@@ -1,6 +1,4 @@
-import React, {
-  Component,
-} from 'react'
+import React from 'react'
 
 import {
   Provider,
@@ -12,12 +10,12 @@ import configureStore from '../store/configureStore'
 const store = configureStore()
 store.runSaga(rootSaga)
 
-export default class extends Component {
+export default React.createClass({
   render() {
     return (
       <Provider store={store} >
         { this.props.children }
       </Provider>
     )
-  }
-}
+  },
+})
