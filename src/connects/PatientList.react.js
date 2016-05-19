@@ -6,7 +6,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = null
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPatientList: () => dispatch({type: 'FETCH_PATIENT_LIST'})
+  }
+}
 
 export default connect(
   mapStateToProps,

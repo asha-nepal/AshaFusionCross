@@ -1,6 +1,10 @@
 import React from 'react'
 
 export default React.createClass({
+  componentWillMount() {
+    this.props.fetchPatientList()
+  },
+
   render() {
     const {
       patientList,
