@@ -1,15 +1,17 @@
-import React from 'react'
-import {
+import React, {
   Component,
-} from 'react-native'
+} from 'react'
 
 import {
   Provider,
 } from 'react-redux'
 
+import rootSaga from '../../sagas'
+
 import configureStore from '../../store/configureStore'
 
 const store = configureStore()
+store.runSaga(rootSaga)
 
 import PatientList from '../containers/PatientList.react'
 

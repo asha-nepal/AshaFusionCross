@@ -1,6 +1,7 @@
-import React from 'react'
-import {
+import React, {
   Component,
+} from 'react'
+import {
   StyleSheet,
   View,
   ListView,
@@ -10,7 +11,11 @@ import {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20
-  }
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#CCCCCC',
+  },
 })
 
 export default class extends Component {
@@ -24,6 +29,10 @@ export default class extends Component {
     this.state = {
       ds: ds.cloneWithRows(props.patientList || []),
     }
+  }
+
+  componentWillMount() {
+    this.props.fetchPatientList()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,6 +55,7 @@ export default class extends Component {
         <ListView
           dataSource={this.state.ds}
           renderRow={this._renderRow}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           enableEmptySections={true}
         />
       </View>
