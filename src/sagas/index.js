@@ -5,7 +5,11 @@ import {
   requestFetchPatientList,
   successFetchPatientList,
   failureFetchPatientList,
-  setPatientList,
+
+  FETCH_PATIENT_DATA,
+  requestFetchPatientData,
+  successFetchPatientData,
+  failureFetchPatientData,
 } from '../actions'
 import { db } from '../db'
 
@@ -24,6 +28,30 @@ export function* fetchPatientList() {
   }
 }
 
+export function* watchFetchPatientList() {
+  yield* takeLatest(FETCH_PATIENT_LIST, fetchPatientList)
+}
+
+function pouchFetchPatientData(patientId) {
+  return db.get(patientId)
+    .then(res => res)
+}
+
+export function* fetchPatientData(action) {
+  yield put(requestFetchPatientData())
+  try {
+    const patientData = yield call(pouchFetchPatientData, action.patientId)
+    yield put(successFetchPatientData(patientData))
+  } catch (error) {
+    yield put(failureFetchPatientData(error))
+  }
+}
+
+export function* watchFetchPatientData() {
+  yield* takeLatest(FETCH_PATIENT_DATA, fetchPatientData)
+}
+
 export default function* rootSaga() {
-  yield* takeLatest(FETCH_PATIENT_LIST, fetchPatientList);
+  yield fork(watchFetchPatientList)
+  yield fork(watchFetchPatientData)
 }

@@ -1,4 +1,7 @@
 import { connect } from 'react-redux'
+import {
+  fetchPatientList,
+} from '../actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -8,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPatientList: () => dispatch({type: 'FETCH_PATIENT_LIST'})
+    fetchPatientList: () => dispatch(fetchPatientList())
   }
 }
 
