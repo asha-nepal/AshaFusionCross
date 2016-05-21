@@ -7,11 +7,17 @@ import {
 
 export default React.createClass({
   render() {
+    const back = this.props.onBack ? (
+      <Text onPress={this.props.onBack}>Back</Text>
+      ) : null
+      
     return (
       <View style={styles.container}>
+        { back }
         <Text style={styles.text}>
           {this.props.title}
         </Text>
+
       </View>
     )
   }

@@ -50,8 +50,8 @@ export default React.createClass({
   _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     return (
       <TouchableHighlight onPress={() => {
-          this._pressRow(rowID);
-          highlightRow(sectionID, rowID);
+        this.props.onPatientSelect(rowData._id)
+        highlightRow(sectionID, rowID);
       }}>
         <View>
           <View style={styles.row}>
@@ -62,13 +62,6 @@ export default React.createClass({
         </View>
       </TouchableHighlight>
     )
-  },
-
-  _pressRow: function(rowID: number) {
-//    this._pressData[rowID] = !this._pressData[rowID];
-//    this.setState({dataSource: this.state.dataSource.cloneWithRows(
-//      this._genRows(this._pressData)
-//    )});
   },
 
   render() {
