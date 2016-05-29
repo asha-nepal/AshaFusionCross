@@ -6,17 +6,17 @@ import {
 
 export default React.createClass({
   componentWillMount() {
-    this.props.fetchPatientData(this.props.params.patientId)
+    this.props.fetchPatient(this.props.params.patientId)
   },
 
   render() {
     const {
-      patientData,
+      patient,
     } = this.props
 
     return (
       <div>
-        <h2>{ patientData.name }</h2>
+        <h2>{ patient.name }</h2>
         <Link to='/'>Top</Link>
       </div>
     )

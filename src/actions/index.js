@@ -23,26 +23,26 @@ export const failureFetchPatientList = (error) => ({
 
 
 
-export const FETCH_PATIENT_DATA = 'FETCH_PATIENT_DATA'
-export const REQUEST_FETCH_PATIENT_DATA = 'REQUEST_FETCH_PATIENT_DATA'
-export const SUCCESS_FETCH_PATIENT_DATA = 'SUCCESS_FETCH_PATIENT_DATA'
-export const FAILURE_FETCH_PATIENT_DATA = 'FAILURE_FETCH_PATIENT_DATA'
+export const FETCH_PATIENT = 'FETCH_PATIENT'
+export const REQUEST_FETCH_PATIENT = 'REQUEST_FETCH_PATIENT'
+export const SUCCESS_FETCH_PATIENT = 'SUCCESS_FETCH_PATIENT'
+export const FAILURE_FETCH_PATIENT = 'FAILURE_FETCH_PATIENT'
 
-export const fetchPatientData = (patientId) => ({
-  type: FETCH_PATIENT_DATA,
+export const fetchPatient = (patientId) => ({
+  type: FETCH_PATIENT,
   patientId,
 })
 
-export const requestFetchPatientData = () => ({
-  type: REQUEST_FETCH_PATIENT_DATA,
+export const requestFetchPatient = () => ({
+  type: REQUEST_FETCH_PATIENT,
 })
 
-export const successFetchPatientData = (patientData) => ({
-  type: SUCCESS_FETCH_PATIENT_DATA,
-  patientData,
+export const successFetchPatient = (patient) => ({
+  type: SUCCESS_FETCH_PATIENT,
+  patient,
 })
 
-export const failureFetchPatientData = (error) => ({
-  type: FAILURE_FETCH_PATIENT_DATA,
+export const failureFetchPatient = (error) => ({
+  type: FAILURE_FETCH_PATIENT,
   error,
 })

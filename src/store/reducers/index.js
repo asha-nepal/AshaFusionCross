@@ -3,9 +3,9 @@ import {
 } from 'redux'
 
 import patientList from './patient-list'
-import patientData from './patient-data'
+import activePatient from './active-patient'
 
 export default combineReducers({
   patientList,
-  patientData,
+  activePatient,
 })

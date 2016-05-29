@@ -7,17 +7,17 @@ import {
 
 export default React.createClass({
   componentWillMount() {
-    this.props.fetchPatientData(this.props.patientId)
+    this.props.fetchPatient(this.props.patientId)
   },
 
   render() {
     const {
-      patientData,
+      patient,
     } = this.props
 
     return (
       <View>
-        <Text>{ patientData.name }</Text>
+        <Text>{ patient.name }</Text>
       </View>
     )
   }
