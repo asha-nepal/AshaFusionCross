@@ -10,6 +10,11 @@ import {
   requestFetchPatient,
   successFetchPatient,
   failureFetchPatient,
+
+  PUT_PATIENT,
+  requestPutPatient,
+  successPutPatient,
+  failurePutPatient,
 } from '../actions'
 import { db } from '../db'
 
@@ -18,7 +23,7 @@ function pouchFetchPatientList() {
     .then(res => res.rows.map(r => r.doc))
 }
 
-export function* fetchPatientList() {
+function* fetchPatientList() {
   yield put(requestFetchPatientList())
   try {
     const patientList = yield call(pouchFetchPatientList)
@@ -28,7 +33,7 @@ export function* fetchPatientList() {
   }
 }
 
-export function* watchFetchPatientList() {
+function* watchFetchPatientList() {
   yield* takeLatest(FETCH_PATIENT_LIST, fetchPatientList)
 }
 
@@ -37,7 +42,7 @@ function pouchFetchPatient(patientId) {
     .then(res => res)
 }
 
-export function* fetchPatient(action) {
+function* fetchPatient(action) {
   yield put(requestFetchPatient())
   try {
     const patient = yield call(pouchFetchPatient, action.patientId)
@@ -47,11 +52,31 @@ export function* fetchPatient(action) {
   }
 }
 
-export function* watchFetchPatient() {
+function* watchFetchPatient() {
   yield* takeLatest(FETCH_PATIENT, fetchPatient)
+}
+
+function pouchPutPatient(patient) {
+  return db.put(patient)
+    .then(res => res)
+}
+
+function* putPatient(action) {
+  yield put(requestPutPatient())
+  try {
+    yield call(pouchPutPatient, action.patient)
+    yield put(successPutPatient())
+  } catch (error) {
+    yield put(failurePutPatient(error))
+  }
+}
+
+function* watchPutPatient() {
+  yield* takeLatest(PUT_PATIENT, putPatient)
 }
 
 export default function* rootSaga() {
   yield fork(watchFetchPatientList)
   yield fork(watchFetchPatient)
+  yield fork(watchPutPatient)
 }

@@ -3,7 +3,7 @@ import {reduxForm} from 'redux-form'
 
 export default reduxForm({
   form: 'patient',
-  fields: ['name', 'age', 'sex', 'address']
+  fields: ['_id', '_rev', 'type', 'name', 'age', 'sex', 'address']
 })(React.createClass({
   render() {
     const {
