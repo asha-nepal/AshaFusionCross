@@ -7,6 +7,9 @@ import {
   Text,
   TextInput,
 } from 'react-native'
+import {
+  SelectButtonGroup,
+} from './fields'
 import Button from 'react-native-button'
 
 export default reduxForm({
@@ -23,6 +26,10 @@ export default reduxForm({
       <View>
         <TextInput {...fields.name} style={styles.textInput} />
         <TextInput {...fields.age} style={styles.textInput} />
+        <SelectButtonGroup {...fields.sex} options={[
+          {id: 'male', label: 'Male'},
+          {id: 'female', label: 'Female'},
+        ]} />
         <TextInput {...fields.address} style={styles.textInput} />
         <Button
           onPress={handleSubmit}
