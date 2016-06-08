@@ -70,3 +70,26 @@ export const failurePutPatient = (error) => ({
   type: FAILURE_PUT_PATIENT,
   error,
 })
+
+export const PUT_RECORD = 'PUT_RECORD'
+export const REQUEST_PUT_RECORD = 'REQUEST_PUT_RECORD'
+export const SUCCESS_PUT_RECORD = 'SUCCESS_PUT_RECORD'
+export const FAILURE_PUT_RECORD = 'FAILURE_PUT_RECORD'
+
+export const putRecord = (record) => ({
+  type: PUT_RECORD,
+  record,
+})
+
+export const requestPutRecord = () => ({
+  type: REQUEST_PUT_RECORD,
+})
+
+export const successPutRecord = () => ({
+  type: SUCCESS_PUT_RECORD,
+})
+
+export const failurePutRecord = (error) => ({
+  type: FAILURE_PUT_RECORD,
+  error,
+})

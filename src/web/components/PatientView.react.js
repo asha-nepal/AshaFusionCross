@@ -5,6 +5,7 @@ import {
 } from 'react-router'
 
 import PatientForm from '../forms/PatientForm.react'
+import RecordForm from '../forms/RecordForm.react'
 
 export default React.createClass({
   componentWillMount() {
@@ -16,13 +17,26 @@ export default React.createClass({
       patient,
       records,
       putPatient,
+      putRecord,
     } = this.props
 
     return (
       <div>
         <h2>{ patient.name }</h2>
 
-        <PatientForm onSubmit={patient => putPatient(patient)} initialValues={patient}/>
+        <PatientForm
+          initialValues={patient}
+          onSubmit={patient => putPatient(patient)}
+        />
+
+        {records.map(record =>
+          <RecordForm
+            key={record._id}
+            formKey={record._id}
+            initialValues={record}
+            onSubmit={record => putRecord(record)}
+          />
+        )}
 
         <Link to='/'>Top</Link>
       </div>

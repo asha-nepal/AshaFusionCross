@@ -15,6 +15,11 @@ import {
   requestPutPatient,
   successPutPatient,
   failurePutPatient,
+
+  PUT_RECORD,
+  requestPutRecord,
+  successPutRecord,
+  failurePutRecord,
 } from '../actions'
 import { db } from '../db'
 
@@ -88,11 +93,28 @@ function* putPatient(action) {
 }
 
 function* watchPutPatient() {
-  yield* takeLatest(PUT_PATIENT, putPatient)
+  yield* takeEvery(PUT_PATIENT, putPatient)
+}
+
+const pouchPutRecord = pouchPutPatient
+
+function* putRecord(action) {
+  yield put(requestPutRecord())
+  try {
+    yield call(pouchPutRecord, action.record)
+    yield put(successPutRecord())
+  } catch (error) {
+    yield put(failurePutRecord(error))
+  }
+}
+
+function* watchPutRecord() {
+  yield* takeEvery(PUT_RECORD, putRecord)
 }
 
 export default function* rootSaga() {
   yield fork(watchFetchPatientList)
   yield fork(watchFetchPatient)
   yield fork(watchPutPatient)
+  yield fork(watchPutRecord)
 }
