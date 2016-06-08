@@ -22,7 +22,6 @@ export const failureFetchPatientList = (error) => ({
 })
 
 
-
 export const FETCH_PATIENT = 'FETCH_PATIENT'
 export const REQUEST_FETCH_PATIENT = 'REQUEST_FETCH_PATIENT'
 export const SUCCESS_FETCH_PATIENT = 'SUCCESS_FETCH_PATIENT'
@@ -44,5 +43,29 @@ export const successFetchPatient = (patient) => ({
 
 export const failureFetchPatient = (error) => ({
   type: FAILURE_FETCH_PATIENT,
+  error,
+})
+
+
+export const PUT_PATIENT = 'PUT_PATIENT'
+export const REQUEST_PUT_PATIENT = 'REQUEST_PUT_PATIENT'
+export const SUCCESS_PUT_PATIENT = 'SUCCESS_PUT_PATIENT'
+export const FAILURE_PUT_PATIENT = 'FAILURE_PUT_PATIENT'
+
+export const putPatient = (patient) => ({
+  type: PUT_PATIENT,
+  patient,
+})
+
+export const requestPutPatient = () => ({
+  type: REQUEST_PUT_PATIENT,
+})
+
+export const successPutPatient = () => ({
+  type: SUCCESS_PUT_PATIENT,
+})
+
+export const failurePutPatient = (error) => ({
+  type: FAILURE_PUT_PATIENT,
   error,
 })
