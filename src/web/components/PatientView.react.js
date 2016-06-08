@@ -14,6 +14,7 @@ export default React.createClass({
   render() {
     const {
       patient,
+      records,
       putPatient,
     } = this.props
 

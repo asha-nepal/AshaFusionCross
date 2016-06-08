@@ -36,9 +36,10 @@ export const requestFetchPatient = () => ({
   type: REQUEST_FETCH_PATIENT,
 })
 
-export const successFetchPatient = (patient) => ({
+export const successFetchPatient = (patient, records) => ({
   type: SUCCESS_FETCH_PATIENT,
   patient,
+  records,
 })
 
 export const failureFetchPatient = (error) => ({

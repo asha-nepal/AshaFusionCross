@@ -19,7 +19,11 @@ import {
 import { db } from '../db'
 
 function pouchFetchPatientList() {
-  return db.allDocs({include_docs: true})
+  return db.allDocs({
+      include_docs: true,
+      startkey: 'patient_',
+      endkey: 'patient_\uffff',
+    })
     .then(res => res.rows.map(r => r.doc))
 }
 
@@ -42,11 +46,23 @@ function pouchFetchPatient(patientId) {
     .then(res => res)
 }
 
+function pouchFetchRecords(patientId) {
+  const patientIdBody = patientId.replace(/^patient_/, '')
+  const idPrefix = `record_${patientIdBody}_`
+  return db.allDocs({
+      startkey: idPrefix,
+      endkey: idPrefix + '\uffff',
+      include_docs: true,
+    })
+    .then(res => res.rows.map(r => r.doc))
+}
+
 function* fetchPatient(action) {
   yield put(requestFetchPatient())
   try {
     const patient = yield call(pouchFetchPatient, action.patientId)
-    yield put(successFetchPatient(patient))
+    const records = yield call(pouchFetchRecords, action.patientId)
+    yield put(successFetchPatient(patient, records))
   } catch (error) {
     yield put(failureFetchPatient(error))
   }

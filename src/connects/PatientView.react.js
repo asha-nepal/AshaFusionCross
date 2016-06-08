@@ -6,6 +6,7 @@ import {
 
 const mapStateToProps = (state) => ({
   patient: state.activePatient,
+  records: state.activeRecords,
 })
 
 const mapDispatchToProps = (dispatch) => ({
