@@ -9,7 +9,19 @@ import PatientForm from '../forms/PatientForm.react'
 
 export default React.createClass({
   componentWillMount() {
-    this.props.fetchPatient(this.props.patientId)
+    const patientId = this.props.patientId
+
+    this.props.fetchPatient(patientId)
+
+    const change = this.props.subscribeChange(patientId)
+    this.setState({change: change})
+  },
+
+  componentWillUnmount() {
+    if (this.state.change) {
+      this.state.change.cancel()
+      this.setState({change: null})
+    }
   },
 
   render() {

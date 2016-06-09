@@ -13,13 +13,11 @@ const mapStateToProps = (state) => ({
   records: state.activeRecords,
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
   putPatient: (patient) => dispatch(putPatient(patient)),
   putRecord: (record) => dispatch(putRecord(record)),
-  subscribeChange: () => {
-    const patientId = ownProps.params.patientId
-
+  subscribeChange: (patientId) => {
     return db.changes({
         since: 'now',
         live: true,
