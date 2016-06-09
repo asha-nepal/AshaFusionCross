@@ -12,6 +12,8 @@ import {
 } from './fields'
 import Button from 'react-native-button'
 
+import styles from './styles'
+
 export default reduxForm({
   form: 'patient',
   fields: ['_id', '_rev', 'type', 'name', 'age', 'sex', 'address']
@@ -38,14 +40,3 @@ export default reduxForm({
     )
   }
 }))
-
-var styles = StyleSheet.create({
-  textInput: {
-    height: 26,
-    borderWidth: 0.5,
-    borderColor: '#0f0f0f',
-    flex: 1,
-    fontSize: 13,
-    padding: 4,
-  },
-});
