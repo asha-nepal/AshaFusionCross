@@ -93,7 +93,7 @@ function* putPatient(action) {
 }
 
 function* watchPutPatient() {
-  yield* takeEvery(PUT_PATIENT, putPatient)
+  yield* takeLatest(PUT_PATIENT, putPatient)
 }
 
 const pouchPutRecord = pouchPutPatient
@@ -109,7 +109,7 @@ function* putRecord(action) {
 }
 
 function* watchPutRecord() {
-  yield* takeEvery(PUT_RECORD, putRecord)
+  yield* takeLatest(PUT_RECORD, putRecord)
 }
 
 export default function* rootSaga() {

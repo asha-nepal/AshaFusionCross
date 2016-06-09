@@ -9,6 +9,8 @@ export default reduxForm({
     const {
       fields,
       handleSubmit,
+
+      freeze,
     } = this.props
 
     return (
@@ -44,7 +46,7 @@ export default reduxForm({
           </label>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={freeze}>Submit</button>
       </form>
     )
   }

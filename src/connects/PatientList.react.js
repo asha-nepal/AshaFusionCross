@@ -5,6 +5,7 @@ import {
 
 const mapStateToProps = (state) => {
   return {
+    isFetching: state.status.isFetchingPatientList,
     patientList: state.patientList,
   }
 }
