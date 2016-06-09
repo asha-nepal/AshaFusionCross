@@ -48,6 +48,13 @@ export const failureFetchPatient = (error) => ({
 })
 
 
+export const UPDATE_ACTIVE_PATIENT = 'UPDATE_ACTIVE_PATIENT'
+export const updateActivePatient = (patient) => ({
+  type: UPDATE_ACTIVE_PATIENT,
+  patient,
+})
+
+
 export const PUT_PATIENT = 'PUT_PATIENT'
 export const REQUEST_PUT_PATIENT = 'REQUEST_PUT_PATIENT'
 export const SUCCESS_PUT_PATIENT = 'SUCCESS_PUT_PATIENT'
@@ -92,4 +99,11 @@ export const successPutRecord = () => ({
 export const failurePutRecord = (error) => ({
   type: FAILURE_PUT_RECORD,
   error,
+})
+
+
+export const UPDATE_ACTIVE_RECORD = 'UPDATE_ACTIVE_RECORD'
+export const updateActiveRecord = (record) => ({
+  type: UPDATE_ACTIVE_RECORD,
+  record,
 })
