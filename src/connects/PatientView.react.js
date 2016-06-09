@@ -6,8 +6,11 @@ import {
 } from '../actions'
 
 const mapStateToProps = (state) => ({
+  isFetching: state.status.isFetchingPatient,
   patient: state.activePatient,
   records: state.activeRecords,
+  isPuttingPatient: state.status.isPuttingPatient,
+  isPuttingRecord: state.status.isPuttingRecord,
 })
 
 const mapDispatchToProps = (dispatch) => ({

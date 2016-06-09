@@ -8,9 +8,14 @@ export default React.createClass({
 
   render() {
     const {
+      isFetching,
       patientList,
       onPatientSelect,
     } = this.props
+
+    if (isFetching) {
+      return <div>Fetching patient list...</div>
+    }
 
     return (
       <ul>

@@ -14,11 +14,18 @@ export default React.createClass({
 
   render() {
     const {
+      isFetching,
       patient,
       records,
       putPatient,
       putRecord,
+      isPuttingPatient,
+      isPuttingRecord,
     } = this.props
+
+    if (isFetching) {
+      return <div>Fetching...</div>
+    }
 
     return (
       <div>
@@ -27,6 +34,7 @@ export default React.createClass({
         <PatientForm
           initialValues={patient}
           onSubmit={patient => putPatient(patient)}
+          freeze={isPuttingPatient}
         />
 
         {records.map(record =>
@@ -35,6 +43,7 @@ export default React.createClass({
             formKey={record._id}
             initialValues={record}
             onSubmit={record => putRecord(record)}
+            freeze={isPuttingRecord}
           />
         )}
 
