@@ -4,6 +4,7 @@ import {
   putPatient,
   putRecord,
   updateActivePatient,
+  updateActiveRecord,
 } from '../actions'
 
 import { db } from '../db'
@@ -26,6 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
       .on('change', change => {
         if (change.doc._id === patientId) {
           dispatch(updateActivePatient(change.doc))
+        } else if (change.doc.type === 'record') {
+          dispatch(updateActiveRecord(change.doc))
         }
       })
       .on('error', error => {
