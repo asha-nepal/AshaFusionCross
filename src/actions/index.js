@@ -48,6 +48,13 @@ export const failureFetchPatient = (error) => ({
 })
 
 
+export const UPDATE_ACTIVE_PATIENT = 'UPDATE_ACTIVE_PATIENT'
+export const updateActivePatient = (patient) => ({
+  type: UPDATE_ACTIVE_PATIENT,
+  patient,
+})
+
+
 export const PUT_PATIENT = 'PUT_PATIENT'
 export const REQUEST_PUT_PATIENT = 'REQUEST_PUT_PATIENT'
 export const SUCCESS_PUT_PATIENT = 'SUCCESS_PUT_PATIENT'
