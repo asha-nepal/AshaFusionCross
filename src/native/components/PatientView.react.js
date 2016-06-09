@@ -14,9 +14,16 @@ export default React.createClass({
 
   render() {
     const {
+      isFetching,
       patient,
       putPatient,
+      isPuttingPatient,
+      isPuttingRecord,
     } = this.props
+
+    if (isFetching) {
+      return <Text>Fetching...</Text>
+    }
 
     return (
       <View>

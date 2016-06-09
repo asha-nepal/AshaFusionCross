@@ -65,6 +65,14 @@ export default React.createClass({
   },
 
   render() {
+    const {
+      isFetching,
+    } = this.props
+
+    if (isFetching) {
+      return <Text>Fetching patient list...</Text>
+    }
+
     return (
       <ListView
         dataSource={this.state.ds}
