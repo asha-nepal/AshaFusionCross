@@ -100,3 +100,10 @@ export const failurePutRecord = (error) => ({
   type: FAILURE_PUT_RECORD,
   error,
 })
+
+
+export const UPDATE_ACTIVE_RECORD = 'UPDATE_ACTIVE_RECORD'
+export const updateActiveRecord = (record) => ({
+  type: UPDATE_ACTIVE_RECORD,
+  record,
+})
