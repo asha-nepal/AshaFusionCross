@@ -33,5 +33,12 @@
     "redux": "^3.5.2",
     "redux-form": "^5.2.5",
     "redux-saga": "^0.10.4"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react/",
+      "<rootDir>/node_modules/react-dom/",
+      "<rootDir>/node_modules/react-addons-test-utils/"
+    ]
   }
 }
