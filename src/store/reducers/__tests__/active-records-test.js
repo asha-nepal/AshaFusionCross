@@ -4,7 +4,7 @@ jest.unmock('../active-records')
 import deepFreeze from 'deep-freeze'
 
 import {
-  UPDATE_ACTIVE_RECORD,
+  updateActiveRecord,
 } from '../../../actions'
 import reducer from '../active-records'
 
@@ -32,10 +32,7 @@ describe('UPDATE_ACTIVE_RECORD', () => {
       dataB: 'yyyyy',
     }
 
-    const action = {
-      type: UPDATE_ACTIVE_RECORD,
-      record: newRecord,
-    }
+    const action = updateActiveRecord(newRecord)
 
     const recordsAfter = [
       {
@@ -76,10 +73,7 @@ describe('UPDATE_ACTIVE_RECORD', () => {
       dataB: 'yyyyy',
     }
 
-    const action = {
-      type: UPDATE_ACTIVE_RECORD,
-      record: newRecord,
-    }
+    const action = updateActiveRecord(newRecord)
 
     deepFreeze(recordsBefore)
     deepFreeze(action)
