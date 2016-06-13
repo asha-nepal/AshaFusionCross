@@ -5,4 +5,7 @@ import {
 
 import App from './src/native/components/App.react'
 
+// Polyfill
+process.nextTick = setImmediate
+
 AppRegistry.registerComponent('AshaFusionCross', () => App);
