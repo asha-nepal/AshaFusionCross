@@ -19,13 +19,13 @@ export default React.createClass({
 
     return (
       <div>
-        <Link to={'/patient/create'}>
+        <Link to={'/patient/'}>
           New
         </Link>
         <ul>
         {patientList.map((patient, i) =>
           <li key={i}>
-            <Link to={`/patient/view/${patient._id}`}>
+            <Link to={`/patient/${patient._id}`}>
               {patient.name}
             </Link>
           </li>
