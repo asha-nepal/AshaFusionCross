@@ -21,6 +21,7 @@ import {
   successPutRecord,
   failurePutRecord,
 } from '../actions'
+
 import { db } from '../db'
 
 function pouchFetchPatientList() {
@@ -112,9 +113,12 @@ function* watchPutRecord() {
   yield* takeLatest(PUT_RECORD, putRecord)
 }
 
+import { watchInitActivePatient } from './init-active-patient'
+
 export default function* rootSaga() {
   yield fork(watchFetchPatientList)
   yield fork(watchFetchPatient)
   yield fork(watchPutPatient)
   yield fork(watchPutRecord)
+  yield fork(watchInitActivePatient)
 }

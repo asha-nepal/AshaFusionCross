@@ -102,6 +102,19 @@ export const failurePutRecord = (error) => ({
 })
 
 
+export const INIT_ACTIVE_PATIENT = 'INIT_ACTIVE_PATIENT'
+export const initActivePatient = () => ({
+  type: INIT_ACTIVE_PATIENT,
+})
+
+
+export const SET_ACTIVE_RECORDS = 'SET_ACTIVE_RECORDS'
+export const setActiveRecords = (records) => ({
+  type: SET_ACTIVE_RECORDS,
+  records,
+})
+
+
 export const UPDATE_ACTIVE_RECORD = 'UPDATE_ACTIVE_RECORD'
 export const updateActiveRecord = (record) => ({
   type: UPDATE_ACTIVE_RECORD,

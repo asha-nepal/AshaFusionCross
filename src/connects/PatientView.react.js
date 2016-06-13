@@ -5,6 +5,7 @@ import {
   putRecord,
   updateActivePatient,
   updateActiveRecord,
+  initActivePatient,
 } from '../actions'
 
 import { db } from '../db'
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
   putPatient: (patient) => dispatch(putPatient(patient)),
   putRecord: (record) => dispatch(putRecord(record)),
+  initPatient: () => dispatch(initActivePatient()),
   subscribeChange: (patientId) => {
     return db.changes({
         since: 'now',

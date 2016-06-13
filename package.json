@@ -21,6 +21,7 @@
     "babel-preset-react-native-stage-0": "^1.0.1",
     "babel-preset-stage-1": "^6.5.0",
     "babel-runtime": "^6.9.0",
+    "chance": "^1.0.3",
     "deep-freeze": "0.0.1",
     "electron-prebuilt": "^1.1.0",
     "gulp-webpack": "^1.5.0",

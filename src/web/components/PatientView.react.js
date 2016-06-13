@@ -11,7 +11,11 @@ export default React.createClass({
   componentWillMount() {
     const patientId = this.props.params.patientId
 
-    this.props.fetchPatient(patientId)
+    if (patientId) {
+      this.props.fetchPatient(patientId)
+    } else {
+      this.props.initPatient()
+    }
 
     const change = this.props.subscribeChange(patientId)
     this.setState({change: change})

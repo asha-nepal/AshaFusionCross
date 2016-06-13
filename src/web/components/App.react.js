@@ -24,6 +24,7 @@ export default React.createClass({
         <Router history={history}>
           <Route path='/'>
             <IndexRoute component={PatientList}/>
+            <Route path='patient/create' component={PatientView} />
             <Route path='patient/view/:patientId' component={PatientView} />
           </Route>
         </Router>
