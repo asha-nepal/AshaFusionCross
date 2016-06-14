@@ -9,15 +9,9 @@ import RecordForm from '../forms/RecordForm.react'
 
 export default React.createClass({
   componentWillMount() {
-    const patientId = this.props.params.patientId
+    this.props.init()
 
-    if (patientId) {
-      this.props.fetchPatient(patientId)
-    } else {
-      this.props.initPatient()
-    }
-
-    const change = this.props.subscribeChange(patientId)
+    const change = this.props.subscribeChange()
     this.setState({change: change})
   },
 

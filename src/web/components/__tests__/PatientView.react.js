@@ -12,19 +12,19 @@ import PatientView from '../PatientView.react'
 
 describe('<PatientView />', () => {
   it('has link to the top', () => {
-    const mockFetchPatient = jest.fn()
+    const mockInit = jest.fn()
     const mockSubscribeChange = jest.fn()
 
     const wrapper = shallow(<PatientView
-        params={{patientId: 'dummy_id'}}
+        init={mockInit}
         patient={{
           name: 'foo bar',
         }}
         records={[]}
-        fetchPatient={mockFetchPatient}
         subscribeChange={mockSubscribeChange}
       />)
 
     expect(wrapper.find(Link).prop('to')).toBe('/')
+    expect(mockInit).toBeCalled()
   })
 })
