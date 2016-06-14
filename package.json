@@ -24,9 +24,11 @@
     "chance": "^1.0.3",
     "deep-freeze": "0.0.1",
     "electron-prebuilt": "^1.1.0",
+    "enzyme": "^2.3.0",
     "gulp-webpack": "^1.5.0",
     "jest-cli": "^12.1.1",
     "pouchdb": "^5.3.2",
+    "react-addons-test-utils": "^15.1.0",
     "react-dom": "^15.0.2",
     "react-native-button": "^1.6.0",
     "react-redux": "^4.4.5",
@@ -39,7 +41,8 @@
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react/",
       "<rootDir>/node_modules/react-dom/",
-      "<rootDir>/node_modules/react-addons-test-utils/"
+      "<rootDir>/node_modules/react-addons-test-utils/",
+      "<rootDir>/node_modules/enzyme/"
     ]
   }
 }
