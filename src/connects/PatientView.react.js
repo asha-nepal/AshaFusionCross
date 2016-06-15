@@ -19,7 +19,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const patientId = ownProps.patientId || ownProps.params.patientId
+  const patientId = ownProps.patientId || ownProps.params && ownProps.params.patientId
 
   return {
     init: () => {
