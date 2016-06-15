@@ -4,17 +4,16 @@ import {
   View,
   Text,
 } from 'react-native'
+import Button from 'react-native-button'
 
 import PatientForm from '../forms/PatientForm.react'
 import RecordForm from '../forms/RecordForm.react'
 
 export default React.createClass({
   componentWillMount() {
-    const patientId = this.props.patientId
+    this.props.init()
 
-    this.props.fetchPatient(patientId)
-
-    const change = this.props.subscribeChange(patientId)
+    const change = this.props.subscribeChange()
     this.setState({change: change})
   },
 
@@ -30,6 +29,7 @@ export default React.createClass({
       isFetching,
       patient,
       records,
+      addNewActiveRecord,
       putPatient,
       putRecord,
       isPuttingPatient,
@@ -53,6 +53,10 @@ export default React.createClass({
             onSubmit={record => putRecord(record)}
           />
         )}
+
+        <Button
+          onPress={addNewActiveRecord}
+        >Add record</Button>
       </View>
     )
   }

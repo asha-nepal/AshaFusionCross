@@ -9,11 +9,9 @@ import RecordForm from '../forms/RecordForm.react'
 
 export default React.createClass({
   componentWillMount() {
-    const patientId = this.props.params.patientId
+    this.props.init()
 
-    this.props.fetchPatient(patientId)
-
-    const change = this.props.subscribeChange(patientId)
+    const change = this.props.subscribeChange()
     this.setState({change: change})
   },
 
@@ -29,6 +27,7 @@ export default React.createClass({
       isFetching,
       patient,
       records,
+      addNewActiveRecord,
       putPatient,
       putRecord,
       isPuttingPatient,
@@ -48,6 +47,14 @@ export default React.createClass({
           onSubmit={patient => putPatient(patient)}
           freeze={isPuttingPatient}
         />
+
+        <a
+          href="#"
+          onClick={e => {
+            e.preventDefault()
+            addNewActiveRecord()
+          }}
+        >ADD RECORD</a>
 
         {records.map(record =>
           <RecordForm

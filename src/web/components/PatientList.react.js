@@ -18,15 +18,20 @@ export default React.createClass({
     }
 
     return (
-      <ul>
-      {patientList.map((patient, i) =>
-        <li key={i}>
-          <Link to={`/patient/view/${patient._id}`}>
-            {patient.name}
-          </Link>
-        </li>
-      )}
-      </ul>
+      <div>
+        <Link to={'/patient/'}>
+          New
+        </Link>
+        <ul>
+        {patientList.map((patient, i) =>
+          <li key={i}>
+            <Link to={`/patient/${patient._id}`}>
+              {patient.name}
+            </Link>
+          </li>
+        )}
+        </ul>
+      </div>
     )
   }
 })

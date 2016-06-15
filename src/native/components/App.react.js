@@ -5,6 +5,7 @@ import {
   Navigator,
   ScrollView,
 } from 'react-native'
+import Button from 'react-native-button'
 
 import Root from '../../common/Root.react'
 
@@ -43,11 +44,19 @@ export default React.createClass({
                         onPatientSelect={(patientId) => {
                           navigator.push({
                             name: 'patient-view',
-                            patientId: patientId
+                            patientId: patientId,
                           })
                         }}
                       />
                     </ScrollView>
+                    <Button
+                      onPress={() => {
+                        navigator.push({
+                          name: 'patient-view',
+                          patientId: null,
+                        })
+                      }}
+                    >New</Button>
                   </View>
                 )
               case 'patient-view':
