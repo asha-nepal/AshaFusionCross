@@ -115,10 +115,13 @@ function* watchPutRecord() {
 
 import { watchInitActivePatient } from './init-active-patient'
 
+import { watchAddNewActiveRecord } from './add-new-active-record'
+
 export default function* rootSaga() {
   yield fork(watchFetchPatientList)
   yield fork(watchFetchPatient)
   yield fork(watchPutPatient)
   yield fork(watchPutRecord)
   yield fork(watchInitActivePatient)
+  yield fork(watchAddNewActiveRecord)
 }

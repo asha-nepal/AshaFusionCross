@@ -5,6 +5,7 @@ import deepFreeze from 'deep-freeze'
 
 import {
   SET_ACTIVE_RECORDS,
+  ADD_ACTIVE_RECORD,
   UPDATE_ACTIVE_RECORD,
 } from '../../../actions'
 import reducer from '../active-records'
@@ -76,5 +77,31 @@ describe('UPDATE_ACTIVE_RECORD', () => {
 
     expect(reducer(recordsBefore, action))
       .toEqual(recordsBefore)
+  })
+})
+
+describe('ADD_ACTIVE_RECORD', () => {
+  it('adds a new entity to records', () => {
+    const recordsBefore = [
+      {_id: 'record_foo', type: 'record', data: 'FOO'},
+    ]
+
+    const newRecord = {_id: 'record_bar', type: 'record', data: "BAR"}
+
+    const action = {
+      type: ADD_ACTIVE_RECORD,
+      record: newRecord,
+    }
+
+    const recordsAfter = [
+      {_id: 'record_foo', type: 'record', data: 'FOO'},
+      {_id: 'record_bar', type: 'record', data: "BAR"},
+    ]
+
+    deepFreeze(recordsBefore)
+    deepFreeze(action)
+
+    expect(reducer(recordsBefore, action))
+      .toEqual(recordsAfter)
   })
 })

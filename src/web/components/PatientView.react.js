@@ -27,6 +27,7 @@ export default React.createClass({
       isFetching,
       patient,
       records,
+      addNewActiveRecord,
       putPatient,
       putRecord,
       isPuttingPatient,
@@ -46,6 +47,14 @@ export default React.createClass({
           onSubmit={patient => putPatient(patient)}
           freeze={isPuttingPatient}
         />
+
+        <a
+          href="#"
+          onClick={e => {
+            e.preventDefault()
+            addNewActiveRecord()
+          }}
+        >ADD RECORD</a>
 
         {records.map(record =>
           <RecordForm

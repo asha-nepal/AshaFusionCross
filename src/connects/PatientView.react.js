@@ -6,6 +6,7 @@ import {
   updateActivePatient,
   updateActiveRecord,
   initActivePatient,
+  addNewActiveRecord,
 } from '../actions'
 
 import { db } from '../db'
@@ -26,6 +27,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       if (patientId) dispatch(fetchPatient(patientId))
       else           dispatch(initActivePatient())
     },
+    addNewActiveRecord: () => dispatch(addNewActiveRecord(patientId)),
     putPatient: (patient) => dispatch(putPatient(patient)),
     putRecord: (record) => dispatch(putRecord(record)),
     subscribeChange: () => {
