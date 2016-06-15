@@ -4,9 +4,9 @@ jest.unmock('../active-records')
 import deepFreeze from 'deep-freeze'
 
 import {
-  SET_ACTIVE_RECORDS,
-  ADD_ACTIVE_RECORD,
-  UPDATE_ACTIVE_RECORD,
+  setActiveRecords,
+  addActiveRecord,
+  updateActiveRecord,
 } from '../../../actions'
 import reducer from '../active-records'
 
@@ -21,10 +21,7 @@ describe('SET_ACTIVE_RECORDS', () => {
       {_id: 'record_fuga', type: 'record', data: 'fuga'},
     ]
 
-    const action = {
-      type: SET_ACTIVE_RECORDS,
-      records: newRecords,
-    }
+    const action = setActiveRecords(newRecords)
 
     deepFreeze(recordsBefore)
     deepFreeze(action)
@@ -43,10 +40,7 @@ describe('UPDATE_ACTIVE_RECORD', () => {
 
     const newRecord = {_id: 'record_foo', type: 'record', dataA: 'xxxxx', dataB: 'yyyyy'}
 
-    const action = {
-      type: UPDATE_ACTIVE_RECORD,
-      record: newRecord,
-    }
+    const action = updateActiveRecord(newRecord)
 
     const recordsAfter = [
       {_id: 'record_foo', type: 'record', dataA: 'xxxxx', dataB: 'yyyyy'},
@@ -67,10 +61,7 @@ describe('UPDATE_ACTIVE_RECORD', () => {
 
     const newRecord = {_id: 'record_foo',type: 'record',dataA: 'xxxxx',dataB: 'yyyyy'}
 
-    const action = {
-      type: UPDATE_ACTIVE_RECORD,
-      record: newRecord,
-    }
+    const action = updateActiveRecord(newRecord)
 
     deepFreeze(recordsBefore)
     deepFreeze(action)
@@ -88,10 +79,7 @@ describe('ADD_ACTIVE_RECORD', () => {
 
     const newRecord = {_id: 'record_bar', type: 'record', data: "BAR"}
 
-    const action = {
-      type: ADD_ACTIVE_RECORD,
-      record: newRecord,
-    }
+    const action = addActiveRecord(newRecord)
 
     const recordsAfter = [
       {_id: 'record_foo', type: 'record', data: 'FOO'},
