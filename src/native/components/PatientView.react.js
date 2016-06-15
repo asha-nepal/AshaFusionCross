@@ -4,6 +4,7 @@ import {
   View,
   Text,
 } from 'react-native'
+import Button from 'react-native-button'
 
 import PatientForm from '../forms/PatientForm.react'
 import RecordForm from '../forms/RecordForm.react'
@@ -28,6 +29,7 @@ export default React.createClass({
       isFetching,
       patient,
       records,
+      addNewActiveRecord,
       putPatient,
       putRecord,
       isPuttingPatient,
@@ -51,6 +53,10 @@ export default React.createClass({
             onSubmit={record => putRecord(record)}
           />
         )}
+
+        <Button
+          onPress={addNewActiveRecord}
+        >Add record</Button>
       </View>
     )
   }
