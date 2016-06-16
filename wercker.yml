@@ -1,4 +1,4 @@
-box: node
+box: bringnow/android-sdk
 
 build:
   steps:
@@ -9,3 +9,17 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+
+deploy-debug:
+  steps:
+    - create-file:
+      name: Create crashlytics.properties
+      filename: android/app/crashlytics.properties
+      overwrite: true
+      content: |-
+        apiKey=$FABRIC_API_KEY
+        apiSecret=$FABRIC_BUILD_SECRET
+    - script:
+      name: build and deploy
+      cwd: android
+      code: ./gradlew assembleDebug crashlyticsUploadDistributionDebug
