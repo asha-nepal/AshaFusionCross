@@ -41,3 +41,4 @@ android/keystores/debug.keystore
 
 # App specific
 public
+android/app/crashlytics.properties
