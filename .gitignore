@@ -42,3 +42,9 @@ android/keystores/debug.keystore
 # App specific
 public
 android/app/crashlytics.properties
+
+# Wercker CLI
+_builds
+_cache
+_projects
+_steps
