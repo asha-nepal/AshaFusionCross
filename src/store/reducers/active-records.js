@@ -3,6 +3,7 @@ import {
   SET_ACTIVE_RECORDS,
   ADD_ACTIVE_RECORD,
   UPDATE_ACTIVE_RECORD,
+  ADD_OR_UPDATE_ACTIVE_RECORD,
 } from '../../actions'
 
 export default (records = [], action) => {
@@ -19,6 +20,21 @@ export default (records = [], action) => {
 
     case UPDATE_ACTIVE_RECORD:
       return records.map(r => r._id === action.record._id ? action.record : r)
+
+    case ADD_OR_UPDATE_ACTIVE_RECORD:
+      const index = records.findIndex(r => r._id === action.record._id)
+      if (index > -1) {
+        return [
+          ...records.slice(0, index),
+          action.record,
+          ...records.slice(index+1),
+        ]
+      } else {
+        return [
+          ...records,
+          action.record,
+        ]
+      }
 
     default:
       return records
