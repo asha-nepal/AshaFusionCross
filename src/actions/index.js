@@ -135,3 +135,10 @@ export const updateActiveRecord = (record) => ({
   type: UPDATE_ACTIVE_RECORD,
   record,
 })
+
+
+export const ADD_OR_UPDATE_ACTIVE_RECORD = 'ADD_OR_UPDATE_ACTIVE_RECORD'
+export const addOrUpdateActiveRecord = (record) => ({
+  type: ADD_OR_UPDATE_ACTIVE_RECORD,
+  record,
+})
