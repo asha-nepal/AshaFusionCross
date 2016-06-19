@@ -7,6 +7,7 @@ import {
   setActiveRecords,
   addActiveRecord,
   updateActiveRecord,
+  addOrUpdateActiveRecord,
 } from '../../../actions'
 import reducer from '../active-records'
 
@@ -84,6 +85,49 @@ describe('ADD_ACTIVE_RECORD', () => {
     const recordsAfter = [
       {_id: 'record_foo', type: 'record', data: 'FOO'},
       {_id: 'record_bar', type: 'record', data: "BAR"},
+    ]
+
+    deepFreeze(recordsBefore)
+    deepFreeze(action)
+
+    expect(reducer(recordsBefore, action))
+      .toEqual(recordsAfter)
+  })
+})
+
+describe('ADD_OR_UPDATE_ACTIVE_RECORD', () => {
+  it('adds a new entity to records if specified ID does not exist.', () => {
+    const recordsBefore = [
+      {_id: 'record_foo', type: 'record', data: 'FOO'},
+    ]
+
+    const newRecord = {_id: 'record_bar', type: 'record', data: "BAR"}
+
+    const action = addOrUpdateActiveRecord(newRecord)
+
+    const recordsAfter = [
+      {_id: 'record_foo', type: 'record', data: 'FOO'},
+      {_id: 'record_bar', type: 'record', data: "BAR"},
+    ]
+
+    deepFreeze(recordsBefore)
+    deepFreeze(action)
+
+    expect(reducer(recordsBefore, action))
+      .toEqual(recordsAfter)
+  })
+
+  it('updates a existing entity if specified ID already exists.', () => {
+    const recordsBefore = [
+      {_id: 'record_foo', type: 'record', data: 'FOO'},
+    ]
+
+    const newRecord = {_id: 'record_foo', type: 'record', data: "YOHO"}
+
+    const action = addOrUpdateActiveRecord(newRecord)
+
+    const recordsAfter = [
+      {_id: 'record_foo', type: 'record', data: 'YOHO'},
     ]
 
     deepFreeze(recordsBefore)

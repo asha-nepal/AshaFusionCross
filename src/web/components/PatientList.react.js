@@ -4,6 +4,16 @@ import { Link } from 'react-router'
 export default React.createClass({
   componentWillMount() {
     this.props.fetchPatientList()
+
+    const change = this.props.subscribeChange()
+    this.setState({change: change})
+  },
+
+  componentWillUnmount() {
+    if (this.state.change) {
+      this.state.change.cancel()
+      this.setState({change: null})
+    }
   },
 
   render() {

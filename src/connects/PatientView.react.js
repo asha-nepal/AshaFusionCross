@@ -4,9 +4,9 @@ import {
   putPatient,
   putRecord,
   updateActivePatient,
-  updateActiveRecord,
   initActivePatient,
   addNewActiveRecord,
+  addOrUpdateActiveRecord,
 } from '../actions'
 
 import { db } from '../db'
@@ -21,6 +21,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const patientId = ownProps.patientId || ownProps.params && ownProps.params.patientId
+  const patientIdBody = patientId.replace(/^patient_/, '')
 
   return {
     init: () => {
@@ -41,10 +42,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           include_docs: true,
         })
         .on('change', change => {
-          if (change.doc._id === patientId) {
-            dispatch(updateActivePatient(change.doc))
-          } else if (change.doc.type === 'record') {
-            dispatch(updateActiveRecord(change.doc))
+          const doc = change.doc
+          if (doc._id === patientId) {
+            dispatch(updateActivePatient(doc))
+          } else if (doc.type === 'record') {
+            const match = doc._id.match(/record_(.+)_.+/) // Extract patientId
+            if (match && (match[1] === patientIdBody)) {
+              dispatch(addOrUpdateActiveRecord(doc))
+            }
           }
         })
         .on('error', error => {
