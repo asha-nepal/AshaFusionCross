@@ -3,6 +3,9 @@ box: bringnow/android-sdk
 build:
   steps:
     - npm-install
+    - script:
+        name: flow
+        code: npm run flow
     - npm-test
     - script:
         name: echo nodejs information

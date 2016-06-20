@@ -1,4 +1,6 @@
-import React from 'react'
+/* @flow */
+
+import React, { PropTypes } from 'react'
 import {
   StyleSheet,
   View,
@@ -25,6 +27,14 @@ const styles = StyleSheet.create({
 })
 
 export default React.createClass({
+  propTypes: {
+    isFetching: PropTypes.bool,
+    patientList: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+    })).isRequired,
+    onPatientSelect: PropTypes.func.isRequired,
+  },
+
   getInitialState() {
     let ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
@@ -39,7 +49,7 @@ export default React.createClass({
     this.props.fetchPatientList()
   },
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Object) {
     if (nextProps.patientList !== this.props.patientList) {
       this.setState({
         ds: this.state.ds.cloneWithRows(nextProps.patientList || [])
@@ -47,7 +57,7 @@ export default React.createClass({
     }
   },
 
-  _renderRow(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
+  _renderRow(rowData: Object, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     return (
       <TouchableHighlight onPress={() => {
         this.props.onPatientSelect(rowData._id)
