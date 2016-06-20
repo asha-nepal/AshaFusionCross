@@ -1,7 +1,17 @@
-import React from 'react'
+/* @flow */
+
+import React, { PropTypes} from 'react'
 import { Link } from 'react-router'
 
 export default React.createClass({
+  propTypes: {
+    isFetching: PropTypes.bool,
+    patientList: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+    })).isRequired,
+    onPatientSelect: PropTypes.func,
+  },
+
   componentWillMount() {
     this.props.fetchPatientList()
 

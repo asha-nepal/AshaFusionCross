@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "electron": "electron index.electron.js",
-    "test": "jest"
+    "test": "jest",
+    "flow": "flow"
   },
   "dependencies": {
     "react": "^15.1.0",
@@ -25,6 +26,7 @@
     "deep-freeze": "0.0.1",
     "electron-prebuilt": "^1.1.0",
     "enzyme": "^2.3.0",
+    "flow-bin": "^0.25.0",
     "gulp-webpack": "^1.5.0",
     "jest-cli": "^12.1.1",
     "moment": "^2.13.0",

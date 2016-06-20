@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { PropTypes } from 'react'
 import {
   View,
@@ -13,7 +15,7 @@ export const SelectButtonGroup = React.createClass({
     options: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.any.isRequired,
       label: PropTypes.string.isRequired,
-    })),
+    })).isRequired,
     value: PropTypes.any,
     disabled: PropTypes.bool,
   },
