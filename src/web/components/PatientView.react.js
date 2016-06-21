@@ -1,4 +1,6 @@
-import React from 'react'
+/* @flow */
+
+import React, { PropTypes } from 'react'
 
 import {
   Link,
@@ -8,6 +10,21 @@ import PatientForm from '../forms/PatientForm.react'
 import RecordForm from '../forms/RecordForm.react'
 
 export default React.createClass({
+  propTypes: {
+    isFetching: PropTypes.bool,
+    patient: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+    }),
+    records: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+    })).isRequired,
+    addNewActiveRecord: PropTypes.func.isRequired,
+    putPatient: PropTypes.func.isRequired,
+    putRecord: PropTypes.func.isRequired,
+    isPuttingPatient: PropTypes.bool,
+    isPuttingRecord: PropTypes.bool,
+  },
+
   componentWillMount() {
     this.props.init()
 
@@ -40,7 +57,7 @@ export default React.createClass({
 
     return (
       <div>
-        <h2>{ patient.name }</h2>
+        <h2>{ patient && patient.name }</h2>
 
         <PatientForm
           initialValues={patient}
