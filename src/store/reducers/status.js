@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   REQUEST_FETCH_PATIENT_LIST,
   SUCCESS_FETCH_PATIENT_LIST,
@@ -21,7 +23,13 @@ const initialState = {
   error: null
 }
 
-export default (state = initialState, action) => {
+export default (
+  state: Object = initialState,
+  action: {
+    type: string,
+    error: ErrorObject,
+  }
+) => {
   switch (action.type) {
     /* Fetch Patient list */
     case REQUEST_FETCH_PATIENT_LIST:
