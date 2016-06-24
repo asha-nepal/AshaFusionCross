@@ -9,7 +9,7 @@ import {
   addOrUpdateActiveRecord,
 } from '../actions'
 
-import { db } from '../db'
+import { subscribe } from '../db'
 
 const mapStateToProps = (state) => ({
   isFetching: state.status.isFetchingPatient,
@@ -36,25 +36,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         return null
       }
 
-      return db.changes({
-          since: 'now',
-          live: true,
-          include_docs: true,
-        })
-        .on('change', change => {
-          const doc = change.doc
-          if (doc._id === patientId) {
-            dispatch(updateActivePatient(doc))
-          } else if (doc.type === 'record') {
-            const match = doc._id.match(/record_(.+)_.+/) // Extract patientId
-            if (match && (match[1] === patientIdBody)) {
-              dispatch(addOrUpdateActiveRecord(doc))
-            }
+      return subscribe('change', change => {
+        const doc = change.doc
+        if (doc._id === patientId) {
+          dispatch(updateActivePatient(doc))
+        } else if (doc.type === 'record') {
+          const match = doc._id.match(/record_(.+)_.+/) // Extract patientId
+          if (match && (match[1] === patientIdBody)) {
+            dispatch(addOrUpdateActiveRecord(doc))
           }
-        })
-        .on('error', error => {
-          console.log('change error', error)
-        })
+        }
+      })
     },
   }
 }
