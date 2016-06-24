@@ -47,6 +47,14 @@ export default React.createClass({
 
   componentWillMount() {
     this.props.fetchPatientList()
+
+    this.unsubscribeChange = this.props.subscribeChange()
+  },
+
+  componentWillUnmount() {
+    if (this.unsubscribeChange) {
+      this.unsubscribeChange()
+    }
   },
 
   componentWillReceiveProps(nextProps: Object) {
