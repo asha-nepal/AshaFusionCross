@@ -1,6 +1,7 @@
 /* @flow */
 
 import PouchDB from 'pouchdb'
+import Subscriber from './subscriber'
 
 export let db
 
@@ -17,6 +18,8 @@ export const getParams = () => ({
   dbname,
 })
 
+const subscriber = new Subscriber()
+
 export function connect(
   _hostname: string,
   _port: number,
@@ -30,5 +33,17 @@ export function connect(
 
   db = new PouchDB(url)
 
-  return db
+  db.changes({
+    since: 'now',
+    live: true,
+    include_docs: true,
+  })
+  .on('change', change => {
+    subscriber.trigger('change', change)
+  })
+  .on('error', err => {
+    subscriber.trigger('error', err)
+  })
 }
+
+export const subscribe = (key: 'change' | 'error', cb: Function) => subscriber.subscribe(key, cb)

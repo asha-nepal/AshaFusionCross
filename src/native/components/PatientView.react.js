@@ -30,14 +30,14 @@ export default React.createClass({
   componentWillMount() {
     this.props.init()
 
-    const change = this.props.subscribeChange()
-    this.setState({change: change})
+    this.setState({
+      unsubscribeChange: this.props.subscribeChange()
+    })
   },
 
   componentWillUnmount() {
-    if (this.state.change) {
-      this.state.change.cancel()
-      this.setState({change: null})
+    if (this.state.unsubscribeChange) {
+      this.state.unsubscribeChange()
     }
   },
 

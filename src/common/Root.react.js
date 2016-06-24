@@ -10,6 +10,11 @@ import configureStore from '../store/configureStore'
 const store = configureStore()
 store.runSaga(rootSaga)
 
+import { subscribe } from '../db'
+subscribe('error', err => {
+  console.log('change error', err)
+})
+
 export default React.createClass({
   render() {
     return (
