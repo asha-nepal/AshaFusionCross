@@ -28,12 +28,14 @@ export default React.createClass({
   componentWillMount() {
     this.props.init()
 
-    this.unsubscribeChange = this.props.subscribeChange()
+    this.setState({
+      unsubscribeChange: this.props.subscribeChange()
+    })
   },
 
   componentWillUnmount() {
-    if (this.unsubscribeChange) {
-      this.unsubscribeChange()
+    if (this.state.unsubscribeChange) {
+      this.state.unsubscribeChange()
     }
   },
 
