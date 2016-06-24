@@ -3,8 +3,19 @@
 let callbacks
 let nextind
 
-export const subscribe = (cb: Function, key: string) => {
-  const entity: {cb: ?Function, key: string} = {
+export const subscribe = (arg1: Function | string, arg2: ?Function) => {
+  let cb: Function, key: ?string
+  if (typeof arg1 === 'function') {
+    cb = arg1
+    key = undefined
+  } else if (typeof arg1 === 'string' && typeof arg2 === 'function') {
+    cb = arg2
+    key = arg1
+  } else {
+    throw TypeError()
+  }
+
+  const entity: {cb: Function, key: ?string} = {
     cb,
     key,
   }

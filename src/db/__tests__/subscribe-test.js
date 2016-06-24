@@ -1,3 +1,5 @@
+/* @flow */
+
 jest.unmock('../subscribe')
 
 import { subscribe, trigger, clear } from '../subscribe'
@@ -34,10 +36,10 @@ describe('subscribe()', () => {
     const cbB2 = jest.fn()
 
     const unsubscribeall = subscribe(cball)
-    const unsubscribeA1  = subscribe(cbA1, 'A')
-    const unsubscribeA2  = subscribe(cbA2, 'A')
-    const unsubscribeB1  = subscribe(cbB1, 'B')
-    const unsubscribeB2  = subscribe(cbB2, 'B')
+    const unsubscribeA1  = subscribe('A', cbA1)
+    const unsubscribeA2  = subscribe('A', cbA2)
+    const unsubscribeB1  = subscribe('B', cbB1)
+    const unsubscribeB2  = subscribe('B', cbB2)
 
     trigger('A')
 
@@ -76,7 +78,7 @@ describe('trigger()', () => {
     const cbA = jest.fn()
     const cball = jest.fn()
 
-    subscribe(cbA, 'A')
+    subscribe('A', cbA)
     subscribe(cball)
 
     trigger(null, 'yoho', 1)
