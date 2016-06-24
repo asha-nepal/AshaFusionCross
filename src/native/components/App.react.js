@@ -12,6 +12,7 @@ import Root from '../../common/Root.react'
 import Title from './Title.react'
 import PatientList from '../containers/PatientList.react'
 import PatientView from '../containers/PatientView.react'
+import Settings from '../containers/Settings.react'
 
 const styles = StyleSheet.create({
   container: {
@@ -39,6 +40,13 @@ export default React.createClass({
                 return (
                   <View style={styles.container}>
                     <Title title='ASHA fusion'/>
+                    <Button
+                      onPress={() => {
+                        navigator.push({
+                          name: 'settings',
+                        })
+                      }}
+                    >Settings</Button>
                     <ScrollView style={styles.wrapper}>
                       <PatientList
                         onPatientSelect={(patientId) => {
@@ -71,6 +79,17 @@ export default React.createClass({
                         patientId={ route.patientId }
                       />
                     </ScrollView>
+                  </View>
+                )
+
+              case 'settings':
+                return (
+                  <View style={styles.container}>
+                    <Title
+                      title='ASHA fusion'
+                      onBack={() => navigator.pop()}
+                    />
+                    <Settings />
                   </View>
                 )
 
