@@ -1,7 +1,7 @@
 /* @flow */
 
 import PouchDB from 'pouchdb'
-import Subscriber from './subscriber'
+import PubSub from './pubsub'
 
 const hostname = (typeof location !== 'undefined' && location.hostname) ? location.hostname : '127.0.0.1'
 const port = '5984'
@@ -10,7 +10,7 @@ const url = 'http://' + hostname + ':' + port + '/' + dbname
 
 export const db = new PouchDB(url)
 
-const subscriber = new Subscriber()
+const pubsub = new PubSub()
 
 db.changes({
   since: 'now',
@@ -18,10 +18,10 @@ db.changes({
   include_docs: true,
 })
 .on('change', change => {
-  subscriber.trigger('change', change)
+  pubsub.publish('change', change)
 })
 .on('error', err => {
-  subscriber.trigger('error', err)
+  pubsub.publish('error', err)
 })
 
-export const subscribe = (key: 'change' | 'error', cb: Function) => subscriber.subscribe(key, cb)
+export const subscribe = (key: 'change' | 'error', cb: Function) => pubsub.subscribe(key, cb)
