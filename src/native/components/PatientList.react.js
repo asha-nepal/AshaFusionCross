@@ -111,9 +111,6 @@ export default React.createClass({
 
     return (
       <ScrollView style={styles.container}>
-        <Button
-          onPress={() => Actions.settings()}
-        >Settings</Button>
         <ListView
           dataSource={this.state.ds}
           renderRow={this._renderRow}

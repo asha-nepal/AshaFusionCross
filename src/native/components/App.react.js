@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Scene } from 'react-native-router-flux';
+import { Router, Scene, Actions } from 'react-native-router-flux'
 
 import Root from '../../common/Root.react'
 
@@ -13,7 +13,9 @@ export default React.createClass({
       <Root>
         <Router>
           <Scene key="root">
-            <Scene key="patientList" component={PatientList} title="Patient List" initial={true} />
+            <Scene key="patientList" component={PatientList} title="Patient List" initial={true}
+              rightTitle='Settings' onRight={() => Actions.settings()}
+            />
             <Scene key="patientView" component={PatientView} title="Patient Records" />
             <Scene key="settings" component={Settings} title="Settings" />
           </Scene>
