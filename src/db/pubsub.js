@@ -1,6 +1,6 @@
 /* @flow */
 
-export default class Subscriber {
+export default class PubSub {
   callbacks: Object;
   nextind: number;
 
@@ -32,7 +32,7 @@ export default class Subscriber {
     return () => { delete this.callbacks[ind] }
   }
 
-  trigger(key: string, ...args: Array<void>) {
+  publish(key: string, ...args: Array<void>) {
     Object.keys(this.callbacks).forEach(ind => {
       const entity = this.callbacks[ind]
 

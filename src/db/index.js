@@ -1,7 +1,7 @@
 /* @flow */
 
 import PouchDB from 'pouchdb'
-import Subscriber from './subscriber'
+import PubSub from './pubsub'
 
 export let db
 
@@ -18,7 +18,7 @@ export const getParams = () => ({
   dbname,
 })
 
-const subscriber = new Subscriber()
+const pubsub = new PubSub()
 
 export function connect(
   _hostname: string,
@@ -39,11 +39,11 @@ export function connect(
     include_docs: true,
   })
   .on('change', change => {
-    subscriber.trigger('change', change)
+    pubsub.publish('change', change)
   })
   .on('error', err => {
-    subscriber.trigger('error', err)
+    pubsub.publish('error', err)
   })
 }
 
-export const subscribe = (key: 'change' | 'error', cb: Function) => subscriber.subscribe(key, cb)
+export const subscribe = (key: 'change' | 'error', cb: Function) => pubsub.subscribe(key, cb)
