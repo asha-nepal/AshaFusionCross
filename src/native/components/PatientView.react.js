@@ -3,13 +3,19 @@
 import React, { PropTypes } from 'react'
 import {
   StyleSheet,
-  View,
+  ScrollView,
   Text,
 } from 'react-native'
 import Button from 'react-native-button'
 
 import PatientForm from '../forms/PatientForm.react'
 import RecordForm from '../forms/RecordForm.react'
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 65,
+  },
+})
 
 export default React.createClass({
   propTypes: {
@@ -58,7 +64,7 @@ export default React.createClass({
     }
 
     return (
-      <View>
+      <ScrollView style={styles.container}>
         <Text>{ patient && patient.name }</Text>
         <PatientForm onSubmit={patient => putPatient(patient)} initialValues={patient}/>
 
@@ -74,7 +80,7 @@ export default React.createClass({
         <Button
           onPress={addNewActiveRecord}
         >Add record</Button>
-      </View>
+      </ScrollView>
     )
   }
 })

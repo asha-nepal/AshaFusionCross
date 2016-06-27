@@ -2,12 +2,19 @@
 
 import React, { PropTypes } from 'react'
 import {
-  View,
+  ScrollView,
   Text,
   TextInput,
+  StyleSheet,
 } from 'react-native'
 
 import PouchSettings from '../forms/PouchSettings.react'
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 65,
+  }
+})
 
 export default React.createClass({
   propTypes: {
@@ -26,7 +33,7 @@ export default React.createClass({
     } = this.props
 
     return (
-      <View>
+      <ScrollView style={styles.container}>
         <Text>Settings</Text>
 
         <PouchSettings
@@ -43,7 +50,7 @@ export default React.createClass({
             )
           }}
         />
-      </View>
+      </ScrollView>
     )
   }
 })
