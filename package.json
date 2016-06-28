@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "build-android-bundle-dev": "react-native bundle --dev true --platform android --entry-file index.android.js --bundle-output android/app/build/intermediates/assets/debug/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/debug",
     "electron": "electron index.electron.js",
     "test": "jest",
     "flow": "flow"
