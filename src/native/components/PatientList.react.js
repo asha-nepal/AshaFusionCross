@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
 export default React.createClass({
   propTypes: {
     isFetching: PropTypes.bool,
+    fetchPatientList: PropTypes.func.isRequired,
+    subscribeChange: PropTypes.func.isRequired,
     patientList: PropTypes.arrayOf(PropTypes.shape({
       _id: PropTypes.string.isRequired,
     })).isRequired,
@@ -42,11 +44,22 @@ export default React.createClass({
 
     return {
       ds: ds.cloneWithRows(this.props.patientList || []),
+      unsubscribeChange: null,
     }
   },
 
   componentWillMount() {
     this.props.fetchPatientList()
+
+    this.setState({
+      unsubscribeChange: this.props.subscribeChange()
+    })
+  },
+
+  componentWillUnmount() {
+    if (this.state.unsubscribeChange) {
+      this.state.unsubscribeChange()
+    }
   },
 
   componentWillReceiveProps(nextProps: Object) {

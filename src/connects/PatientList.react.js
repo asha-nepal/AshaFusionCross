@@ -3,7 +3,7 @@ import {
   fetchPatientList,
 } from '../actions'
 
-import { db } from '../db'
+import { subscribe } from '../db'
 
 const mapStateToProps = (state) => {
   return {
@@ -16,17 +16,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchPatientList: () => dispatch(fetchPatientList()),
     subscribeChange: () => {
-      return db.changes({
-          since: 'now',
-          live: true,
-          include_docs: true,
-        })
-        .on('change', change => {
-          dispatch(fetchPatientList())  // TODO 全件fetchし直すのは効率が悪い
-        })
-        .on('error', error => {
-          console.log('change error', error)
-        })
+      return subscribe('change', change => {
+        dispatch(fetchPatientList())  // TODO 全件fetchし直すのは効率が悪い
+      })
     }
   }
 }
