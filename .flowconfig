@@ -66,6 +66,8 @@
 .*/node_modules/isemail/.*\.json
 .*/node_modules/tr46/.*\.json
 
+# User specified
+.*/node_modules/react-native-experimental-navigation/
 
 [include]
 

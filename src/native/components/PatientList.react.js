@@ -8,9 +8,15 @@ import {
   RecyclerViewBackedScrollView,
   ListView,
   Text,
+  ScrollView,
 } from 'react-native'
+import Button from 'react-native-button'
+import { Actions } from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 65,
+  },
   row: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -34,7 +40,6 @@ export default React.createClass({
     patientList: PropTypes.arrayOf(PropTypes.shape({
       _id: PropTypes.string.isRequired,
     })).isRequired,
-    onPatientSelect: PropTypes.func.isRequired,
   },
 
   getInitialState() {
@@ -70,10 +75,18 @@ export default React.createClass({
     }
   },
 
+  _onAddPress() {
+    Actions.patientView({patientId: null})
+  },
+
+  _onPatientSelect(patientId: string) {
+    Actions.patientView({patientId: patientId})
+  },
+
   _renderRow(rowData: Object, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     return (
       <TouchableHighlight onPress={() => {
-        this.props.onPatientSelect(rowData._id)
+        this._onPatientSelect(rowData._id)
         highlightRow(sectionID, rowID);
       }}>
         <View>
@@ -97,13 +110,18 @@ export default React.createClass({
     }
 
     return (
-      <ListView
-        dataSource={this.state.ds}
-        renderRow={this._renderRow}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-        enableEmptySections={true}
-      />
+      <ScrollView style={styles.container}>
+        <ListView
+          dataSource={this.state.ds}
+          renderRow={this._renderRow}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          enableEmptySections={true}
+        />
+        <Button
+          onPress={this._onAddPress}
+        >New</Button>
+      </ScrollView>
     )
   },
 })
