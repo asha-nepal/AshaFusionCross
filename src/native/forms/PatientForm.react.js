@@ -26,13 +26,21 @@ export default reduxForm({
 
     return (
       <View>
+        <Text>Name</Text>
         <TextInput {...fields.name} style={styles.textInput} />
-        <TextInput {...fields.age} style={styles.textInput} />
+
+        <Text>Age</Text>
+        <TextInput {...fields.age} style={styles.textInput} keyboardType='numeric' />
+
+        <Text>Sex</Text>
         <SelectButtonGroup {...fields.sex} options={[
           {id: 'male', label: 'Male'},
           {id: 'female', label: 'Female'},
         ]} />
+
+        <Text>Address</Text>
         <TextInput {...fields.address} style={styles.textInput} />
+
         <Button
           onPress={handleSubmit}
         >Submit</Button>

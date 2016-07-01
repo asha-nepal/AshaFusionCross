@@ -11,11 +11,12 @@ import Button from 'react-native-button'
 import PatientForm from '../forms/PatientForm.react'
 import RecordForm from '../forms/RecordForm.react'
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 65,
-  },
-})
+import appStyles from './styles'
+
+const styles = {
+  ...appStyles,
+  ...StyleSheet.create({}),
+}
 
 export default React.createClass({
   propTypes: {

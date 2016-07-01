@@ -10,11 +10,12 @@ import {
 
 import PouchSettings from '../forms/PouchSettings.react'
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 65,
-  }
-})
+import appStyles from './styles'
+
+const styles = {
+  ...appStyles,
+  ...StyleSheet.create({}),
+}
 
 export default React.createClass({
   propTypes: {
