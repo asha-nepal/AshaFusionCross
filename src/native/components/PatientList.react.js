@@ -19,39 +19,40 @@ const {
 } = MK;
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 65,
-  },
-  fixedFab: {
-    flex: 1,
-    position: 'absolute',
-    width: 56,
-    height: 56,
-    bottom: 16,
-    right: 16,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 16,
-    paddingRight: 16,
-    height: 48,
-    backgroundColor: '#F6F6F6',
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#DDDDDD',
-  },
-  text: {
-    fontSize: 16,
-    flex: 1,
-  },
-})
+import appStyles from './styles'
+
+const styles = {
+  ...appStyles,
+  ...StyleSheet.create({
+    fixedFab: {
+      flex: 1,
+      position: 'absolute',
+      width: 56,
+      height: 56,
+      bottom: 16,
+      right: 16,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingLeft: 16,
+      paddingRight: 16,
+      height: 48,
+      backgroundColor: '#F6F6F6',
+    },
+    separator: {
+      height: 1,
+      backgroundColor: '#DDDDDD',
+    },
+    text: {
+      fontSize: 16,
+      flex: 1,
+    },
+  }),
+}
 
 const FixedAccentColoredFab = MKButton.accentColoredFab()
   .withStyle(styles.fixedFab)
