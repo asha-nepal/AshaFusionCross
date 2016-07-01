@@ -8,23 +8,55 @@ import {
   RecyclerViewBackedScrollView,
   ListView,
   Text,
+  ScrollView,
 } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
-    backgroundColor: '#F6F6F6',
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#CCCCCC',
-  },
-  text: {
-    flex: 1,
-  },
-})
+const MK = require('react-native-material-kit');
+const {
+  MKButton,
+  MKColor,
+} = MK;
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import appStyles from './styles'
+
+const styles = {
+  ...appStyles,
+  ...StyleSheet.create({
+    fixedFab: {
+      flex: 1,
+      position: 'absolute',
+      width: 56,
+      height: 56,
+      bottom: 16,
+      right: 16,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingLeft: 16,
+      paddingRight: 16,
+      height: 48,
+      backgroundColor: '#F6F6F6',
+    },
+    separator: {
+      height: 1,
+      backgroundColor: '#DDDDDD',
+    },
+    text: {
+      fontSize: 16,
+      flex: 1,
+    },
+  }),
+}
+
+const FixedAccentColoredFab = MKButton.accentColoredFab()
+  .withStyle(styles.fixedFab)
+  .build();
 
 export default React.createClass({
   propTypes: {
@@ -34,7 +66,6 @@ export default React.createClass({
     patientList: PropTypes.arrayOf(PropTypes.shape({
       _id: PropTypes.string.isRequired,
     })).isRequired,
-    onPatientSelect: PropTypes.func.isRequired,
   },
 
   getInitialState() {
@@ -70,18 +101,24 @@ export default React.createClass({
     }
   },
 
+  _onAddPress() {
+    Actions.patientView({patientId: null})
+  },
+
+  _onPatientSelect(patientId: string) {
+    Actions.patientView({patientId: patientId})
+  },
+
   _renderRow(rowData: Object, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
     return (
       <TouchableHighlight onPress={() => {
-        this.props.onPatientSelect(rowData._id)
+        this._onPatientSelect(rowData._id)
         highlightRow(sectionID, rowID);
       }}>
-        <View>
-          <View style={styles.row}>
-            <Text style={styles.text}>
-              {rowData.name}
-            </Text>
-          </View>
+        <View style={styles.row}>
+          <Text style={styles.text}>
+            {rowData.name}
+          </Text>
         </View>
       </TouchableHighlight>
     )
@@ -97,13 +134,21 @@ export default React.createClass({
     }
 
     return (
-      <ListView
-        dataSource={this.state.ds}
-        renderRow={this._renderRow}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-        renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-        enableEmptySections={true}
-      />
+      <View style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <ListView
+            dataSource={this.state.ds}
+            renderRow={this._renderRow}
+            // TODO: RecyclerViewBackedScrollView はandroidでbetter performanceらしいがheight=0になって表示されない（バグ？）
+            // renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+            renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+            enableEmptySections={true}
+          />
+        </ScrollView>
+        <FixedAccentColoredFab
+          onPress={this._onAddPress}
+        ><Icon name='add' size={24} color='#FFFFFF' /></FixedAccentColoredFab>
+      </View>
     )
   },
 })

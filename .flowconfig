@@ -66,6 +66,8 @@
 .*/node_modules/isemail/.*\.json
 .*/node_modules/tr46/.*\.json
 
+# User specified
+.*/node_modules/react-native-experimental-navigation/
 
 [include]
 
@@ -92,6 +94,11 @@ suppress_type=$FixMe
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(2[0-5]\\|1[0-9]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(2[0-5]\\|1[0-9]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)?:? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
+
+# Work around for platform specific codes
+module.file_ext=.ios.js
+module.file_ext=.android.js
+module.file_ext=.js
 
 [version]
 ^0.25.0

@@ -1,3 +1,5 @@
+/* @flow */
+
 import { connect } from 'react-redux'
 import {
   fetchPatient,
@@ -21,7 +23,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const patientId = ownProps.patientId || ownProps.params && ownProps.params.patientId
-  const patientIdBody = patientId.replace(/^patient_/, '')
 
   return {
     init: () => {
@@ -35,6 +36,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       if (!patientId) {
         return null
       }
+
+      const patientIdBody = patientId.replace(/^patient_/, '')
 
       return subscribe('change', change => {
         const doc = change.doc
