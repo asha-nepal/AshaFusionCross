@@ -76,6 +76,12 @@ import com.android.build.OutputFile
  * ]
  */
 
+if (project.hasProperty("bundleInDebug") && bundleInDebug) {
+    project.ext.react = [
+        bundleInDebug: true
+    ]
+}
+
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**

@@ -26,16 +26,6 @@ deploy-debug:
       name: Set version name
       code: sed -i -e "s/\(android:versionName=\"\).*\(\"\)/\1$(git describe | sed -e 's/^v//')\2/" android/app/src/main/AndroidManifest.xml
     - script:
-      name: Install react-native
-      code: npm install -g react-native-cli
-    - script:
-      name: Build first
-      cwd: android
-      code: ./gradlew assembleDebug
-    - script:
-      name: Build bundle
-      code: react-native bundle --dev true --platform android --entry-file index.android.js --bundle-output $WERCKER_ROOT/android/app/build/intermediates/assets/debug/index.android.bundle --assets-dest $WERCKER_ROOT/android/app/build/intermediates/res/merged/debug
-    - script:
       name: Build app and Deploy to Fabric
       cwd: android
-      code: ./gradlew assembleDebug crashlyticsUploadDistributionDebug
+      code: ./gradlew assembleDebug -PbundleInDebug=true crashlyticsUploadDistributionDebug
