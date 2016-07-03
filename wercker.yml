@@ -23,9 +23,6 @@ deploy-debug:
         apiKey=$FABRIC_API_KEY
         apiSecret=$FABRIC_BUILD_SECRET
     - script:
-      name: Set version name
-      code: sed -i -e "s/\(android:versionName=\"\).*\(\"\)/\1$(git describe | sed -e 's/^v//')\2/" android/app/src/main/AndroidManifest.xml
-    - script:
       name: Build app and Deploy to Fabric
       cwd: android
-      code: ./gradlew assembleDebug -PbundleInDebug=true crashlyticsUploadDistributionDebug
+      code: ./gradlew assembleDebug -PbundleInDebug=true -PversionName="$(git describe | sed -e 's/^v//')" crashlyticsUploadDistributionDebug
