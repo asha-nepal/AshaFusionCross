@@ -76,6 +76,12 @@ import com.android.build.OutputFile
  * ]
  */
 
+if (project.hasProperty("bundleInDebug") && bundleInDebug) {
+    project.ext.react = [
+        bundleInDebug: true
+    ]
+}
+
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -93,6 +99,9 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+def VERSION_CODE = 1    // TODO: Change not to be a constant
+def VERSION_NAME = project.hasProperty("versionName") ? versionName : "1.0"
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -101,8 +110,8 @@ android {
         applicationId "com.ashafusioncross"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

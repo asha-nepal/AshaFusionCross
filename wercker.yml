@@ -23,6 +23,6 @@ deploy-debug:
         apiKey=$FABRIC_API_KEY
         apiSecret=$FABRIC_BUILD_SECRET
     - script:
-      name: build and deploy
+      name: Build app and Deploy to Fabric
       cwd: android
-      code: ./gradlew assembleDebug crashlyticsUploadDistributionDebug
+      code: ./gradlew assembleDebug -PbundleInDebug=true -PversionName="$(git describe | sed -e 's/^v//')" crashlyticsUploadDistributionDebug
