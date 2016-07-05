@@ -12,15 +12,11 @@ import {
 } from '../../db'
 
 const mapStateToProps = (state) => ({
-  ...getParams(),
+  pouchConfig: getParams(),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  connectPouchDB: (hostname, port, dbname) => dispatch(connectPouchDB(
-    hostname,
-    port,
-    dbname
-  ))
+  connectPouchDB: (pouchConfig) => dispatch(connectPouchDB(pouchConfig))
 })
 
 export default connect(

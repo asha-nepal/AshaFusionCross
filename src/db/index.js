@@ -6,30 +6,23 @@ import PubSub from './pubsub'
 export let db
 
 // Initial settings
-let hostname: string = (typeof location !== 'undefined' && location.hostname) ? location.hostname : '127.0.0.1'
-let port: number     = 5984
-let dbname: string   = 'asha-fusion-dev'
+let config: PouchConfig = {
+  hostname: ((typeof location !== 'undefined' && location.hostname) ? location.hostname : '127.0.0.1') + ':5984',
+  dbname: 'asha-fusion-dev',
+}
 
-connect(hostname, port, dbname)
+connect(config)
 
-export const getParams = () => ({
-  hostname,
-  port,
-  dbname,
-})
+export const getParams = () => config
 
 const pubsub = new PubSub()
 
 export function connect(
-  _hostname: string,
-  _port: number,
-  _dbname: string
+  _config: PouchConfig
 ) {
-  hostname = _hostname
-  port = _port
-  dbname = _dbname
+  config = _config
 
-  const url = 'http://' + hostname + ':' + port.toString() + '/' + dbname
+  const url = 'http://' + config.hostname + '/' + config.dbname
 
   db = new PouchDB(url)
 

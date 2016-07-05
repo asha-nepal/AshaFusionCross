@@ -13,7 +13,7 @@ import styles from './styles'
 
 export default reduxForm({
   form: 'pouch-settings',
-  fields: ['hostname', 'port', 'dbname'],
+  fields: ['hostname', 'dbname'],
 })(React.createClass({
   render() {
     const {
@@ -27,13 +27,6 @@ export default reduxForm({
         <TextInput
           {...fields.hostname}
           style={styles.textInput}
-        />
-
-        <Text>Port</Text>
-        <TextInput
-          {...fields.port}
-          style={styles.textInput}
-          keyboardType='number-pad'
         />
 
         <Text>Database</Text>

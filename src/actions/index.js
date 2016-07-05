@@ -36,11 +36,9 @@ export const addNewActiveRecord = (patientId: string) => ({
 })
 
 export const CONNECT_POUCHDB = 'CONNECT_POUCHDB'
-export const connectPouchDB = (hostname: string, port: number, dbname: string) => ({
+export const connectPouchDB = (config: PouchConfig) => ({
   type: CONNECT_POUCHDB,
-  hostname,
-  port,
-  dbname,
+  config,
 })
 
 // for reducers

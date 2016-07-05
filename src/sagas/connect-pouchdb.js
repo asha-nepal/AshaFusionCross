@@ -11,8 +11,8 @@ import {
 
 export function* watchConnectPouchDB() {
   while (true) {
-    let {hostname, port, dbname} = yield take(CONNECT_POUCHDB)
-    yield call(connect, hostname, port, dbname)
+    let {config} = yield take(CONNECT_POUCHDB)
+    yield call(connect, config)
     yield call(fetchPatientList)
   }
 }
