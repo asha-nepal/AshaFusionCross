@@ -3,6 +3,13 @@ type RecordObject = {_id: string, type: string}
 type ErrorObject = {}
 
 type PouchConfig = {
-  hostname: string,
-  dbname: string,
+  isLocal: boolean,
+  local: {
+    dbname: string,
+    isSynced: boolean,
+  },
+  remote: {
+    hostname: string,
+    dbname: string,
+  }
 }

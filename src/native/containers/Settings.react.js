@@ -8,11 +8,11 @@ import {
 import Settings from '../components/Settings.react'
 
 import {
-  getParams,
+  getConfig,
 } from '../../db'
 
 const mapStateToProps = (state) => ({
-  pouchConfig: getParams(),
+  pouchConfig: getConfig(),
 })
 
 const mapDispatchToProps = (dispatch) => ({
