@@ -150,3 +150,22 @@ export const addOrUpdateActiveRecord = (record: RecordObject) => ({
   type: ADD_OR_UPDATE_ACTIVE_RECORD,
   record,
 });
+
+
+export const ADD_ALERT = 'ADD_ALERT';
+export const addAlert = (id: string, message: string, type: string): AddAlertAction => ({
+  type: ADD_ALERT,
+  payload: {
+    id,
+    message,
+    type,
+  },
+});
+
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const removeAlert = (id: string): RemoveAlertAction => ({
+  type: REMOVE_ALERT,
+  payload: {
+    id,
+  },
+});
