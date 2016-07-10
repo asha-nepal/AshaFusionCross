@@ -1,3 +1,3 @@
 # AshaFusionCross
 
-[![wercker status](https://app.wercker.com/status/9bac2d868f7b049761ade755b0babf05/m "wercker status")](https://app.wercker.com/project/bykey/9bac2d868f7b049761ade755b0babf05)
+[![wercker status](https://app.wercker.com/status/48f4d8ae121c28691e2c4f767c99eb47/m "wercker status")](https://app.wercker.com/project/bykey/48f4d8ae121c28691e2c4f767c99eb47)
