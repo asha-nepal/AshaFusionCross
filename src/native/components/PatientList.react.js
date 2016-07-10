@@ -1,25 +1,24 @@
 /* @flow */
 
-import React, { PropTypes } from 'react'
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
   TouchableHighlight,
-  RecyclerViewBackedScrollView,
+//  RecyclerViewBackedScrollView,
   ListView,
   Text,
   ScrollView,
-} from 'react-native'
-import { Actions } from 'react-native-router-flux'
+} from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 const MK = require('react-native-material-kit');
 const {
   MKButton,
-  MKColor,
 } = MK;
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import appStyles from './styles'
+import appStyles from './styles';
 
 const styles = {
   ...appStyles,
@@ -52,85 +51,105 @@ const styles = {
       flex: 1,
     },
   }),
-}
+};
 
 const FixedAccentColoredFab = MKButton.accentColoredFab()
   .withStyle(styles.fixedFab)
   .build();
 
-export default React.createClass({
-  propTypes: {
-    isFetching: PropTypes.bool,
-    fetchPatientList: PropTypes.func.isRequired,
-    subscribeChange: PropTypes.func.isRequired,
-    patientList: PropTypes.arrayOf(PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    })).isRequired,
-  },
+export default class PatientList extends Component {
+  constructor(props: Object) {
+    super(props);
 
-  getInitialState() {
-    let ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    })
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
 
-    return {
+    this.state = {
       ds: ds.cloneWithRows(this.props.patientList || []),
       unsubscribeChange: null,
-    }
-  },
+    };
+
+    this._onAddPress = this._onAddPress.bind(this);
+    this._onPatientSelect = this._onPatientSelect.bind(this);
+    this._renderRow = this._renderRow.bind(this);
+  }
+
+  state: {
+    ds: ListView.DataSource;
+    unsubscribeChange: ?() => void;
+  };
 
   componentWillMount() {
-    this.props.fetchPatientList()
+    this.props.fetchPatientList();
 
     this.setState({
-      unsubscribeChange: this.props.subscribeChange()
-    })
-  },
-
-  componentWillUnmount() {
-    if (this.state.unsubscribeChange) {
-      this.state.unsubscribeChange()
-    }
-  },
+      unsubscribeChange: this.props.subscribeChange(),
+    });
+  }
 
   componentWillReceiveProps(nextProps: Object) {
     if (nextProps.patientList !== this.props.patientList) {
       this.setState({
-        ds: this.state.ds.cloneWithRows(nextProps.patientList || [])
-      })
+        ds: this.state.ds.cloneWithRows(nextProps.patientList || []),
+      });
     }
-  },
+  }
+
+  componentWillUnmount() {
+    if (this.state.unsubscribeChange) {
+      this.state.unsubscribeChange();
+    }
+  }
+
+  props: {
+    isFetching: boolean,
+    fetchPatientList: () => void,
+    subscribeChange: () => () => void,
+    patientList: Array<PatientObject>,
+  };
+
+  _onAddPress: Function;
+  _onPatientSelect: Function;
+  _renderRow: Function;
 
   _onAddPress() {
-    Actions.patientView({patientId: null})
-  },
+    Actions.patientView({ patientId: null });
+  }
 
   _onPatientSelect(patientId: string) {
-    Actions.patientView({patientId: patientId})
-  },
+    Actions.patientView({ patientId });
+  }
 
-  _renderRow(rowData: Object, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
+  _renderRow(
+    rowData: Object,
+    sectionID: number,
+    rowID: number,
+    highlightRow: (sectionID: number, rowID: number) => void
+  ) {
     return (
-      <TouchableHighlight onPress={() => {
-        this._onPatientSelect(rowData._id)
-        highlightRow(sectionID, rowID);
-      }}>
+      <TouchableHighlight
+        onPress={() => {
+          this._onPatientSelect(rowData._id);
+          highlightRow(sectionID, rowID);
+        }}
+      >
         <View style={styles.row}>
           <Text style={styles.text}>
             {rowData.name}
           </Text>
         </View>
       </TouchableHighlight>
-    )
-  },
+    );
+  }
 
   render() {
     const {
       isFetching,
-    } = this.props
+    } = this.props;
 
     if (isFetching) {
-      return <Text>Fetching patient list...</Text>
+      return <Text>Fetching patient list...</Text>;
     }
 
     return (
@@ -139,16 +158,19 @@ export default React.createClass({
           <ListView
             dataSource={this.state.ds}
             renderRow={this._renderRow}
-            // TODO: RecyclerViewBackedScrollView はandroidでbetter performanceらしいがheight=0になって表示されない（バグ？）
+            // TODO: RecyclerViewBackedScrollViewは
+            // androidでbetter performanceらしいがheight=0になって表示されない（バグ？）
             // renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-            renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-            enableEmptySections={true}
+            renderSeparator={(sectionID, rowID) =>
+              <View key={`${sectionID}-${rowID}`} style={styles.separator} />
+            }
+            enableEmptySections
           />
         </ScrollView>
         <FixedAccentColoredFab
           onPress={this._onAddPress}
-        ><Icon name='add' size={24} color='#FFFFFF' /></FixedAccentColoredFab>
+        ><Icon name="add" size={24} color="#FFFFFF" /></FixedAccentColoredFab>
       </View>
-    )
-  },
-})
+    );
+  }
+}

@@ -1,6 +1,6 @@
 import {
   StyleSheet,
-} from 'react-native'
+} from 'react-native';
 
 export default StyleSheet.create({
   textInput: {
