@@ -1,5 +1,4 @@
-import { takeLatest } from 'redux-saga';
-import { put, call, select } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import {
   PUT_ACTIVE_RECORD,
   requestPutRecord,
@@ -10,10 +9,10 @@ import { pouchPutPatient } from './put-active-patient';
 
 const pouchPutRecord = pouchPutPatient;
 
-function* putActiveRecord(action) {
+function* putActiveRecord(index) {
   yield put(requestPutRecord());
   try {
-    const record = yield select(state => state.activeRecords[action.index]);
+    const record = yield select(state => state.activeRecords[index]);
     yield call(pouchPutRecord, record);
     yield put(successPutRecord());
   } catch (error) {
@@ -22,5 +21,8 @@ function* putActiveRecord(action) {
 }
 
 export function* watchPutActiveRecord() {
-  yield* takeLatest(PUT_ACTIVE_RECORD, putActiveRecord);
+  while (true) {
+    const { index } = yield take(PUT_ACTIVE_RECORD);
+    yield call(putActiveRecord, index);
+  }
 }

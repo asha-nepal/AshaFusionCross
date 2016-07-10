@@ -1,5 +1,4 @@
-import { takeLatest } from 'redux-saga';
-import { put } from 'redux-saga/effects';
+import { take, put, call } from 'redux-saga/effects';
 import Chance from 'chance';
 import {
   INIT_ACTIVE_PATIENT,
@@ -20,5 +19,8 @@ export function* initActivePatient() {
 }
 
 export function* watchInitActivePatient() {
-  yield* takeLatest(INIT_ACTIVE_PATIENT, initActivePatient);
+  while (true) {
+    yield take(INIT_ACTIVE_PATIENT);
+    yield call(initActivePatient);
+  }
 }
