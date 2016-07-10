@@ -19,18 +19,14 @@ const styles = {
 
 export default React.createClass({
   propTypes: {
-    hostname: PropTypes.string,
-    port: PropTypes.number,
-    dbname: PropTypes.string,
+    pouchConfig: PropTypes.object.isRequired,
     connectPouchDB: PropTypes.func.isRequired,
   },
 
   render() {
     const {
-      hostname,
-      port,
-      dbname,
-      connectPouchDB
+      pouchConfig,
+      connectPouchDB,
     } = this.props
 
     return (
@@ -38,17 +34,9 @@ export default React.createClass({
         <Text>Settings</Text>
 
         <PouchSettings
-          initialValues={{
-            hostname,
-            port: port ? port.toString() : '',
-            dbname
-          }}
+          initialValues={pouchConfig}
           onSubmit={params => {
-            connectPouchDB(
-              params.hostname,
-              parseInt(params.port, 10) || null,
-              params.dbname
-            )
+            connectPouchDB(params)
           }}
         />
       </ScrollView>

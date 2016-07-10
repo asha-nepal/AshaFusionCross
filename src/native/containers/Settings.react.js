@@ -8,19 +8,15 @@ import {
 import Settings from '../components/Settings.react'
 
 import {
-  getParams,
+  getConfig,
 } from '../../db'
 
 const mapStateToProps = (state) => ({
-  ...getParams(),
+  pouchConfig: getConfig(),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  connectPouchDB: (hostname, port, dbname) => dispatch(connectPouchDB(
-    hostname,
-    port,
-    dbname
-  ))
+  connectPouchDB: (pouchConfig) => dispatch(connectPouchDB(pouchConfig))
 })
 
 export default connect(
