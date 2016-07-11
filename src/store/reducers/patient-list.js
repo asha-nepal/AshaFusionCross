@@ -2,7 +2,7 @@
 
 import {
   SUCCESS_FETCH_PATIENT_LIST,
-} from '../../actions'
+} from '../../actions';
 
 export default (
   state: Array<PatientObject> = [],
@@ -13,9 +13,9 @@ export default (
 ): Array<PatientObject> => {
   switch (action.type) {
     case SUCCESS_FETCH_PATIENT_LIST:
-      return action.patientList
+      return action.patientList;
 
     default:
-      return state
+      return state;
   }
-}
+};

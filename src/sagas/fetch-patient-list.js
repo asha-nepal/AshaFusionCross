@@ -1,33 +1,33 @@
-import { takeLatest, takeEvery } from 'redux-saga'
-import { take, put, call, fork, select } from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga';
+import { put, call } from 'redux-saga/effects';
 import {
   FETCH_PATIENT_LIST,
   requestFetchPatientList,
   successFetchPatientList,
   failureFetchPatientList,
-} from '../actions'
+} from '../actions';
 
-import { db } from '../db'
+import { db } from '../db';
 
 function pouchFetchPatientList() {
   return db.allDocs({
-      include_docs: true,
-      startkey: 'patient_',
-      endkey: 'patient_\uffff',
-    })
-    .then(res => res.rows.map(r => r.doc))
+    include_docs: true,
+    startkey: 'patient_',
+    endkey: 'patient_\uffff',
+  })
+  .then(res => res.rows.map(r => r.doc));
 }
 
 export function* fetchPatientList() {
-  yield put(requestFetchPatientList())
+  yield put(requestFetchPatientList());
   try {
-    const patientList = yield call(pouchFetchPatientList)
-    yield put(successFetchPatientList(patientList))
+    const patientList = yield call(pouchFetchPatientList);
+    yield put(successFetchPatientList(patientList));
   } catch (error) {
-    yield put(failureFetchPatientList(error))
+    yield put(failureFetchPatientList(error));
   }
 }
 
 export function* watchFetchPatientList() {
-  yield* takeLatest(FETCH_PATIENT_LIST, fetchPatientList)
+  yield* takeLatest(FETCH_PATIENT_LIST, fetchPatientList);
 }

@@ -1,11 +1,14 @@
 /* @flow */
 
-import PouchDB from 'pouchdb'
-import PubSub from './pubsub'
+import PouchDB from 'pouchdb';
+import PubSub from './pubsub';
 
 export let db
 
 // Initial settings
+const defaultHost = (typeof location !== 'undefined' && location.hostname)
+  ? location.hostname
+  : '127.0.0.1';
 let config: PouchConfig = {
   isLocal: false,
   local: {
@@ -13,53 +16,56 @@ let config: PouchConfig = {
     isSynced: false,
   },
   remote: {
-    hostname: ((typeof location !== 'undefined' && location.hostname) ? location.hostname : '127.0.0.1') + ':5984',
+    hostname: `${defaultHost}:5984`,
     dbname: 'asha-fusion-dev',
   },
-}
+};
 
-connect(config)
+export const getConfig = () => config;
 
-export const getConfig = () => config
-
-const pubsub = new PubSub()
+const pubsub = new PubSub();
 
 export function connect(
   _config: PouchConfig
 ) {
-  config = _config
+  config = _config;
 
-  const remoteUrl = 'http://' + config.remote.hostname + '/' + config.remote.dbname
+  const remoteUrl = `http://${config.remote.hostname}/${config.remote.dbname}`;
 
   if (config.isLocal) {
-    db = new PouchDB(config.local.dbname)
+    db = new PouchDB(config.local.dbname);
     if (config.local.isSynced) {
       db.sync(remoteUrl, {
         live: true,
-        retry: true
-      })
-      .on('change', function (info) {
-        // handle change
-        console.log('sync.change')
-      }).on('paused', function (err) {
-        // replication paused (e.g. replication up to date, user went offline)
-        console.log('sync.paused')
-      }).on('active', function () {
-        // replicate resumed (e.g. new changes replicating, user went back online)
-        console.log('sync.resumed')
-      }).on('denied', function (err) {
-        // a document failed to replicate (e.g. due to permissions)
-        console.log('sync.denied')
-      }).on('complete', function (info) {
-        // handle complete
-        console.log('sync.complete')
-      }).on('error', function (err) {
-        // handle error
-        console.log('sync.error')
+        retry: true,
       });
+//      .on('change', info => {
+//        // handle change
+//        console.log('sync.change')
+//      })
+//      .on('paused', err => {
+//        // replication paused (e.g. replication up to date, user went offline)
+//        console.log('sync.paused')
+//      })
+//      .on('active', () => {
+//        // replicate resumed (e.g. new changes replicating, user went back online)
+//        console.log('sync.resumed')
+//      })
+//      .on('denied', err => {
+//        // a document failed to replicate (e.g. due to permissions)
+//        console.log('sync.denied')
+//      })
+//      .on('complete', info => {
+//        // handle complete
+//        console.log('sync.complete')
+//      })
+//      .on('error', err => {
+//        // handle error
+//        console.log('sync.error')
+//      });
     }
   } else {
-    db = new PouchDB(remoteUrl)
+    db = new PouchDB(remoteUrl);
   }
 
   db.changes({
@@ -69,15 +75,17 @@ export function connect(
   })
   .on('change', change => {
     // handle change
-    pubsub.publish('change', change)
+    pubsub.publish('change', change);
   })
-  .on('complete', function(info) {
+  .on('complete', info => {
     // changes() was canceled
-    pubsub.publish('complete', info)
+    pubsub.publish('complete', info);
   })
   .on('error', err => {
-    pubsub.publish('error', err)
-  })
+    pubsub.publish('error', err);
+  });
 }
 
-export const subscribe = (key: 'change' | 'error', cb: Function) => pubsub.subscribe(key, cb)
+connect(config);
+
+export const subscribe = (key: 'change' | 'error', cb: Function) => pubsub.subscribe(key, cb);
