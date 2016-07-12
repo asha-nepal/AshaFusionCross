@@ -12,7 +12,7 @@ import { Link } from 'react-router';
 import PatientView from '../PatientView.react';
 
 describe('<PatientView />', () => {
-  it('calls init() and subscribeChange() at componentWillMount() and unsubscribe at componentWillUnmount()', () => {
+  it('calls init() and subscribeChange() at componentWillMount() and unsubscribe at componentWillUnmount()', () => { // eslint-disable-line max-len
     const mockInit = jest.fn();
     const mockSubscribeChange = jest.fn();
     const mockUnsubscribeChange = jest.fn();

@@ -23,13 +23,13 @@ const initialState = {
   error: null,
 };
 
-export default (
+export default function (
   state: Object = initialState,
   action: {
     type: string,
     error: ErrorObject,
   }
-) => {
+): Object {
   switch (action.type) {
     /* Fetch Patient list */
     case REQUEST_FETCH_PATIENT_LIST:
@@ -106,4 +106,4 @@ export default (
     default:
       return state;
   }
-};
+}

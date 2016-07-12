@@ -5,10 +5,10 @@ import {
   UPDATE_ACTIVE_PATIENT,
 } from '../../actions';
 
-export default (
+export default function (
   state: ?PatientObject = null,
   action: {type: string, patient: PatientObject}
-): ?PatientObject => {
+): ?PatientObject {
   switch (action.type) {
     case SUCCESS_FETCH_PATIENT:
     case UPDATE_ACTIVE_PATIENT:
@@ -17,4 +17,4 @@ export default (
     default:
       return state;
   }
-};
+}

@@ -1,9 +1,10 @@
 /* @flow */
+/* eslint import/no-mutable-exports: 0*/
 
 import PouchDB from 'pouchdb';
 import PubSub from './pubsub';
 
-export let db
+export let db;
 
 // Initial settings
 const defaultHost = (typeof location !== 'undefined' && location.hostname)

@@ -1,4 +1,5 @@
 /* eslint-env jest */
+/* eslint no-unused-vars: 0*/
 
 jest.unmock('../pubsub');
 
@@ -40,10 +41,10 @@ describe('subscribe()', () => {
     const cbB2 = jest.fn();
 
     const unsubscribeall = pubsub.subscribe(cball);
-    const unsubscribeA1  = pubsub.subscribe('A', cbA1);
-    const unsubscribeA2  = pubsub.subscribe('A', cbA2);
-    const unsubscribeB1  = pubsub.subscribe('B', cbB1);
-    const unsubscribeB2  = pubsub.subscribe('B', cbB2);
+    const unsubscribeA1 = pubsub.subscribe('A', cbA1);
+    const unsubscribeA2 = pubsub.subscribe('A', cbA2);
+    const unsubscribeB1 = pubsub.subscribe('B', cbB1);
+    const unsubscribeB2 = pubsub.subscribe('B', cbB2);
 
     pubsub.publish('A');
 

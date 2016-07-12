@@ -8,14 +8,14 @@ import {
   ADD_OR_UPDATE_ACTIVE_RECORD,
 } from '../../actions';
 
-export default (
+export default function (
   records: Array<RecordObject> = [],
   action: {
     type: string,
     record: RecordObject,
     records: Array<RecordObject>
   }
-): Array<RecordObject> => {
+): Array<RecordObject> {
   switch (action.type) {
     case SUCCESS_FETCH_PATIENT:
     case SET_ACTIVE_RECORDS:
@@ -50,4 +50,4 @@ export default (
     default:
       return records;
   }
-};
+}

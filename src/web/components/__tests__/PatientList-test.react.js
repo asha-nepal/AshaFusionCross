@@ -9,7 +9,7 @@ import React from 'react';
 import PatientList from '../PatientList.react';
 
 describe('<PatientList />', () => {
-  it('calls fetchPatientList() and subscribeChange() at componentWillMount() and unsubscribe at componentWillUnmount()', () => {
+  it('calls fetchPatientList() and subscribeChange() at componentWillMount() and unsubscribe at componentWillUnmount()', () => { // eslint-disable-line max-len
     const mockFetchPatientList = jest.fn();
     const mockSubscribeChange = jest.fn();
     const mockUnsubscribeChange = jest.fn();
