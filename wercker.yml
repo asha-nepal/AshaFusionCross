@@ -6,6 +6,9 @@ build:
     - script:
         name: flow
         code: npm run flow
+    - script:
+        name: eslint
+        code: npm run lint
     - npm-test
     - script:
         name: echo nodejs information

@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "electron": "electron index.electron.js",
     "test": "jest",
-    "flow": "flow"
+    "flow": "flow",
+    "lint": "eslint src"
   },
   "dependencies": {
     "react": "^15.1.0",
