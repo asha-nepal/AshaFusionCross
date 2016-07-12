@@ -1,1 +1,1 @@
-export * from './SelectButtonGroup.react'
+export * from './SelectButtonGroup.react';

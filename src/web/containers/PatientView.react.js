@@ -1,4 +1,4 @@
-import PatientView from '../components/PatientView.react'
-import connect from '../../connects/PatientView.react'
+import PatientView from '../components/PatientView.react';
+import connect from '../../connects/PatientView.react';
 
-export default connect(PatientView)
+export default connect(PatientView);

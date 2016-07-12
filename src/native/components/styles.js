@@ -1,7 +1,7 @@
 import {
   StyleSheet,
   Platform,
-} from 'react-native'
+} from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -11,8 +11,8 @@ export default StyleSheet.create({
         marginTop: 65,
       },
       android: {
-        marginTop: 55
+        marginTop: 55,
       },
     }),
   },
-})
+});
