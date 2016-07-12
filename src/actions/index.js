@@ -41,6 +41,21 @@ export const connectPouchDB = (config: PouchConfig) => ({
   config,
 });
 
+
+export const PUSH_ALERT = 'PUSH_ALERT';
+export const pushAlert = (type: string, message: string, timeout: number) => ({
+  type: PUSH_ALERT,
+  payload: {
+    message,
+    type,
+    timeout,
+  },
+});
+
+export const alertError = pushAlert.bind(this, 'error');
+export const alertInfo = pushAlert.bind(this, 'info');
+
+
 // for reducers
 export const REQUEST_FETCH_PATIENT_LIST = 'REQUEST_FETCH_PATIENT_LIST';
 export const SUCCESS_FETCH_PATIENT_LIST = 'SUCCESS_FETCH_PATIENT_LIST';
