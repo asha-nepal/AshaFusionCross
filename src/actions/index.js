@@ -41,6 +41,21 @@ export const connectPouchDB = (config: PouchConfig) => ({
   config,
 });
 
+
+export const PUSH_ALERT = 'PUSH_ALERT';
+export const pushAlert = (type: string, message: string, timeout: number) => ({
+  type: PUSH_ALERT,
+  payload: {
+    message,
+    type,
+    timeout,
+  },
+});
+
+export const alertError = pushAlert.bind(this, 'error');
+export const alertInfo = pushAlert.bind(this, 'info');
+
+
 // for reducers
 export const REQUEST_FETCH_PATIENT_LIST = 'REQUEST_FETCH_PATIENT_LIST';
 export const SUCCESS_FETCH_PATIENT_LIST = 'SUCCESS_FETCH_PATIENT_LIST';
@@ -149,4 +164,23 @@ export const ADD_OR_UPDATE_ACTIVE_RECORD = 'ADD_OR_UPDATE_ACTIVE_RECORD';
 export const addOrUpdateActiveRecord = (record: RecordObject) => ({
   type: ADD_OR_UPDATE_ACTIVE_RECORD,
   record,
+});
+
+
+export const ADD_ALERT = 'ADD_ALERT';
+export const addAlert = (id: string, message: string, type: string): AddAlertAction => ({
+  type: ADD_ALERT,
+  payload: {
+    id,
+    message,
+    type,
+  },
+});
+
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const removeAlert = (id: string): RemoveAlertAction => ({
+  type: REMOVE_ALERT,
+  payload: {
+    id,
+  },
 });

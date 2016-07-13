@@ -11,7 +11,9 @@ const store = configureStore();
 store.runSaga(rootSaga);
 
 import { subscribe } from '../db';
+import { alertError } from '../actions';
 subscribe('error', err => {
+  store.dispatch(alertError(`ERR: change listener ${err.message || ''}`));
   console.log('change error', err);
 });
 

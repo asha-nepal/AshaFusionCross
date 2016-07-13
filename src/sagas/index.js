@@ -7,6 +7,7 @@ import { watchPutRecord } from './put-record';
 import { watchInitActivePatient } from './init-active-patient';
 import { watchAddNewActiveRecord } from './add-new-active-record';
 import { watchConnectPouchDB } from './connect-pouchdb';
+import { watchPushAlert } from './alerts';
 
 export default function* rootSaga() {
   yield fork(watchFetchPatientList);
@@ -16,4 +17,5 @@ export default function* rootSaga() {
   yield fork(watchInitActivePatient);
   yield fork(watchAddNewActiveRecord);
   yield fork(watchConnectPouchDB);
+  yield fork(watchPushAlert);
 }
