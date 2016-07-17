@@ -1,8 +1,10 @@
-var path = require('path')
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
     './src/web/app.js',
+    './src/web/sass/style.sass',
   ],
   output: {
     filename: 'app.js',
@@ -18,14 +20,23 @@ module.exports = {
         query: {
           plugins: [
             'transform-runtime',
-          ]
+          ],
         },
+      },
+      {
+        test: /\.sass$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
       },
     ],
   },
+  plugins: [
+    new ExtractTextPlugin('style.css', {
+      allChunks: true,
+    }),
+  ],
   devServer: {
     contentBase: './public',
     port: 8080,
     inline: true,
   },
-}
+};
