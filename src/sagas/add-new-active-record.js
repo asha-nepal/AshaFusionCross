@@ -4,15 +4,18 @@ import moment from 'moment';
 import {
   ADD_NEW_ACTIVE_RECORD,
   addActiveRecord,
+  selectActiveRecord,
 } from '../actions';
 
 export function* addNewActiveRecord(patientId) {
   const patientIdBody = patientId.replace(/^patient_/, '');
   const datetime = moment().format('x'); // Unix Millisecond Timestamp
+  const newId = `record_${patientIdBody}_${datetime}`;
   yield put(addActiveRecord({
-    _id: `record_${patientIdBody}_${datetime}`,
+    _id: newId,
     type: 'record',
   }));
+  yield put(selectActiveRecord(newId));
 }
 
 export function* watchAddNewActiveRecord() {

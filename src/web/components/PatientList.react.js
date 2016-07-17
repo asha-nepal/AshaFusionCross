@@ -41,18 +41,29 @@ export default class PatientList extends Component {
 
     return (
       <div>
-        <Link to={'/patient/'}>
-          New
-        </Link>
-        <ul>
-        {patientList.map((patient, i) =>
-          <li key={i}>
-            <Link to={`/patient/${patient._id}`}>
-              {patient.name || ''}
+        <section className="section">
+          <div className="container">
+            <Link to={'/patient/'} className="button">
+              New
             </Link>
-          </li>
-        )}
-        </ul>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <div className="menu">
+              <ul className="menu-list">
+              {patientList.map((patient, i) =>
+                <li key={i}>
+                  <Link to={`/patient/${patient._id}`}>
+                    {patient.name || ''}
+                  </Link>
+                </li>
+              )}
+              </ul>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

@@ -6,49 +6,49 @@ export default reduxForm({
   fields: ['_id', '_rev', 'type', 'name', 'age', 'sex', 'address'],
 })(({ fields, handleSubmit, freeze }) => (
   <form onSubmit={handleSubmit}>
-    <div>
-      <label>
+    <p className="control">
+      <label className="label">
         Name
-        <input type="text" {...fields.name} />
+        <input className="input" type="text" {...fields.name} />
       </label>
-    </div>
+    </p>
 
-    <div>
-      Sex
-      <label>
+    <p className="control">
+      <label className="label">Sex</label>
+      <label className="radio">
         <input
           type="radio"
           {...fields.sex}
           value="male"
           checked={fields.sex.value === 'male'}
         />
-        Male
+        {' '}Male
       </label>
-      <label>
+      <label className="radio">
         <input
           type="radio"
           {...fields.sex}
           value="female"
           checked={fields.sex.value === 'female'}
         />
-        Female
+        {' '}Female
       </label>
-    </div>
+    </p>
 
-    <div>
-      <label>
+    <p className="control">
+      <label className="label">
         Age
-        <input type="number" {...fields.age} />
+        <input className="input" type="number" {...fields.age} />
       </label>
-    </div>
+    </p>
 
-    <div>
-      <label>
+    <p className="control">
+      <label className="label">
         Address
-        <input type="text" {...fields.address} />
+        <input className="input" type="text" {...fields.address} />
       </label>
-    </div>
+    </p>
 
-    <button type="submit" disabled={freeze}>Submit</button>
+    <button className="button is-primary" type="submit" disabled={freeze}>Submit</button>
   </form>
 ));

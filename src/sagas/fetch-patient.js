@@ -33,7 +33,7 @@ export function* fetchPatient(action) {
     const records = yield call(pouchFetchRecords, action.patientId);
     yield put(successFetchPatient(patient, records));
     if (records && records.length > 0) {
-      yield put(selectActiveRecord(records[0]._id));
+      yield put(selectActiveRecord(records[records.length - 1]._id));
     }
   } catch (error) {
     yield put(failureFetchPatient(error));
