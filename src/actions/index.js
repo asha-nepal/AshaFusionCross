@@ -184,3 +184,12 @@ export const removeAlert = (id: string): RemoveAlertAction => ({
     id,
   },
 });
+
+
+export const SELECT_ACTIVE_RECORD = 'SELECT_ACTIVE_RECORD';
+export const selectActiveRecord = (id: string): SelectActiveRecordAction => ({
+  type: SELECT_ACTIVE_RECORD,
+  payload: {
+    id,
+  },
+});

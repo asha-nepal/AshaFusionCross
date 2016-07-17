@@ -5,6 +5,7 @@ import {
   requestFetchPatient,
   successFetchPatient,
   failureFetchPatient,
+  selectActiveRecord,
 } from '../actions';
 
 import { db } from '../db';
@@ -31,6 +32,9 @@ export function* fetchPatient(action) {
     const patient = yield call(pouchFetchPatient, action.patientId);
     const records = yield call(pouchFetchRecords, action.patientId);
     yield put(successFetchPatient(patient, records));
+    if (records && records.length > 0) {
+      yield put(selectActiveRecord(records[0]._id));
+    }
   } catch (error) {
     yield put(failureFetchPatient(error));
   }
