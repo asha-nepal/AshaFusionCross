@@ -39,6 +39,8 @@ export default class PatientView extends Component {
     putRecord: (record: RecordObject) => void,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
+    selectedActiveRecordId: string,
+    selectActiveRecord: (id: string) => void,
   };
 
   render() {
@@ -51,6 +53,8 @@ export default class PatientView extends Component {
       putRecord,
       isPuttingPatient,
       isPuttingRecord,
+      selectedActiveRecordId,
+      selectActiveRecord,
     } = this.props;
 
     if (isFetching) {
@@ -59,33 +63,74 @@ export default class PatientView extends Component {
 
     return (
       <div>
-        <h2>{patient && patient.name || ''}</h2>
 
-        <PatientForm
-          initialValues={patient}
-          onSubmit={params => putPatient(params)}
-          freeze={isPuttingPatient}
-        />
+        <section className="hero is-primary is-bold">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">
+                <Link to="/">&lt; </Link>
+                {patient && patient.name || ''}
+              </h1>
+              <h2 className="subtitle">
+                {(patient && patient.age) ? `Age: ${patient.age}` : ''}
+              </h2>
+            </div>
+          </div>
+        </section>
 
-        <a
-          href="#"
-          onClick={e => {
-            e.preventDefault();
-            addNewActiveRecord();
-          }}
-        >ADD RECORD</a>
+        <section className="section">
+          <div className="container">
+            <PatientForm
+              initialValues={patient}
+              onSubmit={params => putPatient(params)}
+              freeze={isPuttingPatient}
+            />
+          </div>
+        </section>
 
-        {records.map(record =>
-          <RecordForm
-            key={record._id}
-            formKey={record._id}
-            initialValues={record}
-            onSubmit={params => putRecord(params)}
-            freeze={isPuttingRecord}
-          />
-        )}
+        <section className="section">
+          <div className="container">
+            <div className="tabs">
+              <ul>
+                {records.map((record, i) =>
+                  <li
+                    key={record._id}
+                    className={(selectedActiveRecordId === record._id) && 'is-active'}
+                  >
+                    <a
+                      href="#"
+                      onClick={e => {
+                        e.preventDefault();
+                        selectActiveRecord(record._id);
+                      }}
+                    >{i + 1}</a>
+                  </li>
+                )}
+                <li>
+                  <a
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault();
+                      addNewActiveRecord();
+                    }}
+                  >+</a>
+                </li>
+              </ul>
+            </div>
 
-        <Link to="/">Top</Link>
+            {records.map(record =>
+              <div key={record._id} className="container">
+                <RecordForm
+                  formKey={record._id}
+                  initialValues={record}
+                  hidden={record._id !== selectedActiveRecordId}
+                  onSubmit={params => putRecord(params)}
+                  freeze={isPuttingRecord}
+                />
+              </div>
+            )}
+          </div>
+        </section>
       </div>
     );
   }

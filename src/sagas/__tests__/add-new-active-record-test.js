@@ -9,8 +9,9 @@ import moment from 'moment';
 import { delay } from 'redux-saga';
 import { take, put, call } from 'redux-saga/effects';
 import {
-  addActiveRecord,
   ADD_NEW_ACTIVE_RECORD,
+  addActiveRecord,
+  selectActiveRecord,
 } from '../../actions';
 import {
   addNewActiveRecord,
@@ -31,6 +32,9 @@ describe('ADD_NEW_ACTIVE_RECORD', () => {
         _id: 'record_foo_mocked-datetime',
         type: 'record',
       })));
+
+    expect(saga.next().value)
+      .toEqual(put(selectActiveRecord('record_foo_mocked-datetime')));
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });

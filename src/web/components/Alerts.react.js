@@ -4,10 +4,20 @@ import React from 'react';
 
 export default function Alerts({ alerts }: { alerts: Array<Alert> }) {
   return (
-    <ul>
+    <div
+      style={{
+        position: 'fixed',
+        bottom: 16,
+        right: 16,
+        zIndex: 10,
+      }}
+    >
     {alerts.map(alert =>
-      <li key={alert.id}>{alert.message}</li>
+      <div
+        key={alert.id}
+        className={'notification is-danger'}
+      >{alert.message}</div>
     )}
-    </ul>
+    </div>
   );
 }

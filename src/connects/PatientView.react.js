@@ -9,6 +9,7 @@ import {
   initActivePatient,
   addNewActiveRecord,
   addOrUpdateActiveRecord,
+  selectActiveRecord,
 } from '../actions';
 
 import { subscribe } from '../db';
@@ -17,6 +18,7 @@ const mapStateToProps = (state) => ({
   isFetching: state.status.isFetchingPatient,
   patient: state.activePatient,
   records: state.activeRecords,
+  selectedActiveRecordId: state.patientView.selectedActiveRecordId,
   isPuttingPatient: state.status.isPuttingPatient,
   isPuttingRecord: state.status.isPuttingRecord,
 });
@@ -30,6 +32,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       else dispatch(initActivePatient());
     },
     addNewActiveRecord: () => dispatch(addNewActiveRecord(patientId)),
+    selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
     putPatient: (patient) => dispatch(putPatient(patient)),
     putRecord: (record) => dispatch(putRecord(record)),
     subscribeChange: () => {
