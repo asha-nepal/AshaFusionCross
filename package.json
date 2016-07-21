@@ -7,7 +7,9 @@
     "electron": "electron index.electron.js",
     "test": "jest",
     "flow": "flow",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "server": "webpack-dev-server",
+    "build": "rm -rf public && mkdir public && cp src/web/static/* public/. && webpack -p"
   },
   "dependencies": {
     "react": "^15.1.0",
@@ -57,7 +59,9 @@
     "redux-form": "^5.2.5",
     "redux-saga": "^0.10.4",
     "sass-loader": "^4.0.0",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
   },
   "jest": {
     "unmockedModulePathPatterns": [
