@@ -84,22 +84,13 @@ export const requestFetchPatient = () => ({
   type: REQUEST_FETCH_PATIENT,
 });
 
-export const successFetchPatient = (patient: PatientObject, records: Array<RecordObject>) => ({
+export const successFetchPatient = () => ({
   type: SUCCESS_FETCH_PATIENT,
-  patient,
-  records,
 });
 
 export const failureFetchPatient = (error: ErrorObject) => ({
   type: FAILURE_FETCH_PATIENT,
   error,
-});
-
-
-export const UPDATE_ACTIVE_PATIENT = 'UPDATE_ACTIVE_PATIENT';
-export const updateActivePatient = (patient: PatientObject) => ({
-  type: UPDATE_ACTIVE_PATIENT,
-  patient,
 });
 
 
@@ -136,34 +127,6 @@ export const successPutRecord = () => ({
 export const failurePutRecord = (error: ErrorObject) => ({
   type: FAILURE_PUT_RECORD,
   error,
-});
-
-
-export const SET_ACTIVE_RECORDS = 'SET_ACTIVE_RECORDS';
-export const setActiveRecords = (records: Array<RecordObject>) => ({
-  type: SET_ACTIVE_RECORDS,
-  records,
-});
-
-
-export const ADD_ACTIVE_RECORD = 'ADD_ACTIVE_RECORD';
-export const addActiveRecord = (record: RecordObject) => ({
-  type: ADD_ACTIVE_RECORD,
-  record,
-});
-
-
-export const UPDATE_ACTIVE_RECORD = 'UPDATE_ACTIVE_RECORD';
-export const updateActiveRecord = (record: RecordObject) => ({
-  type: UPDATE_ACTIVE_RECORD,
-  record,
-});
-
-
-export const ADD_OR_UPDATE_ACTIVE_RECORD = 'ADD_OR_UPDATE_ACTIVE_RECORD';
-export const addOrUpdateActiveRecord = (record: RecordObject) => ({
-  type: ADD_OR_UPDATE_ACTIVE_RECORD,
-  record,
 });
 
 

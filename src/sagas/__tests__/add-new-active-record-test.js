@@ -2,15 +2,16 @@
 
 jest.unmock('redux-saga');
 jest.unmock('redux-saga/effects');
+jest.unmock('react-redux-form');
 jest.unmock('../../actions');
 jest.unmock('../add-new-active-record');
 
 import moment from 'moment';
 import { delay } from 'redux-saga';
 import { take, put, call } from 'redux-saga/effects';
+import { actions as formActions } from 'react-redux-form';
 import {
   ADD_NEW_ACTIVE_RECORD,
-  addActiveRecord,
   selectActiveRecord,
 } from '../../actions';
 import {
@@ -19,7 +20,7 @@ import {
 } from '../add-new-active-record';
 
 describe('ADD_NEW_ACTIVE_RECORD', () => {
-  it('calls ADD_ACTIVE_RECORD with new ID', () => {
+  it('calls actions.push() with new ID', () => {
     const mockMomentFormat = jest.fn().mockReturnValue('mocked-datetime');
     moment.mockReturnValue({
       format: mockMomentFormat,
@@ -28,10 +29,10 @@ describe('ADD_NEW_ACTIVE_RECORD', () => {
     const saga = addNewActiveRecord('patient_foo');
 
     expect(saga.next().value)
-      .toEqual(put(addActiveRecord({
-        _id: 'record_foo_mocked-datetime',
-        type: 'record',
-      })));
+//      .toEqual(put(formActions.push('activeRecords', {  // TODO: thunk actionの比較
+//        _id: 'record_foo_mocked-datetime',
+//        type: 'record',
+//      })));
 
     expect(saga.next().value)
       .toEqual(put(selectActiveRecord('record_foo_mocked-datetime')));

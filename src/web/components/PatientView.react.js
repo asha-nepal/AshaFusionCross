@@ -39,7 +39,7 @@ export default class PatientView extends Component {
     putRecord: (record: RecordObject) => void,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
-    selectedActiveRecordId: string,
+    selectedActiveRecordIndex: number,
     selectActiveRecord: (id: string) => void,
   };
 
@@ -53,7 +53,7 @@ export default class PatientView extends Component {
       putRecord,
       isPuttingPatient,
       isPuttingRecord,
-      selectedActiveRecordId,
+      selectedActiveRecordIndex,
       selectActiveRecord,
     } = this.props;
 
@@ -81,7 +81,7 @@ export default class PatientView extends Component {
         <section className="section">
           <div className="container">
             <PatientForm
-              initialValues={patient}
+              model="activePatient"
               onSubmit={params => putPatient(params)}
               freeze={isPuttingPatient}
             />
@@ -95,7 +95,7 @@ export default class PatientView extends Component {
                 {records.map((record, i) =>
                   <li
                     key={record._id}
-                    className={(selectedActiveRecordId === record._id) && 'is-active'}
+                    className={(selectedActiveRecordIndex === i) && 'is-active'}
                   >
                     <a
                       href="#"
@@ -118,13 +118,11 @@ export default class PatientView extends Component {
               </ul>
             </div>
 
-            {records.map(record =>
-              <div key={record._id} className="container">
+            {selectedActiveRecordIndex > -1 && (
+              <div className="container">
                 <RecordForm
-                  formKey={record._id}
-                  initialValues={record}
-                  hidden={record._id !== selectedActiveRecordId}
-                  onSubmit={params => putRecord(params)}
+                  model={`activeRecords[${selectedActiveRecordIndex}]`}
+                  onSubmit={(params) => putRecord(params)}
                   freeze={isPuttingRecord}
                 />
               </div>

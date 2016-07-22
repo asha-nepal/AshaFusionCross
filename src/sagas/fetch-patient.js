@@ -1,5 +1,6 @@
 import { takeLatest } from 'redux-saga';
 import { put, call } from 'redux-saga/effects';
+import { actions as formActions } from 'react-redux-form';
 import {
   FETCH_PATIENT,
   requestFetchPatient,
@@ -31,7 +32,9 @@ export function* fetchPatient(action) {
   try {
     const patient = yield call(pouchFetchPatient, action.patientId);
     const records = yield call(pouchFetchRecords, action.patientId);
-    yield put(successFetchPatient(patient, records));
+    yield put(formActions.change('activePatient', patient));
+    yield put(formActions.change('activeRecords', records));
+    yield put(successFetchPatient());
     if (records && records.length > 0) {
       yield put(selectActiveRecord(records[records.length - 1]._id));
     }

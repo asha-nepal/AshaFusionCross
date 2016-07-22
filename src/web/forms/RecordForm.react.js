@@ -1,30 +1,41 @@
+/* @flow */
+
 import React from 'react';
-import { reduxForm } from 'redux-form';
+import { Field, Form } from 'react-redux-form';
 
-export default reduxForm({
-  form: 'record',
-  fields: ['_id', '_rev', 'type', 'height', 'weight'],
-})(({ fields, handleSubmit, freeze, hidden }) => {
-  if (hidden) {
-    return null;
-  }
+export default ({
+  model,
+  onSubmit,
+  freeze,
+}: {
+  model: string,
+  onSubmit: (record: RecordObject) => void,
+  freeze: boolean,
+}) => (
+  <Form
+    model={model}
+    onSubmit={onSubmit}
+  >
+    <p className="control">
+      <label className="label">
+        Height
+        <Field model={`${model}.height`}>
+          <input type="text" className="input" />
+        </Field>
+      </label>
+    </p>
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <p className="control">
-        <label className="label">
-          Height
-          <input className="input" type="text" {...fields.height} />
-        </label>
-      </p>
-      <p className="control">
-        <label className="label">
-          Weight
-          <input className="input" type="text" {...fields.weight} />
-        </label>
-      </p>
+    <p className="control">
+      <label className="label">
+        Weight
+        <Field model={`${model}.weight`}>
+          <input type="text" className="input" />
+        </Field>
+      </label>
+    </p>
 
-      <button type="submit" className="button is-primary" disabled={freeze}>Submit</button>
-    </form>
-  );
-});
+    <button type="submit" className="button is-primary" disabled={freeze}>
+      Submit
+    </button>
+  </Form>
+);

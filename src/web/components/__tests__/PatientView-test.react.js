@@ -2,7 +2,7 @@
 /* eslint-env jest */
 
 jest.unmock('react-router');
-jest.unmock('redux-form');
+jest.unmock('react-redux-form');
 jest.unmock('../PatientView.react');
 
 import { shallow } from 'enzyme';
