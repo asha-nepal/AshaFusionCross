@@ -7,12 +7,10 @@ import {
 
 import Settings from '../components/Settings.react';
 
-const mapStateToProps = (state) => ({
-  pouchConfig: state.pouchConfig,
-});
+const mapStateToProps = null;
 
 const mapDispatchToProps = (dispatch) => ({
-  connectPouchDB: (pouchConfig) => dispatch(connectPouchDB(pouchConfig)),
+  connectPouchDB: () => dispatch(connectPouchDB()),
 });
 
 export default connect(

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { actions as formActions } from 'react-redux-form';
 import {
   fetchPatient,
-  putPatient,
-  putRecord,
+  putActivePatient,
+  putActiveRecord,
   initActivePatient,
   addNewActiveRecord,
   selectActiveRecord,
@@ -55,8 +55,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     addNewActiveRecord: () => dispatch(addNewActiveRecord(patientId)),
     selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
-    putPatient: (patient) => dispatch(putPatient(patient)),
-    putRecord: (record) => dispatch(putRecord(record)),
+    putActivePatient: () => dispatch(putActivePatient()),
+    putActiveRecord: (index) => dispatch(putActiveRecord(index)),
     subscribeChange: () => {
       if (!patientId) {
         return null;

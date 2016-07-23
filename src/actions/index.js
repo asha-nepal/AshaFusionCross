@@ -12,16 +12,15 @@ export const fetchPatient = (patientId: string) => ({
   patientId,
 });
 
-export const PUT_PATIENT = 'PUT_PATIENT';
-export const putPatient = (patient: PatientObject) => ({
-  type: PUT_PATIENT,
-  patient,
+export const PUT_ACTIVE_PATIENT = 'PUT_ACTIVE_PATIENT';
+export const putActivePatient = () => ({
+  type: PUT_ACTIVE_PATIENT,
 });
 
-export const PUT_RECORD = 'PUT_RECORD';
-export const putRecord = (record: RecordObject) => ({
-  type: PUT_RECORD,
-  record,
+export const PUT_ACTIVE_RECORD = 'PUT_ACTIVE_RECORD';
+export const putActiveRecord = (index: number) => ({
+  type: PUT_ACTIVE_RECORD,
+  index,
 });
 
 export const INIT_ACTIVE_PATIENT = 'INIT_ACTIVE_PATIENT';
@@ -36,9 +35,8 @@ export const addNewActiveRecord = (patientId: string) => ({
 });
 
 export const CONNECT_POUCHDB = 'CONNECT_POUCHDB';
-export const connectPouchDB = (config: PouchConfig) => ({
+export const connectPouchDB = () => ({
   type: CONNECT_POUCHDB,
-  config,
 });
 
 

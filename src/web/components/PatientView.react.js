@@ -35,8 +35,8 @@ export default class PatientView extends Component {
     patient: PatientObject,
     records: Array<RecordObject>,
     addNewActiveRecord: () => void,
-    putPatient: (patient: PatientObject) => void,
-    putRecord: (record: RecordObject) => void,
+    putActivePatient: () => void,
+    putActiveRecord: (index: number) => void,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
     selectedActiveRecordIndex: number,
@@ -49,8 +49,8 @@ export default class PatientView extends Component {
       patient,
       records,
       addNewActiveRecord,
-      putPatient,
-      putRecord,
+      putActivePatient,
+      putActiveRecord,
       isPuttingPatient,
       isPuttingRecord,
       selectedActiveRecordIndex,
@@ -82,7 +82,7 @@ export default class PatientView extends Component {
           <div className="container">
             <PatientForm
               model="activePatient"
-              onSubmit={params => putPatient(params)}
+              onSubmit={putActivePatient}
               freeze={isPuttingPatient}
             />
           </div>
@@ -122,7 +122,7 @@ export default class PatientView extends Component {
               <div className="container">
                 <RecordForm
                   model={`activeRecords[${selectedActiveRecordIndex}]`}
-                  onSubmit={(params) => putRecord(params)}
+                  onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
                   freeze={isPuttingRecord}
                 />
               </div>

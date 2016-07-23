@@ -17,7 +17,7 @@ const styles = {
   ...StyleSheet.create({}),
 };
 
-function Settings(props: {pouchConfig: PouchConfig, connectPouchDB: Function}) {
+function Settings(props: {connectPouchDB: Function}) {
   return (
     <ScrollView style={styles.container}>
       <Text>Settings</Text>
@@ -26,14 +26,13 @@ function Settings(props: {pouchConfig: PouchConfig, connectPouchDB: Function}) {
         model="pouchConfig"
       />
       <Button
-        onPress={() => props.connectPouchDB(props.pouchConfig)}
+        onPress={props.connectPouchDB}
       >Submit</Button>
     </ScrollView>
   );
 }
 
 Settings.propTypes = {
-  pouchConfig: PropTypes.object.isRequired,
   connectPouchDB: PropTypes.func.isRequired,
 };
 

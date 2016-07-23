@@ -45,8 +45,8 @@ export default class PatientView extends Component {
     patient: PatientObject,
     records: Array<RecordObject>,
     addNewActiveRecord: () => void,
-    putPatient: (patient: PatientObject) => void,
-    putRecord: (record: RecordObject) => void,
+    putActivePatient: () => void,
+    putActiveRecord: (index: number) => void,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
   };
@@ -57,8 +57,8 @@ export default class PatientView extends Component {
       patient,
       records,
       addNewActiveRecord,
-      putPatient,
-      putRecord,
+      putActivePatient,
+      putActiveRecord,
       isPuttingPatient,
       isPuttingRecord,
     } = this.props;
@@ -75,7 +75,7 @@ export default class PatientView extends Component {
         />
         <Button
           disabled={isPuttingPatient}
-          onPress={() => putPatient(patient)}
+          onPress={putActivePatient}
         >Submit</Button>
 
         {records.map((record, i) =>
@@ -85,7 +85,7 @@ export default class PatientView extends Component {
             />
             <Button
               disabled={isPuttingRecord}
-              onPress={() => putRecord(record)}
+              onPress={() => putActiveRecord(i)}
             >Submit</Button>
           </View>
         )}
