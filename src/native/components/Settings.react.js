@@ -6,8 +6,9 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import Button from 'react-native-button';
 
-import PouchSettings from '../forms/PouchSettings.react';
+import PouchSettingsForm from '../forms/PouchSettingsForm.react';
 
 import appStyles from './styles';
 
@@ -21,12 +22,12 @@ function Settings(props: {pouchConfig: PouchConfig, connectPouchDB: Function}) {
     <ScrollView style={styles.container}>
       <Text>Settings</Text>
 
-      <PouchSettings
-        initialValues={props.pouchConfig}
-        onSubmit={params => {
-          props.connectPouchDB(params);
-        }}
+      <PouchSettingsForm
+        model="pouchConfig"
       />
+      <Button
+        onPress={() => props.connectPouchDB(props.pouchConfig)}
+      >Submit</Button>
     </ScrollView>
   );
 }

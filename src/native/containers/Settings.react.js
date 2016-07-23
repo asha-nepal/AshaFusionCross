@@ -7,12 +7,8 @@ import {
 
 import Settings from '../components/Settings.react';
 
-import {
-  getConfig,
-} from '../../db';
-
-const mapStateToProps = () => ({
-  pouchConfig: getConfig(),
+const mapStateToProps = (state) => ({
+  pouchConfig: state.pouchConfig,
 });
 
 const mapDispatchToProps = (dispatch) => ({
