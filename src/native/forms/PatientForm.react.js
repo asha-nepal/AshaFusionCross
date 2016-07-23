@@ -1,43 +1,43 @@
-import React from 'react';
-import { reduxForm } from 'redux-form';
+/* @flow */
 
+import React from 'react';
+import { Field } from 'react-redux-form/lib/native';
 import {
   View,
   Text,
   TextInput,
+  Picker,
 } from 'react-native';
-import {
-  SelectButtonGroup,
-} from './fields';
-import Button from 'react-native-button';
 
 import styles from './styles';
 
-export default reduxForm({
-  form: 'patient',
-  fields: ['_id', '_rev', 'type', 'name', 'age', 'sex', 'address'],
-})(({ fields, handleSubmit }) => (
+export default ({
+  model,
+}: {
+  model: string,
+}) => (
   <View>
     <Text>Name</Text>
-    <TextInput {...fields.name} style={styles.textInput} />
-
-    <Text>Age</Text>
-    <TextInput {...fields.age} style={styles.textInput} keyboardType="numeric" />
+    <Field model={`${model}.name`}>
+      <TextInput style={styles.textInput} />
+    </Field>
 
     <Text>Sex</Text>
-    <SelectButtonGroup
-      {...fields.sex}
-      options={[
-        { id: 'male', label: 'Male' },
-        { id: 'female', label: 'Female' },
-      ]}
-    />
+    <Field model={`${model}.sex`}>
+      <Picker>
+        <Picker.Item label="Male" value="male" />
+        <Picker.Item label="Female" value="female" />
+      </Picker>
+    </Field>
+
+    <Text>Age</Text>
+    <Field model={`${model}.age`}>
+      <TextInput style={styles.textInput} />
+    </Field>
 
     <Text>Address</Text>
-    <TextInput {...fields.address} style={styles.textInput} />
-
-    <Button
-      onPress={handleSubmit}
-    >Submit</Button>
+    <Field model={`${model}.address`}>
+      <TextInput style={styles.textInput} />
+    </Field>
   </View>
-));
+);
