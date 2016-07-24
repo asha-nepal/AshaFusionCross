@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
   ScrollView,
   Text,
@@ -31,9 +31,5 @@ function Settings(props: {connectPouchDB: Function}) {
     </ScrollView>
   );
 }
-
-Settings.propTypes = {
-  connectPouchDB: PropTypes.func.isRequired,
-};
 
 export default Settings;

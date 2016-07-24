@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint react/jsx-boolean-value: 1*/
 
 import React from 'react';
 import { Field } from 'react-redux-form/lib/native';
