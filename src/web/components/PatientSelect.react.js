@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-export default class PatientList extends Component {
+export default class PatientSelect extends Component {
   state: {
     unsubscribeChange: () => void;
   };

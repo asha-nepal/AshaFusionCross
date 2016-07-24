@@ -15,7 +15,7 @@ history = hashHistory;
 
 import Root from '../../common/Root.react';
 import Alerts from '../containers/Alerts.react';
-import PatientList from '../containers/PatientList.react';
+import PatientSelect from '../containers/PatientSelect.react';
 import PatientView from '../containers/PatientView.react';
 
 const App = ({ children }: { children: ReactClass }) => (
@@ -30,7 +30,7 @@ export default function () {
     <Root>
       <Router history={history}>
         <Route path="/" component={App}>
-          <IndexRoute component={PatientList} />
+          <IndexRoute component={PatientSelect} />
           <Route path="patient/" component={PatientView} />
           <Route path="patient/:patientId" component={PatientView} />
         </Route>

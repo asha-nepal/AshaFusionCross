@@ -57,7 +57,7 @@ const FixedAccentColoredFab = MKButton.accentColoredFab()
   .withStyle(styles.fixedFab)
   .build();
 
-export default class PatientList extends Component {
+export default class PatientSelect extends Component {
   constructor(props: Object) {
     super(props);
 
