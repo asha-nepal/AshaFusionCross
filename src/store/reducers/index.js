@@ -7,6 +7,7 @@ import {
 } from 'react-redux-form';
 
 import patientList from './patient-list';
+import patientSelect from './patient-select';
 import patientView from './patient-view';
 import status from './status';
 import alerts from './alerts';
@@ -14,8 +15,9 @@ import alerts from './alerts';
 import { defaultConfig } from '../../db';
 
 export default combineReducers({
-  patientList,
+  patientSelect,
   patientView,
+  patientList,
   activePatient: modelReducer('activePatient'),
   activePatientForm: formReducer('activePatient'),
   activeRecords: modelReducer('activeRecords', []),

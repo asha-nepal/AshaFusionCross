@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+import PatientListFilter from '../containers/PatientListFilter.react';
+
 export default class PatientSelect extends Component {
   state: {
     unsubscribeChange: () => void;
@@ -44,6 +46,9 @@ export default class PatientSelect extends Component {
         <section className="section">
           <div className="container">
             <nav className="panel">
+              <div className="panel-block">
+                <PatientListFilter />
+              </div>
               <div className="panel-block">
                 <Link to={'/patient/'} className="button is-primary is-outlined is-fullwidth">
                   New
