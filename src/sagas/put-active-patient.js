@@ -1,5 +1,4 @@
-import { takeLatest } from 'redux-saga';
-import { put, call, select } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import {
   PUT_ACTIVE_PATIENT,
   requestPutPatient,
@@ -26,5 +25,8 @@ export function* putActivePatient() {
 }
 
 export function* watchPutActivePatient() {
-  yield* takeLatest(PUT_ACTIVE_PATIENT, putActivePatient);
+  while (true) {
+    yield take(PUT_ACTIVE_PATIENT);
+    yield call(putActivePatient);
+  }
 }

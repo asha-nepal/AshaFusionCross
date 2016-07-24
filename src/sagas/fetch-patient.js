@@ -1,5 +1,4 @@
-import { takeLatest } from 'redux-saga';
-import { put, call } from 'redux-saga/effects';
+import { take, put, call } from 'redux-saga/effects';
 import {
   FETCH_PATIENT,
   requestFetchPatient,
@@ -28,11 +27,11 @@ function pouchFetchRecords(patientId) {
   .then(res => res.rows.map(r => r.doc));
 }
 
-export function* fetchPatient(action) {
+export function* fetchPatient(patientId) {
   yield put(requestFetchPatient());
   try {
-    const patient = yield call(pouchFetchPatient, action.patientId);
-    const records = yield call(pouchFetchRecords, action.patientId);
+    const patient = yield call(pouchFetchPatient, patientId);
+    const records = yield call(pouchFetchRecords, patientId);
     yield put(setActivePatient(patient));
     yield put(setActiveRecords(records));
     yield put(successFetchPatient());
@@ -45,5 +44,8 @@ export function* fetchPatient(action) {
 }
 
 export function* watchFetchPatient() {
-  yield* takeLatest(FETCH_PATIENT, fetchPatient);
+  while (true) {
+    const { patientId } = yield take(FETCH_PATIENT);
+    yield call(fetchPatient, patientId);
+  }
 }
