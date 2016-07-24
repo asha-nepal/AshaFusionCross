@@ -1,7 +1,6 @@
-import { takeLatest } from 'redux-saga';
-import { put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import {
-  PUT_PATIENT,
+  PUT_ACTIVE_PATIENT,
   requestPutPatient,
   successPutPatient,
   failurePutPatient,
@@ -14,16 +13,20 @@ export function pouchPutPatient(patient) {
     .then(res => res);
 }
 
-export function* putPatient(action) {
+export function* putActivePatient() {
   yield put(requestPutPatient());
   try {
-    yield call(pouchPutPatient, action.patient);
+    const patient = yield select(state => state.activePatient);
+    yield call(pouchPutPatient, patient);
     yield put(successPutPatient());
   } catch (error) {
     yield put(failurePutPatient(error));
   }
 }
 
-export function* watchPutPatient() {
-  yield* takeLatest(PUT_PATIENT, putPatient);
+export function* watchPutActivePatient() {
+  while (true) {
+    yield take(PUT_ACTIVE_PATIENT);
+    yield call(putActivePatient);
+  }
 }

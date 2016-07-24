@@ -3,25 +3,32 @@
 import { connect } from 'react-redux';
 import {
   fetchPatient,
-  putPatient,
-  putRecord,
-  updateActivePatient,
+  putActivePatient,
+  putActiveRecord,
   initActivePatient,
   addNewActiveRecord,
-  addOrUpdateActiveRecord,
   selectActiveRecord,
+  setActivePatient,
+  insertOrChangeActiveRecord,
 } from '../actions';
 
 import { subscribe } from '../db';
 
-const mapStateToProps = (state) => ({
-  isFetching: state.status.isFetchingPatient,
-  patient: state.activePatient,
-  records: state.activeRecords,
-  selectedActiveRecordId: state.patientView.selectedActiveRecordId,
-  isPuttingPatient: state.status.isPuttingPatient,
-  isPuttingRecord: state.status.isPuttingRecord,
-});
+const mapStateToProps = (state) => {
+  const patient = state.activePatient;
+  const records = state.activeRecords;
+  const selectedActiveRecordIndex =
+    records && records.findIndex(r => r._id === state.patientView.selectedActiveRecordId);
+
+  return {
+    patient,
+    records,
+    selectedActiveRecordIndex,
+    isFetching: state.status.isFetchingPatient,
+    isPuttingPatient: state.status.isPuttingPatient,
+    isPuttingRecord: state.status.isPuttingRecord,
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const patientId = ownProps.patientId || ownProps.params && ownProps.params.patientId;
@@ -33,8 +40,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     addNewActiveRecord: () => dispatch(addNewActiveRecord(patientId)),
     selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
-    putPatient: (patient) => dispatch(putPatient(patient)),
-    putRecord: (record) => dispatch(putRecord(record)),
+    putActivePatient: () => dispatch(putActivePatient()),
+    putActiveRecord: (index) => dispatch(putActiveRecord(index)),
     subscribeChange: () => {
       if (!patientId) {
         return null;
@@ -45,11 +52,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       return subscribe('change', change => {
         const doc = change.doc;
         if (doc._id === patientId) {
-          dispatch(updateActivePatient(doc));
+          dispatch(setActivePatient(doc));
         } else if (doc.type === 'record') {
           const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
           if (match && (match[1] === patientIdBody)) {
-            dispatch(addOrUpdateActiveRecord(doc));
+            dispatch(insertOrChangeActiveRecord(doc));
           }
         }
       });

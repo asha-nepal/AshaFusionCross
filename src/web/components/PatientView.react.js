@@ -35,11 +35,11 @@ export default class PatientView extends Component {
     patient: PatientObject,
     records: Array<RecordObject>,
     addNewActiveRecord: () => void,
-    putPatient: (patient: PatientObject) => void,
-    putRecord: (record: RecordObject) => void,
+    putActivePatient: () => void,
+    putActiveRecord: (index: number) => void,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
-    selectedActiveRecordId: string,
+    selectedActiveRecordIndex: number,
     selectActiveRecord: (id: string) => void,
   };
 
@@ -49,11 +49,11 @@ export default class PatientView extends Component {
       patient,
       records,
       addNewActiveRecord,
-      putPatient,
-      putRecord,
+      putActivePatient,
+      putActiveRecord,
       isPuttingPatient,
       isPuttingRecord,
-      selectedActiveRecordId,
+      selectedActiveRecordIndex,
       selectActiveRecord,
     } = this.props;
 
@@ -81,8 +81,8 @@ export default class PatientView extends Component {
         <section className="section">
           <div className="container">
             <PatientForm
-              initialValues={patient}
-              onSubmit={params => putPatient(params)}
+              model="activePatient"
+              onSubmit={putActivePatient}
               freeze={isPuttingPatient}
             />
           </div>
@@ -95,7 +95,7 @@ export default class PatientView extends Component {
                 {records.map((record, i) =>
                   <li
                     key={record._id}
-                    className={(selectedActiveRecordId === record._id) && 'is-active'}
+                    className={(selectedActiveRecordIndex === i) && 'is-active'}
                   >
                     <a
                       href="#"
@@ -118,13 +118,11 @@ export default class PatientView extends Component {
               </ul>
             </div>
 
-            {records.map(record =>
-              <div key={record._id} className="container">
+            {selectedActiveRecordIndex > -1 && (
+              <div className="container">
                 <RecordForm
-                  formKey={record._id}
-                  initialValues={record}
-                  hidden={record._id !== selectedActiveRecordId}
-                  onSubmit={params => putRecord(params)}
+                  model={`activeRecords[${selectedActiveRecordIndex}]`}
+                  onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
                   freeze={isPuttingRecord}
                 />
               </div>

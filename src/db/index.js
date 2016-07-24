@@ -10,7 +10,7 @@ export let db;
 const defaultHost = (typeof location !== 'undefined' && location.hostname)
   ? location.hostname
   : '127.0.0.1';
-let config: PouchConfig = {
+export const defaultConfig: PouchConfig = {
   isLocal: false,
   local: {
     dbname: 'asha-fusion-dev',
@@ -22,15 +22,11 @@ let config: PouchConfig = {
   },
 };
 
-export const getConfig = () => config;
-
 const pubsub = new PubSub();
 
 export function connect(
-  _config: PouchConfig
+  config: PouchConfig
 ) {
-  config = _config;
-
   const remoteUrl = `http://${config.remote.hostname}/${config.remote.dbname}`;
 
   if (config.isLocal) {
@@ -87,6 +83,6 @@ export function connect(
   });
 }
 
-connect(config);
+connect(defaultConfig);
 
 export const subscribe = (key: 'change' | 'error', cb: Function) => pubsub.subscribe(key, cb);

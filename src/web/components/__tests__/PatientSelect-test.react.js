@@ -1,14 +1,14 @@
 /* @flow */
 /* eslint-env jest */
 
-jest.unmock('../PatientList.react');
+jest.unmock('../PatientSelect.react');
 
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import PatientList from '../PatientList.react';
+import PatientSelect from '../PatientSelect.react';
 
-describe('<PatientList />', () => {
+describe('<PatientSelect />', () => {
   it('calls fetchPatientList() and subscribeChange() at componentWillMount() and unsubscribe at componentWillUnmount()', () => { // eslint-disable-line max-len
     const mockFetchPatientList = jest.fn();
     const mockSubscribeChange = jest.fn();
@@ -18,7 +18,7 @@ describe('<PatientList />', () => {
     expect(mockFetchPatientList).not.toBeCalled();
     expect(mockSubscribeChange).not.toBeCalled();
 
-    const wrapper = shallow(<PatientList
+    const wrapper = shallow(<PatientSelect
       fetchPatientList={mockFetchPatientList}
       subscribeChange={mockSubscribeChange}
       patientList={[]}

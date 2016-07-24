@@ -1,36 +1,48 @@
-import React from 'react';
-import { reduxForm } from 'redux-form';
+/* @flow */
 
-export default reduxForm({
-  form: 'patient',
-  fields: ['_id', '_rev', 'type', 'name', 'age', 'sex', 'address'],
-})(({ fields, handleSubmit, freeze }) => (
-  <form onSubmit={handleSubmit}>
+import React from 'react';
+import { Field, Form } from 'react-redux-form';
+
+export default ({
+  model,
+  onSubmit,
+  freeze,
+}: {
+  model: string,
+  onSubmit: (patient: PatientObject) => void,
+  freeze: boolean,
+}) => (
+  <Form
+    model={model}
+    onSubmit={onSubmit}
+  >
     <p className="control">
       <label className="label">
         Name
-        <input className="input" type="text" {...fields.name} />
+        <Field model={`${model}.name`}>
+          <input type="text" className="input" />
+        </Field>
       </label>
     </p>
 
     <p className="control">
       <label className="label">Sex</label>
       <label className="radio">
-        <input
-          type="radio"
-          {...fields.sex}
-          value="male"
-          checked={fields.sex.value === 'male'}
-        />
+        <Field model={`${model}.sex`}>
+          <input
+            type="radio"
+            value="male"
+          />
+        </Field>
         {' '}Male
       </label>
       <label className="radio">
-        <input
-          type="radio"
-          {...fields.sex}
-          value="female"
-          checked={fields.sex.value === 'female'}
-        />
+        <Field model={`${model}.sex`}>
+          <input
+            type="radio"
+            value="female"
+          />
+        </Field>
         {' '}Female
       </label>
     </p>
@@ -38,17 +50,23 @@ export default reduxForm({
     <p className="control">
       <label className="label">
         Age
-        <input className="input" type="number" {...fields.age} />
+        <Field model={`${model}.age`}>
+          <input type="number" className="input" />
+        </Field>
       </label>
     </p>
 
     <p className="control">
       <label className="label">
         Address
-        <input className="input" type="text" {...fields.address} />
+        <Field model={`${model}.address`}>
+          <input type="text" className="input" />
+        </Field>
       </label>
     </p>
 
-    <button className="button is-primary" type="submit" disabled={freeze}>Submit</button>
-  </form>
-));
+    <button className="button is-primary" type="submit" disabled={freeze}>
+      Submit
+    </button>
+  </Form>
+);

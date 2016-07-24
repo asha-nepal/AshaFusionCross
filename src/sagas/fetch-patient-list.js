@@ -1,5 +1,4 @@
-import { takeLatest } from 'redux-saga';
-import { put, call } from 'redux-saga/effects';
+import { take, put, call } from 'redux-saga/effects';
 import {
   FETCH_PATIENT_LIST,
   requestFetchPatientList,
@@ -29,5 +28,8 @@ export function* fetchPatientList() {
 }
 
 export function* watchFetchPatientList() {
-  yield* takeLatest(FETCH_PATIENT_LIST, fetchPatientList);
+  while (true) {
+    yield take(FETCH_PATIENT_LIST);
+    yield call(fetchPatientList);
+  }
 }

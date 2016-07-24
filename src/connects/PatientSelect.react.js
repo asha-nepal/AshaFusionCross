@@ -2,12 +2,15 @@ import { connect } from 'react-redux';
 import {
   fetchPatientList,
 } from '../actions';
+import {
+  filterPatientList,
+} from '../selectors';
 
 import { subscribe } from '../db';
 
 const mapStateToProps = (state) => ({
   isFetching: state.status.isFetchingPatientList,
-  patientList: state.patientList,
+  patientList: filterPatientList(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
