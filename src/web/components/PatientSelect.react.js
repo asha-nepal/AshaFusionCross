@@ -47,12 +47,16 @@ export default class PatientSelect extends Component {
           <div className="container">
             <nav className="panel">
               <div className="panel-block">
-                <PatientListFilter />
-              </div>
-              <div className="panel-block">
-                <Link to={'/patient/'} className="button is-primary is-outlined is-fullwidth">
-                  New
-                </Link>
+                <div className="columns">
+                  <div className="column">
+                    <PatientListFilter />
+                  </div>
+                  <div className="column is-one-quarter-tablet">
+                    <Link to={'/patient/'} className="button is-primary is-outlined is-fullwidth">
+                      New
+                    </Link>
+                  </div>
+                </div>
               </div>
               {patientList.map((patient) =>
                 <Link

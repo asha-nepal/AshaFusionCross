@@ -41,7 +41,9 @@
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
     "flow-bin": "^0.25.0",
+    "font-awesome": "^4.6.3",
     "gulp-webpack": "^1.5.0",
     "jest-cli": "^12.1.1",
     "moment": "^2.13.0",
@@ -61,6 +63,7 @@
     "redux-thunk": "^2.1.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
