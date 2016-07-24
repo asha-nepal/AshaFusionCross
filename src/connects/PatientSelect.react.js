@@ -2,17 +2,11 @@ import { connect } from 'react-redux';
 import {
   fetchPatientList,
 } from '../actions';
+import {
+  filterPatientList,
+} from '../selectors';
 
 import { subscribe } from '../db';
-
-const filterPatientList = (state) => {
-  const filter = state.patientSelect.filter.trim().toLowerCase();
-  if (filter.length === 0) {
-    return state.patientList;
-  }
-
-  return state.patientList.filter(p => p.name.toLowerCase().indexOf(filter) >= 0);
-};
 
 const mapStateToProps = (state) => ({
   isFetching: state.status.isFetchingPatientList,
