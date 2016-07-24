@@ -3,7 +3,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-export default class PatientList extends Component {
+import PatientListFilter from '../containers/PatientListFilter.react';
+
+export default class PatientSelect extends Component {
   state: {
     unsubscribeChange: () => void;
   };
@@ -45,9 +47,16 @@ export default class PatientList extends Component {
           <div className="container">
             <nav className="panel">
               <div className="panel-block">
-                <Link to={'/patient/'} className="button is-primary is-outlined is-fullwidth">
-                  New
-                </Link>
+                <div className="columns">
+                  <div className="column">
+                    <PatientListFilter />
+                  </div>
+                  <div className="column is-one-quarter-tablet">
+                    <Link to={'/patient/'} className="button is-primary is-outlined is-fullwidth">
+                      New
+                    </Link>
+                  </div>
+                </div>
               </div>
               {patientList.map((patient) =>
                 <Link

@@ -4,7 +4,7 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 import Root from '../../common/Root.react';
 
 import Alerts from '../containers/Alerts.react';
-import PatientList from '../containers/PatientList.react';
+import PatientSelect from '../containers/PatientSelect.react';
 import PatientView from '../containers/PatientView.react';
 import Settings from '../containers/Settings.react';
 
@@ -19,9 +19,9 @@ export default () => (
         <Scene key="root">
           <Scene
             initial
-            key="patientList"
+            key="patientSelect"
             title="Patient List"
-            component={PatientList}
+            component={PatientSelect}
             rightTitle="Settings"
             onRight={() => Actions.settings()}
           />

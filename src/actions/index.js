@@ -180,3 +180,12 @@ export const selectActiveRecord = (id: string): SelectActiveRecordAction => ({
     id,
   },
 });
+
+
+export const SET_PATIENT_LIST_FILTER = 'SET_PATIENT_LIST_FILTER';
+export const setPatientListFilter = (filter: string) => ({
+  type: SET_PATIENT_LIST_FILTER,
+  payload: {
+    filter,
+  },
+});

@@ -18,6 +18,8 @@ const {
 } = MK;
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import PatientListFilter from '../containers/PatientListFilter.react';
+
 import appStyles from './styles';
 
 const styles = {
@@ -57,7 +59,7 @@ const FixedAccentColoredFab = MKButton.accentColoredFab()
   .withStyle(styles.fixedFab)
   .build();
 
-export default class PatientList extends Component {
+export default class PatientSelect extends Component {
   constructor(props: Object) {
     super(props);
 
@@ -155,6 +157,7 @@ export default class PatientList extends Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
+          <PatientListFilter />
           <ListView
             dataSource={this.state.ds}
             renderRow={this._renderRow}
