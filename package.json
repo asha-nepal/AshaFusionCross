@@ -9,7 +9,7 @@
     "flow": "flow",
     "lint": "eslint src",
     "server": "webpack-dev-server",
-    "build": "rm -rf public && mkdir public && cp src/web/static/* public/. && webpack -p"
+    "build": "rm -rf public && mkdir public && cp src/web/static/* public/. && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors"
   },
   "dependencies": {
     "react": "^15.1.0",
