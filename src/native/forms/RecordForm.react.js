@@ -1,28 +1,29 @@
-import React from 'react';
-import { reduxForm } from 'redux-form';
+/* @flow */
 
+import React from 'react';
+import { Field } from 'react-redux-form/lib/native';
 import {
   View,
   Text,
   TextInput,
 } from 'react-native';
-import Button from 'react-native-button';
 
 import styles from './styles';
 
-export default reduxForm({
-  form: 'record',
-  fields: ['_id', '_rev', 'type', 'height', 'weight'],
-})(({ fields, handleSubmit }) => (
+export default({
+  model,
+}: {
+  model: string,
+}) => (
   <View>
     <Text>Height</Text>
-    <TextInput {...fields.height} style={styles.textInput} />
+    <Field model={`${model}.height`}>
+      <TextInput style={styles.textInput} />
+    </Field>
 
     <Text>Weight</Text>
-    <TextInput {...fields.weight} style={styles.textInput} />
-
-    <Button
-      onPress={handleSubmit}
-    >Submit</Button>
+    <Field model={`${model}.weight`}>
+      <TextInput style={styles.textInput} />
+    </Field>
   </View>
-));
+);

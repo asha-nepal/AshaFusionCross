@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import {
+  View,
   StyleSheet,
   ScrollView,
   Text,
@@ -44,8 +45,8 @@ export default class PatientView extends Component {
     patient: PatientObject,
     records: Array<RecordObject>,
     addNewActiveRecord: () => void,
-    putPatient: (patient: PatientObject) => void,
-    putRecord: (record: RecordObject) => void,
+    putActivePatient: () => void,
+    putActiveRecord: (index: number) => void,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
   };
@@ -56,10 +57,10 @@ export default class PatientView extends Component {
       patient,
       records,
       addNewActiveRecord,
-      putPatient,
-      putRecord,
-//      isPuttingPatient,
-//      isPuttingRecord,
+      putActivePatient,
+      putActiveRecord,
+      isPuttingPatient,
+      isPuttingRecord,
     } = this.props;
 
     if (isFetching) {
@@ -69,15 +70,24 @@ export default class PatientView extends Component {
     return (
       <ScrollView style={styles.container}>
         <Text>{patient && patient.name || ''}</Text>
-        <PatientForm onSubmit={params => putPatient(params)} initialValues={patient} />
+        <PatientForm
+          model="activePatient"
+        />
+        <Button
+          disabled={isPuttingPatient}
+          onPress={putActivePatient}
+        >Submit</Button>
 
-        {records.map(record =>
-          <RecordForm
-            key={record._id}
-            formKey={record._id}
-            initialValues={record}
-            onSubmit={params => putRecord(params)}
-          />
+        {records.map((record, i) =>
+          <View key={i}>
+            <RecordForm
+              model={`activeRecords[${i}]`}
+            />
+            <Button
+              disabled={isPuttingRecord}
+              onPress={() => putActiveRecord(i)}
+            >Submit</Button>
+          </View>
         )}
 
         <Button

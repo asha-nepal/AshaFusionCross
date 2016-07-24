@@ -1,4 +1,4 @@
-import { take, call } from 'redux-saga/effects';
+import { take, call, select } from 'redux-saga/effects';
 import {
   CONNECT_POUCHDB,
 } from '../actions';
@@ -11,7 +11,8 @@ import {
 
 export function* watchConnectPouchDB() {
   while (true) {
-    const { config } = yield take(CONNECT_POUCHDB);
+    yield take(CONNECT_POUCHDB);
+    const config = yield select(state => state.pouchConfig);
     yield call(connect, config);
     yield call(fetchPatientList);
   }

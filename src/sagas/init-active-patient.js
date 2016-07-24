@@ -3,8 +3,8 @@ import { put } from 'redux-saga/effects';
 import Chance from 'chance';
 import {
   INIT_ACTIVE_PATIENT,
-  updateActivePatient,
-  setActiveRecords,
+  setActivePatient,
+  resetActiveRecords,
 } from '../actions';
 
 const chance = new Chance();
@@ -12,11 +12,11 @@ const idStringPool = '0123456789abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVW
 
 export function* initActivePatient() {
   const id = chance.string({ pool: idStringPool, length: 16 });
-  yield put(updateActivePatient({
+  yield put(setActivePatient({
     _id: `patient_${id}`,
     type: 'patient',
   }));
-  yield put(setActiveRecords([]));
+  yield put(resetActiveRecords());
 }
 
 export function* watchInitActivePatient() {

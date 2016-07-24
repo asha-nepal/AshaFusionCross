@@ -2,7 +2,7 @@
 /* eslint-env jest */
 
 jest.unmock('react-router');
-jest.unmock('redux-form');
+jest.unmock('react-redux-form');
 jest.unmock('../PatientView.react');
 
 import { shallow } from 'enzyme';
@@ -30,8 +30,8 @@ describe('<PatientView />', () => {
       }}
       records={[]}
       addNewActiveRecord={jest.fn()}
-      putPatient={jest.fn()}
-      putRecord={jest.fn()}
+      putActivePatient={jest.fn()}
+      putActiveRecord={jest.fn()}
     />);
 
     expect(mockInit).toBeCalled();
@@ -56,8 +56,8 @@ describe('<PatientView />', () => {
       records={[]}
       subscribeChange={mockSubscribeChange}
       addNewActiveRecord={jest.fn()}
-      putPatient={jest.fn()}
-      putRecord={jest.fn()}
+      putActivePatient={jest.fn()}
+      putActiveRecord={jest.fn()}
     />);
 
     expect(wrapper.find(Link).prop('to')).toBe('/');

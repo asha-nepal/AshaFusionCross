@@ -1,4 +1,5 @@
 /* @flow */
+import { actions as formActions } from 'react-redux-form';
 
 // for saga
 export const FETCH_PATIENT_LIST = 'FETCH_PATIENT_LIST';
@@ -12,16 +13,15 @@ export const fetchPatient = (patientId: string) => ({
   patientId,
 });
 
-export const PUT_PATIENT = 'PUT_PATIENT';
-export const putPatient = (patient: PatientObject) => ({
-  type: PUT_PATIENT,
-  patient,
+export const PUT_ACTIVE_PATIENT = 'PUT_ACTIVE_PATIENT';
+export const putActivePatient = () => ({
+  type: PUT_ACTIVE_PATIENT,
 });
 
-export const PUT_RECORD = 'PUT_RECORD';
-export const putRecord = (record: RecordObject) => ({
-  type: PUT_RECORD,
-  record,
+export const PUT_ACTIVE_RECORD = 'PUT_ACTIVE_RECORD';
+export const putActiveRecord = (index: number) => ({
+  type: PUT_ACTIVE_RECORD,
+  index,
 });
 
 export const INIT_ACTIVE_PATIENT = 'INIT_ACTIVE_PATIENT';
@@ -35,10 +35,34 @@ export const addNewActiveRecord = (patientId: string) => ({
   patientId,
 });
 
+export const setActivePatient = formActions.change.bind(null, 'activePatient');
+
+export const setActiveRecords = formActions.change.bind(null, 'activeRecords');
+
+export const resetActiveRecords = formActions.reset.bind(null, 'activeRecords');
+
+export const pushActiveRecord = formActions.push.bind(null, 'activeRecords');
+
+export const insertOrChangeActiveRecord = (record: RecordObject) =>
+  (dispatch: Function, getState: Function) => {
+    const key = '_id';
+    const model = 'activeRecords';
+    const collection = getState().activeRecords;
+    const index = collection.findIndex(c => c[key] === record[key]);
+
+    if (index > -1) {
+      dispatch(formActions.change(`${model}[${index}]`, record));
+    } else {
+      // pushでの末尾追加ではない
+      // IDでソートし，複数端末間で時間差submitしても順序を一意に保つ
+      dispatch(formActions.change(model, collection.concat(record).sort((a, b) => a._id > b._id)));
+    }
+  };
+
+
 export const CONNECT_POUCHDB = 'CONNECT_POUCHDB';
-export const connectPouchDB = (config: PouchConfig) => ({
+export const connectPouchDB = () => ({
   type: CONNECT_POUCHDB,
-  config,
 });
 
 
@@ -84,22 +108,13 @@ export const requestFetchPatient = () => ({
   type: REQUEST_FETCH_PATIENT,
 });
 
-export const successFetchPatient = (patient: PatientObject, records: Array<RecordObject>) => ({
+export const successFetchPatient = () => ({
   type: SUCCESS_FETCH_PATIENT,
-  patient,
-  records,
 });
 
 export const failureFetchPatient = (error: ErrorObject) => ({
   type: FAILURE_FETCH_PATIENT,
   error,
-});
-
-
-export const UPDATE_ACTIVE_PATIENT = 'UPDATE_ACTIVE_PATIENT';
-export const updateActivePatient = (patient: PatientObject) => ({
-  type: UPDATE_ACTIVE_PATIENT,
-  patient,
 });
 
 
@@ -136,34 +151,6 @@ export const successPutRecord = () => ({
 export const failurePutRecord = (error: ErrorObject) => ({
   type: FAILURE_PUT_RECORD,
   error,
-});
-
-
-export const SET_ACTIVE_RECORDS = 'SET_ACTIVE_RECORDS';
-export const setActiveRecords = (records: Array<RecordObject>) => ({
-  type: SET_ACTIVE_RECORDS,
-  records,
-});
-
-
-export const ADD_ACTIVE_RECORD = 'ADD_ACTIVE_RECORD';
-export const addActiveRecord = (record: RecordObject) => ({
-  type: ADD_ACTIVE_RECORD,
-  record,
-});
-
-
-export const UPDATE_ACTIVE_RECORD = 'UPDATE_ACTIVE_RECORD';
-export const updateActiveRecord = (record: RecordObject) => ({
-  type: UPDATE_ACTIVE_RECORD,
-  record,
-});
-
-
-export const ADD_OR_UPDATE_ACTIVE_RECORD = 'ADD_OR_UPDATE_ACTIVE_RECORD';
-export const addOrUpdateActiveRecord = (record: RecordObject) => ({
-  type: ADD_OR_UPDATE_ACTIVE_RECORD,
-  record,
 });
 
 
