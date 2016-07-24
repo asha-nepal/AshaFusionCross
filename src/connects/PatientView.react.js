@@ -1,7 +1,6 @@
 /* @flow */
 
 import { connect } from 'react-redux';
-import { actions as formActions } from 'react-redux-form';
 import {
   fetchPatient,
   putActivePatient,
@@ -9,25 +8,11 @@ import {
   initActivePatient,
   addNewActiveRecord,
   selectActiveRecord,
+  setActivePatient,
+  insertOrChangeActiveRecord,
 } from '../actions';
 
 import { subscribe } from '../db';
-
-// TODO: このActionCreatorはリファクタリングの上，actions/に移動する
-const insertOrChangeActiveRecord = (record: RecordObject) => (dispatch, getState) => {
-  const key = '_id';
-  const model = 'activeRecords';
-  const collection = getState().activeRecords;
-  const index = collection.findIndex(c => c[key] === record[key]);
-
-  if (index > -1) {
-    dispatch(formActions.change(`${model}[${index}]`, record));
-  } else {
-    // pushでの末尾追加ではない
-    // IDでソートし，複数端末間で時間差submitしても順序を一意に保つ
-    dispatch(formActions.change(model, collection.concat(record).sort((a, b) => a._id > b._id)));
-  }
-};
 
 const mapStateToProps = (state) => {
   const patient = state.activePatient;
@@ -67,7 +52,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       return subscribe('change', change => {
         const doc = change.doc;
         if (doc._id === patientId) {
-          dispatch(formActions.change('activePatient', doc));
+          dispatch(setActivePatient(doc));
         } else if (doc.type === 'record') {
           const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
           if (match && (match[1] === patientIdBody)) {

@@ -7,23 +7,26 @@ jest.unmock('../init-active-patient');
 
 import Chance from 'chance';
 import { put } from 'redux-saga/effects';
-import { actions as formActions } from 'react-redux-form';
+import {
+  setActivePatient,
+  resetActiveRecords,
+} from '../../actions';
 import { initActivePatient } from '../init-active-patient';
 
 describe('INIT_ACTIVE_PATIENT', () => {
-  it('calls actions.change() with new ID', () => {
+  it('calls setActivePatient with new ID and resetActiveRecords', () => {
     Chance.prototype.string.mockReturnValue('thisismockedid');
 
     const saga = initActivePatient();
 
     expect(saga.next().value)
-      .toEqual(put(formActions.change('activePatient', {
+      .toEqual(put(setActivePatient({
         _id: 'patient_thisismockedid',
         type: 'patient',
       })));
 
     expect(saga.next().value)
-      .toEqual(put(formActions.reset('activeRecords')));
+      .toEqual(put(resetActiveRecords()));
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });

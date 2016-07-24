@@ -1,9 +1,9 @@
 import { delay } from 'redux-saga';
 import { take, put, call } from 'redux-saga/effects';
-import { actions as formActions } from 'react-redux-form';
 import moment from 'moment';
 import {
   ADD_NEW_ACTIVE_RECORD,
+  pushActiveRecord,
   selectActiveRecord,
 } from '../actions';
 
@@ -11,7 +11,7 @@ export function* addNewActiveRecord(patientId) {
   const patientIdBody = patientId.replace(/^patient_/, '');
   const datetime = moment().format('x'); // Unix Millisecond Timestamp
   const newId = `record_${patientIdBody}_${datetime}`;
-  yield put(formActions.push('activeRecords', {
+  yield put(pushActiveRecord({
     _id: newId,
     type: 'record',
   }));

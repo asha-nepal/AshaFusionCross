@@ -1,4 +1,5 @@
 /* @flow */
+import { actions as formActions } from 'react-redux-form';
 
 // for saga
 export const FETCH_PATIENT_LIST = 'FETCH_PATIENT_LIST';
@@ -33,6 +34,30 @@ export const addNewActiveRecord = (patientId: string) => ({
   type: ADD_NEW_ACTIVE_RECORD,
   patientId,
 });
+
+export const setActivePatient = formActions.change.bind(null, 'activePatient');
+
+export const setActiveRecords = formActions.change.bind(null, 'activeRecords');
+
+export const resetActiveRecords = formActions.reset.bind(null, 'activeRecords');
+
+export const pushActiveRecord = formActions.push.bind(null, 'activeRecords');
+
+export const insertOrChangeActiveRecord = (record: RecordObject) => (dispatch, getState) => {
+  const key = '_id';
+  const model = 'activeRecords';
+  const collection = getState().activeRecords;
+  const index = collection.findIndex(c => c[key] === record[key]);
+
+  if (index > -1) {
+    dispatch(formActions.change(`${model}[${index}]`, record));
+  } else {
+    // pushでの末尾追加ではない
+    // IDでソートし，複数端末間で時間差submitしても順序を一意に保つ
+    dispatch(formActions.change(model, collection.concat(record).sort((a, b) => a._id > b._id)));
+  }
+};
+
 
 export const CONNECT_POUCHDB = 'CONNECT_POUCHDB';
 export const connectPouchDB = () => ({
