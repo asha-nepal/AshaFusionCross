@@ -8,10 +8,15 @@
     "test": "jest",
     "flow": "flow",
     "lint": "eslint src",
-    "server": "webpack-dev-server",
-    "build": "rm -rf public && mkdir public && cp src/web/static/* public/. && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors"
+    "build": "rm -rf public && mkdir public && cp src/web/static/* public/. && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
+    "server": "if-env NODE_ENV=production && npm run server:prod || npm run server:dev",
+    "server:dev": "webpack-dev-server",
+    "server:prod": "node server.js"
   },
   "dependencies": {
+    "compression": "^1.6.2",
+    "express": "^4.14.0",
+    "if-env": "^1.0.0",
     "react": "^15.1.0",
     "react-native": "^0.27.2",
     "react-native-material-kit": "^0.3.2"
