@@ -46,5 +46,6 @@ module.exports = {
     contentBase: './public',
     port: 8080,
     inline: true,
+    historyApiFallback: true,
   },
 };

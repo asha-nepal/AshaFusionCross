@@ -4,14 +4,8 @@ import {
   Router,
   Route,
   IndexRoute,
-//  browserHistory,
-  hashHistory,
+  browserHistory,
 } from 'react-router';
-let history;
-// if (PRODUCTION)
-//   history = browserHistory
-// else
-history = hashHistory;
 
 import Root from '../../common/Root.react';
 import Alerts from '../containers/Alerts.react';
@@ -28,7 +22,7 @@ const App = ({ children }: { children: ReactClass }) => (
 export default function () {
   return (
     <Root>
-      <Router history={history}>
+      <Router history={browserHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={PatientSelect} />
           <Route path="patient/" component={PatientView} />
