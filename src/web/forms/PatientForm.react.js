@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { Field, Form } from 'react-redux-form';
+import {
+  RadioGroup,
+} from './fields';
 
 export default ({
   model,
@@ -25,27 +28,16 @@ export default ({
       </label>
     </p>
 
-    <p className="control">
+    <div className="control">
       <label className="label">Sex</label>
-      <label className="radio">
-        <Field model={`${model}.sex`}>
-          <input
-            type="radio"
-            value="male"
-          />
-        </Field>
-        {' '}Male
-      </label>
-      <label className="radio">
-        <Field model={`${model}.sex`}>
-          <input
-            type="radio"
-            value="female"
-          />
-        </Field>
-        {' '}Female
-      </label>
-    </p>
+      <RadioGroup
+        model={`${model}.sex`}
+        options={[
+          { id: 'male', label: 'Male' },
+          { id: 'female', label: 'Female' },
+        ]}
+      />
+    </div>
 
     <p className="control">
       <label className="label">
