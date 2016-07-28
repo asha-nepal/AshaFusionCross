@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { actions, Control } from 'react-redux-form';
+import { actions, Field, Control } from 'react-redux-form';
 
 const RadioGroupComponent = ({
   options,
@@ -50,4 +50,20 @@ export const RadioGroup = ({
       onChange: v => p.dispatch(actions.change(model, v)),
     })}
   />
+);
+
+
+export const TextInput = ({
+  model,
+  label,
+}: {
+  model: string,
+  label: string,
+}) => (
+  <label className="label">
+    {label}
+    <Field model={model}>
+      <input type="text" className="input" />
+    </Field>
+  </label>
 );
