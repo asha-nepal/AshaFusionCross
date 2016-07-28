@@ -2,26 +2,26 @@ export default {
   record: {
     normal: [
       {
-        field: 'height', label: 'Height',
+        field: 'height', label: 'Height', class: 'textinput', type: 'number',
       },
       {
-        field: 'weight', label: 'Weight',
+        field: 'weight', label: 'Weight', class: 'textinput', type: 'number',
       },
       {
-        field: 'waist', label: 'Waist',
+        field: 'waist', label: 'Waist', class: 'textinput', type: 'number',
       },
       {
-        field: 'medicalHistory', label: 'Medical history', type: 'textarea',
+        field: 'medicalHistory', label: 'Medical history', class: 'textarea',
       },
       {
-        field: 'currentMedicine', label: 'Current medicines', type: 'textarea',
+        field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
       },
     ],
     ksix: [
       {
         field: 'ksix.nervious',
         label: 'Nervious?',
-        type: 'radio',
+        class: 'radio',
         options: [
           { id: 4, label: 'All of the time (4)' },
           { id: 3, label: 'Most of the time (3)' },
@@ -33,7 +33,7 @@ export default {
       {
         field: 'ksix.hopeless',
         label: 'Hopeless?',
-        type: 'radio',
+        class: 'radio',
         options: [
           { id: 4, label: 'All of the time (4)' },
           { id: 3, label: 'Most of the time (3)' },
@@ -45,7 +45,7 @@ export default {
       {
         field: 'ksix.restless',
         label: 'Restless or fidgety?',
-        type: 'radio',
+        class: 'radio',
         options: [
           { id: 4, label: 'All of the time (4)' },
           { id: 3, label: 'Most of the time (3)' },
@@ -57,7 +57,7 @@ export default {
       {
         field: 'ksix.depressed',
         label: 'So depressed that nothing could cheer you up?',
-        type: 'radio',
+        class: 'radio',
         options: [
           { id: 4, label: 'All of the time (4)' },
           { id: 3, label: 'Most of the time (3)' },
@@ -69,7 +69,7 @@ export default {
       {
         field: 'ksix.effort',
         label: 'That everything was an effort?',
-        type: 'radio',
+        class: 'radio',
         options: [
           { id: 4, label: 'All of the time (4)' },
           { id: 3, label: 'Most of the time (3)' },
@@ -81,7 +81,7 @@ export default {
       {
         field: 'ksix.worthless',
         label: 'Worthless?',
-        type: 'radio',
+        class: 'radio',
         options: [
           { id: 4, label: 'All of the time (4)' },
           { id: 3, label: 'Most of the time (3)' },

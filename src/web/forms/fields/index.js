@@ -64,7 +64,7 @@ export const RadioGroup = ({
 export const TextInput = ({
   model,
   label,
-  type='text',
+  type = 'text',
 }: {
   model: string,
   label: string,

@@ -26,9 +26,10 @@ export default ({
       let component;
       let props = {};
 
-      switch (field.type) {
+      switch (field.class) {
         case 'textarea':
-          component = TextArea; break;
+          component = TextArea;
+          break;
         case 'radio':
           component = RadioGroup;
           props = {
@@ -36,7 +37,11 @@ export default ({
           };
           break;
         default:
-          component = TextInput; break;
+          component = TextInput;
+          props = {
+            type: field.type || 'text',
+          };
+          break;
       }
 
       return React.createElement(
