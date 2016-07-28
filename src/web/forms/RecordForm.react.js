@@ -5,6 +5,7 @@ import { Form } from 'react-redux-form';
 import {
   TextInput,
   TextArea,
+  RadioGroup,
 } from './fields';
 import formStyle from '../../form-style';
 
@@ -23,17 +24,30 @@ export default ({
   >
     {formStyle.record.normal.map((field, i) => {
       let component;
+      let props = {};
 
       switch (field.type) {
         case 'textarea':
           component = TextArea; break;
+        case 'radio':
+          component = RadioGroup;
+          props = {
+            options: field.options,
+          };
+          break;
         default:
           component = TextInput; break;
       }
 
-      return (<p key={i} className="control">
-        {React.createElement(component, { model: `${model}.${field.field}`, label: field.label })}
-      </p>);
+      return React.createElement(
+        component,
+        {
+          key: i,
+          model: `${model}.${field.field}`,
+          label: field.label,
+          ...props,
+        }
+      );
     })}
 
     <button type="submit" className="button is-primary" disabled={freeze}>
