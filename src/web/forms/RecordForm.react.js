@@ -1,7 +1,11 @@
 /* @flow */
 
 import React from 'react';
-import { Field, Form } from 'react-redux-form';
+import { Form } from 'react-redux-form';
+import {
+  TextInput,
+} from './fields';
+import formStyle from '../../form-style';
 
 export default ({
   model,
@@ -16,23 +20,13 @@ export default ({
     model={model}
     onSubmit={onSubmit}
   >
-    <p className="control">
-      <label className="label">
-        Height
-        <Field model={`${model}.height`}>
-          <input type="text" className="input" />
-        </Field>
-      </label>
-    </p>
-
-    <p className="control">
-      <label className="label">
-        Weight
-        <Field model={`${model}.weight`}>
-          <input type="text" className="input" />
-        </Field>
-      </label>
-    </p>
+    {formStyle.record.normal.map((field, i) =>
+      <TextInput
+        key={i}
+        model={`${model}.${field.field}`}
+        label={field.label}
+      />
+    )}
 
     <button type="submit" className="button is-primary" disabled={freeze}>
       Submit
