@@ -67,3 +67,19 @@ export const TextInput = ({
     </Field>
   </label>
 );
+
+
+export const TextArea = ({
+  model,
+  label,
+}: {
+  model: string,
+  label: string,
+}) => (
+  <label className="label">
+    {label}
+    <Field model={model}>
+      <textarea className="textarea" />
+    </Field>
+  </label>
+);

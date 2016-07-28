@@ -10,6 +10,12 @@ export default {
       {
         field: 'waist', label: 'Waist',
       },
+      {
+        field: 'medicalHistory', label: 'Medical history', type: 'textarea',
+      },
+      {
+        field: 'currentMedicine', label: 'Current medicines', type: 'textarea',
+      },
     ],
   },
 };
