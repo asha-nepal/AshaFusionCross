@@ -10,9 +10,13 @@ import {
   selectActiveRecord,
   setActivePatient,
   insertOrChangeActiveRecord,
+  setRecordFormStyleId,
 } from '../actions';
 
 import { subscribe } from '../db';
+
+import formStyle from '../form-style';
+const recordFormStyleIds = Object.keys(formStyle.record);
 
 const mapStateToProps = (state) => {
   const patient = state.activePatient;
@@ -27,6 +31,8 @@ const mapStateToProps = (state) => {
     isFetching: state.status.isFetchingPatient,
     isPuttingPatient: state.status.isPuttingPatient,
     isPuttingRecord: state.status.isPuttingRecord,
+    recordFormStyleIds,
+    recordFormStyle: formStyle.record[state.patientView.recordFormStyleId || 'normal'],
   };
 };
 
@@ -42,6 +48,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
     putActivePatient: () => dispatch(putActivePatient()),
     putActiveRecord: (index) => dispatch(putActiveRecord(index)),
+    setRecordFormStyleId: (styleId) => dispatch(setRecordFormStyleId(styleId)),
     subscribeChange: () => {
       if (!patientId) {
         return null;

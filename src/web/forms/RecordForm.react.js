@@ -7,14 +7,15 @@ import {
   TextArea,
   RadioGroup,
 } from './fields';
-import formStyle from '../../form-style';
 
 export default ({
   model,
+  style,
   onSubmit,
   freeze,
 }: {
   model: string,
+  style: Array<Object>,
   onSubmit: (record: RecordObject) => void,
   freeze: boolean,
 }) => (
@@ -22,7 +23,7 @@ export default ({
     model={model}
     onSubmit={onSubmit}
   >
-    {formStyle.record.normal.map((field, i) => {
+    {style.map((field, i) => {
       let component;
       let props = {};
 
