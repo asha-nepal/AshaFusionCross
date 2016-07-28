@@ -64,15 +64,17 @@ export const RadioGroup = ({
 export const TextInput = ({
   model,
   label,
+  type='text',
 }: {
   model: string,
   label: string,
+  type: string,
 }) => (
   <p className="control">
     <label className="label">
       {label}
       <Field model={model}>
-        <input type="text" className="input" />
+        <input type={type} className="input" />
       </Field>
     </label>
   </p>
