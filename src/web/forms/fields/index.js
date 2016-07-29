@@ -41,11 +41,7 @@ export const RadioGroup = ({
   model,
   label,
   options,
-}: {
-  model: string,
-  label: string,
-  options: Array<{id: string, label: string}>
-}) => (
+}: RadioGroupProps) => (
   <Control
     model={model}
     component={RadioGroupComponent}
@@ -65,11 +61,7 @@ export const TextInput = ({
   model,
   label,
   type = 'text',
-}: {
-  model: string,
-  label: string,
-  type: string,
-}) => (
+}: TextFieldProps) => (
   <p className="control">
     <label className="label">
       {label}
@@ -84,10 +76,7 @@ export const TextInput = ({
 export const TextArea = ({
   model,
   label,
-}: {
-  model: string,
-  label: string,
-}) => (
+}: TextAreaProps) => (
   <p className="control">
     <label className="label">
       {label}
