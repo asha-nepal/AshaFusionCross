@@ -32,7 +32,7 @@ describe('<PatientView />', () => {
       addNewActiveRecord={jest.fn()}
       putActivePatient={jest.fn()}
       putActiveRecord={jest.fn()}
-      recordFormStyleIds={[]}
+      recordFormStyles={[]}
     />);
 
     expect(mockInit).toBeCalled();
@@ -58,7 +58,7 @@ describe('<PatientView />', () => {
       addNewActiveRecord={jest.fn()}
       putActivePatient={jest.fn()}
       putActiveRecord={jest.fn()}
-      recordFormStyleIds={[]}
+      recordFormStyles={[]}
     />);
 
     expect(wrapper.find(Link).prop('to')).toBe('/');
@@ -78,7 +78,7 @@ describe('<PatientView />', () => {
       addNewActiveRecord={jest.fn()}
       putActivePatient={jest.fn()}
       putActiveRecord={jest.fn()}
-      recordFormStyleIds={[]}
+      recordFormStyles={[]}
     />);
   });
 
@@ -96,14 +96,16 @@ describe('<PatientView />', () => {
       addNewActiveRecord={jest.fn()}
       putActivePatient={jest.fn()}
       putActiveRecord={jest.fn()}
-      recordFormStyleIds={[
-        'hoge',
-        'fuga',
+      recordFormStyles={[
+        { id: 'hoge', label: 'Hoge' },
+        { id: 'fuga', label: 'Fuga' },
       ]}
     />);
 
     const select = wrapper.find('select');
-    expect(select.childAt(0).text()).toBe('hoge');
-    expect(select.childAt(1).text()).toBe('fuga');
+    expect(select.childAt(0).prop('value')).toBe('hoge');
+    expect(select.childAt(0).text()).toBe('Hoge');
+    expect(select.childAt(1).prop('value')).toBe('fuga');
+    expect(select.childAt(1).text()).toBe('Fuga');
   });
 });

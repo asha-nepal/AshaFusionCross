@@ -41,8 +41,9 @@ export default class PatientView extends Component {
     isPuttingRecord: boolean,
     selectedActiveRecordIndex: number,
     selectActiveRecord: (id: string) => void,
-    recordFormStyleIds: Array<string>,
     setRecordFormStyleId: (styleId: string) => void,
+    recordFormStyles: Array<Object>,
+    recordFormStyleId: string,
     recordFormStyle: ?string,
   };
 
@@ -58,8 +59,9 @@ export default class PatientView extends Component {
       isPuttingRecord,
       selectedActiveRecordIndex,
       selectActiveRecord,
-      recordFormStyleIds,
       setRecordFormStyleId,
+      recordFormStyles,
+      recordFormStyleId,
       recordFormStyle,
     } = this.props;
 
@@ -130,12 +132,13 @@ export default class PatientView extends Component {
               <div className="column control" style={{ flex: 'none' }}>
                 <span className="select">
                   <select
+                    value={recordFormStyleId}
                     onChange={e => {
                       setRecordFormStyleId(e.target.value);
                     }}
                   >
-                  {recordFormStyleIds.map(styleId =>
-                    <option key={styleId} value={styleId}>{styleId}</option>
+                  {recordFormStyles.map(style =>
+                    <option key={style.id} value={style.id}>{style.label}</option>
                   )}
                   </select>
                 </span>

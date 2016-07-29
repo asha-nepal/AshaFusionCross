@@ -15,14 +15,19 @@ import {
 
 import { subscribe } from '../db';
 
-import formStyle from '../form-style';
-const recordFormStyleIds = Object.keys(formStyle.record);
+import {
+  recordFormStylesSelector,
+  recordFormStyleIdSelector,
+  recordFormStyleSelector,
+} from '../selectors';
 
 const mapStateToProps = (state) => {
   const patient = state.activePatient;
   const records = state.activeRecords;
   const selectedActiveRecordIndex =
     records && records.findIndex(r => r._id === state.patientView.selectedActiveRecordId);
+
+  const recordFormStyle = recordFormStyleSelector(state);
 
   return {
     patient,
@@ -31,8 +36,9 @@ const mapStateToProps = (state) => {
     isFetching: state.status.isFetchingPatient,
     isPuttingPatient: state.status.isPuttingPatient,
     isPuttingRecord: state.status.isPuttingRecord,
-    recordFormStyleIds,
-    recordFormStyle: formStyle.record[state.patientView.recordFormStyleId || 'normal'],
+    recordFormStyles: recordFormStylesSelector(state),
+    recordFormStyleId: recordFormStyleIdSelector(state),
+    recordFormStyle: recordFormStyle && recordFormStyle.style,
   };
 };
 
