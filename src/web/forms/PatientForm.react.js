@@ -1,8 +1,9 @@
 /* @flow */
 
 import React from 'react';
-import { Field, Form } from 'react-redux-form';
+import { Form } from 'react-redux-form';
 import {
+  TextInput,
   RadioGroup,
 } from './fields';
 
@@ -19,43 +20,30 @@ export default ({
     model={model}
     onSubmit={onSubmit}
   >
-    <p className="control">
-      <label className="label">
-        Name
-        <Field model={`${model}.name`}>
-          <input type="text" className="input" />
-        </Field>
-      </label>
-    </p>
+    <TextInput
+      model={`${model}.name`}
+      label="Name"
+    />
 
-    <div className="control">
-      <label className="label">Sex</label>
-      <RadioGroup
-        model={`${model}.sex`}
-        options={[
-          { id: 'male', label: 'Male' },
-          { id: 'female', label: 'Female' },
-        ]}
-      />
-    </div>
+    <RadioGroup
+      model={`${model}.sex`}
+      label="Sex"
+      options={[
+        { id: 'male', label: 'Male' },
+        { id: 'female', label: 'Female' },
+      ]}
+    />
 
-    <p className="control">
-      <label className="label">
-        Age
-        <Field model={`${model}.age`}>
-          <input type="number" className="input" />
-        </Field>
-      </label>
-    </p>
+    <TextInput
+      model={`${model}.age`}
+      label="Age"
+      type="number"
+    />
 
-    <p className="control">
-      <label className="label">
-        Address
-        <Field model={`${model}.address`}>
-          <input type="text" className="input" />
-        </Field>
-      </label>
-    </p>
+    <TextInput
+      model={`${model}.address`}
+      label="Address"
+    />
 
     <button className="button is-primary" type="submit" disabled={freeze}>
       Submit

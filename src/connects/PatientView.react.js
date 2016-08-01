@@ -10,15 +10,24 @@ import {
   selectActiveRecord,
   setActivePatient,
   insertOrChangeActiveRecord,
+  setRecordFormStyleId,
 } from '../actions';
 
 import { subscribe } from '../db';
+
+import {
+  recordFormStylesSelector,
+  recordFormStyleIdSelector,
+  recordFormStyleSelector,
+} from '../selectors';
 
 const mapStateToProps = (state) => {
   const patient = state.activePatient;
   const records = state.activeRecords;
   const selectedActiveRecordIndex =
     records && records.findIndex(r => r._id === state.patientView.selectedActiveRecordId);
+
+  const recordFormStyle = recordFormStyleSelector(state);
 
   return {
     patient,
@@ -27,6 +36,9 @@ const mapStateToProps = (state) => {
     isFetching: state.status.isFetchingPatient,
     isPuttingPatient: state.status.isPuttingPatient,
     isPuttingRecord: state.status.isPuttingRecord,
+    recordFormStyles: recordFormStylesSelector(state),
+    recordFormStyleId: recordFormStyleIdSelector(state),
+    recordFormStyle: recordFormStyle && recordFormStyle.style,
   };
 };
 
@@ -42,6 +54,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
     putActivePatient: () => dispatch(putActivePatient()),
     putActiveRecord: (index) => dispatch(putActiveRecord(index)),
+    setRecordFormStyleId: (styleId) => dispatch(setRecordFormStyleId(styleId)),
     subscribeChange: () => {
       if (!patientId) {
         return null;

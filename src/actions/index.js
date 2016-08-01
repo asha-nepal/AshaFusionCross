@@ -181,6 +181,14 @@ export const selectActiveRecord = (id: string): SelectActiveRecordAction => ({
   },
 });
 
+export const SET_RECORD_FORM_STYLE_ID = 'SET_RECORD_FORM_STYLE_ID';
+export const setRecordFormStyleId = (styleId: string): SetRecordFormStyleIdAction => ({
+  type: SET_RECORD_FORM_STYLE_ID,
+  payload: {
+    styleId,
+  },
+});
+
 
 export const SET_PATIENT_LIST_FILTER = 'SET_PATIENT_LIST_FILTER';
 export const setPatientListFilter = (filter: string) => ({

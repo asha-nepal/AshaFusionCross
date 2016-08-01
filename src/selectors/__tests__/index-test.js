@@ -9,6 +9,7 @@ import {
   patientListSelector,
   filterSelector,
   filterPatientList,
+  recordFormStyleIdSelector,
 } from '../index';
 
 describe('patientListSelector', () => {
@@ -80,5 +81,21 @@ describe('filterPatientList', () => {
         { _id: 'patient_hogefoo', name: 'hoge foo' },
         { _id: 'patient_hogehoge', name: 'HogeHoge' },
       ]);
+  });
+});
+
+
+describe('recordFormStyleIdSelector', () => {
+  it('selects recordFormStyleId', () => {
+    const state = {
+      patientView: {
+        recordFormStyleId: 'dummystyleid',
+      },
+    };
+
+    deepFreeze(state);
+
+    expect(recordFormStyleIdSelector(state))
+      .toEqual('dummystyleid');
   });
 });
