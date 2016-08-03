@@ -8,6 +8,49 @@ import {
   RadioGroup,
 } from './fields';
 
+function createChildFields(rootModel, fields) {
+  return fields.map((field, i) => {
+    let component;
+    let customProps = {};
+
+    switch (field.class) {
+      case 'textarea':
+        component = TextArea;
+        break;
+
+      case 'radio':
+        component = RadioGroup;
+        break;
+
+      case 'block':
+        return (
+          <div key={i} className="control is-grouped">
+          {createChildFields(rootModel, field.children)}
+          </div>
+        );
+
+      case 'textinput':
+      default:
+        component = TextInput;
+        customProps = {
+          type: field.type || 'text',
+        };
+        break;
+    }
+
+    return React.createElement(
+      component,
+      {
+        key: i,
+        model: `${rootModel}.${field.field}`,
+        label: field.label,
+        ...customProps,
+        ...field,
+      }
+    );
+  });
+}
+
 export default ({
   model,
   style,
@@ -23,38 +66,9 @@ export default ({
     model={model}
     onSubmit={onSubmit}
   >
-    {style.map((field, i) => {
-      let component;
-      let props = {};
-
-      switch (field.class) {
-        case 'textarea':
-          component = TextArea;
-          break;
-        case 'radio':
-          component = RadioGroup;
-          props = {
-            options: field.options,
-          };
-          break;
-        default:
-          component = TextInput;
-          props = {
-            type: field.type || 'text',
-          };
-          break;
-      }
-
-      return React.createElement(
-        component,
-        {
-          key: i,
-          model: `${model}.${field.field}`,
-          label: field.label,
-          ...props,
-        }
-      );
-    })}
+    <div className="control">
+    {createChildFields(model, style, 'control')}
+    </div>
 
     <button type="submit" className="button is-primary" disabled={freeze}>
       Submit

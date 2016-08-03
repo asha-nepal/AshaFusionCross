@@ -1,6 +1,7 @@
 type FormField = {
   model: string,
   label: string,
+  style: ?Object,
 }
 
 export type TextFieldProps = FormField & {
