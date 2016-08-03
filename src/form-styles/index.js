@@ -5,19 +5,54 @@ export default {
       label: 'Normal',
       style: [
         {
-          field: 'height', label: 'Height', class: 'textinput', type: 'number',
+          class: 'block',
+          children: [
+            {
+              field: 'height', label: 'Height', class: 'textinput', type: 'number',
+              style: { width: 100 },
+            },
+            {
+              field: 'weight', label: 'Weight', class: 'textinput', type: 'number',
+              style: { width: 100 },
+            },
+            {
+              field: 'waist', label: 'Waist', class: 'textinput', type: 'number',
+              style: { width: 100 },
+            },
+          ],
         },
         {
-          field: 'weight', label: 'Weight', class: 'textinput', type: 'number',
+          class: 'block',
+          children: [
+            {
+              field: 'pulse', label: 'Pulse', class: 'textinput', type: 'number',
+              style: { width: 100 },
+            },
+            {
+              field: 'temperature', label: 'Temperature', class: 'textinput', type: 'number',
+              style: { width: 100 },
+            },
+            {
+              field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
+              style: { width: 100 },
+            },
+          ],
         },
         {
-          field: 'waist', label: 'Waist', class: 'textinput', type: 'number',
+          class: 'block',
+          children: [
+            {
+              field: 'medicalHistory', label: 'Medical history', class: 'textarea',
+              style: { width: '50%' },
+            },
+            {
+              field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
+              style: { width: '50%' },
+            },
+          ],
         },
         {
-          field: 'medicalHistory', label: 'Medical history', class: 'textarea',
-        },
-        {
-          field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
+          field: 'symptoms', label: 'Symptoms', class: 'textarea',
         },
       ],
     },
