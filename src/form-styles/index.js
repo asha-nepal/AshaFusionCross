@@ -27,6 +27,7 @@ export default {
             {
               field: 'pulse', label: 'Pulse', class: 'textinput', type: 'number',
               style: { width: 100 },
+              suffix: '/min',
             },
             {
               field: 'temperature', label: 'Temperature', class: 'textinput', type: 'number',
@@ -35,6 +36,7 @@ export default {
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
               style: { width: 100 },
+              suffix: '%',
             },
           ],
         },
