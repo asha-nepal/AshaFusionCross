@@ -66,9 +66,7 @@ export default ({
     model={model}
     onSubmit={onSubmit}
   >
-    <div className="control">
     {createChildFields(model, style, 'control')}
-    </div>
 
     <button type="submit" className="button is-primary" disabled={freeze}>
       Submit
