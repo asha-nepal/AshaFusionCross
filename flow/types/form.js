@@ -15,3 +15,7 @@ export type TextAreaProps = FormField
 export type RadioGroupProps = FormField & {
   options: Array<{id: string, label: string}>,
 }
+
+export type TextUnitInputProps = FormField & {
+  units: Array<string>,
+}

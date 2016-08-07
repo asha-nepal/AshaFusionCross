@@ -72,12 +72,7 @@ export const TextUnitInput = ({
   label,
   units,
   style,
-}: {
-  model: string,
-  label: string,
-  units: Array<string>,
-  style: Object,
-}) => (
+}: TextUnitInputProps) => (
   <Control
     model={model}
     component={TextUnitInputComponent}
