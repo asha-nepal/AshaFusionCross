@@ -7,6 +7,7 @@ import {
   TextUnitInput,
   TextArea,
   RadioGroup,
+  AttachmentInput,
 } from './fields';
 
 function createChildFields(rootModel, fields) {
@@ -29,6 +30,13 @@ function createChildFields(rootModel, fields) {
           {createChildFields(rootModel, field.children)}
           </div>
         );
+
+      case 'attachment':
+        component = AttachmentInput;
+        customProps = {
+          rootModel,
+        };
+        break;
 
       case 'textunitinput':
         component = TextUnitInput;

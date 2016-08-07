@@ -60,6 +60,10 @@ export default {
         {
           field: 'symptoms', label: 'Symptoms', class: 'textarea',
         },
+        {
+          field: 'attachments.images', label: 'Attachments', class: 'attachment',
+          accept: 'image/*', multiple: true,
+        },
       ],
     },
     {
