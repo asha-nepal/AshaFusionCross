@@ -8,13 +8,31 @@ export const TextInput = ({
   label,
   style,
   type = 'text',
-}: TextFieldProps) => (
-  <p className="control" style={style}>
-    <label className="label">
-      {label}
-    </label>
-    <Field model={model}>
-      <input type={type} className="input" />
-    </Field>
-  </p>
-);
+  prefix,
+  suffix,
+}: TextFieldProps) => {
+  const hasAddons = prefix || suffix;
+
+  return (
+    <div className="control">
+      <label className="label">
+        {label}
+        <p className={hasAddons ? 'control has-addons' : 'control'}>
+          {prefix &&
+            <span className="button is-disabled">
+              {prefix}
+            </span>
+          }
+          <Field model={model}>
+            <input type={type} className="input" style={style} />
+          </Field>
+          {suffix &&
+            <span className="button is-disabled">
+              {suffix}
+            </span>
+          }
+        </p>
+      </label>
+    </div>
+  );
+};

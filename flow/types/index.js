@@ -1,8 +1,8 @@
-type PatientObject = {_id: string, type: string}
-type RecordObject = {_id: string, type: string}
-type ErrorObject = {}
+export type PatientObject = {_id: string, type: string}
+export type RecordObject = {_id: string, type: string}
+export type ErrorObject = {}
 
-type PouchConfig = {
+export type PouchConfig = {
   isLocal: boolean,
   local: {
     dbname: string,
@@ -12,4 +12,9 @@ type PouchConfig = {
     hostname: string,
     dbname: string,
   }
+}
+
+export type ValueUnitType = {
+  value: string,
+  unit: string,
 }

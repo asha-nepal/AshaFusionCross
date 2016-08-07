@@ -6,6 +6,8 @@ type FormField = {
 
 export type TextFieldProps = FormField & {
   type: string,
+  prefix: ?string,
+  suffix: ?string,
 }
 
 export type TextAreaProps = FormField

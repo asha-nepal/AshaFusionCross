@@ -8,16 +8,19 @@ export default {
           class: 'block',
           children: [
             {
-              field: 'height', label: 'Height', class: 'textinput', type: 'number',
+              field: 'height', label: 'Height', class: 'textunitinput', type: 'number',
+              units: ['cm', 'in'],
               style: { width: 100 },
             },
             {
-              field: 'weight', label: 'Weight', class: 'textinput', type: 'number',
+              field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
               style: { width: 100 },
+              units: ['kg', 'lbm'],
             },
             {
-              field: 'waist', label: 'Waist', class: 'textinput', type: 'number',
+              field: 'waist', label: 'Waist', class: 'textunitinput', type: 'number',
               style: { width: 100 },
+              units: ['cm', 'in'],
             },
           ],
         },
@@ -27,14 +30,17 @@ export default {
             {
               field: 'pulse', label: 'Pulse', class: 'textinput', type: 'number',
               style: { width: 100 },
+              suffix: '/min',
             },
             {
               field: 'temperature', label: 'Temperature', class: 'textinput', type: 'number',
               style: { width: 100 },
+              units: ['degC', 'degF'],
             },
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
               style: { width: 100 },
+              suffix: '%',
             },
           ],
         },
