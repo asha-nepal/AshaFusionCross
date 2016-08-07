@@ -42,6 +42,9 @@ export default {
               style: { width: 100 },
               suffix: '%',
             },
+            {
+              field: 'allergy', label: 'Allergy', class: 'check',
+            },
           ],
         },
         {

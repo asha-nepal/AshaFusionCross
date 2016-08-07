@@ -11,6 +11,7 @@ import {
   AttachmentInput,
   AttachmentViewer,
   Accordion,
+  Checkbox,
 } from './fields';
 
 function createChildFields(rootModel, fields) {
@@ -64,6 +65,10 @@ function createChildFields(rootModel, fields) {
 
       case 'textunitinput':
         component = TextUnitInput;
+        break;
+
+      case 'check':
+        component = Checkbox;
         break;
 
       case 'textinput':
