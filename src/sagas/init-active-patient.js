@@ -1,16 +1,15 @@
 import { take, put, call } from 'redux-saga/effects';
-import Chance from 'chance';
 import {
   INIT_ACTIVE_PATIENT,
   setActivePatient,
   resetActiveRecords,
 } from '../actions';
-
-const chance = new Chance();
-const idStringPool = '0123456789abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; // URLセーフな文字のみ
+import {
+  createId,
+} from '../utils';
 
 export function* initActivePatient() {
-  const id = chance.string({ pool: idStringPool, length: 16 });
+  const id = createId(16);
   yield put(setActivePatient({
     _id: `patient_${id}`,
     type: 'patient',
