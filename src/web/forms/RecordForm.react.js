@@ -4,6 +4,7 @@ import React from 'react';
 import { Form } from 'react-redux-form';
 import {
   TextInput,
+  TextUnitInput,
   TextArea,
   RadioGroup,
 } from './fields';
@@ -28,6 +29,10 @@ function createChildFields(rootModel, fields) {
           {createChildFields(rootModel, field.children)}
           </div>
         );
+
+      case 'textunitinput':
+        component = TextUnitInput;
+        break;
 
       case 'textinput':
       default:
