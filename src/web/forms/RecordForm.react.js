@@ -8,6 +8,7 @@ import {
   TextArea,
   RadioGroup,
   AttachmentInput,
+  AttachmentViewer,
 } from './fields';
 
 function createChildFields(rootModel, fields) {
@@ -33,6 +34,13 @@ function createChildFields(rootModel, fields) {
 
       case 'attachment':
         component = AttachmentInput;
+        customProps = {
+          rootModel,
+        };
+        break;
+
+      case 'attachmentviewer':
+        component = AttachmentViewer;
         customProps = {
           rootModel,
         };

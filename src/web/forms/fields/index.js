@@ -5,3 +5,4 @@ export { TextInput } from './TextInput';
 export { TextArea } from './TextArea';
 export { TextUnitInput } from './TextUnitInput';
 export { AttachmentInput } from './AttachmentInput';
+export { AttachmentViewer } from './AttachmentViewer';
