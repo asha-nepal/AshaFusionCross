@@ -4,8 +4,6 @@
 import PouchDB from 'pouchdb';
 import PubSub from './pubsub';
 
-export let db;
-
 // Initial settings
 const defaultHost = (typeof location !== 'undefined' && location.hostname)
   ? location.hostname
@@ -22,17 +20,14 @@ export const defaultConfig: PouchConfig = {
   },
 };
 
-const pubsub = new PubSub();
-
-export function connect(
-  config: PouchConfig
-) {
+function createPouch(config: PouchConfig, _pubsub: Object) {
+  let _db;
   const remoteUrl = `http://${config.remote.hostname}/${config.remote.dbname}`;
 
   if (config.isLocal) {
-    db = new PouchDB(config.local.dbname);
+    _db = new PouchDB(config.local.dbname);
     if (config.local.isSynced) {
-      db.sync(remoteUrl, {
+      _db.sync(remoteUrl, {
         live: true,
         retry: true,
       });
@@ -62,27 +57,38 @@ export function connect(
 //      });
     }
   } else {
-    db = new PouchDB(remoteUrl);
+    _db = new PouchDB(remoteUrl);
   }
 
-  db.changes({
+  _db.changes({
     since: 'now',
     live: true,
     include_docs: true,
   })
   .on('change', change => {
     // handle change
-    pubsub.publish('change', change);
+    _pubsub.publish('change', change);
   })
   .on('complete', info => {
     // changes() was canceled
-    pubsub.publish('complete', info);
+    _pubsub.publish('complete', info);
   })
   .on('error', err => {
-    pubsub.publish('error', err);
+    _pubsub.publish('error', err);
   });
+
+  return _db;
 }
 
-connect(defaultConfig);
+
+const pubsub = new PubSub();
+
+export let db = createPouch(defaultConfig, pubsub);
+
+export function connect(
+  config: PouchConfig
+) {
+  db = createPouch(config, pubsub);
+}
 
 export const subscribe = (key: 'change' | 'error', cb: Function) => pubsub.subscribe(key, cb);
