@@ -12,12 +12,14 @@ export const Attachment = ({
   multiple,
 }: AttachmentProps) => (
   <div className="control">
+    <label className="label">{label}</label>
     <AttachmentViewer
-      label={label}
       rootModel={rootModel}
       model={model}
     />
     <AttachmentInput
+      rootModel={rootModel}
+      model={model}
       accept={accept}
       multiple={multiple}
     />
