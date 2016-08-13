@@ -131,7 +131,7 @@ class AttachmentViewerComponent extends Component {
 
     return (
       <div className="control">
-        <label className="label">{label}</label>
+        {label && <label className="label">{label}</label>}
         <div style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
         {metadata.map(m => {
           const blob = (this.state.cache[docId] && this.state.cache[docId][m.id])
