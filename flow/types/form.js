@@ -15,3 +15,9 @@ export type TextAreaProps = FormField
 export type RadioGroupProps = FormField & {
   options: Array<{id: string, label: string}>,
 }
+
+export type AttachmentProps = FormField & {
+  rootModel: string,
+  accept: ?string,
+  multiple: ?boolean,
+}

@@ -5,7 +5,7 @@ jest.unmock('react-redux-form');
 jest.unmock('../../actions');
 jest.unmock('../init-active-patient');
 
-import Chance from 'chance';
+import { createId } from '../../utils';
 import { put } from 'redux-saga/effects';
 import {
   setActivePatient,
@@ -15,7 +15,7 @@ import { initActivePatient } from '../init-active-patient';
 
 describe('INIT_ACTIVE_PATIENT', () => {
   it('calls setActivePatient with new ID and resetActiveRecords', () => {
-    Chance.prototype.string.mockReturnValue('thisismockedid');
+    createId.mockReturnValue('thisismockedid');
 
     const saga = initActivePatient();
 
