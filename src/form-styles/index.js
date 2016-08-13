@@ -61,10 +61,7 @@ export default {
           field: 'symptoms', label: 'Symptoms', class: 'textarea',
         },
         {
-          field: 'attachments.images', label: 'Attachments', class: 'attachmentviewer',
-        },
-        {
-          field: 'attachments.images', label: 'Add Attachment', class: 'attachment',
+          field: 'attachments.images', label: 'Images', class: 'attachment',
           accept: 'image/*', multiple: true,
         },
       ],

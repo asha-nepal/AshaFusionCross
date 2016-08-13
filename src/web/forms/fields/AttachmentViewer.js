@@ -130,7 +130,7 @@ class AttachmentViewerComponent extends Component {
     }
 
     return (
-      <div>
+      <div className="control">
         <label className="label">{label}</label>
         <div style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
         {metadata.map(m => {
