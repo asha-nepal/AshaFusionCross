@@ -10,11 +10,9 @@ export const TextArea = ({
   placeholder,
 }: TextAreaProps) => (
   <p className="control" style={style}>
-    <label className="label">
-      {label}
-      <Field model={model}>
-        <textarea className="textarea" placeholder={placeholder} />
-      </Field>
-    </label>
+    {label && <label className="label">{label}</label>}
+    <Field model={model}>
+      <textarea className="textarea" placeholder={placeholder} />
+    </Field>
   </p>
 );
