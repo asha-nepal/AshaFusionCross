@@ -15,7 +15,7 @@ const RadioGroupComponent = ({
   onChange: (newValue: string) => void,
 }) => (
   <div className="control">
-    <label className="label">{label}</label>
+    {label && <label className="label">{label}</label>}
     <div className="tabs is-toggle">
       <ul>
       {options.map(option =>

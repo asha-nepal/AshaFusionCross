@@ -20,39 +20,37 @@ const AttachmentInputComponent = ({
   addAttachments: (attachments: Object, meta: Array<Object>) => void,
 }) => (
   <p className="control">
-    <label className="label">
-      {label}
-      <input
-        type="file"
-        accept={accept}
-        multiple={multiple}
-        onChange={e => {
-          const files = e.target.files;
+    {label && <label className="label">{label}</label>}
+    <input
+      type="file"
+      accept={accept}
+      multiple={multiple}
+      onChange={e => {
+        const files = e.target.files;
 
-          const meta = [];
-          const attachments = {};
-          for (let i = 0; i < files.length; ++i) {
-            const file = files[i];
-            const id = createId(16);
+        const meta = [];
+        const attachments = {};
+        for (let i = 0; i < files.length; ++i) {
+          const file = files[i];
+          const id = createId(16);
 
-            meta.push({
-              id,
-              name: file.name,
-              size: file.size,
-              type: file.type,
-              lastModified: file.lastModified,
-            });
+          meta.push({
+            id,
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            lastModified: file.lastModified,
+          });
 
-            attachments[id] = {
-              content_type: file.type,
-              data: file,
-            };
-          }
+          attachments[id] = {
+            content_type: file.type,
+            data: file,
+          };
+        }
 
-          addAttachments(attachments, meta);
-        }}
-      />
-    </label>
+        addAttachments(attachments, meta);
+      }}
+    />
   </p>
 );
 

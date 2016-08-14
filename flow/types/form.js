@@ -24,3 +24,5 @@ export type AttachmentProps = FormField & {
   accept: ?string,
   multiple: ?boolean,
 }
+
+export type CheckboxProps = FormField;

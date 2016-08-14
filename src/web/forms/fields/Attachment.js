@@ -12,7 +12,7 @@ export const Attachment = ({
   multiple,
 }: AttachmentProps) => (
   <div className="control">
-    <label className="label">{label}</label>
+    {label && <label className="label">{label}</label>}
     <AttachmentViewer
       rootModel={rootModel}
       model={model}

@@ -42,6 +42,9 @@ export default {
               style: { width: 100 },
               suffix: '%',
             },
+            {
+              field: 'allergy', label: 'Allergy', class: 'check',
+            },
           ],
         },
         {
@@ -55,6 +58,13 @@ export default {
               field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
               style: { width: '50%' },
             },
+          ],
+        },
+        {
+          field: 'symptoms_select', label: 'Symptoms', class: 'checkgroup',
+          options: [
+            { id: 'diabetes', label: 'Diabetes' },
+            { id: 'high_bp', label: 'High blood pressure' },
           ],
         },
         {

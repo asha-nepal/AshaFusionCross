@@ -40,28 +40,26 @@ class TextUnitInputComponent extends Component {
 
     return (
       <div className="control">
-        <label className="label">
-          {label}
-          <p className="control has-addons">
-            <input
-              type="number"
-              className="input"
-              style={style}
-              value={inputValue}
-              onChange={(e) => onChange({ value: e.target.value, unit: this.state.unit })}
-            />
-            <span className="select">
-              <select
-                value={this.state.unit}
-                onChange={e => this.setState({ unit: e.target.value })}
-              >
-              {units.map(unit =>
-                <option key={unit} value={unit}>{unit}</option>
-              )}
-              </select>
-            </span>
-          </p>
-        </label>
+        {label && <label className="label">{label}</label>}
+        <p className="control has-addons">
+          <input
+            type="number"
+            className="input"
+            style={style}
+            value={inputValue}
+            onChange={(e) => onChange({ value: e.target.value, unit: this.state.unit })}
+          />
+          <span className="select">
+            <select
+              value={this.state.unit}
+              onChange={e => this.setState({ unit: e.target.value })}
+            >
+            {units.map(unit =>
+              <option key={unit} value={unit}>{unit}</option>
+            )}
+            </select>
+          </span>
+        </p>
       </div>
     );
   }
