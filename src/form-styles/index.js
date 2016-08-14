@@ -61,6 +61,13 @@ export default {
           ],
         },
         {
+          field: 'symptoms', label: 'Symptoms', class: 'checkgroup',
+          options: [
+            { id: 'diabetes', label: 'Diabetes' },
+            { id: 'high_bp', label: 'High blood pressure' },
+          ],
+        },
+        {
           field: 'symptoms', label: 'Symptoms', class: 'textarea',
         },
         {
