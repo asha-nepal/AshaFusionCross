@@ -10,6 +10,7 @@ export const TextInput = ({
   type = 'text',
   prefix,
   suffix,
+  placeholder,
 }: TextFieldProps) => {
   const hasAddons = prefix || suffix;
 
@@ -24,7 +25,7 @@ export const TextInput = ({
             </span>
           }
           <Field model={model}>
-            <input type={type} className="input" style={style} />
+            <input type={type} className="input" style={style} placeholder={placeholder} />
           </Field>
           {suffix &&
             <span className="button is-disabled">

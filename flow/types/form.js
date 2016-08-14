@@ -8,9 +8,12 @@ export type TextFieldProps = FormField & {
   type: string,
   prefix: ?string,
   suffix: ?string,
+  placeholder: ?string,
 }
 
-export type TextAreaProps = FormField
+export type TextAreaProps = FormField & {
+  placeholder: ?string,
+}
 
 export type RadioGroupProps = FormField & {
   options: Array<{id: string, label: string}>,
