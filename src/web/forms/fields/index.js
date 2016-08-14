@@ -7,3 +7,4 @@ export { TextUnitInput } from './TextUnitInput';
 export { Attachment } from './Attachment';
 export { AttachmentInput } from './AttachmentInput';
 export { AttachmentViewer } from './AttachmentViewer';
+export { Accordion } from './Accordion';

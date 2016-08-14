@@ -10,6 +10,7 @@ import {
   Attachment,
   AttachmentInput,
   AttachmentViewer,
+  Accordion,
 } from './fields';
 
 function createChildFields(rootModel, fields) {
@@ -31,6 +32,13 @@ function createChildFields(rootModel, fields) {
           <div key={i} className="control is-grouped">
           {createChildFields(rootModel, field.children)}
           </div>
+        );
+
+      case 'accordion':
+        return (
+          <Accordion key={i} label={field.label}>
+          {createChildFields(rootModel, field.children)}
+          </Accordion>
         );
 
       case 'attachment':
