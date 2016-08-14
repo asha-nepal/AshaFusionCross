@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import {
   Link,
+  browserHistory,
 } from 'react-router';
 
 import PatientForm from '../forms/PatientForm.react';
@@ -90,7 +91,14 @@ export default class PatientView extends Component {
           <div className="container">
             <PatientForm
               model="activePatient"
-              onSubmit={putActivePatient}
+              onSubmit={params => {
+                putActivePatient(params);
+                // TODO: ここにbrowserHistory.replace()があることの問題
+                // pushPatient sagaと非同期 => 仮にpushPatient sagaが失敗してもURLは書き換わる
+                // ロジックがViewに入っている => connectsに抜き出すべき？native / webで分けるためには？
+                browserHistory.replace(`/patient/${params._id}`);
+                this.forceUpdate();
+              }}
               freeze={isPuttingPatient}
             />
           </div>
@@ -98,53 +106,54 @@ export default class PatientView extends Component {
 
         <section className="section">
           <div className="container">
-            <div className="columns">
-              <div className="column" style={{ overflow: 'scroll' }}>
-                <div className="tabs">
-                  <ul>
-                    {records.map((record, i) =>
-                      <li
-                        key={record._id}
-                        className={(selectedActiveRecordIndex === i) && 'is-active'}
-                      >
+            {patient._rev && (
+              <div className="columns">
+                <div className="column">
+                  <div className="tabs">
+                    <ul>
+                      {records.map((record, i) =>
+                        <li
+                          key={record._id}
+                          className={(selectedActiveRecordIndex === i) && 'is-active'}
+                        >
+                          <a
+                            href="#"
+                            onClick={e => {
+                              e.preventDefault();
+                              selectActiveRecord(record._id);
+                            }}
+                          >{i + 1}</a>
+                        </li>
+                      )}
+                      <li>
                         <a
                           href="#"
                           onClick={e => {
                             e.preventDefault();
-                            selectActiveRecord(record._id);
+                            addNewActiveRecord();
                           }}
-                        >{i + 1}</a>
+                        >+</a>
                       </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="column control" style={{ flex: 'none' }}>
+                  <span className="select">
+                    <select
+                      value={recordFormStyleId}
+                      onChange={e => {
+                        setRecordFormStyleId(e.target.value);
+                      }}
+                    >
+                    {recordFormStyles.map(style =>
+                      <option key={style.id} value={style.id}>{style.label}</option>
                     )}
-                    <li>
-                      <a
-                        href="#"
-                        onClick={e => {
-                          e.preventDefault();
-                          addNewActiveRecord();
-                        }}
-                      >+</a>
-                    </li>
-                  </ul>
+                    </select>
+                  </span>
                 </div>
               </div>
-
-              <div className="column control" style={{ flex: 'none' }}>
-                <span className="select">
-                  <select
-                    value={recordFormStyleId}
-                    onChange={e => {
-                      setRecordFormStyleId(e.target.value);
-                    }}
-                  >
-                  {recordFormStyles.map(style =>
-                    <option key={style.id} value={style.id}>{style.label}</option>
-                  )}
-                  </select>
-                </span>
-              </div>
-            </div>
-
+            )}
 
             {selectedActiveRecordIndex > -1 && (
               <div className="container">
