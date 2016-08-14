@@ -4,17 +4,29 @@ build:
   steps:
     - npm-install
     - script:
-        name: flow
-        code: npm run flow
+      name: flow
+      code: npm run flow
     - script:
-        name: eslint
-        code: npm run lint
-    - npm-test
+      name: eslint
+      code: npm run lint
     - script:
-        name: echo nodejs information
-        code: |
-          echo "node version $(node -v) running"
-          echo "npm version $(npm -v) running"
+      name: npm-test
+      code: npm test -- --coverage
+    - script:
+      name: save-artifacts
+      code: cp -r coverage $WERCKER_REPORT_ARTIFACTS_DIR/coverage
+    - script:
+      name: echo nodejs information
+      code: |
+        echo "node version $(node -v) running"
+        echo "npm version $(npm -v) running"
+  after-steps:
+    - slack-notifier:
+      url: $SLACK_URL
+      username: wercker-ci
+    - script:
+      name: slack-notify-coverage
+      code: node slack-istanbul.js
 
 deploy-debug:
   steps:
