@@ -13,6 +13,7 @@ import {
   Accordion,
   Checkbox,
   CheckGroup,
+  AutoCalc,
 } from './fields';
 
 function createChildFields(rootModel, fields) {
@@ -74,6 +75,13 @@ function createChildFields(rootModel, fields) {
 
       case 'checkgroup':
         component = CheckGroup;
+        break;
+
+      case 'autocalc':
+        component = AutoCalc;
+        customProps = {
+          rootModel,
+        };
         break;
 
       case 'textinput':

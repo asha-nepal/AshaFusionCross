@@ -1,3 +1,5 @@
+import math from 'mathjs';
+
 export default {
   record: [
     {
@@ -16,6 +18,19 @@ export default {
               field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
               style: { width: 100 },
               units: ['kg', 'lbm'],
+            },
+            {
+              label: 'BMI', class: 'autocalc', style: { width: 50 },
+              inputs: ['height', 'weight'],
+              calc: (height, weight) => {
+                try {
+                  const h = math.unit(height.value, height.unit).toNumber('m');
+                  const w = math.unit(weight.value, weight.unit).toNumber('kg');
+                  return (w / h ** 2).toFixed(2);
+                } catch (e) {
+                  return null;
+                }
+              },
             },
             {
               field: 'waist', label: 'Waist', class: 'textunitinput', type: 'number',
