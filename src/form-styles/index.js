@@ -3,8 +3,8 @@ import math from 'mathjs';
 export default {
   record: [
     {
-      id: 'normal',
-      label: 'Normal',
+      id: 'reception',
+      label: 'Reception',
       style: [
         {
           class: 'block',
@@ -43,19 +43,40 @@ export default {
           class: 'block',
           children: [
             {
+              class: 'block',
+              label: 'Blood pressure',
+              children: [
+                {
+                  field: 'bp.h', class: 'textinput', placeholder: 'high',
+                  type: 'number', style: { width: 60 },
+                },
+                {
+                  field: 'bp.l', class: 'textinput', placeholder: 'low',
+                  type: 'number', style: { width: 60 }, suffix: 'mm/Hg',
+                },
+              ],
+            },
+            {
               field: 'pulse', label: 'Pulse', class: 'textinput', type: 'number',
-              style: { width: 100 },
+              style: { width: 60 },
               suffix: '/min',
             },
             {
-              field: 'temperature', label: 'Temperature', class: 'textinput', type: 'number',
-              style: { width: 100 },
+              field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
+              style: { width: 60 },
               units: ['degC', 'degF'],
             },
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
-              style: { width: 100 },
-              suffix: '%',
+              style: { width: 60 }, suffix: '%',
+            },
+            {
+              field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
+              style: { width: 60 }, suffix: '/min',
+            },
+            {
+              field: 'bs', label: 'Blood sugar', class: 'textinput', type: 'number',
+              style: { width: 60 }, suffix: 'mg/dL',
             },
             {
               field: 'allergy', label: 'Allergy', class: 'check',
