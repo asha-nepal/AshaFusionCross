@@ -80,6 +80,9 @@
       "<rootDir>/node_modules/react-addons-test-utils/",
       "<rootDir>/node_modules/enzyme/",
       "<rootDir>/node_modules/react-redux-form/"
-    ]
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(gif|png|jpg|jpeg)$": "<rootDir>/test/fileMock.js"
+    }
   }
 }
