@@ -31,7 +31,16 @@ function createChildFields(rootModel, fields) {
         break;
 
       case 'block':
-        return (
+        return field.label
+        ? (
+          <div key={i} className="control">
+            {field.label && <label className="label">{field.label}</label>}
+            <div className="control is-grouped">
+              {createChildFields(rootModel, field.children)}
+            </div>
+          </div>
+        )
+        : (
           <div key={i} className="control is-grouped">
           {createChildFields(rootModel, field.children)}
           </div>
