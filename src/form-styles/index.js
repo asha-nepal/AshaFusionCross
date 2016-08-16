@@ -113,6 +113,119 @@ export default {
       ],
     },
     {
+      id: 'physical',
+      label: 'Physical',
+      style: [
+        {
+          class: 'guide',
+        },
+        {
+          class: 'block',
+          children: [
+            {
+              field: 'height', label: 'Height', class: 'textunitinput', type: 'number',
+              units: ['cm', 'in'],
+              style: { width: 100 },
+            },
+            {
+              field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
+              style: { width: 100 },
+              units: ['kg', 'lbm'],
+            },
+            {
+              label: 'BMI', class: 'autocalc', style: { width: 50 },
+              inputs: ['height', 'weight'],
+              calc: (height, weight) => {
+                try {
+                  const h = math.unit(height.value, height.unit).toNumber('m');
+                  const w = math.unit(weight.value, weight.unit).toNumber('kg');
+                  return (w / h ** 2).toFixed(2);
+                } catch (e) {
+                  return null;
+                }
+              },
+            },
+            {
+              field: 'waist', label: 'Waist', class: 'textunitinput', type: 'number',
+              style: { width: 100 },
+              units: ['cm', 'in'],
+            },
+          ],
+        },
+        {
+          class: 'block',
+          children: [
+            {
+              class: 'block',
+              label: 'Blood pressure',
+              children: [
+                {
+                  field: 'bp.h', class: 'textinput', placeholder: 'high',
+                  type: 'number', style: { width: 60 },
+                },
+                {
+                  field: 'bp.l', class: 'textinput', placeholder: 'low',
+                  type: 'number', style: { width: 60 }, suffix: 'mm/Hg',
+                },
+              ],
+            },
+            {
+              field: 'pulse', label: 'Pulse', class: 'textinput', type: 'number',
+              style: { width: 60 },
+              suffix: '/min',
+            },
+            {
+              field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
+              style: { width: 60 },
+              units: ['degC', 'degF'],
+            },
+            {
+              field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
+              style: { width: 60 }, suffix: '%',
+            },
+            {
+              field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
+              style: { width: 60 }, suffix: '/min',
+            },
+            {
+              field: 'bs', label: 'Blood sugar', class: 'textinput', type: 'number',
+              style: { width: 60 }, suffix: 'mg/dL',
+            },
+            {
+              field: 'allergy', label: 'Allergy', class: 'check',
+            },
+          ],
+        },
+        {
+          class: 'block',
+          children: [
+            {
+              field: 'medicalHistory', label: 'Medical history', class: 'textarea',
+              style: { width: '50%' },
+            },
+            {
+              field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
+              style: { width: '50%' },
+            },
+          ],
+        },
+        {
+          field: 'symptoms_select', label: 'Symptoms', class: 'checkgroup',
+          options: [
+            { id: 'diabetes', label: 'Diabetes' },
+            { id: 'high_bp', label: 'High blood pressure' },
+          ],
+        },
+        {
+          field: 'symptoms', label: 'Symptoms', class: 'textarea',
+        },
+        {
+          field: 'attachments.images', label: 'Images', class: 'attachment',
+          accept: 'image/*', multiple: true,
+        },
+      ],
+    },
+    {
       id: 'mental',
       label: 'Mental',
       style: [
