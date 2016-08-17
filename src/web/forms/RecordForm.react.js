@@ -14,6 +14,7 @@ import {
   Checkbox,
   CheckGroup,
   AutoCalc,
+  GuideTools,
 } from './fields';
 
 function createChildFields(rootModel, fields) {
@@ -52,6 +53,9 @@ function createChildFields(rootModel, fields) {
           {createChildFields(rootModel, field.children)}
           </Accordion>
         );
+
+      case 'guide':
+        return <GuideTools key={i} />;
 
       case 'attachment':
         component = Attachment;

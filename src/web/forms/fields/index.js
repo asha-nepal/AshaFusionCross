@@ -11,3 +11,4 @@ export { Accordion } from './Accordion';
 export { Checkbox } from './Checkbox';
 export { CheckGroup } from './CheckGroup';
 export { AutoCalc } from './AutoCalc';
+export { GuideTools } from './GuideTools';

@@ -24,6 +24,10 @@ module.exports = {
         },
       },
       {
+        test: /\.(jpg|jpeg)$/,
+        loader: 'url-loader?mimetype=image/jpeg',
+      },
+      {
         test: /\.sass$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
       },
