@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 
 import Modal from '../../components/Modal';
 
-import btnDiabetesImg from '../../../assets/img/btn-diabetes.jpg';
-import btnBloodPressureImg from '../../../assets/img/btn-blood-pressure.jpg';
-import modalDiabetesImg from '../../../assets/img/modal-diabetes.jpg';
-import modalBloodPressureImg from '../../../assets/img/modal-blood-pressure.jpg';
+import btnDiabetesImg from '../../../../assets/img/btn-diabetes.jpg';
+import btnBloodPressureImg from '../../../../assets/img/btn-blood-pressure.jpg';
+import modalDiabetesImg from '../../../../assets/img/modal-diabetes.jpg';
+import modalBloodPressureImg from '../../../../assets/img/modal-blood-pressure.jpg';
 
 export class GuideTools extends Component {
   constructor(props: {}) {
