@@ -56,6 +56,7 @@
     "node-sass": "^3.8.0",
     "pouchdb": "^5.4.5",
     "react-addons-test-utils": "^15.1.0",
+    "react-autosuggest": "^5.1.0",
     "react-dom": "^15.0.2",
     "react-native-button": "^1.6.0",
     "react-native-material-kit": "^0.3.2",
