@@ -25,21 +25,21 @@ export class GuideTools extends Component {
   render() {
     return (
       <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        <button
+        <a
           className="button"
           onClick={e => {
             e.preventDefault();
             this.setState({ modal: 'diabetes' });
           }}
-        ><img src={btnDiabetesImg} alt="Diabetes" style={{ height: '100%' }} /></button>
+        ><img src={btnDiabetesImg} alt="Diabetes" style={{ height: '100%' }} /></a>
 
-        <button
+        <a
           className="button"
           onClick={e => {
             e.preventDefault();
             this.setState({ modal: 'bloodpressure' });
           }}
-        ><img src={btnBloodPressureImg} alt="Blood pressure" style={{ height: '100%' }} /></button>
+        ><img src={btnBloodPressureImg} alt="Blood pressure" style={{ height: '100%' }} /></a>
 
         <Modal
           isOpen={!(this.state.modal === false)}
