@@ -217,7 +217,7 @@ export default {
           ],
         },
         {
-          field: 'symptoms', label: 'Symptoms', class: 'textarea',
+          field: 'symptoms', label: 'Symptoms', class: 'multiinput',
         },
         {
           field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',

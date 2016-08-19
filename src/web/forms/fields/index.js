@@ -13,3 +13,4 @@ export { CheckGroup } from './CheckGroup';
 export { AutoCalc } from './AutoCalc';
 export { GuideTools } from './GuideTools';
 export { Diagnoses } from './Diagnoses';
+export { MultiInput } from './MultiInput';

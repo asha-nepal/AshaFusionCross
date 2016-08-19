@@ -16,6 +16,7 @@ import {
   AutoCalc,
   GuideTools,
   Diagnoses,
+  MultiInput,
 } from './fields';
 
 function createChildFields(rootModel, fields) {
@@ -100,6 +101,10 @@ function createChildFields(rootModel, fields) {
         customProps = {
           rootModel,
         };
+        break;
+
+      case 'multiinput':
+        component = MultiInput;
         break;
 
       case 'textinput':
