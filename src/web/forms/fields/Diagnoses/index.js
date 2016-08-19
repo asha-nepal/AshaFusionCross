@@ -14,7 +14,7 @@ type diagnosisType = {
   text: ?string,
 };
 
-const DiagnosesComponent = ({
+export const DiagnosesComponent = ({
   label,
   diagnoses,
   addDiagnosis,
@@ -38,7 +38,7 @@ const DiagnosesComponent = ({
           </tr>
         </thead>
         <tbody>
-        {diagnoses.map((diagnosis, i) =>
+        {diagnoses && diagnoses.map && diagnoses.map((diagnosis, i) =>
           <tr key={i}>
             <td>{diagnosis.icd10}</td>
             <td>{ICD10[diagnosis.icd10]}</td>
