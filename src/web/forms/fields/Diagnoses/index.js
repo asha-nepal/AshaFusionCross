@@ -43,8 +43,9 @@ export const DiagnosesComponent = ({
             <td>{diagnosis.icd10}</td>
             <td>{ICD10[diagnosis.icd10]}</td>
             <td>{diagnosis.text}</td>
-            <td className="is-icon">
+            <td>
               <a
+                className="button is-danger"
                 onClick={e => {
                   e.preventDefault();
                   removeDiagnosis(i);
