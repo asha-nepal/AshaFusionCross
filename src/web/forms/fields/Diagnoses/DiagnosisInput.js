@@ -59,7 +59,7 @@ export default class extends Component {
                     this.setState({ icd10: undefined });
                   }}
                 >
-                  <span className="icon"><i className="fa fa-times" /></span>
+                  <i className="fa fa-times" />
                 </a>
               </div>
             </div>
@@ -99,7 +99,7 @@ export default class extends Component {
 
               this.addDiagnosis();
             }}
-          >ADD</a>
+          ><i className="fa fa-plus" /></a>
         </div>
       </div>
     );
