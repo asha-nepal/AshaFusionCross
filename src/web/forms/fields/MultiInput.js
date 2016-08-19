@@ -15,11 +15,25 @@ type Props = {
 };
 
 export class MultiInputComponent extends Component {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      text: '',
+    };
+  }
+
+  state: {
+    text: string,
+  };
+
   props: Props;
 
   _addItem() {
-    this.props.onAddItemRequested(this.refs.newinput.value);
-    this.refs.newinput.value = '';
+    if (this.state.text) {
+      this.props.onAddItemRequested(this.state.text);
+      this.setState({ text: '' });
+    }
   }
 
   render() {
@@ -55,9 +69,10 @@ export class MultiInputComponent extends Component {
         )}
         <p className="control has-addons">
           <input
-            ref="newinput"
             type={type}
             className="input is-expanded"
+            value={this.state.text}
+            onChange={e => this.setState({ text: e.target.value })}
             onKeyPress={e => {
               if (e.which === 13) {
                 this._addItem();
@@ -65,7 +80,7 @@ export class MultiInputComponent extends Component {
             }}
           />
           <a
-            className="button is-primary"
+            className={this.state.text ? 'button is-primary' : 'button is-primary is-disabled'}
             onClick={e => {
               e.preventDefault();
               this._addItem();
