@@ -70,6 +70,7 @@ export default class ICD10Input extends Component {
 
     this._onSuggestionsUpdateRequested = this._onSuggestionsUpdateRequested.bind(this);
     this._onSuggestionSelected = this._onSuggestionSelected.bind(this);
+    this._onInputBlur = this._onInputBlur.bind(this);
 
     this.state = {
       value: '',
@@ -88,6 +89,7 @@ export default class ICD10Input extends Component {
 
   _onSuggestionsUpdateRequested: (args: { value: string }) => void;
   _onSuggestionSelected: (event: Object, args: { suggestion: ICD10SuggestionType }) => void;
+  _onInputBlur: (evnet: Object, args: { focusedSuggestion: ICD10SuggestionType }) => void;
 
   _onSuggestionsUpdateRequested({ value }: { value: string }) {
     this.setState({
@@ -96,7 +98,14 @@ export default class ICD10Input extends Component {
   }
 
   _onSuggestionSelected(event: Object, { suggestion }: { suggestion: ICD10SuggestionType }) {
+    event.preventDefault();
     this.props.onChange(suggestion.code);
+  }
+
+  _onInputBlur(event: Object, { focusedSuggestion }: { focusedSuggestion: ICD10SuggestionType }) {
+    if (focusedSuggestion) {
+      this.props.onChange(focusedSuggestion.code);
+    }
   }
 
   render() {
@@ -113,6 +122,7 @@ export default class ICD10Input extends Component {
               className: 'input',
               placeholder: this.props.placeholder,
               value: this.state.value,
+              onBlur: this._onInputBlur,
               onChange: (e, { newValue }) => {
                 this.setState({ value: newValue });
               },

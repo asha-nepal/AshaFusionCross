@@ -68,6 +68,7 @@ export default class extends Component {
               placeholder="ICD-10"
               onChange={(code) => {
                 this.setState({ icd10: code });
+                this.refs.newtext.focus();
               }}
             />
           )}
@@ -75,6 +76,7 @@ export default class extends Component {
 
         <div className="column">
           <input
+            ref="newtext"
             type="text"
             className="input"
             placeholder="Free description"
