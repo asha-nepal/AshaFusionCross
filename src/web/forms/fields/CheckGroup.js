@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
-import _ from 'lodash';
+import _get from 'lodash.get';
 
 export const CheckGroupComponent = ({
   label,
@@ -51,7 +51,7 @@ export const CheckGroupComponent = ({
 );
 
 const mapStateToProps = (state, ownProps) => ({
-  value: _.get(state, ownProps.model),
+  value: _get(state, ownProps.model),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

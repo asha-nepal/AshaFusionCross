@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
-import _ from 'lodash';
+import _get from 'lodash.get';
 import { db } from '../../../db';
 import { makeCancelable } from '../../../utils';
 
@@ -196,12 +196,12 @@ class AttachmentViewerComponent extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const record = _.get(state, ownProps.rootModel);
+  const record = _get(state, ownProps.rootModel);
 
   return {
     docId: record && record._id,
     _attachments: record && record._attachments,
-    metadata: _.get(state, ownProps.model),
+    metadata: _get(state, ownProps.model),
   };
 };
 
