@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
-import _ from 'lodash';
+import _get from 'lodash.get';
 
 const CheckboxComponent = ({
   label,
@@ -32,7 +32,7 @@ const CheckboxComponent = ({
 );
 
 const mapStateToProps = (state, ownProps) => ({
-  isChecked: _.get(state, ownProps.model, false),
+  isChecked: _get(state, ownProps.model, false),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

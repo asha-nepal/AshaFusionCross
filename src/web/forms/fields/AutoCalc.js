@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+import _get from 'lodash.get';
 
 const AutoCalcComponent = ({
   label,
@@ -21,7 +21,7 @@ const AutoCalcComponent = ({
 
 const mapStateToProps = (state, ownProps) => {
   const args = ownProps.inputs.map(inmodel =>
-    _.get(state, `${ownProps.rootModel}.${inmodel}`, undefined)
+    _get(state, `${ownProps.rootModel}.${inmodel}`, undefined)
   );
 
   return {
