@@ -15,6 +15,7 @@ import {
   CheckGroup,
   AutoCalc,
   GuideTools,
+  Diagnoses,
 } from './fields';
 
 function createChildFields(rootModel, fields) {
@@ -88,6 +89,10 @@ function createChildFields(rootModel, fields) {
 
       case 'checkgroup':
         component = CheckGroup;
+        break;
+
+      case 'diagnoses':
+        component = Diagnoses;
         break;
 
       case 'autocalc':

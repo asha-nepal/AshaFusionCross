@@ -220,6 +220,9 @@ export default {
           field: 'symptoms', label: 'Symptoms', class: 'textarea',
         },
         {
+          field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',
+        },
+        {
           field: 'attachments.images', label: 'Images', class: 'attachment',
           accept: 'image/*', multiple: true,
         },

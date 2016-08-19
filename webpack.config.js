@@ -24,6 +24,10 @@ module.exports = {
         },
       },
       {
+        test: /\.json$/,
+        loader: 'json',
+      },
+      {
         test: /\.(jpg|jpeg)$/,
         loader: 'url-loader?mimetype=image/jpeg',
       },
