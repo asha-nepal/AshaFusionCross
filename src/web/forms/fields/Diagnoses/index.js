@@ -43,7 +43,7 @@ export const DiagnosesComponent = ({
             <td>{diagnosis.icd10}</td>
             <td>{ICD10[diagnosis.icd10]}</td>
             <td>{diagnosis.text}</td>
-            <td>
+            <td className="is-narrow">
               <a
                 className="button is-danger"
                 onClick={e => {
