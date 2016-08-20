@@ -7,13 +7,20 @@ import {
 } from '../actions';
 import { pouchPutPatient } from './put-active-patient';
 
-const pouchPutRecord = pouchPutPatient;
+export const pouchPutRecord = pouchPutPatient;
 
-function* putActiveRecord(index) {
+export function* putActiveRecord(index) {
   yield put(requestPutRecord());
   try {
     const record = yield select(state => state.activeRecords[index]);
-    yield call(pouchPutRecord, record);
+
+    const now = (new Date()).getTime();  // Unix Millisecond Timestamp
+
+    yield call(pouchPutRecord, {
+      $created_at: now,
+      ...record,
+      $updated_at: now,
+    });
     yield put(successPutRecord());
   } catch (error) {
     yield put(failurePutRecord(error));

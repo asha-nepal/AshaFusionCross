@@ -102,20 +102,31 @@ export default class PatientView extends Component {
               <div className="column" style={{ overflow: 'scroll' }}>
                 <div className="tabs">
                   <ul>
-                    {records.map((record, i) =>
-                      <li
-                        key={record._id}
-                        className={(selectedActiveRecordIndex === i) && 'is-active'}
-                      >
-                        <a
-                          href="#"
-                          onClick={e => {
-                            e.preventDefault();
-                            selectActiveRecord(record._id);
-                          }}
-                        >{i + 1}</a>
-                      </li>
-                    )}
+                    {records.map((record, i) => {
+                      const createdAt = new Date(record.$created_at);
+
+                      return (
+                        <li
+                          key={record._id}
+                          className={(selectedActiveRecordIndex === i) && 'is-active'}
+                        >
+                          <a
+                            href="#"
+                            onClick={e => {
+                              e.preventDefault();
+                              selectActiveRecord(record._id);
+                            }}
+                          >
+                            {i + 1}
+                            {isNaN(createdAt.getTime()) ||
+                              <small style={{ paddingLeft: 8 }}>
+                                {createdAt.toDateString()}
+                              </small>
+                            }
+                          </a>
+                        </li>
+                      );
+                    })}
                     <li>
                       <a
                         href="#"
