@@ -100,7 +100,7 @@ export default class PatientView extends Component {
           <div className="container">
             <div className="columns">
               <div className="column">
-                <div className="tabs">
+                <div className="tabs is-boxed">
                   <ul>
                     {records.map((record, i) => {
                       const createdAt = new Date(record.$created_at);
