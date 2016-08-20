@@ -99,11 +99,13 @@ export default class PatientView extends Component {
         <section className="section">
           <div className="container">
             <div className="columns">
-              <div className="column" style={{ overflow: 'scroll' }}>
-                <div className="tabs">
+              <div className="column">
+                <div className="tabs is-boxed">
                   <ul>
                     {records.map((record, i) => {
                       const createdAt = new Date(record.$created_at);
+                      const hasAttachments =
+                        record._attachments && Object.keys(record._attachments).length > 0;
 
                       return (
                         <li
@@ -117,6 +119,11 @@ export default class PatientView extends Component {
                               selectActiveRecord(record._id);
                             }}
                           >
+                            {hasAttachments &&
+                              <span className="icon is-small">
+                                <i className="fa fa-paperclip" />
+                              </span>
+                            }
                             {i + 1}
                             {isNaN(createdAt.getTime()) ||
                               <small style={{ paddingLeft: 8 }}>
