@@ -1,5 +1,19 @@
-export type PatientObject = {_id: string, type: string}
-export type RecordObject = {_id: string, type: string}
+interface PouchDocType {
+  _id: string,
+  _rev: string,
+}
+
+export type PatientObject = PouchDocType & {
+  type: string,
+}
+
+export type RecordObject = PouchDocType & {
+  _id: string,
+  type: string,
+  $created_at: number,
+  $updated_at: number,
+}
+
 export type ErrorObject = {}
 
 export type PouchConfig = {
