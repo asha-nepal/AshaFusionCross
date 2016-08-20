@@ -12,6 +12,7 @@ import { put, call } from 'redux-saga/effects';
 import {
   requestPutRecord,
   successPutRecord,
+  alertInfo,
 } from '../../actions';
 import {
   pouchPutRecord,
@@ -51,6 +52,9 @@ describe('PUT_ACTIVE_RECORD', () => {
       }));
 
     expect(saga.next().value)
+      .toEqual(put(alertInfo('Record updated')));
+
+    expect(saga.next().value)
       .toEqual(put(successPutRecord()));
 
     expect(saga.next())
@@ -77,6 +81,9 @@ describe('PUT_ACTIVE_RECORD', () => {
         ...mockRecord,
         $updated_at: mockCurrentTime,
       }));
+
+    expect(saga.next().value)
+      .toEqual(put(alertInfo('Record updated')));
 
     expect(saga.next().value)
       .toEqual(put(successPutRecord()));
