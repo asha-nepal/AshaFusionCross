@@ -6,7 +6,6 @@ jest.unmock('redux-saga/effects');
 jest.unmock('react-redux-form');
 jest.unmock('../../actions');
 jest.unmock('../add-new-active-record');
-jest.unmock('underscore');
 
 import moment from 'moment';
 import { delay } from 'redux-saga';
