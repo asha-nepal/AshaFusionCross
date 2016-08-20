@@ -2,6 +2,11 @@
 
 import React from 'react';
 
+const modifiers = {
+  error: 'is-danger',
+  info: 'is-info',
+};
+
 export default function Alerts({ alerts }: { alerts: Array<Alert> }) {
   return (
     <div
@@ -15,7 +20,7 @@ export default function Alerts({ alerts }: { alerts: Array<Alert> }) {
     {alerts.map(alert =>
       <div
         key={alert.id}
-        className={'notification is-danger'}
+        className={`notification ${modifiers[alert.type]}`}
       >{alert.message}</div>
     )}
     </div>

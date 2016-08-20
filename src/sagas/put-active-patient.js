@@ -4,6 +4,7 @@ import {
   requestPutPatient,
   successPutPatient,
   failurePutPatient,
+  alertInfo,
 } from '../actions';
 
 import { db } from '../db';
@@ -15,13 +16,17 @@ export function pouchPutPatient(patient) {
 
 export function* putActivePatient() {
   yield put(requestPutPatient());
+
   try {
     const patient = yield select(state => state.activePatient);
     yield call(pouchPutPatient, patient);
-    yield put(successPutPatient());
   } catch (error) {
     yield put(failurePutPatient(error));
+    return;
   }
+
+  yield put(alertInfo('Patient data updated'));
+  yield put(successPutPatient());
 }
 
 export function* watchPutActivePatient() {
