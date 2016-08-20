@@ -53,6 +53,7 @@
     "json-loader": "^0.5.4",
     "lodash.get": "^4.4.2",
     "mathjs": "^3.3.0",
+    "mockdate": "^1.0.4",
     "moment": "^2.13.0",
     "node-sass": "^3.8.0",
     "pouchdb": "^5.4.5",
