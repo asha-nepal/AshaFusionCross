@@ -1,7 +1,9 @@
 /* @flow */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { Form } from 'react-redux-form';
+import _get from 'lodash.get';
 import {
   TextInput,
   TextUnitInput,
@@ -19,8 +21,15 @@ import {
   MultiInput,
 } from './fields';
 
-function createChildFields(rootModel, fields) {
+function createChildFields(state, rootModel, fields) {
   return fields.map((field, i) => {
+    // Handle "show" prop
+    if (field.show === false) {
+      return null;
+    } else if (typeof field.show === 'string' && !_get(state, `${rootModel}.${field.show}`, true)) {
+      return null;
+    }
+
     let component;
     let customProps = {};
 
@@ -39,20 +48,20 @@ function createChildFields(rootModel, fields) {
           <div key={i} className="control">
             {field.label && <label className="label">{field.label}</label>}
             <div className="control is-grouped">
-              {createChildFields(rootModel, field.children)}
+              {createChildFields(state, rootModel, field.children)}
             </div>
           </div>
         )
         : (
           <div key={i} className="control is-grouped">
-          {createChildFields(rootModel, field.children)}
+          {createChildFields(state, rootModel, field.children)}
           </div>
         );
 
       case 'accordion':
         return (
           <Accordion key={i} label={field.label}>
-          {createChildFields(rootModel, field.children)}
+          {createChildFields(state, rootModel, field.children)}
           </Accordion>
         );
 
@@ -129,12 +138,14 @@ function createChildFields(rootModel, fields) {
   });
 }
 
-export default ({
+const RecordFormComponent = ({
+  state,
   model,
   style,
   onSubmit,
   freeze,
 }: {
+  state: Object,
   model: string,
   style: Array<Object>,
   onSubmit: (record: RecordObject) => void,
@@ -144,10 +155,14 @@ export default ({
     model={model}
     onSubmit={onSubmit}
   >
-    {createChildFields(model, style, 'control')}
+    {createChildFields(state, model, style)}
 
     <button type="submit" className="button is-primary" disabled={freeze}>
       Submit
     </button>
   </Form>
 );
+
+export default connect(
+  state => ({ state })
+)(RecordFormComponent);

@@ -6,8 +6,8 @@ import {
   Link,
 } from 'react-router';
 
-import PatientForm from '../forms/PatientForm.react';
-import RecordForm from '../forms/RecordForm.react';
+import PatientForm from '../forms/PatientForm';
+import RecordForm from '../forms/RecordForm';
 
 export default class PatientView extends Component {
   state: {

@@ -84,6 +84,10 @@ export default {
           ],
         },
         {
+          field: 'allergy_memo', label: 'Allergy memo', class: 'textarea',
+          show: 'allergy',
+        },
+        {
           class: 'block',
           children: [
             {
