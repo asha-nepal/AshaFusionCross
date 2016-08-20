@@ -99,7 +99,7 @@ export default class PatientView extends Component {
         <section className="section">
           <div className="container">
             <div className="columns">
-              <div className="column" style={{ overflow: 'scroll' }}>
+              <div className="column">
                 <div className="tabs">
                   <ul>
                     {records.map((record, i) => {
