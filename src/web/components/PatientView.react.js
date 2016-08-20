@@ -104,6 +104,8 @@ export default class PatientView extends Component {
                   <ul>
                     {records.map((record, i) => {
                       const createdAt = new Date(record.$created_at);
+                      const hasAttachments =
+                        record._attachments && Object.keys(record._attachments).length > 0;
 
                       return (
                         <li
@@ -117,6 +119,11 @@ export default class PatientView extends Component {
                               selectActiveRecord(record._id);
                             }}
                           >
+                            {hasAttachments &&
+                              <span className="icon is-small">
+                                <i className="fa fa-paperclip" />
+                              </span>
+                            }
                             {i + 1}
                             {isNaN(createdAt.getTime()) ||
                               <small style={{ paddingLeft: 8 }}>
