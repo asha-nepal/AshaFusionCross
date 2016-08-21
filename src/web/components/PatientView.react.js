@@ -37,6 +37,7 @@ export default class PatientView extends Component {
     addNewActiveRecord: () => void,
     putActivePatient: () => void,
     putActiveRecord: (index: number) => void,
+    isNew: boolean,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
     patientFormVisibility: boolean,
@@ -57,6 +58,7 @@ export default class PatientView extends Component {
       addNewActiveRecord,
       putActivePatient,
       putActiveRecord,
+      isNew,
       isPuttingPatient,
       isPuttingRecord,
       patientFormVisibility,
@@ -75,7 +77,7 @@ export default class PatientView extends Component {
 
     return (
       <div>
-        {patientFormVisibility ? (
+        {isNew || patientFormVisibility ? (
           <div>
             <section className="hero is-primary is-bold">
               <div className="hero-head">
@@ -104,17 +106,19 @@ export default class PatientView extends Component {
                     />
                   </div>
                 </div>
-                <footer className="card-footer">
-                  <a
-                    className="card-footer-item"
-                    onClick={e => {
-                      e.preventDefault();
-                      setPatientFormVisibility(!patientFormVisibility);
-                    }}
-                  >
-                    <i className="fa fa-caret-square-o-up" />
-                  </a>
-                </footer>
+                {!isNew &&
+                  <footer className="card-footer">
+                    <a
+                      className="card-footer-item"
+                      onClick={e => {
+                        e.preventDefault();
+                        setPatientFormVisibility(!patientFormVisibility);
+                      }}
+                    >
+                      <i className="fa fa-caret-square-o-up" />
+                    </a>
+                  </footer>
+                }
               </div>
             </section>
           </div>
