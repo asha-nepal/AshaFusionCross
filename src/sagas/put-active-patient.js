@@ -5,6 +5,7 @@ import {
   requestPutPatient,
   successPutPatient,
   failurePutPatient,
+  setActivePatient,
   alertInfo,
   alertError,
 } from '../actions';
@@ -17,7 +18,16 @@ export function* putActivePatient() {
   const patient = yield select(state => state.activePatient);
 
   try {
-    yield call([db, db.put], patient);
+    const res = yield call([db, db.put], patient);
+    if (!res.ok || res.id !== patient._id) {
+      throw new Error('Invalid response');
+    }
+
+    yield put(setActivePatient({
+      ...patient,
+      _rev: res.rev,
+    }));
+
     yield put(alertInfo('Patient data updated'));
 
     // Router (No effect on native)
