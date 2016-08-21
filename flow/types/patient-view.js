@@ -8,4 +8,9 @@ interface SetRecordFormStyleIdPayload {
 }
 interface SetRecordFormStyleIdAction extends PayloadAction<SetRecordFormStyleIdPayload> {}
 
-type PatientViewAction = SelectActiveRecordAction & SetRecordFormStyleIdAction
+interface SetPatientFormVisibilityPayload {
+  visibility: boolean,
+}
+interface SetPatientFormVisibilityAction extends PayloadAction<SetPatientFormVisibilityPayload> {}
+
+type PatientViewAction = SelectActiveRecordAction & SetRecordFormStyleIdAction & SetPatientFormVisibilityAction

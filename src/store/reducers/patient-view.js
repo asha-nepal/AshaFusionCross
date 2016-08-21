@@ -3,11 +3,13 @@
 import {
   SELECT_ACTIVE_RECORD,
   SET_RECORD_FORM_STYLE_ID,
+  SET_PATIENT_FORM_VISIBILITY,
 } from '../../actions';
 
 const initialState = {
   selectedActiveRecordId: null,
   recordFormStyleId: null,
+  patientFormVisibility: false,
 };
 
 export default function (
@@ -23,6 +25,11 @@ export default function (
     case SET_RECORD_FORM_STYLE_ID:
       return Object.assign({}, state, {
         recordFormStyleId: action.payload.styleId,
+      });
+
+    case SET_PATIENT_FORM_VISIBILITY:
+      return Object.assign({}, state, {
+        patientFormVisibility: action.payload.visibility,
       });
 
     default:

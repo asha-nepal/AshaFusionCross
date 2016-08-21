@@ -39,6 +39,8 @@ export default class PatientView extends Component {
     putActiveRecord: (index: number) => void,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
+    patientFormVisibility: boolean,
+    setPatientFormVisibility: (visibility: boolean) => void,
     selectedActiveRecordIndex: number,
     selectActiveRecord: (id: string) => void,
     setRecordFormStyleId: (styleId: string) => void,
@@ -57,6 +59,8 @@ export default class PatientView extends Component {
       putActiveRecord,
       isPuttingPatient,
       isPuttingRecord,
+      patientFormVisibility,
+      setPatientFormVisibility,
       selectedActiveRecordIndex,
       selectActiveRecord,
       setRecordFormStyleId,
@@ -71,30 +75,82 @@ export default class PatientView extends Component {
 
     return (
       <div>
+        {patientFormVisibility ? (
+          <div>
+            <section className="hero is-primary is-bold">
+              <div className="hero-head">
+                <div className="container">
+                  <nav className="nav">
+                    <div className="nav-left">
+                      <Link className="nav-item" to="/">
+                        <span className="icon">
+                          <i className="fa fa-arrow-left" />
+                        </span>
+                      </Link>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </section>
 
-        <section className="hero is-primary is-bold">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">
-                <Link to="/">&lt; </Link>
-                {patient && patient.name || ''}
-              </h1>
-              <h2 className="subtitle">
-                {(patient && patient.age) ? `Age: ${patient.age}` : ''}
-              </h2>
+            <section className="section">
+              <div className="card is-fullwidth">
+                <div className="card-content">
+                  <div className="container">
+                    <PatientForm
+                      model="activePatient"
+                      onSubmit={putActivePatient}
+                      freeze={isPuttingPatient}
+                    />
+                  </div>
+                </div>
+                <footer className="card-footer">
+                  <a
+                    className="card-footer-item"
+                    onClick={e => {
+                      e.preventDefault();
+                      setPatientFormVisibility(!patientFormVisibility);
+                    }}
+                  >
+                    <i className="fa fa-caret-square-o-up" />
+                  </a>
+                </footer>
+              </div>
+            </section>
+          </div>
+        ) : (
+          <section className="hero is-primary is-bold">
+            <div className="hero-head">
+              <div className="container">
+                <nav className="nav">
+                  <div className="nav-left">
+                    <Link className="nav-item" to="/">
+                      <span className="icon"><i className="fa fa-arrow-left" /></span>
+                    </Link>
+                    <span className="nav-item">
+                      <span className="title">
+                      {patient && patient.name || ''}
+                      </span>
+                    </span>
+                    {(patient && patient.age) &&
+                      <span className="nav-item">Age: {patient.age}</span>}
+                    {(patient && patient.sex) &&
+                      <span className="nav-item">Sex: {patient.sex}</span>}
+                    {(patient && patient.address) &&
+                      <span className="nav-item">Address: {patient.address}</span>}
+                    <a
+                      className="nav-item"
+                      onClick={e => {
+                        e.preventDefault();
+                        setPatientFormVisibility(!patientFormVisibility);
+                      }}
+                    ><span className="icon"><i className="fa fa-pencil-square-o" /></span></a>
+                  </div>
+                </nav>
+              </div>
             </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="container">
-            <PatientForm
-              model="activePatient"
-              onSubmit={putActivePatient}
-              freeze={isPuttingPatient}
-            />
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="section">
           <div className="container">
