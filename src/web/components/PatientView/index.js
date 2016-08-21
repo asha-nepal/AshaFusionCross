@@ -111,47 +111,49 @@ export default class PatientView extends Component {
           </section>
         }
 
-        <section className="section">
-          <div className="container">
-            <div className="columns">
-              <div className="column">
-                <RecordsTab
-                  records={records}
-                  selectedActiveRecordIndex={selectedActiveRecordIndex}
-                  selectActiveRecord={selectActiveRecord}
-                  addNewActiveRecord={addNewActiveRecord}
-                />
+        {!isNew &&
+          <section className="section">
+            <div className="container">
+              <div className="columns">
+                <div className="column">
+                  <RecordsTab
+                    records={records}
+                    selectedActiveRecordIndex={selectedActiveRecordIndex}
+                    selectActiveRecord={selectActiveRecord}
+                    addNewActiveRecord={addNewActiveRecord}
+                  />
+                </div>
+
+                <div className="column control" style={{ flex: 'none' }}>
+                  <span className="select">
+                    <select
+                      value={recordFormStyleId}
+                      onChange={e => {
+                        setRecordFormStyleId(e.target.value);
+                      }}
+                    >
+                    {recordFormStyles.map(style =>
+                      <option key={style.id} value={style.id}>{style.label}</option>
+                    )}
+                    </select>
+                  </span>
+                </div>
               </div>
 
-              <div className="column control" style={{ flex: 'none' }}>
-                <span className="select">
-                  <select
-                    value={recordFormStyleId}
-                    onChange={e => {
-                      setRecordFormStyleId(e.target.value);
-                    }}
-                  >
-                  {recordFormStyles.map(style =>
-                    <option key={style.id} value={style.id}>{style.label}</option>
-                  )}
-                  </select>
-                </span>
-              </div>
+
+              {selectedActiveRecordIndex > -1 && (
+                <div className="container">
+                  <RecordForm
+                    model={`activeRecords[${selectedActiveRecordIndex}]`}
+                    style={recordFormStyle}
+                    onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
+                    freeze={isPuttingRecord}
+                  />
+                </div>
+              )}
             </div>
-
-
-            {selectedActiveRecordIndex > -1 && (
-              <div className="container">
-                <RecordForm
-                  model={`activeRecords[${selectedActiveRecordIndex}]`}
-                  style={recordFormStyle}
-                  onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
-                  freeze={isPuttingRecord}
-                />
-              </div>
-            )}
-          </div>
-        </section>
+          </section>
+        }
       </div>
     );
   }
