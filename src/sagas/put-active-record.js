@@ -5,31 +5,29 @@ import {
   successPutRecord,
   failurePutRecord,
   alertInfo,
+  alertError,
 } from '../actions';
-import { pouchPutPatient } from './put-active-patient';
-
-export const pouchPutRecord = pouchPutPatient;
+import { db } from '../db';
 
 export function* putActiveRecord(index) {
   yield put(requestPutRecord());
 
+  const record = yield select(state => state.activeRecords[index]);
+
+  const now = (new Date()).getTime();  // Unix Millisecond Timestamp
+
   try {
-    const record = yield select(state => state.activeRecords[index]);
-
-    const now = (new Date()).getTime();  // Unix Millisecond Timestamp
-
-    yield call(pouchPutRecord, {
+    yield call([db, db.put], {
       $created_at: now,
       ...record,
       $updated_at: now,
     });
+    yield put(alertInfo('Record updated'));
+    yield put(successPutRecord());
   } catch (error) {
+    yield put(alertError('Failed updating record'));
     yield put(failurePutRecord(error));
-    return;
   }
-
-  yield put(alertInfo('Record updated'));
-  yield put(successPutRecord());
 }
 
 export function* watchPutActiveRecord() {

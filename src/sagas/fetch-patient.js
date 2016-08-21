@@ -7,38 +7,37 @@ import {
   setActivePatient,
   setActiveRecords,
   selectActiveRecord,
+  alertInfo,
+  alertError,
 } from '../actions';
 
 import { db } from '../db';
 
-function pouchFetchPatient(patientId) {
-  return db.get(patientId)
-    .then(res => res);
-}
-
-function pouchFetchRecords(patientId) {
-  const patientIdBody = patientId.replace(/^patient_/, '');
-  const idPrefix = `record_${patientIdBody}_`;
-  return db.allDocs({
-    startkey: idPrefix,
-    endkey: `${idPrefix}\uffff`,
-    include_docs: true,
-  })
-  .then(res => res.rows.map(r => r.doc));
-}
-
 export function* fetchPatient(patientId) {
   yield put(requestFetchPatient());
   try {
-    const patient = yield call(pouchFetchPatient, patientId);
-    const records = yield call(pouchFetchRecords, patientId);
+    // Prepare queries
+    const patientIdBody = patientId.replace(/^patient_/, '');
+    const idPrefix = `record_${patientIdBody}_`;
+    const recordsQuery = {
+      startkey: idPrefix,
+      endkey: `${idPrefix}\uffff`,
+      include_docs: true,
+    };
+
+    // call fetching APIs
+    const patient = yield call([db, db.get], patientId);
+    const recordDocs = yield call([db, db.allDocs], recordsQuery);
+    const records = recordDocs.rows.map(r => r.doc);
     yield put(setActivePatient(patient));
     yield put(setActiveRecords(records));
+    yield put(alertInfo('Patient data and records loaded'));
     yield put(successFetchPatient());
     if (records && records.length > 0) {
       yield put(selectActiveRecord(records[records.length - 1]._id));
     }
   } catch (error) {
+    yield put(alertError('Failed loading patient data and records'));
     yield put(failureFetchPatient(error));
   }
 }
