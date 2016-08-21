@@ -9,13 +9,15 @@ import deepFreeze from 'deep-freeze';
 import MockDate from 'mockdate';
 import { put, call } from 'redux-saga/effects';
 
+import { db } from '../../db';
 import {
   requestPutRecord,
   successPutRecord,
+  failurePutRecord,
   alertInfo,
+  alertError,
 } from '../../actions';
 import {
-  pouchPutRecord,
   putActiveRecord,
 } from '../put-active-record';
 
@@ -30,7 +32,7 @@ describe('PUT_ACTIVE_RECORD', () => {
     MockDate.reset();
   });
 
-  it('calls pouchPutRecord(record) with $created_at and $updated_at', () => {
+  it('calls db.put(record) with $created_at and $updated_at', () => {
     const mockRecord = {
       _id: 'record_mocked',
       hoge: 'hoge',
@@ -45,7 +47,7 @@ describe('PUT_ACTIVE_RECORD', () => {
     saga.next();
 
     expect(saga.next(mockRecord).value)
-      .toEqual(call(pouchPutRecord, {
+      .toEqual(call([db, db.put], {
         ...mockRecord,
         $created_at: mockCurrentTime,
         $updated_at: mockCurrentTime,
@@ -77,7 +79,7 @@ describe('PUT_ACTIVE_RECORD', () => {
     saga.next();
 
     expect(saga.next(mockRecord).value)
-      .toEqual(call(pouchPutRecord, {
+      .toEqual(call([db, db.put], {
         ...mockRecord,
         $updated_at: mockCurrentTime,
       }));
@@ -90,5 +92,25 @@ describe('PUT_ACTIVE_RECORD', () => {
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });
+  });
+
+  it('handles error', () => {
+    const mockRecord = {};
+    const mockError = {};
+
+    const saga = putActiveRecord();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutRecord()));
+
+    saga.next();
+
+    saga.next(mockRecord);
+
+    expect(saga.throw(mockError).value)
+      .toEqual(put(alertError('Failed updating record')));
+
+    expect(saga.next().value)
+      .toEqual(put(failurePutRecord(mockError)));
   });
 });
