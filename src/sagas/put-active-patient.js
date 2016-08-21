@@ -1,4 +1,5 @@
 import { take, put, call, select } from 'redux-saga/effects';
+import { browserHistory } from 'react-router';
 import {
   PUT_ACTIVE_PATIENT,
   requestPutPatient,
@@ -18,6 +19,10 @@ export function* putActivePatient() {
   try {
     yield call([db, db.put], patient);
     yield put(alertInfo('Patient data updated'));
+
+    // Router (No effect on native)
+    yield call([browserHistory, browserHistory.replace], `/patient/${patient._id}`);
+
     yield put(successPutPatient());
   } catch (error) {
     yield put(alertError('Failed updating patient data'));
