@@ -7,5 +7,7 @@ export default class {
     return new EventEmitter();
   }
 
+  allDocs = jest.fn();
+  get = jest.fn();
   put = jest.fn();
 }
