@@ -2,6 +2,7 @@
 /* eslint import/no-mutable-exports: 0*/
 
 import PouchDB from 'pouchdb';
+PouchDB.plugin(require('pouchdb-authentication'));
 import PubSub from './pubsub';
 
 // Initial settings
