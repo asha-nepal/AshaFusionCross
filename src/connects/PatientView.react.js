@@ -10,6 +10,7 @@ import {
   selectActiveRecord,
   setActivePatient,
   insertOrChangeActiveRecord,
+  setPatientFormVisibility,
   setRecordFormStyleId,
 } from '../actions';
 
@@ -33,9 +34,11 @@ const mapStateToProps = (state) => {
     patient,
     records,
     selectedActiveRecordIndex,
+    isNew: !patient.hasOwnProperty('_rev'),
     isFetching: state.status.isFetchingPatient,
     isPuttingPatient: state.status.isPuttingPatient,
     isPuttingRecord: state.status.isPuttingRecord,
+    patientFormVisibility: state.patientView.patientFormVisibility,
     recordFormStyles: recordFormStylesSelector(state),
     recordFormStyleId: recordFormStyleIdSelector(state),
     recordFormStyle: recordFormStyle && recordFormStyle.style,
@@ -54,6 +57,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
     putActivePatient: () => dispatch(putActivePatient()),
     putActiveRecord: (index) => dispatch(putActiveRecord(index)),
+    setPatientFormVisibility: (visibility: boolean) =>
+      dispatch(setPatientFormVisibility(visibility)),
     setRecordFormStyleId: (styleId) => dispatch(setRecordFormStyleId(styleId)),
     subscribeChange: () => {
       if (!patientId) {

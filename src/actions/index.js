@@ -189,6 +189,14 @@ export const setRecordFormStyleId = (styleId: string): SetRecordFormStyleIdActio
   },
 });
 
+export const SET_PATIENT_FORM_VISIBILITY = 'SET_PATIENT_FORM_VISIBILITY';
+export const setPatientFormVisibility = (visibility: boolean): SetPatientFormVisibilityAction => ({
+  type: SET_PATIENT_FORM_VISIBILITY,
+  payload: {
+    visibility,
+  },
+});
+
 
 export const SET_PATIENT_LIST_FILTER = 'SET_PATIENT_LIST_FILTER';
 export const setPatientListFilter = (filter: string) => ({

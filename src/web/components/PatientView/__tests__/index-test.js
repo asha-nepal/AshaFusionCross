@@ -1,15 +1,12 @@
-/* @flow */
 /* eslint-env jest */
 
-jest.unmock('react-router');
 jest.unmock('react-redux-form');
-jest.unmock('../PatientView.react');
+jest.unmock('../index');
 
 import { shallow } from 'enzyme';
 import React from 'react';
-import { Link } from 'react-router';
 
-import PatientView from '../PatientView.react';
+import PatientView from '../index';
 
 describe('<PatientView />', () => {
   it('calls init() and subscribeChange() at componentWillMount() and unsubscribe at componentWillUnmount()', () => { // eslint-disable-line max-len
@@ -42,27 +39,6 @@ describe('<PatientView />', () => {
     wrapper.unmount();
 
     expect(mockUnsubscribeChange).toBeCalled();
-  });
-
-  it('has link to the top', () => {
-    const mockInit = jest.fn();
-
-    const wrapper = shallow(<PatientView
-      init={mockInit}
-      patient={{
-        _id: 'patient_foo',
-        name: 'foo bar',
-      }}
-      records={[]}
-      subscribeChange={jest.fn()}
-      addNewActiveRecord={jest.fn()}
-      putActivePatient={jest.fn()}
-      putActiveRecord={jest.fn()}
-      recordFormStyles={[]}
-    />);
-
-    expect(wrapper.find(Link).prop('to')).toBe('/');
-    expect(mockInit).toBeCalled();
   });
 
   it('does not throw errors if patient.name is null', () => {

@@ -8,6 +8,7 @@ import deepFreeze from 'deep-freeze';
 import {
   selectActiveRecord,
   setRecordFormStyleId,
+  setPatientFormVisibility,
 } from '../../../actions';
 import reducer from '../patient-view';
 
@@ -39,6 +40,25 @@ describe('SET_RECORD_FORM_STYLE_ID', () => {
 
     const stateAfter = {
       recordFormStyleId: 'fuga',
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+});
+
+describe('SET_PATIENT_FORM_VISIBILITY', () => {
+  it('updates isPatientFormVisible', () => {
+    const stateBefore = {
+      patientFormVisibility: false,
+    };
+    const action = setPatientFormVisibility(true);
+
+    const stateAfter = {
+      patientFormVisibility: true,
     };
 
     deepFreeze(stateBefore);

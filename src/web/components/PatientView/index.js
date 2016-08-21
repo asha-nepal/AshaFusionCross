@@ -2,12 +2,11 @@
 
 import React, { Component } from 'react';
 
-import {
-  Link,
-} from 'react-router';
+import Header from './Header';
+import RecordsTab from './RecordsTab';
 
-import PatientForm from '../forms/PatientForm';
-import RecordForm from '../forms/RecordForm';
+import PatientForm from '../../forms/PatientForm';
+import RecordForm from '../../forms/RecordForm';
 
 export default class PatientView extends Component {
   state: {
@@ -37,8 +36,11 @@ export default class PatientView extends Component {
     addNewActiveRecord: () => void,
     putActivePatient: () => void,
     putActiveRecord: (index: number) => void,
+    isNew: boolean,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
+    patientFormVisibility: boolean,
+    setPatientFormVisibility: (visibility: boolean) => void,
     selectedActiveRecordIndex: number,
     selectActiveRecord: (id: string) => void,
     setRecordFormStyleId: (styleId: string) => void,
@@ -55,8 +57,11 @@ export default class PatientView extends Component {
       addNewActiveRecord,
       putActivePatient,
       putActiveRecord,
+      isNew,
       isPuttingPatient,
       isPuttingRecord,
+      patientFormVisibility,
+      setPatientFormVisibility,
       selectedActiveRecordIndex,
       selectActiveRecord,
       setRecordFormStyleId,
@@ -71,80 +76,51 @@ export default class PatientView extends Component {
 
     return (
       <div>
+        <Header
+          patient={patient}
+          verbose={!isNew && !patientFormVisibility}
+          onPatientFormShowRequested={() => setPatientFormVisibility(true)}
+        />
 
-        <section className="hero is-primary is-bold">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">
-                <Link to="/">&lt; </Link>
-                {patient && patient.name || ''}
-              </h1>
-              <h2 className="subtitle">
-                {(patient && patient.age) ? `Age: ${patient.age}` : ''}
-              </h2>
+        {(isNew || patientFormVisibility) &&
+          <section className="section">
+            <div className="card is-fullwidth">
+              <div className="card-content">
+                <div className="container">
+                  <PatientForm
+                    model="activePatient"
+                    onSubmit={putActivePatient}
+                    freeze={isPuttingPatient}
+                  />
+                </div>
+              </div>
+              {!isNew &&
+                <footer className="card-footer">
+                  <a
+                    className="card-footer-item"
+                    onClick={e => {
+                      e.preventDefault();
+                      setPatientFormVisibility(false);
+                    }}
+                  >
+                    <i className="fa fa-caret-square-o-up" />
+                  </a>
+                </footer>
+              }
             </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="container">
-            <PatientForm
-              model="activePatient"
-              onSubmit={putActivePatient}
-              freeze={isPuttingPatient}
-            />
-          </div>
-        </section>
+          </section>
+        }
 
         <section className="section">
           <div className="container">
             <div className="columns">
               <div className="column">
-                <div className="tabs is-boxed">
-                  <ul>
-                    {records.map((record, i) => {
-                      const createdAt = new Date(record.$created_at);
-                      const hasAttachments =
-                        record._attachments && Object.keys(record._attachments).length > 0;
-
-                      return (
-                        <li
-                          key={record._id}
-                          className={(selectedActiveRecordIndex === i) && 'is-active'}
-                        >
-                          <a
-                            href="#"
-                            onClick={e => {
-                              e.preventDefault();
-                              selectActiveRecord(record._id);
-                            }}
-                          >
-                            {hasAttachments &&
-                              <span className="icon is-small">
-                                <i className="fa fa-paperclip" />
-                              </span>
-                            }
-                            {i + 1}
-                            {isNaN(createdAt.getTime()) ||
-                              <small style={{ paddingLeft: 8 }}>
-                                {createdAt.toDateString()}
-                              </small>
-                            }
-                          </a>
-                        </li>
-                      );
-                    })}
-                    <li>
-                      <a
-                        href="#"
-                        onClick={e => {
-                          e.preventDefault();
-                          addNewActiveRecord();
-                        }}
-                      >+</a>
-                    </li>
-                  </ul>
-                </div>
+                <RecordsTab
+                  records={records}
+                  selectedActiveRecordIndex={selectedActiveRecordIndex}
+                  selectActiveRecord={selectActiveRecord}
+                  addNewActiveRecord={addNewActiveRecord}
+                />
               </div>
 
               <div className="column control" style={{ flex: 'none' }}>
