@@ -1,9 +1,11 @@
 /* eslint-env jest, jasmine */
 
 jest.unmock('redux-saga/effects');
+jest.unmock('mockdate');
 jest.unmock('../put-active-patient');
 jest.unmock('../../actions');
 
+import MockDate from 'mockdate';
 import { put, call } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
 
@@ -21,6 +23,16 @@ import {
 } from '../put-active-patient';
 
 describe('putActivePatient', () => {
+  const mockCurrentTime = 9876543210987;
+
+  beforeEach(() => {
+    MockDate.set(mockCurrentTime);
+  });
+
+  afterEach(() => {
+    MockDate.reset();
+  });
+
   it('calls db.put(patient) with specified id and updates activePatient with new rev', () => {
     const mockPatient = {
       _id: 'patient_1234',
@@ -41,7 +53,11 @@ describe('putActivePatient', () => {
     saga.next();
 
     expect(saga.next(mockPatient).value)
-      .toEqual(call([db, db.put], mockPatient));
+      .toEqual(call([db, db.put], {
+        ...mockPatient,
+        $created_at: mockCurrentTime,
+        $updated_at: mockCurrentTime,
+      }));
 
     expect(saga.next(mockResponse).value)
       .toEqual(put(setActivePatient({
@@ -79,7 +95,11 @@ describe('putActivePatient', () => {
     saga.next();
 
     expect(saga.next(mockPatient).value)
-      .toEqual(call([db, db.put], mockPatient));
+      .toEqual(call([db, db.put], {
+        ...mockPatient,
+        $created_at: mockCurrentTime,
+        $updated_at: mockCurrentTime,
+      }));
 
     expect(saga.throw(mockError).value)
       .toEqual(put(alertError('Failed updating patient data')));
@@ -109,7 +129,11 @@ describe('putActivePatient', () => {
     saga.next();
 
     expect(saga.next(mockPatient).value)
-      .toEqual(call([db, db.put], mockPatient));
+      .toEqual(call([db, db.put], {
+        ...mockPatient,
+        $created_at: mockCurrentTime,
+        $updated_at: mockCurrentTime,
+      }));
 
     expect(saga.next(mockResponse).value)
       .toEqual(put(alertError('Failed updating patient data')));
@@ -140,7 +164,11 @@ describe('putActivePatient', () => {
     saga.next();
 
     expect(saga.next(mockPatient).value)
-      .toEqual(call([db, db.put], mockPatient));
+      .toEqual(call([db, db.put], {
+        ...mockPatient,
+        $created_at: mockCurrentTime,
+        $updated_at: mockCurrentTime,
+      }));
 
     expect(saga.next(mockResponse).value)
       .toEqual(put(alertError('Failed updating patient data')));
@@ -150,5 +178,29 @@ describe('putActivePatient', () => {
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });
+  });
+
+  it('does not update created_at but does updated_at', () => {
+    const mockPatient = {
+      _id: 'patient_1234',
+      _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
+      hoge: 'fuga',
+      $created_at: 1000,
+      $updated_at: 2000,
+    };
+
+    const saga = putActivePatient();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutPatient()));
+
+    saga.next();
+
+    expect(saga.next(mockPatient).value)
+      .toEqual(call([db, db.put], {
+        ...mockPatient,
+        $created_at: 1000,
+        $updated_at: mockCurrentTime,
+      }));
   });
 });

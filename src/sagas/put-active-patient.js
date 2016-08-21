@@ -17,8 +17,14 @@ export function* putActivePatient() {
 
   const patient = yield select(state => state.activePatient);
 
+  const now = (new Date()).getTime();  // Unix Millisecond Timestamp
+
   try {
-    const res = yield call([db, db.put], patient);
+    const res = yield call([db, db.put], {
+      $created_at: now,
+      ...patient,
+      $updated_at: now,
+    });
     if (!res.ok || res.id !== patient._id) {
       throw new Error('Invalid response');
     }
