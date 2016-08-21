@@ -1,6 +1,7 @@
 /* @flow */
 /* eslint-env jest */
 
+jest.unmock('react-router');
 jest.unmock('../PatientSelect.react');
 
 import { shallow } from 'enzyme';
