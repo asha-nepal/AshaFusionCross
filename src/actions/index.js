@@ -1,6 +1,14 @@
 /* @flow */
 import { actions as formActions } from 'react-redux-form';
 
+export {
+  REQUEST_LOGIN, requestLogin,
+  REQUEST_LOGOUT, requestLogout,
+  LOGIN_SUCCESS, loginSuccess,
+  LOGIN_ERROR, loginError,
+  LOGOUT_SUCCESS, logoutSuccess,
+} from './auth';
+
 // for saga
 export const FETCH_PATIENT_LIST = 'FETCH_PATIENT_LIST';
 export const fetchPatientList = () => ({

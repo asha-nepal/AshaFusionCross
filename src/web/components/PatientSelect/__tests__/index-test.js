@@ -2,12 +2,12 @@
 /* eslint-env jest */
 
 jest.unmock('react-router');
-jest.unmock('../PatientSelect.react');
+jest.unmock('../index');
 
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import PatientSelect from '../PatientSelect.react';
+import PatientSelect from '../index';
 
 describe('<PatientSelect />', () => {
   it('calls fetchPatientList() and subscribeChange() at componentWillMount() and unsubscribe at componentWillUnmount()', () => { // eslint-disable-line max-len

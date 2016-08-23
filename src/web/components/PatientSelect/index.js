@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import PatientListFilter from '../containers/PatientListFilter.react';
+import Header from './Header';
+import PatientListFilter from '../../containers/PatientListFilter.react';
 
 export default class PatientSelect extends Component {
   state: {
@@ -29,12 +30,14 @@ export default class PatientSelect extends Component {
     fetchPatientList: () => void,
     subscribeChange: () => () => void,
     patientList: Array<PatientObject>,
+    logout: () => void,
   };
 
   render() {
     const {
       isFetching,
       patientList,
+      logout,
     } = this.props;
 
     if (isFetching) {
@@ -43,6 +46,7 @@ export default class PatientSelect extends Component {
 
     return (
       <div>
+        <Header logout={logout} />
         <section className="section">
           <div className="container">
             <nav className="panel">

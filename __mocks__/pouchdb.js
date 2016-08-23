@@ -3,6 +3,8 @@
 import EventEmitter from 'events';
 
 export default class {
+  static plugin = jest.fn();
+
   changes() {
     return new EventEmitter();
   }
