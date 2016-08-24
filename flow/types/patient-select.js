@@ -1,10 +1,12 @@
+import PayloadAction from './action';
+
 interface SetPatientListFilterPayload {
   filter: string,
 }
 
-interface SetPatientListFilterAction extends PayloadAction<SetPatientListFilterPayload> {};
+interface SetPatientListFilterAction extends PayloadAction<SetPatientListFilterPayload> {}
 
-type PatientSelectAction = SetPatientListFilterAction;
-type PatientSelectState = {
+export type PatientSelectAction = SetPatientListFilterAction;
+export type PatientSelectState = {
   filter: string
 }

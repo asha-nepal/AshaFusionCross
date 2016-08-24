@@ -1,3 +1,5 @@
+import PayloadAction from './action';
+
 interface LoginSuccessPayload {
   response: {
     name: ?string,
@@ -5,6 +7,6 @@ interface LoginSuccessPayload {
   }
 }
 
-interface LoginSuccessAction extends PayloadAction<LoginSuccessPayload> {};
+interface LoginSuccessAction extends PayloadAction<LoginSuccessPayload> {}
 
-type AuthAction = LoginSuccessAction;
+export type AuthAction = LoginSuccessAction
