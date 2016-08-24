@@ -72,7 +72,7 @@ function createPouch(config: PouchConfig) {
 
 const pubsub = new PubSub();
 
-export let db = createPouch(defaultConfig);
+export let db = null;
 
 let feed = null;
 

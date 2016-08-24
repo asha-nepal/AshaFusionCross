@@ -5,8 +5,8 @@ export {
   REQUEST_LOGIN, requestLogin,
   REQUEST_LOGOUT, requestLogout,
   LOGIN_SUCCESS, loginSuccess,
-  LOGIN_ERROR, loginError,
   LOGOUT_SUCCESS, logoutSuccess,
+  SET_IS_DB_PUBLIC, setIsDBPublic,
 } from './auth';
 
 // for saga

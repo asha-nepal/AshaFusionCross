@@ -18,10 +18,11 @@ export const requestLogout = () => ({
 
 // for reducers
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const loginSuccess = (response: Object) => ({
+export const loginSuccess = (name: string, roles: Array<string>) => ({
   type: LOGIN_SUCCESS,
   payload: {
-    response,
+    name,
+    roles,
   },
 });
 
@@ -33,4 +34,12 @@ export const loginError = () => ({
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const logoutSuccess = () => ({
   type: LOGOUT_SUCCESS,
+});
+
+export const SET_IS_DB_PUBLIC = 'SET_IS_DB_PUBLIC';
+export const setIsDBPublic = (isDBPublic: boolean) => ({
+  type: SET_IS_DB_PUBLIC,
+  payload: {
+    isDBPublic,
+  },
 });

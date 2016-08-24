@@ -1,14 +1,14 @@
-import { fork, call, put, take, cancel } from 'redux-saga/effects';
+import { fork, call, put, take, cancel, race } from 'redux-saga/effects';
 
 import {
   loginSuccess,
-  loginError,
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
-  LOGIN_ERROR,
   logoutSuccess,
   alertError,
   alertInfo,
+  connectPouchDB,
+  setIsDBPublic,
 } from '../actions';
 import { db, startListening, stopListening } from '../db';
 
@@ -21,6 +21,11 @@ import { watchAddNewActiveRecord } from './add-new-active-record';
 import { watchConnectPouchDB } from './connect-pouchdb';
 import { watchPushAlert } from './alerts';
 
+const initialSagas = [
+  watchConnectPouchDB,
+  watchPushAlert,
+];
+
 const authedSagas = [
   watchFetchPatientList,
   watchFetchPatient,
@@ -28,10 +33,31 @@ const authedSagas = [
   watchPutActiveRecord,
   watchInitActivePatient,
   watchAddNewActiveRecord,
-  watchConnectPouchDB,
 ];
 
 const authedTasks = new Array(authedSagas.length);
+
+function* afterLoggedIn() {
+  for (let i = 0; i < authedSagas.length; ++i) {
+    authedTasks[i] = yield fork(authedSagas[i]);
+  }
+  startListening();
+
+  const session = yield call([db, db.getSession]);
+  yield put(loginSuccess(session.userCtx.name, session.userCtx.roles));
+}
+
+function* logout() {
+  yield call([db, db.logout]);
+  yield put(logoutSuccess());
+
+  for (let i = 0; i < authedTasks.length; ++i) {
+    if (authedTasks[i]) {
+      yield cancel(authedTasks[i]);
+    }
+  }
+  stopListening();
+}
 
 function* authorize(username: string, password: string) {
   const ajaxOpts = {
@@ -44,38 +70,80 @@ function* authorize(username: string, password: string) {
 
   try {
     const response = yield call([db, db.login], username, password, ajaxOpts);
-
-    for (let i = 0; i < authedSagas.length; ++i) {
-      authedTasks[i] = yield fork(authedSagas[i]);
-    }
-    startListening();
-
-    // Logged-in process
-    yield put(loginSuccess(response));
-    yield put(alertInfo('Logged in!'));
+    return { response };
   } catch (error) {
-    yield put(loginError(error));
-    yield put(alertError('Failed to log in'));
+    return { error };
   }
 }
 
-export default function* rootSaga() {
-  yield fork(watchPushAlert);
-
-  // Auth loop
+function* loginFlow() {
   while (true) {
     const { payload } = yield take(REQUEST_LOGIN);
-    yield fork(authorize, payload.username, payload.password);
+    const { username, password } = payload;
 
-    yield take([REQUEST_LOGOUT, LOGIN_ERROR]);
-    yield call([db, db.logout]);
-    yield put(logoutSuccess());
-    // Logged-out process
-    for (let i = 0; i < authedTasks.length; ++i) {
-      if (authedTasks[i]) {
-        yield cancel(authedTasks[i]);
+    const winner = yield race({
+      auth: call(authorize, username, password),
+      logout: take(REQUEST_LOGOUT),
+    });
+
+    if (winner.auth) {
+      const { response, error } = winner.auth;
+      if (response) {
+        yield [
+          call(afterLoggedIn, response.name, response.roles),
+          put(alertInfo('Logged in!')),
+        ];
+      } else {
+        yield put(alertError(`Failed to log in: ${error.message}`));
       }
+    } else if (winner.logout) {
+      call(logout);
     }
-    stopListening();
+  }
+}
+
+export function * logoutFlow() {
+  while (true) {
+    yield take(REQUEST_LOGOUT);
+    yield call(logout);
+  }
+}
+
+function checkAccessible() {
+  return db.info()
+    .then(() => true)
+    .catch(() => false);
+}
+
+export default function* rootSaga() {
+  for (let i = 0; i < initialSagas.length; ++i) {
+    yield fork(initialSagas[i]);
+  }
+
+  yield put(connectPouchDB());
+
+  const isAccessible = yield call(checkAccessible);
+  const session = yield call([db, db.getSession]);
+  const isDBPublic = isAccessible && !session.userCtx.name;
+
+  yield put(setIsDBPublic(!isDBPublic));
+
+  if (isDBPublic) {
+    // The DB is publit
+    yield [
+      call(afterLoggedIn),
+      put(alertInfo('Logged in! (public DB)')),
+    ];
+  } else {
+    yield fork(loginFlow);
+    yield fork(logoutFlow);
+
+    if (isAccessible) {
+      // Already logged in
+      yield [
+        call(afterLoggedIn),
+        put(alertInfo('Logged in!')),
+      ];
+    }
   }
 }

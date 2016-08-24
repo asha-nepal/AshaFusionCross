@@ -2,11 +2,12 @@
 
 import {
   LOGIN_SUCCESS,
-  LOGIN_ERROR,
   LOGOUT_SUCCESS,
+  SET_IS_DB_PUBLIC,
 } from '../../actions';
 
 const initialState: Object = {
+  isDBPublic: true,
   loggedIn: false,
   loggedInUser: null,
   loggedInRoles: null,
@@ -21,17 +22,22 @@ export default function (
       return {
         ...state,
         loggedIn: true,
-        loggedInUser: action.payload.response.name,
-        loggedInRoles: action.payload.response.roles,
+        loggedInUser: action.payload.name,
+        loggedInRoles: action.payload.roles,
       };
 
-    case LOGIN_ERROR:
     case LOGOUT_SUCCESS:
       return {
         ...state,
         loggedIn: false,
         loggedInUser: null,
         loggedInRoles: null,
+      };
+
+    case SET_IS_DB_PUBLIC:
+      return {
+        ...state,
+        isDBPublic: action.payload.isDBPublic,
       };
 
     default:
