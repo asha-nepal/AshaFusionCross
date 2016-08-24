@@ -1,9 +1,10 @@
-import { fork, call, put, take, cancel, race } from 'redux-saga/effects';
+import { fork, call, put, take, cancel, race, select } from 'redux-saga/effects';
 
 import {
   loginSuccess,
   REQUEST_SIGNUP,
   REQUEST_LOGIN,
+  REQUEST_ANONYMOUS_LOGIN,
   REQUEST_LOGOUT,
   requestLogin,
   logoutSuccess,
@@ -104,6 +105,23 @@ function* loginFlow() {
   }
 }
 
+function* anonymousLoginFlow() {
+  while (true) {
+    yield take(REQUEST_ANONYMOUS_LOGIN);
+    const isDBPublic = yield select(state => state.auth.isDBPublic);
+
+    if (!isDBPublic) {
+      yield put(alertError('This DB is not public'));
+      continue;
+    }
+
+    yield [
+      call(afterLoggedIn),
+      put(alertInfo('Logged in as an anonymous user')),
+    ];
+  }
+}
+
 function* signupFlow() {
   while (true) {
     const { payload } = yield take(REQUEST_SIGNUP);
@@ -154,25 +172,18 @@ export default function* rootSaga() {
   const session = yield call([db, db.getSession]);
   const isDBPublic = isAccessible && !session.userCtx.name;
 
-  yield put(setIsDBPublic(!isDBPublic));
+  yield put(setIsDBPublic(isDBPublic));
 
-  if (isDBPublic) {
-    // The DB is publit
+  if (isDBPublic) yield fork(anonymousLoginFlow);
+  yield fork(loginFlow);
+  yield fork(logoutFlow);
+  yield fork(signupFlow);
+
+  // Auto login
+  if (isAccessible) {
     yield [
       call(afterLoggedIn),
-      put(alertInfo('Logged in! (public DB)')),
+      put(alertInfo(isDBPublic ? 'Logged in (public DB)' : 'Logged in!')),
     ];
-  } else {
-    yield fork(loginFlow);
-    yield fork(logoutFlow);
-    yield fork(signupFlow);
-
-    if (isAccessible) {
-      // Already logged in
-      yield [
-        call(afterLoggedIn),
-        put(alertInfo('Logged in!')),
-      ];
-    }
   }
 }

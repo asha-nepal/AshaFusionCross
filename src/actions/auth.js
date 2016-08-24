@@ -10,6 +10,11 @@ export const requestLogin = (username: string, password: string) => ({
   },
 });
 
+export const REQUEST_ANONYMOUS_LOGIN = 'REQUEST_ANONYMOUS_LOGIN';
+export const requestAnonymousLogin = () => ({
+  type: REQUEST_ANONYMOUS_LOGIN,
+});
+
 export const REQUEST_LOGOUT = 'REQUEST_LOGOUT';
 export const requestLogout = () => ({
   type: REQUEST_LOGOUT,

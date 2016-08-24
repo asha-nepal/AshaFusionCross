@@ -3,8 +3,10 @@
 import React, { Component } from 'react';
 
 type Props = {
+  isDBPublic: boolean,
   loggedIn: boolean,
   login: (username: string, password: string) => void,
+  anonymousLogin: () => void,
   signup: (username: string, password: string) => void,
   children: ReactElement,
 }
@@ -14,8 +16,10 @@ export default class extends Component {
 
   render() {
     const {
+      isDBPublic,
       loggedIn,
       login,
+      anonymousLogin,
       signup,
       children,
     } = this.props;
@@ -42,15 +46,37 @@ export default class extends Component {
                       <input className="input" type="password" ref="password" />
                     </label>
                   </p>
-                  <p className="control">
-                    <button
-                      className="button is-primary"
-                      onClick={e => {
-                        e.preventDefault();
-                        login(this.refs.username.value, this.refs.password.value);
-                      }}
-                    >Login</button>
-                  </p>
+                  <nav className="level">
+                    <div className="level-left">
+                      <div className="level-item">
+                        <p className="control">
+                          <button
+                            className="button is-primary"
+                            onClick={e => {
+                              e.preventDefault();
+                              login(this.refs.username.value, this.refs.password.value);
+                            }}
+                          >Login</button>
+                        </p>
+                      </div>
+                    </div>
+                    {isDBPublic &&
+                      <div className="level-left">
+                        <div className="level-item">or</div>
+                        <div className="level-item">
+                          <p className="control">
+                            <a
+                              className="button"
+                              onClick={e => {
+                                e.preventDefault();
+                                anonymousLogin();
+                              }}
+                            >Log in as anonymous user</a>
+                          </p>
+                        </div>
+                      </div>
+                    }
+                  </nav>
                 </form>
               </div>
             </div>
@@ -105,7 +131,7 @@ export default class extends Component {
 
                         signup(username, password);
                       }}
-                    >Sign in</button>
+                    >Sign up</button>
                   </p>
                 </form>
               </div>
