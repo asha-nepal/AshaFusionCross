@@ -57,6 +57,7 @@ class AttachmentViewerComponent extends Component {
   _loadAttachmentsToCache: Function;
 
   _loadAttachmentsToCache(docId: string, _attachments: Object, metadata: Array<Object>) {
+    if (!db) { return; }
     if (!_attachments) { return; }
 
     const attachmentIds = metadata.map(m => m.id);
