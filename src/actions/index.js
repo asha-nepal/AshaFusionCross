@@ -2,6 +2,7 @@
 import { actions as formActions } from 'react-redux-form';
 
 export {
+  REQUEST_SIGNUP, requestSignup,
   REQUEST_LOGIN, requestLogin,
   REQUEST_LOGOUT, requestLogout,
   LOGIN_SUCCESS, loginSuccess,

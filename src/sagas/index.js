@@ -2,8 +2,10 @@ import { fork, call, put, take, cancel, race } from 'redux-saga/effects';
 
 import {
   loginSuccess,
+  REQUEST_SIGNUP,
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
+  requestLogin,
   logoutSuccess,
   alertError,
   alertInfo,
@@ -102,6 +104,32 @@ function* loginFlow() {
   }
 }
 
+function* signupFlow() {
+  while (true) {
+    const { payload } = yield take(REQUEST_SIGNUP);
+    const { username, password } = payload;
+    const option = {
+      metadata: {
+        roles: ['staff'],
+      },
+    };
+
+    try {
+      yield call([db, db.signup], username, password, option);
+      yield put(alertInfo('Success'));
+      yield put(requestLogin(username, password));
+    } catch (error) {
+      if (error.name === 'conflict') {
+        yield put(alertError(`"${username}" already exists, choose another username`, 5000));
+      } else if (error.name === 'forbidden') {
+        yield put(alertError('Invalid username', 5000));
+      } else {
+        yield put(alertError(`${error.name}: ${error.message}`));
+      }
+    }
+  }
+}
+
 export function * logoutFlow() {
   while (true) {
     yield take(REQUEST_LOGOUT);
@@ -137,6 +165,7 @@ export default function* rootSaga() {
   } else {
     yield fork(loginFlow);
     yield fork(logoutFlow);
+    yield fork(signupFlow);
 
     if (isAccessible) {
       // Already logged in

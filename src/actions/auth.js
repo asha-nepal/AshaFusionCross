@@ -15,6 +15,15 @@ export const requestLogout = () => ({
   type: REQUEST_LOGOUT,
 });
 
+export const REQUEST_SIGNUP = 'REQUEST_SIGNUP';
+export const requestSignup = (username: string, password: string) => ({
+  type: REQUEST_SIGNUP,
+  payload: {
+    username,
+    password,
+  },
+});
+
 
 // for reducers
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
