@@ -28,7 +28,8 @@ export function* putActiveRecord(index) {
     yield put(alertInfo('Record updated'));
     yield put(successPutRecord());
   } catch (error) {
-    yield put(alertError('Failed updating record'));
+    const errmsg = error.name === 'forbidden' ? 'Forbidden' : 'Failed updating record';
+    yield put(alertError(errmsg));
     yield put(failurePutRecord(error));
   }
 }

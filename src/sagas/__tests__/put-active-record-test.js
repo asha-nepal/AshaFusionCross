@@ -46,7 +46,6 @@ describe('PUT_ACTIVE_RECORD', () => {
       .toEqual(put(requestPutRecord()));
 
     saga.next();
-
     saga.next(mockRecord);
 
     expect(saga.next(mockAuth).value)
@@ -209,13 +208,34 @@ describe('PUT_ACTIVE_RECORD', () => {
       .toEqual(put(requestPutRecord()));
 
     saga.next();
-
     saga.next(mockAuth);
-
     saga.next(mockRecord);
 
     expect(saga.throw(mockError).value)
       .toEqual(put(alertError('Failed updating record')));
+
+    expect(saga.next().value)
+      .toEqual(put(failurePutRecord(mockError)));
+  });
+
+  it('shows forbidden message for 403 error', () => {
+    const mockRecord = {};
+    const mockAuth = {};
+    const mockError = {
+      name: 'forbidden',
+    };
+
+    const saga = putActiveRecord();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutRecord()));
+
+    saga.next();
+    saga.next(mockAuth);
+    saga.next(mockRecord);
+
+    expect(saga.throw(mockError).value)
+      .toEqual(put(alertError('Forbidden')));
 
     expect(saga.next().value)
       .toEqual(put(failurePutRecord(mockError)));
