@@ -2,7 +2,7 @@
 
 // for saga
 export const REQUEST_LOGIN = 'REQUEST_LOGIN';
-export const requestLogin = (username: string, password: string) => ({
+export const requestLogin = (username: string, password: string): RequestLoginAction => ({
   type: REQUEST_LOGIN,
   payload: {
     username,
@@ -11,17 +11,17 @@ export const requestLogin = (username: string, password: string) => ({
 });
 
 export const REQUEST_ANONYMOUS_LOGIN = 'REQUEST_ANONYMOUS_LOGIN';
-export const requestAnonymousLogin = () => ({
+export const requestAnonymousLogin = (): Action => ({
   type: REQUEST_ANONYMOUS_LOGIN,
 });
 
 export const REQUEST_LOGOUT = 'REQUEST_LOGOUT';
-export const requestLogout = () => ({
+export const requestLogout = (): Action => ({
   type: REQUEST_LOGOUT,
 });
 
 export const REQUEST_SIGNUP = 'REQUEST_SIGNUP';
-export const requestSignup = (username: string, password: string) => ({
+export const requestSignup = (username: string, password: string): RequestSignupAction => ({
   type: REQUEST_SIGNUP,
   payload: {
     username,
@@ -32,7 +32,7 @@ export const requestSignup = (username: string, password: string) => ({
 
 // for reducers
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const loginSuccess = (name: string, roles: Array<string>) => ({
+export const loginSuccess = (name: string, roles: Array<string>): LoginSuccessAction => ({
   type: LOGIN_SUCCESS,
   payload: {
     name,
@@ -41,17 +41,17 @@ export const loginSuccess = (name: string, roles: Array<string>) => ({
 });
 
 export const LOGIN_ERROR = 'LOGIN_ERROR';
-export const loginError = () => ({
+export const loginError = (): Action => ({
   type: LOGIN_ERROR,
 });
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const logoutSuccess = () => ({
+export const logoutSuccess = (): Action => ({
   type: LOGOUT_SUCCESS,
 });
 
 export const SET_IS_DB_PUBLIC = 'SET_IS_DB_PUBLIC';
-export const setIsDBPublic = (isDBPublic: boolean) => ({
+export const setIsDBPublic = (isDBPublic: boolean): SetIsDBPublicAction => ({
   type: SET_IS_DB_PUBLIC,
   payload: {
     isDBPublic,
