@@ -28,6 +28,11 @@ export const selectedActiveRecordSelector = createSelector(
   (activeRecords, selectedActiveRecordId) =>
     activeRecords.find(r => r._id === selectedActiveRecordId)
 );
+export const selectedActiveRecordIndexSelector = createSelector(
+  [activeRecordsSelector, selectedActiveRecordIdSelector],
+  (activeRecords, selectedActiveRecordId) =>
+    activeRecords.findIndex(r => r._id === selectedActiveRecordId)
+);
 
 import formStyles from '../form-styles';
 const recordFormStyles = formStyles.record || [];

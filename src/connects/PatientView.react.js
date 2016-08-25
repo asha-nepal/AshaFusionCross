@@ -18,23 +18,22 @@ import {
 import { subscribe } from '../db';
 
 import {
+  activePatientSelector,
+  activeRecordsSelector,
+  selectedActiveRecordIndexSelector,
   recordFormStylesSelector,
   recordFormStyleIdSelector,
   recordFormStyleSelector,
 } from '../selectors';
 
 const mapStateToProps = (state) => {
-  const patient = state.activePatient;
-  const records = state.activeRecords;
-  const selectedActiveRecordIndex =
-    records && records.findIndex(r => r._id === state.patientView.selectedActiveRecordId);
-
+  const patient = activePatientSelector(state);
   const recordFormStyle = recordFormStyleSelector(state);
 
   return {
     patient,
-    records,
-    selectedActiveRecordIndex,
+    records: activeRecordsSelector(state),
+    selectedActiveRecordIndex: selectedActiveRecordIndexSelector(state),
     isNew: !patient.hasOwnProperty('_rev'),
     isFetching: state.status.isFetchingPatient,
     isPuttingPatient: state.status.isPuttingPatient,
