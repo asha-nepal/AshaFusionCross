@@ -80,6 +80,15 @@ export const makeGetDuplicatedPatients = (field: string) => createSelector(
   }
 );
 
+export const activePatientSelector = (state: Object) => state.activePatient;
+export const activeRecordsSelector = (state: Object) => state.activeRecords;
+export const selectedActiveRecordIdSelector =
+  (state: Object) => state.patientView.selectedActiveRecordId;
+export const selectedActiveRecordSelector = createSelector(
+  [activeRecordsSelector, selectedActiveRecordIdSelector],
+  (activeRecords, selectedActiveRecordId) =>
+    activeRecords.find(r => r._id === selectedActiveRecordId)
+);
 
 import formStyles from '../form-styles';
 const recordFormStyles = formStyles.record || [];

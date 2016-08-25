@@ -8,6 +8,7 @@ import {
 import {
   TextUnitInputComponent,
 } from '../../forms/fields';
+import PrintRecord from '../../containers/PrintRecord';
 
 export default ({
   patient,
@@ -56,6 +57,7 @@ export default ({
                 <span className="icon"><i className="fa fa-pencil-square-o" /></span>
               </a>
             }
+            <PrintRecord className="nav-item" />
           </div>
         </nav>
       </div>
