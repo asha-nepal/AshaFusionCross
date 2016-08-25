@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import Header from './Header';
+import Header from '../../containers/PatientSelect/Header';
 import PatientListFilter from '../../containers/PatientListFilter.react';
 
 export default class PatientSelect extends Component {

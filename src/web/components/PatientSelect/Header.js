@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 
 type Props = {
+  loggedIn: boolean,
+  loggedInUser: ?string,
   logout: () => void,
 };
 
@@ -23,6 +25,8 @@ export default class extends Component {
 
   render() {
     const {
+      loggedIn,
+      loggedInUser,
       logout,
     } = this.props;
 
@@ -34,6 +38,7 @@ export default class extends Component {
               <div className="nav-left">
                 <span className="nav-item is-brand title">ASHA fusion</span>
               </div>
+
               <span
                 className="nav-toggle"
                 onClick={e => {
@@ -45,15 +50,18 @@ export default class extends Component {
                 <span></span>
                 <span></span>
               </span>
-              <div className={`nav-right nav-menu ${this.state.isMenuOpen && 'is-active'}`}>
-                <a
-                  className="nav-item"
-                  onClick={e => {
-                    e.preventDefault();
-                    logout();
-                  }}
-                >Log out</a>
-              </div>
+              {loggedIn &&
+                <div className={`nav-right nav-menu ${this.state.isMenuOpen && 'is-active'}`}>
+                  <p className="nav-item">{loggedInUser || '(anonymous user)'}</p>
+                  <a
+                    className="nav-item"
+                    onClick={e => {
+                      e.preventDefault();
+                      logout();
+                    }}
+                  >Log out</a>
+                </div>
+              }
             </nav>
           </div>
         </div>

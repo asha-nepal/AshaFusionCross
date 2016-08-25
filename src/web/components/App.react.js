@@ -10,7 +10,7 @@ import {
 import Root from '../../common/Root.react';
 import Auth from '../containers/Auth';
 import Alerts from '../containers/Alerts.react';
-import PatientSelect from '../containers/PatientSelect.react';
+import PatientSelect from '../containers/PatientSelect';
 import PatientView from '../containers/PatientView.react';
 
 const App = ({ children }: { children: ReactClass }) => (
