@@ -2,6 +2,7 @@
 /* eslint import/no-mutable-exports: 0*/
 
 import PouchDB from 'pouchdb';
+PouchDB.plugin(require('pouchdb-authentication'));
 import PubSub from './pubsub';
 
 // Initial settings
@@ -20,7 +21,11 @@ export const defaultConfig: PouchConfig = {
   },
 };
 
-function createPouch(config: PouchConfig, _pubsub: Object) {
+const pouchOpts = {
+  skipSetup: true,
+};
+
+function createPouch(config: PouchConfig) {
   let _db;
   const remoteUrl = `http://${config.remote.hostname}/${config.remote.dbname}`;
 
@@ -28,6 +33,7 @@ function createPouch(config: PouchConfig, _pubsub: Object) {
     _db = new PouchDB(config.local.dbname);
     if (config.local.isSynced) {
       _db.sync(remoteUrl, {
+        ...pouchOpts,
         live: true,
         retry: true,
       });
@@ -57,25 +63,8 @@ function createPouch(config: PouchConfig, _pubsub: Object) {
 //      });
     }
   } else {
-    _db = new PouchDB(remoteUrl);
+    _db = new PouchDB(remoteUrl, pouchOpts);
   }
-
-  _db.changes({
-    since: 'now',
-    live: true,
-    include_docs: true,
-  })
-  .on('change', change => {
-    // handle change
-    _pubsub.publish('change', change);
-  })
-  .on('complete', info => {
-    // changes() was canceled
-    _pubsub.publish('complete', info);
-  })
-  .on('error', err => {
-    _pubsub.publish('error', err);
-  });
 
   return _db;
 }
@@ -83,12 +72,43 @@ function createPouch(config: PouchConfig, _pubsub: Object) {
 
 const pubsub = new PubSub();
 
-export let db = createPouch(defaultConfig, pubsub);
+export let db: PouchDB = null;
+
+let feed = null;
+
+export function stopListening() {
+  if (feed) {
+    feed.cancel();
+  }
+}
+
+export function startListening() {
+  stopListening();
+
+  if (!db || !pubsub) { return; }
+
+  feed = db.changes({
+    since: 'now',
+    live: true,
+    include_docs: true,
+  })
+  .on('change', change => {
+    // handle change
+    pubsub.publish('change', change);
+  })
+  .on('complete', info => {
+    // changes() was canceled
+    pubsub.publish('complete', info);
+  })
+  .on('error', err => {
+    pubsub.publish('error', err);
+  });
+}
 
 export function connect(
   config: PouchConfig
 ) {
-  db = createPouch(config, pubsub);
+  db = createPouch(config);
 }
 
 export const subscribe = (key: 'change' | 'error', cb: Function) => pubsub.subscribe(key, cb);

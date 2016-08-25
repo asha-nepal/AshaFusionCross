@@ -38,6 +38,7 @@ describe('PUT_ACTIVE_RECORD', () => {
       hoge: 'hoge',
     };
     deepFreeze(mockRecord);
+    const mockAuth = {};
 
     const saga = putActiveRecord();
 
@@ -45,12 +46,15 @@ describe('PUT_ACTIVE_RECORD', () => {
       .toEqual(put(requestPutRecord()));
 
     saga.next();
+    saga.next(mockRecord);
 
-    expect(saga.next(mockRecord).value)
+    expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
         ...mockRecord,
         $created_at: mockCurrentTime,
         $updated_at: mockCurrentTime,
+        $created_by: null,
+        $updated_by: null,
       }));
 
     expect(saga.next().value)
@@ -70,6 +74,7 @@ describe('PUT_ACTIVE_RECORD', () => {
       hoge: 'hoge',
     };
     deepFreeze(mockRecord);
+    const mockAuth = {};
 
     const saga = putActiveRecord();
 
@@ -77,11 +82,14 @@ describe('PUT_ACTIVE_RECORD', () => {
       .toEqual(put(requestPutRecord()));
 
     saga.next();
+    saga.next(mockRecord);
 
-    expect(saga.next(mockRecord).value)
+    expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
         ...mockRecord,
         $updated_at: mockCurrentTime,
+        $created_by: null,
+        $updated_by: null,
       }));
 
     expect(saga.next().value)
@@ -94,8 +102,104 @@ describe('PUT_ACTIVE_RECORD', () => {
       .toEqual({ done: true, value: undefined });
   });
 
+  it('adds $created_by and $updated_by if logged in', () => {
+    const mockRecord = {
+      _id: 'record_mocked',
+      hoge: 'hoge',
+    };
+    deepFreeze(mockRecord);
+
+    const mockAuth = {
+      loggedInUser: 'dummyuser',
+    };
+    deepFreeze(mockAuth);
+
+    const saga = putActiveRecord();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutRecord()));
+
+    saga.next();
+    saga.next(mockRecord);
+
+    expect(saga.next(mockAuth).value)
+      .toEqual(call([db, db.put], {
+        ...mockRecord,
+        $created_at: mockCurrentTime,
+        $updated_at: mockCurrentTime,
+        $created_by: 'dummyuser',
+        $updated_by: 'dummyuser',
+      }));
+
+    expect(saga.next().value)
+      .toEqual(put(alertInfo('Record updated')));
+
+    expect(saga.next().value)
+      .toEqual(put(successPutRecord()));
+
+    expect(saga.next())
+      .toEqual({ done: true, value: undefined });
+  });
+
+  it('does not update $created_by if already exists', () => {
+    const mockRecord = {
+      _id: 'record_mocked',
+      $created_at: 1000,
+      $created_by: 'originalcreator',
+      hoge: 'hoge',
+    };
+    deepFreeze(mockRecord);
+    const mockAuth = {
+      loggedInUser: 'dummyuser',
+    };
+
+    const saga = putActiveRecord();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutRecord()));
+
+    saga.next();
+    saga.next(mockRecord);
+
+    expect(saga.next(mockAuth).value)
+      .toEqual(call([db, db.put], {
+        ...mockRecord,
+        $updated_at: mockCurrentTime,
+        $updated_by: 'dummyuser',
+      }));
+  });
+
+  it('$created_by and $updated_by are null if undefined', () => {
+    const mockRecord = {
+      _id: 'record_mocked',
+      hoge: 'hoge',
+    };
+    deepFreeze(mockRecord);
+
+    const mockAuth = {};
+    deepFreeze(mockAuth);
+
+    const saga = putActiveRecord();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutRecord()));
+
+    saga.next();
+    saga.next(mockRecord);
+
+    expect(saga.next(mockAuth).value)
+      .toEqual(call([db, db.put], {
+        ...mockRecord,
+        $created_at: mockCurrentTime,
+        $updated_at: mockCurrentTime,
+        $created_by: null,
+        $updated_by: null,
+      }));
+  });
+
   it('handles error', () => {
     const mockRecord = {};
+    const mockAuth = {};
     const mockError = {};
 
     const saga = putActiveRecord();
@@ -104,11 +208,34 @@ describe('PUT_ACTIVE_RECORD', () => {
       .toEqual(put(requestPutRecord()));
 
     saga.next();
-
+    saga.next(mockAuth);
     saga.next(mockRecord);
 
     expect(saga.throw(mockError).value)
       .toEqual(put(alertError('Failed updating record')));
+
+    expect(saga.next().value)
+      .toEqual(put(failurePutRecord(mockError)));
+  });
+
+  it('shows forbidden message for 403 error', () => {
+    const mockRecord = {};
+    const mockAuth = {};
+    const mockError = {
+      name: 'forbidden',
+    };
+
+    const saga = putActiveRecord();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutRecord()));
+
+    saga.next();
+    saga.next(mockAuth);
+    saga.next(mockRecord);
+
+    expect(saga.throw(mockError).value)
+      .toEqual(put(alertError('Forbidden')));
 
     expect(saga.next().value)
       .toEqual(put(failurePutRecord(mockError)));

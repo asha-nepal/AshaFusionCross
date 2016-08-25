@@ -3,9 +3,6 @@ import {
   CONNECT_POUCHDB,
 } from '../actions';
 import {
-  fetchPatientList,
-} from './fetch-patient-list';
-import {
   connect,
 } from '../db';
 
@@ -14,6 +11,5 @@ export function* watchConnectPouchDB() {
     yield take(CONNECT_POUCHDB);
     const config = yield select(state => state.pouchConfig);
     yield call(connect, config);
-    yield call(fetchPatientList);
   }
 }

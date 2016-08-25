@@ -16,14 +16,17 @@ export function* putActivePatient() {
   yield put(requestPutPatient());
 
   const patient = yield select(state => state.activePatient);
+  const { loggedInUser } = yield select(state => state.auth);
 
   const now = (new Date()).getTime();  // Unix Millisecond Timestamp
 
   try {
     const res = yield call([db, db.put], {
       $created_at: now,
+      $created_by: loggedInUser || null,
       ...patient,
       $updated_at: now,
+      $updated_by: loggedInUser || null,
     });
     if (!res.ok || res.id !== patient._id) {
       throw new Error('Invalid response');
@@ -41,7 +44,8 @@ export function* putActivePatient() {
 
     yield put(successPutPatient());
   } catch (error) {
-    yield put(alertError('Failed updating patient data'));
+    const errmsg = error.name === 'forbidden' ? 'Forbidden' : 'Failed updating patient data';
+    yield put(alertError(errmsg));
     yield put(failurePutPatient(error));
   }
 }

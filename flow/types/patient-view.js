@@ -1,3 +1,5 @@
+import PayloadAction from './action';
+
 interface SelectActiveRecordPayload {
   id: string,
 }
@@ -13,4 +15,7 @@ interface SetPatientFormVisibilityPayload {
 }
 interface SetPatientFormVisibilityAction extends PayloadAction<SetPatientFormVisibilityPayload> {}
 
-type PatientViewAction = SelectActiveRecordAction & SetRecordFormStyleIdAction & SetPatientFormVisibilityAction
+export type PatientViewAction =
+  SelectActiveRecordAction
+  & SetRecordFormStyleIdAction
+  & SetPatientFormVisibilityAction;

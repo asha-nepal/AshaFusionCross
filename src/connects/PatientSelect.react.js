@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import {
   fetchPatientList,
+  requestLogout,
 } from '../actions';
 import {
   filterPatientList,
@@ -18,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
   subscribeChange: () => subscribe('change', (/* change */) => {
     dispatch(fetchPatientList());  // TODO 全件fetchし直すのは効率が悪い
   }),
+  logout: () => dispatch(requestLogout()),
 });
 
 export default connect(
