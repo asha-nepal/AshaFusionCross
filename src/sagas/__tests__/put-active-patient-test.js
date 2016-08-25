@@ -39,6 +39,9 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockAuth = {
+      loggedInUser: 'dummyuser',
+    };
     const mockResponse = {
       ok: true,
       id: 'patient_1234',
@@ -51,12 +54,15 @@ describe('putActivePatient', () => {
       .toEqual(put(requestPutPatient()));
 
     saga.next();
+    saga.next(mockPatient);
 
-    expect(saga.next(mockPatient).value)
+    expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
         ...mockPatient,
         $created_at: mockCurrentTime,
         $updated_at: mockCurrentTime,
+        $created_by: 'dummyuser',
+        $updated_by: 'dummyuser',
       }));
 
     expect(saga.next(mockResponse).value)
@@ -86,6 +92,7 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockAuth = {};
 
     const saga = putActivePatient();
 
@@ -93,12 +100,15 @@ describe('putActivePatient', () => {
       .toEqual(put(requestPutPatient()));
 
     saga.next();
+    saga.next(mockPatient);
 
-    expect(saga.next(mockPatient).value)
+    expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
         ...mockPatient,
         $created_at: mockCurrentTime,
         $updated_at: mockCurrentTime,
+        $created_by: null,
+        $updated_by: null,
       }));
 
     expect(saga.throw(mockError).value)
@@ -117,6 +127,7 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockAuth = {};
     const mockResponse = {
       ok: false,
     };
@@ -127,12 +138,15 @@ describe('putActivePatient', () => {
       .toEqual(put(requestPutPatient()));
 
     saga.next();
+    saga.next(mockPatient);
 
-    expect(saga.next(mockPatient).value)
+    expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
         ...mockPatient,
         $created_at: mockCurrentTime,
         $updated_at: mockCurrentTime,
+        $created_by: null,
+        $updated_by: null,
       }));
 
     expect(saga.next(mockResponse).value)
@@ -151,6 +165,7 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockAuth = {};
     const mockResponse = {
       ok: true,
       id: 'patient_9876',
@@ -162,12 +177,15 @@ describe('putActivePatient', () => {
       .toEqual(put(requestPutPatient()));
 
     saga.next();
+    saga.next(mockPatient);
 
-    expect(saga.next(mockPatient).value)
+    expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
         ...mockPatient,
         $created_at: mockCurrentTime,
         $updated_at: mockCurrentTime,
+        $created_by: null,
+        $updated_by: null,
       }));
 
     expect(saga.next(mockResponse).value)
@@ -188,6 +206,7 @@ describe('putActivePatient', () => {
       $created_at: 1000,
       $updated_at: 2000,
     };
+    const mockAuth = {};
 
     const saga = putActivePatient();
 
@@ -195,12 +214,15 @@ describe('putActivePatient', () => {
       .toEqual(put(requestPutPatient()));
 
     saga.next();
+    saga.next(mockPatient);
 
-    expect(saga.next(mockPatient).value)
+    expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
         ...mockPatient,
         $created_at: 1000,
         $updated_at: mockCurrentTime,
+        $created_by: null,
+        $updated_by: null,
       }));
   });
 });
