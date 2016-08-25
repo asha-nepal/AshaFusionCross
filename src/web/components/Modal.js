@@ -23,7 +23,11 @@ export default ({
     </div>
     <button
       className="modal-close"
-      onClick={onClose}
+      onClick={e => {
+        e.preventDefault();
+        onClose();
+        return false;
+      }}
     />
   </div>
 );
