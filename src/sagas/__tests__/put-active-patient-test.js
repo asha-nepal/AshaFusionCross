@@ -15,6 +15,7 @@ import {
   successPutPatient,
   failurePutPatient,
   setActivePatient,
+  addNewActiveRecord,
   alertInfo,
   alertError,
 } from '../../actions';
@@ -39,6 +40,7 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockRecords = [{}];
     const mockAuth = {
       loggedInUser: 'dummyuser',
     };
@@ -55,6 +57,7 @@ describe('putActivePatient', () => {
 
     saga.next();
     saga.next(mockPatient);
+    saga.next(mockRecords);
 
     expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
@@ -93,6 +96,7 @@ describe('putActivePatient', () => {
       $created_at: 1000,
       $updated_at: 2000,
     };
+    const mockRecords = [{}];
     const mockAuth = {};
 
     const saga = putActivePatient();
@@ -102,6 +106,7 @@ describe('putActivePatient', () => {
 
     saga.next();
     saga.next(mockPatient);
+    saga.next(mockRecords);
 
     expect(saga.next(mockAuth).value)
       .toEqual(call([db, db.put], {
@@ -113,6 +118,86 @@ describe('putActivePatient', () => {
       }));
   });
 
+  it('puts ADD_NEW_ACTIVE_RECORD if activeRecords is null', () => {
+    const mockPatient = {
+      _id: 'patient_1234',
+      _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
+    };
+    const mockRecords = null;
+    const mockAuth = {};
+    const mockResponse = {
+      ok: true,
+      id: 'patient_1234',
+      rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
+    };
+
+    const saga = putActivePatient();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutPatient()));
+
+    saga.next();
+    saga.next(mockPatient);
+    saga.next(mockRecords);
+    saga.next(mockAuth);
+    saga.next(mockResponse);
+
+    expect(saga.next().value)
+      .toEqual(put(alertInfo('Patient data updated')));
+
+    expect(saga.next().value)
+      .toEqual(put(addNewActiveRecord('patient_1234')));
+
+    expect(saga.next().value)
+      .toEqual(call([browserHistory, browserHistory.replace], '/patient/patient_1234'));
+
+    expect(saga.next().value)
+      .toEqual(put(successPutPatient()));
+
+    expect(saga.next())
+      .toEqual({ done: true, value: undefined });
+  });
+
+  it('puts ADD_NEW_ACTIVE_RECORD if activeRecords.length === 0', () => {
+    const mockPatient = {
+      _id: 'patient_1234',
+      _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
+    };
+    const mockRecords = [];
+    const mockAuth = {};
+    const mockResponse = {
+      ok: true,
+      id: 'patient_1234',
+      rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
+    };
+
+    const saga = putActivePatient();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutPatient()));
+
+    saga.next();
+    saga.next(mockPatient);
+    saga.next(mockRecords);
+    saga.next(mockAuth);
+    saga.next(mockResponse);
+
+    expect(saga.next().value)
+      .toEqual(put(alertInfo('Patient data updated')));
+
+    expect(saga.next().value)
+      .toEqual(put(addNewActiveRecord('patient_1234')));
+
+    expect(saga.next().value)
+      .toEqual(call([browserHistory, browserHistory.replace], '/patient/patient_1234'));
+
+    expect(saga.next().value)
+      .toEqual(put(successPutPatient()));
+
+    expect(saga.next())
+      .toEqual({ done: true, value: undefined });
+  });
+
   it('handles error', () => {
     const mockError = {};
     const mockPatient = {
@@ -120,6 +205,7 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockRecords = [{}];
     const mockAuth = {};
 
     const saga = putActivePatient();
@@ -129,6 +215,7 @@ describe('putActivePatient', () => {
 
     saga.next();
     saga.next(mockPatient);
+    saga.next(mockRecords);
     saga.next(mockAuth);
 
     expect(saga.throw(mockError).value)
@@ -147,6 +234,7 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockRecords = [{}];
     const mockAuth = {};
     const mockResponse = {
       ok: false,
@@ -159,6 +247,7 @@ describe('putActivePatient', () => {
 
     saga.next();
     saga.next(mockPatient);
+    saga.next(mockRecords);
     saga.next(mockAuth);
 
     expect(saga.next(mockResponse).value)
@@ -177,6 +266,7 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockRecords = [{}];
     const mockAuth = {};
     const mockResponse = {
       ok: true,
@@ -190,6 +280,7 @@ describe('putActivePatient', () => {
 
     saga.next();
     saga.next(mockPatient);
+    saga.next(mockRecords);
     saga.next(mockAuth);
 
     expect(saga.next(mockResponse).value)
@@ -211,6 +302,7 @@ describe('putActivePatient', () => {
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
       hoge: 'fuga',
     };
+    const mockRecords = [{}];
     const mockAuth = {};
 
     const saga = putActivePatient();
@@ -220,6 +312,7 @@ describe('putActivePatient', () => {
 
     saga.next();
     saga.next(mockPatient);
+    saga.next(mockRecords);
     saga.next(mockAuth);
 
     expect(saga.throw(mockError).value)
