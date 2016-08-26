@@ -4,6 +4,8 @@ import {
   requestFetchPatientList,
   successFetchPatientList,
   failureFetchPatientList,
+  alertInfo,
+  alertError,
 } from '../actions';
 
 import { db } from '../db';
@@ -21,8 +23,10 @@ export function* fetchPatientList() {
   yield put(requestFetchPatientList());
   try {
     const patientList = yield call(pouchFetchPatientList);
+    yield put(alertInfo('Patient list loaded'));
     yield put(successFetchPatientList(patientList));
   } catch (error) {
+    yield put(alertError('Failed loading patient list'));
     yield put(failureFetchPatientList(error));
   }
 }
