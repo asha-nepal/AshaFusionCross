@@ -19,6 +19,7 @@ import {
   GuideTools,
   Diagnoses,
   MultiInput,
+  Block,
 } from './fields';
 
 function createChildFields(state, rootModel, fields) {
@@ -32,6 +33,7 @@ function createChildFields(state, rootModel, fields) {
 
     let component;
     let customProps = {};
+    let children = null;
 
     switch (field.class) {
       case 'textarea':
@@ -43,27 +45,14 @@ function createChildFields(state, rootModel, fields) {
         break;
 
       case 'block':
-        return field.label
-        ? (
-          <div key={i} className="control">
-            {field.label && <label className="label">{field.label}</label>}
-            <div className="control is-grouped">
-              {createChildFields(state, rootModel, field.children)}
-            </div>
-          </div>
-        )
-        : (
-          <div key={i} className="control is-grouped">
-          {createChildFields(state, rootModel, field.children)}
-          </div>
-        );
+        component = Block;
+        children = createChildFields(state, rootModel, field.children);
+        break;
 
       case 'accordion':
-        return (
-          <Accordion key={i} label={field.label}>
-          {createChildFields(state, rootModel, field.children)}
-          </Accordion>
-        );
+        component = Accordion;
+        children = createChildFields(state, rootModel, field.children);
+        break;
 
       case 'guide':
         return <GuideTools key={i} />;
@@ -133,7 +122,8 @@ function createChildFields(state, rootModel, fields) {
         label: field.label,
         ...customProps,
         ...field,
-      }
+      },
+      children
     );
   });
 }
