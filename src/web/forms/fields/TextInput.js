@@ -11,6 +11,23 @@ const alertIcons = {
   success: <i className="fa fa-check is-success" />,
 };
 
+const ReadOnly = ({
+  label,
+  value,
+  prefix,
+  suffix,
+}: {
+  label: ?string,
+  value: ?string,
+  prefix: ?string,
+  suffix: ?string,
+}) => (
+  <div className="control">
+    {label && <label className="label">{label}</label>}
+    <p>{[prefix, value, suffix].join(' ')}</p>
+  </div>
+);
+
 const TextInputComponent = ({
   label,
   value,
@@ -21,6 +38,7 @@ const TextInputComponent = ({
   suffix,
   placeholder,
   alerts,
+  readonly = false,
 }: {
   label: ?string,
   value: ?string,
@@ -31,7 +49,12 @@ const TextInputComponent = ({
   suffix: ?string,
   placeholder: ?string,
   alerts: ?Array<Object>,
+  readonly: boolean,
 }) => {
+  if (readonly) {
+    return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
+  }
+
   const hasAddons = prefix || suffix;
 
   let alert = null;
