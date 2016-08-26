@@ -6,6 +6,7 @@ import {
   successPutPatient,
   failurePutPatient,
   setActivePatient,
+  addNewActiveRecord,
   alertInfo,
   alertError,
 } from '../actions';
@@ -16,6 +17,7 @@ export function* putActivePatient() {
   yield put(requestPutPatient());
 
   const patient = yield select(state => state.activePatient);
+  const records = yield select(state => state.activeRecords);
   const { loggedInUser } = yield select(state => state.auth);
 
   const now = (new Date()).getTime();  // Unix Millisecond Timestamp
@@ -38,6 +40,10 @@ export function* putActivePatient() {
     }));
 
     yield put(alertInfo('Patient data updated'));
+
+    if (!records || records.length === 0) {
+      yield put(addNewActiveRecord(patient._id));
+    }
 
     // Router (No effect on native)
     yield call([browserHistory, browserHistory.replace], `/patient/${patient._id}`);
