@@ -4,13 +4,6 @@ type FormField = {
   style: ?Object,
 }
 
-export type TextFieldProps = FormField & {
-  type: string,
-  prefix: ?string,
-  suffix: ?string,
-  placeholder: ?string,
-}
-
 export type TextAreaProps = FormField & {
   placeholder: ?string,
 }
