@@ -89,6 +89,7 @@ export default {
         },
         {
           class: 'block',
+          wrap: false,
           children: [
             {
               field: 'medicalHistory', label: 'Medical history', class: 'textarea',
@@ -202,6 +203,7 @@ export default {
         },
         {
           class: 'block',
+          wrap: false,
           children: [
             {
               field: 'medicalHistory', label: 'Medical history', class: 'textarea',
