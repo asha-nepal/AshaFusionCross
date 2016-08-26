@@ -22,6 +22,24 @@ import {
   Block,
 } from './fields';
 
+const fieldComponents = {
+  textinput: TextInput,
+  textunitinput: TextUnitInput,
+  textarea: TextArea,
+  radio: RadioGroup,
+  attachment: Attachment,
+  attachmentinput: AttachmentInput,
+  attachmentviewer: AttachmentViewer,
+  accordion: Accordion,
+  check: Checkbox,
+  checkgroup: CheckGroup,
+  autocalc: AutoCalc,
+  guide: GuideTools,
+  diagnoses: Diagnoses,
+  multiinput: MultiInput,
+  block: Block,
+};
+
 function createChildFields(state, rootModel, fields) {
   return fields.map((field, i) => {
     // Handle "show" prop
@@ -31,87 +49,11 @@ function createChildFields(state, rootModel, fields) {
       return null;
     }
 
-    let component;
-    let customProps = {};
+    const component = fieldComponents[field.class] || TextInput;
     let children = null;
 
-    switch (field.class) {
-      case 'textarea':
-        component = TextArea;
-        break;
-
-      case 'radio':
-        component = RadioGroup;
-        break;
-
-      case 'block':
-        component = Block;
-        children = createChildFields(state, rootModel, field.children);
-        break;
-
-      case 'accordion':
-        component = Accordion;
-        children = createChildFields(state, rootModel, field.children);
-        break;
-
-      case 'guide':
-        return <GuideTools key={i} />;
-
-      case 'attachment':
-        component = Attachment;
-        customProps = {
-          rootModel,
-        };
-        break;
-
-      case 'attachmentinput':
-        component = AttachmentInput;
-        customProps = {
-          rootModel,
-        };
-        break;
-
-      case 'attachmentviewer':
-        component = AttachmentViewer;
-        customProps = {
-          rootModel,
-        };
-        break;
-
-      case 'textunitinput':
-        component = TextUnitInput;
-        break;
-
-      case 'check':
-        component = Checkbox;
-        break;
-
-      case 'checkgroup':
-        component = CheckGroup;
-        break;
-
-      case 'diagnoses':
-        component = Diagnoses;
-        break;
-
-      case 'autocalc':
-        component = AutoCalc;
-        customProps = {
-          rootModel,
-        };
-        break;
-
-      case 'multiinput':
-        component = MultiInput;
-        break;
-
-      case 'textinput':
-      default:
-        component = TextInput;
-        customProps = {
-          type: field.type || 'text',
-        };
-        break;
+    if (field.class === 'block' || field.class === 'accordion') {
+      children = createChildFields(state, rootModel, field.children);
     }
 
     return React.createElement(
@@ -120,7 +62,7 @@ function createChildFields(state, rootModel, fields) {
         key: i,
         model: `${rootModel}.${field.field}`,
         label: field.label,
-        ...customProps,
+        rootModel,
         ...field,
       },
       children
