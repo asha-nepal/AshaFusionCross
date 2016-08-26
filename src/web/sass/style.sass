@@ -1,3 +1,20 @@
 @import "~bulma/bulma"
 $fa-font-path: "~font-awesome/fonts"
 @import "~font-awesome/scss/font-awesome"
+
+@import "~balloon-css/balloon"
+
+.control.has-icon
+  .fa
+    @each $name, $pair in $colors
+      $color: nth($pair, 1)
+      $color-invert: nth($pair, 2)
+      &.is-#{$name}
+        color: $color
+  .input
+    &:focus + .fa
+      @each $name, $pair in $colors
+        $color: nth($pair, 1)
+        $color-invert: nth($pair, 2)
+        &.is-#{$name}
+          color: $color

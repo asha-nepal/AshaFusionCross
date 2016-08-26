@@ -47,12 +47,24 @@ export default {
               label: 'Blood pressure',
               children: [
                 {
-                  field: 'bp.h', class: 'textinput', placeholder: 'high',
+                  field: 'bp.s', class: 'textinput', placeholder: 'sBP',
                   type: 'number', style: { width: 60 },
+                  alerts: [
+                    { type: 'warning', label: 'Low', range: [null, 100] },
+                    { type: 'success', label: 'Normal', range: [100, 140] },
+                    { type: 'warning', label: 'High', range: [140, 180] },
+                    { type: 'danger', label: 'Alert', range: [180, null] },
+                  ],
                 },
                 {
-                  field: 'bp.l', class: 'textinput', placeholder: 'low',
+                  field: 'bp.d', class: 'textinput', placeholder: 'dBP',
                   type: 'number', style: { width: 60 }, suffix: 'mm/Hg',
+                  alerts: [
+                    { type: 'warning', label: 'Low', range: [null, 60] },
+                    { type: 'success', label: 'Normal', range: [60, 90] },
+                    { type: 'warning', label: 'High', range: [90, 110] },
+                    { type: 'danger', label: 'Alert', range: [110, null] },
+                  ],
                 },
               ],
             },
@@ -60,6 +72,13 @@ export default {
               field: 'pulse', label: 'Pulse', class: 'textinput', type: 'number',
               style: { width: 60 },
               suffix: '/min',
+              alerts: [
+                { type: 'danger', label: 'Alert', range: [null, 35] },
+                { type: 'warning', label: 'Low', range: [35, 50] },
+                { type: 'success', label: 'Normal', range: [50, 100] },
+                { type: 'warning', label: 'High', range: [100, 150] },
+                { type: 'danger', label: 'Alert', range: [150, null] },
+              ],
             },
             {
               field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
@@ -69,6 +88,11 @@ export default {
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '%',
+              alerts: [
+                { type: 'danger', label: 'Alert', range: [null, 80] },
+                { type: 'warning', label: 'Low', range: [80, 95] },
+                { type: 'success', label: 'Normal', range: [95, null] },
+              ],
             },
             {
               field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
@@ -164,12 +188,24 @@ export default {
               label: 'Blood pressure',
               children: [
                 {
-                  field: 'bp.h', class: 'textinput', placeholder: 'high',
+                  field: 'bp.s', class: 'textinput', placeholder: 'sBP',
                   type: 'number', style: { width: 60 },
+                  alerts: [
+                    { type: 'warning', label: 'Low', range: [null, 100] },
+                    { type: 'success', label: 'Normal', range: [100, 140] },
+                    { type: 'warning', label: 'High', range: [140, 180] },
+                    { type: 'danger', label: 'Alert', range: [180, null] },
+                  ],
                 },
                 {
-                  field: 'bp.l', class: 'textinput', placeholder: 'low',
+                  field: 'bp.d', class: 'textinput', placeholder: 'dBP',
                   type: 'number', style: { width: 60 }, suffix: 'mm/Hg',
+                  alerts: [
+                    { type: 'warning', label: 'Low', range: [null, 60] },
+                    { type: 'success', label: 'Normal', range: [60, 90] },
+                    { type: 'warning', label: 'High', range: [90, 110] },
+                    { type: 'danger', label: 'Alert', range: [110, null] },
+                  ],
                 },
               ],
             },
@@ -177,6 +213,13 @@ export default {
               field: 'pulse', label: 'Pulse', class: 'textinput', type: 'number',
               style: { width: 60 },
               suffix: '/min',
+              alerts: [
+                { type: 'danger', label: 'Alert', range: [null, 35] },
+                { type: 'warning', label: 'Low', range: [35, 50] },
+                { type: 'success', label: 'Normal', range: [50, 100] },
+                { type: 'warning', label: 'High', range: [100, 150] },
+                { type: 'danger', label: 'Alert', range: [150, null] },
+              ],
             },
             {
               field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
@@ -186,6 +229,11 @@ export default {
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '%',
+              alerts: [
+                { type: 'danger', label: 'Alert', range: [null, 80] },
+                { type: 'warning', label: 'Low', range: [80, 95] },
+                { type: 'success', label: 'Normal', range: [95, null] },
+              ],
             },
             {
               field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
