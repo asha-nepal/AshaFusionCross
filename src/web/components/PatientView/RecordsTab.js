@@ -13,7 +13,7 @@ export default ({
   selectActiveRecord: (id: string) => void,
   addNewActiveRecord: () => void,
 }) => (
-  <div className="tabs is-boxed">
+  <div className="tabs is-boxed column">
     <ul>
       {records.map((record, i) => {
         const createdAt = new Date(record.$created_at);
