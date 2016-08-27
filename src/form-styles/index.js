@@ -11,12 +11,12 @@ export default {
           children: [
             {
               field: 'height', label: 'Height', class: 'textunitinput', type: 'number',
-              units: ['cm', 'in'],
+              units: ['cm', 'in'], precision: 1,
               style: { width: 100 },
             },
             {
               field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
-              style: { width: 100 },
+              style: { width: 100 }, precision: 1,
               units: ['kg', 'lbm'],
             },
             {
