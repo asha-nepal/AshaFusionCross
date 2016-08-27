@@ -1,8 +1,9 @@
 box: bringnow/android-sdk
-
+command-timeout: 60
 build:
   steps:
     - npm-install
+  use-cache: false
     - script:
         name: flow
         code: npm run flow
