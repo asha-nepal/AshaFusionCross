@@ -45,7 +45,8 @@ function createChildFields(state, rootModel, fields) {
     // Handle "show" prop
     if (field.show === false) {
       return null;
-    } else if (typeof field.show === 'string' && !_get(state, `${rootModel}.${field.show}`, true)) {
+    } else if (typeof field.show === 'string'
+      && !_get(state, `${rootModel}.${field.show}`, false)) {
       return null;
     }
 
