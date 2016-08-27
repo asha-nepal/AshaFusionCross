@@ -1,7 +1,9 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { actions, Control } from 'react-redux-form';
+import { connect } from 'react-redux';
+import { actions } from 'react-redux-form';
+import _get from 'lodash.get';
 import math from 'mathjs';
 
 class TextUnitInputComponent extends Component {
@@ -65,28 +67,13 @@ class TextUnitInputComponent extends Component {
   }
 }
 
-export const TextUnitInput = ({
-  model,
-  label,
-  units,
-  style,
-}: {
-  model: string,
-  label: string,
-  units: Array<string>,
-  style: Object,
-}) => (
-  <Control
-    model={model}
-    component={TextUnitInputComponent}
-    controlProps={{
-      label,
-      units,
-      style,
-    }}
-    mapProps={(p) => ({
-      value: p.modelValue,
-      onChange: v => p.dispatch(actions.change(model, v)),
-    })}
-  />
-);
+const mapStateToProps = (state, ownProps) => ({
+  value: _get(state, ownProps.model),
+});
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onChange: v => dispatch(actions.change(ownProps.model, v)),
+});
+
+export const TextUnitInput = connect(
+  mapStateToProps, mapDispatchToProps
+)(TextUnitInputComponent);
