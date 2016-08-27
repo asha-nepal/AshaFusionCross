@@ -6,7 +6,7 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 import math from 'mathjs';
 
-export const convert = (value: ?ValueUnitType, targetUnit: ?string): number => {
+export const convert = (value: ?ValueUnitType, targetUnit: ?string): ?number => {
   if (!value || !value.value || !value.unit) { return null; }
   if (!targetUnit) { return null; }
   if (value.unit === targetUnit) { return parseFloat(value.value); }
@@ -62,7 +62,7 @@ class TextUnitInputComponent extends Component {
             className="input"
             style={style}
             value={inputValue}
-            step={precision ? 10 ** -precision : null}
+            step={precision ? Math.pow(10, -precision) : null}
             placeholder={placeholder}
             onChange={(e) => onChange({ value: e.target.value, unit: this.state.unit })}
           />
