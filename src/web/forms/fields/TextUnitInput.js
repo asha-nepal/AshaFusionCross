@@ -33,6 +33,7 @@ class TextUnitInputComponent extends Component {
     value: ValueUnitType,
     style: Object,
     precision: number,
+    placeholder: ?string,
     onChange: (value: ValueUnitType) => void,
   };
 
@@ -43,6 +44,7 @@ class TextUnitInputComponent extends Component {
       value,
       style,
       precision,
+      placeholder,
       onChange,
     } = this.props;
 
@@ -61,10 +63,12 @@ class TextUnitInputComponent extends Component {
             style={style}
             value={inputValue}
             step={precision ? 10 ** -precision : null}
+            placeholder={placeholder}
             onChange={(e) => onChange({ value: e.target.value, unit: this.state.unit })}
           />
           <span className="select">
             <select
+              tabIndex="-1"
               value={this.state.unit}
               onChange={e => this.setState({ unit: e.target.value })}
             >
