@@ -6,6 +6,14 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 import math from 'mathjs';
 
+export const convert = (value: ?ValueUnitType, targetUnit: ?string) => {
+  if (!value || !value.value || !value.unit) { return null; }
+  if (!targetUnit) { return null; }
+  if (value.unit === targetUnit) { return value.value; }
+
+  return math.unit(value.value, value.unit).toNumber(targetUnit);
+};
+
 class TextUnitInputComponent extends Component {
   constructor(props) {
     super(props);
@@ -36,9 +44,8 @@ class TextUnitInputComponent extends Component {
       onChange,
     } = this.props;
 
-    const inputValue = (value && value.value && value.unit && value.unit !== this.state.unit)
-      ? math.unit(value.value, value.unit).toNumber(this.state.unit).toString()
-      : value && value.value && value.value.toString() || '';
+    const converted = convert(value, this.state.unit);
+    const inputValue = converted && converted.toString() || '';
 
     return (
       <div className="control">

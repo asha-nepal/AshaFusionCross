@@ -29,6 +29,6 @@ export type PouchConfig = {
 }
 
 export type ValueUnitType = {
-  value: string,
-  unit: string,
+  value: ?string,
+  unit: ?string,
 }
