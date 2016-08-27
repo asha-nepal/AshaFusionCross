@@ -41,6 +41,7 @@ const fieldComponents = {
 };
 
 function createChildFields(state, rootModel, fields) {
+  fields = fields ? fields : []
   return fields.map((field, i) => {
     // Handle "show" prop
     if (field.show === false) {
