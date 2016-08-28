@@ -4,12 +4,16 @@ import {
   SELECT_ACTIVE_RECORD,
   SET_RECORD_FORM_STYLE_ID,
   SET_PATIENT_FORM_VISIBILITY,
+  SET_RECORD_CHART_VISIBILITY,
+  SET_RECORD_CHART_TYPE,
 } from '../../actions';
 
 const initialState = {
   selectedActiveRecordId: null,
   recordFormStyleId: null,
   patientFormVisibility: false,
+  recordChartVisibility: false,
+  recordChartType: null,
 };
 
 export default function (
@@ -30,6 +34,16 @@ export default function (
     case SET_PATIENT_FORM_VISIBILITY:
       return Object.assign({}, state, {
         patientFormVisibility: action.payload.visibility,
+      });
+
+    case SET_RECORD_CHART_VISIBILITY:
+      return Object.assign({}, state, {
+        recordChartVisibility: action.payload.visibility,
+      });
+
+    case SET_RECORD_CHART_TYPE:
+      return Object.assign({}, state, {
+        recordChartType: action.payload.type,
       });
 
     default:

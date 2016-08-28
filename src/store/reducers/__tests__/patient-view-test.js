@@ -9,6 +9,8 @@ import {
   selectActiveRecord,
   setRecordFormStyleId,
   setPatientFormVisibility,
+  setRecordChartVisibility,
+  setRecordChartType,
 } from '../../../actions';
 import reducer from '../patient-view';
 
@@ -51,7 +53,7 @@ describe('SET_RECORD_FORM_STYLE_ID', () => {
 });
 
 describe('SET_PATIENT_FORM_VISIBILITY', () => {
-  it('updates isPatientFormVisible', () => {
+  it('updates patientFormVisibility', () => {
     const stateBefore = {
       patientFormVisibility: false,
     };
@@ -59,6 +61,44 @@ describe('SET_PATIENT_FORM_VISIBILITY', () => {
 
     const stateAfter = {
       patientFormVisibility: true,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+});
+
+describe('SET_RECORD_CHART_VISIBILITY', () => {
+  it('updates recordChartVisibility', () => {
+    const stateBefore = {
+      recordChartVisibility: false,
+    };
+    const action = setRecordChartVisibility(true);
+
+    const stateAfter = {
+      recordChartVisibility: true,
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+});
+
+describe('SET_RECORD_CHART_TYPE', () => {
+  it('updates recordChartType', () => {
+    const stateBefore = {
+      recordChartType: 'hoge',
+    };
+    const action = setRecordChartType('fuga');
+
+    const stateAfter = {
+      recordChartType: 'fuga',
     };
 
     deepFreeze(stateBefore);

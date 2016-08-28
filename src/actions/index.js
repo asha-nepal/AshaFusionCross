@@ -207,6 +207,22 @@ export const setPatientFormVisibility = (visibility: boolean): SetPatientFormVis
   },
 });
 
+export const SET_RECORD_CHART_VISIBILITY = 'SET_RECORD_CHART_VISIBILITY';
+export const setRecordChartVisibility = (visibility: boolean): SetRecordChartVisibilityAction => ({
+  type: SET_RECORD_CHART_VISIBILITY,
+  payload: {
+    visibility,
+  },
+});
+
+export const SET_RECORD_CHART_TYPE = 'SET_RECORD_CHART_TYPE';
+export const setRecordChartType = (type: string): SetRecordChartTypeAction => ({
+  type: SET_RECORD_CHART_TYPE,
+  payload: {
+    type,
+  },
+});
+
 
 export const SET_PATIENT_LIST_FILTER = 'SET_PATIENT_LIST_FILTER';
 export const setPatientListFilter = (filter: string) => ({

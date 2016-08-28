@@ -10,12 +10,20 @@ interface SetRecordFormStyleIdPayload {
 }
 interface SetRecordFormStyleIdAction extends PayloadAction<SetRecordFormStyleIdPayload> {}
 
-interface SetPatientFormVisibilityPayload {
+interface SetVisibilityPayload {
   visibility: boolean,
 }
-interface SetPatientFormVisibilityAction extends PayloadAction<SetPatientFormVisibilityPayload> {}
+interface SetPatientFormVisibilityAction extends PayloadAction<SetVisibilityPayload> {}
+interface SetRecordChartVisibilityAction extends PayloadAction<SetVisibilityPayload> {}
+
+interface SetRecordChartTypePayload {
+  type: string,
+}
+interface SetRecordChartTypeAction extends PayloadAction<SetRecordChartTypePayload> {}
 
 export type PatientViewAction =
   SelectActiveRecordAction
   & SetRecordFormStyleIdAction
-  & SetPatientFormVisibilityAction;
+  & SetPatientFormVisibilityAction
+  & SetRecordChartVisibilityAction
+  & SetRecordChartTypeAction;

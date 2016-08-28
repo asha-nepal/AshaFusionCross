@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import Header from './Header';
 import RecordsTab from './RecordsTab';
 
+import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
+import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import PatientForm from '../../forms/PatientForm';
 import RecordForm from '../../forms/RecordForm';
 
@@ -134,8 +136,11 @@ export default class PatientView extends Component {
                     )}
                     </select>
                   </span>
+                  <RecordChartToggle />
                 </div>
               </div>
+
+              <RecordChartSelector records={records} />
 
               {selectedActiveRecordIndex > -1 && (
                 <div className="container">
