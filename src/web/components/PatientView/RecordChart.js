@@ -60,7 +60,7 @@ export default ({
           const value = _get(record, field.field);
           return [
             record.$created_at,
-            typeof value === 'string' ? parseFloat(value) : convert(value, 'cm'),
+            typeof value === 'string' ? parseFloat(value) : convert(value, yaxis.unit),
           ];
         })
         .filter(plot => plot[0] != null && plot[1] != null)

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import RecordsTab from './RecordsTab';
 
-import RecordChart from './RecordChart';
+import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import PatientForm from '../../forms/PatientForm';
 import RecordForm from '../../forms/RecordForm';
 
@@ -112,17 +112,9 @@ export default class PatientView extends Component {
           </section>
         }
 
-        <RecordChart
-          records={records}
-          fields={[
-            { field: 'bp.s', label: 'sBP', color: '#C390D4' },
-            { field: 'bp.d', label: 'dBP', color: '#8884d8' },
-          ]}
-          yaxis={{
-            label: 'Blood pressure',
-            unit: 'mmHg',
-          }}
-        />
+        <section className="section">
+          <RecordChartSelector records={records} />
+        </section>
 
         {!isNew &&
           <section className="section">
