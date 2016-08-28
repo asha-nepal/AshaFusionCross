@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import RecordChart from './RecordChart';
+import RecordChart from '../RecordChart';
 
 const types = [
   { label: 'Height', type: 'height', unit: 'cm',
@@ -57,53 +57,43 @@ export default ({
   records,
   visibility,
   type = 'height',
-  setVisibility,
   setType,
 }: {
   records: Array<RecordObject>,
   type: string,
   visibility: boolean,
-  setVisibility: (visibility: boolean) => void,
   setType: (type: string) => void,
 }) => {
+  if (!visibility) { return null; }
+
   const _type = type || 'height';
   const selectedType = types.find(t => t.type === _type);
 
   return (
     <div>
-      <button
-        className="button"
-        onClick={e => {
-          e.preventDefault();
-          setVisibility(!visibility);
+      <div className="tabs">
+        <ul>
+        {types.map((t, i) =>
+          <li key={i} className={t.type === selectedType.type ? 'is-active' : null}>
+            <a
+              onClick={e => {
+                e.preventDefault();
+                setType(t.type);
+              }}
+            >{t.label}</a>
+          </li>
+        )}
+        </ul>
+      </div>
+
+      <RecordChart
+        records={records}
+        fields={selectedType.fields}
+        yaxis={{
+          label: selectedType.label,
+          unit: selectedType.unit,
         }}
-      ><i className="fa fa-line-chart" /></button>
-      {visibility &&
-        <div>
-          <div className="tabs">
-            <ul>
-            {types.map((t, i) =>
-              <li key={i} className={t.type === selectedType.type ? 'is-active' : null}>
-                <a
-                  onClick={e => {
-                    e.preventDefault();
-                    setType(t.type);
-                  }}
-                >{t.label}</a>
-              </li>
-            )}
-            </ul>
-          </div>
-          <RecordChart
-            records={records}
-            fields={selectedType.fields}
-            yaxis={{
-              label: selectedType.label,
-              unit: selectedType.unit,
-            }}
-          />
-        </div>
-      }
+      />
     </div>
   );
 };

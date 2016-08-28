@@ -11,12 +11,13 @@ import {
   Scatter,
 } from 'recharts';
 import _get from 'lodash.get';
-import { convert } from '../../forms/fields/TextUnitInput';
+import { convert } from '../forms/fields/TextUnitInput';
 
 export default ({
   records,
   fields,
   yaxis,
+  wrapperProps,
 }: {
   records: Array<RecordObject>,
   fields: Array<{
@@ -26,9 +27,15 @@ export default ({
   yaxis: {
     label: string,
     unit: string,
-  }
+  },
+  wrapperProps: ?Object
 }) => (
-  <ScatterChart width={600} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }} >
+  <ScatterChart
+    width={600}
+    height={400}
+    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+    {...wrapperProps}
+  >
     <XAxis
       dataKey="x"
       type="number"
@@ -59,7 +66,7 @@ export default ({
         .map(record => {
           const value = _get(record, field.field);
           return [
-            record.$created_at,
+            record.$created_at || record.$initialized_at || null,
             typeof value === 'string' ? parseFloat(value) : convert(value, yaxis.unit),
           ];
         })
