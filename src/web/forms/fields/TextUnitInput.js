@@ -1,8 +1,18 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { actions, Control } from 'react-redux-form';
+import { connect } from 'react-redux';
+import { actions } from 'react-redux-form';
+import _get from 'lodash.get';
 import math from 'mathjs';
+
+export const convert = (value: ?ValueUnitType, targetUnit: ?string): ?number => {
+  if (!value || !value.value || !value.unit) { return null; }
+  if (!targetUnit) { return null; }
+  if (value.unit === targetUnit) { return parseFloat(value.value); }
+
+  return math.unit(value.value, value.unit).toNumber(targetUnit);
+};
 
 class TextUnitInputComponent extends Component {
   constructor(props) {
@@ -22,6 +32,8 @@ class TextUnitInputComponent extends Component {
     units: Array<string>,
     value: ValueUnitType,
     style: Object,
+    precision: number,
+    placeholder: ?string,
     onChange: (value: ValueUnitType) => void,
   };
 
@@ -31,12 +43,15 @@ class TextUnitInputComponent extends Component {
       units,
       value,
       style,
+      precision,
+      placeholder,
       onChange,
     } = this.props;
 
-    const inputValue = (value && value.value && value.unit && value.unit !== this.state.unit)
-      ? math.unit(value.value, value.unit).toNumber(this.state.unit).toString()
-      : value && value.value && value.value.toString() || '';
+    const converted = convert(value, this.state.unit);
+    const inputValue = converted
+      && (precision ? converted.toFixed(precision) : converted.toString())
+      || '';
 
     return (
       <div className="control">
@@ -47,10 +62,13 @@ class TextUnitInputComponent extends Component {
             className="input"
             style={style}
             value={inputValue}
+            step={precision ? Math.pow(10, -precision) : null}
+            placeholder={placeholder}
             onChange={(e) => onChange({ value: e.target.value, unit: this.state.unit })}
           />
           <span className="select">
             <select
+              tabIndex="-1"
               value={this.state.unit}
               onChange={e => this.setState({ unit: e.target.value })}
             >
@@ -65,28 +83,13 @@ class TextUnitInputComponent extends Component {
   }
 }
 
-export const TextUnitInput = ({
-  model,
-  label,
-  units,
-  style,
-}: {
-  model: string,
-  label: string,
-  units: Array<string>,
-  style: Object,
-}) => (
-  <Control
-    model={model}
-    component={TextUnitInputComponent}
-    controlProps={{
-      label,
-      units,
-      style,
-    }}
-    mapProps={(p) => ({
-      value: p.modelValue,
-      onChange: v => p.dispatch(actions.change(model, v)),
-    })}
-  />
-);
+const mapStateToProps = (state, ownProps) => ({
+  value: _get(state, ownProps.model),
+});
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onChange: v => dispatch(actions.change(ownProps.model, v)),
+});
+
+export const TextUnitInput = connect(
+  mapStateToProps, mapDispatchToProps
+)(TextUnitInputComponent);
