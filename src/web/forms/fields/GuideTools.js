@@ -25,7 +25,7 @@ export class GuideTools extends Component {
   render() {
     return (
       <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        <button
+        <a
           className="button"
           onClick={e => {
             e.preventDefault();
@@ -34,9 +34,9 @@ export class GuideTools extends Component {
           }}
         >
           <img src={btnDiabetesImg} alt="Diabetes" style={{ height: '100%' }} />
-        </button>
+        </a>
 
-        <button
+        <a
           className="button"
           onClick={e => {
             e.preventDefault();
@@ -45,7 +45,7 @@ export class GuideTools extends Component {
           }}
         >
           <img src={btnBloodPressureImg} alt="Blood pressure" style={{ height: '100%' }} />
-        </button>
+        </a>
 
         <Modal
           isOpen={!(this.state.modal === false)}
