@@ -58,7 +58,7 @@ export default {
                 },
                 {
                   field: 'bp.d', class: 'textinput', placeholder: 'dBP',
-                  type: 'number', style: { width: 60 }, suffix: 'mm/Hg',
+                  type: 'number', style: { width: 60 }, suffix: 'mmHg',
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 60] },
                     { type: 'success', label: 'Normal', range: [60, 90] },
@@ -200,7 +200,7 @@ export default {
                 },
                 {
                   field: 'bp.d', class: 'textinput', placeholder: 'dBP',
-                  type: 'number', style: { width: 60 }, suffix: 'mm/Hg',
+                  type: 'number', style: { width: 60 }, suffix: 'mmHg',
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 60] },
                     { type: 'success', label: 'Normal', range: [60, 90] },
