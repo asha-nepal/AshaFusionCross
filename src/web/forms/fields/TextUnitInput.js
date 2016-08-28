@@ -28,11 +28,12 @@ class TextUnitInputComponent extends Component {
   };
 
   props: {
-    label: string,
+    label: ?string,
     units: Array<string>,
     value: ValueUnitType,
-    style: Object,
-    precision: number,
+    style: ?Object,
+    precision: ?number,
+    forceFixed: ?boolean,
     placeholder: ?string,
     onChange: (value: ValueUnitType) => void,
   };
@@ -44,14 +45,16 @@ class TextUnitInputComponent extends Component {
       value,
       style,
       precision,
+      forceFixed = false,
       placeholder,
       onChange,
     } = this.props;
 
     const converted = convert(value, this.state.unit);
-    const inputValue = converted
-      && (precision ? converted.toFixed(precision) : converted.toString())
-      || '';
+    const convertedString = converted && converted.toString() || '';
+    const inputValue = forceFixed && precision
+      ? convertedString.replace(new RegExp(`(\\.\\d{0,${precision}})\\d*`), '$1')
+      : convertedString;
 
     return (
       <div className="control">
