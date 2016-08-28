@@ -2,12 +2,18 @@
 
 import React, { Component } from 'react';
 
-import Modal from '../../components/Modal';
+import Modal from '../../../components/Modal';
 
-import btnDiabetesImg from '../../../../assets/img/btn-diabetes.jpg';
-import btnBloodPressureImg from '../../../../assets/img/btn-blood-pressure.jpg';
-import modalDiabetesImg from '../../../../assets/img/modal-diabetes.jpg';
-import modalBloodPressureImg from '../../../../assets/img/modal-blood-pressure.jpg';
+import btnDiabetesImg from '../../../../../assets/img/btn-diabetes.jpg';
+import btnBloodPressureImg from '../../../../../assets/img/btn-blood-pressure.jpg';
+import modalBloodPressureImg from '../../../../../assets/img/modal-blood-pressure.png';
+import diabetesTableHTML from './diabetes.html';
+
+const createDiabetesTable = () => ({
+  __html: diabetesTableHTML,
+});
+
+const DiabetesTable = <div className="guidetool" dangerouslySetInnerHTML={createDiabetesTable()} />;
 
 export class GuideTools extends Component {
   constructor(props: {}) {
@@ -52,13 +58,22 @@ export class GuideTools extends Component {
           onClose={() => this.setState({ modal: false })}
         >
           <div className="box">
-            <img
-              src={this.state.modal === 'diabetes'
-                ? modalDiabetesImg
-                : modalBloodPressureImg
-              }
-              alt=""
-            />
+          {this.state.modal === 'diabetes' ? (
+            DiabetesTable
+          ) : (
+            <div>
+              <img
+                src={modalBloodPressureImg}
+                alt="Diagnosis algorithm"
+              />
+              <p>
+                Cited from:
+                "Health Care Guideline Hypertension Diagnosis and Treatment",
+                Institute for Clinical Systems Improvement
+              </p>
+              <a target="_blank" href="/assets/HTN.pdf">Original PDF</a>
+            </div>
+          )}
           </div>
         </Modal>
       </div>
