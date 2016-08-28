@@ -1,4 +1,6 @@
 box: bringnow/android-sdk
+no-response-timeout: 30
+command-timeout: 60
 
 build:
   steps:
