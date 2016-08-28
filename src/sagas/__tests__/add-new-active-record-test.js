@@ -4,10 +4,11 @@ jest.unmock('redux-thunk');
 jest.unmock('redux-saga');
 jest.unmock('redux-saga/effects');
 jest.unmock('react-redux-form');
+jest.unmock('mockdate');
 jest.unmock('../../actions');
 jest.unmock('../add-new-active-record');
 
-import moment from 'moment';
+import MockDate from 'mockdate';
 import { delay } from 'redux-saga';
 import { take, put, call } from 'redux-saga/effects';
 import { actionTypes as formActionTypes } from 'react-redux-form';
@@ -21,12 +22,17 @@ import {
 } from '../add-new-active-record';
 
 describe('ADD_NEW_ACTIVE_RECORD', () => {
-  it('calls actions.push() with new ID', () => {
-    const mockMomentFormat = jest.fn().mockReturnValue('mocked-datetime');
-    moment.mockReturnValue({
-      format: mockMomentFormat,
-    });
+  const mockCurrentTime = 1234567890123;
 
+  beforeEach(() => {
+    MockDate.set(mockCurrentTime);
+  });
+
+  afterEach(() => {
+    MockDate.reset();
+  });
+
+  it('calls actions.push() with new ID', () => {
     const saga = addNewActiveRecord('patient_foo');
 
 //    expect(saga.next().value)
@@ -52,20 +58,19 @@ describe('ADD_NEW_ACTIVE_RECORD', () => {
       value: [
         'existing data',
         {
-          _id: 'record_foo_mocked-datetime',
+          _id: 'record_foo_1234567890123',
           type: 'record',
+          $initialized_at: 1234567890123,
         },
       ],
     });
 
 
     expect(saga.next().value)
-      .toEqual(put(selectActiveRecord('record_foo_mocked-datetime')));
+      .toEqual(put(selectActiveRecord('record_foo_1234567890123')));
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });
-
-    expect(mockMomentFormat).toBeCalledWith('x');  // Unix Millisecond Timestamp
   });
 });
 
