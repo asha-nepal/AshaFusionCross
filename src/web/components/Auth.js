@@ -37,7 +37,13 @@ export default class extends Component {
                   <p className="control">
                     <label className="label">
                       Username
-                      <input className="input" type="text" ref="username" />
+                      <input
+                        className="input"
+                        type="text"
+                        ref="username"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                      />
                     </label>
                   </p>
                   <p className="control">
@@ -90,7 +96,13 @@ export default class extends Component {
                   <p className="control">
                     <label className="label">
                       Username
-                      <input className="input" type="text" ref="signup_username" />
+                      <input
+                        className="input"
+                        type="text"
+                        ref="signup_username"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                      />
                     </label>
                   </p>
                   <p className="control">
