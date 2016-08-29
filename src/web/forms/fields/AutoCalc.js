@@ -15,7 +15,7 @@ const AutoCalcComponent = ({
 }) => (
   <div className="control">
     {label && <label className="label">{label}</label>}
-    <p style={style}>{value}</p>
+    <span className="form-static" style={style}>{value}</span>
   </div>
 );
 
