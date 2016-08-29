@@ -6,12 +6,23 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 import math from 'mathjs';
 
-export const convert = (value: ?ValueUnitType, targetUnit: ?string): ?number => {
+export const convert = (
+  value: ?ValueUnitType,
+  targetUnit: ?string,
+  precision: ?number
+): ?number => {
   if (!value || !value.value || !value.unit) { return null; }
   if (!targetUnit) { return null; }
   if (value.unit === targetUnit) { return parseFloat(value.value); }
 
-  return math.unit(value.value, value.unit).toNumber(targetUnit);
+  const converted = math.unit(value.value, value.unit).toNumber(targetUnit);
+
+  if (precision != null) {
+    const e = Math.pow(10, precision);
+    return Math.round(converted * e) / e;
+  }
+
+  return converted;
 };
 
 class TextUnitInputComponent extends Component {
@@ -50,7 +61,7 @@ class TextUnitInputComponent extends Component {
       onChange,
     } = this.props;
 
-    const converted = convert(value, this.state.unit);
+    const converted = convert(value, this.state.unit, precision);
     const convertedString = converted && converted.toString() || '';
     const inputValue = forceFixed && precision
       ? convertedString.replace(new RegExp(`(\\.\\d{0,${precision}})\\d*`), '$1')
