@@ -46,6 +46,7 @@ class TextUnitInputComponent extends Component {
     precision: ?number,
     forceFixed: ?boolean,
     placeholder: ?string,
+    readonly: boolean,
     onChange: (value: ValueUnitType) => void,
   };
 
@@ -58,6 +59,7 @@ class TextUnitInputComponent extends Component {
       precision,
       forceFixed = false,
       placeholder,
+      readonly = false,
       onChange,
     } = this.props;
 
@@ -70,16 +72,22 @@ class TextUnitInputComponent extends Component {
     return (
       <div className="control">
         {label && <label className="label">{label}</label>}
-        <p className="control has-addons">
-          <input
-            type="number"
-            className="input"
-            style={style}
-            value={inputValue}
-            step={precision ? Math.pow(10, -precision) : null}
-            placeholder={placeholder}
-            onChange={(e) => onChange({ value: e.target.value, unit: this.state.unit })}
-          />
+        <p className={readonly ? 'control' : 'control has-addons'}>
+          {readonly ? (
+            <span className="form-static">
+              {inputValue}
+            </span>
+          ) : (
+            <input
+              type="number"
+              className="input"
+              style={style}
+              value={inputValue}
+              step={precision ? Math.pow(10, -precision) : null}
+              placeholder={placeholder}
+              onChange={(e) => onChange({ value: e.target.value, unit: this.state.unit })}
+            />
+          )}
           <span className="select">
             <select
               tabIndex="-1"

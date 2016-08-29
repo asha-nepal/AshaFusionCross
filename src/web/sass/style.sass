@@ -22,3 +22,34 @@ $fa-font-path: "~font-awesome/fonts"
 .guidetool ul
    list-style-type: disc
    margin-left: 20px
+
+// =control をコピペして不要なスタイルを削除
+.form-static
+  -moz-appearance: none
+  -webkit-appearance: none
+  align-items: center
+  background-color: $control-background
+  color: $control
+  display: inline-flex
+  font-size: $size-normal
+  height: 32px
+  justify-content: flex-start
+  line-height: 24px
+  padding-left: 8px
+  padding-right: 8px
+  position: relative
+  vertical-align: top
+
+  &.is-small
+    +control-small
+  &.is-medium
+    +control-medium
+  &.is-large
+    +control-large
+  // Modifiers
+  &.is-fullwidth
+    display: block
+    width: 100%
+  &.is-inline
+    display: inline
+    width: auto
