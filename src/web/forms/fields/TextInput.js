@@ -24,7 +24,7 @@ const ReadOnly = ({
 }) => (
   <div className="control">
     {label && <label className="label">{label}</label>}
-    <p>{[prefix, value, suffix].join(' ')}</p>
+    <span className="form-static">{[prefix, value, suffix].join(' ')}</span>
   </div>
 );
 
