@@ -8,11 +8,31 @@ import _get from 'lodash.get';
 type Props = {
   label: string,
   type: ?string,
-  values: Array<string>,
+  values: ?Array<string>,
+  readonly: boolean,
   onChange: (index: number, value: string) => void,
   onAddItemRequested: (value: string) => void,
   onRemoveItemRequested: (index: number) => void,
 };
+
+const ReadOnly = ({
+  label,
+  values,
+}: {
+  label: ?string,
+  values: ?Array<string>,
+}) => (
+  <div className="control">
+  {label && <label className="label">{label}</label>}
+  {values &&
+    <div className="form-static is-multiline">
+      <ul>
+        {values.map((v, i) => <li key={i}>{v}</li>)}
+      </ul>
+    </div>
+  }
+  </div>
+);
 
 export class MultiInputComponent extends Component {
   constructor(props: Props) {
@@ -41,9 +61,14 @@ export class MultiInputComponent extends Component {
       label,
       type = 'text',
       values,
+      readonly = false,
       onChange,
       onRemoveItemRequested,
     } = this.props;
+
+    if (readonly) {
+      return <ReadOnly label={label} values={values} />;
+    }
 
     return (
       <div className="control">
