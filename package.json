@@ -8,7 +8,7 @@
     "test": "jest",
     "flow": "flow",
     "lint": "eslint src",
-    "build": "rm -rf public && mkdir public && cp src/web/static/* public/. && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
+    "build": "rm -rf public && mkdir public && cp -r src/web/static/* public/. && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
     "server": "if-env NODE_ENV=production && npm run server:prod || npm run server:dev",
     "server:dev": "webpack-dev-server",
     "server:prod": "node server.js"
@@ -50,6 +50,7 @@
     "file-loader": "^0.9.0",
     "flow-bin": "^0.25.0",
     "font-awesome": "^4.6.3",
+    "html-loader": "^0.4.3",
     "jest-cli": "^12.1.1",
     "json-loader": "^0.5.4",
     "lodash.get": "^4.4.2",
@@ -90,7 +91,7 @@
       "<rootDir>/node_modules/react-redux-form/"
     ],
     "moduleNameMapper": {
-      "^.+\\.(gif|png|jpg|jpeg)$": "<rootDir>/test/fileMock.js"
+      "^.+\\.(gif|png|jpg|jpeg|html)$": "<rootDir>/test/fileMock.js"
     }
   }
 }

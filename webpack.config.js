@@ -28,8 +28,16 @@ module.exports = {
         loader: 'json',
       },
       {
+        test: /\.html$/,
+        loader: 'html',
+      },
+      {
         test: /\.(jpg|jpeg)$/,
         loader: 'url-loader?mimetype=image/jpeg',
+      },
+      {
+        test: /\.png$/,
+        loader: 'url-loader?mimetype=image/png',
       },
       {
         test: /\.sass$/,
