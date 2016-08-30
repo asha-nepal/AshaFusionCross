@@ -10,10 +10,12 @@ import {
 export default ({
   model,
   onSubmit,
+  onRemove,
   freeze,
 }: {
   model: string,
   onSubmit: (patient: PatientObject) => void,
+  onRemove: () => void,
   freeze: boolean,
 }) => (
   <Form
@@ -45,8 +47,24 @@ export default ({
       label="Address"
     />
 
-    <button className="button is-primary" type="submit" disabled={freeze}>
-      Submit
-    </button>
+    <div className="level">
+      <p className="level-left">
+        <button className="button is-primary" type="submit" disabled={freeze}>
+          Submit
+        </button>
+      </p>
+      {onRemove &&
+        <p className="level-right">
+          <a
+            className="button is-danger"
+            disabled={freeze}
+            onClick={e => {
+              e.preventDefault();
+              if (!freeze) { onRemove(); }
+            }}
+          ><i className="fa fa-times" />Remove patient</a>
+        </p>
+      }
+    </div>
   </Form>
 );

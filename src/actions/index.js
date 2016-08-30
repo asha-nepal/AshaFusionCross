@@ -34,6 +34,11 @@ export const putActiveRecord = (index: number) => ({
   index,
 });
 
+export const REMOVE_ACTIVE_PATIENT = 'REMOVE_ACTIVE_PATIENT';
+export const removeActivePatient = () => ({
+  type: REMOVE_ACTIVE_PATIENT,
+});
+
 export const INIT_ACTIVE_PATIENT = 'INIT_ACTIVE_PATIENT';
 export const initActivePatient = () => ({
   type: INIT_ACTIVE_PATIENT,
@@ -160,6 +165,21 @@ export const successPutRecord = () => ({
 
 export const failurePutRecord = (error: ErrorObject) => ({
   type: FAILURE_PUT_RECORD,
+  error,
+});
+
+
+export const REQUEST_REMOVE_PATIENT = 'REQUEST_REMOVE_PATIENT';
+export const SUCCESS_REMOVE_PATIENT = 'SUCCESS_REMOVE_PATIENT';
+export const FAILURE_REMOVE_PATIENT = 'FAILURE_REMOVE_PATIENT';
+export const requestRemovePatient = () => ({
+  type: REQUEST_REMOVE_PATIENT,
+});
+export const successRemovePatient = () => ({
+  type: SUCCESS_REMOVE_PATIENT,
+});
+export const failureRemovePatient = (error: ErrorObject) => ({
+  type: FAILURE_REMOVE_PATIENT,
   error,
 });
 
