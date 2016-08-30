@@ -33,11 +33,11 @@ module.exports = {
       },
       {
         test: /\.(jpg|jpeg)$/,
-        loader: 'url-loader?mimetype=image/jpeg',
+        loader: 'url-loader?mimetype=image/jpeg&limit=1024&name=assets/img/[name].[ext]',
       },
       {
         test: /\.png$/,
-        loader: 'url-loader?mimetype=image/png',
+        loader: 'url-loader?mimetype=image/png&limit=1024&name=assets/img/[name].[ext]',
       },
       {
         test: /\.sass$/,
