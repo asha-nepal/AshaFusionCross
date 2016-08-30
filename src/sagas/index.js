@@ -19,6 +19,7 @@ import { watchFetchPatientList } from './fetch-patient-list';
 import { watchFetchPatient } from './fetch-patient';
 import { watchPutActivePatient } from './put-active-patient';
 import { watchPutActiveRecord } from './put-active-record';
+import { watchRemoveActivePatient } from './remove-active-patient';
 import { watchInitActivePatient } from './init-active-patient';
 import { watchAddNewActiveRecord } from './add-new-active-record';
 import { watchConnectPouchDB } from './connect-pouchdb';
@@ -34,6 +35,7 @@ const authedSagas = [
   watchFetchPatient,
   watchPutActivePatient,
   watchPutActiveRecord,
+  watchRemoveActivePatient,
   watchInitActivePatient,
   watchAddNewActiveRecord,
 ];

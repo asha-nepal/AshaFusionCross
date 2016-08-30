@@ -5,6 +5,7 @@ import {
   fetchPatient,
   putActivePatient,
   putActiveRecord,
+  removeActivePatient,
   initActivePatient,
   addNewActiveRecord,
   selectActiveRecord,
@@ -57,6 +58,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
     putActivePatient: () => dispatch(putActivePatient()),
     putActiveRecord: (index) => dispatch(putActiveRecord(index)),
+    removeActivePatient: () => dispatch(removeActivePatient()),
     setPatientFormVisibility: (visibility: boolean) =>
       dispatch(setPatientFormVisibility(visibility)),
     setRecordFormStyleId: (styleId) => dispatch(setRecordFormStyleId(styleId)),

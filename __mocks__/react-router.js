@@ -2,4 +2,5 @@
 
 export const browserHistory = {
   replace: jest.fn(),
+  push: jest.fn(),
 };

@@ -38,6 +38,7 @@ export default class PatientView extends Component {
     addNewActiveRecord: () => void,
     putActivePatient: () => void,
     putActiveRecord: (index: number) => void,
+    removeActivePatient: () => void,
     isNew: boolean,
     isPuttingPatient: boolean,
     isPuttingRecord: boolean,
@@ -59,6 +60,7 @@ export default class PatientView extends Component {
       addNewActiveRecord,
       putActivePatient,
       putActiveRecord,
+      removeActivePatient,
       isNew,
       isPuttingPatient,
       isPuttingRecord,
@@ -93,6 +95,11 @@ export default class PatientView extends Component {
                     model="activePatient"
                     onSubmit={putActivePatient}
                     freeze={isPuttingPatient}
+                    onRemove={!isNew && (() => {
+                      if (confirm('Are you sure?')) {
+                        removeActivePatient();
+                      }
+                    })}
                   />
                 </div>
               </div>

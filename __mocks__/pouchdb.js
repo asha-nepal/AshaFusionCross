@@ -10,6 +10,7 @@ export default class {
   }
 
   allDocs = jest.fn();
+  bulkDocs = jest.fn();
   get = jest.fn();
   put = jest.fn();
 }
