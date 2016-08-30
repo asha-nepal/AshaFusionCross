@@ -8,26 +8,34 @@ import _get from 'lodash.get';
 const CheckboxComponent = ({
   label,
   isChecked,
+  readonly = false,
   onChange,
 }: {
   label: string,
   isChecked: ?boolean,
+  readonly: boolean,
   onChange: (newValue: boolean) => void,
 }) => (
   <div className="control">
     {label && <label className="label">{label}</label>}
-    <p className="control">
-      <a
-        className={isChecked ? 'button is-primary' : 'button'}
-        style={{ width: 32 }}
-        onClick={e => {
-          e.preventDefault();
-          onChange(!isChecked);
-        }}
-      >
-        {isChecked && <i className={'fa fa-check'} />}
-      </a>
-    </p>
+    {readonly ? (
+      <p className="form-static">
+        {isChecked ? <span className="icon"><i className="fa fa-check" /></span> : '---'}
+      </p>
+    ) : (
+      <p className="control">
+        <a
+          className={isChecked ? 'button is-primary' : 'button'}
+          style={{ width: 32 }}
+          onClick={e => {
+            e.preventDefault();
+            onChange(!isChecked);
+          }}
+        >
+          {isChecked && <i className="fa fa-check" />}
+        </a>
+      </p>
+    )}
   </div>
 );
 
