@@ -19,11 +19,13 @@ export const DiagnosesComponent = ({
   diagnoses,
   addDiagnosis,
   removeDiagnosis,
+  readonly = false,
 }: {
   label: ?string,
   diagnoses: Array<diagnosisType>,
   addDiagnosis: (diagnosis: diagnosisType) => void,
   removeDiagnosis: (index: number) => void,
+  readonly: boolean,
 }) => (
   <div>
     <div className="control">
@@ -34,7 +36,9 @@ export const DiagnosesComponent = ({
             <th>ICD-10 Code</th>
             <th>Description</th>
             <th>Text</th>
-            <th></th>
+            {!readonly &&
+              <th></th>
+            }
           </tr>
         </thead>
         <tbody>
@@ -43,25 +47,29 @@ export const DiagnosesComponent = ({
             <td>{diagnosis.icd10}</td>
             <td>{ICD10[diagnosis.icd10]}</td>
             <td>{diagnosis.text}</td>
-            <td className="is-narrow">
-              <a
-                className="button is-danger"
-                onClick={e => {
-                  e.preventDefault();
-                  removeDiagnosis(i);
-                }}
-              >
-                <i className="fa fa-times" />
-              </a>
-            </td>
+            {!readonly &&
+              <td className="is-narrow">
+                <a
+                  className="button is-danger"
+                  onClick={e => {
+                    e.preventDefault();
+                    removeDiagnosis(i);
+                  }}
+                >
+                  <i className="fa fa-times" />
+                </a>
+              </td>
+            }
           </tr>
         )}
         </tbody>
       </table>
     </div>
-    <DiagnosisInput
-      onDiagnosisAdded={addDiagnosis}
-    />
+    {!readonly &&
+      <DiagnosisInput
+        onDiagnosisAdded={addDiagnosis}
+      />
+    }
   </div>
 );
 
