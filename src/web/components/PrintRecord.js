@@ -3,7 +3,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _get from 'lodash.get';
-import math from 'mathjs';
+
+import { convert } from '../forms/fields/TextUnitInput';
 
 const Body = ({
   patient,
@@ -24,14 +25,10 @@ const Body = ({
       <tbody>
         <tr>
           <td>
-            {math.unit(_get(record, 'height.value'), _get(record, 'height.unit'))
-              .toNumber('cm')}
-            cm
+            {convert(_get(record, 'height'), 'cm', 1)} cm
           </td>
           <td>
-            {math.unit(_get(record, 'weight.value'), _get(record, 'weight.unit'))
-              .toNumber('kg')}
-            kg
+            {convert(_get(record, 'weight'), 'kg', 1)} kg
           </td>
         </tr>
       </tbody>
