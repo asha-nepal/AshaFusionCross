@@ -53,4 +53,16 @@ describe('TextUnitInput.convert', () => {
     expect(math.unit).not.toBeCalled();
     expect(mockMathUnitToNumber).not.toBeCalled();
   });
+
+  it('cuts off result as precision argument given', () => {
+    mockMathUnitToNumber.mockReturnValue(12.9876);
+    const value = {
+      value: '180',
+      unit: 'cm',
+    };
+    const targetUnit = 'in';
+    const precision = 2;
+
+    expect(convert(value, targetUnit, precision)).toEqual(12.99);
+  });
 });
