@@ -20,7 +20,8 @@ import {
   Diagnoses,
   MultiInput,
   Block,
-} from './fields';
+} from '../fields';
+import WriterNames from './WriterNames';
 
 const fieldComponents = {
   textinput: TextInput,
@@ -85,16 +86,22 @@ const RecordFormComponent = ({
   onSubmit: (record: RecordObject) => void,
   freeze: boolean,
 }) => (
-  <Form
-    model={model}
-    onSubmit={onSubmit}
-  >
-    {createChildFields(state, model, style)}
+  <div>
+    <Form
+      model={model}
+      onSubmit={onSubmit}
+    >
+      {createChildFields(state, model, style)}
 
-    <button type="submit" className="button is-primary" disabled={freeze}>
-      Submit
-    </button>
-  </Form>
+      <button type="submit" className="button is-primary" disabled={freeze}>
+        Submit
+      </button>
+    </Form>
+
+    <hr />
+
+    <WriterNames model={model} />
+  </div>
 );
 
 export default connect(
