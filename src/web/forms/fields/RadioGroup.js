@@ -39,23 +39,18 @@ const RadioGroupComponent = ({
     {readonly ? (
       <ReadOnly options={options} value={value} />
     ) : (
-      <div className="tabs is-toggle">
-        <ul>
+      <div className="checkgroup is-equiv">
         {options.map(option =>
-          <li
+          <a
             key={option.id}
-            className={option.id === value && 'is-active'}
-          >
-            <a
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                onChange(option.id);
-              }}
-            >{option.label}</a>
-          </li>
+            className={option.id === value ? 'control button is-primary' : 'control button'}
+            style={{ flexBasis: 1 }}
+            onClick={e => {
+              e.preventDefault();
+              onChange(option.id);
+            }}
+          >{option.label}</a>
         )}
-        </ul>
       </div>
     )}
   </div>
