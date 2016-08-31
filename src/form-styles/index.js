@@ -80,7 +80,8 @@ export default {
             {
               field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
               style: { width: 60 },
-              units: ['degC', 'degF'],
+              units: ['degF', 'degC'],
+              precision: 1,
             },
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
@@ -230,7 +231,8 @@ export default {
             {
               field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
               style: { width: 60 },
-              units: ['degC', 'degF'],
+              units: ['degF', 'degC'],
+              precision: 1,
             },
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
