@@ -32,11 +32,6 @@ export default {
                 }
               },
             },
-            {
-              field: 'waist', label: 'Waist', class: 'textunitinput', type: 'number',
-              style: { width: 100 },
-              units: ['cm', 'in'],
-            },
           ],
         },
         {
@@ -112,24 +107,32 @@ export default {
           show: 'allergy',
         },
         {
+          field: 'current_medicine', label: 'Current medicines', class: 'textarea',
+        },
+        {
           class: 'block',
           wrap: false,
           children: [
             {
-              field: 'medicalHistory', label: 'Medical history', class: 'textarea',
+              field: 'past_medical_history', label: 'Past medical history', class: 'textarea',
               style: { width: '50%' },
             },
             {
-              field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
+              field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
               style: { width: '50%' },
             },
           ],
         },
         {
-          field: 'symptoms_select', label: 'Symptoms', class: 'checkgroup',
+          field: 'signs', label: 'Signs', class: 'checkgroup',
           options: [
-            { id: 'diabetes', label: 'Diabetes' },
-            { id: 'high_bp', label: 'High blood pressure' },
+            { id: 'jaundice', label: 'Jaundice' },
+            { id: 'anemia', label: 'Anemia' },
+            { id: 'lymphadenopathy', label: 'Lymphadenopathy' },
+            { id: 'cyanosis', label: 'Cyanosis' },
+            { id: 'clubbing', label: 'Clubbing' },
+            { id: 'oedema', label: 'Oedema' },
+            { id: 'dehydration', label: 'Dehydration' },
           ],
         },
         {
@@ -173,11 +176,6 @@ export default {
                   return null;
                 }
               },
-            },
-            {
-              field: 'waist', label: 'Waist', class: 'textunitinput', type: 'number',
-              style: { width: 100 },
-              units: ['cm', 'in'],
             },
           ],
         },
@@ -250,24 +248,32 @@ export default {
           ],
         },
         {
+          field: 'current_medicine', label: 'Current medicines', class: 'textarea',
+        },
+        {
           class: 'block',
           wrap: false,
           children: [
             {
-              field: 'medicalHistory', label: 'Medical history', class: 'textarea',
+              field: 'past_medical_history', label: 'Past medical history', class: 'textarea',
               style: { width: '50%' },
             },
             {
-              field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
+              field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
               style: { width: '50%' },
             },
           ],
         },
         {
-          field: 'symptoms_select', label: 'Symptoms', class: 'checkgroup',
+          field: 'signs', label: 'Signs', class: 'checkgroup',
           options: [
-            { id: 'diabetes', label: 'Diabetes' },
-            { id: 'high_bp', label: 'High blood pressure' },
+            { id: 'jaundice', label: 'Jaundice' },
+            { id: 'anemia', label: 'Anemia' },
+            { id: 'lymphadenopathy', label: 'Lymphadenopathy' },
+            { id: 'cyanosis', label: 'Cyanosis' },
+            { id: 'clubbing', label: 'Clubbing' },
+            { id: 'oedema', label: 'Oedema' },
+            { id: 'dehydration', label: 'Dehydration' },
           ],
         },
         {
