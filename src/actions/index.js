@@ -52,6 +52,9 @@ export const addNewActiveRecord = (patientId: string) => ({
 
 export const setActivePatient = formActions.change.bind(null, 'activePatient');
 
+export const setActiveRecord = (index: number, record: RecordObject) =>
+  formActions.change(`activeRecords[${index}]`, record);
+
 export const setActiveRecords = formActions.change.bind(null, 'activeRecords');
 
 export const resetActiveRecords = formActions.reset.bind(null, 'activeRecords');

@@ -4,6 +4,7 @@ import {
   requestPutRecord,
   successPutRecord,
   failurePutRecord,
+  setActiveRecord,
   alertInfo,
   alertError,
 } from '../actions';
@@ -18,13 +19,22 @@ export function* putActiveRecord(index) {
   const now = (new Date()).getTime();  // Unix Millisecond Timestamp
 
   try {
-    yield call([db, db.put], {
+    const res = yield call([db, db.put], {
       $created_at: now,
       $created_by: loggedInUser || null,
       ...record,
       $updated_at: now,
       $updated_by: loggedInUser || null,
     });
+    if (!res.ok || res.id !== record._id) {
+      throw new Error('Invalid response');
+    }
+
+    yield put(setActiveRecord(index, {
+      ...record,
+      _rev: res.rev,
+    }));
+
     yield put(alertInfo('Record updated'));
     yield put(successPutRecord());
   } catch (error) {

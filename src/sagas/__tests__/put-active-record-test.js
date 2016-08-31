@@ -14,6 +14,7 @@ import {
   requestPutRecord,
   successPutRecord,
   failurePutRecord,
+  setActiveRecord,
   alertInfo,
   alertError,
 } from '../../actions';
@@ -33,14 +34,20 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('calls db.put(record) with $created_at and $updated_at', () => {
+    const mockIndex = 42;
     const mockRecord = {
       _id: 'record_mocked',
       hoge: 'hoge',
     };
     deepFreeze(mockRecord);
+    const mockResponse = {
+      ok: true,
+      id: 'record_mocked',
+      rev: '2-a147c1a7e2a186da6f0797743a95e240',
+    };
     const mockAuth = {};
 
-    const saga = putActiveRecord();
+    const saga = putActiveRecord(mockIndex);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));
@@ -56,6 +63,12 @@ describe('PUT_ACTIVE_RECORD', () => {
         $created_by: null,
         $updated_by: null,
       }));
+
+    expect(saga.next(mockResponse).value)
+      .toEqual(put(setActiveRecord(mockIndex, {
+        ...mockRecord,
+        _rev: '2-a147c1a7e2a186da6f0797743a95e240',
+      })));
 
     expect(saga.next().value)
       .toEqual(put(alertInfo('Record updated')));
@@ -91,15 +104,6 @@ describe('PUT_ACTIVE_RECORD', () => {
         $created_by: null,
         $updated_by: null,
       }));
-
-    expect(saga.next().value)
-      .toEqual(put(alertInfo('Record updated')));
-
-    expect(saga.next().value)
-      .toEqual(put(successPutRecord()));
-
-    expect(saga.next())
-      .toEqual({ done: true, value: undefined });
   });
 
   it('adds $created_by and $updated_by if logged in', () => {
@@ -130,15 +134,6 @@ describe('PUT_ACTIVE_RECORD', () => {
         $created_by: 'dummyuser',
         $updated_by: 'dummyuser',
       }));
-
-    expect(saga.next().value)
-      .toEqual(put(alertInfo('Record updated')));
-
-    expect(saga.next().value)
-      .toEqual(put(successPutRecord()));
-
-    expect(saga.next())
-      .toEqual({ done: true, value: undefined });
   });
 
   it('does not update $created_by if already exists', () => {
@@ -239,5 +234,33 @@ describe('PUT_ACTIVE_RECORD', () => {
 
     expect(saga.next().value)
       .toEqual(put(failurePutRecord(mockError)));
+  });
+
+  it('handles invalid response as error', () => {
+    const mockRecord = {
+      _id: 'record_mocked',
+      hoge: 'hoge',
+    };
+    deepFreeze(mockRecord);
+    const mockAuth = {};
+    const mockResponse = { ok: false };
+
+    const saga = putActiveRecord();
+
+    expect(saga.next().value)
+      .toEqual(put(requestPutRecord()));
+
+    saga.next();
+    saga.next();
+    saga.next(mockAuth);
+
+    expect(saga.next(mockResponse).value)
+      .toEqual(put(alertError('Failed updating record')));
+
+    expect(saga.next().value)
+      .toEqual(put(failurePutRecord(new Error('Invalid response'))));
+
+    expect(saga.next())
+      .toEqual({ done: true, value: undefined });
   });
 });
