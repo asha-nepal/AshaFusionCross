@@ -10,9 +10,34 @@ import RecordChartSelector from '../../containers/PatientView/RecordChartSelecto
 import PatientForm from '../../forms/PatientForm';
 import RecordForm from '../../forms/RecordForm';
 
+type Props = {
+  init: () => void,
+  subscribeChange: () => () => void,
+  isFetching: boolean,
+  patient: PatientObject,
+  records: Array<RecordObject>,
+  addNewActiveRecord: () => void,
+  putActivePatient: () => void,
+  putActiveRecord: (index: number) => void,
+  removeActivePatient: () => void,
+  isNew: boolean,
+  isPuttingPatient: boolean,
+  isPuttingRecord: boolean,
+  patientFormVisibility: boolean,
+  setPatientFormVisibility: (visibility: boolean) => void,
+  selectedActiveRecordIndex: number,
+  selectActiveRecord: (id: string) => void,
+  setRecordFormStyleId: (styleId: string) => void,
+  recordFormStyles: Array<Object>,
+  recordFormStyleId: string,
+  recordFormStyle: ?string,
+  params: ?Object,
+  patientId: ?string,
+};
+
 export default class PatientView extends Component {
   state: {
-    unsubscribeChange: () => void;
+    unsubscribeChange: ?() => void;
   };
 
   componentWillMount() {
@@ -23,34 +48,35 @@ export default class PatientView extends Component {
     });
   }
 
-  componentWillUnmount() {
-    if (this.state.unsubscribeChange) {
-      this.state.unsubscribeChange();
+  componentWillReceiveProps(newProps: Props) {
+    const patientIdChanged = this.props.params ? (
+      newProps.params && (this.props.params.patientId !== newProps.params.patientId)
+    ) : (
+      this.props.patientId !== newProps.patientId
+    );
+
+    if (patientIdChanged) {
+      if (this.state.unsubscribeChange) {
+        this.state.unsubscribeChange();
+      }
+
+      this.setState({
+        unsubscribeChange: newProps.subscribeChange(),
+      });
     }
   }
 
-  props: {
-    init: () => void,
-    subscribeChange: () => () => void,
-    isFetching: boolean,
-    patient: PatientObject,
-    records: Array<RecordObject>,
-    addNewActiveRecord: () => void,
-    putActivePatient: () => void,
-    putActiveRecord: (index: number) => void,
-    removeActivePatient: () => void,
-    isNew: boolean,
-    isPuttingPatient: boolean,
-    isPuttingRecord: boolean,
-    patientFormVisibility: boolean,
-    setPatientFormVisibility: (visibility: boolean) => void,
-    selectedActiveRecordIndex: number,
-    selectActiveRecord: (id: string) => void,
-    setRecordFormStyleId: (styleId: string) => void,
-    recordFormStyles: Array<Object>,
-    recordFormStyleId: string,
-    recordFormStyle: ?string,
-  };
+  componentWillUnmount() {
+    if (this.state.unsubscribeChange) {
+      this.state.unsubscribeChange();
+
+      this.setState({
+        unsubscribeChange: null,
+      });
+    }
+  }
+
+  props: Props;
 
   render() {
     const {
