@@ -47,34 +47,29 @@ export const CheckGroupComponent = ({
     {readonly ? (
       <ReadOnly value={value} options={options} />
     ) : (
-      <div className="tabs is-toggle">
-        <ul>
+      <div className="checkgroup">
         {options.map(option => {
           const isChecked = value && value.indexOf(option.id) > -1;
           return (
-            <li
+            <a
               key={option.id}
-              className={isChecked && 'is-active'}
+              className={isChecked ? 'control button is-primary' : 'control button'}
+              onClick={e => {
+                e.preventDefault();
+                onChange(
+                  isChecked
+                    ? (value || []).filter(v => v !== option.id)
+                    : (value || []).concat(option.id)
+                );
+              }}
             >
-              <a
-                onClick={e => {
-                  e.preventDefault();
-                  onChange(
-                    isChecked
-                      ? (value || []).filter(v => v !== option.id)
-                      : (value || []).concat(option.id)
-                  );
-                }}
-              >
-                <span className="icon is-small">
-                  <i className={isChecked ? 'fa fa-check-square' : 'fa fa-square-o'} />
-                </span>
-                <span>{option.label}</span>
-              </a>
-            </li>
+              <span className="icon is-small">
+                <i className={isChecked ? 'fa fa-check-square' : 'fa fa-square-o'} />
+              </span>
+              <span>{option.label}</span>
+            </a>
           );
         })}
-        </ul>
       </div>
     )}
   </div>

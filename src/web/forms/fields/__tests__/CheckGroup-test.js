@@ -25,7 +25,7 @@ describe('<CheckGroupComponent />', () => {
       onChange={mockOnChange}
     />);
 
-    wrapper.find('li').at(1).find('a')
+    wrapper.find('a').at(1)
       .simulate('click', mockEventObject);
     expect(mockOnChange).toBeCalledWith(['a', 'b']);
   });
@@ -46,7 +46,7 @@ describe('<CheckGroupComponent />', () => {
       onChange={mockOnChange}
     />);
 
-    wrapper.find('li').at(1).find('a')
+    wrapper.find('a').at(1)
       .simulate('click', mockEventObject);
     expect(mockOnChange).toBeCalledWith(['a']);
   });
