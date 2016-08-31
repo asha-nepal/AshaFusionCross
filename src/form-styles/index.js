@@ -44,6 +44,7 @@ export default {
                 {
                   field: 'bp.s', class: 'textinput', placeholder: 'sBP',
                   type: 'number', style: { width: 60 },
+                  min: 1, precision: 0,
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 100] },
                     { type: 'success', label: 'Normal', range: [100, 140] },
@@ -54,6 +55,7 @@ export default {
                 {
                   field: 'bp.d', class: 'textinput', placeholder: 'dBP',
                   type: 'number', style: { width: 60 }, suffix: 'mmHg',
+                  min: 1, precision: 0,
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 60] },
                     { type: 'success', label: 'Normal', range: [60, 90] },
@@ -83,6 +85,7 @@ export default {
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '%',
+              min: 0, max: 100, precision: 0,
               alerts: [
                 { type: 'danger', label: 'Alert', range: [null, 80] },
                 { type: 'warning', label: 'Low', range: [80, 95] },
@@ -92,10 +95,12 @@ export default {
             {
               field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '/min',
+              min: 1, precision: 0,
             },
             {
               field: 'bs', label: 'Blood sugar', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: 'mg/dL',
+              min: 1, precision: 0,
             },
             {
               field: 'allergy', label: 'Allergy', class: 'check',
@@ -189,6 +194,7 @@ export default {
                 {
                   field: 'bp.s', class: 'textinput', placeholder: 'sBP',
                   type: 'number', style: { width: 60 },
+                  min: 1, precision: 0,
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 100] },
                     { type: 'success', label: 'Normal', range: [100, 140] },
@@ -199,6 +205,7 @@ export default {
                 {
                   field: 'bp.d', class: 'textinput', placeholder: 'dBP',
                   type: 'number', style: { width: 60 }, suffix: 'mmHg',
+                  min: 1, precision: 0,
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 60] },
                     { type: 'success', label: 'Normal', range: [60, 90] },
@@ -228,6 +235,7 @@ export default {
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '%',
+              min: 0, max: 100, precision: 0,
               alerts: [
                 { type: 'danger', label: 'Alert', range: [null, 80] },
                 { type: 'warning', label: 'Low', range: [80, 95] },
@@ -237,10 +245,12 @@ export default {
             {
               field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '/min',
+              min: 1, precision: 0,
             },
             {
               field: 'bs', label: 'Blood sugar', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: 'mg/dL',
+              min: 1, precision: 0,
             },
             {
               field: 'allergy', label: 'Allergy', class: 'check',
