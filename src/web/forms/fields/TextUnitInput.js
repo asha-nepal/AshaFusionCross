@@ -25,7 +25,7 @@ export const convert = (
   return converted;
 };
 
-class TextUnitInputComponent extends Component {
+export class TextUnitInputComponent extends Component {
   constructor(props) {
     super(props);
 
