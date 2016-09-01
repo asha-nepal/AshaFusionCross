@@ -260,6 +260,10 @@ export default {
           ],
         },
         {
+          field: 'allergy_memo', label: 'Allergy memo', class: 'textarea',
+          show: 'allergy',
+        },
+        {
           field: 'current_medicine', label: 'Current medicines', class: 'textarea',
         },
         {
