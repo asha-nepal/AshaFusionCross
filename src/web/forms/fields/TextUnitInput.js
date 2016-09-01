@@ -25,8 +25,20 @@ export const convert = (
   return converted;
 };
 
+type Props = {
+  label: ?string,
+  units: Array<string>,
+  value: ValueUnitType,
+  style: ?Object,
+  precision: ?number,
+  forceFixed: ?boolean,
+  placeholder: ?string,
+  readonly: boolean,
+  onChange: (value: ValueUnitType) => void,
+};
+
 export class TextUnitInputComponent extends Component {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -38,17 +50,7 @@ export class TextUnitInputComponent extends Component {
     unit: string,
   };
 
-  props: {
-    label: ?string,
-    units: Array<string>,
-    value: ValueUnitType,
-    style: ?Object,
-    precision: ?number,
-    forceFixed: ?boolean,
-    placeholder: ?string,
-    readonly: boolean,
-    onChange: (value: ValueUnitType) => void,
-  };
+  props: Props;
 
   render() {
     const {

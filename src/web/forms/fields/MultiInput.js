@@ -6,7 +6,7 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 
 type Props = {
-  label: string,
+  label: ?string,
   type: ?string,
   values: ?Array<string>,
   readonly: boolean,
@@ -15,7 +15,7 @@ type Props = {
   onRemoveItemRequested: (index: number) => void,
 };
 
-const ReadOnly = ({
+export const ReadonlyMultiInput = ({
   label,
   values,
 }: {
@@ -67,7 +67,7 @@ export class MultiInputComponent extends Component {
     } = this.props;
 
     if (readonly) {
-      return <ReadOnly label={label} values={values} />;
+      return <ReadonlyMultiInput label={label} values={values} />;
     }
 
     return (
