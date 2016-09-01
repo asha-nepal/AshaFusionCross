@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 import _get from 'lodash.get';
 
 import { convert } from '../forms/fields/TextUnitInput';
-import { TextAreaComponent } from '../forms/fields/TextArea';
-import { MultiInputComponent } from '../forms/fields/MultiInput';
+import { ReadonlyTextArea } from '../forms/fields/TextArea';
+import { ReadonlyMultiInput } from '../forms/fields/MultiInput';
 import { CheckGroupComponent } from '../forms/fields/CheckGroup';
 import { DiagnosesComponent } from '../forms/fields/Diagnoses';
 
@@ -84,9 +84,8 @@ const Body = ({
               <td>{_get(record, 'allergy') ? (
                 <div>
                   <strong>&lt;Yes&gt;</strong>
-                  <TextAreaComponent
+                  <ReadonlyTextArea
                     value={_get(record, 'allergy_memo')}
-                    readonly
                   />
                 </div>
               ) : '---'}</td>
@@ -94,18 +93,16 @@ const Body = ({
             <tr>
               <th>Medical history</th>
               <td>
-                <TextAreaComponent
+                <ReadonlyTextArea
                   value={_get(record, 'medical_history')}
-                  readonly
                 />
               </td>
             </tr>
             <tr>
               <th>Current medicines</th>
               <td>
-                <TextAreaComponent
+                <ReadonlyTextArea
                   value={_get(record, 'current_medicine')}
-                  readonly
                 />
               </td>
             </tr>
@@ -120,9 +117,8 @@ const Body = ({
                   ]}
                   readonly
                 />
-                <MultiInputComponent
+                <ReadonlyMultiInput
                   values={_get(record, 'symptoms')}
-                  readonly
                 />
               </td>
             </tr>
