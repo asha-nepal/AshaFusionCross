@@ -39,6 +39,9 @@ const TextInputComponent = ({
   prefix,
   suffix,
   placeholder,
+  min,
+  max,
+  precision,
   alerts,
   readonly = false,
 }: {
@@ -50,6 +53,9 @@ const TextInputComponent = ({
   prefix: ?string,
   suffix: ?string,
   placeholder: ?string,
+  min: ?number,
+  max: ?number,
+  precision: ?number,
   alerts: ?Array<Object>,
   readonly: boolean,
 }) => {
@@ -96,6 +102,9 @@ const TextInputComponent = ({
             }}
             placeholder={placeholder}
             value={value || ''}
+            min={min}
+            max={max}
+            step={typeof precision === 'number' && Math.pow(10, -precision)}
             onChange={e => onChange(e.target.value)}
           />
           {alert ? alertIcons[alert.type] : <span />}

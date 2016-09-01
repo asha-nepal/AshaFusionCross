@@ -5,6 +5,7 @@ import { Form } from 'react-redux-form';
 import {
   TextInput,
   RadioGroup,
+  Block,
 } from './fields';
 
 export default ({
@@ -27,24 +28,31 @@ export default ({
       label="Name"
     />
 
-    <RadioGroup
-      model={`${model}.sex`}
-      label="Sex"
-      options={[
-        { id: 'male', label: 'Male' },
-        { id: 'female', label: 'Female' },
-      ]}
-    />
+    <Block>
+      <RadioGroup
+        model={`${model}.sex`}
+        label="Sex"
+        options={[
+          { id: 'male', label: 'Male' },
+          { id: 'female', label: 'Female' },
+        ]}
+      />
 
-    <TextInput
-      model={`${model}.age`}
-      label="Age"
-      type="number"
-    />
+      <TextInput
+        model={`${model}.age`}
+        label="Age"
+        type="number"
+      />
+    </Block>
 
     <TextInput
       model={`${model}.address`}
       label="Address"
+    />
+
+    <TextInput
+      model={`${model}.ethnicity`}
+      label="Ethnicity"
     />
 
     <div className="level">

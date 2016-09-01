@@ -32,11 +32,6 @@ export default {
                 }
               },
             },
-            {
-              field: 'waist', label: 'Waist', class: 'textunitinput', type: 'number',
-              style: { width: 100 },
-              units: ['cm', 'in'],
-            },
           ],
         },
         {
@@ -49,6 +44,7 @@ export default {
                 {
                   field: 'bp.s', class: 'textinput', placeholder: 'sBP',
                   type: 'number', style: { width: 60 },
+                  min: 1, precision: 0,
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 100] },
                     { type: 'success', label: 'Normal', range: [100, 140] },
@@ -59,6 +55,7 @@ export default {
                 {
                   field: 'bp.d', class: 'textinput', placeholder: 'dBP',
                   type: 'number', style: { width: 60 }, suffix: 'mmHg',
+                  min: 1, precision: 0,
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 60] },
                     { type: 'success', label: 'Normal', range: [60, 90] },
@@ -83,11 +80,13 @@ export default {
             {
               field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
               style: { width: 60 },
-              units: ['degC', 'degF'],
+              units: ['degF', 'degC'],
+              precision: 1,
             },
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '%',
+              min: 0, max: 100, precision: 0,
               alerts: [
                 { type: 'danger', label: 'Alert', range: [null, 80] },
                 { type: 'warning', label: 'Low', range: [80, 95] },
@@ -97,10 +96,12 @@ export default {
             {
               field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '/min',
+              min: 1, precision: 0,
             },
             {
               field: 'bs', label: 'Blood sugar', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: 'mg/dL',
+              min: 1, precision: 0,
             },
             {
               field: 'allergy', label: 'Allergy', class: 'check',
@@ -112,24 +113,32 @@ export default {
           show: 'allergy',
         },
         {
+          field: 'current_medicine', label: 'Current medicines', class: 'textarea',
+        },
+        {
           class: 'block',
           wrap: false,
           children: [
             {
-              field: 'medicalHistory', label: 'Medical history', class: 'textarea',
+              field: 'past_medical_history', label: 'Past medical history', class: 'textarea',
               style: { width: '50%' },
             },
             {
-              field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
+              field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
               style: { width: '50%' },
             },
           ],
         },
         {
-          field: 'symptoms_select', label: 'Symptoms', class: 'checkgroup',
+          field: 'signs', label: 'Signs', class: 'checkgroup',
           options: [
-            { id: 'diabetes', label: 'Diabetes' },
-            { id: 'high_bp', label: 'High blood pressure' },
+            { id: 'jaundice', label: 'Jaundice' },
+            { id: 'anemia', label: 'Anemia' },
+            { id: 'lymphadenopathy', label: 'Lymphadenopathy' },
+            { id: 'cyanosis', label: 'Cyanosis' },
+            { id: 'clubbing', label: 'Clubbing' },
+            { id: 'oedema', label: 'Oedema' },
+            { id: 'dehydration', label: 'Dehydration' },
           ],
         },
         {
@@ -174,11 +183,6 @@ export default {
                 }
               },
             },
-            {
-              field: 'waist', label: 'Waist', class: 'textunitinput', type: 'number',
-              style: { width: 100 },
-              units: ['cm', 'in'],
-            },
           ],
         },
         {
@@ -191,6 +195,7 @@ export default {
                 {
                   field: 'bp.s', class: 'textinput', placeholder: 'sBP',
                   type: 'number', style: { width: 60 },
+                  min: 1, precision: 0,
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 100] },
                     { type: 'success', label: 'Normal', range: [100, 140] },
@@ -201,6 +206,7 @@ export default {
                 {
                   field: 'bp.d', class: 'textinput', placeholder: 'dBP',
                   type: 'number', style: { width: 60 }, suffix: 'mmHg',
+                  min: 1, precision: 0,
                   alerts: [
                     { type: 'warning', label: 'Low', range: [null, 60] },
                     { type: 'success', label: 'Normal', range: [60, 90] },
@@ -225,11 +231,13 @@ export default {
             {
               field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
               style: { width: 60 },
-              units: ['degC', 'degF'],
+              units: ['degF', 'degC'],
+              precision: 1,
             },
             {
               field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '%',
+              min: 0, max: 100, precision: 0,
               alerts: [
                 { type: 'danger', label: 'Alert', range: [null, 80] },
                 { type: 'warning', label: 'Low', range: [80, 95] },
@@ -239,10 +247,12 @@ export default {
             {
               field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: '/min',
+              min: 1, precision: 0,
             },
             {
               field: 'bs', label: 'Blood sugar', class: 'textinput', type: 'number',
               style: { width: 60 }, suffix: 'mg/dL',
+              min: 1, precision: 0,
             },
             {
               field: 'allergy', label: 'Allergy', class: 'check',
@@ -250,24 +260,32 @@ export default {
           ],
         },
         {
+          field: 'current_medicine', label: 'Current medicines', class: 'textarea',
+        },
+        {
           class: 'block',
           wrap: false,
           children: [
             {
-              field: 'medicalHistory', label: 'Medical history', class: 'textarea',
+              field: 'past_medical_history', label: 'Past medical history', class: 'textarea',
               style: { width: '50%' },
             },
             {
-              field: 'currentMedicine', label: 'Current medicines', class: 'textarea',
+              field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
               style: { width: '50%' },
             },
           ],
         },
         {
-          field: 'symptoms_select', label: 'Symptoms', class: 'checkgroup',
+          field: 'signs', label: 'Signs', class: 'checkgroup',
           options: [
-            { id: 'diabetes', label: 'Diabetes' },
-            { id: 'high_bp', label: 'High blood pressure' },
+            { id: 'jaundice', label: 'Jaundice' },
+            { id: 'anemia', label: 'Anemia' },
+            { id: 'lymphadenopathy', label: 'Lymphadenopathy' },
+            { id: 'cyanosis', label: 'Cyanosis' },
+            { id: 'clubbing', label: 'Clubbing' },
+            { id: 'oedema', label: 'Oedema' },
+            { id: 'dehydration', label: 'Dehydration' },
           ],
         },
         {
@@ -405,74 +423,80 @@ Otherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) 
       style: [
         {
           field: 'ksix.nervious',
-          label: 'Nervious?',
+          label: 'क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervious?)',
           class: 'radio',
           options: [
-            { id: 4, label: 'All of the time (4)' },
-            { id: 3, label: 'Most of the time (3)' },
-            { id: 2, label: 'Some of the time (2)' },
-            { id: 1, label: 'A little of the time (1)' },
-            { id: 0, label: 'None of the time (0)' },
+            { id: 4, label: 'संध (4)' },
+            { id: 3, label: 'धेरैजसो (3)' },
+            { id: 2, label: 'कहिलेकाहीं बिरैले (2)' },
+            { id: 1, label: 'एकदम कम मात्र (1)' },
+            { id: 0, label: 'कहिल्यै पनि भएन (0)' },
           ],
         },
         {
           field: 'ksix.hopeless',
-          label: 'Hopeless?',
+          label: 'ख) भविष्यमा केही पनि गर्न सक्दिन भनेर हरेस खानुभएको थियो ? (Hopeless?)',
           class: 'radio',
           options: [
-            { id: 4, label: 'All of the time (4)' },
-            { id: 3, label: 'Most of the time (3)' },
-            { id: 2, label: 'Some of the time (2)' },
-            { id: 1, label: 'A little of the time (1)' },
-            { id: 0, label: 'None of the time (0)' },
+            { id: 4, label: 'संध (4)' },
+            { id: 3, label: 'धेरैजसो (3)' },
+            { id: 2, label: 'कहिलेकाहीं बिरैले (2)' },
+            { id: 1, label: 'एकदम कम मात्र (1)' },
+            { id: 0, label: 'कहिल्यै पनि भएन (0)' },
           ],
         },
         {
           field: 'ksix.restless',
-          label: 'Restless or fidgety?',
+          /* eslint-disable max-len */
+          label: 'ग )छटपटी हुने ,एक ठाउँमा स्थिर भएर बास्न नसक्ने वा कहाँ जाउँ के गरूँ जस्तो हुनुभएको थियो ? (Restless or fidgety?)',
+          /* eslint-enable max-len */
           class: 'radio',
           options: [
-            { id: 4, label: 'All of the time (4)' },
-            { id: 3, label: 'Most of the time (3)' },
-            { id: 2, label: 'Some of the time (2)' },
-            { id: 1, label: 'A little of the time (1)' },
-            { id: 0, label: 'None of the time (0)' },
+            { id: 4, label: 'संध (4)' },
+            { id: 3, label: 'धेरैजसो (3)' },
+            { id: 2, label: 'कहिलेकाहीं बिरैले (2)' },
+            { id: 1, label: 'एकदम कम मात्र (1)' },
+            { id: 0, label: 'कहिल्यै पनि भएन (0)' },
           ],
         },
         {
           field: 'ksix.depressed',
-          label: 'So depressed that nothing could cheer you up?',
+          /* eslint-disable max-len */
+          label: 'घ) तपाईंको मनमा भएको दिक्दारिपन ,उदासिपन वा खिन्नताले गर्दा कुनैपनि कुराले केही गरेपनि खुसी हुननसक्ने हनुभएको थियो ? (So depressed that nothing could cheer you up?)',
+          /* eslint-enable max-len */
           class: 'radio',
           options: [
-            { id: 4, label: 'All of the time (4)' },
-            { id: 3, label: 'Most of the time (3)' },
-            { id: 2, label: 'Some of the time (2)' },
-            { id: 1, label: 'A little of the time (1)' },
-            { id: 0, label: 'None of the time (0)' },
+            { id: 4, label: 'संध (4)' },
+            { id: 3, label: 'धेरैजसो (3)' },
+            { id: 2, label: 'कहिलेकाहीं बिरैले (2)' },
+            { id: 1, label: 'एकदम कम मात्र (1)' },
+            { id: 0, label: 'कहिल्यै पनि भएन (0)' },
           ],
         },
         {
           field: 'ksix.effort',
-          label: 'That everything was an effort?',
+          /* eslint-disable max-len */
+          label: 'ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything was an effort?)',
+          /* eslint-enable max-len */
           class: 'radio',
           options: [
-            { id: 4, label: 'All of the time (4)' },
-            { id: 3, label: 'Most of the time (3)' },
-            { id: 2, label: 'Some of the time (2)' },
-            { id: 1, label: 'A little of the time (1)' },
-            { id: 0, label: 'None of the time (0)' },
+            { id: 4, label: 'संध (4)' },
+            { id: 3, label: 'धेरैजसो (3)' },
+            { id: 2, label: 'कहिलेकाहीं बिरैले (2)' },
+            { id: 1, label: 'एकदम कम मात्र (1)' },
+            { id: 0, label: 'कहिल्यै पनि भएन (0)' },
           ],
         },
         {
           field: 'ksix.worthless',
-          label: 'Worthless?',
+          label: 'च) आफुलाई काम नलाग्ऩे बेकारको मान्छे जस्तो ठान्नुभएको थियो ? (Worthless?)',
           class: 'radio',
           options: [
-            { id: 4, label: 'All of the time (4)' },
-            { id: 3, label: 'Most of the time (3)' },
-            { id: 2, label: 'Some of the time (2)' },
-            { id: 1, label: 'A little of the time (1)' },
-            { id: 0, label: 'None of the time (0)' },
+            { id: 4, label: 'संध (4)' },
+            { id: 3, label: 'धेरैजसो (3)' },
+            { id: 2, label: 'कहिलेकाहीं बिरैले (2)' },
+            { id: 1, label: 'एकदम कम मात्र (1)' },
+            { id: 0, label: 'कहिल्यै पनि भएन (0)' },
           ],
         },
       ],
