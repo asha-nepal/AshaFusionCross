@@ -1,4 +1,4 @@
-import { fork, call, put, take, cancel, race, select } from 'redux-saga/effects';
+import { fork, call, put, take, cancel, race } from 'redux-saga/effects';
 
 import {
   loginSuccess,
@@ -42,6 +42,13 @@ const authedSagas = [
 
 const authedTasks = new Array(authedSagas.length);
 
+
+function checkAccessible() {
+  return db.info()
+    .then(() => true)
+    .catch(() => false);
+}
+
 function* afterLoggedIn() {
   for (let i = 0; i < authedSagas.length; ++i) {
     authedTasks[i] = yield fork(authedSagas[i]);
@@ -53,7 +60,12 @@ function* afterLoggedIn() {
 }
 
 function* logout() {
-  yield call([db, db.logout]);
+  try {
+    yield call([db, db.logout]);
+  } catch (error) {
+    console.log(error);
+  }
+
   yield put(logoutSuccess());
 
   for (let i = 0; i < authedTasks.length; ++i) {
@@ -110,7 +122,16 @@ function* loginFlow() {
 function* anonymousLoginFlow() {
   while (true) {
     yield take(REQUEST_ANONYMOUS_LOGIN);
-    const isDBPublic = yield select(state => state.auth.isDBPublic);
+
+    const isAccessible = yield call(checkAccessible);
+    if (!isAccessible) {
+      yield put(alertError('Disconnected'));
+      continue;
+    }
+
+    const session = yield call([db, db.getSession]);
+    const isDBPublic = isAccessible && !session.userCtx.name;
+    yield put(setIsDBPublic(isDBPublic));
 
     if (!isDBPublic) {
       yield put(alertError('This DB is not public'));
@@ -157,12 +178,6 @@ export function * logoutFlow() {
   }
 }
 
-function checkAccessible() {
-  return db.info()
-    .then(() => true)
-    .catch(() => false);
-}
-
 export default function* rootSaga() {
   for (let i = 0; i < initialSagas.length; ++i) {
     yield fork(initialSagas[i]);
@@ -171,9 +186,13 @@ export default function* rootSaga() {
   yield put(connectPouchDB());
 
   const isAccessible = yield call(checkAccessible);
+  if (!isAccessible) {
+    yield put(alertError('Disconnected'));
+    return;
+  }
+
   const session = yield call([db, db.getSession]);
   const isDBPublic = isAccessible && !session.userCtx.name;
-
   yield put(setIsDBPublic(isDBPublic));
 
   if (isDBPublic) yield fork(anonymousLoginFlow);
