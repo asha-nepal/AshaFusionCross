@@ -8,7 +8,7 @@
     "test": "jest",
     "flow": "flow",
     "lint": "eslint src",
-    "build": "rm -rf public && mkdir public && cp -r src/web/static/* public/. && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
+    "build": "rm -rf public && mkdir public && cp -r src/web/static/* public/. && cp src/web/static/.[!.]* public/. && webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
     "server": "if-env NODE_ENV=production && npm run server:prod || npm run server:dev",
     "server:dev": "webpack-dev-server",
     "server:prod": "node server.js"
