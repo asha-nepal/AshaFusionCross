@@ -186,11 +186,6 @@ export default function* rootSaga() {
   yield put(connectPouchDB());
 
   const isAccessible = yield call(checkAccessible);
-  if (!isAccessible) {
-    yield put(alertError('Disconnected'));
-    return;
-  }
-
   const session = yield call([db, db.getSession]);
   const isDBPublic = isAccessible && !session.userCtx.name;
   yield put(setIsDBPublic(isDBPublic));
