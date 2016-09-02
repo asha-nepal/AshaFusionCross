@@ -43,6 +43,7 @@ const TextInputComponent = ({
   max,
   precision,
   alerts,
+  required = false,
   readonly = false,
 }: {
   label: ?string,
@@ -57,6 +58,7 @@ const TextInputComponent = ({
   max: ?number,
   precision: ?number,
   alerts: ?Array<Object>,
+  required: boolean,
   readonly: boolean,
 }) => {
   if (readonly) {
@@ -106,6 +108,7 @@ const TextInputComponent = ({
             max={max}
             step={typeof precision === 'number' && Math.pow(10, -precision)}
             onChange={e => onChange(e.target.value)}
+            required={required}
           />
           {alert ? alertIcons[alert.type] : <span />}
         </span>

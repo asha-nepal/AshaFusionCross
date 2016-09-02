@@ -26,6 +26,7 @@ export default ({
     <TextInput
       model={`${model}.name`}
       label="Name"
+      required
     />
 
     <Block>
