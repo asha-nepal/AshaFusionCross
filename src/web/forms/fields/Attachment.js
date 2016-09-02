@@ -7,18 +7,18 @@ import { AttachmentViewer } from './AttachmentViewer';
 export const Attachment = ({
   model,
   label,
-  rootModel,
+  modelReducer,
   accept,
   multiple,
 }: AttachmentProps) => (
   <div className="control">
     {label && <label className="label">{label}</label>}
     <AttachmentViewer
-      rootModel={rootModel}
+      modelReducer={modelReducer}
       model={model}
     />
     <AttachmentInput
-      rootModel={rootModel}
+      modelReducer={modelReducer}
       model={model}
       accept={accept}
       multiple={multiple}

@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
+import { mapStateToProps, mapDispatchToProps } from './utils';
 
 const alertIcons = {
   danger: <i className="fa fa-warning is-danger" />,
@@ -33,7 +32,9 @@ const ReadOnly = ({
 const TextInputComponent = ({
   label,
   value,
+  errors,
   onChange,
+  onBlur,
   style,
   type = 'text',
   prefix,
@@ -47,7 +48,9 @@ const TextInputComponent = ({
 }: {
   label: ?string,
   value: ?string,
+  errors: ?Array<string>,
   onChange: (newValue: string) => void,
+  onBlur: (newValue: string) => void,
   style: ?Object,
   type: string,
   prefix: ?string,
@@ -95,7 +98,7 @@ const TextInputComponent = ({
         >
           <input
             type={type}
-            className="input"
+            className={errors && errors.length > 0 ? 'input is-danger' : 'input'}
             style={{
               ...style,
               ...overrideStyle,
@@ -106,8 +109,14 @@ const TextInputComponent = ({
             max={max}
             step={typeof precision === 'number' && Math.pow(10, -precision)}
             onChange={e => onChange(e.target.value)}
+            onBlur={e => onBlur(e.target.value)}
           />
           {alert ? alertIcons[alert.type] : <span />}
+          {errors &&
+            errors.map(error =>
+              <span key={error} className="help is-danger">{error}</span>
+            )
+          }
         </span>
         {suffix &&
           <span className="button is-disabled">
@@ -118,13 +127,6 @@ const TextInputComponent = ({
     </div>
   );
 };
-
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
-});
 
 export const TextInput = connect(
   mapStateToProps, mapDispatchToProps

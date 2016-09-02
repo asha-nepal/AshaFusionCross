@@ -197,21 +197,26 @@ class AttachmentViewerComponent extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const record = _get(state, ownProps.rootModel);
+  const model = `${ownProps.modelReducer}.${ownProps.model}`;
+  const record = _get(state, ownProps.modelReducer);
 
   return {
     docId: record && record._id,
     _attachments: record && record._attachments,
-    metadata: _get(state, ownProps.model),
+    metadata: _get(state, model),
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  removeAttachment: (attachmentId) => {
-    dispatch(actions.filter(ownProps.model, (m) => m.id !== attachmentId));
-    dispatch(actions.omit(`${ownProps.rootModel}._attachments`, attachmentId));
-  },
-});
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const model = `${ownProps.modelReducer}.${ownProps.model}`;
+
+  return {
+    removeAttachment: (attachmentId) => {
+      dispatch(actions.filter(model, (m) => m.id !== attachmentId));
+      dispatch(actions.omit(`${ownProps.modelReducer}._attachments`, attachmentId));
+    },
+  };
+};
 
 export const AttachmentViewer = connect(
   mapStateToProps,

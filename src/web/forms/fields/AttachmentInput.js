@@ -56,15 +56,19 @@ const AttachmentInputComponent = ({
 
 const mapStateToProps = null;
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  addAttachments: (attachments, meta) => {
-    dispatch(actions.merge(`${ownProps.rootModel}._attachments`, attachments));
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const model = `${ownProps.modelReducer}.${ownProps.model}`;
 
-    for (let i = 0; i < meta.length; ++i) {
-      dispatch(actions.push(ownProps.model, meta[i]));
-    }
-  },
-});
+  return {
+    addAttachments: (attachments, meta) => {
+      dispatch(actions.merge(`${ownProps.modelReducer}._attachments`, attachments));
+
+      for (let i = 0; i < meta.length; ++i) {
+        dispatch(actions.push(model, meta[i]));
+      }
+    },
+  };
+};
 
 export const AttachmentInput = connect(
   mapStateToProps,
