@@ -12,7 +12,7 @@ export const filterPatientList = createSelector(
       return patientList;
     }
 
-    return patientList.filter(p => p.name.toLowerCase().indexOf(filter) >= 0);
+    return patientList.filter(p => p.name && p.name.toLowerCase().indexOf(filter) >= 0);
   }
 );
 
