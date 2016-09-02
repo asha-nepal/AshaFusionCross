@@ -78,7 +78,7 @@ export class MultiInputComponent extends Component {
             <input
               type={type}
               className="input is-expanded"
-              value={value}
+              value={value || ''}
               onChange={e => onChange(i, e.target.value)}
             />
             <a
@@ -96,7 +96,7 @@ export class MultiInputComponent extends Component {
           <input
             type={type}
             className="input is-expanded"
-            value={this.state.text}
+            value={this.state.text || ''}
             onChange={e => this.setState({ text: e.target.value })}
             onKeyPress={e => {
               if (e.which === 13) {

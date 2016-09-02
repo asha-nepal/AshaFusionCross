@@ -32,7 +32,7 @@ export const TextAreaComponent = ({
       <textarea
         className="textarea"
         placeholder={placeholder}
-        value={value}
+        value={value || ''}
         onChange={e => onChange(e.target.value)}
       />
     )}
