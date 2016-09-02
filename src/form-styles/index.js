@@ -514,5 +514,153 @@ Otherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) 
         },
       ],
     },
+    {
+      id: 'pathology',
+      label: 'Pathology',
+      style: [
+        {
+          class: 'block',
+          label: 'HEMATOLOGY',
+          children: [
+            {
+              field: 'pathology.hematology.twbc', label: 'T.W.B.C.', suffix: 'per/cumm',
+              type: 'number',
+              alerts: [
+                { type: 'warning', label: 'Low', range: [null, 4000] },
+                { type: 'success', label: 'Normal', range: [4000, 11000] },
+                { type: 'warning', label: 'High', range: [11000, null] },
+              ],
+            },
+            {
+              field: 'pathology.hematology.plateletes_count',
+              label: 'Plateletes count', suffix: 'per/cumm',
+              type: 'number',
+              alerts: [
+                { type: 'warning', label: 'Low', range: [null, 150000] },
+                { type: 'success', label: 'Normal', range: [150000, 400000] },
+                { type: 'warning', label: 'High', range: [400000, null] },
+              ],
+            },
+            {
+              field: 'pathology.hematology.trbc', label: 'T.R.B.C.', suffix: 'per/cumm',
+            },
+          ],
+        },
+        {
+          class: 'block',
+          label: 'DIFFERENTIAL COUNT',
+          children: [
+            {
+              field: 'pathology.differential.neutrophils', label: 'Neutrophils', suffix: '%',
+              class: 'textinput',
+              type: 'number',
+              min: 0, max: 100,
+              alerts: [
+                { type: 'warning', label: 'Low', range: [null, 40] },
+                { type: 'success', label: 'Normal', range: [40, 75] },
+                { type: 'warning', label: 'High', range: [75, null] },
+              ],
+            },
+            {
+              field: 'pathology.differential.lymphocyte', label: 'Lymphocyte', suffix: '%',
+              class: 'textinput',
+              type: 'number',
+              min: 0, max: 100,
+              alerts: [
+                { type: 'warning', label: 'Low', range: [null, 20] },
+                { type: 'success', label: 'Normal', range: [20, 45] },
+                { type: 'warning', label: 'High', range: [45, null] },
+              ],
+            },
+            {
+              field: 'pathology.differential.monocyte', label: 'Monocyte', suffix: '%',
+              class: 'textinput',
+              type: 'number',
+              min: 0, max: 100,
+              alerts: [
+                { type: 'warning', label: 'Low', range: [null, 2] },
+                { type: 'success', label: 'Normal', range: [2, 10] },
+                { type: 'warning', label: 'High', range: [10, null] },
+              ],
+            },
+            {
+              field: 'pathology.differential.eosinophils', label: 'Eosinophils', suffix: '%',
+              class: 'textinput',
+              type: 'number',
+              min: 0, max: 100,
+              alerts: [
+                { type: 'warning', label: 'Low', range: [null, 1] },
+                { type: 'success', label: 'Normal', range: [1, 6] },
+                { type: 'warning', label: 'High', range: [6, null] },
+              ],
+            },
+            {
+              field: 'pathology.differential.basophils', label: 'Basophils', suffix: '%',
+              class: 'textinput',
+              type: 'number',
+              min: 0, max: 100, precision: 1,
+              alerts: [
+                { type: 'success', label: 'Normal', range: [null, 1] },
+                { type: 'warning', label: 'High', range: [1, null] },
+              ],
+            },
+            {
+              field: 'pathology.differential.hbper', label: 'HB%', suffix: 'gm%',
+              class: 'textinput',
+              type: 'number',
+            },
+            {
+              field: 'pathology.differential.esr', label: 'ESR', class: 'textinput',
+              suffix: 'mm in 1st hour (wintrobe)',
+              type: 'number',
+            },
+            {
+              class: 'block',
+              children: [
+                {
+                  field: 'pathology.differential.b_grouping',
+                  label: 'B.grouping', class: 'textinput',
+                },
+                {
+                  field: 'pathology.differential.rh',
+                  label: 'RH',
+                  class: 'radio',
+                  options: [
+                    { id: 'positive', label: 'positive' },
+                    { id: 'negative', label: 'negative' },
+                  ],
+                },
+              ],
+            },
+            {
+              class: 'textinput',
+              field: 'pathology.bt',
+              label: 'B.T.',
+            },
+            {
+              class: 'textinput',
+              field: 'pathology.ct',
+              label: 'C.T.',
+            },
+          ],
+        },
+        {
+          class: 'block',
+          label: 'Bio-chemistry',
+          children: [
+            {
+              field: 'pathology.bs_r', label: 'Blood sugar(R)',
+              type: 'number',
+              suffix: 'mg%',
+              alerts: [
+                { type: 'warning', label: 'High', range: [null, 80] },
+                { type: 'success', label: 'Normal', range: [80, 120] },
+                { type: 'warning', label: 'High', range: [120, null] },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
