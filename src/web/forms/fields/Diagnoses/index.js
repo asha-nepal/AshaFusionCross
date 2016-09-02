@@ -33,9 +33,8 @@ export const DiagnosesComponent = ({
       <table className="table">
         <thead>
           <tr>
-            <th>ICD-10 Code</th>
-            <th>Description</th>
-            <th>Text</th>
+            <th>ICD-10</th>
+            <th>Free description</th>
             {!readonly &&
               <th></th>
             }
@@ -44,8 +43,9 @@ export const DiagnosesComponent = ({
         <tbody>
         {diagnoses && diagnoses.map && diagnoses.map((diagnosis, i) =>
           <tr key={i}>
-            <td>{diagnosis.icd10}</td>
-            <td>{ICD10[diagnosis.icd10]}</td>
+            <td>
+              {diagnosis.icd10}{' '}{ICD10[diagnosis.icd10]}
+            </td>
             <td>{diagnosis.text}</td>
             {!readonly &&
               <td className="is-narrow">
