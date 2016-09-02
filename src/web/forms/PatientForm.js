@@ -51,6 +51,11 @@ export default ({
     />
 
     <TextInput
+      model={`${model}.tel`}
+      label="Tel"
+    />
+
+    <TextInput
       model={`${model}.ethnicity`}
       label="Ethnicity"
     />
