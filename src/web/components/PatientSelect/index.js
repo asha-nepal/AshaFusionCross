@@ -67,7 +67,7 @@ export default class PatientSelect extends Component {
                   key={patient._id}
                   className="panel-block"
                   to={`/patient/${patient._id}`}
-                >{patient.name || ''}</Link>
+                >{patient.number && `[${patient.number}] `} {patient.name || ''}</Link>
               )}
             </nav>
           </div>

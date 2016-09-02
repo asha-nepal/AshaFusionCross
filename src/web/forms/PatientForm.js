@@ -24,6 +24,12 @@ export default ({
     onSubmit={onSubmit}
   >
     <TextInput
+      model={`${model}.number`}
+      label="No."
+      style={{ width: 200 }}
+    />
+
+    <TextInput
       model={`${model}.name`}
       label="Name"
     />
