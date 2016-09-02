@@ -23,6 +23,7 @@ export default ({
               <span className="icon"><i className="fa fa-arrow-left" /></span>
             </Link>
             {verbose && patient && [
+              patient.number && <span key="number" className="nav-item">[{patient.number}]</span>,
               patient.name && <span key="name" className="nav-item">
                 <span className="title">{patient.name || ''}</span>
               </span>,
