@@ -113,9 +113,6 @@ export default {
           show: 'allergy',
         },
         {
-          field: 'current_medicine', label: 'Current medicines', class: 'textarea',
-        },
-        {
           class: 'block',
           wrap: false,
           children: [
@@ -124,13 +121,19 @@ export default {
               style: { width: '50%' },
             },
             {
-              field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
+              field: 'current_medicine', label: 'Current medicines', class: 'textarea',
               style: { width: '50%' },
             },
           ],
         },
         {
-          field: 'signs', label: 'Signs', class: 'checkgroup',
+          field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
+        },
+        {
+          field: 'symptoms', label: 'Symptoms', class: 'multiinput',
+        },
+        {
+          field: 'signs_select', label: 'Signs', class: 'checkgroup',
           options: [
             { id: 'jaundice', label: 'Jaundice' },
             { id: 'anemia', label: 'Anemia' },
@@ -142,7 +145,7 @@ export default {
           ],
         },
         {
-          field: 'symptoms', label: 'Symptoms', class: 'multiinput',
+          field: 'signs', class: 'textarea',
         },
         {
           field: 'attachments.images', label: 'Images', class: 'attachment',
@@ -264,9 +267,6 @@ export default {
           show: 'allergy',
         },
         {
-          field: 'current_medicine', label: 'Current medicines', class: 'textarea',
-        },
-        {
           class: 'block',
           wrap: false,
           children: [
@@ -275,13 +275,19 @@ export default {
               style: { width: '50%' },
             },
             {
-              field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
+              field: 'current_medicine', label: 'Current medicines', class: 'textarea',
               style: { width: '50%' },
             },
           ],
         },
         {
-          field: 'signs', label: 'Signs', class: 'checkgroup',
+          field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
+        },
+        {
+          field: 'symptoms', label: 'Symptoms', class: 'multiinput',
+        },
+        {
+          field: 'signs_select', label: 'Signs', class: 'checkgroup',
           options: [
             { id: 'jaundice', label: 'Jaundice' },
             { id: 'anemia', label: 'Anemia' },
@@ -293,7 +299,7 @@ export default {
           ],
         },
         {
-          field: 'symptoms', label: 'Symptoms', class: 'multiinput',
+          field: 'signs', class: 'textarea',
         },
         {
           field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',
