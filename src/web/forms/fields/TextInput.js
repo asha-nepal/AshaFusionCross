@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
+import { actions, getField } from 'react-redux-form';
 import _get from 'lodash.get';
 
 const alertIcons = {
@@ -33,7 +33,9 @@ const ReadOnly = ({
 const TextInputComponent = ({
   label,
   value,
+  errors,
   onChange,
+  onBlur,
   style,
   type = 'text',
   prefix,
@@ -47,7 +49,9 @@ const TextInputComponent = ({
 }: {
   label: ?string,
   value: ?string,
+  errors: ?Array<string>,
   onChange: (newValue: string) => void,
+  onBlur: (newValue: string) => void,
   style: ?Object,
   type: string,
   prefix: ?string,
@@ -95,7 +99,7 @@ const TextInputComponent = ({
         >
           <input
             type={type}
-            className="input"
+            className={errors && errors.length > 0 ? 'input is-danger' : 'input'}
             style={{
               ...style,
               ...overrideStyle,
@@ -106,8 +110,14 @@ const TextInputComponent = ({
             max={max}
             step={typeof precision === 'number' && Math.pow(10, -precision)}
             onChange={e => onChange(e.target.value)}
+            onBlur={e => onBlur(e.target.value)}
           />
           {alert ? alertIcons[alert.type] : <span />}
+          {errors &&
+            errors.map(error =>
+              <span key={error} className="help is-danger">{error}</span>
+            )
+          }
         </span>
         {suffix &&
           <span className="button is-disabled">
@@ -119,12 +129,24 @@ const TextInputComponent = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
-});
+const mapStateToProps = (state, ownProps) => {
+  const model = `${ownProps.modelReducer}.${ownProps.model}`;
+  const fieldState = _get(state, ownProps.fieldReducer);
+  const errorsObject = fieldState ? getField(fieldState, ownProps.model).errors : null;
+  const errors = Object.keys(errorsObject).filter(error => errorsObject[error]);
+
+  return {
+    value: _get(state, model),
+    errors,
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const model = `${ownProps.modelReducer}.${ownProps.model}`;
+  return {
+    onChange: (newValue) => dispatch(actions.change(model, newValue)),
+    onBlur: () => ownProps.validators && dispatch(actions.validate(model, ownProps.validators)),
+  };
+};
 
 export const TextInput = connect(
   mapStateToProps, mapDispatchToProps

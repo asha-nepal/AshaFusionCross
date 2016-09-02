@@ -8,29 +8,40 @@ import {
   Block,
 } from './fields';
 
+import { required } from './fields/validators';
+
 export default ({
-  model,
+  modelReducer,
+  fieldReducer,
   onSubmit,
   onRemove,
   freeze,
 }: {
-  model: string,
+  modelReducer: string,
+  fieldReducer: string,
   onSubmit: (patient: PatientObject) => void,
   onRemove: () => void,
   freeze: boolean,
 }) => (
   <Form
-    model={model}
+    model={modelReducer}
     onSubmit={onSubmit}
   >
     <TextInput
-      model={`${model}.name`}
+      modelReducer={modelReducer}
+      fieldReducer={fieldReducer}
+      model="name"
       label="Name"
+      validators={{
+        required,
+      }}
     />
 
     <Block>
       <RadioGroup
-        model={`${model}.sex`}
+        modelReducer={modelReducer}
+        fieldReducer={fieldReducer}
+        model="sex"
         label="Sex"
         options={[
           { id: 'male', label: 'Male' },
@@ -39,19 +50,25 @@ export default ({
       />
 
       <TextInput
-        model={`${model}.age`}
+        modelReducer={modelReducer}
+        fieldReducer={fieldReducer}
+        model="age"
         label="Age"
         type="number"
       />
     </Block>
 
     <TextInput
-      model={`${model}.address`}
+      modelReducer={modelReducer}
+      fieldReducer={fieldReducer}
+      model="address"
       label="Address"
     />
 
     <TextInput
-      model={`${model}.ethnicity`}
+      modelReducer={modelReducer}
+      fieldReducer={fieldReducer}
+      model="ethnicity"
       label="Ethnicity"
     />
 

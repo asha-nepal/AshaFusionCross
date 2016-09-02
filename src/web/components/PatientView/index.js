@@ -118,7 +118,8 @@ export default class PatientView extends Component {
               <div className="card-content">
                 <div className="container">
                   <PatientForm
-                    model="activePatient"
+                    modelReducer="activePatient"
+                    fieldReducer="activePatientForm"
                     onSubmit={putActivePatient}
                     freeze={isPuttingPatient}
                     onRemove={!isNew && (() => {
@@ -178,7 +179,8 @@ export default class PatientView extends Component {
               {selectedActiveRecordIndex > -1 && (
                 <div className="container">
                   <RecordForm
-                    model={`activeRecords[${selectedActiveRecordIndex}]`}
+                    modelReducer={`activeRecords[${selectedActiveRecordIndex}]`}
+                    fieldReducer="activeRecordsForm"
                     style={recordFormStyle}
                     onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
                     freeze={isPuttingRecord}
