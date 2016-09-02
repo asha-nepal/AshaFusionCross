@@ -100,6 +100,7 @@ export class MultiInputComponent extends Component {
             onChange={e => this.setState({ text: e.target.value })}
             onKeyPress={e => {
               if (e.which === 13) {
+                e.preventDefault();
                 this._addItem();
               }
             }}
