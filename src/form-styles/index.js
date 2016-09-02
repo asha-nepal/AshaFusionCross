@@ -11,7 +11,7 @@ export default {
           children: [
             {
               field: 'height', label: 'Height', class: 'textunitinput', type: 'number',
-              units: ['cm', 'in'], precision: 1,
+              units: ['ft', 'cm', 'in'], precision: 1,
               style: { width: 100 },
             },
             {
@@ -162,7 +162,7 @@ export default {
           children: [
             {
               field: 'height', label: 'Height', class: 'textunitinput', type: 'number',
-              units: ['cm', 'in'],
+              units: ['ft', 'cm', 'in'],
               style: { width: 100 },
             },
             {
