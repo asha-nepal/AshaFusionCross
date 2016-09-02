@@ -305,6 +305,9 @@ export default {
           field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',
         },
         {
+          field: 'prescriptions', label: 'Prescriptions', class: 'multiinput',
+        },
+        {
           field: 'attachments.images', label: 'Images', class: 'attachment',
           accept: 'image/*', multiple: true,
         },
