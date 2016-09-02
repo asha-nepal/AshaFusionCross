@@ -73,14 +73,22 @@ export const DiagnosesComponent = ({
   </div>
 );
 
-const mapStateToProps = (state, ownProps) => ({
-  diagnoses: _get(state, ownProps.model),
-});
+const mapStateToProps = (state, ownProps) => {
+  const model = `${ownProps.modelReducer}.${ownProps.model}`;
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  addDiagnosis: (diagnosis) => dispatch(actions.push(ownProps.model, diagnosis)),
-  removeDiagnosis: (index) => dispatch(actions.remove(ownProps.model, index)),
-});
+  return {
+    diagnoses: _get(state, model),
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const model = `${ownProps.modelReducer}.${ownProps.model}`;
+
+  return {
+    addDiagnosis: (diagnosis) => dispatch(actions.push(model, diagnosis)),
+    removeDiagnosis: (index) => dispatch(actions.remove(model, index)),
+  };
+};
 
 export const Diagnoses = connect(
   mapStateToProps, mapDispatchToProps

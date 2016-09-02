@@ -21,7 +21,7 @@ const AutoCalcComponent = ({
 
 const mapStateToProps = (state, ownProps) => {
   const args = ownProps.inputs.map(inmodel =>
-    _get(state, `${ownProps.rootModel}.${inmodel}`, undefined)
+    _get(state, `${ownProps.modelReducer}.${inmodel}`, undefined)
   );
 
   return {

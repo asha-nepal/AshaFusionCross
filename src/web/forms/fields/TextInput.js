@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions, getField } from 'react-redux-form';
-import _get from 'lodash.get';
+import { mapStateToProps, mapDispatchToProps } from './utils';
 
 const alertIcons = {
   danger: <i className="fa fa-warning is-danger" />,
@@ -127,25 +126,6 @@ const TextInputComponent = ({
       </p>
     </div>
   );
-};
-
-const mapStateToProps = (state, ownProps) => {
-  const model = `${ownProps.modelReducer}.${ownProps.model}`;
-  const fieldState = _get(state, ownProps.fieldReducer);
-  const errorsObject = fieldState ? getField(fieldState, ownProps.model).errors : null;
-  const errors = Object.keys(errorsObject).filter(error => errorsObject[error]);
-
-  return {
-    value: _get(state, model),
-    errors,
-  };
-};
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const model = `${ownProps.modelReducer}.${ownProps.model}`;
-  return {
-    onChange: (newValue) => dispatch(actions.change(model, newValue)),
-    onBlur: () => ownProps.validators && dispatch(actions.validate(model, ownProps.validators)),
-  };
 };
 
 export const TextInput = connect(

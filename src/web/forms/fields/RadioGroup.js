@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
+import { mapStateToProps, mapDispatchToProps } from './utils';
 
 const ReadOnly = ({
   options,
@@ -55,14 +54,6 @@ const RadioGroupComponent = ({
     )}
   </div>
 );
-
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
-});
 
 export const RadioGroup = connect(
   mapStateToProps, mapDispatchToProps

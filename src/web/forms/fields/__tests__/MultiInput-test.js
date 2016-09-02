@@ -12,7 +12,7 @@ describe('<MultiInputComponent />', () => {
   it('shows <input />s according to given values', () => {
     const wrapper = shallow(<MultiInputComponent
       label="THISISMULTIINPUT"
-      values={['AAAA', 'BBBB', 'CCCC']}
+      value={['AAAA', 'BBBB', 'CCCC']}
     />);
 
     expect(wrapper.find('label').text()).toEqual('THISISMULTIINPUT');
@@ -27,7 +27,7 @@ describe('<MultiInputComponent />', () => {
   it('does not show any <input />s if no value given', () => {
     const wrapper = shallow(<MultiInputComponent
       label="THISISMULTIINPUT"
-      values={null}
+      value={null}
     />);
 
     expect(wrapper.find('label').text()).toEqual('THISISMULTIINPUT');
@@ -38,7 +38,7 @@ describe('<MultiInputComponent />', () => {
 
   it('contains <input />s whose type is specified by prop', () => {
     const wrapper = shallow(<MultiInputComponent
-      values={['AAAA', 'BBBB']}
+      value={['AAAA', 'BBBB']}
       type="number"
     />);
 

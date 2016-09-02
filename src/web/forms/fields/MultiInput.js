@@ -3,12 +3,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
+import { mapStateToProps } from './utils';
 
 type Props = {
   label: string,
   type: ?string,
-  values: ?Array<string>,
+  value: ?Array<string>,
   readonly: boolean,
   onChange: (index: number, value: string) => void,
   onAddItemRequested: (value: string) => void,
@@ -60,25 +60,25 @@ export class MultiInputComponent extends Component {
     const {
       label,
       type = 'text',
-      values,
+      value,
       readonly = false,
       onChange,
       onRemoveItemRequested,
     } = this.props;
 
     if (readonly) {
-      return <ReadOnly label={label} values={values} />;
+      return <ReadOnly label={label} values={value} />;
     }
 
     return (
       <div className="control">
         {label && <label className="label">{label}</label>}
-        {values && values.map && values.map((value, i) =>
+        {value && value.map && value.map((v, i) =>
           <p key={i} className="control has-addons">
             <input
               type={type}
               className="input is-expanded"
-              value={value}
+              value={v}
               onChange={e => onChange(i, e.target.value)}
             />
             <a
@@ -117,14 +117,15 @@ export class MultiInputComponent extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  values: _get(state, ownProps.model),
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (index, value) => dispatch(actions.change(`${ownProps.model}[${index}]`, value)),
-  onAddItemRequested: (value) => dispatch(actions.push(ownProps.model, value)),
-  onRemoveItemRequested: (index) => dispatch(actions.remove(ownProps.model, index)),
-});
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const model = `${ownProps.modelReducer}.${ownProps.model}`;
+
+  return {
+    onChange: (index, value) => dispatch(actions.change(`${model}[${index}]`, value)),
+    onAddItemRequested: (value) => dispatch(actions.push(model, value)),
+    onRemoveItemRequested: (index) => dispatch(actions.remove(model, index)),
+  };
+};
 
 export const MultiInput = connect(
   mapStateToProps, mapDispatchToProps
