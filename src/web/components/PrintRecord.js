@@ -20,16 +20,22 @@ const Body = ({
   const precision = 2;
   const e = Math.pow(10, precision);
 
-  const height = convert(_get(record, 'height'), 'cm', 1);
+  const number = _get(patient, 'number');
+
+  const heightMeter = convert(_get(record, 'height'), 'm', 1);
+  const heightFoot = convert(_get(record, 'height'), 'ft', 1);
   const weight = convert(_get(record, 'weight'), 'kg', 1);
-  const bmi = height && weight && (weight / Math.pow(height / 100, 2));
+  const bmi = heightMeter && weight && (weight / Math.pow(heightMeter, 2));
   const bmiRounded = bmi && Math.round(bmi * e) / e;
   const temperature = convert(_get(record, 'temperature'), 'degF', 1);
 
   return (
     <section className="section is-print">
       <div className="container">
-        <h1 className="title">{_get(patient, 'name')}</h1>
+        <h1 className="title">
+          {number && <small>No. {number} </small>}
+          {_get(patient, 'name')}
+        </h1>
         <h2 className="subtitle">
           <p>Age: {_get(patient, 'age')}</p>
           <p>Sex: {{ male: 'Male', female: 'Female' }[_get(patient, 'sex')]}</p>
@@ -39,7 +45,7 @@ const Body = ({
         <div className="control is-grouped">
           <div className="control">
             <label className="label">Height</label>
-            <p className="form-static">{height ? `${height} cm` : '---'}</p>
+            <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
           </div>
           <div className="control">
             <label className="label">Weight</label>
@@ -53,11 +59,13 @@ const Body = ({
         <div className="control is-grouped">
           <div className="control">
             <label className="label">Blood pressure</label>
-            <p className="form-static">{_get(record, 'bp.s')} / {_get(record, 'bp.d')} mmHg</p>
+            <p className="form-static">
+              {_get(record, 'bp.s', '---')} / {_get(record, 'bp.d', '---')} mmHg
+            </p>
           </div>
           <div className="control">
             <label className="label">Pulse</label>
-            <p className="form-static">{_get(record, 'pulse')} /min</p>
+            <p className="form-static">{_get(record, 'pulse', '---')} /min</p>
           </div>
           <div className="control">
             <label className="label">Temperature</label>
@@ -65,15 +73,15 @@ const Body = ({
           </div>
           <div className="control">
             <label className="label">SpO2</label>
-            <p className="form-static">{_get(record, 'spo2')} %</p>
+            <p className="form-static">{_get(record, 'spo2', '---')} %</p>
           </div>
           <div className="control">
             <label className="label">Respiration rate</label>
-            <p className="form-static">{_get(record, 'rr')} /min</p>
+            <p className="form-static">{_get(record, 'rr', '---')} /min</p>
           </div>
           <div className="control">
             <label className="label">Blood sugar</label>
-            <p className="form-static">{_get(record, 'bs')} mg/dL</p>
+            <p className="form-static">{_get(record, 'bs', '---')} mg/dL</p>
           </div>
         </div>
 
@@ -91,10 +99,26 @@ const Body = ({
               ) : '---'}</td>
             </tr>
             <tr>
-              <th>Medical history</th>
+              <th>Past medical history</th>
               <td>
                 <ReadonlyTextArea
-                  value={_get(record, 'medical_history')}
+                  value={_get(record, 'past_medical_history')}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Current medicines</th>
+              <td>
+                <ReadonlyTextArea
+                  value={_get(record, 'current_medicine')}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Present medical history</th>
+              <td>
+                <ReadonlyTextArea
+                  value={_get(record, 'present_medical_history')}
                 />
               </td>
             </tr>
@@ -109,16 +133,29 @@ const Body = ({
             <tr>
               <th>Symptoms</th>
               <td>
+                <ReadonlyMultiInput
+                  values={_get(record, 'symptoms')}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Signs</th>
+              <td>
                 <CheckGroupComponent
-                  value={_get(record, 'symptoms_select')}
+                  value={_get(record, 'signs_select')}
                   options={[
-                    { id: 'diabetes', label: 'Diabetes' },
-                    { id: 'high_bp', label: 'High blood pressure' },
+                    { id: 'jaundice', label: 'Jaundice' },
+                    { id: 'anemia', label: 'Anemia' },
+                    { id: 'lymphadenopathy', label: 'Lymphadenopathy' },
+                    { id: 'cyanosis', label: 'Cyanosis' },
+                    { id: 'clubbing', label: 'Clubbing' },
+                    { id: 'oedema', label: 'Oedema' },
+                    { id: 'dehydration', label: 'Dehydration' },
                   ]}
                   readonly
                 />
-                <ReadonlyMultiInput
-                  values={_get(record, 'symptoms')}
+                <ReadonlyTextArea
+                  value={_get(record, 'signs')}
                 />
               </td>
             </tr>
@@ -128,6 +165,14 @@ const Body = ({
                 <DiagnosesComponent
                   diagnoses={_get(record, 'diagnoses')}
                   readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Prescriptions</th>
+              <td>
+                <ReadonlyMultiInput
+                  values={_get(record, 'prescriptions')}
                 />
               </td>
             </tr>
