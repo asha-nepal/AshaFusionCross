@@ -5,6 +5,8 @@ import {
   Link,
 } from 'react-router';
 
+import PrintRecord from '../../containers/PrintRecord';
+
 export default ({
   patient,
   verbose,
@@ -45,6 +47,7 @@ export default ({
                 <span className="icon"><i className="fa fa-pencil-square-o" /></span>
               </a>
             }
+            <PrintRecord className="nav-item" />
           </div>
         </nav>
       </div>
