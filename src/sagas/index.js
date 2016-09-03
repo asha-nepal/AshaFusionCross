@@ -114,7 +114,7 @@ function* loginFlow() {
         yield put(alertError(`Failed to log in: ${error.message}`));
       }
     } else if (winner.logout) {
-      call(logout);
+      yield call(logout);
     }
   }
 }
