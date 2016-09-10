@@ -12,6 +12,7 @@ import Auth from '../containers/Auth';
 import Alerts from '../containers/Alerts.react';
 import PatientSelect from '../containers/PatientSelect';
 import PatientView from '../containers/PatientView.react';
+import Summary from '../containers/Summary';
 
 const App = ({ children }: { children: ReactClass }) => (
   <div>
@@ -30,6 +31,7 @@ export default function () {
               <IndexRoute component={PatientSelect} />
               <Route path="patient/" component={PatientView} />
               <Route path="patient/:patientId" component={PatientView} />
+              <Route path="summary" component={Summary} />
             </Route>
           </Router>
         </Auth>

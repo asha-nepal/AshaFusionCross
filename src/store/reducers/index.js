@@ -12,6 +12,7 @@ import patientView from './patient-view';
 import status from './status';
 import alerts from './alerts';
 import auth from './auth';
+import summary from './summary';
 
 import { defaultConfig } from '../../db';
 
@@ -28,4 +29,5 @@ export default combineReducers({
   status,
   alerts,
   auth,
+  summary,
 });

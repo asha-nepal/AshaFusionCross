@@ -11,6 +11,11 @@ export {
   SET_IS_DB_PUBLIC, setIsDBPublic,
 } from './auth';
 
+export {
+  FETCH_RECORD_LIST, fetchRecordList,
+  SET_SUMMARY_RECORDS, setSummaryRecords,
+} from './summary';
+
 // for saga
 export const FETCH_PATIENT_LIST = 'FETCH_PATIENT_LIST';
 export const fetchPatientList = () => ({

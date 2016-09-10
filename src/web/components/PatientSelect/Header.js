@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 type Props = {
   loggedIn: boolean,
@@ -52,6 +53,12 @@ export default class extends Component {
               </span>
               {loggedIn &&
                 <div className={`nav-right nav-menu ${this.state.isMenuOpen && 'is-active'}`}>
+                  <Link
+                    className="nav-item"
+                    to="/summary"
+                  >
+                    Summary
+                  </Link>
                   <p className="nav-item">{loggedInUser || '(anonymous user)'}</p>
                   <a
                     className="nav-item"
