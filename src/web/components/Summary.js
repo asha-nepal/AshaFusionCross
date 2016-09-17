@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 type Props = {
   fetchRecords: () => void,
+  columns: Array<{ field: string }>,
   records: Array<RecordObject>,
 };
 
@@ -16,6 +17,7 @@ export default class extends Component {
 
   render() {
     const {
+      columns,
       records,
     } = this.props;
 
@@ -27,16 +29,18 @@ export default class extends Component {
           <table className="table">
             <thead>
               <tr>
-                <th>Height (cm)</th>
-                <th>Weight (kg)</th>
+              {columns.map((column, i) =>
+                <th key={i}>{column.label || column.field}</th>
+              )}
                 <th>Created at</th>
               </tr>
             </thead>
             <tbody>
             {records.map(record =>
               <tr key={record._id}>
-                <td>{record.height}</td>
-                <td>{record.weight}</td>
+              {columns.map((column, i) =>
+                <td key={i}>{record[column.field]}</td>
+              )}
                 <td>{new Date(record.$created_at).toString()}</td>
               </tr>
             )}
