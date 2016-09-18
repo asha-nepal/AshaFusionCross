@@ -48,3 +48,6 @@ _builds
 _cache
 _projects
 _steps
+
+# Jest
+coverage
