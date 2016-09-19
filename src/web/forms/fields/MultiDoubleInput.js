@@ -8,9 +8,14 @@ import _get from 'lodash.get';
 type Props = {
   label: string,
   type: ?string,
-  values: Array<{ freeCategory: string, freeMedicine: string }>,
-  onChange: (index: number, value: { freeCategory: string, freeMedicine: string }) => void,
-  onAddItemRequested: (value: { freeCategory: string, freeMedicine: string }) => void,
+  values: Array<{ freeCategory: string, freeMedicine: string, readonly: boolean }>,
+  onChange: (
+    index: number,
+    value: { freeCategory: string, freeMedicine: string }
+  ) => void,
+  onAddItemRequested: (
+    value: { freeCategory: string, freeMedicine: string, readonly: boolean }
+  ) => void,
   onRemoveItemRequested: (index: number) => void,
 };
 
@@ -21,12 +26,14 @@ export class MultiDoubleInputComponent extends Component {
     this.state = {
       freeCategory: '',
       freeMedicine: '',
+      readonly: false,
     };
   }
 
   state: {
     freeCategory: string,
     freeMedicine: string,
+    readonly: boolean,
   };
 
   props: Props;
@@ -34,7 +41,7 @@ export class MultiDoubleInputComponent extends Component {
   _addItem() {
     if (this.state.freeCategory && this.state.freeMedicine) {
       this.props.onAddItemRequested(this.state);
-      this.setState({ freeCategory: '', freeMedicine: '' });
+      this.setState({ freeCategory: '', freeMedicine: '', readonly: false });
     }
   }
 
