@@ -32,16 +32,14 @@ export default class extends Component {
               {columns.map((column, i) =>
                 <th key={i}>{column.label || column.field}</th>
               )}
-                <th>Created at</th>
               </tr>
             </thead>
             <tbody>
-            {records.map(record =>
-              <tr key={record._id}>
-              {columns.map((column, i) =>
-                <td key={i}>{record[column.field]}</td>
+            {records.map((record, i) =>
+              <tr key={i}>
+              {columns.map((column, j) =>
+                <td key={j}>{record[column.field]}</td>
               )}
-                <td>{new Date(record.$created_at).toString()}</td>
               </tr>
             )}
             </tbody>

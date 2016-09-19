@@ -1,13 +1,13 @@
 /* @flow */
 
 import { connect } from 'react-redux';
-import _get from 'lodash.get';
 import {
   fetchRecordList,
 } from '../../actions';
+import {
+  tablize,
+} from '../../selectors';
 import Summary from '../components/Summary';
-
-import { convert } from '../forms/fields/TextUnitInput';
 
 const columns = [
   { field: 'height', label: 'Height', class: 'textunitinput', unit: 'cm' },
@@ -28,59 +28,12 @@ const columns = [
   },
   { field: 'symptoms', label: 'Symptoms', class: 'multiinput' },
   { field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses' },
+  { field: '$created_at', label: 'Created at', class: 'timestamp' },
 ];
-
-const tablize = (records) => records.map(record => {
-  const transformed = {};
-  columns.forEach(column => {
-    const originalValue = _get(record, column.field);
-
-    switch (column.class) {
-      case 'textunitinput':
-        transformed[column.field] = convert(originalValue, column.unit);
-        break;
-
-      case 'check':
-        transformed[column.field] = originalValue ? 'Yes' : 'No';
-        break;
-
-      case 'checkgroup':
-        transformed[column.field] =
-          originalValue && originalValue
-          .map(val => {
-            const option = column.options && column.options.find(opt => opt.id === val);
-            return option ? option.label : val;
-          })
-          .join(', ');
-        break;
-
-      case 'multiinput':
-        transformed[column.field] =
-          originalValue && originalValue.join(', ');
-        break;
-
-      case 'diagnoses':
-        transformed[column.field] =
-          originalValue && originalValue
-          .map(diagnosis => diagnosis.icd10 || diagnosis.text)
-          .join(', ');
-        break;
-
-      default:
-        transformed[column.field] = originalValue;
-        break;
-    }
-  });
-
-  return {
-    ...record,
-    ...transformed,
-  };
-});
 
 const mapStateToProps = (state) => ({
   columns,
-  records: state.summary.records ? tablize(state.summary.records) : [],
+  records: state.summary.records ? tablize(state.summary.records, columns) : [],
 });
 
 const mapDispatchToProps = (dispatch) => ({
