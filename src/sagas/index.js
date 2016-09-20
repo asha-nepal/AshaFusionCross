@@ -24,6 +24,7 @@ import { watchInitActivePatient } from './init-active-patient';
 import { watchAddNewActiveRecord } from './add-new-active-record';
 import { watchConnectPouchDB } from './connect-pouchdb';
 import { watchPushAlert } from './alerts';
+import { summarySaga } from './summary';
 
 const initialSagas = [
   watchConnectPouchDB,
@@ -38,6 +39,7 @@ const authedSagas = [
   watchRemoveActivePatient,
   watchInitActivePatient,
   watchAddNewActiveRecord,
+  summarySaga,
 ];
 
 const authedTasks = new Array(authedSagas.length);

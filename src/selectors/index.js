@@ -34,3 +34,6 @@ export const recordFormStyleSelector = createSelector(
   [recordFormStyleIdSelector],
   (recordFormStyleId) => recordFormStyles.find(s => s.id === recordFormStyleId)
 );
+
+
+export { tablize } from './summary';

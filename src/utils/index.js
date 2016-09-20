@@ -29,3 +29,18 @@ export const makeCancelable = (promise: Promise) => {
     },
   };
 };
+
+export const convertToCsv = (data: Array<Object>) => {
+  const columns = Object.keys(data[0]);
+
+  const header = columns.join(',');
+  const body = data.map(row =>
+    columns.map(column => (
+      typeof row[column] === 'string' && row[column].match(/[",\n\t]/g)
+      ? `"${row[column].replace(/"/g, '""')}"`  // "や特殊文字があったら""で囲む．"はエスケープ
+      : row[column]
+    )).join(',')
+  ).join('\n');
+
+  return `${header}\n${body}`;
+};
