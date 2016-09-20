@@ -1,6 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { convertToCsv } from '../../utils';
+import { downloadBlob } from '../../utils/web';
 
 type Props = {
   fetchRecords: () => void,
@@ -26,6 +28,18 @@ export default class extends Component {
     return (
       <section className="section">
         <div className="container">
+          <a
+            className="button is-primary"
+            onClick={e => {
+              e.preventDefault();
+              const csv = convertToCsv(records);
+              const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+              const blob = new Blob([bom, csv], { type: 'text/csv' });
+              const name = 'output.csv';
+              downloadBlob(blob, name);
+            }}
+          >Download CSV</a>
+
           <table className="table">
             <thead>
               <tr>
