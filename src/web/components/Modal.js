@@ -9,7 +9,7 @@ export default ({
 }: {
   children: ReactElement,
   isOpen: ?boolean,
-  onClose: () => void,
+  onClose: ?() => void,
 }) => (
   <div className={isOpen ? 'modal is-active' : 'modal'}>
     <div
@@ -21,13 +21,15 @@ export default ({
         {children}
       </div>
     </div>
-    <button
-      className="modal-close"
-      onClick={e => {
-        e.preventDefault();
-        onClose();
-        return false;
-      }}
-    />
+    {onClose &&
+      <button
+        className="modal-close"
+        onClick={e => {
+          e.preventDefault();
+          if (onClose) onClose();  // FIXME: Workaround for flow@0.25.0
+          return false;
+        }}
+      />
+    }
   </div>
 );
