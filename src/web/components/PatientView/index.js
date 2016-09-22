@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 
 import Header from './Header';
 import RecordsTab from './RecordsTab';
@@ -9,6 +10,7 @@ import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import PatientForm from '../../forms/PatientForm';
 import RecordForm from '../../forms/RecordForm';
+import SaveConfirmation from './SaveConfirmation';
 
 type Props = {
   init: () => void,
@@ -38,6 +40,7 @@ type Props = {
 export default class PatientView extends Component {
   state: {
     unsubscribeChange: ?() => void;
+    isSaveConfirmationOpen: boolean,
   };
 
   componentWillMount() {
@@ -45,6 +48,7 @@ export default class PatientView extends Component {
 
     this.setState({
       unsubscribeChange: this.props.subscribeChange(),
+      isSaveConfirmationOpen: false,
     });
   }
 
@@ -78,6 +82,10 @@ export default class PatientView extends Component {
 
   props: Props;
 
+  _moveBack() {
+    browserHistory.push('/');
+  }
+
   render() {
     const {
       isFetching,
@@ -109,7 +117,29 @@ export default class PatientView extends Component {
         <Header
           patient={patient}
           verbose={!isNew && !patientFormVisibility}
+          onBackRequested={() => {
+            const isDataUnsubmitted = true;  // TODO
+            if (isDataUnsubmitted) {
+              this.setState({ isSaveConfirmationOpen: true });
+            } else {
+              this._moveBack();
+            }
+          }}
           onPatientFormShowRequested={() => setPatientFormVisibility(true)}
+        />
+
+        <SaveConfirmation
+          isOpen={this.state.isSaveConfirmationOpen}
+          onSave={() => {
+            // putActivePatient();  // TODO
+            this.setState({ isSaveConfirmationOpen: false });
+            this._moveBack();
+          }}
+          onNotSave={() => {
+            this.setState({ isSaveConfirmationOpen: false });
+            this._moveBack();
+          }}
+          onCancel={() => this.setState({ isSaveConfirmationOpen: false })}
         />
 
         {(isNew || patientFormVisibility) &&

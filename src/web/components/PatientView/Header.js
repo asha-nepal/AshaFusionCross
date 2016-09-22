@@ -1,17 +1,16 @@
 /* @flow */
 
 import React from 'react';
-import {
-  Link,
-} from 'react-router';
 
 export default ({
   patient,
   verbose,
+  onBackRequested,
   onPatientFormShowRequested,
 }: {
   patient: ?PatientObject,
   verbose: boolean,
+  onBackRequested: () => void,
   onPatientFormShowRequested: () => void,
 }) => (
   <section className="hero is-primary is-bold">
@@ -19,9 +18,15 @@ export default ({
       <div className="container">
         <nav className="nav">
           <div className="nav-left">
-            <Link className="nav-item" to="/">
+            <a
+              className="nav-item"
+              onClick={e => {
+                e.preventDefault();
+                onBackRequested();
+              }}
+            >
               <span className="icon"><i className="fa fa-arrow-left" /></span>
-            </Link>
+            </a>
             {verbose && patient && [
               patient.number && <span key="number" className="nav-item">[{patient.number}]</span>,
               patient.name && <span key="name" className="nav-item">
