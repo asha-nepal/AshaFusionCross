@@ -11,8 +11,8 @@ import {
   requestFetchPatient,
   successFetchPatient,
   failureFetchPatient,
-  setActivePatient,
-  setActiveRecords,
+  changeActivePatient,
+  changeActiveRecords,
   selectActiveRecord,
   alertInfo,
   alertError,
@@ -53,10 +53,12 @@ describe('fetchPatient saga', () => {
       }));
 
     expect(saga.next(mockFetchedRecordDocs).value)
-      .toEqual(put(setActivePatient(mockFetchedPatient)));
+      .toEqual(put(changeActivePatient(mockFetchedPatient, { silent: true })));
 
     expect(saga.next().value)
-      .toEqual(put(setActiveRecords(mockFetchedRecordDocs.rows.map(r => r.doc))));
+      .toEqual(
+        put(changeActiveRecords(mockFetchedRecordDocs.rows.map(r => r.doc), { silent: true }))
+      );
 
     expect(saga.next().value)
       .toEqual(put(alertInfo('Patient data and records loaded')));

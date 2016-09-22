@@ -9,7 +9,7 @@ import {
   initActivePatient,
   addNewActiveRecord,
   selectActiveRecord,
-  setActivePatient,
+  changeActivePatient,
   insertOrChangeActiveRecord,
   setPatientFormVisibility,
   setRecordFormStyleId,
@@ -72,11 +72,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       return subscribe('change', change => {
         const doc = change.doc;
         if (doc._id === patientId) {
-          dispatch(setActivePatient(doc));
+          dispatch(changeActivePatient(doc, { silent: true }));
         } else if (doc.type === 'record') {
           const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
           if (match && (match[1] === patientIdBody)) {
-            dispatch(insertOrChangeActiveRecord(doc));
+            dispatch(insertOrChangeActiveRecord(doc, { silent: true }));
           }
         }
       });

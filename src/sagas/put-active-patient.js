@@ -5,7 +5,7 @@ import {
   requestPutPatient,
   successPutPatient,
   failurePutPatient,
-  setActivePatient,
+  changeActivePatient,
   addNewActiveRecord,
   alertInfo,
   alertError,
@@ -34,9 +34,11 @@ export function* putActivePatient() {
       throw new Error('Invalid response');
     }
 
-    yield put(setActivePatient({
+    yield put(changeActivePatient({
       ...patient,
       _rev: res.rev,
+    }, {
+      silent: true,
     }));
 
     yield put(alertInfo('Patient data updated'));
