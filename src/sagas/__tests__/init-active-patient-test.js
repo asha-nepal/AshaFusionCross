@@ -8,21 +8,23 @@ jest.unmock('../init-active-patient');
 import { createId } from '../../utils';
 import { put } from 'redux-saga/effects';
 import {
-  setActivePatient,
+  changeActivePatient,
   resetActiveRecords,
 } from '../../actions';
 import { initActivePatient } from '../init-active-patient';
 
 describe('INIT_ACTIVE_PATIENT', () => {
-  it('calls setActivePatient with new ID and resetActiveRecords', () => {
+  it('calls changeActivePatient with new ID and resetActiveRecords as silent', () => {
     createId.mockReturnValue('thisismockedid');
 
     const saga = initActivePatient();
 
     expect(saga.next().value)
-      .toEqual(put(setActivePatient({
+      .toEqual(put(changeActivePatient({
         _id: 'patient_thisismockedid',
         type: 'patient',
+      }, {
+        silent: true,
       })));
 
     expect(saga.next().value)

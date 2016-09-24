@@ -4,8 +4,8 @@ import {
   requestFetchPatient,
   successFetchPatient,
   failureFetchPatient,
-  setActivePatient,
-  setActiveRecords,
+  changeActivePatient,
+  changeActiveRecords,
   selectActiveRecord,
   alertInfo,
   alertError,
@@ -29,8 +29,8 @@ export function* fetchPatient(patientId) {
     const patient = yield call([db, db.get], patientId);
     const recordDocs = yield call([db, db.allDocs], recordsQuery);
     const records = recordDocs.rows.map(r => r.doc);
-    yield put(setActivePatient(patient));
-    yield put(setActiveRecords(records));
+    yield put(changeActivePatient(patient, { silent: true }));
+    yield put(changeActiveRecords(records, { silent: true }));
     yield put(alertInfo('Patient data and records loaded'));
     yield put(successFetchPatient());
     if (records && records.length > 0) {

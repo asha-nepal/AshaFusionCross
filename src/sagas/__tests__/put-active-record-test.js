@@ -14,7 +14,7 @@ import {
   requestPutRecord,
   successPutRecord,
   failurePutRecord,
-  setActiveRecord,
+  changeActiveRecord,
   alertInfo,
   alertError,
 } from '../../actions';
@@ -65,9 +65,11 @@ describe('PUT_ACTIVE_RECORD', () => {
       }));
 
     expect(saga.next(mockResponse).value)
-      .toEqual(put(setActiveRecord(mockIndex, {
+      .toEqual(put(changeActiveRecord(mockIndex, {
         ...mockRecord,
         _rev: '2-a147c1a7e2a186da6f0797743a95e240',
+      }, {
+        silent: true,
       })));
 
     expect(saga.next().value)

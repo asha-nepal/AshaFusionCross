@@ -4,7 +4,7 @@ import {
   requestPutRecord,
   successPutRecord,
   failurePutRecord,
-  setActiveRecord,
+  changeActiveRecord,
   alertInfo,
   alertError,
 } from '../actions';
@@ -30,9 +30,11 @@ export function* putActiveRecord(index) {
       throw new Error('Invalid response');
     }
 
-    yield put(setActiveRecord(index, {
+    yield put(changeActiveRecord(index, {
       ...record,
       _rev: res.rev,
+    }, {
+      silent: true,
     }));
 
     yield put(alertInfo('Record updated'));

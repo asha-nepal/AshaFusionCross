@@ -50,18 +50,18 @@ export const addNewActiveRecord = (patientId: string) => ({
   patientId,
 });
 
-export const setActivePatient = formActions.change.bind(null, 'activePatient');
+export const changeActivePatient = formActions.change.bind(null, 'activePatient');
 
-export const setActiveRecord = (index: number, record: RecordObject) =>
-  formActions.change(`activeRecords[${index}]`, record);
+export const changeActiveRecord = (index: number, record: RecordObject, option: ?Object) =>
+  formActions.change(`activeRecords[${index}]`, record, option);
 
-export const setActiveRecords = formActions.change.bind(null, 'activeRecords');
+export const changeActiveRecords = formActions.change.bind(null, 'activeRecords');
 
 export const resetActiveRecords = formActions.reset.bind(null, 'activeRecords');
 
 export const pushActiveRecord = formActions.push.bind(null, 'activeRecords');
 
-export const insertOrChangeActiveRecord = (record: RecordObject) =>
+export const insertOrChangeActiveRecord = (record: RecordObject, option: ?Object) =>
   (dispatch: Function, getState: Function) => {
     const key = '_id';
     const model = 'activeRecords';
@@ -69,11 +69,15 @@ export const insertOrChangeActiveRecord = (record: RecordObject) =>
     const index = collection.findIndex(c => c[key] === record[key]);
 
     if (index > -1) {
-      dispatch(formActions.change(`${model}[${index}]`, record));
+      dispatch(
+        formActions.change(`${model}[${index}]`, record, option)
+      );
     } else {
       // pushでの末尾追加ではない
       // IDでソートし，複数端末間で時間差submitしても順序を一意に保つ
-      dispatch(formActions.change(model, collection.concat(record).sort((a, b) => a._id > b._id)));
+      dispatch(
+        formActions.change(model, collection.concat(record).sort((a, b) => a._id > b._id), option)
+      );
     }
   };
 

@@ -14,7 +14,7 @@ import {
   requestPutPatient,
   successPutPatient,
   failurePutPatient,
-  setActivePatient,
+  changeActivePatient,
   addNewActiveRecord,
   alertInfo,
   alertError,
@@ -69,10 +69,12 @@ describe('putActivePatient', () => {
       }));
 
     expect(saga.next(mockResponse).value)
-      .toEqual(put(setActivePatient({
+      .toEqual(put(changeActivePatient({
         _id: 'patient_1234',
         _rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
         hoge: 'fuga',
+      }, {
+        silent: true,
       })));
 
     expect(saga.next().value)

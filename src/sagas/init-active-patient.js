@@ -1,7 +1,7 @@
 import { take, put, call } from 'redux-saga/effects';
 import {
   INIT_ACTIVE_PATIENT,
-  setActivePatient,
+  changeActivePatient,
   resetActiveRecords,
 } from '../actions';
 import {
@@ -10,9 +10,11 @@ import {
 
 export function* initActivePatient() {
   const id = createId(16);
-  yield put(setActivePatient({
+  yield put(changeActivePatient({
     _id: `patient_${id}`,
     type: 'patient',
+  }, {
+    silent: true,
   }));
   yield put(resetActiveRecords());
 }
