@@ -7,11 +7,13 @@ export default ({
   selectedActiveRecordIndex,
   selectActiveRecord,
   addNewActiveRecord,
+  dirtyIndices,
 }: {
   records: Array<RecordObject>,
   selectedActiveRecordIndex: number,
   selectActiveRecord: (id: string) => void,
   addNewActiveRecord: () => void,
+  dirtyIndices: Array<number>,
 }) => (
   <div className="tabs is-boxed column">
     <ul>
@@ -42,6 +44,9 @@ export default ({
                 <small style={{ paddingLeft: 8 }}>
                   {createdAt.toDateString()}
                 </small>
+              }
+              {dirtyIndices.indexOf(i) > -1 &&
+                '*'
               }
             </a>
           </li>

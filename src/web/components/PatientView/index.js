@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 
 import Header from './Header';
 import RecordsTab from './RecordsTab';
@@ -9,6 +10,7 @@ import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import PatientForm from '../../forms/PatientForm';
 import RecordForm from '../../forms/RecordForm';
+import SaveConfirmation from './SaveConfirmation';
 
 type Props = {
   init: () => void,
@@ -16,6 +18,7 @@ type Props = {
   isFetching: boolean,
   patient: PatientObject,
   records: Array<RecordObject>,
+  dirtyRecordIndices: Array<number>,
   addNewActiveRecord: () => void,
   putActivePatient: () => void,
   putActiveRecord: (index: number) => void,
@@ -38,6 +41,7 @@ type Props = {
 export default class PatientView extends Component {
   state: {
     unsubscribeChange: ?() => void;
+    isSaveConfirmationOpen: boolean,
   };
 
   componentWillMount() {
@@ -45,6 +49,7 @@ export default class PatientView extends Component {
 
     this.setState({
       unsubscribeChange: this.props.subscribeChange(),
+      isSaveConfirmationOpen: false,
     });
   }
 
@@ -78,6 +83,10 @@ export default class PatientView extends Component {
 
   props: Props;
 
+  _moveBack() {
+    browserHistory.push('/');
+  }
+
   render() {
     const {
       isFetching,
@@ -98,6 +107,7 @@ export default class PatientView extends Component {
       recordFormStyles,
       recordFormStyleId,
       recordFormStyle,
+      dirtyRecordIndices,
     } = this.props;
 
     if (isFetching) {
@@ -109,7 +119,30 @@ export default class PatientView extends Component {
         <Header
           patient={patient}
           verbose={!isNew && !patientFormVisibility}
+          onBackRequested={() => {
+            const isDataUnsubmitted = dirtyRecordIndices.length > 0;  // TODO
+            if (isDataUnsubmitted) {
+              this.setState({ isSaveConfirmationOpen: true });
+            } else {
+              this._moveBack();
+            }
+          }}
           onPatientFormShowRequested={() => setPatientFormVisibility(true)}
+        />
+
+        <SaveConfirmation
+          isOpen={this.state.isSaveConfirmationOpen}
+          onSave={() => {
+            // putActivePatient();  // TODO
+            dirtyRecordIndices.forEach(i => putActiveRecord(i));
+            this.setState({ isSaveConfirmationOpen: false });
+            this._moveBack();
+          }}
+          onNotSave={() => {
+            this.setState({ isSaveConfirmationOpen: false });
+            this._moveBack();
+          }}
+          onCancel={() => this.setState({ isSaveConfirmationOpen: false })}
         />
 
         {(isNew || patientFormVisibility) &&
@@ -155,6 +188,7 @@ export default class PatientView extends Component {
                   selectedActiveRecordIndex={selectedActiveRecordIndex}
                   selectActiveRecord={selectActiveRecord}
                   addNewActiveRecord={addNewActiveRecord}
+                  dirtyIndices={dirtyRecordIndices}
                 />
                 <div className="column is-narrow control">
                   <span className="select">

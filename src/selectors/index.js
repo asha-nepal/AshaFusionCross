@@ -34,3 +34,6 @@ export const recordFormStyleSelector = createSelector(
   [recordFormStyleIdSelector],
   (recordFormStyleId) => recordFormStyles.find(s => s.id === recordFormStyleId)
 );
+
+
+export { getDirtyIndices } from './form';
