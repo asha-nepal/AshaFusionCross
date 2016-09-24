@@ -10,8 +10,9 @@ export type PatientObject = PouchDocType & {
 export type RecordObject = PouchDocType & {
   _id: string,
   type: string,
-  $created_at: number,
-  $updated_at: number,
+  $created_at: ?number,
+  $updated_at: ?number,
+  $initialized_at: ?number,
 }
 
 export type ErrorObject = {}
