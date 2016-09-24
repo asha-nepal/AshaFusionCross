@@ -16,7 +16,8 @@ export default ({
   <div className="tabs is-boxed column">
     <ul>
       {records.map((record, i) => {
-        const createdAt = new Date(record.$created_at);
+        const timestamp = record.$created_at || record.$initialized_at;
+        const date = timestamp && new Date(timestamp);
         const hasAttachments =
           record._attachments && Object.keys(record._attachments).length > 0;
 
@@ -38,9 +39,9 @@ export default ({
                 </span>
               }
               {i + 1}
-              {isNaN(createdAt.getTime()) ||
+              {date &&
                 <small style={{ paddingLeft: 8 }}>
-                  {createdAt.toDateString()}
+                  {date.toDateString()}
                 </small>
               }
             </a>
