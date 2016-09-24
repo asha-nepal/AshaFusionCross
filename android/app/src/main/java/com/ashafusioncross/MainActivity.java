@@ -2,7 +2,17 @@ package com.ashafusioncross;
 
 import com.facebook.react.ReactActivity;
 
+// Crashlytics
+import android.os.Bundle;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
 public class MainActivity extends ReactActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      Fabric.with(this, new Crashlytics());
+    }
 
     /**
      * Returns the name of the main component registered from JavaScript.
