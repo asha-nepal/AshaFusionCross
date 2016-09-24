@@ -18,6 +18,7 @@ type Props = {
   isFetching: boolean,
   patient: PatientObject,
   records: Array<RecordObject>,
+  dirtyRecordIndices: Array<number>,
   addNewActiveRecord: () => void,
   putActivePatient: () => void,
   putActiveRecord: (index: number) => void,
@@ -106,6 +107,7 @@ export default class PatientView extends Component {
       recordFormStyles,
       recordFormStyleId,
       recordFormStyle,
+      dirtyRecordIndices,
     } = this.props;
 
     if (isFetching) {
@@ -118,7 +120,7 @@ export default class PatientView extends Component {
           patient={patient}
           verbose={!isNew && !patientFormVisibility}
           onBackRequested={() => {
-            const isDataUnsubmitted = true;  // TODO
+            const isDataUnsubmitted = dirtyRecordIndices.length > 0;  // TODO
             if (isDataUnsubmitted) {
               this.setState({ isSaveConfirmationOpen: true });
             } else {
@@ -132,6 +134,7 @@ export default class PatientView extends Component {
           isOpen={this.state.isSaveConfirmationOpen}
           onSave={() => {
             // putActivePatient();  // TODO
+            dirtyRecordIndices.forEach(i => putActiveRecord(i));
             this.setState({ isSaveConfirmationOpen: false });
             this._moveBack();
           }}
@@ -185,6 +188,7 @@ export default class PatientView extends Component {
                   selectedActiveRecordIndex={selectedActiveRecordIndex}
                   selectActiveRecord={selectActiveRecord}
                   addNewActiveRecord={addNewActiveRecord}
+                  dirtyIndices={dirtyRecordIndices}
                 />
                 <div className="column is-narrow control">
                   <span className="select">

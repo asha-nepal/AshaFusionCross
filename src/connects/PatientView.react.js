@@ -21,6 +21,7 @@ import {
   recordFormStylesSelector,
   recordFormStyleIdSelector,
   recordFormStyleSelector,
+  getDirtyIndices,
 } from '../selectors';
 
 const mapStateToProps = (state) => {
@@ -43,6 +44,7 @@ const mapStateToProps = (state) => {
     recordFormStyles: recordFormStylesSelector(state),
     recordFormStyleId: recordFormStyleIdSelector(state),
     recordFormStyle: recordFormStyle && recordFormStyle.style,
+    dirtyRecordIndices: getDirtyIndices(state.activeRecordsForm),
   };
 };
 
