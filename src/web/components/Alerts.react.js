@@ -14,7 +14,7 @@ export default function Alerts({ alerts }: { alerts: Array<Alert> }) {
         position: 'fixed',
         bottom: 16,
         right: 16,
-        zIndex: 10,
+        zIndex: 1000,
       }}
     >
     {alerts.map(alert =>

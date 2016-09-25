@@ -14,7 +14,7 @@ export default ({
   verbose: boolean,
   onPatientFormShowRequested: () => void,
 }) => (
-  <section className="hero is-primary is-bold">
+  <section className="hero is-primary is-bold header-fixed">
     <div className="hero-head">
       <div className="container">
         <nav className="nav">

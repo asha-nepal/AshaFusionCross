@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import Header from './Header';
 import RecordsTab from './RecordsTab';
+import Footer from './Footer';
 
 import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
@@ -105,7 +106,7 @@ export default class PatientView extends Component {
     }
 
     return (
-      <div>
+      <div className="header-fixed-container footer-fixed-container">
         <Header
           patient={patient}
           verbose={!isNew && !patientFormVisibility}
@@ -180,7 +181,6 @@ export default class PatientView extends Component {
                   <RecordForm
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
                     style={recordFormStyle}
-                    onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
                     freeze={isPuttingRecord}
                   />
                 </div>
@@ -188,6 +188,11 @@ export default class PatientView extends Component {
             </div>
           </section>
         }
+
+        <Footer
+          onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
+          freeze={isPuttingRecord}
+        />
       </div>
     );
   }
