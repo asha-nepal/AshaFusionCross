@@ -8,6 +8,8 @@ import deepFreeze from 'deep-freeze';
 import {
   patientListSelector,
   filterSelector,
+  queryListSelector,
+  filterPatient,
   filterPatientList,
   recordFormStyleIdSelector,
 } from '../index';
@@ -59,6 +61,58 @@ describe('filterSelector', () => {
   });
 });
 
+describe('queryListSelector', () => {
+  it('selects filter from state and split to list', () => {
+    const state = {
+      patientSelect: {
+        filter: 'foo bar',
+      },
+    };
+
+    deepFreeze(state);
+
+    expect(queryListSelector(state))
+      .toEqual(['foo', 'bar']);
+  });
+
+  it('returns empty array if no filter provided', () => {
+    const state = {
+      patientSelect: {
+        filter: '',
+      },
+    };
+
+    deepFreeze(state);
+
+    expect(queryListSelector(state))
+      .toEqual([]);
+  });
+});
+
+describe('filterPatient', () => {
+  it('matches only at the beginning of term', () => {
+    expect(filterPatient(['ho'], { name: 'hoge fuga' })).toBe(true);
+    expect(filterPatient(['ge'], { name: 'hoge fuga' })).toBe(false);
+    expect(filterPatient(['fu'], { name: 'hoge fuga' })).toBe(true);
+    expect(filterPatient(['ga'], { name: 'hoge fuga' })).toBe(false);
+  });
+
+  it('matches multiple queries', () => {
+    expect(filterPatient(['ho', 'fu'], { name: 'hoge fuga' })).toBe(true);
+    expect(filterPatient(['ho', 'fu'], { name: 'hoge aaaa' })).toBe(false);
+  });
+
+  it('matches patient.number', () => {
+    expect(filterPatient(['123'], { number: '123' })).toBe(true);
+    expect(filterPatient(['123'], { number: '987' })).toBe(false);
+  });
+
+  it('queries name and number', () => {
+    expect(filterPatient(['hoge', '123'], { name: 'hoge', number: '123' })).toBe(true);
+    expect(filterPatient(['hoge', '123'], { name: 'hoge', number: '987' })).toBe(false);
+  });
+});
+
 describe('filterPatientList', () => {
   it('filters patientList', () => {
     const state = {
@@ -83,7 +137,6 @@ describe('filterPatientList', () => {
       ]);
   });
 });
-
 
 describe('recordFormStyleIdSelector', () => {
   it('selects recordFormStyleId', () => {

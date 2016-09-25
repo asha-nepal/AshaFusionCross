@@ -4,18 +4,32 @@ import { createSelector } from 'reselect';
 
 export const patientListSelector = (state: Object) => state.patientList;
 export const filterSelector = (state: Object) => state.patientSelect.filter.trim().toLowerCase();
+export const queryListSelector = (state: Object) =>
+  filterSelector(state).split(' ').filter(q => q.length > 0);
+
+export const filterPatient = (queries: Array<string>, patient: PatientObject) =>
+  queries.every(query => {
+    if (patient.name) {
+      const _query = ` ${query}`;
+      const _name = ` ${patient.name.toLowerCase()}`;
+      if (_name.indexOf(_query) !== -1) return true;
+    }
+
+    if (patient.number) {
+      if (patient.number === query) return true;
+    }
+
+    return false;
+  });
 
 export const filterPatientList = createSelector(
-  [patientListSelector, filterSelector],
-  (patientList, filter) => {
-    if (filter.length === 0) {
+  [patientListSelector, queryListSelector],
+  (patientList, queryList) => {
+    if (queryList.length === 0) {
       return patientList;
     }
 
-    return patientList.filter(p =>
-      (p.name && p.name.toLowerCase().indexOf(filter) >= 0)
-      || (p.number && p.number === filter)
-    );
+    return patientList.filter(patient => filterPatient(queryList, patient));
   }
 );
 
