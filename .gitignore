@@ -52,3 +52,6 @@ _steps
 
 # Jest
 coverage
+
+# Flow
+flow-typed
