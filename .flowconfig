@@ -26,6 +26,7 @@
 
 # User specified
 .*/node_modules/react-native-experimental-navigation/
+.*/node_modules/react-static-container/
 
 [include]
 

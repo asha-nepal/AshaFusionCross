@@ -26,11 +26,11 @@ export default class PatientSelect extends Component {
   }
 
   props: {
-    isFetching: boolean,
+    isFetching?: boolean,
     fetchPatientList: () => void,
     subscribeChange: () => () => void,
     patientList: Array<PatientObject>,
-    logout: () => void,
+    logout?: () => void,
   };
 
   render() {

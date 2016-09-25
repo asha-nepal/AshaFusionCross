@@ -4,11 +4,11 @@ import React from 'react';
 
 export default ({
   children,
-  isOpen,
+  isOpen = false,
   onClose,
 }: {
-  children: ReactElement,
-  isOpen: ?boolean,
+  children?: React$Element<any>,  // FIXME: flow@0.32.0がJSXのchildren propを正しく検出してくれないためWorkaround
+  isOpen?: boolean,
   onClose: () => void,
 }) => (
   <div className={isOpen ? 'modal is-active' : 'modal'}>

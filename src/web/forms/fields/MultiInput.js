@@ -7,9 +7,9 @@ import _get from 'lodash.get';
 
 type Props = {
   label: string,
-  type: ?string,
+  type?: string,
   values: ?Array<string>,
-  readonly: boolean,
+  readonly?: boolean,
   onChange: (index: number, value: string) => void,
   onAddItemRequested: (value: string) => void,
   onRemoveItemRequested: (index: number) => void,
@@ -43,13 +43,13 @@ const RowComponent = ({
   onRemoveItemRequested,
   inputRef,
 }: {
-  type: string,
+  type?: string,
   value: string,
   onChange: Function,
-  onBlur: ?Function,
-  onFocusNextRequested: ?Function,
-  onRemoveItemRequested: ?Function,
-  inputRef: ?Function,
+  onBlur?: Function,
+  onFocusNextRequested?: Function,
+  onRemoveItemRequested?: Function,
+  inputRef?: Function,
 }) => (
   <p className={onRemoveItemRequested ? 'control has-addons' : 'control'}>
     <input

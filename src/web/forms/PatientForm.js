@@ -16,7 +16,7 @@ export default ({
 }: {
   model: string,
   onSubmit: (patient: PatientObject) => void,
-  onRemove: () => void,
+  onRemove: ?() => void,
   freeze: boolean,
 }) => (
   <Form
@@ -80,7 +80,7 @@ export default ({
             disabled={freeze}
             onClick={e => {
               e.preventDefault();
-              if (!freeze) { onRemove(); }
+              if (!freeze && onRemove) { onRemove(); }
             }}
           ><i className="fa fa-times" />Remove patient</a>
         </p>

@@ -8,7 +8,7 @@ type Props = {
   login: (username: string, password: string) => void,
   anonymousLogin: () => void,
   signup: (username: string, password: string) => void,
-  children: ReactElement,
+  children: React$Element<any>,
 }
 
 export default class extends Component {
