@@ -82,7 +82,7 @@ const RecordFormComponent = ({
   state: Object,
   model: string,
   style: Array<Object>,
-  onSubmit: (record: RecordObject) => void,
+  onSubmit?: (record: RecordObject) => void,
   freeze: boolean,
 }) => (
   <Form
@@ -91,9 +91,11 @@ const RecordFormComponent = ({
   >
     {createChildFields(state, model, style)}
 
-    <button type="submit" className="button is-primary" disabled={freeze}>
-      Submit
-    </button>
+    {onSubmit &&
+      <button type="submit" className="button is-primary" disabled={freeze}>
+        Submit
+      </button>
+    }
   </Form>
 );
 
