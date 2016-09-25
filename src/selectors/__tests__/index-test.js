@@ -11,6 +11,7 @@ import {
   queryListSelector,
   filterPatient,
   filterPatientList,
+  sortFilterPatientList,
   recordFormStyleIdSelector,
 } from '../index';
 
@@ -134,6 +135,60 @@ describe('filterPatientList', () => {
         { _id: 'patient_hoge', name: 'hoge' },
         { _id: 'patient_hogefoo', name: 'hoge foo' },
         { _id: 'patient_hogehoge', name: 'HogeHoge' },
+      ]);
+  });
+});
+
+describe('sortFilterPatientList', () => {
+  it('sorts filtered patient list', () => {
+    const state = {
+      patientList: [
+        { name: 'fuga' },
+        { name: 'yo hoge' },
+        { name: 'ho hoge' },
+        { name: 'hoge fuga' },
+        { name: 'Hoge foo' },
+        { name: 'fuga fuga' },
+        { name: 'hoge bar' },
+        { name: 'Hoge' },
+      ],
+      patientSelect: {
+        filter: ' hoge ',
+      },
+    };
+
+    deepFreeze(state);
+
+    expect(sortFilterPatientList(state))
+      .toEqual([
+        { name: 'ho hoge' },
+        { name: 'Hoge' },
+        { name: 'hoge bar' },
+        { name: 'Hoge foo' },
+        { name: 'hoge fuga' },
+        { name: 'yo hoge' },
+      ]);
+  });
+
+  it('handles empty name', () => {
+    const state = {
+      patientList: [
+        { name: 'hoge fuga' },
+        { name: 'Hoge foo' },
+        { name: '' },
+      ],
+      patientSelect: {
+        filter: '',
+      },
+    };
+
+    deepFreeze(state);
+
+    expect(sortFilterPatientList(state))
+      .toEqual([
+        { name: '' },
+        { name: 'Hoge foo' },
+        { name: 'hoge fuga' },
       ]);
   });
 });

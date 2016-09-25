@@ -4,14 +4,14 @@ import {
   requestLogout,
 } from '../actions';
 import {
-  filterPatientList,
+  sortFilterPatientList,
 } from '../selectors';
 
 import { subscribe } from '../db';
 
 const mapStateToProps = (state) => ({
   isFetching: state.status.isFetchingPatientList,
-  patientList: filterPatientList(state),
+  patientList: sortFilterPatientList(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

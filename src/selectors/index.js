@@ -33,6 +33,23 @@ export const filterPatientList = createSelector(
   }
 );
 
+export const sortFilterPatientList = createSelector(
+  [filterPatientList],
+  (filteredPatientList) => filteredPatientList
+    .slice().sort((a, b) => { // sort()は破壊的なので，slice()を挟む
+      const _a = a.name ? a.name.toLowerCase() : '';
+      const _b = b.name ? b.name.toLowerCase() : '';
+
+      if (_a < _b) {
+        return -1;
+      } else if (_a > _b) {
+        return 1;
+      }
+
+      return 0;
+    })
+);
+
 
 import formStyles from '../form-styles';
 const recordFormStyles = formStyles.record || [];
