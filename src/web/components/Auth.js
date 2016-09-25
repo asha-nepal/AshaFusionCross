@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import logo from '../../../assets/img/logo.svg';
 
 type Props = {
   isDBPublic: boolean,
@@ -29,6 +30,15 @@ export default class extends Component {
     return (
       <section className="section">
         <div className="container">
+          <div className="columns">
+            <div className="column is-half-tablet is-offset-one-quarter-tablet">
+              <div className="logo">
+                <img className="logo-img" src={logo} alt="ASHA fusion" />
+                <h1 className="logo-title">ASHA fusion</h1>
+              </div>
+            </div>
+          </div>
+
           <div className="columns">
             <div className="column is-half-tablet is-offset-one-quarter-tablet">
               <div className="box">
