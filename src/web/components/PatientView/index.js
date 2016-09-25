@@ -121,7 +121,7 @@ export default class PatientView extends Component {
                     model="activePatient"
                     onSubmit={putActivePatient}
                     freeze={isPuttingPatient}
-                    onRemove={!isNew && (() => {
+                    onRemove={isNew ? null : (() => {
                       if (confirm('Are you sure?')) {
                         removeActivePatient();
                       }

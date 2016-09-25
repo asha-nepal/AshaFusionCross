@@ -10,7 +10,7 @@ export function createId(length: number = 16) {
 }
 
 // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
-export const makeCancelable = (promise: Promise) => {
+export const makeCancelable = (promise: Promise<any>) => {
   let hasCanceled_ = false;
 
   const wrappedPromise = new Promise((resolve, reject) => {

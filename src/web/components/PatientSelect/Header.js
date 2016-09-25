@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 type Props = {
   loggedIn: boolean,
   loggedInUser: ?string,
-  logout: () => void,
+  logout?: () => void,
 };
 
 export default class extends Component {
@@ -51,15 +51,17 @@ export default class extends Component {
                 <span></span>
               </span>
               {loggedIn &&
-                <div className={`nav-right nav-menu ${this.state.isMenuOpen && 'is-active'}`}>
+                <div className={`nav-right nav-menu${this.state.isMenuOpen ? ' is-active' : ''}`}>
                   <p className="nav-item">{loggedInUser || '(anonymous user)'}</p>
-                  <a
-                    className="nav-item"
-                    onClick={e => {
-                      e.preventDefault();
-                      logout();
-                    }}
-                  >Log out</a>
+                  {logout &&
+                    <a
+                      className="nav-item"
+                      onClick={e => {
+                        e.preventDefault();
+                        logout();
+                      }}
+                    >Log out</a>
+                  }
                 </div>
               }
             </nav>

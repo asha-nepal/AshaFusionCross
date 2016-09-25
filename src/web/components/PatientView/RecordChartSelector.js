@@ -66,8 +66,7 @@ export default ({
 }) => {
   if (!visibility) { return null; }
 
-  const _type = type || 'height';
-  const selectedType = types.find(t => t.type === _type);
+  const selectedType = types.find(t => t.type === type) || types[0];
 
   return (
     <div>

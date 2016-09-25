@@ -7,7 +7,10 @@ build:
     - npm-install
     - script:
       name: flow
-      code: npm run flow
+      code: |
+        npm install flow-typed
+        ./node_modules/.bin/flow-typed install -f 0.32.0 jest
+        npm run flow
     - script:
       name: eslint
       code: npm run lint

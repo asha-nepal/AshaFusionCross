@@ -28,7 +28,7 @@ const ColoredRaisedLoginButton = MKButton.coloredButton()
 type Props = {
   loggedIn: boolean,
   login: (username: string, password: string) => void,
-  children: ReactElement,
+  children: React$Element<any>,
 }
 
 export default class extends Component {

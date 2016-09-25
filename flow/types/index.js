@@ -1,10 +1,16 @@
 interface PouchDocType {
   _id: string,
   _rev: string,
+  _attachments?: Object,
 }
 
 export type PatientObject = PouchDocType & {
   type: string,
+  name: string,
+  age?: number,
+  sex?: number,
+  address?: string,
+  number?: number,
 }
 
 export type RecordObject = PouchDocType & {

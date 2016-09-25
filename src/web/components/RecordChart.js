@@ -28,7 +28,7 @@ export default ({
     label: string,
     unit: string,
   },
-  wrapperProps: ?Object
+  wrapperProps?: Object
 }) => (
   <ScatterChart
     width={600}

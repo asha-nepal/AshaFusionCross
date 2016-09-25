@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 type Props = {
   label: ?string,
-  children?: ReactElement,
+  children?: React$Element<any>,
 };
 
 export class Accordion extends Component {
