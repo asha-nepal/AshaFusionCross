@@ -6,16 +6,16 @@ jest.unmock('../index');
 
 import deepFreeze from 'deep-freeze';
 import {
-  patientListSelector,
-  filterSelector,
-  queryListSelector,
-  filterPatient,
-  filterPatientList,
-  sortFilterPatientList,
+  getPatientList,
+  getPatientSelectFilter,
+  getPatientSelectQueryList,
+  getFilteredPatientList,
+  getFilteredPatientListList,
+  getSortedFilteredPatientList,
   recordFormStyleIdSelector,
 } from '../index';
 
-describe('patientListSelector', () => {
+describe('getPatientList', () => {
   it('selects patientList from state', () => {
     const state = {
       patientList: [
@@ -26,7 +26,7 @@ describe('patientListSelector', () => {
 
     deepFreeze(state);
 
-    expect(patientListSelector(state))
+    expect(getPatientList(state))
       .toEqual([
         { _id: 'patient_hoge', name: 'Hoge' },
         { _id: 'patient_fuga', name: 'Fuga' },
@@ -34,7 +34,7 @@ describe('patientListSelector', () => {
   });
 });
 
-describe('filterSelector', () => {
+describe('getPatientSelectFilter', () => {
   it('selects filter from state with trimming', () => {
     const state = {
       patientSelect: {
@@ -44,7 +44,7 @@ describe('filterSelector', () => {
 
     deepFreeze(state);
 
-    expect(filterSelector(state))
+    expect(getPatientSelectFilter(state))
       .toEqual('foo bar');
   });
 
@@ -57,12 +57,12 @@ describe('filterSelector', () => {
 
     deepFreeze(state);
 
-    expect(filterSelector(state))
+    expect(getPatientSelectFilter(state))
       .toEqual('foo bar');
   });
 });
 
-describe('queryListSelector', () => {
+describe('getPatientSelectQueryList', () => {
   it('selects filter from state and split to list', () => {
     const state = {
       patientSelect: {
@@ -72,7 +72,7 @@ describe('queryListSelector', () => {
 
     deepFreeze(state);
 
-    expect(queryListSelector(state))
+    expect(getPatientSelectQueryList(state))
       .toEqual(['foo', 'bar']);
   });
 
@@ -85,36 +85,36 @@ describe('queryListSelector', () => {
 
     deepFreeze(state);
 
-    expect(queryListSelector(state))
+    expect(getPatientSelectQueryList(state))
       .toEqual([]);
   });
 });
 
-describe('filterPatient', () => {
+describe('getFilteredPatientList', () => {
   it('matches only at the beginning of term', () => {
-    expect(filterPatient(['ho'], { name: 'hoge fuga' })).toBe(true);
-    expect(filterPatient(['ge'], { name: 'hoge fuga' })).toBe(false);
-    expect(filterPatient(['fu'], { name: 'hoge fuga' })).toBe(true);
-    expect(filterPatient(['ga'], { name: 'hoge fuga' })).toBe(false);
+    expect(getFilteredPatientList(['ho'], { name: 'hoge fuga' })).toBe(true);
+    expect(getFilteredPatientList(['ge'], { name: 'hoge fuga' })).toBe(false);
+    expect(getFilteredPatientList(['fu'], { name: 'hoge fuga' })).toBe(true);
+    expect(getFilteredPatientList(['ga'], { name: 'hoge fuga' })).toBe(false);
   });
 
   it('matches multiple queries', () => {
-    expect(filterPatient(['ho', 'fu'], { name: 'hoge fuga' })).toBe(true);
-    expect(filterPatient(['ho', 'fu'], { name: 'hoge aaaa' })).toBe(false);
+    expect(getFilteredPatientList(['ho', 'fu'], { name: 'hoge fuga' })).toBe(true);
+    expect(getFilteredPatientList(['ho', 'fu'], { name: 'hoge aaaa' })).toBe(false);
   });
 
   it('matches patient.number', () => {
-    expect(filterPatient(['123'], { number: '123' })).toBe(true);
-    expect(filterPatient(['123'], { number: '987' })).toBe(false);
+    expect(getFilteredPatientList(['123'], { number: '123' })).toBe(true);
+    expect(getFilteredPatientList(['123'], { number: '987' })).toBe(false);
   });
 
   it('queries name and number', () => {
-    expect(filterPatient(['hoge', '123'], { name: 'hoge', number: '123' })).toBe(true);
-    expect(filterPatient(['hoge', '123'], { name: 'hoge', number: '987' })).toBe(false);
+    expect(getFilteredPatientList(['hoge', '123'], { name: 'hoge', number: '123' })).toBe(true);
+    expect(getFilteredPatientList(['hoge', '123'], { name: 'hoge', number: '987' })).toBe(false);
   });
 });
 
-describe('filterPatientList', () => {
+describe('getFilteredPatientListList', () => {
   it('filters patientList', () => {
     const state = {
       patientList: [
@@ -130,7 +130,7 @@ describe('filterPatientList', () => {
 
     deepFreeze(state);
 
-    expect(filterPatientList(state))
+    expect(getFilteredPatientListList(state))
       .toEqual([
         { _id: 'patient_hoge', name: 'hoge' },
         { _id: 'patient_hogefoo', name: 'hoge foo' },
@@ -139,7 +139,7 @@ describe('filterPatientList', () => {
   });
 });
 
-describe('sortFilterPatientList', () => {
+describe('getSortedFilteredPatientList', () => {
   it('sorts filtered patient list', () => {
     const state = {
       patientList: [
@@ -160,7 +160,7 @@ describe('sortFilterPatientList', () => {
 
     deepFreeze(state);
 
-    expect(sortFilterPatientList(state))
+    expect(getSortedFilteredPatientList(state))
       .toEqual([
         { name: 'ho hoge' },
         { name: 'Hoge' },
@@ -186,7 +186,7 @@ describe('sortFilterPatientList', () => {
 
     deepFreeze(state);
 
-    expect(sortFilterPatientList(state))
+    expect(getSortedFilteredPatientList(state))
       .toEqual([
         { name: '' },
         { name: 'Hoge foo' },
@@ -208,7 +208,7 @@ describe('sortFilterPatientList', () => {
 
     deepFreeze(state);
 
-    expect(sortFilterPatientList(state))
+    expect(getSortedFilteredPatientList(state))
       .toEqual([
         { name: 'aaa' },
         { name: 'zzz' },
@@ -229,7 +229,7 @@ describe('sortFilterPatientList', () => {
 
     deepFreeze(state);
 
-    expect(sortFilterPatientList(state))
+    expect(getSortedFilteredPatientList(state))
       .toEqual([
         { name: 'zzz' },
         { name: 'aaa' },

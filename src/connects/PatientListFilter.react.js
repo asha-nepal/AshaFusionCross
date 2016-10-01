@@ -6,12 +6,12 @@ import {
   setPatientListOrder,
 } from '../actions';
 import {
-  sortInAscSelector,
+  getPatientSortOrder,
 } from '../selectors';
 
 const mapStateToProps = (state) => ({
   filter: state.patientSelect.filter,
-  sortInAsc: sortInAscSelector(state),
+  sortInAsc: getPatientSortOrder(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
