@@ -12,7 +12,7 @@ import {
   getFilteredPatientList,
   getFilteredPatientListList,
   getSortedFilteredPatientList,
-  recordFormStyleIdSelector,
+  getRecordFormStyleId,
 } from '../index';
 
 describe('getPatientList', () => {
@@ -237,7 +237,7 @@ describe('getSortedFilteredPatientList', () => {
   });
 });
 
-describe('recordFormStyleIdSelector', () => {
+describe('getRecordFormStyleId', () => {
   it('selects recordFormStyleId', () => {
     const state = {
       patientView: {
@@ -247,7 +247,7 @@ describe('recordFormStyleIdSelector', () => {
 
     deepFreeze(state);
 
-    expect(recordFormStyleIdSelector(state))
+    expect(getRecordFormStyleId(state))
       .toEqual('dummystyleid');
   });
 });

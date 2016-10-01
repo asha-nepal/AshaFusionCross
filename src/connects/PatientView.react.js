@@ -18,9 +18,9 @@ import {
 import { subscribe } from '../db';
 
 import {
-  recordFormStylesSelector,
-  recordFormStyleIdSelector,
-  recordFormStyleSelector,
+  getRecordFormStyles,
+  getRecordFormStyleId,
+  getRecordFormStyle,
   getPatientFormStyle,
 } from '../selectors';
 
@@ -40,9 +40,9 @@ const mapStateToProps = (state) => {
     isPuttingRecord: state.status.isPuttingRecord,
     patientFormVisibility: state.patientView.patientFormVisibility,
     patientFormStyle: getPatientFormStyle(),
-    recordFormStyles: recordFormStylesSelector(state),
-    recordFormStyleId: recordFormStyleIdSelector(state),
-    recordFormStyle: recordFormStyleSelector(state),
+    recordFormStyles: getRecordFormStyles(state),
+    recordFormStyleId: getRecordFormStyleId(state),
+    recordFormStyle: getRecordFormStyle(state),
   };
 };
 
