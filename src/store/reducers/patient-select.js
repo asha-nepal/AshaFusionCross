@@ -2,20 +2,27 @@
 
 import {
   SET_PATIENT_LIST_FILTER,
+  SET_PATIENT_LIST_ORDER,
 } from '../../actions';
 
-const initialState = {
+const initialState: PatientSelectState = {
   filter: '',
+  sortInAsc: true,
 };
 
 export default function (
   state: PatientSelectState = initialState,
   action: PatientSelectAction,
-): Object {
+): PatientSelectState {
   switch (action.type) {
     case SET_PATIENT_LIST_FILTER:
       return Object.assign({}, state, {
         filter: action.payload.filter,
+      });
+
+    case SET_PATIENT_LIST_ORDER:
+      return Object.assign({}, state, {
+        sortInAsc: action.payload.sortInAsc,
       });
 
     default:

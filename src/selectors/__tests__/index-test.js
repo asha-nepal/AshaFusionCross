@@ -154,6 +154,7 @@ describe('sortFilterPatientList', () => {
       ],
       patientSelect: {
         filter: ' hoge ',
+        sortInAsc: true,
       },
     };
 
@@ -179,6 +180,7 @@ describe('sortFilterPatientList', () => {
       ],
       patientSelect: {
         filter: '',
+        sortInAsc: true,
       },
     };
 
@@ -189,6 +191,48 @@ describe('sortFilterPatientList', () => {
         { name: '' },
         { name: 'Hoge foo' },
         { name: 'hoge fuga' },
+      ]);
+  });
+
+  it('sorts according in ASC if sortInAsc is true', () => {
+    const state = {
+      patientList: [
+        { name: 'aaa' },
+        { name: 'zzz' },
+      ],
+      patientSelect: {
+        filter: '',
+        sortInAsc: true,
+      },
+    };
+
+    deepFreeze(state);
+
+    expect(sortFilterPatientList(state))
+      .toEqual([
+        { name: 'aaa' },
+        { name: 'zzz' },
+      ]);
+  });
+
+  it('sorts according in DESC if sortInAsc is false', () => {
+    const state = {
+      patientList: [
+        { name: 'aaa' },
+        { name: 'zzz' },
+      ],
+      patientSelect: {
+        filter: '',
+        sortInAsc: false,
+      },
+    };
+
+    deepFreeze(state);
+
+    expect(sortFilterPatientList(state))
+      .toEqual([
+        { name: 'zzz' },
+        { name: 'aaa' },
       ]);
   });
 });

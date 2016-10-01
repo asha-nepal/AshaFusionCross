@@ -33,21 +33,28 @@ export const filterPatientList = createSelector(
   }
 );
 
+export const sortInAscSelector = (state: Object) => state.patientSelect.sortInAsc;
+
 export const sortFilterPatientList = createSelector(
-  [filterPatientList],
-  (filteredPatientList) => filteredPatientList
-    .slice().sort((a, b) => { // sort()は破壊的なので，slice()を挟む
-      const _a = a.name ? a.name.toLowerCase() : '';
-      const _b = b.name ? b.name.toLowerCase() : '';
+  [filterPatientList, sortInAscSelector],
+  (filteredPatientList, sortInAsc) => {
+    const x = sortInAsc ? -1 : 1;
+    const _x = -x;
 
-      if (_a < _b) {
-        return -1;
-      } else if (_a > _b) {
-        return 1;
-      }
+    return filteredPatientList
+      .slice().sort((a, b) => { // sort()は破壊的なので，slice()を挟む
+        const _a = a.name ? a.name.toLowerCase() : '';
+        const _b = b.name ? b.name.toLowerCase() : '';
 
-      return 0;
-    })
+        if (_a < _b) {
+          return x;
+        } else if (_a > _b) {
+          return _x;
+        }
+
+        return 0;
+      });
+  }
 );
 
 
