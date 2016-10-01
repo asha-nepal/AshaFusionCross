@@ -21,6 +21,7 @@ import {
   recordFormStylesSelector,
   recordFormStyleIdSelector,
   recordFormStyleSelector,
+  getPatientFormStyle,
 } from '../selectors';
 
 const mapStateToProps = (state) => {
@@ -28,8 +29,6 @@ const mapStateToProps = (state) => {
   const records = state.activeRecords;
   const selectedActiveRecordIndex =
     records && records.findIndex(r => r._id === state.patientView.selectedActiveRecordId);
-
-  const recordFormStyle = recordFormStyleSelector(state);
 
   return {
     patient,
@@ -40,9 +39,10 @@ const mapStateToProps = (state) => {
     isPuttingPatient: state.status.isPuttingPatient,
     isPuttingRecord: state.status.isPuttingRecord,
     patientFormVisibility: state.patientView.patientFormVisibility,
+    patientFormStyle: getPatientFormStyle(),
     recordFormStyles: recordFormStylesSelector(state),
     recordFormStyleId: recordFormStyleIdSelector(state),
-    recordFormStyle: recordFormStyle && recordFormStyle.style,
+    recordFormStyle: recordFormStyleSelector(state),
   };
 };
 

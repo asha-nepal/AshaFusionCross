@@ -8,8 +8,7 @@ import Footer from './Footer';
 
 import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
-import PatientForm from '../../forms/PatientForm';
-import RecordForm from '../../forms/RecordForm';
+import DynamicForm from '../../forms/DynamicForm';
 
 type Props = {
   init: () => void,
@@ -29,6 +28,7 @@ type Props = {
   selectedActiveRecordIndex: number,
   selectActiveRecord: (id: string) => void,
   setRecordFormStyleId: (styleId: string) => void,
+  patientFormStyle: Array<Object>,
   recordFormStyles: Array<Object>,
   recordFormStyleId: string,
   recordFormStyle: ?string,
@@ -96,6 +96,7 @@ export default class PatientView extends Component {
       selectedActiveRecordIndex,
       selectActiveRecord,
       setRecordFormStyleId,
+      patientFormStyle,
       recordFormStyles,
       recordFormStyleId,
       recordFormStyle,
@@ -118,10 +119,11 @@ export default class PatientView extends Component {
             <div className="card is-fullwidth">
               <div className="card-content">
                 <div className="container">
-                  <PatientForm
+                  <DynamicForm
                     model="activePatient"
-                    onSubmit={putActivePatient}
+                    style={patientFormStyle}
                     freeze={isPuttingPatient}
+                    onSubmit={putActivePatient}
                     onRemove={isNew ? null : (() => {
                       if (confirm('Are you sure?')) {
                         removeActivePatient();
@@ -178,7 +180,7 @@ export default class PatientView extends Component {
 
               {selectedActiveRecordIndex > -1 && (
                 <div className="container">
-                  <RecordForm
+                  <DynamicForm
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}

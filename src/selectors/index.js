@@ -71,5 +71,10 @@ export const recordFormStyleIdSelector = (state: Object) =>
 
 export const recordFormStyleSelector = createSelector(
   [recordFormStyleIdSelector],
-  (recordFormStyleId) => recordFormStyles.find(s => s.id === recordFormStyleId)
+  (recordFormStyleId) => {
+    const recordFormStyle = recordFormStyles.find(s => s.id === recordFormStyleId);
+    return recordFormStyle && recordFormStyle.style;
+  }
 );
+
+export const getPatientFormStyle = () => formStyles.patient[0].style;  // TODO とりあえず固定で
