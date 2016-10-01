@@ -34,18 +34,20 @@ export const getFilteredPatientListList = createSelector(
   }
 );
 
+// TODO: 名付けの一貫性
+export const getPatientSortField = (state: Object) => state.patientSelect.sortBy;
 export const getPatientSortOrder = (state: Object) => state.patientSelect.sortInAsc;
 
 export const getSortedFilteredPatientList = createSelector(
-  [getFilteredPatientListList, getPatientSortOrder],
-  (filteredPatientList, sortInAsc) => {
+  [getFilteredPatientListList, getPatientSortField, getPatientSortOrder],
+  (filteredPatientList, sortBy, sortInAsc) => {
     const x = sortInAsc ? -1 : 1;
     const _x = -x;
 
     return filteredPatientList
       .slice().sort((a, b) => { // sort()は破壊的なので，slice()を挟む
-        const _a = a.name ? a.name.toLowerCase() : '';
-        const _b = b.name ? b.name.toLowerCase() : '';
+        const _a = a[sortBy] ? a[sortBy].toLowerCase() : '';
+        const _b = b[sortBy] ? b[sortBy].toLowerCase() : '';
 
         if (_a < _b) {
           return x;

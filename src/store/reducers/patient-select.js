@@ -7,6 +7,7 @@ import {
 
 const initialState: PatientSelectState = {
   filter: '',
+  sortBy: 'name',
   sortInAsc: true,
 };
 
