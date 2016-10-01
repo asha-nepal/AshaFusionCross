@@ -11,6 +11,11 @@ export {
   SET_IS_DB_PUBLIC, setIsDBPublic,
 } from './auth';
 
+export {
+  SET_PATIENT_LIST_FILTER, setPatientListFilter,
+  SET_PATIENT_LIST_ORDER, setPatientListOrder,
+} from './patient-select';
+
 // for saga
 export const FETCH_PATIENT_LIST = 'FETCH_PATIENT_LIST';
 export const fetchPatientList = () => ({
@@ -247,14 +252,5 @@ export const setRecordChartType = (type: string): SetRecordChartTypeAction => ({
   type: SET_RECORD_CHART_TYPE,
   payload: {
     type,
-  },
-});
-
-
-export const SET_PATIENT_LIST_FILTER = 'SET_PATIENT_LIST_FILTER';
-export const setPatientListFilter = (filter: string) => ({
-  type: SET_PATIENT_LIST_FILTER,
-  payload: {
-    filter,
   },
 });

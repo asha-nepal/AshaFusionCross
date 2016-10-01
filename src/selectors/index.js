@@ -2,12 +2,13 @@
 
 import { createSelector } from 'reselect';
 
-export const patientListSelector = (state: Object) => state.patientList;
-export const filterSelector = (state: Object) => state.patientSelect.filter.trim().toLowerCase();
-export const queryListSelector = (state: Object) =>
-  filterSelector(state).split(' ').filter(q => q.length > 0);
+export const getPatientList = (state: Object) => state.patientList;
+export const getPatientSelectFilter = (state: Object) =>
+  state.patientSelect.filter.trim().toLowerCase();
+export const getPatientSelectQueryList = (state: Object) =>
+  getPatientSelectFilter(state).split(' ').filter(q => q.length > 0);
 
-export const filterPatient = (queries: Array<string>, patient: PatientObject) =>
+export const getFilteredPatientList = (queries: Array<string>, patient: PatientObject) =>
   queries.every(query => {
     if (patient.name) {
       const _query = ` ${query}`;
@@ -22,14 +23,38 @@ export const filterPatient = (queries: Array<string>, patient: PatientObject) =>
     return false;
   });
 
-export const filterPatientList = createSelector(
-  [patientListSelector, queryListSelector],
+export const getFilteredPatientListList = createSelector(
+  [getPatientList, getPatientSelectQueryList],
   (patientList, queryList) => {
     if (queryList.length === 0) {
       return patientList;
     }
 
-    return patientList.filter(patient => filterPatient(queryList, patient));
+    return patientList.filter(patient => getFilteredPatientList(queryList, patient));
+  }
+);
+
+export const getPatientSortOrder = (state: Object) => state.patientSelect.sortInAsc;
+
+export const getSortedFilteredPatientList = createSelector(
+  [getFilteredPatientListList, getPatientSortOrder],
+  (filteredPatientList, sortInAsc) => {
+    const x = sortInAsc ? -1 : 1;
+    const _x = -x;
+
+    return filteredPatientList
+      .slice().sort((a, b) => { // sort()は破壊的なので，slice()を挟む
+        const _a = a.name ? a.name.toLowerCase() : '';
+        const _b = b.name ? b.name.toLowerCase() : '';
+
+        if (_a < _b) {
+          return x;
+        } else if (_a > _b) {
+          return _x;
+        }
+
+        return 0;
+      });
   }
 );
 
