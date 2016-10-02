@@ -38,7 +38,7 @@ export default ({
         </select>
       </span>
     </p>
-    <p className="control form-static">
+    <p className="form-static">
       <a
         onClick={e => {
           e.preventDefault();
