@@ -8,7 +8,7 @@ export const getPatientSelectFilter = (state: Object) =>
 export const getPatientSelectQueryList = (state: Object) =>
   getPatientSelectFilter(state).split(' ').filter(q => q.length > 0);
 
-export const getFilteredPatientList = (queries: Array<string>, patient: PatientObject) =>
+export const checkPatientMatchesQueries = (queries: Array<string>, patient: PatientObject) =>
   queries.every(query => {
     if (patient.name) {
       const _query = ` ${query}`;
@@ -23,14 +23,14 @@ export const getFilteredPatientList = (queries: Array<string>, patient: PatientO
     return false;
   });
 
-export const getFilteredPatientListList = createSelector(
+export const getFilteredPatientList = createSelector(
   [getPatientList, getPatientSelectQueryList],
   (patientList, queryList) => {
     if (queryList.length === 0) {
       return patientList;
     }
 
-    return patientList.filter(patient => getFilteredPatientList(queryList, patient));
+    return patientList.filter(patient => checkPatientMatchesQueries(queryList, patient));
   }
 );
 
@@ -39,7 +39,7 @@ export const getPatientSortField = (state: Object) => state.patientSelect.sortBy
 export const getPatientSortOrder = (state: Object) => state.patientSelect.sortInAsc;
 
 export const getSortedFilteredPatientList = createSelector(
-  [getFilteredPatientListList, getPatientSortField, getPatientSortOrder],
+  [getFilteredPatientList, getPatientSortField, getPatientSortOrder],
   (filteredPatientList, sortBy, sortInAsc) => {
     const x = sortInAsc ? -1 : 1;
     const _x = -x;

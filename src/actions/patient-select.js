@@ -16,9 +16,9 @@ export const setPatientListSortField = (sortBy: string): SetPatientListSortField
   },
 });
 
-export const SET_PATIENT_LIST_ORDER = 'SET_PATIENT_LIST_ORDER';
-export const setPatientListOrder = (sortInAsc: boolean): SetPatientListOrderAction => ({
-  type: SET_PATIENT_LIST_ORDER,
+export const SET_PATIENT_LIST_SORT_ORDER = 'SET_PATIENT_LIST_SORT_ORDER';
+export const setPatientListSortOrder = (sortInAsc: boolean): SetPatientListSortOrderAction => ({
+  type: SET_PATIENT_LIST_SORT_ORDER,
   payload: {
     sortInAsc,
   },

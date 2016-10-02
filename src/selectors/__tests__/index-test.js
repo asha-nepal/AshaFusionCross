@@ -9,8 +9,8 @@ import {
   getPatientList,
   getPatientSelectFilter,
   getPatientSelectQueryList,
+  checkPatientMatchesQueries,
   getFilteredPatientList,
-  getFilteredPatientListList,
   getSortedFilteredPatientList,
   recordFormStyleIdSelector,
 } from '../index';
@@ -90,31 +90,33 @@ describe('getPatientSelectQueryList', () => {
   });
 });
 
-describe('getFilteredPatientList', () => {
+describe('checkPatientMatchesQueries', () => {
   it('matches only at the beginning of term', () => {
-    expect(getFilteredPatientList(['ho'], { name: 'hoge fuga' })).toBe(true);
-    expect(getFilteredPatientList(['ge'], { name: 'hoge fuga' })).toBe(false);
-    expect(getFilteredPatientList(['fu'], { name: 'hoge fuga' })).toBe(true);
-    expect(getFilteredPatientList(['ga'], { name: 'hoge fuga' })).toBe(false);
+    expect(checkPatientMatchesQueries(['ho'], { name: 'hoge fuga' })).toBe(true);
+    expect(checkPatientMatchesQueries(['ge'], { name: 'hoge fuga' })).toBe(false);
+    expect(checkPatientMatchesQueries(['fu'], { name: 'hoge fuga' })).toBe(true);
+    expect(checkPatientMatchesQueries(['ga'], { name: 'hoge fuga' })).toBe(false);
   });
 
   it('matches multiple queries', () => {
-    expect(getFilteredPatientList(['ho', 'fu'], { name: 'hoge fuga' })).toBe(true);
-    expect(getFilteredPatientList(['ho', 'fu'], { name: 'hoge aaaa' })).toBe(false);
+    expect(checkPatientMatchesQueries(['ho', 'fu'], { name: 'hoge fuga' })).toBe(true);
+    expect(checkPatientMatchesQueries(['ho', 'fu'], { name: 'hoge aaaa' })).toBe(false);
   });
 
   it('matches patient.number', () => {
-    expect(getFilteredPatientList(['123'], { number: '123' })).toBe(true);
-    expect(getFilteredPatientList(['123'], { number: '987' })).toBe(false);
+    expect(checkPatientMatchesQueries(['123'], { number: '123' })).toBe(true);
+    expect(checkPatientMatchesQueries(['123'], { number: '987' })).toBe(false);
   });
 
   it('queries name and number', () => {
-    expect(getFilteredPatientList(['hoge', '123'], { name: 'hoge', number: '123' })).toBe(true);
-    expect(getFilteredPatientList(['hoge', '123'], { name: 'hoge', number: '987' })).toBe(false);
+    expect(checkPatientMatchesQueries(['hoge', '123'], { name: 'hoge', number: '123' }))
+      .toBe(true);
+    expect(checkPatientMatchesQueries(['hoge', '123'], { name: 'hoge', number: '987' }))
+      .toBe(false);
   });
 });
 
-describe('getFilteredPatientListList', () => {
+describe('getFilteredPatientList', () => {
   it('filters patientList', () => {
     const state = {
       patientList: [
@@ -130,7 +132,7 @@ describe('getFilteredPatientListList', () => {
 
     deepFreeze(state);
 
-    expect(getFilteredPatientListList(state))
+    expect(getFilteredPatientList(state))
       .toEqual([
         { _id: 'patient_hoge', name: 'hoge' },
         { _id: 'patient_hogefoo', name: 'hoge foo' },

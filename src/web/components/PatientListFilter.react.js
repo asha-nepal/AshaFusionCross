@@ -6,14 +6,14 @@ export default ({
   sortBy,
   sortInAsc,
   setPatientListSortField,
-  setPatientListOrder,
+  setPatientListSortOrder,
   onFilterChange,
 }: {
   filter: string,
   sortBy: string,
   sortInAsc: boolean,
   setPatientListSortField: (sortBy: string) => void,
-  setPatientListOrder: (sortInAsc: boolean) => void,
+  setPatientListSortOrder: (sortInAsc: boolean) => void,
   onFilterChange: (newFilter: string) => void,
 }) => (
   <div className="control is-grouped">
@@ -42,7 +42,7 @@ export default ({
       <a
         onClick={e => {
           e.preventDefault();
-          setPatientListOrder(!sortInAsc);
+          setPatientListSortOrder(!sortInAsc);
         }}
       >
         <span className="icon is-small" style={{ verticalAlign: 'middle' }}>

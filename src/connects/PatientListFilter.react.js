@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   setPatientListFilter,
   setPatientListSortField,
-  setPatientListOrder,
+  setPatientListSortOrder,
 } from '../actions';
 import {
   getPatientSortField,
@@ -20,7 +20,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onFilterChange: (newFilter) => dispatch(setPatientListFilter(newFilter)),
   setPatientListSortField: (sortBy: string) => dispatch(setPatientListSortField(sortBy)),
-  setPatientListOrder: (sortInAsc: boolean) => dispatch(setPatientListOrder(sortInAsc)),
+  setPatientListSortOrder: (sortInAsc: boolean) => dispatch(setPatientListSortOrder(sortInAsc)),
 });
 
 export default connect(
