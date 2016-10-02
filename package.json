@@ -57,7 +57,7 @@
     "mockdate": "^1.0.4",
     "moment": "^2.13.0",
     "node-sass": "^3.8.0",
-    "pouchdb": "^5.4.5",
+    "pouchdb": "^6.0.6",
     "pouchdb-authentication": "^0.5.3",
     "react-addons-perf": "^15.3.1",
     "react-addons-test-utils": "^15.1.0",
