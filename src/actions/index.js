@@ -13,6 +13,7 @@ export {
 
 export {
   SET_PATIENT_LIST_FILTER, setPatientListFilter,
+  SET_PATIENT_LIST_SORT_FIELD, setPatientListSortField,
   SET_PATIENT_LIST_ORDER, setPatientListOrder,
 } from './patient-select';
 

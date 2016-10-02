@@ -5,6 +5,11 @@ interface SetPatientListFilterPayload {
 }
 interface SetPatientListFilterAction extends PayloadAction<SetPatientListFilterPayload> {}
 
+interface SetPatientListSortFieldPayload {
+  sortBy: string,
+}
+interface SetPatientListSortFieldAction extends PayloadAction<SetPatientListSortFieldPayload> {}
+
 interface SetPatientListOrderPayload {
   sortInAsc: boolean,
 }
@@ -12,10 +17,12 @@ interface SetPatientListOrderAction extends PayloadAction<SetPatientListOrderPay
 
 export type PatientSelectAction =
   SetPatientListFilterAction &
+  SetPatientListSortFieldAction &
   SetPatientListOrderAction;
 
 
 export type PatientSelectState = {
   filter: string,
+  sortBy: string,
   sortInAsc: boolean,
 }

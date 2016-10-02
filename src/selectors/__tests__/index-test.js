@@ -154,6 +154,7 @@ describe('getSortedFilteredPatientList', () => {
       ],
       patientSelect: {
         filter: ' hoge ',
+        sortBy: 'name',
         sortInAsc: true,
       },
     };
@@ -180,6 +181,7 @@ describe('getSortedFilteredPatientList', () => {
       ],
       patientSelect: {
         filter: '',
+        sortBy: 'name',
         sortInAsc: true,
       },
     };
@@ -202,6 +204,7 @@ describe('getSortedFilteredPatientList', () => {
       ],
       patientSelect: {
         filter: '',
+        sortBy: 'name',
         sortInAsc: true,
       },
     };
@@ -223,6 +226,7 @@ describe('getSortedFilteredPatientList', () => {
       ],
       patientSelect: {
         filter: '',
+        sortBy: 'name',
         sortInAsc: false,
       },
     };
@@ -233,6 +237,30 @@ describe('getSortedFilteredPatientList', () => {
       .toEqual([
         { name: 'zzz' },
         { name: 'aaa' },
+      ]);
+  });
+
+  it('sorts by speficied field', () => {
+    const state = {
+      patientList: [
+        { hoge: 'ccc' },
+        { hoge: 'aaa' },
+        { hoge: 'bbb' },
+      ],
+      patientSelect: {
+        filter: '',
+        sortBy: 'hoge',
+        sortInAsc: true,
+      },
+    };
+
+    deepFreeze(state);
+
+    expect(getSortedFilteredPatientList(state))
+      .toEqual([
+        { hoge: 'aaa' },
+        { hoge: 'bbb' },
+        { hoge: 'ccc' },
       ]);
   });
 });

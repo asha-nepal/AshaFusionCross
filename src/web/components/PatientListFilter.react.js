@@ -3,12 +3,16 @@
 import React from 'react';
 export default ({
   filter,
+  sortBy,
   sortInAsc,
+  setPatientListSortField,
   setPatientListOrder,
   onFilterChange,
 }: {
   filter: string,
+  sortBy: string,
   sortInAsc: boolean,
+  setPatientListSortField: (sortBy: string) => void,
   setPatientListOrder: (sortInAsc: boolean) => void,
   onFilterChange: (newFilter: string) => void,
 }) => (
@@ -22,8 +26,19 @@ export default ({
       />
       <i className="fa fa-search" />
     </p>
+    <span className="form-static">Sort:</span>
+    <p className="control">
+      <span className="select">
+        <select
+          value={sortBy}
+          onChange={e => setPatientListSortField(e.target.value)}
+        >
+          <option value="name">Name</option>
+          <option value="number">No.</option>
+        </select>
+      </span>
+    </p>
     <p className="control form-static">
-      Sort:
       <a
         onClick={e => {
           e.preventDefault();
