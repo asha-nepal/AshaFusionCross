@@ -8,7 +8,7 @@ export const getPatientSelectFilter = (state: Object) =>
 export const getPatientSelectQueryList = (state: Object) =>
   getPatientSelectFilter(state).split(' ').filter(q => q.length > 0);
 
-export const getFilteredPatientList = (queries: Array<string>, patient: PatientObject) =>
+export const checkPatientMatchesQueries = (queries: Array<string>, patient: PatientObject) =>
   queries.every(query => {
     if (patient.name) {
       const _query = ` ${query}`;
@@ -23,29 +23,34 @@ export const getFilteredPatientList = (queries: Array<string>, patient: PatientO
     return false;
   });
 
-export const getFilteredPatientListList = createSelector(
+export const getFilteredPatientList = createSelector(
   [getPatientList, getPatientSelectQueryList],
   (patientList, queryList) => {
     if (queryList.length === 0) {
       return patientList;
     }
 
-    return patientList.filter(patient => getFilteredPatientList(queryList, patient));
+    return patientList.filter(patient => checkPatientMatchesQueries(queryList, patient));
   }
 );
 
+// TODO: 名付けの一貫性
+export const getPatientSortField = (state: Object) => state.patientSelect.sortBy;
 export const getPatientSortOrder = (state: Object) => state.patientSelect.sortInAsc;
 
 export const getSortedFilteredPatientList = createSelector(
-  [getFilteredPatientListList, getPatientSortOrder],
-  (filteredPatientList, sortInAsc) => {
+  [getFilteredPatientList, getPatientSortField, getPatientSortOrder],
+  (filteredPatientList, sortBy, sortInAsc) => {
     const x = sortInAsc ? -1 : 1;
     const _x = -x;
 
     return filteredPatientList
       .slice().sort((a, b) => { // sort()は破壊的なので，slice()を挟む
-        const _a = a.name ? a.name.toLowerCase() : '';
-        const _b = b.name ? b.name.toLowerCase() : '';
+        if (!a[sortBy]) { return 1; }  // 空データはASC, DESC問わず末尾にする
+        if (!b[sortBy]) { return -1; }
+
+        const _a = a[sortBy].toLowerCase();
+        const _b = b[sortBy].toLowerCase();
 
         if (_a < _b) {
           return x;

@@ -2,11 +2,13 @@
 
 import {
   SET_PATIENT_LIST_FILTER,
-  SET_PATIENT_LIST_ORDER,
+  SET_PATIENT_LIST_SORT_FIELD,
+  SET_PATIENT_LIST_SORT_ORDER,
 } from '../../actions';
 
 const initialState: PatientSelectState = {
   filter: '',
+  sortBy: 'name',
   sortInAsc: true,
 };
 
@@ -20,7 +22,12 @@ export default function (
         filter: action.payload.filter,
       });
 
-    case SET_PATIENT_LIST_ORDER:
+    case SET_PATIENT_LIST_SORT_FIELD:
+      return Object.assign({}, state, {
+        sortBy: action.payload.sortBy,
+      });
+
+    case SET_PATIENT_LIST_SORT_ORDER:
       return Object.assign({}, state, {
         sortInAsc: action.payload.sortInAsc,
       });

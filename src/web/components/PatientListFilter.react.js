@@ -3,13 +3,17 @@
 import React from 'react';
 export default ({
   filter,
+  sortBy,
   sortInAsc,
-  setPatientListOrder,
+  setPatientListSortField,
+  setPatientListSortOrder,
   onFilterChange,
 }: {
   filter: string,
+  sortBy: string,
   sortInAsc: boolean,
-  setPatientListOrder: (sortInAsc: boolean) => void,
+  setPatientListSortField: (sortBy: string) => void,
+  setPatientListSortOrder: (sortInAsc: boolean) => void,
   onFilterChange: (newFilter: string) => void,
 }) => (
   <div className="control is-grouped">
@@ -22,12 +26,23 @@ export default ({
       />
       <i className="fa fa-search" />
     </p>
-    <p className="control form-static">
-      Sort:
+    <span className="form-static">Sort:</span>
+    <p className="control">
+      <span className="select">
+        <select
+          value={sortBy}
+          onChange={e => setPatientListSortField(e.target.value)}
+        >
+          <option value="name">Name</option>
+          <option value="number">No.</option>
+        </select>
+      </span>
+    </p>
+    <p className="form-static">
       <a
         onClick={e => {
           e.preventDefault();
-          setPatientListOrder(!sortInAsc);
+          setPatientListSortOrder(!sortInAsc);
         }}
       >
         <span className="icon is-small" style={{ verticalAlign: 'middle' }}>
