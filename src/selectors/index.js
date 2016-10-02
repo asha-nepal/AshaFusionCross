@@ -46,8 +46,11 @@ export const getSortedFilteredPatientList = createSelector(
 
     return filteredPatientList
       .slice().sort((a, b) => { // sort()は破壊的なので，slice()を挟む
-        const _a = a[sortBy] ? a[sortBy].toLowerCase() : '';
-        const _b = b[sortBy] ? b[sortBy].toLowerCase() : '';
+        if (!a[sortBy]) { return 1; }  // 空データはASC, DESC問わず末尾にする
+        if (!b[sortBy]) { return -1; }
+
+        const _a = a[sortBy].toLowerCase();
+        const _b = b[sortBy].toLowerCase();
 
         if (_a < _b) {
           return x;

@@ -192,9 +192,9 @@ describe('getSortedFilteredPatientList', () => {
 
     expect(getSortedFilteredPatientList(state))
       .toEqual([
-        { name: '' },
         { name: 'Hoge foo' },
         { name: 'hoge fuga' },
+        { name: '' },  // 空データは末尾に来る
       ]);
   });
 
@@ -263,6 +263,40 @@ describe('getSortedFilteredPatientList', () => {
         { hoge: 'aaa' },
         { hoge: 'bbb' },
         { hoge: 'ccc' },
+      ]);
+  });
+
+  it('places entities whose values are null regardless of sortBy and sortInAsc', () => {
+    const state = {
+      patientList: [
+        { hoge: null },
+        { hoge: 'aaa' },
+        { hoge: 'zzz' },
+        { hoge: null },
+      ],
+      patientSelect: {
+        filter: '',
+        sortBy: 'hoge',
+        sortInAsc: true,
+      },
+    };
+
+    expect(getSortedFilteredPatientList(state))
+      .toEqual([
+        { hoge: 'aaa' },
+        { hoge: 'zzz' },
+        { hoge: null },
+        { hoge: null },
+      ]);
+
+    state.patientSelect.sortInAsc = false;
+
+    expect(getSortedFilteredPatientList(state))
+      .toEqual([
+        { hoge: 'zzz' },
+        { hoge: 'aaa' },
+        { hoge: null },
+        { hoge: null },
       ]);
   });
 });
