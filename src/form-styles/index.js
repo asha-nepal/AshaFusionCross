@@ -1,6 +1,32 @@
 import math from 'mathjs';
 
 export default {
+  patient: [
+    {
+      style: [
+        { field: 'number', label: 'No.', style: { width: 200 } },
+        { field: 'name', label: 'Name', class: 'textinput' },
+        {
+          class: 'block',
+          children: [
+            {
+              field: 'sex',
+              label: 'Sex',
+              class: 'radio',
+              options: [
+                { id: 'male', label: 'Male' },
+                { id: 'female', label: 'Female' },
+              ],
+            },
+            { field: 'age', label: 'Age', class: 'textinput', type: 'number' },
+          ],
+        },
+        { field: 'address', label: 'Address', class: 'textinput' },
+        { field: 'tel', label: 'Tel', class: 'textinput' },
+        { field: 'ethnicity', label: 'Ethnicity', class: 'textinput' },
+      ],
+    },
+  ],
   record: [
     {
       id: 'reception',

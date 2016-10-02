@@ -72,17 +72,19 @@ function createChildFields(state, rootModel, fields) {
   });
 }
 
-const RecordFormComponent = ({
+export const DynamicFormComponent = ({
   state,
   model,
   style,
   onSubmit,
+  onRemove,
   freeze,
 }: {
   state: Object,
   model: string,
   style: Array<Object>,
-  onSubmit?: (record: RecordObject) => void,
+  onSubmit?: (data: Object) => void,
+  onRemove: ?() => void,
   freeze: boolean,
 }) => (
   <Form
@@ -91,14 +93,32 @@ const RecordFormComponent = ({
   >
     {createChildFields(state, model, style)}
 
-    {onSubmit &&
-      <button type="submit" className="button is-primary" disabled={freeze}>
-        Submit
-      </button>
+    {(onSubmit || onRemove) &&
+      <div className="level">
+        {onSubmit &&
+          <p className="level-left">
+            <button type="submit" className="button is-primary" disabled={freeze}>
+              Submit
+            </button>
+          </p>
+        }
+        {onRemove &&
+          <p className="level-right">
+            <a
+              className="button is-danger"
+              disabled={freeze}
+              onClick={e => {
+                e.preventDefault();
+                if (!freeze && onRemove) { onRemove(); }
+              }}
+            ><i className="fa fa-times" />Remove</a>
+          </p>
+        }
+      </div>
     }
   </Form>
 );
 
 export default connect(
   state => ({ state })
-)(RecordFormComponent);
+)(DynamicFormComponent);

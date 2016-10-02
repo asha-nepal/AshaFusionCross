@@ -18,9 +18,10 @@ import {
 import { subscribe } from '../db';
 
 import {
-  recordFormStylesSelector,
-  recordFormStyleIdSelector,
-  recordFormStyleSelector,
+  getRecordFormStyles,
+  getRecordFormStyleId,
+  getRecordFormStyle,
+  getPatientFormStyle,
 } from '../selectors';
 
 const mapStateToProps = (state) => {
@@ -28,8 +29,6 @@ const mapStateToProps = (state) => {
   const records = state.activeRecords;
   const selectedActiveRecordIndex =
     records && records.findIndex(r => r._id === state.patientView.selectedActiveRecordId);
-
-  const recordFormStyle = recordFormStyleSelector(state);
 
   return {
     patient,
@@ -40,9 +39,10 @@ const mapStateToProps = (state) => {
     isPuttingPatient: state.status.isPuttingPatient,
     isPuttingRecord: state.status.isPuttingRecord,
     patientFormVisibility: state.patientView.patientFormVisibility,
-    recordFormStyles: recordFormStylesSelector(state),
-    recordFormStyleId: recordFormStyleIdSelector(state),
-    recordFormStyle: recordFormStyle && recordFormStyle.style,
+    patientFormStyle: getPatientFormStyle(),
+    recordFormStyles: getRecordFormStyles(state),
+    recordFormStyleId: getRecordFormStyleId(state),
+    recordFormStyle: getRecordFormStyle(state),
   };
 };
 
