@@ -13,10 +13,11 @@ type Props = {
 
 const getSuggestions = (value) => {
   const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
+  if (inputValue.length === 0) { return []; }
 
-  return inputLength === 0 ? [] : ICD10.filter(suggestion =>
-    suggestion._query.indexOf(inputValue) > -1
+  const query = ` ${inputValue}`;  // 前方一致用にスペース入れる
+  return ICD10.filter(suggestion =>
+    suggestion._query.indexOf(query) > -1
   ).slice(0, 10);
 };
 
