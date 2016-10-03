@@ -44,7 +44,11 @@ export const DiagnosesComponent = ({
         {diagnoses && diagnoses.map && diagnoses.map((diagnosis, i) =>
           <tr key={i}>
             <td>
-              {diagnosis.icd10}{' '}{ICD10[diagnosis.icd10]}
+              {diagnosis.icd10}{' '}
+              {(() => {
+                const icd10 = ICD10.find(row => row.code === diagnosis.icd10);
+                return icd10 && icd10.description;
+              })()}
             </td>
             <td>{diagnosis.text}</td>
             {!readonly &&

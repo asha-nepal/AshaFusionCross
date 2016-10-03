@@ -11,24 +11,14 @@ type Props = {
   onChange: (newCode: string) => void,
 };
 
-type ICD10SuggestionType = {
-  code: string,
-  description: string,
-  query: string,
-};
-
-const ICD10suggestions: Array<ICD10SuggestionType> = Object.keys(ICD10).map(code => ({
-  code,
-  description: ICD10[code],
-  query: (code + ICD10[code]).toLowerCase(),  // suggestion検索用
-}));
-
-const getSuggestions = (value) => {
+export const getSuggestions = (candidates: Array<{_query: string}>, value: string) => {
   const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
+  if (inputValue.length === 0) { return []; }
 
-  return inputLength === 0 ? [] : ICD10suggestions.filter(suggestion =>
-    suggestion.query.indexOf(inputValue) > -1
+  const queries = inputValue.split(' ').filter(q => q.length > 0);
+
+  return candidates.filter(icd10 =>
+    queries.every(query => icd10._query.indexOf(` ${query}`) > -1)
   ).slice(0, 10);
 };
 
@@ -88,21 +78,21 @@ export default class ICD10Input extends Component {
   props: Props;
 
   _onSuggestionsUpdateRequested: (args: { value: string }) => void;
-  _onSuggestionSelected: (event: Object, args: { suggestion: ICD10SuggestionType }) => void;
-  _onInputBlur: (evnet: Object, args: { focusedSuggestion: ICD10SuggestionType }) => void;
+  _onSuggestionSelected: (event: Object, args: { suggestion: ICD10Type }) => void;
+  _onInputBlur: (evnet: Object, args: { focusedSuggestion: ICD10Type }) => void;
 
   _onSuggestionsUpdateRequested({ value }: { value: string }) {
     this.setState({
-      suggestions: getSuggestions(value),
+      suggestions: getSuggestions(ICD10, value),
     });
   }
 
-  _onSuggestionSelected(event: Object, { suggestion }: { suggestion: ICD10SuggestionType }) {
+  _onSuggestionSelected(event: Object, { suggestion }: { suggestion: ICD10Type }) {
     event.preventDefault();
     this.props.onChange(suggestion.code);
   }
 
-  _onInputBlur(event: Object, { focusedSuggestion }: { focusedSuggestion: ICD10SuggestionType }) {
+  _onInputBlur(event: Object, { focusedSuggestion }: { focusedSuggestion: ICD10Type }) {
     if (focusedSuggestion) {
       this.props.onChange(focusedSuggestion.code);
     }
