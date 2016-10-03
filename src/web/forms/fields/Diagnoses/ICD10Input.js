@@ -11,13 +11,14 @@ type Props = {
   onChange: (newCode: string) => void,
 };
 
-const getSuggestions = (value) => {
+export const getSuggestions = (candidates: Array<{_query: string}>, value: string) => {
   const inputValue = value.trim().toLowerCase();
   if (inputValue.length === 0) { return []; }
 
-  const query = ` ${inputValue}`;  // 前方一致用にスペース入れる
-  return ICD10.filter(suggestion =>
-    suggestion._query.indexOf(query) > -1
+  const queries = inputValue.split(' ').filter(q => q.length > 0);
+
+  return candidates.filter(icd10 =>
+    queries.every(query => icd10._query.indexOf(` ${query}`) > -1)
   ).slice(0, 10);
 };
 
@@ -82,7 +83,7 @@ export default class ICD10Input extends Component {
 
   _onSuggestionsUpdateRequested({ value }: { value: string }) {
     this.setState({
-      suggestions: getSuggestions(value),
+      suggestions: getSuggestions(ICD10, value),
     });
   }
 
