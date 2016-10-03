@@ -134,9 +134,11 @@ export default class PatientView extends Component {
                         removeActivePatient();
                       }
                     })}
+                    warnings={{
+                      name: duplicatedPatientsExist.name && 'Duplicated',
+                      number: duplicatedPatientsExist.number && 'Duplicated',
+                    }}
                   />
-                  {duplicatedPatientsExist.name && <p>Name duplicated</p>}
-                  {duplicatedPatientsExist.number && <p>Number duplicated</p>}
                 </div>
               </div>
               {!isNew &&

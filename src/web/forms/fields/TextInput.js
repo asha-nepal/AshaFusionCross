@@ -43,6 +43,7 @@ const TextInputComponent = ({
   max,
   precision,
   alerts,
+  warning,
   required = false,
   readonly = false,
 }: {
@@ -58,6 +59,7 @@ const TextInputComponent = ({
   max: ?number,
   precision: ?number,
   alerts: ?Array<Object>,
+  warning?: string,
   required: boolean,
   readonly: boolean,
 }) => {
@@ -97,7 +99,7 @@ const TextInputComponent = ({
         >
           <input
             type={type}
-            className="input"
+            className={`input${warning ? ' is-warning' : ''}`}
             style={{
               ...style,
               ...overrideStyle,
@@ -118,6 +120,7 @@ const TextInputComponent = ({
           </span>
         }
       </p>
+      <span className="help is-warning">{warning}</span>
     </div>
   );
 };

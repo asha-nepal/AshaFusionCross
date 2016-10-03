@@ -40,7 +40,7 @@ const fieldComponents = {
   block: Block,
 };
 
-function createChildFields(state, rootModel, fields) {
+function createChildFields(state, rootModel, fields, warnings) {
   if (!fields) { return []; }
   return fields.map((field, i) => {
     // Handle "show" prop
@@ -55,7 +55,7 @@ function createChildFields(state, rootModel, fields) {
     let children = null;
 
     if (field.class === 'block' || field.class === 'accordion') {
-      children = createChildFields(state, rootModel, field.children);
+      children = createChildFields(state, rootModel, field.children, warnings);
     }
 
     return React.createElement(
@@ -64,6 +64,7 @@ function createChildFields(state, rootModel, fields) {
         key: i,
         model: `${rootModel}.${field.field}`,
         label: field.label,
+        warning: warnings[field.field],
         rootModel,
         ...field,
       },
@@ -79,6 +80,7 @@ export const DynamicFormComponent = ({
   onSubmit,
   onRemove,
   freeze,
+  warnings = {},
 }: {
   state: Object,
   model: string,
@@ -86,12 +88,13 @@ export const DynamicFormComponent = ({
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
   freeze: boolean,
+  warnings?: Object,
 }) => (
   <Form
     model={model}
     onSubmit={onSubmit}
   >
-    {createChildFields(state, model, style)}
+    {createChildFields(state, model, style, warnings)}
 
     {(onSubmit || onRemove) &&
       <div className="level">
