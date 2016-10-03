@@ -74,5 +74,6 @@ CIサービスはWerckerを利用．`npm test`に加え，flowによる型チェ
 - 参考) http://qiita.com/yuichiroTCY/items/7c66691fe6cc244053de
 
 ### Form
+[react-redux-form](https://github.com/davidkpiano/react-redux-form)を利用．
 フォームは`form-styles`に従って動的に構築される．
 `web/forms/fields/*`, `native/forms/fields/*`はフォームの構成要素．これらは基本的にPresentational / Container componentの定義を分離しない．
