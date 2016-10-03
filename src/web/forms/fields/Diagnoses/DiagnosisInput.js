@@ -49,7 +49,10 @@ export default class extends Component {
             <div className="level">
               <span className="level-left">
                 <small>{this.state.icd10}</small>
-                {ICD10[this.state.icd10]}
+                {(() => {
+                  const icd10 = ICD10.find(row => row.code === this.state.icd10);
+                  return icd10 && icd10.description;
+                })()}
               </span>
               <div className="level-right">
                 <a
