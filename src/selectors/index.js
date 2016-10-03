@@ -64,6 +64,23 @@ export const getSortedFilteredPatientList = createSelector(
 );
 
 
+export const getActivePatient = (state: Object) => state.activePatient;
+
+export const makeGetDuplicatedPatients = (field: string) => createSelector(
+  [
+    (state) => state.activePatient._id,
+    (state) => state.activePatient[field],
+    getPatientList,
+  ],
+  (activePatientId, activePatientField, patientList) => {
+    if (!activePatientField) { return []; }
+
+    return patientList.filter(p =>
+      p._id !== activePatientId && p[field] === activePatientField);
+  }
+);
+
+
 import formStyles from '../form-styles';
 const recordFormStyles = formStyles.record || [];
 const defaultRecordFormStyleId = recordFormStyles[0] && recordFormStyles[0].id;

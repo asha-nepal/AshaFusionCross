@@ -34,6 +34,10 @@ type Props = {
   recordFormStyle: ?string,
   params: ?Object,
   patientId: ?string,
+  duplicatedPatientsExist: {
+    name: boolean,
+    number: boolean,
+  },
 };
 
 export default class PatientView extends Component {
@@ -100,6 +104,7 @@ export default class PatientView extends Component {
       recordFormStyles,
       recordFormStyleId,
       recordFormStyle,
+      duplicatedPatientsExist,
     } = this.props;
 
     if (isFetching) {
@@ -129,6 +134,10 @@ export default class PatientView extends Component {
                         removeActivePatient();
                       }
                     })}
+                    warnings={{
+                      name: duplicatedPatientsExist.name && 'Duplicated',
+                      number: duplicatedPatientsExist.number && 'Duplicated',
+                    }}
                   />
                 </div>
               </div>

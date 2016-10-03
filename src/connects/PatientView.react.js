@@ -18,14 +18,19 @@ import {
 import { subscribe } from '../db';
 
 import {
+  getActivePatient,
+  makeGetDuplicatedPatients,
   getRecordFormStyles,
   getRecordFormStyleId,
   getRecordFormStyle,
   getPatientFormStyle,
 } from '../selectors';
 
+const getNameDuplicatedPatients = makeGetDuplicatedPatients('name');
+const getNumberDuplicatedPatients = makeGetDuplicatedPatients('number');
+
 const mapStateToProps = (state) => {
-  const patient = state.activePatient;
+  const patient = getActivePatient(state);
   const records = state.activeRecords;
   const selectedActiveRecordIndex =
     records && records.findIndex(r => r._id === state.patientView.selectedActiveRecordId);
@@ -43,6 +48,10 @@ const mapStateToProps = (state) => {
     recordFormStyles: getRecordFormStyles(state),
     recordFormStyleId: getRecordFormStyleId(state),
     recordFormStyle: getRecordFormStyle(state),
+    duplicatedPatientsExist: {
+      name: getNameDuplicatedPatients(state).length > 0,
+      number: getNumberDuplicatedPatients(state).length > 0,
+    },
   };
 };
 

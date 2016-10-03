@@ -13,6 +13,7 @@ import {
   getFilteredPatientList,
   getSortedFilteredPatientList,
   getRecordFormStyleId,
+  makeGetDuplicatedPatients,
 } from '../index';
 
 describe('getPatientList', () => {
@@ -313,5 +314,31 @@ describe('getRecordFormStyleId', () => {
 
     expect(getRecordFormStyleId(state))
       .toEqual('dummystyleid');
+  });
+});
+
+describe('makeGetDuplicatedPatients', () => {
+  it('makes a selector to find duplicated patients about specified field', () => {
+    const state = {
+      patientList: [
+        { _id: 1, name: 'foo', number: 1 },
+        { _id: 2, name: 'bar', number: 2 },
+      ],
+      activePatient: {
+        name: 'foo', number: 2,
+      },
+    };
+
+    const selectorOnName = makeGetDuplicatedPatients('name');
+    expect(selectorOnName(state))
+      .toEqual([
+        { _id: 1, name: 'foo', number: 1 },
+      ]);
+
+    const selectorOnNumber = makeGetDuplicatedPatients('number');
+    expect(selectorOnNumber(state))
+      .toEqual([
+        { _id: 2, name: 'bar', number: 2 },
+      ]);
   });
 });
