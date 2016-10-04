@@ -19,13 +19,13 @@ export const getSuggestions = (candidates: Array<{_query: string}>, value: strin
 
   return candidates.filter(icd10 =>
     queries.every(query => icd10._query.indexOf(` ${query}`) > -1)
-  ).slice(0, 10);
+  );
 };
 
 const getSuggestionValue = (suggestion) => suggestion.description;
 
 const renderSuggestion = (suggestion) => (
-  <span><small>{suggestion.code}</small>{suggestion.description}</span>
+  <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
 );
 
 const theme = {
@@ -40,14 +40,17 @@ const theme = {
     backgroundColor: '#fff',
     borderBottomLeftRadius: '4px',
     borderBottomRightRadius: '4px',
-    zIndex: 2,
+    zIndex: 1999,
+    maxHeight: '14em',
+    overflow: 'scroll',
   },
   input: {
     width: '100%',
   },
   suggestion: {
     cursor: 'pointer',
-    padding: '5px 10px',
+    lineHeight: '1.6em',
+    padding: '0 0.5em',
   },
   suggestionFocused: {
     backgroundColor: '#ddd',
