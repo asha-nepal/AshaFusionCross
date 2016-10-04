@@ -5,17 +5,36 @@ import {
   View,
   Text,
   TextInput,
+  Image,
   StyleSheet,
 } from 'react-native';
 import { MKButton } from 'react-native-material-kit';
 
+import logo from '../../../assets/img/logo.png';
+
 // TODO: ../forms/stylesと共通化？
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 15,
+  },
+  logoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    flex: 0,
+  },
+  title: {
+    fontSize: 32,
+    color: '#606060',
+  },
   textInput: {
     height: 26,
     borderWidth: 0.5,
     borderColor: '#0f0f0f',
-    flex: 1,
     fontSize: 13,
     padding: 4,
   },
@@ -58,8 +77,19 @@ export default class extends Component {
     if (loggedIn) return children;
 
     return (
-      <View>
-        <Text>Log in</Text>
+      <View style={styles.container}>
+        <View
+          style={styles.logoContainer}
+        >
+          <Image
+            source={logo}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+          <Text
+            style={styles.title}
+          >ASHA fusion</Text>
+        </View>
 
         <Text>username</Text>
         <TextInput
