@@ -4,11 +4,15 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  TextInput,
   Image,
   StyleSheet,
 } from 'react-native';
-import { MKButton } from 'react-native-material-kit';
+import {
+  MKButton,
+} from 'react-native-material-kit';
+import {
+  TextField,
+} from '../forms/components';
 
 import logo from '../../../assets/img/logo.png';
 
@@ -17,6 +21,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 15,
+    marginLeft: 15,
+    marginRight: 15,
   },
   logoContainer: {
     flexDirection: 'row',
@@ -32,11 +38,8 @@ const styles = StyleSheet.create({
     color: '#606060',
   },
   textInput: {
-    height: 26,
-    borderWidth: 0.5,
-    borderColor: '#0f0f0f',
-    fontSize: 13,
-    padding: 4,
+    height: 32,
+    marginBottom: 8,
   },
 });
 
@@ -91,18 +94,16 @@ export default class extends Component {
           >ASHA fusion</Text>
         </View>
 
-        <Text>username</Text>
-        <TextInput
-          style={styles.textInput}
+        <TextField
           autoCapitalize="none"
+          placeholder="username"
           value={this.state.username}
           onChangeText={username => this.setState({ username })}
         />
 
-        <Text>password</Text>
-        <TextInput
-          style={styles.textInput}
+        <TextField
           secureTextEntry
+          placeholder="password"
           value={this.state.password}
           onChangeText={password => this.setState({ password })}
         />
