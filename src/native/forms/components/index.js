@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 export const TextField = MKTextField.textfield()
-  .withStyle(styles.textinput)
+  .withStyle(styles.textfield)
   .withUnderlineColorAndroid('transparent')
   .build();
 

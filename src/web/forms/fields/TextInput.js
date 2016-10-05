@@ -1,9 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
 
 const alertIcons = {
   danger: <i className="fa fa-warning is-danger" />,
@@ -125,13 +122,7 @@ const TextInputComponent = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
-});
 
-export const TextInput = connect(
-  mapStateToProps, mapDispatchToProps
-)(TextInputComponent);
+import connect from '../../../common/forms/fields/TextInput';
+
+export const TextInput = connect(TextInputComponent);
