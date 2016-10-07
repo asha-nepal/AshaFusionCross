@@ -6,10 +6,10 @@ jest.unmock('../put-active-patient');
 jest.unmock('../../actions');
 
 import MockDate from 'mockdate';
+import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
 
-import { db } from '../../db';
 import {
   requestPutPatient,
   successPutPatient,
@@ -35,6 +35,7 @@ describe('putActivePatient', () => {
   });
 
   it('calls db.put(patient) with specified id and updates activePatient with new rev', () => {
+    const db = new PouchDB();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -50,7 +51,7 @@ describe('putActivePatient', () => {
       rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
     };
 
-    const saga = putActivePatient();
+    const saga = putActivePatient(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -91,6 +92,7 @@ describe('putActivePatient', () => {
   });
 
   it('does not update created_at but does updated_at', () => {
+    const db = new PouchDB();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -101,7 +103,7 @@ describe('putActivePatient', () => {
     const mockRecords = [{}];
     const mockAuth = {};
 
-    const saga = putActivePatient();
+    const saga = putActivePatient(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -121,6 +123,7 @@ describe('putActivePatient', () => {
   });
 
   it('puts ADD_NEW_ACTIVE_RECORD if activeRecords is null', () => {
+    const db = new PouchDB();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -133,7 +136,7 @@ describe('putActivePatient', () => {
       rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
     };
 
-    const saga = putActivePatient();
+    const saga = putActivePatient(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -161,6 +164,7 @@ describe('putActivePatient', () => {
   });
 
   it('puts ADD_NEW_ACTIVE_RECORD if activeRecords.length === 0', () => {
+    const db = new PouchDB();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -173,7 +177,7 @@ describe('putActivePatient', () => {
       rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
     };
 
-    const saga = putActivePatient();
+    const saga = putActivePatient(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -201,6 +205,7 @@ describe('putActivePatient', () => {
   });
 
   it('handles error', () => {
+    const db = new PouchDB();
     const mockError = {};
     const mockPatient = {
       _id: 'patient_1234',
@@ -210,7 +215,7 @@ describe('putActivePatient', () => {
     const mockRecords = [{}];
     const mockAuth = {};
 
-    const saga = putActivePatient();
+    const saga = putActivePatient(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -231,6 +236,7 @@ describe('putActivePatient', () => {
   });
 
   it('handles not ok response as error', () => {
+    const db = new PouchDB();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -242,7 +248,7 @@ describe('putActivePatient', () => {
       ok: false,
     };
 
-    const saga = putActivePatient();
+    const saga = putActivePatient(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -263,6 +269,7 @@ describe('putActivePatient', () => {
   });
 
   it('handles response with different id as error', () => {
+    const db = new PouchDB();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -275,7 +282,7 @@ describe('putActivePatient', () => {
       id: 'patient_9876',
     };
 
-    const saga = putActivePatient();
+    const saga = putActivePatient(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -296,6 +303,7 @@ describe('putActivePatient', () => {
   });
 
   it('shows forbidden message for 403 error', () => {
+    const db = new PouchDB();
     const mockError = {
       name: 'forbidden',
     };
@@ -307,7 +315,7 @@ describe('putActivePatient', () => {
     const mockRecords = [{}];
     const mockAuth = {};
 
-    const saga = putActivePatient();
+    const saga = putActivePatient(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));

@@ -1,4 +1,4 @@
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import {
   FETCH_PATIENT_LIST,
   requestFetchPatientList,
@@ -8,9 +8,7 @@ import {
   alertError,
 } from '../actions';
 
-import { db } from '../db';
-
-function pouchFetchPatientList() {
+function pouchFetchPatientList(db: PouchInstance) {
   return db.allDocs({
     include_docs: true,
     startkey: 'patient_',
@@ -19,10 +17,10 @@ function pouchFetchPatientList() {
   .then(res => res.rows.map(r => r.doc));
 }
 
-export function* fetchPatientList() {
+export function* fetchPatientList(db: PouchInstance) {
   yield put(requestFetchPatientList());
   try {
-    const patientList = yield call(pouchFetchPatientList);
+    const patientList = yield call(pouchFetchPatientList, db);
     yield put(alertInfo('Patient list loaded'));
     yield put(successFetchPatientList(patientList));
   } catch (error) {
@@ -34,6 +32,7 @@ export function* fetchPatientList() {
 export function* watchFetchPatientList() {
   while (true) {
     yield take(FETCH_PATIENT_LIST);
-    yield call(fetchPatientList);
+    const db = yield select(state => state.db.instance);
+    yield call(fetchPatientList, db);
   }
 }

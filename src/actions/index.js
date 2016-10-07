@@ -2,6 +2,12 @@
 import { actions as formActions } from 'react-redux-form';
 
 export {
+  DB_SET_INSTANCE, dbSetInstance,
+  DB_CONNECT_REQUEST, dbConnectRequest,
+  DB_DISCONNECT_REQUEST, dbDisconnectRequest,
+} from './db';
+
+export {
   REQUEST_SIGNUP, requestSignup,
   REQUEST_LOGIN, requestLogin,
   REQUEST_ANONYMOUS_LOGIN, requestAnonymousLogin,

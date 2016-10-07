@@ -8,9 +8,8 @@ import {
   alertInfo,
   alertError,
 } from '../actions';
-import { db } from '../db';
 
-export function* removeActivePatient() {
+export function* removeActivePatient(db: PouchInstance) {
   yield put(requestRemovePatient());
 
   const patient = yield select(state => state.activePatient);
@@ -53,6 +52,7 @@ export function* removeActivePatient() {
 export function* watchRemoveActivePatient() {
   while (true) {
     yield take(REMOVE_ACTIVE_PATIENT);
-    yield call(removeActivePatient);
+    const db = yield select(state => state.db.instance);
+    yield call(removeActivePatient, db);
   }
 }

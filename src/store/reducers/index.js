@@ -11,6 +11,7 @@ import patientSelect from './patient-select';
 import patientView from './patient-view';
 import status from './status';
 import alerts from './alerts';
+import db from './db';
 import auth from './auth';
 
 import { defaultConfig } from '../../db';
@@ -27,5 +28,6 @@ export default combineReducers({
   pouchConfigForm: formReducer('pouchConfig'),
   status,
   alerts,
+  db,
   auth,
 });

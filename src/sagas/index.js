@@ -1,4 +1,4 @@
-import { fork, call, put, take, cancel, race } from 'redux-saga/effects';
+import { fork, call, put, take, select, cancel, race } from 'redux-saga/effects';
 
 import {
   loginSuccess,
@@ -10,10 +10,12 @@ import {
   logoutSuccess,
   alertError,
   alertInfo,
-  connectPouchDB,
   setIsDBPublic,
+  DB_CONNECT_REQUEST,
+  DB_DISCONNECT_REQUEST,
+  dbSetInstance,
+  dbConnectRequest,
 } from '../actions';
-import { db, startListening, stopListening } from '../db';
 
 import { watchFetchPatientList } from './fetch-patient-list';
 import { watchFetchPatient } from './fetch-patient';
@@ -22,11 +24,10 @@ import { watchPutActiveRecord } from './put-active-record';
 import { watchRemoveActivePatient } from './remove-active-patient';
 import { watchInitActivePatient } from './init-active-patient';
 import { watchAddNewActiveRecord } from './add-new-active-record';
-import { watchConnectPouchDB } from './connect-pouchdb';
 import { watchPushAlert } from './alerts';
+import { watchOnPouchChanges } from './db';
 
 const initialSagas = [
-  watchConnectPouchDB,
   watchPushAlert,
 ];
 
@@ -43,23 +44,24 @@ const authedSagas = [
 const authedTasks = new Array(authedSagas.length);
 
 
-function checkAccessible() {
+function checkAccessible(db: PouchInstance) {
   return db.info()
     .then(() => true)
     .catch(() => false);
 }
 
-function* afterLoggedIn() {
+function* afterLoggedIn(db: PouchInstance) {
   for (let i = 0; i < authedSagas.length; ++i) {
     authedTasks[i] = yield fork(authedSagas[i]);
   }
-  startListening();
 
   const session = yield call([db, db.getSession]);
   yield put(loginSuccess(session.userCtx.name, session.userCtx.roles));
+
+  yield fork(watchOnPouchChanges, db);
 }
 
-function* logout() {
+function* logout(db: PouchInstance) {
   try {
     yield call([db, db.logout]);
   } catch (error) {
@@ -73,10 +75,10 @@ function* logout() {
       yield cancel(authedTasks[i]);
     }
   }
-  stopListening();
+//  stopListening();
 }
 
-function* authorize(username: string, password: string) {
+function* authorize(db: PouchInstance, username: string, password: string) {
   const ajaxOpts = {
     ajax: {
       headers: {
@@ -96,10 +98,17 @@ function* authorize(username: string, password: string) {
 function* loginFlow() {
   while (true) {
     const { payload } = yield take(REQUEST_LOGIN);
+
+    const db = yield select(state => state.db.instance);
+    if (!db) {
+      console.log('Not connected');
+      continue;
+    }
+
     const { username, password } = payload;
 
     const winner = yield race({
-      auth: call(authorize, username, password),
+      auth: call(authorize, db, username, password),
       logout: take(REQUEST_LOGOUT),
     });
 
@@ -107,14 +116,14 @@ function* loginFlow() {
       const { response, error } = winner.auth;
       if (response) {
         yield [
-          call(afterLoggedIn, response.name, response.roles),
+          call(afterLoggedIn, db),
           put(alertInfo('Logged in!')),
         ];
       } else {
         yield put(alertError(`Failed to log in: ${error.message}`));
       }
     } else if (winner.logout) {
-      yield call(logout);
+      yield call(logout, db);
     }
   }
 }
@@ -123,7 +132,13 @@ function* anonymousLoginFlow() {
   while (true) {
     yield take(REQUEST_ANONYMOUS_LOGIN);
 
-    const isAccessible = yield call(checkAccessible);
+    const db = yield select(state => state.db.instance);
+    if (!db) {
+      console.log('Not connected');
+      continue;
+    }
+
+    const isAccessible = yield call(checkAccessible, db);
     if (!isAccessible) {
       yield put(alertError('Disconnected'));
       continue;
@@ -139,7 +154,7 @@ function* anonymousLoginFlow() {
     }
 
     yield [
-      call(afterLoggedIn),
+      call(afterLoggedIn, db),
       put(alertInfo('Logged in as an anonymous user')),
     ];
   }
@@ -148,6 +163,13 @@ function* anonymousLoginFlow() {
 function* signupFlow() {
   while (true) {
     const { payload } = yield take(REQUEST_SIGNUP);
+    const db = yield select(state => state.db.instance);
+
+    if (!db) {
+      console.log('Not connected');
+      continue;
+    }
+
     const { username, password } = payload;
     const option = {
       metadata: {
@@ -174,32 +196,114 @@ function* signupFlow() {
 export function * logoutFlow() {
   while (true) {
     yield take(REQUEST_LOGOUT);
-    yield call(logout);
+    const db = yield select(state => state.db.instance);
+    if (!db) {
+      console.log('Not connected');
+      continue;
+    }
+    yield call(logout, db);
   }
 }
+
+// Connection saga
+import PouchDB from 'pouchdb';
+const pouchOpts = {
+  skipSetup: true,
+};
+
+export function * connect(config: PouchConfig) {
+  try {
+    const remoteUrl = `http://${config.remote.hostname}/${config.remote.dbname}`;
+    let db;
+
+    if (config.isLocal) {
+      db = new PouchDB(config.local.dbname);
+      if (config.local.isSynced) {
+        db.sync(remoteUrl, {
+          ...pouchOpts,
+          live: true,
+          retry: true,
+        });
+      }
+    } else {
+      db = new PouchDB(remoteUrl, pouchOpts);
+    }
+
+    yield put(dbSetInstance(db));
+//    yield fork(watchOnPouchChanges, db);
+
+    return { db };
+  } catch (error) {
+    return { error };
+  }
+}
+
+export function * disconnect() {
+  const db = yield select(state => state.db.instance);
+  yield call(logout, db);
+
+  yield put(dbSetInstance(null));
+}
+
+export function * connectFlow() {
+  while (true) {
+    const { payload } = yield take(DB_CONNECT_REQUEST);
+
+    const winner = yield race({
+      connect: call(connect, payload.config),
+      disconnect: take(DB_DISCONNECT_REQUEST),
+    });
+
+    if (winner.connect) {
+      const { db, error } = winner.connect;
+      if (db) {
+        yield put(alertInfo('Connected'));
+
+        const isAccessible = yield call(checkAccessible, db);
+        const session = yield call([db, db.getSession]);
+        const isDBPublic = isAccessible && !session.userCtx.name;
+        yield put(setIsDBPublic(isDBPublic));
+
+        if (isDBPublic) yield fork(anonymousLoginFlow);
+        yield fork(loginFlow);
+        yield fork(logoutFlow);
+        yield fork(signupFlow);
+
+        // Auto login
+        if (isAccessible) {
+          yield [
+            call(afterLoggedIn, db),
+            put(alertInfo(isDBPublic ? 'Logged in (public DB)' : 'Logged in!')),
+          ];
+        }
+      } else {
+        yield put(alertError(`Failed to connect DB: ${error.message}`));
+      }
+    } else {
+      yield call(disconnect);
+    }
+  }
+}
+
 
 export default function* rootSaga() {
   for (let i = 0; i < initialSagas.length; ++i) {
     yield fork(initialSagas[i]);
   }
 
-  yield put(connectPouchDB());
+  yield fork(connectFlow);
 
-  const isAccessible = yield call(checkAccessible);
-  const session = yield call([db, db.getSession]);
-  const isDBPublic = isAccessible && !session.userCtx.name;
-  yield put(setIsDBPublic(isDBPublic));
+  const pouchConfig = {
+    isLocal: false,
+    local: {
+      dbname: 'asha-fusion-dev',
+      isSynced: false,
+    },
+    remote: {
+      hostname: 'localhost:5984',
+      dbname: 'asha-fusion-dev',
+    },
+  };
 
-  if (isDBPublic) yield fork(anonymousLoginFlow);
-  yield fork(loginFlow);
-  yield fork(logoutFlow);
-  yield fork(signupFlow);
-
-  // Auto login
-  if (isAccessible) {
-    yield [
-      call(afterLoggedIn),
-      put(alertInfo(isDBPublic ? 'Logged in (public DB)' : 'Logged in!')),
-    ];
-  }
+  yield put(dbConnectRequest(pouchConfig));
 }
