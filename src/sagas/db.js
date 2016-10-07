@@ -4,6 +4,8 @@ import {
   fetchPatientList,
   changeActivePatient,
   insertOrChangeActiveRecord,
+  requestLogout,
+  alertError,
 } from '../actions';
 
 function createPouchChangeChannel(db: PouchInstance) {
@@ -49,7 +51,7 @@ export function* watchOnPouchChanges(db: PouchInstance) {
   const pouchChannel = yield call(createPouchChangeChannel, db);
 
   while (true) {
-    const { type, payload } = yield take(pouchChannel);
+    const { type, payload, error } = yield take(pouchChannel);
 
     if (type === 'change') {
       const { change } = payload;
@@ -71,6 +73,9 @@ export function* watchOnPouchChanges(db: PouchInstance) {
           yield put(insertOrChangeActiveRecord(doc, { silent: true }));
         }
       }
+    } else if (error) {
+      yield put(alertError(`ERR: change listener ${error.message || ''}`));
+      yield put(requestLogout());
     }
   }
 }

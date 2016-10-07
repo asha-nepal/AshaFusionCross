@@ -207,6 +207,7 @@ export function * logoutFlow() {
 
 // Connection saga
 import PouchDB from 'pouchdb';
+PouchDB.plugin(require('pouchdb-authentication'));
 const pouchOpts = {
   skipSetup: true,
 };
@@ -258,7 +259,6 @@ export function * connectFlow() {
       const { db, error } = winner.connect;
       if (db) {
         yield put(alertInfo('Connected'));
-
         const isAccessible = yield call(checkAccessible, db);
         const session = yield call([db, db.getSession]);
         const isDBPublic = isAccessible && !session.userCtx.name;
