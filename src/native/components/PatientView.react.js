@@ -20,27 +20,12 @@ const styles = {
 };
 
 export default class PatientView extends Component {
-  state: {
-    unsubscribeChange: () => void;
-  };
-
   componentWillMount() {
     this.props.init();
-
-    this.setState({
-      unsubscribeChange: this.props.subscribeChange(),
-    });
-  }
-
-  componentWillUnmount() {
-    if (this.state.unsubscribeChange) {
-      this.state.unsubscribeChange();
-    }
   }
 
   props: {
     init: () => void,
-    subscribeChange: () => () => void,
     isFetching: boolean,
     patient: PatientObject,
     records: Array<RecordObject>,

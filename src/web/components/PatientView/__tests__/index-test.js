@@ -9,18 +9,12 @@ import React from 'react';
 import PatientView from '../index';
 
 describe('<PatientView />', () => {
-  it('calls init() and subscribeChange() at componentWillMount() and unsubscribe at componentWillUnmount()', () => { // eslint-disable-line max-len
+  it('calls init() at componentWillMount()', () => {
     const mockInit = jest.fn();
-    const mockSubscribeChange = jest.fn();
-    const mockUnsubscribeChange = jest.fn();
-    mockSubscribeChange.mockReturnValue(mockUnsubscribeChange);
-
     expect(mockInit).not.toBeCalled();
-    expect(mockSubscribeChange).not.toBeCalled();
 
-    const wrapper = shallow(<PatientView
+    shallow(<PatientView
       init={mockInit}
-      subscribeChange={mockSubscribeChange}
       patient={{
         _id: 'patient_foo',
         name: 'foo bar',
@@ -33,12 +27,6 @@ describe('<PatientView />', () => {
     />);
 
     expect(mockInit).toBeCalled();
-    expect(mockSubscribeChange).toBeCalled();
-    expect(mockUnsubscribeChange).not.toBeCalled();
-
-    wrapper.unmount();
-
-    expect(mockUnsubscribeChange).toBeCalled();
   });
 
   it('does not throw errors if patient.name is null', () => {
@@ -50,7 +38,6 @@ describe('<PatientView />', () => {
         _id: 'patient_foo',
       }}
       records={[]}
-      subscribeChange={jest.fn()}
       addNewActiveRecord={jest.fn()}
       putActivePatient={jest.fn()}
       putActiveRecord={jest.fn()}
@@ -68,7 +55,6 @@ describe('<PatientView />', () => {
         name: 'foo bar',
       }}
       records={[]}
-      subscribeChange={jest.fn()}
       addNewActiveRecord={jest.fn()}
       putActivePatient={jest.fn()}
       putActiveRecord={jest.fn()}

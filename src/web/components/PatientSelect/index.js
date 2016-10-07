@@ -7,28 +7,13 @@ import Header from '../../containers/PatientSelect/Header';
 import PatientListFilter from '../../containers/PatientListFilter.react';
 
 export default class PatientSelect extends Component {
-  state: {
-    unsubscribeChange: () => void;
-  };
-
   componentWillMount() {
     this.props.fetchPatientList();
-
-    this.setState({
-      unsubscribeChange: this.props.subscribeChange(),
-    });
-  }
-
-  componentWillUnmount() {
-    if (this.state.unsubscribeChange) {
-      this.state.unsubscribeChange();
-    }
   }
 
   props: {
     isFetching?: boolean,
     fetchPatientList: () => void,
-    subscribeChange: () => () => void,
     patientList: Array<PatientObject>,
     logout?: () => void,
   };
