@@ -48,7 +48,7 @@ export default class extends Component {
           {this.state.icd10 ? (
             <div className="level">
               <span className="level-left">
-                <small>{this.state.icd10}</small>
+                <small style={{ marginRight: '1em' }}>{this.state.icd10}</small>
                 {(() => {
                   const icd10 = ICD10.find(row => row.code === this.state.icd10);
                   return icd10 && icd10.description;
