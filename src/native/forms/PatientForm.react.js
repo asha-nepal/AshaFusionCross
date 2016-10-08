@@ -5,11 +5,11 @@ import { Field } from 'react-redux-form/lib/native';
 import {
   View,
   Text,
-  TextInput,
   Picker,
 } from 'react-native';
-
-import styles from './styles';
+import {
+  TextInput,
+} from './fields';
 
 export default ({
   model,
@@ -17,10 +17,10 @@ export default ({
   model: string,
 }) => (
   <View>
-    <Text>Name</Text>
-    <Field model={`${model}.name`}>
-      <TextInput style={styles.textInput} />
-    </Field>
+    <TextInput
+      model={`${model}.name`}
+      label="Name"
+    />
 
     <Text>Sex</Text>
     <Field model={`${model}.sex`}>
@@ -30,14 +30,14 @@ export default ({
       </Picker>
     </Field>
 
-    <Text>Age</Text>
-    <Field model={`${model}.age`}>
-      <TextInput style={styles.textInput} />
-    </Field>
+    <TextInput
+      model={`${model}.age`}
+      label="Age"
+    />
 
-    <Text>Address</Text>
-    <Field model={`${model}.address`}>
-      <TextInput style={styles.textInput} />
-    </Field>
+    <TextInput
+      model={`${model}.address`}
+      label="Address"
+    />
   </View>
 );
