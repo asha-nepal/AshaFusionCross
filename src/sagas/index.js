@@ -1,4 +1,4 @@
-import { fork, put } from 'redux-saga/effects';
+import { fork, put, select } from 'redux-saga/effects';
 
 import {
   dbConnectRequest,
@@ -33,17 +33,6 @@ export default function* rootSaga() {
   yield fork(logoutFlow);
   yield fork(signupFlow);
 
-  const pouchConfig = {
-    isLocal: false,
-    local: {
-      dbname: 'asha-fusion-dev',
-      isSynced: false,
-    },
-    remote: {
-      hostname: 'localhost:5984',
-      dbname: 'asha-fusion-dev',
-    },
-  };
-
+  const pouchConfig = yield select(state => state.pouchConfig);
   yield put(dbConnectRequest(pouchConfig));
 }

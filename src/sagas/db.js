@@ -92,35 +92,43 @@ export function* watchOnPouchChanges(db: PouchInstance) {
   }
 }
 
+export function checkConnectable(db: PouchInstance) {
+  return db.info()
+    .then(() => true)
+    .catch((error) => error.status === 401);
+}
+
 const pouchOpts = {
   skipSetup: true,
 };
 
 export function * connect(config: PouchConfig) {
-  try {
-    const remoteUrl = `http://${config.remote.hostname}/${config.remote.dbname}`;
-    let db;
+  const remoteUrl = `http://${config.remote.hostname}/${config.remote.dbname}`;
+  let db;
 
-    if (config.isLocal) {
-      db = new PouchDB(config.local.dbname);
-      if (config.local.isSynced) {
-        db.sync(remoteUrl, {
-          ...pouchOpts,
-          live: true,
-          retry: true,
-        });
-      }
-    } else {
-      db = new PouchDB(remoteUrl, pouchOpts);
+  if (config.isLocal) {
+    db = new PouchDB(config.local.dbname);
+    if (config.local.isSynced) {
+      db.sync(remoteUrl, {
+        ...pouchOpts,
+        live: true,
+        retry: true,
+      });
     }
+  } else {
+    db = new PouchDB(remoteUrl, pouchOpts);
+  }
 
-    yield put(dbSetInstance(db));
+  // 接続可能か確かめる
+  const isDBConnectable = yield call(checkConnectable, db);
+  if (!isDBConnectable) {
+    return { error: Error('Cannot connect') };
+  }
+
+  yield put(dbSetInstance(db));
 //    yield fork(watchOnPouchChanges, db);
 
-    return { db };
-  } catch (error) {
-    return { error };
-  }
+  return { db };
 }
 
 export function * disconnect() {
