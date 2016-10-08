@@ -1,11 +1,23 @@
-import { take, call, put, select } from 'redux-saga/effects';
+import PouchDB from 'pouchdb';
+PouchDB.plugin(require('pouchdb-authentication'));
+import { take, call, put, select, race } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import {
+  checkAccessible,
+  logout,
+  afterLoggedIn,
+} from './auth';
+import {
+  alertError,
+  alertInfo,
+  setIsDBPublic,
+  DB_CONNECT_REQUEST,
+  DB_DISCONNECT_REQUEST,
+  dbSetInstance,
   fetchPatientList,
   changeActivePatient,
   insertOrChangeActiveRecord,
   requestLogout,
-  alertError,
 } from '../actions';
 
 function createPouchChangeChannel(db: PouchInstance) {
@@ -76,6 +88,78 @@ export function* watchOnPouchChanges(db: PouchInstance) {
     } else if (error) {
       yield put(alertError(`ERR: change listener ${error.message || ''}`));
       yield put(requestLogout());
+    }
+  }
+}
+
+const pouchOpts = {
+  skipSetup: true,
+};
+
+export function * connect(config: PouchConfig) {
+  try {
+    const remoteUrl = `http://${config.remote.hostname}/${config.remote.dbname}`;
+    let db;
+
+    if (config.isLocal) {
+      db = new PouchDB(config.local.dbname);
+      if (config.local.isSynced) {
+        db.sync(remoteUrl, {
+          ...pouchOpts,
+          live: true,
+          retry: true,
+        });
+      }
+    } else {
+      db = new PouchDB(remoteUrl, pouchOpts);
+    }
+
+    yield put(dbSetInstance(db));
+//    yield fork(watchOnPouchChanges, db);
+
+    return { db };
+  } catch (error) {
+    return { error };
+  }
+}
+
+export function * disconnect() {
+  const db = yield select(state => state.db.instance);
+  yield call(logout, db);
+
+  yield put(dbSetInstance(null));
+}
+
+export function * connectFlow() {
+  while (true) {
+    const { payload } = yield take(DB_CONNECT_REQUEST);
+
+    const winner = yield race({
+      connect: call(connect, payload.config),
+      disconnect: take(DB_DISCONNECT_REQUEST),
+    });
+
+    if (winner.connect) {
+      const { db, error } = winner.connect;
+      if (db) {
+        yield put(alertInfo('Connected'));
+        const isAccessible = yield call(checkAccessible, db);
+        const session = yield call([db, db.getSession]);
+        const isDBPublic = isAccessible && !session.userCtx.name;
+        yield put(setIsDBPublic(isDBPublic));
+
+        // Auto login
+        if (isAccessible) {
+          yield [
+            call(afterLoggedIn, db),
+            put(alertInfo(isDBPublic ? 'Logged in (public DB)' : 'Logged in!')),
+          ];
+        }
+      } else {
+        yield put(alertError(`Failed to connect DB: ${error.message}`));
+      }
+    } else {
+      yield call(disconnect);
     }
   }
 }
