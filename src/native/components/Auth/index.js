@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 
 export default ({
   isDBConnected,
-  pouchConfig,
+  currentDBConfig,
   connectDB,
   isDBPublic,
   loggedIn,
@@ -54,7 +54,7 @@ export default ({
   children,
 }: {
   isDBConnected: boolean,
-  pouchConfig: PouchConfig,
+  currentDBConfig: PouchConfig,
   connectDB: (config: PouchConfig) => void,
   isDBPublic: boolean,
   loggedIn: boolean,
@@ -96,7 +96,8 @@ export default ({
 
       {!isDBConnected &&
         <DBConfigForm
-          onConnect={() => connectDB(pouchConfig)}
+          defaultValue={currentDBConfig}
+          onConnect={(config) => connectDB(config)}
         />
       }
     </View>

@@ -33,6 +33,6 @@ export default function* rootSaga() {
   yield fork(logoutFlow);
   yield fork(signupFlow);
 
-  const pouchConfig = yield select(state => state.pouchConfig);
+  const pouchConfig = yield select(state => state.db.config);
   yield put(dbConnectRequest(pouchConfig));
 }

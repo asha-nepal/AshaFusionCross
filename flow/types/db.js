@@ -21,4 +21,5 @@ export type DBAction =
 
 export type DBState = {
   instance: ?PouchInstance,
+  config: ?PouchConfig,
 }

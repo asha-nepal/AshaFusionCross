@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
 } from 'react-native';
@@ -10,33 +10,86 @@ import {
 } from 'react-native-material-kit';
 
 import {
-  TextInput,
-} from '../../forms/fields';
+  TextField,
+} from '../../forms/components';
 
 const ColoredRaisedConnectButton = MKButton.coloredButton()
   .withText('Connect')
   .build();
 
-export default ({
-  onConnect,
-}: {
-  onConnect: () => void,
-}) => (
-  <View>
-    <TextInput
-      model="pouchConfig.remote.hostname"
-      placeholder="Host"
-      autoCapitalize="none"
-    />
+type Props = {
+  onConnect: (config: PouchConfig) => void,
+  defaultValue: PouchConfig,
+}
 
-    <TextInput
-      model="pouchConfig.remote.dbname"
-      placeholder="DB name"
-      autoCapitalize="none"
-    />
+export default class extends Component {
+  constructor(props: Props) {
+    super(props);
 
-    <ColoredRaisedConnectButton
-      onPress={() => onConnect()}
-    />
-  </View>
-);
+    this.state = {
+      hostname: '',
+      dbname: '',
+    };
+  }
+
+  state: {
+    hostname: string,
+    dbname: string,
+  }
+
+  componentWillMount() {
+    this.setState({
+      hostname: this.props.defaultValue.remote.hostname,
+      dbname: this.props.defaultValue.remote.dbname,
+    });
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.defaultValue !== this.props.defaultValue) {
+      this.setState({
+        hostname: nextProps.defaultValue.remote.hostname,
+        dbname: nextProps.defaultValue.remote.dbname,
+      });
+    }
+  }
+
+  props: Props
+
+  render() {
+    const {
+      onConnect,
+      defaultValue,
+    } = this.props;
+
+    return (
+      <View>
+        <TextField
+          autoCapitalize="none"
+          placeholder="Host"
+          value={this.state.hostname}
+          onChangeText={hostname => this.setState({ hostname })}
+        />
+
+        <TextField
+          autoCapitalize="none"
+          placeholder="DB name"
+          value={this.state.dbname}
+          onChangeText={dbname => this.setState({ dbname })}
+        />
+
+        <ColoredRaisedConnectButton
+          onPress={() => {
+            const config = Object.assign({}, defaultValue, {
+              remote: {
+                hostname: this.state.hostname,
+                dbname: this.state.dbname,
+              },
+            });
+
+            onConnect(config);
+          }}
+        />
+      </View>
+    );
+  }
+}

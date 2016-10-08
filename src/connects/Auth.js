@@ -10,7 +10,7 @@ import {
 
 const mapStateToProps = (state) => ({
   isDBConnected: !!state.db.instance,
-  pouchConfig: state.pouchConfig,
+  currentDBConfig: state.db.config,
   isDBPublic: state.auth.isDBPublic,
   loggedIn: state.auth.loggedIn,
 });
