@@ -19,6 +19,7 @@ import {
   GuideTools,
   Diagnoses,
   MultiInput,
+  MultiDoubleInput,
   Block,
 } from './fields';
 
@@ -37,6 +38,7 @@ const fieldComponents = {
   guide: GuideTools,
   diagnoses: Diagnoses,
   multiinput: MultiInput,
+  multidoubleinput: MultiDoubleInput,
   block: Block,
 };
 

@@ -14,4 +14,5 @@ export { AutoCalc } from './AutoCalc';
 export { GuideTools } from './GuideTools';
 export { Diagnoses } from './Diagnoses';
 export { MultiInput } from './MultiInput';
+export { MultiDoubleInput } from './MultiDoubleInput';
 export { Block } from './Block';
