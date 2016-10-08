@@ -94,12 +94,6 @@ export const insertOrChangeActiveRecord = (record: RecordObject, option: ?Object
   };
 
 
-export const CONNECT_POUCHDB = 'CONNECT_POUCHDB';
-export const connectPouchDB = () => ({
-  type: CONNECT_POUCHDB,
-});
-
-
 export const PUSH_ALERT = 'PUSH_ALERT';
 export const pushAlert = (type: string, message: string, timeout?: number) => ({
   type: PUSH_ALERT,
