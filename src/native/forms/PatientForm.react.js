@@ -3,7 +3,6 @@
 import React from 'react';
 import {
   View,
-  Text,
 } from 'react-native';
 import {
   TextInput,
@@ -21,8 +20,8 @@ export default ({
       label="Name"
     />
 
-    <Text>Sex</Text>
     <RadioGroup
+      label="Sex"
       model={`${model}.sex`}
       options={[
         { id: 'male', label: 'Male' },

@@ -8,6 +8,7 @@ import {
 import {
   MKRadioButton,
 } from 'react-native-material-kit';
+import styles from './styles';
 
 type Props = {
   options: Array<{id: string, label: string}>,
@@ -37,10 +38,10 @@ export class RadioGroupComponent extends Component {
 
     return (
       <View>
-        <Text>{label || ''}</Text>
+        <Text style={styles.fieldLabel}>{label || ''}</Text>
+        <View style={styles.radioGroupRow}>
         {options.map(option =>
-          <View key={option.id}>
-            <Text>{option.label}</Text>
+          <View key={option.id} style={styles.radioGroupCol}>
             <MKRadioButton
               checked={option.id === value}
               group={this.radioGroup}
@@ -50,8 +51,10 @@ export class RadioGroupComponent extends Component {
                 }
               }}
             />
+            <Text style={styles.legendLabel}>{option.label}</Text>
           </View>
         )}
+        </View>
       </View>
     );
   }

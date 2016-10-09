@@ -13,10 +13,16 @@ import {
 
 const ColoredRaisedSubmitButton = MKButton.coloredButton()
   .withText('Submit')
+  .withStyle({
+    marginBottom: 20,
+  })
   .build();
 
 const ColoredRaisedAddButton = MKButton.coloredButton()
   .withText('Add')
+  .withStyle({
+    marginBottom: 20,
+  })
   .build();
 
 import PatientForm from '../forms/PatientForm.react';
@@ -49,7 +55,6 @@ export default class PatientView extends Component {
   render() {
     const {
       isFetching,
-      patient,
       records,
       addNewActiveRecord,
       putActivePatient,
@@ -64,7 +69,6 @@ export default class PatientView extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <Text>{patient && patient.name || ''}</Text>
         <PatientForm
           model="activePatient"
         />
