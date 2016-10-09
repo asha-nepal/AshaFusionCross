@@ -8,9 +8,8 @@ import {
   alertInfo,
   alertError,
 } from '../actions';
-import { db } from '../db';
 
-export function* putActiveRecord(index) {
+export function* putActiveRecord(db: PouchInstance, index: number) {
   yield put(requestPutRecord());
 
   const record = yield select(state => state.activeRecords[index]);
@@ -49,6 +48,7 @@ export function* putActiveRecord(index) {
 export function* watchPutActiveRecord() {
   while (true) {
     const { index } = yield take(PUT_ACTIVE_RECORD);
-    yield call(putActiveRecord, index);
+    const db = yield select(state => state.db.instance);
+    yield call(putActiveRecord, db, index);
   }
 }

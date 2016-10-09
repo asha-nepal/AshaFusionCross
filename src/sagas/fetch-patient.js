@@ -1,4 +1,4 @@
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import {
   FETCH_PATIENT,
   requestFetchPatient,
@@ -11,9 +11,7 @@ import {
   alertError,
 } from '../actions';
 
-import { db } from '../db';
-
-export function* fetchPatient(patientId) {
+export function* fetchPatient(db: PouchInstance, patientId: string) {
   yield put(requestFetchPatient());
   try {
     // Prepare queries
@@ -45,6 +43,7 @@ export function* fetchPatient(patientId) {
 export function* watchFetchPatient() {
   while (true) {
     const { patientId } = yield take(FETCH_PATIENT);
-    yield call(fetchPatient, patientId);
+    const db = yield select(state => state.db.instance);
+    yield call(fetchPatient, db, patientId);
   }
 }

@@ -3,54 +3,27 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
-  Image,
-  StyleSheet,
 } from 'react-native';
 import {
   MKButton,
 } from 'react-native-material-kit';
+
 import {
   TextField,
-} from '../forms/components';
-
-import logo from '../../../assets/img/logo.png';
-
-// TODO: ../forms/stylesと共通化？
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 15,
-    marginLeft: 15,
-    marginRight: 15,
-  },
-  logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    flex: 0,
-  },
-  title: {
-    fontSize: 32,
-    color: '#606060',
-  },
-  textInput: {
-    height: 32,
-    marginBottom: 8,
-  },
-});
+} from '../../forms/components';
 
 const ColoredRaisedLoginButton = MKButton.coloredButton()
   .withText('Log in')
   .build();
 
+const AnonymousLoginButton = MKButton.button()
+  .withText('Log in as anonymous user')
+  .build();
+
 type Props = {
-  loggedIn: boolean,
   login: (username: string, password: string) => void,
-  children: React$Element<any>,
+  isDBPublic: boolean,
+  anonymousLogin: () => void,
 }
 
 export default class extends Component {
@@ -68,32 +41,17 @@ export default class extends Component {
     password: string,
   };
 
-  props: Props;
+  props: Props
 
   render() {
     const {
-      loggedIn,
       login,
-      children,
+      isDBPublic,
+      anonymousLogin,
     } = this.props;
 
-    if (loggedIn) return children;
-
     return (
-      <View style={styles.container}>
-        <View
-          style={styles.logoContainer}
-        >
-          <Image
-            source={logo}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <Text
-            style={styles.title}
-          >ASHA fusion</Text>
-        </View>
-
+      <View>
         <TextField
           autoCapitalize="none"
           placeholder="username"
@@ -113,6 +71,12 @@ export default class extends Component {
             login(this.state.username, this.state.password);
           }}
         />
+
+        {isDBPublic &&
+          <AnonymousLoginButton
+            onPress={() => anonymousLogin()}
+          />
+        }
       </View>
     );
   }

@@ -11,9 +11,7 @@ import {
   alertError,
 } from '../actions';
 
-import { db } from '../db';
-
-export function* putActivePatient() {
+export function* putActivePatient(db: PouchInstance) {
   yield put(requestPutPatient());
 
   const patient = yield select(state => state.activePatient);
@@ -61,6 +59,7 @@ export function* putActivePatient() {
 export function* watchPutActivePatient() {
   while (true) {
     yield take(PUT_ACTIVE_PATIENT);
-    yield call(putActivePatient);
+    const db = yield select(state => state.db.instance);
+    yield call(putActivePatient, db);
   }
 }

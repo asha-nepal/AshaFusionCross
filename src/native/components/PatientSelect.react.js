@@ -69,7 +69,6 @@ export default class PatientSelect extends Component {
 
     this.state = {
       ds: ds.cloneWithRows(this.props.patientList || []),
-      unsubscribeChange: null,
     };
 
     this._onAddPress = this._onAddPress.bind(this);
@@ -79,15 +78,10 @@ export default class PatientSelect extends Component {
 
   state: {
     ds: ListView.DataSource;
-    unsubscribeChange: ?() => void;
   };
 
   componentWillMount() {
     this.props.fetchPatientList();
-
-    this.setState({
-      unsubscribeChange: this.props.subscribeChange(),
-    });
   }
 
   componentWillReceiveProps(nextProps: Object) {
@@ -98,16 +92,9 @@ export default class PatientSelect extends Component {
     }
   }
 
-  componentWillUnmount() {
-    if (this.state.unsubscribeChange) {
-      this.state.unsubscribeChange();
-    }
-  }
-
   props: {
     isFetching: boolean,
     fetchPatientList: () => void,
-    subscribeChange: () => () => void,
     patientList: Array<PatientObject>,
   };
 

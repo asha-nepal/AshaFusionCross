@@ -9,13 +9,9 @@ import {
   initActivePatient,
   addNewActiveRecord,
   selectActiveRecord,
-  changeActivePatient,
-  insertOrChangeActiveRecord,
   setPatientFormVisibility,
   setRecordFormStyleId,
 } from '../actions';
-
-import { subscribe } from '../db';
 
 import {
   getActivePatient,
@@ -71,25 +67,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     setPatientFormVisibility: (visibility: boolean) =>
       dispatch(setPatientFormVisibility(visibility)),
     setRecordFormStyleId: (styleId) => dispatch(setRecordFormStyleId(styleId)),
-    subscribeChange: () => {
-      if (!patientId) {
-        return null;
-      }
-
-      const patientIdBody = patientId.replace(/^patient_/, '');
-
-      return subscribe('change', change => {
-        const doc = change.doc;
-        if (doc._id === patientId) {
-          dispatch(changeActivePatient(doc, { silent: true }));
-        } else if (doc.type === 'record') {
-          const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
-          if (match && (match[1] === patientIdBody)) {
-            dispatch(insertOrChangeActiveRecord(doc, { silent: true }));
-          }
-        }
-      });
-    },
   };
 };
 

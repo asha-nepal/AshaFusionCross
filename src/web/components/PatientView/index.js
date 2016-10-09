@@ -12,7 +12,6 @@ import DynamicForm from '../../forms/DynamicForm';
 
 type Props = {
   init: () => void,
-  subscribeChange: () => () => void,
   isFetching: boolean,
   patient: PatientObject,
   records: Array<RecordObject>,
@@ -41,44 +40,8 @@ type Props = {
 };
 
 export default class PatientView extends Component {
-  state: {
-    unsubscribeChange: ?() => void;
-  };
-
   componentWillMount() {
     this.props.init();
-
-    this.setState({
-      unsubscribeChange: this.props.subscribeChange(),
-    });
-  }
-
-  componentWillReceiveProps(newProps: Props) {
-    const patientIdChanged = this.props.params ? (
-      newProps.params && (this.props.params.patientId !== newProps.params.patientId)
-    ) : (
-      this.props.patientId !== newProps.patientId
-    );
-
-    if (patientIdChanged) {
-      if (this.state.unsubscribeChange) {
-        this.state.unsubscribeChange();
-      }
-
-      this.setState({
-        unsubscribeChange: newProps.subscribeChange(),
-      });
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.state.unsubscribeChange) {
-      this.state.unsubscribeChange();
-
-      this.setState({
-        unsubscribeChange: null,
-      });
-    }
   }
 
   props: Props;

@@ -16,6 +16,7 @@ export const TextInputComponent = ({
   value,
   onChange,
   type,
+  ...rest,
 }: {
   label? : string,
   value: ?string,
@@ -26,6 +27,7 @@ export const TextInputComponent = ({
   value={value || ''}
   onChangeText={onChange}
   keyboardType={type && keyboardTypes[type] || 'default'}
+  {...rest}
 />;
 
 

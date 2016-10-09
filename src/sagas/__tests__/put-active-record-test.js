@@ -7,9 +7,9 @@ jest.unmock('mockdate');
 
 import deepFreeze from 'deep-freeze';
 import MockDate from 'mockdate';
+import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
 
-import { db } from '../../db';
 import {
   requestPutRecord,
   successPutRecord,
@@ -34,6 +34,7 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('calls db.put(record) with $created_at and $updated_at', () => {
+    const db = new PouchDB();
     const mockIndex = 42;
     const mockRecord = {
       _id: 'record_mocked',
@@ -47,7 +48,7 @@ describe('PUT_ACTIVE_RECORD', () => {
     };
     const mockAuth = {};
 
-    const saga = putActiveRecord(mockIndex);
+    const saga = putActiveRecord(db, mockIndex);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));
@@ -83,6 +84,7 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('does not update $created_at if already exists', () => {
+    const db = new PouchDB();
     const mockRecord = {
       _id: 'record_mocked',
       $created_at: 1000,
@@ -91,7 +93,7 @@ describe('PUT_ACTIVE_RECORD', () => {
     deepFreeze(mockRecord);
     const mockAuth = {};
 
-    const saga = putActiveRecord();
+    const saga = putActiveRecord(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));
@@ -109,6 +111,7 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('adds $created_by and $updated_by if logged in', () => {
+    const db = new PouchDB();
     const mockRecord = {
       _id: 'record_mocked',
       hoge: 'hoge',
@@ -120,7 +123,7 @@ describe('PUT_ACTIVE_RECORD', () => {
     };
     deepFreeze(mockAuth);
 
-    const saga = putActiveRecord();
+    const saga = putActiveRecord(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));
@@ -139,6 +142,7 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('does not update $created_by if already exists', () => {
+    const db = new PouchDB();
     const mockRecord = {
       _id: 'record_mocked',
       $created_at: 1000,
@@ -150,7 +154,7 @@ describe('PUT_ACTIVE_RECORD', () => {
       loggedInUser: 'dummyuser',
     };
 
-    const saga = putActiveRecord();
+    const saga = putActiveRecord(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));
@@ -167,6 +171,7 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('$created_by and $updated_by are null if undefined', () => {
+    const db = new PouchDB();
     const mockRecord = {
       _id: 'record_mocked',
       hoge: 'hoge',
@@ -176,7 +181,7 @@ describe('PUT_ACTIVE_RECORD', () => {
     const mockAuth = {};
     deepFreeze(mockAuth);
 
-    const saga = putActiveRecord();
+    const saga = putActiveRecord(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));
@@ -195,11 +200,12 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('handles error', () => {
+    const db = new PouchDB();
     const mockRecord = {};
     const mockAuth = {};
     const mockError = {};
 
-    const saga = putActiveRecord();
+    const saga = putActiveRecord(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));
@@ -216,13 +222,14 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('shows forbidden message for 403 error', () => {
+    const db = new PouchDB();
     const mockRecord = {};
     const mockAuth = {};
     const mockError = {
       name: 'forbidden',
     };
 
-    const saga = putActiveRecord();
+    const saga = putActiveRecord(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));
@@ -239,6 +246,7 @@ describe('PUT_ACTIVE_RECORD', () => {
   });
 
   it('handles invalid response as error', () => {
+    const db = new PouchDB();
     const mockRecord = {
       _id: 'record_mocked',
       hoge: 'hoge',
@@ -247,7 +255,7 @@ describe('PUT_ACTIVE_RECORD', () => {
     const mockAuth = {};
     const mockResponse = { ok: false };
 
-    const saga = putActiveRecord();
+    const saga = putActiveRecord(db);
 
     expect(saga.next().value)
       .toEqual(put(requestPutRecord()));

@@ -2,6 +2,12 @@
 import { actions as formActions } from 'react-redux-form';
 
 export {
+  DB_SET_INSTANCE, dbSetInstance,
+  DB_CONNECT_REQUEST, dbConnectRequest,
+  DB_DISCONNECT_REQUEST, dbDisconnectRequest,
+} from './db';
+
+export {
   REQUEST_SIGNUP, requestSignup,
   REQUEST_LOGIN, requestLogin,
   REQUEST_ANONYMOUS_LOGIN, requestAnonymousLogin,
@@ -88,14 +94,8 @@ export const insertOrChangeActiveRecord = (record: RecordObject, option: ?Object
   };
 
 
-export const CONNECT_POUCHDB = 'CONNECT_POUCHDB';
-export const connectPouchDB = () => ({
-  type: CONNECT_POUCHDB,
-});
-
-
 export const PUSH_ALERT = 'PUSH_ALERT';
-export const pushAlert = (type: string, message: string, timeout: number) => ({
+export const pushAlert = (type: string, message: string, timeout?: number) => ({
   type: PUSH_ALERT,
   payload: {
     message,

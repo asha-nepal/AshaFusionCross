@@ -11,9 +11,8 @@ import patientSelect from './patient-select';
 import patientView from './patient-view';
 import status from './status';
 import alerts from './alerts';
+import db from './db';
 import auth from './auth';
-
-import { defaultConfig } from '../../db';
 
 export default combineReducers({
   patientSelect,
@@ -23,9 +22,8 @@ export default combineReducers({
   activePatientForm: formReducer('activePatient'),
   activeRecords: modelReducer('activeRecords', []),
   activeRecordsForm: formReducer('activeRecords'),
-  pouchConfig: modelReducer('pouchConfig', defaultConfig),
-  pouchConfigForm: formReducer('pouchConfig'),
   status,
   alerts,
+  db,
   auth,
 });

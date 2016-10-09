@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
-import { db } from '../../../db';
 import { makeCancelable } from '../../../utils';
 
 class AttachmentViewerComponent extends Component {
@@ -27,10 +26,11 @@ class AttachmentViewerComponent extends Component {
       docId,
       _attachments,
       metadata,
+      db,
     } = this.props;
 
     if (docId && metadata) {
-      this._loadAttachmentsToCache(docId, _attachments, metadata);
+      this._loadAttachmentsToCache(db, docId, _attachments, metadata);
     }
   }
 
@@ -39,10 +39,11 @@ class AttachmentViewerComponent extends Component {
       docId,
       _attachments,
       metadata,
+      db,
     } = nextProps;
 
     if (docId && metadata) {
-      this._loadAttachmentsToCache(docId, _attachments, metadata);
+      this._loadAttachmentsToCache(db, docId, _attachments, metadata);
     }
   }
 
@@ -56,7 +57,9 @@ class AttachmentViewerComponent extends Component {
   loadingCachesPromise: ?CancelablePromise;
   _loadAttachmentsToCache: Function;
 
-  _loadAttachmentsToCache(docId: string, _attachments: Object, metadata: Array<Object>) {
+  _loadAttachmentsToCache(
+    db: PouchInstance, docId: string, _attachments: Object, metadata: Array<Object>
+  ) {
     if (!db) { return; }
     if (!_attachments) { return; }
 
@@ -114,6 +117,7 @@ class AttachmentViewerComponent extends Component {
     docId: string,
     _attachments: Object,
     metadata: Array<Object>,
+    db: PouchInstance,
     removeAttachment: (attachmentId: string) => void,
   };
 
@@ -203,6 +207,7 @@ const mapStateToProps = (state, ownProps) => {
     docId: record && record._id,
     _attachments: record && record._attachments,
     metadata: _get(state, ownProps.model),
+    db: state.db.instance,
   };
 };
 

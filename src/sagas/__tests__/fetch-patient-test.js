@@ -4,9 +4,9 @@ jest.unmock('redux-saga/effects');
 jest.unmock('../../actions');
 jest.unmock('../fetch-patient');
 
+import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
 
-import { db } from '../../db';
 import {
   requestFetchPatient,
   successFetchPatient,
@@ -23,6 +23,7 @@ import {
 
 describe('fetchPatient saga', () => {
   it('calls db.get() with specified id then set current active-record', () => {
+    const db = new PouchDB();
     const mockPatientId = 'patient_1234';
     const mockFetchedPatient = {
       _id: 'patient_1234',
@@ -37,7 +38,7 @@ describe('fetchPatient saga', () => {
       ],
     };
 
-    const saga = fetchPatient(mockPatientId);
+    const saga = fetchPatient(db, mockPatientId);
 
     expect(saga.next().value)
       .toEqual(put(requestFetchPatient()));
@@ -71,10 +72,11 @@ describe('fetchPatient saga', () => {
   });
 
   it('handles error at fetching patient', () => {
+    const db = new PouchDB();
     const mockPatientId = 'patient_1234';
     const mockError = {};
 
-    const saga = fetchPatient(mockPatientId);
+    const saga = fetchPatient(db, mockPatientId);
 
     expect(saga.next().value)
       .toEqual(put(requestFetchPatient()));
@@ -90,6 +92,7 @@ describe('fetchPatient saga', () => {
   });
 
   it('handles error at fetching records', () => {
+    const db = new PouchDB();
     const mockPatientId = 'patient_1234';
     const mockError = {};
     const mockFetchedPatient = {
@@ -97,7 +100,7 @@ describe('fetchPatient saga', () => {
       hoge: 'fuga',
     };
 
-    const saga = fetchPatient(mockPatientId);
+    const saga = fetchPatient(db, mockPatientId);
 
     expect(saga.next().value)
       .toEqual(put(requestFetchPatient()));
