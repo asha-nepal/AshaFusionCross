@@ -1,9 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
 
 const ReadOnly = ({
   options,
@@ -56,14 +53,6 @@ const RadioGroupComponent = ({
   </div>
 );
 
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
+import connect from '../../../common/forms/fields/RadioGroup';
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
-});
-
-export const RadioGroup = connect(
-  mapStateToProps, mapDispatchToProps
-)(RadioGroupComponent);
+export const RadioGroup = connect(RadioGroupComponent);
