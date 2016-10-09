@@ -44,6 +44,7 @@ function createPouchChangeChannel(db: PouchInstance) {
           info,
         },
       });
+      feed.cancel();
       emit(END);
     })
     .on('error', error => {
@@ -51,6 +52,8 @@ function createPouchChangeChannel(db: PouchInstance) {
         type: 'error',
         error,
       });
+      feed.cancel();
+      emit(END);
     });
 
     const unsubscribe = () => feed.cancel();
@@ -62,33 +65,37 @@ function createPouchChangeChannel(db: PouchInstance) {
 export function* watchOnPouchChanges(db: PouchInstance) {
   const pouchChannel = yield call(createPouchChangeChannel, db);
 
-  while (true) {
-    const { type, payload, error } = yield take(pouchChannel);
+  try {
+    while (true) {
+      const { type, payload, error } = yield take(pouchChannel);
 
-    if (type === 'change') {
-      const { change } = payload;
+      if (type === 'change') {
+        const { change } = payload;
 
-      // For PatientSelect
-      yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
+        // For PatientSelect
+        yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
 
-      // For PatientView
-      const activePatientId = yield select(state => state.activePatient._id);
-      if (!activePatientId) { continue; }
+        // For PatientView
+        const activePatientId = yield select(state => state.activePatient._id);
+        if (!activePatientId) { continue; }
 
-      const doc = change.doc;
-      if (doc._id === activePatientId) {
-        yield put(changeActivePatient(doc, { silent: true }));
-      } else if (doc.type === 'record') {
-        const activePatientIdBody = activePatientId.replace(/^patient_/, '');
-        const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
-        if (match && (match[1] === activePatientIdBody)) {
-          yield put(insertOrChangeActiveRecord(doc, { silent: true }));
+        const doc = change.doc;
+        if (doc._id === activePatientId) {
+          yield put(changeActivePatient(doc, { silent: true }));
+        } else if (doc.type === 'record') {
+          const activePatientIdBody = activePatientId.replace(/^patient_/, '');
+          const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
+          if (match && (match[1] === activePatientIdBody)) {
+            yield put(insertOrChangeActiveRecord(doc, { silent: true }));
+          }
         }
+      } else if (error) {
+        yield put(alertError(`ERR: change listener ${error.message || ''}`));
+        yield put(requestLogout());
       }
-    } else if (error) {
-      yield put(alertError(`ERR: change listener ${error.message || ''}`));
-      yield put(requestLogout());
     }
+  } finally {
+    console.log('PouchDB listener terminated');
   }
 }
 
