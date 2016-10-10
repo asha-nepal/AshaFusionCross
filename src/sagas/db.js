@@ -184,3 +184,10 @@ export function * connectFlow() {
     }
   }
 }
+
+export function * disconnectFlow() {
+  while (true) {
+    yield take(DB_DISCONNECT_REQUEST);
+    yield call(disconnect);
+  }
+}
