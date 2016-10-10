@@ -4,7 +4,7 @@ import React from 'react';
 import Drawer from 'react-native-drawer';
 import { Actions, DefaultRenderer } from 'react-native-router-flux';
 
-import SideMenu from './SideMenu';
+import SideMenu from '../../containers/Drawer/SideMenu';
 
 const drawerStyles = {
   drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3, backgroundColor: '#fff' },
@@ -27,7 +27,9 @@ export default ({
       open={navigationState.open}
       onOpen={() => Actions.refresh({ key: navigationState.key, open: true })}
       onClose={() => Actions.refresh({ key: navigationState.key, open: false })}
-      content={<SideMenu />}
+      content={<SideMenu
+        onClose={() => Actions.refresh({ key: navigationState.key, open: false })}
+      />}
       tapToClose
       openDrawerOffset={0.2}
       panCloseMask={0.2}

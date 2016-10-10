@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
+import { DefaultRenderer } from 'react-native-router-flux';
 
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
@@ -51,7 +52,9 @@ export default ({
   login,
   anonymousLogin,
   signup,
-  children,
+
+  onNavigate,
+  navigationState,
 }: {
   isDBConnected: boolean,
   currentDBConfig: PouchConfig,
@@ -61,9 +64,15 @@ export default ({
   login: (username: string, password: string) => void,
   anonymousLogin: () => void,
   signup: (username: string, password: string) => void,
-  children: React$Element<any>,
+
+  onNavigate: Function,
+  navigationState: Object,
 }) => {
-  if (isDBConnected && loggedIn) return children;
+  const children = navigationState.children;
+
+  if (isDBConnected && loggedIn) {
+    return <DefaultRenderer navigationState={children[0]} onNavigate={onNavigate} />;
+  }
 
   return (
     <View style={styles.container}>

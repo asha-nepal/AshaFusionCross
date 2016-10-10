@@ -29,8 +29,8 @@ const BackButton = (<Icon
 export default () => (
   <Root>
     <View style={{ flex: 1 }}>
-      <Auth>
-        <Router>
+      <Router>
+        <Scene key="auth" component={Auth}>
           <Scene key="drawer" component={Drawer} open={false} >
             <Scene key="main">
               <Scene
@@ -52,8 +52,8 @@ export default () => (
               />
             </Scene>
           </Scene>
-        </Router>
-      </Auth>
+        </Scene>
+      </Router>
       <Alerts />
     </View>
   </Root>
