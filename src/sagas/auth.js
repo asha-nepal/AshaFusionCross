@@ -32,7 +32,7 @@ const authedSagas = [
   watchAddNewActiveRecord,
 ];
 
-const authedTasks = new Array(authedSagas.length);
+let authedTask = null;
 
 export function checkAccessible(db: PouchInstance) {
   return db.info()
@@ -42,13 +42,12 @@ export function checkAccessible(db: PouchInstance) {
 
 export function* afterLoggedIn(db: PouchInstance) {
   for (let i = 0; i < authedSagas.length; ++i) {
-    authedTasks[i] = yield fork(authedSagas[i]);
+    yield fork(authedSagas[i]);
   }
+  yield fork(watchOnPouchChanges, db);
 
   const session = yield call([db, db.getSession]);
   yield put(loginSuccess(session.userCtx.name, session.userCtx.roles));
-
-  yield fork(watchOnPouchChanges, db);
 }
 
 export function* logout(db: PouchInstance) {
@@ -60,10 +59,8 @@ export function* logout(db: PouchInstance) {
 
   yield put(logoutSuccess());
 
-  for (let i = 0; i < authedTasks.length; ++i) {
-    if (authedTasks[i]) {
-      yield cancel(authedTasks[i]);
-    }
+  if (authedTask) {
+    yield cancel(authedTask);
   }
 }
 
@@ -104,10 +101,8 @@ export function* loginFlow() {
     if (winner.auth) {
       const { response, error } = winner.auth;
       if (response) {
-        yield [
-          call(afterLoggedIn, db),
-          put(alertInfo('Logged in!')),
-        ];
+        authedTask = yield fork(afterLoggedIn, db);
+        yield put(alertInfo('Logged in!'));
       } else {
         yield put(alertError(`Failed to log in: ${error.message}`));
       }
@@ -142,10 +137,8 @@ export function* anonymousLoginFlow() {
       continue;
     }
 
-    yield [
-      call(afterLoggedIn, db),
-      put(alertInfo('Logged in as an anonymous user')),
-    ];
+    authedTask = yield fork(afterLoggedIn, db);
+    yield put(alertInfo('Logged in as an anonymous user'));
   }
 }
 
