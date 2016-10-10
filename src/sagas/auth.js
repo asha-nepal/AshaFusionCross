@@ -33,6 +33,7 @@ const authedSagas = [
 ];
 
 const authedTasks = new Array(authedSagas.length);
+let watchOnPouchChangesTask = null;
 
 export function checkAccessible(db: PouchInstance) {
   return db.info()
@@ -48,7 +49,7 @@ export function* afterLoggedIn(db: PouchInstance) {
   const session = yield call([db, db.getSession]);
   yield put(loginSuccess(session.userCtx.name, session.userCtx.roles));
 
-  yield fork(watchOnPouchChanges, db);
+  watchOnPouchChangesTask = yield fork(watchOnPouchChanges, db);
 }
 
 export function* logout(db: PouchInstance) {
@@ -65,6 +66,7 @@ export function* logout(db: PouchInstance) {
       yield cancel(authedTasks[i]);
     }
   }
+  yield cancel(watchOnPouchChangesTask);
 }
 
 export function* authorize(db: PouchInstance, username: string, password: string) {
@@ -105,7 +107,7 @@ export function* loginFlow() {
       const { response, error } = winner.auth;
       if (response) {
         yield [
-          call(afterLoggedIn, db),
+          fork(afterLoggedIn, db),
           put(alertInfo('Logged in!')),
         ];
       } else {
@@ -143,7 +145,7 @@ export function* anonymousLoginFlow() {
     }
 
     yield [
-      call(afterLoggedIn, db),
+      fork(afterLoggedIn, db),
       put(alertInfo('Logged in as an anonymous user')),
     ];
   }

@@ -1,6 +1,6 @@
 import PouchDB from 'pouchdb';
 PouchDB.plugin(require('pouchdb-authentication'));
-import { take, call, put, select, race } from 'redux-saga/effects';
+import { take, call, put, fork, select, race } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import {
   checkAccessible,
@@ -166,7 +166,7 @@ export function * connectFlow() {
         // Auto login
         if (isAccessible) {
           yield [
-            call(afterLoggedIn, db),
+            fork(afterLoggedIn, db),
             put(alertInfo(isDBPublic ? 'Logged in (public DB)' : 'Logged in!')),
           ];
         }
