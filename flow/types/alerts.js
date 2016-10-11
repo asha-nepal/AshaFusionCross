@@ -14,5 +14,5 @@ export type AlertAction = AddAlertAction & RemoveAlertAction;
 export type Alert = {
   id: string,
   message: string,
-  type: string,
+  type: 'error' | 'info',
 };
