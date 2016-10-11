@@ -67,7 +67,7 @@ export class TextUnitInputComponent extends Component {
       : converted.toString();
 
     return (
-      <View>
+      <View style={styles.fieldContainer}>
         <Text style={styles.fieldLabel}>{label}</Text>
         <View style={styles.columns}>
           <TextField

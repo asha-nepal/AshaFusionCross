@@ -17,7 +17,7 @@ const keyboardTypes = {
 };
 
 const TextField = MKTextField.textfield()
-  .withStyle(styles.textfield)
+  .withStyle([styles.textfield, styles.column])
   .withUnderlineColorAndroid('transparent')
   .build();
 
@@ -26,21 +26,29 @@ export const TextInputComponent = ({
   value,
   onChange,
   type,
+  prefix,
+  suffix,
   ...rest,
 }: {
   label? : string,
   value: ?string,
   onChange: (newValue: string) => void,
   type?: string,
+  prefix?: string,
+  suffix?: string,
 }) => (
-  <View>
+  <View style={styles.fieldContainer}>
     <Text style={styles.fieldLabel}>{label}</Text>
-    <TextField
-      value={value || ''}
-      onChangeText={onChange}
-      keyboardType={type && keyboardTypes[type] || 'default'}
-      {...rest}
-    />
+    <View style={styles.columns}>
+      {prefix && <Text style={styles.textfieldPrefix}>{prefix}</Text>}
+      <TextField
+        value={value || ''}
+        onChangeText={onChange}
+        keyboardType={type && keyboardTypes[type] || 'default'}
+        {...rest}
+      />
+      {suffix && <Text style={styles.textfieldPrefix}>{suffix}</Text>}
+    </View>
   </View>
 );
 

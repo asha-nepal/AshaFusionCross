@@ -30,6 +30,7 @@ export default({
     <TextInput
       label="Pulse"
       model={`${model}.pulse`}
+      suffix="/min"
     />
   </View>
 );

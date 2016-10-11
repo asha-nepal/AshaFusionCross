@@ -5,9 +5,15 @@ import {
 } from 'react-native';
 
 export default StyleSheet.create({
+  fieldContainer: {
+    marginBottom: 20,
+  },
   textfield: {
     height: 28,  // have to do it on iOS
-    marginBottom: 20,
+  },
+  textfieldPrefix: {
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   columns: {
     flexDirection: 'row',

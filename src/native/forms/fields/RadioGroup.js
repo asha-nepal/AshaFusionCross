@@ -37,7 +37,7 @@ export class RadioGroupComponent extends Component {
     } = this.props;
 
     return (
-      <View>
+      <View style={styles.fieldContainer}>
         <Text style={styles.fieldLabel}>{label || ''}</Text>
         <View style={styles.radioGroupRow}>
         {options.map(option =>
