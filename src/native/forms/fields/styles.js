@@ -9,6 +9,12 @@ export default StyleSheet.create({
     height: 28,  // have to do it on iOS
     marginBottom: 20,
   },
+  columns: {
+    flexDirection: 'row',
+  },
+  column: {
+    flex: 1,
+  },
   radioGroupRow: {
     flexDirection: 'row',
   },
