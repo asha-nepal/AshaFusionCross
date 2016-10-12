@@ -97,10 +97,10 @@ export default class PatientView extends Component {
                         removeActivePatient();
                       }
                     })}
-                    warnings={{
+                    warnings={duplicatedPatientsExist ? {
                       name: duplicatedPatientsExist.name && 'Duplicated',
                       number: duplicatedPatientsExist.number && 'Duplicated',
-                    }}
+                    } : undefined}
                   />
                 </div>
               </div>
@@ -163,10 +163,12 @@ export default class PatientView extends Component {
           </section>
         }
 
-        <Footer
-          onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
-          freeze={isPuttingRecord}
-        />
+        {!isNew &&
+          <Footer
+            onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
+            freeze={isPuttingRecord}
+          />
+        }
       </div>
     );
   }

@@ -7,6 +7,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import PatientView from '../index';
+import Footer from '../Footer';
 
 describe('<PatientView />', () => {
   it('calls init() at componentWillMount()', () => {
@@ -69,5 +70,20 @@ describe('<PatientView />', () => {
     expect(select.childAt(0).text()).toBe('Hoge');
     expect(select.childAt(1).prop('value')).toBe('fuga');
     expect(select.childAt(1).text()).toBe('Fuga');
+  });
+
+  it('hides Footer if isNew is true', () => {
+    const wrapper = shallow(
+      <PatientView
+        init={jest.fn()}
+        patient={{
+          _id: 'patient_foo',
+          name: 'foo bar',
+        }}
+        isNew
+      />
+    );
+
+    expect(wrapper.find(Footer).length).toBe(0);
   });
 });
