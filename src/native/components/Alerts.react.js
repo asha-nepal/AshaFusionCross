@@ -9,19 +9,38 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    marginLeft: 5,
     bottom: 0,
     left: 0,
     position: 'absolute',
-    backgroundColor: '#ffffff',
+  },
+  alert: {
+    padding: 5,
+    marginBottom: 2,
+    borderRadius: 5,
+    backgroundColor: '#f00a',
+  },
+  error: {
+    backgroundColor: '#f00a',
+  },
+  info: {
+    backgroundColor: '#0afa',
+  },
+  alertMessage: {
+    color: '#fff',
+    fontSize: 12,
   },
 });
 
 export default function Alerts({ alerts }: { alerts: Array<Alert> }) {
+  if (!alerts || alerts.length === 0) { return null; }
+
   return (
     <View style={styles.container}>
     {alerts.map(alert =>
-      <Text key={alert.id}>{alert.message}</Text>
+      <View key={alert.id} style={[styles.alert, styles[alert.type]]}>
+        <Text style={styles.alertMessage}>{alert.message}</Text>
+      </View>
     )}
     </View>
   );

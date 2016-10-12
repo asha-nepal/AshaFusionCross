@@ -1,9 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
 import math from 'mathjs';
 
 export const convert = (
@@ -130,13 +127,6 @@ export class TextUnitInputComponent extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: v => dispatch(actions.change(ownProps.model, v)),
-});
+import connect from '../../../common/forms/fields/TextUnitInput';
 
-export const TextUnitInput = connect(
-  mapStateToProps, mapDispatchToProps
-)(TextUnitInputComponent);
+export const TextUnitInput = connect(TextUnitInputComponent);

@@ -7,7 +7,23 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import Button from 'react-native-button';
+import {
+  MKButton,
+} from 'react-native-material-kit';
+
+const ColoredRaisedSubmitButton = MKButton.coloredButton()
+  .withText('Submit')
+  .withStyle({
+    marginBottom: 20,
+  })
+  .build();
+
+const ColoredRaisedAddButton = MKButton.coloredButton()
+  .withText('Add')
+  .withStyle({
+    marginBottom: 20,
+  })
+  .build();
 
 import PatientForm from '../forms/PatientForm.react';
 import RecordForm from '../forms/RecordForm.react';
@@ -39,7 +55,6 @@ export default class PatientView extends Component {
   render() {
     const {
       isFetching,
-      patient,
       records,
       addNewActiveRecord,
       putActivePatient,
@@ -54,30 +69,29 @@ export default class PatientView extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <Text>{patient && patient.name || ''}</Text>
         <PatientForm
           model="activePatient"
         />
-        <Button
+        <ColoredRaisedSubmitButton
           disabled={isPuttingPatient}
           onPress={putActivePatient}
-        >Submit</Button>
+        />
 
         {records.map((record, i) =>
           <View key={i}>
             <RecordForm
               model={`activeRecords[${i}]`}
             />
-            <Button
+            <ColoredRaisedSubmitButton
               disabled={isPuttingRecord}
               onPress={() => putActiveRecord(i)}
-            >Submit</Button>
+            />
           </View>
         )}
 
-        <Button
+        <ColoredRaisedAddButton
           onPress={addNewActiveRecord}
-        >Add record</Button>
+        />
       </ScrollView>
     );
   }

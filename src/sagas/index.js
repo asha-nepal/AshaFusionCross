@@ -15,6 +15,7 @@ import {
 } from './auth';
 import {
   connectFlow,
+  disconnectFlow,
 } from './db';
 
 const initialSagas = [
@@ -28,6 +29,7 @@ export default function* rootSaga() {
   }
 
   yield fork(connectFlow);
+  yield fork(disconnectFlow);
   yield fork(anonymousLoginFlow);
   yield fork(loginFlow);
   yield fork(logoutFlow);

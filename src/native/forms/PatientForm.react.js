@@ -1,14 +1,12 @@
 /* @flow */
 
 import React from 'react';
-import { Field } from 'react-redux-form/lib/native';
 import {
   View,
-  Text,
-  Picker,
 } from 'react-native';
 import {
   TextInput,
+  RadioGroup,
 } from './fields';
 
 export default ({
@@ -22,13 +20,14 @@ export default ({
       label="Name"
     />
 
-    <Text>Sex</Text>
-    <Field model={`${model}.sex`}>
-      <Picker>
-        <Picker.Item label="Male" value="male" />
-        <Picker.Item label="Female" value="female" />
-      </Picker>
-    </Field>
+    <RadioGroup
+      label="Sex"
+      model={`${model}.sex`}
+      options={[
+        { id: 'male', label: 'Male' },
+        { id: 'female', label: 'Female' },
+      ]}
+    />
 
     <TextInput
       model={`${model}.age`}
