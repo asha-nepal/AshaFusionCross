@@ -25,30 +25,34 @@ export const convert = (
   return converted;
 };
 
-class TextUnitInputComponent extends Component {
-  constructor(props) {
+type Props = {
+  label: ?string,
+  units: Array<string>,
+  value: ValueUnitType,
+  style: ?Object,
+  precision: ?number,
+  forceFixed: ?boolean,
+  placeholder: ?string,
+  readonly: boolean,
+  onChange: (value: ?ValueUnitType) => void,
+}
+
+export class TextUnitInputComponent extends Component {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
-      unit: props.units[0],
+      unit: props.value && props.value.unit ? props.value.unit : props.units[0],
+      inputValue: props.value && props.value.value ? props.value.value.toString() : '',
     };
   }
 
   state: {
     unit: string,
+    inputValue: string,
   };
 
-  props: {
-    label: ?string,
-    units: Array<string>,
-    value: ValueUnitType,
-    style: ?Object,
-    precision: ?number,
-    forceFixed: ?boolean,
-    placeholder: ?string,
-    readonly: boolean,
-    onChange: (value: ValueUnitType) => void,
-  };
+  props: Props
 
   render() {
     const {
@@ -64,10 +68,10 @@ class TextUnitInputComponent extends Component {
     } = this.props;
 
     const converted = convert(value, this.state.unit, precision);
-    const convertedString = converted && converted.toString() || '';
-    const inputValue = forceFixed && precision
-      ? convertedString.replace(new RegExp(`(\\.\\d{0,${precision}})\\d*`), '$1')
-      : convertedString;
+
+    const inputValue = !converted || parseFloat(this.state.inputValue) === converted
+      ? this.state.inputValue  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
+      : converted.toString();
 
     return (
       <div className="control">
@@ -85,7 +89,28 @@ class TextUnitInputComponent extends Component {
               value={inputValue}
               step={precision ? Math.pow(10, -precision) : null}
               placeholder={placeholder}
-              onChange={(e) => onChange({ value: e.target.value, unit: this.state.unit })}
+              onChange={(e) => {
+                let v = e.target.value;
+
+                if (forceFixed && precision) {
+                  // 入力桁数を制限
+                  v = v.replace(new RegExp(`(\\.\\d{1,${precision}})\\d*`), '$1');
+                }
+
+                const asFloat = parseFloat(v);
+                if (v && isNaN(asFloat)) { return false; }
+
+                // convert()等に通さない，inputの生の値を持っておく．小数点対策
+                this.setState({ inputValue: v });
+
+                if (v.trim() === '') {
+                  onChange(null);
+                } else {
+                  onChange({ value: asFloat, unit: this.state.unit });
+                }
+
+                return true;
+              }}
             />
           )}
           <span className="select">
