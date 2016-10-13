@@ -126,4 +126,38 @@ describe('<TextUnitInput />', () => {
     getInput().simulate('change', { target: { value: '160.55' } });
     expect(onChange).toBeCalledWith({ value: 160.5, unit: 'cm' });
   });
+
+  it('can take number', () => {
+    const onChange = jest.fn();
+    const wrapper = shallow(
+      <TextUnitInputComponent
+        value={160}
+        units={['cm']}
+        onChange={onChange}
+      />
+    );
+
+    const getInput = () => wrapper.find('input').at(0);
+
+    expect(getInput().prop('value')).toEqual('160');
+    getInput().simulate('change', { target: { value: '160.5' } });
+    expect(onChange).toBeCalledWith({ value: 160.5, unit: 'cm' });
+  });
+
+  it('can take string', () => {
+    const onChange = jest.fn();
+    const wrapper = shallow(
+      <TextUnitInputComponent
+        value="160"
+        units={['cm']}
+        onChange={onChange}
+      />
+    );
+
+    const getInput = () => wrapper.find('input').at(0);
+
+    expect(getInput().prop('value')).toEqual('160');
+    getInput().simulate('change', { target: { value: '160.5' } });
+    expect(onChange).toBeCalledWith({ value: 160.5, unit: 'cm' });
+  });
 });

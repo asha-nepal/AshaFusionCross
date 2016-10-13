@@ -3,7 +3,7 @@
 export { RadioGroup } from './RadioGroup';
 export { TextInput } from './TextInput';
 export { TextArea } from './TextArea';
-export { TextUnitInput } from './TextUnitInput';
+export { TextUnitInput, TextUnitInputComponent } from './TextUnitInput';
 export { Attachment } from './Attachment';
 export { AttachmentInput } from './AttachmentInput';
 export { AttachmentViewer } from './AttachmentViewer';
