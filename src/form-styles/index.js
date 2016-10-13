@@ -18,7 +18,10 @@ export default {
                 { id: 'female', label: 'Female' },
               ],
             },
-            { field: 'age', label: 'Age', class: 'textinput', type: 'number' },
+            {
+              field: 'age', label: 'Age', class: 'textunitinput',
+              units: ['years', 'months'], precision: 0,
+            },
           ],
         },
         { field: 'address', label: 'Address', class: 'textinput' },

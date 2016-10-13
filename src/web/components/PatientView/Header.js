@@ -5,6 +5,10 @@ import {
   Link,
 } from 'react-router';
 
+import {
+  TextUnitInputComponent,
+} from '../../forms/fields';
+
 export default ({
   patient,
   verbose,
@@ -28,7 +32,14 @@ export default ({
                 <span className="title">{patient.name || ''}</span>
               </span>,
               patient.age &&
-                <span key="age" className="nav-item">Age: {patient.age}</span>,
+                <span key="age" className="nav-item">
+                  Age:
+                  {<TextUnitInputComponent
+                    value={patient.age}
+                    units={['years', 'months']}
+                    readonly
+                  />}
+                </span>,
               patient.sex &&
                 <span key="sex" className="nav-item">Sex: {patient.sex}</span>,
               patient.address &&
