@@ -1,6 +1,7 @@
 /* @flow */
 
 import Chance from 'chance';
+import base64 from 'base64-js';
 
 const chance = new Chance();
 const idStringPool = '0123456789abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; // URLセーフな文字のみ
@@ -29,3 +30,17 @@ export const makeCancelable = (promise: Promise<any>) => {
     },
   };
 };
+
+const createBTOA = () => {
+  if (typeof window !== 'undefined' && typeof window.btoa === 'function') {
+    return window.btoa;
+  }
+
+  if (typeof Buffer !== 'undefined') {
+    return (text: string) => new Buffer(text).toString('base64');
+  }
+
+  return base64.fromByteArray;
+};
+
+export const btoa = createBTOA();

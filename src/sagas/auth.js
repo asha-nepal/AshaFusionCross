@@ -12,6 +12,7 @@ import {
   alertInfo,
   setIsDBPublic,
 } from '../actions';
+import { btoa as _btoa } from '../utils';
 
 import { watchFetchPatientList } from './fetch-patient-list';
 import { watchFetchPatient } from './fetch-patient';
@@ -68,7 +69,7 @@ export function* authorize(db: PouchInstance, username: string, password: string
   const ajaxOpts = {
     ajax: {
       headers: {
-        Authorization: `Basic ${window.btoa(`${username}:${password}`)}`,
+        Authorization: `Basic ${_btoa(`${username}:${password}`)}`,
       },
     },
   };
