@@ -30,12 +30,12 @@ export const TextInputComponent = ({
   suffix,
   ...rest,
 }: {
-  label? : string,
+  label?: string,
   value: ?string,
   onChange: (newValue: string) => void,
   type?: string,
   prefix?: string,
-  suffix?: string,
+  suffix?: string
 }) => (
   <View style={styles.fieldContainer}>
     <Text style={styles.fieldLabel}>{label}</Text>
