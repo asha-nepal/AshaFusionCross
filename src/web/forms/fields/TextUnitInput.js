@@ -23,24 +23,40 @@ export const convert = (
 };
 
 type Props = {
-  label: ?string,
+  label?: string,
   units: Array<string>,
-  value: ValueUnitType,
-  style: ?Object,
-  precision: ?number,
-  forceFixed: ?boolean,
-  placeholder: ?string,
-  readonly: boolean,
-  onChange: (value: ?ValueUnitType) => void,
+  value: ?(ValueUnitType | number | string),
+  style?: Object,
+  precision?: number,
+  forceFixed?: boolean,
+  placeholder?: string,
+  readonly?: boolean,
+  onChange?: (value: ?ValueUnitType) => void,
 }
 
 export class TextUnitInputComponent extends Component {
   constructor(props: Props) {
     super(props);
 
+    if (!props.value) {
+      this.state = {
+        unit: props.units[0],
+        inputValue: '',
+      };
+      return;
+    }
+
+    if (typeof props.value === 'number' || typeof props.value === 'string') {
+      this.state = {
+        unit: props.units[0],
+        inputValue: props.value.toString(),
+      };
+      return;
+    }
+
     this.state = {
-      unit: props.value && props.value.unit ? props.value.unit : props.units[0],
-      inputValue: props.value && props.value.value ? props.value.value.toString() : '',
+      unit: props.value.unit ? props.value.unit : props.units[0],
+      inputValue: props.value.value ? props.value.value.toString() : '',
     };
   }
 
@@ -64,7 +80,11 @@ export class TextUnitInputComponent extends Component {
       onChange,
     } = this.props;
 
-    const converted = convert(value, this.state.unit, precision);
+    const _value = (typeof value === 'number' || typeof value === 'string')
+      ? { value, unit: units[0] }
+      : value;
+
+    const converted = convert(_value, this.state.unit, precision);
 
     const inputValue = !converted || parseFloat(this.state.inputValue) === converted
       ? this.state.inputValue  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
@@ -99,6 +119,8 @@ export class TextUnitInputComponent extends Component {
 
                 // convert()等に通さない，inputの生の値を持っておく．小数点対策
                 this.setState({ inputValue: v });
+
+                if (!onChange) { return true; }
 
                 if (v.trim() === '') {
                   onChange(null);
