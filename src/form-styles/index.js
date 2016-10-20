@@ -341,10 +341,21 @@ export default {
           field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',
         },
         {
+          field: 'plan', label: 'Plan', class: 'checkgroup',
+          options: [
+            { id: 'prescription', label: 'Prescription' },
+            { id: 'refer', label: 'Refer' },
+            { id: 'test', label: 'Test' },
+            { id: 'advice', label: 'Advice' },
+          ],
+        },
+        {
           field: 'prescription', label: 'Prescriptions', class: 'multiinput',
+          show: 'plan:prescription',
         },
         {
           field: 'refer', label: 'Refer', class: 'radio',
+          show: 'plan:refer',
           options: [
             { id: 'dhulikhel', label: 'Dhulikhel' },
             { id: 'other', label: 'Other' },
@@ -352,9 +363,11 @@ export default {
         },
         {
           field: 'test', label: 'Test', class: 'textarea',
+          show: 'plan:test',
         },
         {
           field: 'advice', label: 'Advice', class: 'textarea',
+          show: 'plan:advice',
         },
         {
           field: 'attachments.images', label: 'Images', class: 'attachment',
