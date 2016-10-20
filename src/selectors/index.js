@@ -80,16 +80,16 @@ export const makeGetDuplicatedPatients = (field: string) => createSelector(
   }
 );
 
-export const activeRecordsSelector = (state: Object) => state.activeRecords;
-export const selectedActiveRecordIdSelector =
+export const getActiveRecords = (state: Object) => state.activeRecords;
+export const getSelectedActiveRecordId =
   (state: Object) => state.patientView.selectedActiveRecordId;
-export const selectedActiveRecordSelector = createSelector(
-  [activeRecordsSelector, selectedActiveRecordIdSelector],
+export const getSelectedActiveRecord = createSelector(
+  [getActiveRecords, getSelectedActiveRecordId],
   (activeRecords, selectedActiveRecordId) =>
     activeRecords.find(r => r._id === selectedActiveRecordId)
 );
-export const selectedActiveRecordIndexSelector = createSelector(
-  [activeRecordsSelector, selectedActiveRecordIdSelector],
+export const getSelectedActiveRecordIndex = createSelector(
+  [getActiveRecords, getSelectedActiveRecordId],
   (activeRecords, selectedActiveRecordId) =>
     activeRecords.findIndex(r => r._id === selectedActiveRecordId)
 );

@@ -20,8 +20,8 @@ import {
   getRecordFormStyleId,
   getRecordFormStyle,
   getPatientFormStyle,
-  activeRecordsSelector,
-  selectedActiveRecordIndexSelector,
+  getActiveRecords,
+  getSelectedActiveRecordIndex,
 } from '../selectors';
 
 const getNameDuplicatedPatients = makeGetDuplicatedPatients('name');
@@ -32,8 +32,8 @@ const mapStateToProps = (state) => {
 
   return {
     patient,
-    records: activeRecordsSelector(state),
-    selectedActiveRecordIndex: selectedActiveRecordIndexSelector(state),
+    records: getActiveRecords(state),
+    selectedActiveRecordIndex: getSelectedActiveRecordIndex(state),
     isNew: !patient.hasOwnProperty('_rev'),
     isFetching: state.status.isFetchingPatient,
     isPuttingPatient: state.status.isPuttingPatient,

@@ -3,13 +3,13 @@
 import { connect } from 'react-redux';
 import {
   getActivePatient,
-  selectedActiveRecordSelector,
+  getSelectedActiveRecord,
 } from '../../selectors';
 import PrintRecord from '../components/PrintRecord';
 
 const mapStateToProps = (state) => ({
   patient: getActivePatient(state),
-  record: selectedActiveRecordSelector(state),
+  record: getSelectedActiveRecord(state),
 });
 const mapDispatchToProps = null;
 
