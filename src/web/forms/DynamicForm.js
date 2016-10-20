@@ -42,14 +42,30 @@ const fieldComponents = {
   block: Block,
 };
 
+export function checkVisibility(state: Object, rootModel: string, showProp: string|boolean) {
+  if (showProp === false) {
+    return false;
+  }
+
+  if (typeof showProp === 'string') {
+    const [referPath, containedInArray] = showProp.split(':');
+    const referent = _get(state, `${rootModel}.${referPath}`, false);
+
+    if (!referent) { return false; }
+
+    if (containedInArray) {
+      return referent.indexOf(containedInArray) > -1;
+    }
+  }
+
+  return true;
+}
+
 function createChildFields(state, rootModel, fields, warnings) {
   if (!fields) { return []; }
   return fields.map((field, i) => {
     // Handle "show" prop
-    if (field.show === false) {
-      return null;
-    } else if (typeof field.show === 'string'
-      && !_get(state, `${rootModel}.${field.show}`, false)) {
+    if (!checkVisibility(state, rootModel, field.show)) {
       return null;
     }
 

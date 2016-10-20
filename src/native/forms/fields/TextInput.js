@@ -28,7 +28,7 @@ export const TextInputComponent = ({
   type,
   prefix,
   suffix,
-  ...rest,
+  ...rest
 }: {
   label?: string,
   value: ?string,
