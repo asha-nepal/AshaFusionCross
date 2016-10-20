@@ -4,7 +4,7 @@ export default {
   patient: [
     {
       style: [
-        { field: 'number', label: 'No.', style: { width: 200 } },
+        { field: 'number', label: 'Regd. No.', style: { width: 200 } },
         { field: 'name', label: 'Name', class: 'textinput', required: true },
         {
           class: 'block',
@@ -26,6 +26,13 @@ export default {
         },
         { field: 'address', label: 'Address', class: 'textinput' },
         { field: 'tel', label: 'Tel', class: 'textinput' },
+        { class: 'block',
+          children: [
+            { field: 'guardian_name', label: 'Guardian\'s name', style: { width: 400 } },
+            { field: 'guardian_relationship', label: 'Relationship', style: { width: 200 } },
+          ],
+        },
+        { field: 'occupation', label: 'Occupation' },
         { field: 'ethnicity', label: 'Ethnicity', class: 'textinput' },
       ],
     },
@@ -335,6 +342,19 @@ export default {
         },
         {
           field: 'prescription', label: 'Prescriptions', class: 'multiinput',
+        },
+        {
+          field: 'refer', label: 'Refer', class: 'radio',
+          options: [
+            { id: 'dhulikhel', label: 'Dhulikhel' },
+            { id: 'other', label: 'Other' },
+          ],
+        },
+        {
+          field: 'test', label: 'Test', class: 'textarea',
+        },
+        {
+          field: 'advice', label: 'Advice', class: 'textarea',
         },
         {
           field: 'attachments.images', label: 'Images', class: 'attachment',
