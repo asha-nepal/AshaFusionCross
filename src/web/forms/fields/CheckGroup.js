@@ -36,11 +36,11 @@ export const CheckGroupComponent = ({
   readonly = false,
   onChange,
 }: {
-  label: string,
+  label?: ?string,
   value: ?Array<string>,
   options: Array<{id: string, label: string}>,
-  readonly: boolean,
-  onChange: (newValue: Array<string>) => void,
+  readonly?: boolean,
+  onChange?: (newValue: Array<string>) => void,
 }) => (
   <div className="control">
     {label && <label className="label">{label}</label>}
@@ -56,11 +56,13 @@ export const CheckGroupComponent = ({
               className={isChecked ? 'control button is-primary' : 'control button'}
               onClick={e => {
                 e.preventDefault();
-                onChange(
-                  isChecked
-                    ? (value || []).filter(v => v !== option.id)
-                    : (value || []).concat(option.id)
-                );
+                if (onChange) {
+                  onChange(
+                    isChecked
+                      ? (value || []).filter(v => v !== option.id)
+                      : (value || []).concat(option.id)
+                  );
+                }
               }}
             >
               <span className="icon is-small">

@@ -19,7 +19,7 @@ export const ReadonlyMultiInput = ({
   label,
   values,
 }: {
-  label: ?string,
+  label?: ?string,
   values: ?Array<string>,
 }) => (
   <div className="control">

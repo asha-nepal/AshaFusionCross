@@ -9,7 +9,7 @@ export const ReadonlyTextArea = ({
   label,
   value,
 }: {
-  label: ?string,
+  label?: ?string,
   value: ?string,
 }) => (
   <p className="control">
@@ -31,7 +31,7 @@ export const TextAreaComponent = ({
   onChange,
 }: {
   value: ?string,
-  label: ?string,
+  label?: ?string,
   style: ?Object,
   placeholder: ?string,
   readonly: boolean,

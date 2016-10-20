@@ -21,10 +21,10 @@ export const DiagnosesComponent = ({
   removeDiagnosis,
   readonly = false,
 }: {
-  label: ?string,
+  label?: ?string,
   diagnoses: Array<diagnosisType>,
-  addDiagnosis: (diagnosis: diagnosisType) => void,
-  removeDiagnosis: (index: number) => void,
+  addDiagnosis?: (diagnosis: diagnosisType) => void,
+  removeDiagnosis?: (index: number) => void,
   readonly: boolean,
 }) => (
   <div>
@@ -57,7 +57,9 @@ export const DiagnosesComponent = ({
                   className="button is-danger"
                   onClick={e => {
                     e.preventDefault();
-                    removeDiagnosis(i);
+                    if (removeDiagnosis) {
+                      removeDiagnosis(i);
+                    }
                   }}
                 >
                   <i className="fa fa-times" />
