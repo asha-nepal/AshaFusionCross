@@ -1,22 +1,26 @@
 /* @flow */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import _get from 'lodash.get';
 
-import { convert } from '../forms/fields/TextUnitInput';
-import { ReadonlyTextArea } from '../forms/fields/TextArea';
-import { ReadonlyMultiInput } from '../forms/fields/MultiInput';
-import { CheckGroupComponent } from '../forms/fields/CheckGroup';
-import { DiagnosesComponent } from '../forms/fields/Diagnoses';
+import { convert } from '../../forms/fields/TextUnitInput';
+import { TextArea } from '../../forms/fields/TextArea';
+import { MultiInput } from '../../forms/fields/MultiInput';
+import { MultiDoubleInput } from '../../forms/fields/MultiDoubleInput';
+import { CheckGroup } from '../../forms/fields/CheckGroup';
+import { Diagnoses } from '../../forms/fields/Diagnoses';
 
-const Body = ({
+
+export default ({
   patient,
   record,
 }: {
   patient: PatientObject,
   record: RecordObject,
 }) => {
+//  const patientModel = 'activePatient';
+  const recordModel = 'activeRecords[0]';
+
   const precision = 2;
   const e = Math.pow(10, precision);
 
@@ -92,8 +96,9 @@ const Body = ({
               <td>{_get(record, 'allergy') ? (
                 <div>
                   <strong>&lt;Yes&gt;</strong>
-                  <ReadonlyTextArea
-                    value={_get(record, 'allergy_memo')}
+                  <TextArea
+                    model={`${recordModel}.allergy_memo`}
+                    readonly
                   />
                 </div>
               ) : '---'}</td>
@@ -101,48 +106,53 @@ const Body = ({
             <tr>
               <th>Past medical history</th>
               <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'past_medical_history')}
+                <TextArea
+                  model={`${recordModel}.past_medical_history`}
+                  readonly
                 />
               </td>
             </tr>
             <tr>
               <th>Current medicines</th>
               <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'current_medicine')}
+                <TextArea
+                  model={`${recordModel}.current_medicine`}
+                  readonly
                 />
               </td>
             </tr>
             <tr>
               <th>Present medical history</th>
               <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'present_medical_history')}
+                <TextArea
+                  model={`${recordModel}.present_medical_history`}
+                  readonly
                 />
               </td>
             </tr>
             <tr>
               <th>Current medicines</th>
               <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'current_medicine')}
+                <TextArea
+                  model={`${recordModel}.current_medicine`}
+                  readonly
                 />
               </td>
             </tr>
             <tr>
               <th>Symptoms</th>
               <td>
-                <ReadonlyMultiInput
-                  values={_get(record, 'symptoms')}
+                <MultiInput
+                  model={`${recordModel}.symptoms`}
+                  readonly
                 />
               </td>
             </tr>
             <tr>
               <th>Signs</th>
               <td>
-                <CheckGroupComponent
-                  value={_get(record, 'signs_select')}
+                <CheckGroup
+                  model={`${recordModel}.signs_select`}
                   options={[
                     { id: 'jaundice', label: 'Jaundice' },
                     { id: 'anemia', label: 'Anemia' },
@@ -154,16 +164,17 @@ const Body = ({
                   ]}
                   readonly
                 />
-                <ReadonlyTextArea
-                  value={_get(record, 'signs')}
+                <TextArea
+                  model={`${recordModel}.signs`}
+                  readonly
                 />
               </td>
             </tr>
             <tr>
               <th>Diagnoses</th>
               <td>
-                <DiagnosesComponent
-                  diagnoses={_get(record, 'diagnoses')}
+                <Diagnoses
+                  model={`${recordModel}.diagnoses`}
                   readonly
                 />
               </td>
@@ -171,8 +182,9 @@ const Body = ({
             <tr>
               <th>Prescriptions</th>
               <td>
-                <ReadonlyMultiInput
-                  values={_get(record, 'prescriptions')}
+                <MultiDoubleInput
+                  model={`${recordModel}.prescriptions`}
+                  readonly
                 />
               </td>
             </tr>
@@ -182,37 +194,3 @@ const Body = ({
     </section>
   );
 };
-
-export default ({
-  patient,
-  record,
-  className,
-}: {
-  patient: PatientObject,
-  record: RecordObject,
-  className: ?string,
-}) => (
-  <span className={className}>
-    <a
-      className="icon"
-      onClick={e => {
-        e.preventDefault();
-
-        const printWindow = window.open('/print.html');
-        if (printWindow) {
-          printWindow.onload = () => {
-            ReactDOM.render(
-              <Body patient={patient} record={record} />,
-              printWindow.document.getElementById('root'),
-              () => {
-                printWindow.focus();
-                printWindow.print();
-//                printWindow.close();
-              }
-            );
-          };
-        }
-      }}
-    ><i className="fa fa-print" /></a>
-  </span>
-);
