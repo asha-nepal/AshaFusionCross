@@ -334,7 +334,7 @@ export default {
           field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',
         },
         {
-          field: 'prescription', label: 'Prescriptions', class: 'multidoubleinput',
+          field: 'prescription', label: 'Prescriptions', class: 'multiinput',
         },
         {
           field: 'attachments.images', label: 'Images', class: 'attachment',
