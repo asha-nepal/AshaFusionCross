@@ -18,7 +18,7 @@ const ReadOnly = ({
   );
 };
 
-const RadioGroupComponent = ({
+export const RadioGroupComponent = ({
   options,
   label,
   value,
