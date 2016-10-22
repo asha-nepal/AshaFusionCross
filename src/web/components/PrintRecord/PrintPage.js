@@ -7,6 +7,7 @@ import { convert } from '../../forms/fields/TextUnitInput';
 import { ReadonlyTextArea } from '../../forms/fields/TextArea';
 import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
 import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
+import { RadioGroupComponent } from '../../forms/fields/RadioGroup';
 import { DiagnosesComponent } from '../../forms/fields/Diagnoses';
 
 function getStr(obj: Object, path: string, defaultValue: string = ''): string {
@@ -194,13 +195,65 @@ export default ({
               </td>
             </tr>
             <tr>
-              <th>Prescriptions</th>
+              <th>Plan</th>
               <td>
-                <ReadonlyMultiInput
-                  values={_get(record, 'prescription')}
+                <CheckGroupComponent
+                  value={_get(record, 'plan')}
+                  options={[
+                    { id: 'prescription', label: 'Prescription' },
+                    { id: 'refer', label: 'Refer' },
+                    { id: 'test', label: 'Test' },
+                    { id: 'advice', label: 'Advice' },
+                  ]}
+                  readonly
                 />
               </td>
             </tr>
+            {_get(record, 'plan', []).indexOf('prescription') > -1 &&
+              <tr>
+                <th>Prescriptions</th>
+                <td>
+                  <ReadonlyMultiInput
+                    values={_get(record, 'prescription')}
+                  />
+                </td>
+              </tr>
+            }
+            {_get(record, 'plan', []).indexOf('refer') > -1 &&
+              <tr>
+                <th>Refer</th>
+                <td>
+                  <RadioGroupComponent
+                    value={_get(record, 'refer')}
+                    options={[
+                      { id: 'dhulikhel', label: 'Dhulikhel' },
+                      { id: 'other', label: 'Other' },
+                    ]}
+                    readonly
+                  />
+                </td>
+              </tr>
+            }
+            {_get(record, 'plan', []).indexOf('test') > -1 &&
+              <tr>
+                <th>Test</th>
+                <td>
+                  <ReadonlyTextArea
+                    value={_get(record, 'test')}
+                  />
+                </td>
+              </tr>
+            }
+            {_get(record, 'plan', []).indexOf('advice') > -1 &&
+              <tr>
+                <th>Advice</th>
+                <td>
+                  <ReadonlyTextArea
+                    value={_get(record, 'advice')}
+                  />
+                </td>
+              </tr>
+            }
           </tbody>
         </table>
       </div>
