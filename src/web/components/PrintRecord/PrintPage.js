@@ -1,14 +1,13 @@
 /* @flow */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import _get from 'lodash.get';
 
-import { convert } from '../forms/fields/TextUnitInput';
-import { ReadonlyTextArea } from '../forms/fields/TextArea';
-import { ReadonlyMultiInput } from '../forms/fields/MultiInput';
-import { CheckGroupComponent } from '../forms/fields/CheckGroup';
-import { DiagnosesComponent } from '../forms/fields/Diagnoses';
+import { convert } from '../../forms/fields/TextUnitInput';
+import { ReadonlyTextArea } from '../../forms/fields/TextArea';
+import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
+import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
+import { DiagnosesComponent } from '../../forms/fields/Diagnoses';
 
 function getStr(obj: Object, path: string, defaultValue: string = ''): string {
   const value = _get(obj, path, defaultValue);
@@ -24,7 +23,7 @@ function getStr(obj: Object, path: string, defaultValue: string = ''): string {
   return '';
 }
 
-const Body = ({
+export default ({
   patient,
   record,
 }: {
@@ -208,37 +207,3 @@ const Body = ({
     </section>
   );
 };
-
-export default ({
-  patient,
-  record,
-  className,
-}: {
-  patient: PatientObject,
-  record: RecordObject,
-  className: ?string,
-}) => (
-  <span className={className}>
-    <a
-      className="icon"
-      onClick={e => {
-        e.preventDefault();
-
-        const printWindow = window.open('/print.html');
-        if (printWindow) {
-          printWindow.onload = () => {
-            ReactDOM.render(
-              <Body patient={patient} record={record} />,
-              printWindow.document.getElementById('root'),
-              () => {
-                printWindow.focus();
-                printWindow.print();
-//                printWindow.close();
-              }
-            );
-          };
-        }
-      }}
-    ><i className="fa fa-print" /></a>
-  </span>
-);
