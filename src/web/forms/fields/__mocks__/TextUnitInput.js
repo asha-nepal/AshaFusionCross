@@ -1,7 +1,9 @@
+/* eslint-env jest */
+
 import React from 'react';
 
-export default () => (
-  <div>
-    TextUnitInput
-  </div>
+export const convert = jest.fn(() => 100);
+
+export const TextUnitInput = () => (
+  <div>TextUnitInput</div>
 );
