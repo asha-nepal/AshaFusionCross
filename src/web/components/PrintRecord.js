@@ -10,6 +10,20 @@ import { ReadonlyMultiInput } from '../forms/fields/MultiInput';
 import { CheckGroupComponent } from '../forms/fields/CheckGroup';
 import { DiagnosesComponent } from '../forms/fields/Diagnoses';
 
+function getStr(obj: Object, path: string, defaultValue: string = ''): string {
+  const value = _get(obj, path, defaultValue);
+
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (typeof value === 'object') {
+    return `${value.value} ${value.unit}`;
+  }
+
+  return '';
+}
+
 const Body = ({
   patient,
   record,
@@ -37,7 +51,7 @@ const Body = ({
       <div className="header is-clearfix">
         <h1 className="title is-pulled-left">
           {number && <small>No. {number} </small>}
-          {_get(patient, 'name')}
+          {getStr(patient, 'name')}
         </h1>
 
         {date &&
@@ -49,9 +63,9 @@ const Body = ({
 
       <div className="container">
         <h2 className="subtitle">
-          <p>Age: {_get(patient, 'age')}</p>
+          <p>Age: {getStr(patient, 'age')}</p>
           <p>Sex: {{ male: 'Male', female: 'Female' }[_get(patient, 'sex')]}</p>
-          <p>Address: {_get(patient, 'address')}</p>
+          <p>Address: {getStr(patient, 'address')}</p>
         </h2>
 
         <div className="control is-grouped">
@@ -72,12 +86,12 @@ const Body = ({
           <div className="control">
             <label className="label">Blood pressure</label>
             <p className="form-static">
-              {_get(record, 'bp.s', '---')} / {_get(record, 'bp.d', '---')} mmHg
+              {getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg
             </p>
           </div>
           <div className="control">
             <label className="label">Pulse</label>
-            <p className="form-static">{_get(record, 'pulse', '---')} /min</p>
+            <p className="form-static">{getStr(record, 'pulse', '---')} /min</p>
           </div>
           <div className="control">
             <label className="label">Temperature</label>
@@ -85,15 +99,15 @@ const Body = ({
           </div>
           <div className="control">
             <label className="label">SpO2</label>
-            <p className="form-static">{_get(record, 'spo2', '---')} %</p>
+            <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
           </div>
           <div className="control">
             <label className="label">Respiration rate</label>
-            <p className="form-static">{_get(record, 'rr', '---')} /min</p>
+            <p className="form-static">{getStr(record, 'rr', '---')} /min</p>
           </div>
           <div className="control">
             <label className="label">Blood sugar</label>
-            <p className="form-static">{_get(record, 'bs', '---')} mg/dL</p>
+            <p className="form-static">{getStr(record, 'bs', '---')} mg/dL</p>
           </div>
         </div>
 
