@@ -15,11 +15,11 @@ type Props = {
   onRemoveItemRequested: (index: number) => void,
 };
 
-const ReadOnly = ({
+export const ReadonlyMultiInput = ({
   label,
   values,
 }: {
-  label: ?string,
+  label?: ?string,
   values: ?Array<string>,
 }) => (
   <div className="control">
@@ -109,7 +109,7 @@ export class MultiInputComponent extends Component {
     } = this.props;
 
     if (readonly) {
-      return <ReadOnly label={label} values={values} />;
+      return <ReadonlyMultiInput label={label} values={values} />;
     }
 
     const _values = values || [];

@@ -20,6 +20,8 @@ import {
   getRecordFormStyleId,
   getRecordFormStyle,
   getPatientFormStyle,
+  getActiveRecords,
+  getSelectedActiveRecordIndex,
 } from '../selectors';
 
 const getNameDuplicatedPatients = makeGetDuplicatedPatients('name');
@@ -27,14 +29,11 @@ const getNumberDuplicatedPatients = makeGetDuplicatedPatients('number');
 
 const mapStateToProps = (state) => {
   const patient = getActivePatient(state);
-  const records = state.activeRecords;
-  const selectedActiveRecordIndex =
-    records && records.findIndex(r => r._id === state.patientView.selectedActiveRecordId);
 
   return {
     patient,
-    records,
-    selectedActiveRecordIndex,
+    records: getActiveRecords(state),
+    selectedActiveRecordIndex: getSelectedActiveRecordIndex(state),
     isNew: !patient.hasOwnProperty('_rev'),
     isFetching: state.status.isFetchingPatient,
     isPuttingPatient: state.status.isPuttingPatient,
