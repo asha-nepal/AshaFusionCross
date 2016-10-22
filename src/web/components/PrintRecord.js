@@ -20,6 +20,9 @@ const Body = ({
   const precision = 2;
   const e = Math.pow(10, precision);
 
+  const timestamp = record.$created_at || record.$initialized_at;
+  const date = timestamp && new Date(timestamp);
+
   const number = _get(patient, 'number');
 
   const heightMeter = convert(_get(record, 'height'), 'm', 1);
@@ -31,11 +34,20 @@ const Body = ({
 
   return (
     <section className="section is-print">
-      <div className="container">
-        <h1 className="title">
+      <div className="header is-clearfix">
+        <h1 className="title is-pulled-left">
           {number && <small>No. {number} </small>}
           {_get(patient, 'name')}
         </h1>
+
+        {date &&
+          <p className="is-pulled-right">
+            {date.toDateString()}
+          </p>
+        }
+      </div>
+
+      <div className="container">
         <h2 className="subtitle">
           <p>Age: {_get(patient, 'age')}</p>
           <p>Sex: {{ male: 'Male', female: 'Female' }[_get(patient, 'sex')]}</p>
