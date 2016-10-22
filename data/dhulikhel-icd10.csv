@@ -1,0 +1,226 @@
+code,description,meta
+B05.9,Measles,"A. Communicable, Immunizable"
+A36.9,Diptheria,"A. Communicable, Immunizable"
+A37.9,Whooping Cough,"A. Communicable, Immunizable"
+A33,Neonatal Tetanus,"A. Communicable, Immunizable"
+A35,Tetanus,"A. Communicable, Immunizable"
+A16.9,Tuberculosis,"A. Communicable, Immunizable"
+G83,Acute Flaccid Paralysis (AFP),"A. Communicable, Immunizable"
+B06.9,Rubella,"A. Communicable, Immunizable"
+B26.9,Mumps,"A. Communicable, Immunizable"
+B01.9,Chicken Pox,"A. Communicable, Immunizable"
+B16.9,Hepatitis B,"A. Communicable, Immunizable"
+A86,Acute Encephalitis like Syndrome (AES),"B. Communicable, Vector Borne"
+B74.9,Filariasis,"B. Communicable, Vector Borne"
+B54,Clinical Malaria,"B. Communicable, Vector Borne"
+B50.9,Malaria (Plasmodium Falciparum),"B. Communicable, Vector Borne"
+B51.9,Malaria (Plasmodium Vivax),"B. Communicable, Vector Borne"
+A90,Dengue Fever,"B. Communicable, Vector Borne"
+A01.0,Typhoid (Enteric Fever),"C. Communicable, Water/Food Borne"
+A09,Acute gastro‐enteritis (AGE),"C. Communicable, Water/Food Borne"
+A06.9,Ameobic  Dysentery/Amoebiasis,"C. Communicable, Water/Food Borne"
+A03.9,Bacillary  Dysentery/Shigellosis,"C. Communicable, Water/Food Borne"
+K52.9,Presumed non‐infectious diarrhoea,"C. Communicable, Water/Food Borne"
+A00.9,Cholera,"C. Communicable, Water/Food Borne"
+B82.9,Intestinal Worms,"C. Communicable, Water/Food Borne"
+R17,Jaundice,"C. Communicable, Water/Food Borne"
+B15.9,Hepatitis A,"C. Communicable, Water/Food Borne"
+B17,Hepatitis E,"C. Communicable, Water/Food Borne"
+E86,Volume Depletion (Dehydration),"C. Communicable, Water/Food Borne"
+A30.9,Leprosy,D. Other Communicable Diseases
+G03.9,Meningitis,D. Other Communicable Diseases
+B20,HIV Infection,E. HIV/STI
+A54,Urethral Discharge Syndrome (UDS) Gonococal,E. HIV/STI
+N49,"Inflammatory disorders of male genital organs, not elsewhere classified",E. HIV/STI
+N89.8,Other specified noninflammatory disorders of vagina,E. HIV/STI
+N74,Female pelvic inflammatory disorders in diseases classified elsewhere,E. HIV/STI
+A54.3,Other gonococcal eye infection,E. HIV/STI
+N76.6,Ulceration of vulva ‐ female,E. HIV/STI
+N50.8,Other specified disorders of the male genital organs,E. HIV/STI
+A56.01,Chlamydial cystitis and urethritis,E. HIV/STI
+A51,Syphilis,E. HIV/STI
+J22,ARI/Lower respiratory tract infection (LRTI),F. Other Infected Diseases
+J06,Upper respiratory tract infection (URTI),F. Other Infected Diseases
+J18,Pneumonia,F. Other Infected Diseases
+J40,Bronchitis (Acute & chronic),F. Other Infected Diseases
+N39,Urinary Tract Infection (UTI),F. Other Infected Diseases
+J11,Viral Influenza,F. Other Infected Diseases
+E04,"Goitre, Cretinism",G. Nutritional & Metabolic Disorder
+E13,Other specified diabetes mellitus,G. Nutritional & Metabolic Disorder
+E46,Malnutrition,G. Nutritional & Metabolic Disorder
+E50,Vitamin A deficiency,G. Nutritional & Metabolic Disorder
+E66,Obesity,G. Nutritional & Metabolic Disorder
+D64,Anaemia,G. Nutritional & Metabolic Disorder
+G62,Polyneuritis,G. Nutritional & Metabolic Disorder
+L70,Acne,G. Nutritional & Metabolic Disorder
+B07,Warts,G. Nutritional & Metabolic Disorder
+L81.1,Chloasma/ melasma,G. Nutritional & Metabolic Disorder
+L50,Urticaria,G. Nutritional & Metabolic Disorder
+L30.9,Dermatitis/Eczema,G. Nutritional & Metabolic Disorder
+L65,Alopecia,G. Nutritional & Metabolic Disorder
+L80,Vitiligo,G. Nutritional & Metabolic Disorder
+E70.3,Albinism,G. Nutritional & Metabolic Disorder
+B00,Herpes simplex,G. Nutritional & Metabolic Disorder
+B02,Herpes zoster,G. Nutritional & Metabolic Disorder
+L53.9,Erythroderma,G. Nutritional & Metabolic Disorder
+L01.0,Impetigo,G. Nutritional & Metabolic Disorder
+L02,"Cutaneous abscess, furuncle and carbuncle",G. Nutritional & Metabolic Disorder
+L43,Fungal infection (Lichen planus),G. Nutritional & Metabolic Disorder
+B86,Scabies,G. Nutritional & Metabolic Disorder
+L81.5,Leukoderma,G. Nutritional & Metabolic Disorder
+L40,Psoriasis,G. Nutritional & Metabolic Disorder
+L04,Acute Lymphadenitis,G. Nutritional & Metabolic Disorder
+H66.0,Acute Suppurative Otitis Media,"I. Ear, Nose and Throat Infection"
+H66.1,Chronic Suppurative Otitis Media,"I. Ear, Nose and Throat Infection"
+J32,Sinusitis,"I. Ear, Nose and Throat Infection"
+J03,Acute Tonsilitis,"I. Ear, Nose and Throat Infection"
+J02,Pharyngitis/Sore throat,"I. Ear, Nose and Throat Infection"
+T16,Foreign body in ear,"I. Ear, Nose and Throat Infection"
+T17.1,Foreign body in nose,"I. Ear, Nose and Throat Infection"
+T17.2,Foreign body in throat,"I. Ear, Nose and Throat Infection"
+H61.2,"Impacted cerumen, bilateral","I. Ear, Nose and Throat Infection"
+J33,Nasal Polyps,"I. Ear, Nose and Throat Infection"
+J34.2,Deviated nasal septum (DNS),"I. Ear, Nose and Throat Infection"
+J31,Rhinitis,"I. Ear, Nose and Throat Infection"
+H60,Otitis externa,"I. Ear, Nose and Throat Infection"
+K21.0,Gastro-esophageal reflux disease with esophagitis,"I. Ear, Nose and Throat Infection"
+K02,Dental caries,J. Oral Health Related Problems
+K08.8,Other specified disorders of teeth and supporting structures,J. Oral Health Related Problems
+K05,Periodontal disease (gum disease),J. Oral Health Related Problems
+K08.9,Other disorder of teeth,J. Oral Health Related Problems
+K12,Oral ulcer (Aphthous & herpetic),J. Oral Health Related Problems
+K01.1,Tooth impaction,J. Oral Health Related Problems
+K00.4,Hypoplasia,J. Oral Health Related Problems
+K13.2,Leukoplakia,J. Oral Health Related Problems
+B37,Fungal infection (candidiasis),J. Oral Health Related Problems
+K04,Diseases of pulp and periapical tissues,J. Oral Health Related Problems
+H10,Conjunctivitis,K. Eye Problems
+A71,Trachoma,K. Eye Problems
+H26,Cataract,K. Eye Problems
+H54,Blindness,K. Eye Problems
+H52,Disorders of refraction and accommodation,K. Eye Problems
+H40,Glaucoma,K. Eye Problems
+H53.5,Colour blindness,K. Eye Problems
+H05.2,Exophthalmos,K. Eye Problems
+H00.0,Hordeolum (externum) (internum) of eyelid,K. Eye Problems
+H00.1,Chalazion,K. Eye Problems
+H11.0,Pterygium,K. Eye Problems
+E11.329,Type 2 diabetes mellitus with mild nonproliferative diabetic retinopathy without macular edema,K. Eye Problems
+H35,Other retinal disorders,K. Eye Problems
+H02,Other disorders of eyelid,K. Eye Problems
+H26.1,Traumatic eye disease,K. Eye Problems
+H20,Uveitis,K. Eye Problems
+H35.3,Macular degeneration (age related),K. Eye Problems
+H53.0,Amblyopia (Lazy eye),K. Eye Problems
+H50,Other strabismus(Squint),K. Eye Problems
+H35.5,Retinitis pigmentosa,K. Eye Problems
+H53.6,Nightblindness/visual  disturbance,K. Eye Problems
+C69.2,Retinoblastoma,K. Eye Problems
+O00,Ectopic Pregnancy,L. Obstetrics Complications
+O08,Abortion Complication,L. Obstetrics Complications
+O13,Pregnancy Induced Hypertension (PIH),L. Obstetrics Complications
+O14,Severe/ Pre‐eclampsia,L. Obstetrics Complications
+O15.0,Antepartum Eclampsia,L. Obstetrics Complications
+O15.1,Intrapartum Eclampsia,L. Obstetrics Complications
+O15.2,Postpartum Eclampsia,L. Obstetrics Complications
+O21,Excessive vomiting in pregnancy (Hyperemesis Grivadarum),L. Obstetrics Complications
+O46,Antepartum Haemorrhage,L. Obstetrics Complications
+O63,Prolonged labour,L. Obstetrics Complications
+O66.9,Obstructed Labor,L. Obstetrics Complications
+S37,Ruptured Uterus,L. Obstetrics Complications
+O72,Postpartum Haemorrhage,L. Obstetrics Complications
+O73,Retained Placenta,L. Obstetrics Complications
+O75,Other Complications of labor and delivery,L. Obstetrics Complications
+O85,Pueperal Sepsis,L. Obstetrics Complications
+N73,Pelvic Inflammatory Disease (PID),M. Gynae Problems
+N81.4,Prolapsed uterus,M. Gynae Problems
+N92,Menstrual disorder,M. Gynae Problems
+N93,Disfunctional Uterine Bleeding (DUB),M. Gynae Problems
+N97,Female infertility,M. Gynae Problems
+N46,Male infertility,M. Gynae Problems
+F03,Dementia,N. Mental Health related problems
+F10,"Addiction (ch. acoholisim, Dipsomania, drug)",N. Mental Health related problems
+F20,Schizophrenia,N. Mental Health related problems
+F23,Acute psychotic disorder,N. Mental Health related problems
+F31,Bipolar affective disorder,N. Mental Health related problems
+F32,Depression,N. Mental Health related problems
+F40,Phobic Anxiety,N. Mental Health related problems
+F41,Other Anxiety,N. Mental Health related problems
+F42,Obsessive ‐ compulsive disorder,N. Mental Health related problems
+F44,Conversive disorder (Hysteria),N. Mental Health related problems
+F48,Neurosis,N. Mental Health related problems
+F79,Mental retardation,N. Mental Health related problems
+G40,Epilepsy,N. Mental Health related problems
+G43,Migraine,N. Mental Health related problems
+F99,Mental illness (unspecified),N. Mental Health related problems
+C50,Breast cancer,O. Malignancy
+C53,Cervical/ uteri cancer,O. Malignancy
+C34,Lung/ brunchial Cancer,O. Malignancy
+C15,Oesophagus cancer,O. Malignancy
+C16,Stomach cancer,O. Malignancy
+C73,Thyroid cancer,O. Malignancy
+C22,Liver cancer,O. Malignancy
+C25,Pancreatic cancer,O. Malignancy
+C79.5,Bone/ bone marrow cancer,O. Malignancy
+C23,Gall bladder cancer,O. Malignancy
+C19,Colorectal (colon with rectum) cancer,O. Malignancy
+C06,Oral cancer,O. Malignancy
+C85,Lymphoma cancer,O. Malignancy
+C56,Ovary cancer,O. Malignancy
+C67,Urinary bladder cancer,O. Malignancy
+C11,Nasopharyngeal cancer,O. Malignancy
+C49.0,Head & neck cancer,O. Malignancy
+C80,Other Cancer,O. Malignancy
+I10,Hypertension,P. Cardiovascular & Respiratory Related Problems
+I50.2,Congestive heart failure,P. Cardiovascular & Respiratory Related Problems
+I50.9,"Heart failure, unspecified",P. Cardiovascular & Respiratory Related Problems
+J44,Chronic Obstructive Pulmonary Disease (COPD),P. Cardiovascular & Respiratory Related Problems
+I09,Other rheumatic heart diseases,P. Cardiovascular & Respiratory Related Problems
+I24,Ischemic heart disease,P. Cardiovascular & Respiratory Related Problems
+I52*,Other cardiovascular problems,P. Cardiovascular & Respiratory Related Problems
+J45,Asthma,P. Cardiovascular & Respiratory Related Problems
+N17,Acute Renal failure,Q. Other Diseases & Injuries
+N18,Chronic Renal failure,Q. Other Diseases & Injuries
+N05,Nephritis,Q. Other Diseases & Injuries
+N04,Nephrotic syndrome,Q. Other Diseases & Injuries
+R51,Headache,Q. Other Diseases & Injuries
+R50,Pyrexia of Unknown Origin (PUO),Q. Other Diseases & Injuries
+K29,Gastritis (APD),Q. Other Diseases & Injuries
+W57,Insect/Wasp bite,Q. Other Diseases & Injuries
+R10,Abdominal Pain,Q. Other Diseases & Injuries
+K74,Cirrhosis of liver,Q. Other Diseases & Injuries
+T30,Burns and Scalds,Q. Other Diseases & Injuries
+T65,Toxic Effect,Q. Other Diseases & Injuries
+W54,Dog Bite,Q. Other Diseases & Injuries
+A82,Other rabies susceptible animal bite,Q. Other Diseases & Injuries
+T63.0,Snake bite: Poisonous,Q. Other Diseases & Injuries
+W59,Snake bite: Non‐poisonous,Q. Other Diseases & Injuries
+Z73,Physical Disability (Disabled Person),Q. Other Diseases & Injuries
+T14,Falls/ injuries/ fractures,R. Orthopaedic Problems
+V89,Road Traffic Accident (RTA),R. Orthopaedic Problems
+M06,Rheumatoid arthritis,R. Orthopaedic Problems
+M13,Arthritis,R. Orthopaedic Problems
+M19,Osteoarthrosis,R. Orthopaedic Problems
+M54.9,Back ache (musculo‐ skeletal pain),R. Orthopaedic Problems
+K27,"Peptic ulcer, site unspecified",S. Surgical Problems
+K60.2,Anal Fissure,S. Surgical Problems
+K60.3,Anal fistula,S. Surgical Problems
+K63.2,Fistula of Intestine,S. Surgical Problems
+N20.0,Renal stones,S. Surgical Problems
+N63,Breast lumps (adenoma),S. Surgical Problems
+N61,Mastitis (Ignored breast)/breast abscess,S. Surgical Problems
+N64.4,Mastodynia,S. Surgical Problems
+D17,Lumps (lipoma),S. Surgical Problems
+L72.1,Sebaceous cyst,S. Surgical Problems
+L05,Pilonidal cyst and sinus,S. Surgical Problems
+K37,Appendicitis,S. Surgical Problems
+K81,Cholecystitis,S. Surgical Problems
+K80,Cholelithiasis (gall stone),S. Surgical Problems
+K46,Hernia,S. Surgical Problems
+N43,Hydrocoele,S. Surgical Problems
+N47,Phimosis/para‐phimosis,S. Surgical Problems
+I84,Haemorrhoids/Piles,S. Surgical Problems
+N45,Epididymitis/ Orchitis,S. Surgical Problems
+N40,Benign prostatic hyperplasia,S. Surgical Problems
+N41,Inflammatory diseases of prostate,S. Surgical Problems
+R69,Not mentioned above and other,S. Surgical Problems

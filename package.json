@@ -54,6 +54,8 @@
     "jest-cli": "^12.1.1",
     "json-loader": "^0.5.4",
     "lodash.get": "^4.4.2",
+    "lodash.sortby": "^4.7.0",
+    "lodash.uniqby": "^4.7.0",
     "mathjs": "^3.3.0",
     "mockdate": "^1.0.4",
     "moment": "^2.13.0",

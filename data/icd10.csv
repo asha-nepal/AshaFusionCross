@@ -1,0 +1,628 @@
+code,description
+A63.8,"Other Specified Predominantly Sexually
+Transmitted Diseases"
+A64,Unspecified Sexually Transmitted Disease
+A69.20,"Lyme Disease, Unspecified"
+B00.9,"Herpesviral Infection, Unspecified"
+B17.10,Acute Hepatitis C Without Hepatic Coma
+B18.1,Chronic Viral Hepatitis B Without Delta-Agent
+B18.2,Chronic Viral Hepatitis C
+B19.20,Unspecified Viral Hepatitis C Without Hepatic Coma
+B20,Human Immunodeficiency Virus (HIV) Disease
+B34.9,"Viral Infection, Unspecified"
+B35.1,Tinea Unguium
+B37.3,Candidiasis Of Vulva And Vagina
+B89,Unspecified Parasitic Disease
+B96.81,"Helicobacter Pylori (H. Pylori) As The Cause Of Diseases
+Classified Elsewhere"
+B97.7,"Papillomavirus As The Cause Of Diseases
+Specified Elsewhere"
+B99.9,Unspecified Infectious Disease
+C18.9,"Malignant Neoplasm Of Colon, Unspecified"
+C20,Malignant Neoplasm Of Rectum
+C34.90,"Malignant Neoplasm Of Unspecified Part Of
+Unspecified Bronchus Or Lung"
+C50.419,"Malignant Neoplasm Of Upper-Outer Quadrant Of
+Unspecified Female Breast"
+C50.911,"Malignant Neoplasm Of Unspecified Site Of
+Right Female Breast"
+C50.912,"Malignant Neoplasm Of Unspecified Site Of
+Left Female Breast"
+C50.919,"Malignant Neoplasm Of Unspecified Site Of
+Unspecified Female Breast"
+C50.919,"Malignant Neoplasm Of Unspecified Site Of
+Unspecified Female Breast"
+C54.9,"Malignant Neoplasm Of Corpus Uteri, Unspecified"
+C56.1,Malignant Neoplasm Of Right Ovary
+C56.2,Malignant Neoplasm Of Left Ovary
+C56.9,Malignant Neoplasm Of Unspecified Ovary
+C61,Malignant Neoplasm Of Prostate
+C67.9,"Malignant Neoplasm Of Bladder, Unspecified"
+C73,Malignant Neoplasm Of Thyroid Gland
+C79.51,Secondary Malignant Neoplasm Of Bone
+C79.52,Secondary Malignant Neoplasm Of Bone Marrow
+C85.80,"Other Specified Types Of Non-Hodgkins Lymphoma,
+Unspecified Site"
+C90.00,Multiple Myeloma Not Having Achieved Remission
+C90.00,Multiple Myeloma Not Having Achieved Remission
+C91.10,"Chronic Lymphocytic Leukemia Of B-Cell Type
+Not Having Achieved Remission"
+C91.11,"Chronic Lymphocytic Leukemia Of B-Cell Type
+In Remission"
+C91.12,"Chronic Lymphocytic Leukemia Of B-Cell Type
+In Relapse"
+D12.6,"Benign Neoplasm Of Colon, Unspecified"
+D25.9,"Leiomyoma Of Uterus, Unspecified"
+D47.2,Monoclonal Gammopathy
+D48.5,Neoplasm Of Uncertain Behavior Of Skin
+D49.2,"Neoplasm Of Unspecified Behavior Of Bone,
+Soft Tissue, And Skin"
+D50.0,"Iron Deficiency Anemia Secondary
+To Blood Loss (Chronic)"
+D50.8,Other Iron Deficiency Anemias
+D50.9,"Iron Deficiency Anemia, Unspecified"
+D51.0,"Vitamin D Deficiency Anemia Due To
+Intrinsic Factor Deficiency"
+D51.0,"Vitamin B12 Deficiency Anemia Due To
+Intrinsic Factor Deficiency"
+D51.1,"Vitamin B12 Deficiency Anemia Due To
+Selective Vitamin B12 Malabsorption With Proteinuria"
+D51.2,Transcobalamin 2 Deficiency
+D51.3,Other Dietary Vitamin B12 Deficiency Anemia
+D51.8,Other Vitamin B12 Deficiency Anemia
+D51.9,"Vitamin B12 Deficiency Anemia, Unspecified"
+D53.9,"Nutritional Anemia, Unspecified"
+D63.1,Anemia In Chronic Kidney Disease
+D63.8,Anemia In Other Chronic Diseases Classified Elsewhere
+D64.89,Other Specified Anemias
+D64.9,"Anemia, Unspecified"
+D68.318,"Other Hemorrhagic Disorder Due To Intrinsic Circulating
+Anticoagulants, Antibodies, Or Inhibitors"
+D68.59,Other Primary Thrombophilia
+D68.9,"Coagulation Defect, Unspecified"
+D69.6,"Thrombocytopenia, Unspecified"
+D70.9,"Neutropenia, Unspecified"
+D72.819,"Decreased White Blood Cell Count, Unspecified"
+D72.829,"Elevated White Blood Cell Count, Unspecified"
+D72.89,Other Specified Disorders Of White Blood Cells
+E03.8,Other Specified Hypothyroidism
+E03.9,"Hypothyroidism, Unspecified"
+E04.1,Nontoxic Single Thyroid Nodule
+E04.2,Nontoxic Multinodular Goiter
+E04.9,"Nontoxic Goiter, Unspecified"
+E05.00,"Thyrotoxicosis With Diffuse Goiter
+Without Thyrotoxic Crisis Or Storm"
+E05.90,"Thyrotoxicosis, Unspecified
+Without Thyrotoxic Crisis Or Storm"
+E06.3,Autoimmune Thyroiditis
+E07.9,"Disorder Of Thyroid, Unspecified"
+E10.9,Type 1 Diabetes Mellitus Without Complications
+E10.9,Type 1 Diabetes Mellitus Without Complications
+E11.21,Type 2 Diabetes Mellitus With Diabetic Nephropathy
+E11.21,Type 2 Diabetes Mellitus With Diabetic Nephropathy
+E11.22,"Type 2 Diabetes Mellitus With Diabetic Chronic
+Kidney Disease"
+E11.22,"Type 2 Diabetes Mellitus With Diabetic Chronic
+Kidney Disease"
+E11.29,"Type 2 Diabetes Mellitus
+With Other Diabetic Kidney Complication"
+E11.29,"Type 2 Diabetes Mellitus
+With Other Diabetic Kidney Complication"
+E11.40,"Type 2 Diabetes Mellitus
+With Other Diabetic Neuropathy Unspecified"
+E11.40,"Type 2 Diabetes Mellitus
+With Other Diabetic Neuropathy Unspecified"
+E11.41,"Type 2 Diabetes Mellitus With Other
+Diabetic Mononeuropathy"
+E11.41,"Type 2 Diabetes Mellitus With Other
+Diabetic Mononeuropathy"
+E11.42,"Type 2 Diabetes Mellitus With Other
+Diabetic Polyneuropathy"
+E11.42,"Type 2 Diabetes Mellitus With Other
+Diabetic Polyneuropathy"
+E11.43,"Type 2 Diabetes Mellitus With Other
+Diabetic Autonomic (Poly) Neuropathy"
+E11.43,"Type 2 Diabetes Mellitus With Other Diabetic
+Autonomic (Polyneuropathy) Neuropathy"
+E11.44,"Type 2 Diabetes Mellitus With Other
+Diabetic Amyotrophy"
+E11.44,"Type 2 Diabetes Mellitus With Other
+Diabetic Amyotrophy"
+E11.49,"Type 2 Diabetes Mellitus
+With Other Diabetic Neurological Complication"
+E11.49,"Type 2 Diabetes Mellitus
+With Other Diabetic Neurological Complication"
+E11.8,"Type 2 Diabetes Mellitus With
+Unspecified Complications"
+E11.9,"E11.9"""
+E16.2,"Hypoglycemia, Unspecified"
+E21.3,"Hyperparathyroidism, Unspecified"
+E28.2,Polycystic Ovarian Syndrome
+E29.1,Testicular Hypofunction
+E34.9,"Endocrine Disorder, Unspecified"
+E53.9,"Vitamin B Deficiencies, Unspecified"
+E55.9,"Vitamin D Deficiency, Unspecified"
+E56.9,"Vitamin Deficiency, Unspecified"
+E66.01,Morbid (Severe) Obesity Due To Excess Calories
+E66.2,Morbid (Severe) Obesity Due To Alveolar Hypoventilation
+E66.3,Overweight
+E66.9,"Obesity, Unspecified"
+E73.0,Congenital Lactase Deficiency
+E73.1,Secondary Lactase Deficiency
+E73.8,Other Lactose Intolerance
+E73.9,"Lactose Intolerance, Unspecified"
+E74.31,Sucrose-Isomaltase Deficiency
+E74.39,Other Disorders Of Intestinal Carbohydrate Absorption
+E78.0,Pure Hypercholesterolemia
+E78.1,Pure Hyperglyceridemia
+E78.2,Mixed Hyperlipidemia
+E78.5,"Hyperlipidemia, Unspecified"
+E78.9,"Disorder Of Lipoprotein Metabolism, Unspecified"
+E83.10,"Disorder Of Iron Metabolism, Unspecified"
+E83.40,"Disorders Of Magnesium Metabolism, Unspecified"
+E83.51,Hypocalcemia
+E83.52,Hypercalcemia
+E86.0,Dehydration
+E87.1,Hypo osmolality And Hyponatremia
+E87.5,Hyperkalemia
+E87.6,Hypokalemia
+E87.8,"Other Disorders Of Electrolyte And Fluid Balance,
+Not Elsewhere Classified"
+E88.81,Metabolic Syndrome
+E89.0,Postprocedural Hypothyroidism
+E89.0,Postprocedural Hypothyroidism
+F11.20,"Opioid Dependence, Uncomplicated"
+F17.200,"Nicotine Dependence, Unspecified, Uncomplicated"
+F25.9,"Schizoaffective Disorder, Unspecified"
+F31.9,"Bipolar Disorder, Unspecified"
+F32.9,"Major Depressive Disorder, Single Episode, Unspecified"
+F34.1,Dysthymic Disorder
+F41.1,Generalized Anxiety Disorder
+F41.9,"Anxiety Disorder, Unspecified"
+F52.21,Male Erectile Disorder
+F52.22,Female Sexual Arousal Disorder
+F90.0,"Attention Deficit Hyperactivity Disorder,
+Predominantly Inattentive Type"
+F90.9,"Attention-Deficit Hyperactivity Disorder,
+Unspecified Type"
+G35,Multiple Sclerosis
+G40.909,"Epilepsy, Unspecified, Not Intractable,
+Without Status Epilepticus"
+G43.909,"Migraine, Unspecified, Not Intractable,
+Without Status Migrainosus"
+G45.9,"Transient Cerebral Ischemic Attack, Unspecified"
+G47.00,"Insomnia, Unspecified"
+G47.30,"Sleep Apnea, Unspecified"
+G60.9,"Hereditary And Idiopathic Neuropathy, Unspecified"
+G89.29,Other Chronic Pain
+I10,Essential (Primary) Hypertension
+I10,Essential (Primary) Hypertension
+I10,Essential (Primary) Hypertension
+I11.9,Hypertensive Heart Disease Without Heart Failure
+I11.9,Hypertensive Heart Disease Without Heart Failure
+I12.9,"Hypertensive Chronic Kidney Disease
+With Stage 1 Through Stage 4 Chronic Kidney Disease,
+Or Unspecified Chronic Kidney Disease"
+I12.9,"Hypertensive Chronic Kidney Disease With Stage I
+Through Stage 4 Chronic Kidney Disease, Or Unspecified
+Chronic Kidney Disease"
+I20.9,"Angina Pectoris, Unspecified"
+I25.10,"Atherosclerotic Heart Disease Of Native Coronary Artery
+Without Angina Pectoris"
+I25.10,"Atherosclerotic Heart Disease Of Native Coronary Artery
+Without Angina Pectoris"
+I25.10,Atherosclerotic Heart Disease Of Native Coronary Artery
+I25.9,"Chronic Ischemic Heart Disease, Unspecified"
+I26.09,Other Pulmonary Embolism With Acute Cor Pulmonale
+I26.99,"Other Pulmonary Embolism Without Acute
+Cor Pulmonale"
+I34.8,Other Nonrheumatic Mitral Valve Disorders
+I35.9,"Nonrheumatic Aortic Valve Disorder, Unspecified"
+I42.8,Other Cardiomyopathy
+I48.91,Unspecified Atrial Fibrillation
+I49.8,Other Specified Cardiac Arrhythmias
+I49.9,"Cardiac Arrhythmia, Unspecified"
+I50.9,"Heart Failure, Unspecified"
+I51.9,"Heart Disease, Unspecified"
+I63.50,"Cerebral Infarction Due To Unspecified Occlusion
+Or Stenosis Of Unspecified Cerebral Artery"
+I65.29,"Occlusion And Stenosis Of Unspecified Carotid Artery,
+Not Resulting In Cerebral Infarction"
+I67.89,Other Cerebrovascular Disease
+I73.9,"Peripheral Vascular Disease, Unspecified"
+I80.299,"Phlebitis And Thrombophlebitis Of Other Deep Vessels
+Of Unspecified Lower Extremities"
+I82.409,"Acute Embolism And Thrombosis Of Unspecified
+Deep Veins Of Unspecified Lower Extremity"
+I82.90,Acute Embolism And Thrombosis Of Unspecified Vein
+I82.91,Chronic Embolism And Thrombosis Of Unspecified Vein
+J00,Acute Nasopharyngitis (Common Cold)
+J01.90,"Acute Sinusitis, Unspecified"
+J02.0,Streptococcal Pharyngitis
+J02.9,"Acute Pharyngitis, Unspecified"
+J03.90,"Acute Tonsillitis, Unspecified"
+J06.9,"Acute Upper Respiratory Infection, Unspecified"
+J18.9,"Pneumonia, Unspecified Organism"
+J20.9,"Acute Bronchitis, Unspecified"
+J30.1,Allergic Rhinitis Due To Pollen
+J30.89,Other Allergic Rhinitis
+J30.9,"Allergic Rhinitis, Unspecified"
+J31.0,Chronic Rhinitis
+J32.9,"Chronic Sinusitis, Unspecified"
+J44.9,"Chronic Obstructive Pulmonary Disease, Unspecified"
+J45.909,"Unspecified Asthma, Uncomplicated"
+J45.909,"Unspecified Asthma, Uncomplicated"
+K21.0,Gastro-Esophageal Reflux Disease With Esophagitis
+K21.9,Gastro-Esophageal Reflux Disease Without Esophagitis
+K29.00,Acute Gastritis Without Bleeding
+K29.70,"Gastritis, Unspecified Without Bleeding"
+K29.9,"Gastoduodenitis, Unspecified Without Bleeding"
+K30,Functional Dyspepsia
+K31.9,Other Diseases Of Stomach And Duodenum
+K50.90,"Crohn's Disease, Unspecified, Without Complications"
+K50.911,"Crohn's Disease, Unspecified, With Rectal Bleeding"
+K50.912,"Crohn's Disease, Unspecified,
+With Intestinal Obstruction"
+K50.913,"Crohn's Disease, Unspecified, With Fistula"
+K50.914,"Crohn's Disease, Unspecified, With Abscess"
+K50.918,"Crohn's Disease, Unspecified, With Other Complications"
+K50.919,"Crohn's Disease, Unspecified, With Unspecified
+Complications"
+K51.90,"Ulcerative Colitis, Unspecified, Without Complications"
+K52.9,"Noninfective Gastroenteritis And Colitis, Unspecified"
+K57.30,"Diverticulosis Of Large Intestine Without Perforation
+Or Abscess Without Bleeding"
+K58.0,Irritable Bowel Syndrome With Diarrhea
+K58.9,Irritable Bowel Syndrome Without Diarrhea
+K59.00,"Constipation, Unspecified"
+K62.5,Hemorrhage Of Anus And Rectum
+K63.5,Polyp Of Colon
+K72.10,Chronic Hepatic Failure Without Coma
+K72.11,Chronic Hepatic Failure With Coma
+K74.60,Unspecified Cirrhosis Of Liver
+K75.9,"Inflammatory Liver Disease, Unspecified"
+K76.0,"Fatty (Change Of) Liver, Not Elsewhere Classified"
+K76.9,"Liver Disease, Unspecified"
+K76.9,"Liver Disease, Unspecified"
+K85.9,"Acute Pancreatitis, Unspecified"
+K92.1,Melena
+K92.2,"Gastrointestinal Hemorrhage, Unspecified"
+L02.419,Abscess Of Lower Limb
+L02.91,"Cutaneous Abscess, Unspecified"
+L03.119,Cellulitis Of Lower Limb
+L03.90,"Cellulitis, Unspecified"
+L08.9,"Local Infection Of The Skin And Subcutaneous Tissue,
+Unspecified"
+L20.89,Other Atopic Dermatitis
+L25.9,"Unspecified Contact Dermatitis, Unspecified Cause"
+L30.9,"Dermatitis, Unspecified"
+L40.50,"Arthropathic Psoriasis, Unspecified"
+L40.8,Other Psoriasis
+L50.9,"Urticaria, Unspecified"
+L65.9,"Nonscarring Hair Loss, Unspecified"
+L68.0,Hirsutism
+L70.8,Other Acne
+L72.3,Sebaceous Cyst
+L98.9,"Disorder Of The Skin And Subcutaneous Tissue,
+Unspecified"
+M06.4,Inflammatory Polyarthropathy
+M06.9,"Rheumatoid Arthritis, Unspecified"
+M10.00,"Idiopathic Gout, Unspecified Site"
+M10.9,"Gout, Unspecified"
+M12.9,"Arthropathy, Unspecified"
+M13.0,"Polyarthritis, Unspecified"
+M15.9,"Polyosteoarthritis, Unspecified"
+M15.9,"Polyosteoarthritis, Unspecified"
+M19.90,"Unspecified Osteoarthritis, Unspecified Site"
+M25.50,Pain In Unspecified Joint
+M25.50,Pain In Unspecified Joint
+M25.519,Pain In Unspecified Shoulder
+M25.559,Pain In Unspecified Hip
+M25.561,Pain In Right Knee
+M25.562,Pain In Left Knee
+M25.569,Pain In Unspecified Knee
+M25.571,Pain In Right Ankle And Joints Of Right Foot
+M25.572,Pain In Left Ankle And Joints Of Left Foot
+M25.579,"Pain In Unspecified Ankle And Joints Of
+Unspecified Foot"
+M32.9,"Systemic Lupus Erythematosus, Unspecified"
+M35.00,"Sicca Syndrome, Unspecified"
+M35.3,Polymyalgia Rheumatica
+M35.9,"Systemic Involvement Of Connective Tissue, Unspecified"
+M54.2,Cervicalgia
+M54.5,Low Back Pain
+M54.9,"Dorsalgia, Unspecified"
+M60.9,Myositis
+M62.81,Muscle Weakness (Generalized)
+M62.838,Other Muscle Spasm
+M79.1,Myalgia
+M79.609,Pain In Unspecified Limb
+M80.00,"Age-Related Osteoporosis With Current Pathological
+Fracture, Unspecified Site"
+M81.0,"Age-Related Osteoporosis Without Current
+Pathological Fracture"
+M81.0,"Age-Related Osteoporosis Without Current
+Pathological Fracture"
+M89.9,"Disorder Of Bone, Unspecified"
+M94.9,"Disorder Of Cartilage, Unspecified"
+N17.9,"Acute Kidney Failure, Unspecified"
+N18.1,"Chronic Kidney Disease, Stage 1"
+N18.2,"Chronic Kidney Disease, Stage 2 (Mild)"
+N18.3,"Chronic Kidney Disease, Stage 3 (Moderate)"
+N18.4,"Chronic Kidney Disease, Stage 4 (Severe)"
+N18.9,"Chronic Kidney Disease, Unspecified"
+N19,Unspecified Kidney Failure
+N20.0,Calculus Of Kidney
+N25.81,Secondary Hyperparathyroidism Of Renal Origin
+N28.9,"Disorder Of Kidney And Ureter, Unspecified"
+N30.00,Acute Cystitis Without Hematuria
+N30.01,Acute Cystitis With Hematuria
+N30.90,"Cystitis, Unspecified Without Hematuria"
+N30.91,"Cystitis, Unspecified With Hematuria"
+N36.9,Urethral Disorder
+N39.0,"Urinary Tract Infection, Site Not Specified"
+N39.9,Urinary System Disorder
+N40.0,"Enlarged Prostate Without Lower Urinary
+Tract Symptoms (LUTS)"
+N40.0,"Enlarged Prostate Without Lower Urinary
+Tract Symptoms (LUTS)"
+N40.1,Enlarged Prostate With Lower Urinary Tract
+N41.9,"Inflammatory Disease Of Prostate, Unspecified"
+N42.9,"Disorder Of Prostate, Unspecified"
+N52.9,"Male Erectile Dysfunction, Unspecified"
+N72,Inflammatory Disease Of Cervix Uteri
+N72,Inflammatory Disorder Of Cervix Uteri
+N76.0,Acute Vaginitis
+N76.0,Acute Vaginitis
+N76.89,Other Specified Inflammation Of Vagina And Vulva
+N83.20,Unspecified Ovarian Cyst
+N83.29,Other Ovarian Cyst
+N87.0,Mild Cervical Dysplasia
+N89.8,Other Specified Noninflammatory Disorders Of Vagina
+N91.2,"Amenorrhea, Unspecified"
+N92.0,"Excessive And Frequent Menstruation With
+Regular Cycle"
+N92.1,"Excessive And Frequent Menstruation Without
+Regular Cycle"
+N92.1,"Excessive And Frequent Menstruation With
+Irregular Cycle"
+N92.6,"Irregular Menstruation, Unspecified"
+N94.6,"Dysmenorrhea, Unspecified"
+N94.89,"Other Specified Conditions Associated With Female
+Genital Organs And Menstrual Cycle"
+N94.9,"Unspecified Condition Associated With Female Genital
+Organs And Menstrual Cycle"
+N94.9,"Unspecified Condition Associated With Female Genital
+Organs And Menstrual Cycle"
+N95.0,Postmenopausal Bleeding
+N95.1,Menopausal And Female Climacteric States
+N95.2,Postmenopausal Atrophic Vaginitis
+N95.9,Unspecified Menopausal And Perimenopausal Disorder
+N97.9,"Female Infertility, Unspecified"
+O02.1,Missed Abortion
+O09.891,"Supervision Of Other High-Risk Pregnancies,
+First Trimester"
+O09.892,"Supervision Of Other High-Risk Pregnancies,
+Second Trimester"
+O09.893,"Supervision Of Other High-Risk Pregnancies,
+Third Trimester"
+O09.899,"Supervision Of Other High-Risk Pregnancies,
+Unspecified Trimester"
+O09.90,"Supervision Of High-Risk Pregnancy, Unspecified,
+Unspecified Trimester"
+O09.91,"Supervision Of High-Risk Pregnancy, Unspecified,
+First Trimester"
+O09.92,"Supervision Of High-Risk Pregnancy, Unspecified,
+Second Trimester"
+O09.93,"Supervision Of Pregnancy, Unspecified, Third Trimester"
+O20.0,Threatened Abortion
+O99.810,Abnormal Glucose Complicating Pregnancy
+P59.9,"Neonatal Jaundice, Unspecified"
+R00.0,"Tachycardia, Unspecified"
+R00.2,Palpitations
+R03.0,"Elevated Blood Pressure Reading,
+Without Diagnosis Of Hypertension"
+R05,Cough
+R06.02,Shortness Of Breath
+R06.89,Other Abnormalities Of Breathing
+R07.89,Other Chest Pain
+R07.9,"Chest Pain, Unspecified"
+R10.11,Right Upper Quadrant Pain
+R10.13,Epigastric Pain
+R10.31,Right Lower Quadrant Pain
+R10.32,Left Lower Quadrant Pain
+R10.84,Generalized Abdominal Pain
+R10.9,Unspecified Abdominal Pain
+R10.9,Unspecified Abdominal Pain
+R11.0,Nausea
+R11.10,"Vomiting, Unspecified"
+R11.2,"Nausea With Vomiting, Unspecified"
+R14.0,Abdominal Distention (Gaseous)
+R14.1,Gas Pain
+R14.2,Eructation
+R14.3,Flatulence
+R17,Unspecified Jaundice
+R19.7,"Diarrhea, Unspecified"
+R19.8,"Other Specified Symptoms And Signs Involving
+The Digestive System And Abdomen"
+R20.0,Anesthesia Of Skin
+R20.1,Hypoesthesia Of Skin
+R20.2,Paresthesia Of Skin
+R20.3,Hyperesthesia
+R20.8,Other Disturbances Of Skin Sensation
+R20.9,Unspecified Disturbances Of Skin Sensation
+R21,Rash And Other Nonspecific Skin Eruption
+R25.2,Cramp And Spasm
+R30.0,Dysuria
+R31.0,Gross Hematuria
+R31.2,Other Microscopic Hematuria
+R31.9,"Hematuria, Unspecified"
+R32,Unspecified Urinary Incontinence
+R35.0,Frequency Of Micturition
+R35.1,Nocturia
+R35.8,Other Polyuria
+R39.15,Urgency Of Urination
+R41.3,Other Amnesia
+R42,Dizziness And Giddiness
+R50.9,"Fever, Unspecified"
+R51,Headache
+R53.81,Other Malaise
+R53.82,"Chronic Fatigue, Unspecified"
+R53.83,Other Fatigue
+R55,Syncope And Collapse
+R56.9,Unspecified Convulsions
+R59.9,"Enlarged Lymph Nodes, Unspecified"
+R60.9,"Edema, Unspecified"
+R63.4,Abnormal Weight Loss
+R63.5,Abnormal Weight Gain
+R68.82,Decreased Libido
+R68.89,Other General Symptoms And Signs
+R73.01,Impaired Fasting Glucose
+R73.02,Impaired Glucose Tolerance (Oral)
+R73.09,Other Abnormal Glucose
+R73.9,"Hyperglycemia, Unspecified"
+R74.0,"Nonspecific Elevation Of Levels Of Transaminase
+And Lactic Acid Dehydrogenase (LDH)"
+R74.8,Abnormal Levels Of Other Serum Enzymes
+R76.9,"Abnormal Immunological Finding In Serum, Unspecified"
+R79.89,Other Specified Abnormal Findings Of Blood Chemistry
+R79.9,"Abnormal Finding Of Blood Chemistry, Unspecified"
+R80.9,"Proteinuria, Unspecified"
+R82.99,Other Abnormal Findings In Urine
+R87.610,"Atypical Squamous Cells Of Undetermined Significance
+On Cytologic Smear Of Cervix (ASC-US)"
+R87.611,"Atypical Squamous Cells Cannot Exclude High Grade
+Squamous Intraepithelial Lesion On Cytologic Smear
+Of Cervix (ASC-H)"
+R87.612,"Low Grade Squamous Intraepithelial Lesion
+On Cytologic Smear Of Cervix (LGSIL)"
+R87.619,"Unspecified Abnormal Cytological Findings
+In Specimens From Cervix Uteri"
+R87.810,"Cervical High-Risk Human Papillomavirus (HPV)
+DNA Test Positive"
+R89.4,"Abnormal Immunological Finding In Specimens
+From Other Organs, Systems, And Tissues"
+R94.31,Abnormal Electrocardiogram (ECG) (EKG)
+R94.5,Abnormal Results Of Liver Function Studies
+R94.6,Abnormal Results Of Thyroid Function Studies
+R97.2,"Elevated Prostate Specific Antigen (PSA)
+T78.40xA Allergy, Unspecified, Initial Encounter
+T78.40xD Allergy, Unspecified, Subsequent Encounter
+T78.40xS Allergy, Unspecified, Sequela
+T88.7xxA Unspecified Adverse Effect Of Drug Or Medicament,
+Initial Encounter
+T88.7xxA Unspecified Adverse Effect Of Drug Or Medicament,
+Sequela
+T88.7xxD Unspecified Adverse Effect Of Drug Or Medicament,
+Subsequent Encounter"
+Z00.00,"Encounter For General Adult Medical Examination
+Without Abnormal Findings"
+Z00.00,"Encounter For General Adult Medical Examination
+ Without Abnormal Findings"
+Z00.129,"Encounter For Routine Child Health Examination
+Without Abnormal Findings"
+Z01.419,"Encounter For Gynecological Examination (General)
+(Routine) Without Abnormal Findings"
+Z01.810,"Encounter For Preprocedural Cardiovascular
+Examination"
+Z01.818,Encounter For Other Preprocedural Examination
+Z01.818,Encounter For Other Preprocedural Examination
+Z02.0,"Encounter Examination For Admission To Educational
+Institution"
+Z02.1,Encounter For Pre-Employment Examination
+Z02.2,"Encounter For Examination For Admission To
+Residential Institution"
+Z02.3,"Encounter For Examination For Recruitment To
+Armed Forces"
+Z02.4,Encounter For Examination For Driving License
+Z02.5,Encounter For Examination For Participation In Sport
+Z02.6,Encounter For Examination For Insurance Purposes
+Z02.71,Encounter For Disability Determination
+Z02.79,Encounter For Issue Of Other Medical Certificate
+Z02.81,Encounter For Paternity Testing
+Z02.82,Encounter For Adoption Services
+Z02.83,Encounter For Blood-Alcohol And Blood-Drug Test
+Z02.89,Encounter For Other Administrative Examinations
+Z02.89,Encounter For Other Administrative Examinations
+Z08,"Encounter For Follow-Up Examination After Completed
+Treatment For Malignant Neoplasm"
+Z09,"Encounter For Follow-Up Examination After Completed
+Treatment For Conditions Other Than Malignant
+Neoplasm"
+Z11.3,"Encounter For Screening For Infections With A
+Predominantly Sexual Mode Of Transmission"
+Z11.51,"Encounter For Screening For Human Papillomavirus
+(HPV)"
+Z11.59,Encounter For Screening For Other Viral Diseases
+Z11.8,"Encounter For Screening For Other Infectious
+And Parasitic Diseases"
+Z11.8,"Encounter For Screening For Other Infectious
+And Parasitic Diseases"
+Z11.9,"Encounter For Screening For Infectious
+And Parasitic Diseases, Unspecified"
+Z12.11,"Encounter For Screening For Malignant Neoplasm
+Of Colon"
+Z12.12,"Encounter For Screening For Malignant Neoplasm
+Of Rectum"
+Z12.4,"Encounter For Screening For Malignant Neoplasm
+Of Cervix"
+Z12.5,"Encounter For Screening For Malignant Neoplasm
+Of Prostate"
+Z12.72,"Encounter For Screening For Malignant Neoplasm
+Of Vagina"
+Z13.0,"Encounter For Screening For Diseases Of The Blood And
+Blood-Forming Organs And Certain Disorders Involving
+The Immune Mechanism"
+Z13.0,"Encounter For Screening For Diseases Of The Blood And
+Blood-Forming Organs And Certain Disorders Involving
+The Immune Mechanism"
+Z13.1,Encounter For Screening For Diabetes Mellitus
+Z13.21,Encounter For Screening For Nutritional Disorders
+Z13.220,Encounter For Screening For Lipoid Disorders
+Z13.228,Encounter For Screening For Other Metabolic Disorders
+Z13.29,"Encounter For Screening For Other Suspected
+Endocrine Disorder"
+Z13.29,"Encounter For Screening For Other Suspected
+Endocrine Disorders"
+Z13.6,Encounter For Screening For Cardiovascular Disorders
+Z13.88,"Encounter For Screening For Disorder Due To Exposure
+To Contaminants"
+Z13.89,Encounter For Screening For Other Disorder
+Z13.9,"Encounter For Screening, Unspecified"
+Z20.2,"Contact With And (Suspected) Exposure To Infections
+With A Predominantly Sexual Mode Of Transmission"
+Z20.828,"Contact With And (Suspected) Exposure To Other Viral
+Communicable Diseases"
+Z20.9,"Contact With And (Suspected) Exposure To Unspecified
+Communicable Disease"
+Z30.09,"Encounter For Other General Counseling And Advice
+On Contraception"
+Z32.00,"Encounter For Pregnancy Test, Result Unknown"
+Z32.01,"Encounter For Pregnancy Test, Result Positive"
+Z33.1,"Pregnant State, Incidental"
+Z34.00,"Encounter For Supervision Of Normal First Pregnancy,
+Unspecified Trimester"
+Z34.80,"Encounter For Supervision Of Other Normal Pregnancy,
+Unspecified Trimester"
+Z36,Encounter For Antenatal Screening Of Mother
+Z36,Encounter For Antenatal Screening Of Mother
+Z39.2,Encounter For Routine Postpartum Follow-Up
+Z51.11,Encounter For Antineoplastic Chemotherapy
+Z51.81,Encounter For Therapeutic Drug Level Monitoring
+Z72.0,Tobacco Use
+Z72.51,High-Risk Heterosexual Behavior
+Z72.52,High-Risk Homosexual Behavior
+Z72.53,High-Risk Bisexual Behavior
+Z77.011,Contact With And (Suspected) Exposure To Lead
+Z77.21,"Contact With And (Suspected) Exposure To
+Potentially Hazardous Body Fluids"
+Z79.01,Long-Term (Current) Use Of Anticoagulants
+Z79.899,Other Long-Term (Current) Drug Therapy
+Z82.49,"Family History Of Ischemic Heart Disease And
+Other Diseases Of The Circulatory System"
+Z82.49,"Family History Of Ischemic Heart Disease And
+Other Diseases Of The Circulatory System"
+Z83.3,Family History Of Diabetes Mellitus
+Z94.0,Kidney Transplant Status
+Z94.4,Liver Transplant Status
+Z95.2,Presence Of Prosthetic Heart Valve
