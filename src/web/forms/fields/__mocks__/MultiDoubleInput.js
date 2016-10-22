@@ -1,7 +1,5 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    MultiDoubleInput
-  </div>
+export const MultiDoubleInput = () => (
+  <div>MultiDoubleInput</div>
 );

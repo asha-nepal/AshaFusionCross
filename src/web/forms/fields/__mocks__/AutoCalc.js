@@ -1,7 +1,5 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    AutoCalc
-  </div>
+export const AutoCalc = () => (
+  <div>AutoCalc</div>
 );

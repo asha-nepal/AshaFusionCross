@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    CheckGroup
-  </div>
+export const CheckGroupComponent = () => (
+  <div>CheckGroupComponent</div>
+);
+
+export const CheckGroup = () => (
+  <div>CheckGroup</div>
 );

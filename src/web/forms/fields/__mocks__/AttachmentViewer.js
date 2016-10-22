@@ -1,7 +1,5 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    AttachmentViewer
-  </div>
+export const AttachmentViewer = () => (
+  <div>AttachmentViewer</div>
 );

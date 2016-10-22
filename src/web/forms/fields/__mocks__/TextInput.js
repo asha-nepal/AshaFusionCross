@@ -1,7 +1,5 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    TextInput
-  </div>
+export const TextInput = () => (
+  <div>TextInput</div>
 );

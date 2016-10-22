@@ -1,7 +1,5 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    AttachmentInput
-  </div>
+export const AttachmentInput = () => (
+  <div>AttachmentInput</div>
 );

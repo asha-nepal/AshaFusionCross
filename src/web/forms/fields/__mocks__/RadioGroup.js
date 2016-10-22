@@ -1,7 +1,5 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    RadioGroup
-  </div>
+export const RadioGroup = () => (
+  <div>RadioGroup</div>
 );

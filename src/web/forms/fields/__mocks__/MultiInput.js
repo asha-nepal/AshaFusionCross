@@ -1,7 +1,13 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    MultiInput
-  </div>
+export const ReadonlyMultiInput = () => (
+  <div>MultiInputComponent</div>
+);
+
+export const MultiInputComponent = () => (
+  <div>MultiInputComponent</div>
+);
+
+export const MultiInput = () => (
+  <div>MultiInput</div>
 );

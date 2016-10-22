@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    TextArea
-  </div>
+export const ReadonlyTextArea = () => (
+  <div>ReadonlyTextArea</div>
+);
+
+export const TextArea = () => (
+  <div>TextArea</div>
 );
