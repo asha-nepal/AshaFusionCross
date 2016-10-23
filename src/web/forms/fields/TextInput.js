@@ -57,7 +57,7 @@ const TextInputComponent = ({
   precision: ?number,
   alerts: ?Array<Object>,
   warning?: string,
-  required: boolean,
+  required?: boolean,
   readonly: boolean,
 }) => {
   if (readonly) {
