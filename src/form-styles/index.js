@@ -5,7 +5,7 @@ export default {
     {
       style: [
         { field: 'number', label: 'No.', style: { width: 200 } },
-        { field: 'name', label: 'Name', class: 'textinput' },
+        { field: 'name', label: 'Name', class: 'textinput', required: true },
         {
           class: 'block',
           children: [
