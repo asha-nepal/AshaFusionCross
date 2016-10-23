@@ -4,7 +4,7 @@ export default {
   patient: [
     {
       style: [
-        { field: 'number', label: 'No.', style: { width: 200 } },
+        { field: 'number', label: 'Regd. No.', style: { width: 200 } },
         { field: 'name', label: 'Name', class: 'textinput', required: true },
         {
           class: 'block',
@@ -26,6 +26,13 @@ export default {
         },
         { field: 'address', label: 'Address', class: 'textinput' },
         { field: 'tel', label: 'Tel', class: 'textinput' },
+        { class: 'block',
+          children: [
+            { field: 'guardian_name', label: 'Guardian\'s name', style: { width: 400 } },
+            { field: 'guardian_relationship', label: 'Relationship', style: { width: 200 } },
+          ],
+        },
+        { field: 'occupation', label: 'Occupation' },
         { field: 'ethnicity', label: 'Ethnicity', class: 'textinput' },
       ],
     },
@@ -334,7 +341,33 @@ export default {
           field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',
         },
         {
+          field: 'plan', label: 'Plan', class: 'checkgroup',
+          options: [
+            { id: 'prescription', label: 'Prescription' },
+            { id: 'refer', label: 'Refer' },
+            { id: 'test', label: 'Test' },
+            { id: 'advice', label: 'Advice' },
+          ],
+        },
+        {
           field: 'prescription', label: 'Prescriptions', class: 'multiinput',
+          show: 'plan:prescription',
+        },
+        {
+          field: 'refer', label: 'Refer', class: 'radio',
+          show: 'plan:refer',
+          options: [
+            { id: 'dhulikhel', label: 'Dhulikhel' },
+            { id: 'other', label: 'Other' },
+          ],
+        },
+        {
+          field: 'test', label: 'Test', class: 'textarea',
+          show: 'plan:test',
+        },
+        {
+          field: 'advice', label: 'Advice', class: 'textarea',
+          show: 'plan:advice',
         },
         {
           field: 'attachments.images', label: 'Images', class: 'attachment',
