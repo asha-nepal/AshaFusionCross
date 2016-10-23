@@ -197,7 +197,7 @@ export default ({
               <th>Prescriptions</th>
               <td>
                 <ReadonlyMultiInput
-                  values={_get(record, 'prescriptions')}
+                  values={_get(record, 'prescription')}
                 />
               </td>
             </tr>
