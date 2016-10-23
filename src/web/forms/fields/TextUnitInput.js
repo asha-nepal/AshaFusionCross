@@ -123,7 +123,7 @@ export class TextUnitInputComponent extends Component {
                 if (!onChange) { return true; }
 
                 if (v.trim() === '') {
-                  onChange(null);
+                  onChange({ value: null, unit: null });
                 } else {
                   onChange({ value: asFloat, unit: this.state.unit });
                 }
