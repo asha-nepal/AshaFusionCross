@@ -3,7 +3,8 @@ PouchDB.plugin(require('pouchdb-authentication'));
 import { take, call, put, select, race } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import {
-  checkAccessible,
+  checkAccessibility,
+  alreadyLoggedIn,
   logout,
 } from './auth';
 import {
@@ -167,17 +168,21 @@ export function * connectFlow() {
       const { db, error } = winner.connect;
       if (db) {
         yield put(alertInfo('Connected'));
-        const isAccessible = yield call(checkAccessible, db);
-        const session = yield call([db, db.getSession]);
-        const isDBPublic = isAccessible && !session.userCtx.name;
-        yield put(setIsDBPublic(isDBPublic));
+
+        const { accessibility } = yield call(checkAccessibility, db);
+        yield put(setIsDBPublic(accessibility));
 
         // Auto login
-        if (isDBPublic) {
-          yield put(requestAnonymousLogin());
+        if (accessibility) {
+          const session = yield call([db, db.getSession]);
+          if (session.userCtx.name) {
+            yield call(alreadyLoggedIn, db);
+          } else {
+            yield put(requestAnonymousLogin());
+          }
         }
       } else {
-        yield put(alertError(`Failed to connect DB: ${error.message}`));
+        yield put(alertError(`Failed to connect DB: ${error.message || ''}`));
       }
     } else {
       yield call(disconnect);

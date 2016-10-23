@@ -35,10 +35,13 @@ const authedSagas = [
 
 let authedTask = null;
 
-export function checkAccessible(db: PouchInstance) {
+export function checkAccessibility(db: PouchInstance) {
   return db.info()
-    .then(() => true)
-    .catch(() => false);
+    .then(() => ({ accessibility: true }))
+    .catch(error => ({
+      accessibility: false,
+      error,
+    }));
 }
 
 export function* afterLoggedIn(db: PouchInstance) {
@@ -105,7 +108,7 @@ export function* loginFlow() {
         authedTask = yield fork(afterLoggedIn, db);
         yield put(alertInfo('Logged in!'));
       } else {
-        yield put(alertError(`Failed to log in: ${error.message}`));
+        yield put(alertError(`Failed to log in: ${error.message || ''}`));
       }
     } else if (winner.logout) {
       yield call(logout, db);
@@ -123,24 +126,24 @@ export function* anonymousLoginFlow() {
       continue;
     }
 
-    const isAccessible = yield call(checkAccessible, db);
-    if (!isAccessible) {
-      yield put(alertError('Disconnected'));
-      continue;
-    }
-
-    const session = yield call([db, db.getSession]);
-    const isDBPublic = isAccessible && !session.userCtx.name;
-    yield put(setIsDBPublic(isDBPublic));
-
-    if (!isDBPublic) {
-      yield put(alertError('This DB is not public'));
+    const { accessibility, error } = yield call(checkAccessibility, db);
+    if (!accessibility) {
+      if (error.status === 401) {
+        yield put(alertError('This DB is not public'));
+        yield put(setIsDBPublic(false));
+      } else {
+        yield put(alertError('Disconnected'));
+      }
       continue;
     }
 
     authedTask = yield fork(afterLoggedIn, db);
     yield put(alertInfo('Logged in as an anonymous user'));
   }
+}
+
+export function * alreadyLoggedIn(db: PouchInstance) {
+  authedTask = yield fork(afterLoggedIn, db);
 }
 
 export function* signupFlow() {
@@ -170,7 +173,7 @@ export function* signupFlow() {
       } else if (error.name === 'forbidden') {
         yield put(alertError('Invalid username', 5000));
       } else {
-        yield put(alertError(`${error.name}: ${error.message}`));
+        yield put(alertError(`${error.name}: ${error.message || ''}`));
       }
     }
   }
