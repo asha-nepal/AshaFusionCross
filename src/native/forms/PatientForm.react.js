@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import {
   TextInput,
+  TextUnitInput,
   RadioGroup,
 } from './fields';
 
@@ -29,9 +30,11 @@ export default ({
       ]}
     />
 
-    <TextInput
+    <TextUnitInput
       model={`${model}.age`}
       label="Age"
+      units={['years', 'months']}
+      precision={0}
     />
 
     <TextInput
