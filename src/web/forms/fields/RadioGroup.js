@@ -22,14 +22,14 @@ export const RadioGroupComponent = ({
   options,
   label,
   value,
-  readonly,
+  readonly = false,
   onChange,
 }: {
   options: Array<{id: string, label: string}>,
-  label: string,
+  label?: ?string,
   value: string,
-  readonly: boolean,
-  onChange: (newValue: string) => void,
+  readonly?: boolean,
+  onChange?: (newValue: string) => void,
 }) => (
   <div className="control">
     {label && <label className="label">{label}</label>}
@@ -44,7 +44,9 @@ export const RadioGroupComponent = ({
             style={{ flexBasis: 1 }}
             onClick={e => {
               e.preventDefault();
-              onChange(option.id);
+              if (onChange) {
+                onChange(option.id);
+              }
             }}
           >{option.label}</a>
         )}
