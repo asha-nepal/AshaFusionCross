@@ -20,6 +20,7 @@ import {
   Diagnoses,
   MultiInput,
   MultiDoubleInput,
+  SubformList,
   Block,
 } from './fields';
 
@@ -39,6 +40,7 @@ const fieldComponents = {
   diagnoses: Diagnoses,
   multiinput: MultiInput,
   multidoubleinput: MultiDoubleInput,
+  subformlist: SubformList,
   block: Block,
 };
 

@@ -27,7 +27,7 @@ const ReadOnly = ({
   </div>
 );
 
-const TextInputComponent = ({
+export const TextInputComponent = ({
   label,
   value,
   onChange,

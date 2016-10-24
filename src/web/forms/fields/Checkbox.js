@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 
-const CheckboxComponent = ({
+export const CheckboxComponent = ({
   label,
-  isChecked,
+  value,
   readonly = false,
   onChange,
 }: {
   label: string,
-  isChecked: ?boolean,
+  value: ?boolean,
   readonly: boolean,
   onChange: (newValue: boolean) => void,
 }) => (
@@ -20,19 +20,19 @@ const CheckboxComponent = ({
     {label && <label className="label">{label}</label>}
     {readonly ? (
       <p className="form-static">
-        {isChecked ? <span className="icon"><i className="fa fa-check" /></span> : '---'}
+        {value ? <span className="icon"><i className="fa fa-check" /></span> : '---'}
       </p>
     ) : (
       <p className="control">
         <a
-          className={isChecked ? 'button is-primary' : 'button'}
+          className={value ? 'button is-primary' : 'button'}
           style={{ width: 32 }}
           onClick={e => {
             e.preventDefault();
-            onChange(!isChecked);
+            onChange(!value);
           }}
         >
-          {isChecked && <i className="fa fa-check" />}
+          {value && <i className="fa fa-check" />}
         </a>
       </p>
     )}
@@ -40,7 +40,7 @@ const CheckboxComponent = ({
 );
 
 const mapStateToProps = (state, ownProps) => ({
-  isChecked: _get(state, ownProps.model, false),
+  value: _get(state, ownProps.model, false),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
