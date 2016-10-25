@@ -31,41 +31,52 @@ const RowComponent = ({
   onChange: (newValue: Object) => void,
   onRemoveItemRequested?: () => void,
 }) => (
-  <div>
-    {fields.map((field, i) => {
-      const component = fieldComponents[field.class];
+  <div className="panel-block">
+    <div className="columns">
+      <div className="column">
+        <div className="control is-grouped">
+        {fields.map((field, i) => {
+          const component = fieldComponents[field.class];
 
-      return React.createElement(component, {
-        key: i,
-        label: field.label,
-        value: value[field.field],
-        onChange: (v => {
-          const updated = {};
-          updated[field.field] = v;
+          return React.createElement(component, {
+            key: i,
+            label: field.label,
+            value: value[field.field],
+            onChange: (v => {
+              const updated = {};
+              updated[field.field] = v;
 
-          onChange({
-            ...value,
-            ...updated,
+              onChange({
+                ...value,
+                ...updated,
+              });
+            }),
           });
-        }),
-      });
-    })}
+        })}
+        </div>
+      </div>
 
-    {onRemoveItemRequested &&
-      <a
-        className="button is-danger"
-        onClick={e => {
-          e.preventDefault();
-          if (onRemoveItemRequested) onRemoveItemRequested();
-        }}
-      >
-        <i className="fa fa-times" />
-      </a>
-    }
+      {onRemoveItemRequested &&
+        <div style={{ position: 'relative' }}>
+          <a
+            style={{ height: '100%' }}
+            className="button is-danger"
+            onClick={e => {
+              e.preventDefault();
+              if (onRemoveItemRequested) onRemoveItemRequested();
+            }}
+          >
+            <i className="fa fa-times" />
+          </a>
+        </div>
+      }
+    </div>
+
   </div>
 );
 
 export const SubformListComponent = ({
+  label,
   values,
   fields,
   onChange,
@@ -83,22 +94,25 @@ export const SubformListComponent = ({
 
   return (
     <div className="control">
-    {_values.map((value, i) =>
-      <RowComponent
-        key={i}
-        value={value}
-        fields={fields}
-        onChange={v => onChange(i, v)}
-        onRemoveItemRequested={() => onRemoveItemRequested(i)}
-      />
-    ).concat(
-      <RowComponent
-        key={_values.length}
-        value={{}}
-        fields={fields}
-        onChange={v => onAddItemRequested(v)}
-      />
-    )}
+      {label && <label className="label">{label}</label>}
+      <div className="panel">
+      {_values.map((value, i) =>
+        <RowComponent
+          key={i}
+          value={value}
+          fields={fields}
+          onChange={v => onChange(i, v)}
+          onRemoveItemRequested={() => onRemoveItemRequested(i)}
+        />
+      ).concat(
+        <RowComponent
+          key={_values.length}
+          value={{}}
+          fields={fields}
+          onChange={v => onAddItemRequested(v)}
+        />
+      )}
+      </div>
     </div>
   );
 };
