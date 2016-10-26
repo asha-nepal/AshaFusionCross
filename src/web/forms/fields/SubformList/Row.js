@@ -1,14 +1,12 @@
 /* @flow */
-
 import React from 'react';
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
+import type { FormFieldDefinition } from '.';
 import {
   TextInputComponent,
   CheckboxComponent,
   RadioGroupComponent,
-} from '.';
+} from '../index';
 
 const fieldComponents = {
   textinput: TextInputComponent,
@@ -35,15 +33,7 @@ function checkVisibility(state: Object, showProp: ?string|boolean) {
   return true;
 }
 
-type FormFieldDefinition = {
-  field: string,
-  class: string,
-  label?: string,
-  primary?: boolean,
-  show?: boolean | string,
-}
-
-const RowComponent = ({
+export default ({
   value,
   fields,
   onChange,
@@ -119,96 +109,3 @@ const RowComponent = ({
     </div>
   );
 };
-
-export const ReadonlySubformList = ({
-  label,
-  values,
-  fields,
-}: {
-  label?: ?string,
-  values: ?Array<Object | string>,
-  fields: Array<FormFieldDefinition>,
-}) => (
-  <div className="control">
-    {label && <label className="label">{label}</label>}
-    <div className="panel">
-      {(values || []).map((value, i) =>
-        <RowComponent
-          key={i}
-          value={value}
-          fields={fields}
-          readonly
-        />
-      )}
-    </div>
-  </div>
-);
-
-export const SubformListComponent = ({
-  label,
-  values,
-  fields,
-  onChange,
-  onAddItemRequested,
-  onRemoveItemRequested,
-  readonly,
-}: {
-  label?: ?string,
-  values: ?Array<Object | string>,
-  fields: Array<FormFieldDefinition>,
-  onChange: (index: number, newValue: Object) => void,
-  onAddItemRequested: (value: Object) => void,
-  onRemoveItemRequested: (index: number) => void,
-  readonly?: boolean,
-}) => {
-  if (readonly) {
-    return (
-      <ReadonlySubformList
-        label={label}
-        values={values}
-        fields={fields}
-      />
-    );
-  }
-
-  const _values = values || [];
-
-  return (
-    <div className="control">
-      {label && <label className="label">{label}</label>}
-      <div className="panel">
-      {_values.map((value, i) =>
-        <RowComponent
-          key={i}
-          value={value}
-          fields={fields}
-          onChange={v => onChange(i, v)}
-          onRemoveItemRequested={() => onRemoveItemRequested(i)}
-        />
-      ).concat(
-        <RowComponent
-          key={_values.length}
-          value={{}}
-          fields={fields}
-          onChange={v => onAddItemRequested(v)}
-        />
-      )}
-      </div>
-    </div>
-  );
-};
-
-
-// TODO: MultiInput のconnectと共通化
-const mapStateToProps = (state, ownProps) => ({
-  values: _get(state, ownProps.model),
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (index, value) => dispatch(actions.change(`${ownProps.model}[${index}]`, value)),
-  onAddItemRequested: (value) => dispatch(actions.push(ownProps.model, value)),
-  onRemoveItemRequested: (index) => dispatch(actions.remove(ownProps.model, index)),
-});
-
-export const SubformList = connect(
-  mapStateToProps, mapDispatchToProps
-)(SubformListComponent);
