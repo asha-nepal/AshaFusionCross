@@ -29,7 +29,7 @@ export default ({
               printWindow.document.getElementById('root'),
               () => {
                 printWindow.focus();
-                printWindow.print();
+                setTimeout(() => printWindow.print(), 1);
 //                printWindow.close();
               }
             );
