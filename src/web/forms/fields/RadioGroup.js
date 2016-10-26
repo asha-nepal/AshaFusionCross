@@ -23,12 +23,14 @@ export const RadioGroupComponent = ({
   label,
   value,
   readonly = false,
+  size,
   onChange,
 }: {
   options: Array<{id: string, label: string}>,
   label?: ?string,
   value: string,
   readonly?: boolean,
+  size?: string,
   onChange?: (newValue: string) => void,
 }) => (
   <div className="control">
@@ -37,19 +39,22 @@ export const RadioGroupComponent = ({
       <ReadOnly options={options} value={value} />
     ) : (
       <div className="checkgroup is-equiv">
-        {options.map(option =>
-          <a
-            key={option.id}
-            className={option.id === value ? 'control button is-primary' : 'control button'}
-            style={{ flexBasis: 1 }}
-            onClick={e => {
-              e.preventDefault();
-              if (onChange) {
-                onChange(option.id);
-              }
-            }}
-          >{option.label}</a>
-        )}
+        {options.map(option => {
+          const checkedClassName = option.id === value ? ' is-primary' : '';
+          const sizeClassName = size ? ` is-${size}` : '';
+          return (
+            <a
+              key={option.id}
+              className={`control button${checkedClassName}${sizeClassName}`}
+              onClick={e => {
+                e.preventDefault();
+                if (onChange) {
+                  onChange(option.id);
+                }
+              }}
+            >{option.label}</a>
+          );
+        })}
       </div>
     )}
   </div>

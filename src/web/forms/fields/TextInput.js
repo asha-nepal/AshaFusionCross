@@ -41,6 +41,7 @@ export const TextInputComponent = ({
   precision,
   alerts,
   warning,
+  size,
   required = false,
   readonly = false,
 }: {
@@ -57,6 +58,7 @@ export const TextInputComponent = ({
   precision: ?number,
   alerts: ?Array<Object>,
   warning?: string,
+  size?: string,
   required?: boolean,
   readonly: boolean,
 }) => {
@@ -80,12 +82,15 @@ export const TextInputComponent = ({
     }
   }
 
+  const warningClassName = warning ? ' is-warning' : '';
+  const sizeClassName = size ? ` is-${size}` : '';
+
   return (
     <div className="control">
       {label && <label className="label">{label}</label>}
       <p className={hasAddons ? 'control has-addons' : 'control'}>
         {prefix &&
-          <span className="button is-disabled">
+          <span className={`button is-disabled${sizeClassName}`}>
             {prefix}
           </span>
         }
@@ -96,7 +101,7 @@ export const TextInputComponent = ({
         >
           <input
             type={type}
-            className={`input${warning ? ' is-warning' : ''}`}
+            className={`input${warningClassName}${sizeClassName}`}
             style={{
               ...style,
               ...overrideStyle,
@@ -112,7 +117,7 @@ export const TextInputComponent = ({
           {alert ? alertIcons[alert.type] : <span />}
         </span>
         {suffix &&
-          <span className="button is-disabled">
+          <span className={`button is-disabled${sizeClassName}`}>
             {suffix}
           </span>
         }
