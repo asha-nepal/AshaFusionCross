@@ -149,14 +149,6 @@ export default ({
               </td>
             </tr>
             <tr>
-              <th>Current medicines</th>
-              <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'current_medicine')}
-                />
-              </td>
-            </tr>
-            <tr>
               <th>Symptoms</th>
               <td>
                 <ReadonlyMultiInput
