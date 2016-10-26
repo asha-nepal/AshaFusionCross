@@ -6,6 +6,7 @@ import _get from 'lodash.get';
 import { convert } from '../../forms/fields/TextUnitInput';
 import { ReadonlyTextArea } from '../../forms/fields/TextArea';
 import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
+import { ReadonlySubformList } from '../../forms/fields/SubformList';
 import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
 import { DiagnosesComponent } from '../../forms/fields/Diagnoses';
 
@@ -196,8 +197,32 @@ export default ({
             <tr>
               <th>Prescriptions</th>
               <td>
-                <ReadonlyMultiInput
+                <ReadonlySubformList
                   values={_get(record, 'prescription')}
+                  fields={[
+                    { field: 'freetext', label: 'Medicine', class: 'textinput', primary: true },
+                    { field: 'stat', label: 'Stat', class: 'check' },
+                    { field: 'sos', label: 'SOS', class: 'check' },
+                    {
+                      field: 'once_pcs', class: 'textinput',
+                      label: 'Once', suffix: 'pcs',
+                    },
+                    {
+                      field: 'daily_times', class: 'textinput',
+                      label: 'Daily', suffix: 'times', show: 'sos',
+                    },
+                    {
+                      field: 'days', class: 'textinput',
+                      label: 'Days', suffix: 'days', show: 'sos',
+                    },
+                    {
+                      field: 'meal', class: 'radio',
+                      options: [
+                        { id: 'before', label: 'Before the meal' },
+                        { id: 'after', label: 'After the meal' },
+                      ],
+                    },
+                  ]}
                 />
               </td>
             </tr>

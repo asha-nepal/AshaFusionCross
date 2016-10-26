@@ -15,5 +15,5 @@ export { GuideTools } from './GuideTools';
 export { Diagnoses } from './Diagnoses';
 export { MultiInput } from './MultiInput';
 export { MultiDoubleInput } from './MultiDoubleInput';
-export { SubformList, SubformListComponent } from './SubformList';
+export { SubformList, SubformListComponent, ReadonlySubformList } from './SubformList';
 export { Block } from './Block';

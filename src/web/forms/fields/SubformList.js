@@ -48,11 +48,13 @@ const RowComponent = ({
   fields,
   onChange,
   onRemoveItemRequested,
+  readonly,
 }: {
   value: Object | string,
   fields: Array<FormFieldDefinition>,
-  onChange: (newValue: Object) => void,
+  onChange?: (newValue: Object) => void,
   onRemoveItemRequested?: () => void,
+  readonly?: boolean,
 }) => {
   let _value = {};
   if (typeof value === 'string') {
@@ -80,9 +82,12 @@ const RowComponent = ({
             return React.createElement(component, {
               key: i,
               ...field,
+              readonly,
               size: 'small',
               value: _value[field.field],
               onChange: (v => {
+                if (!onChange) { return; }
+
                 const updated = {};
                 updated[field.field] = v;
 
@@ -115,6 +120,30 @@ const RowComponent = ({
   );
 };
 
+export const ReadonlySubformList = ({
+  label,
+  values,
+  fields,
+}: {
+  label?: ?string,
+  values: ?Array<Object | string>,
+  fields: Array<FormFieldDefinition>,
+}) => (
+  <div className="control">
+    {label && <label className="label">{label}</label>}
+    <div className="panel">
+      {(values || []).map((value, i) =>
+        <RowComponent
+          key={i}
+          value={value}
+          fields={fields}
+          readonly
+        />
+      )}
+    </div>
+  </div>
+);
+
 export const SubformListComponent = ({
   label,
   values,
@@ -122,6 +151,7 @@ export const SubformListComponent = ({
   onChange,
   onAddItemRequested,
   onRemoveItemRequested,
+  readonly,
 }: {
   label?: ?string,
   values: ?Array<Object | string>,
@@ -129,7 +159,18 @@ export const SubformListComponent = ({
   onChange: (index: number, newValue: Object) => void,
   onAddItemRequested: (value: Object) => void,
   onRemoveItemRequested: (index: number) => void,
+  readonly?: boolean,
 }) => {
+  if (readonly) {
+    return (
+      <ReadonlySubformList
+        label={label}
+        values={values}
+        fields={fields}
+      />
+    );
+  }
+
   const _values = values || [];
 
   return (
