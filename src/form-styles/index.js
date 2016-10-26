@@ -162,7 +162,7 @@ export default {
           field: 'symptoms', label: 'Symptoms', class: 'multiinput',
         },
         {
-          field: 'signs_select', label: 'Signs', class: 'checkgroup',
+          field: 'signs_select', label: 'Physical Exams', class: 'checkgroup',
           options: [
             { id: 'jaundice', label: 'Jaundice' },
             { id: 'anemia', label: 'Anemia' },
@@ -184,7 +184,7 @@ export default {
     },
     {
       id: 'physical',
-      label: 'Physical',
+      label: 'Physician',
       style: [
         {
           class: 'guide',
@@ -316,7 +316,7 @@ export default {
           field: 'symptoms', label: 'Symptoms', class: 'multiinput',
         },
         {
-          field: 'signs_select', label: 'Signs', class: 'checkgroup',
+          field: 'signs_select', label: 'Physical Exams', class: 'checkgroup',
           options: [
             { id: 'jaundice', label: 'Jaundice' },
             { id: 'anemia', label: 'Anemia' },
