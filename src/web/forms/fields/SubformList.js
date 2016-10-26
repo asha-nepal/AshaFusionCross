@@ -7,18 +7,40 @@ import _get from 'lodash.get';
 import {
   TextInputComponent,
   CheckboxComponent,
+  RadioGroupComponent,
 } from '.';
 
 const fieldComponents = {
   textinput: TextInputComponent,
   check: CheckboxComponent,
+  radio: RadioGroupComponent,
 };
+
+function checkVisibility(state: Object, showProp: ?string|boolean) {
+  if (showProp === false) {
+    return false;
+  }
+
+  if (typeof showProp === 'string') {
+    const [referPath, containedInArray] = showProp.split(':');
+    const referent = _get(state, referPath, false);
+
+    if (!referent) { return false; }
+
+    if (containedInArray) {
+      return referent.indexOf(containedInArray) > -1;
+    }
+  }
+
+  return true;
+}
 
 type FormFieldDefinition = {
   field: string,
   class: string,
   label?: string,
   primary?: boolean,
+  show?: boolean | string,
 }
 
 const RowComponent = ({
@@ -45,15 +67,19 @@ const RowComponent = ({
 
   return (
     <div className="panel-block">
-      <div className="columns">
+      <div className="columns is-mobile">
         <div className="column">
-          <div className="control is-grouped">
+          <div className="control is-grouped" style={{ flexWrap: 'wrap' }} >
           {fields.map((field, i) => {
+            if (!checkVisibility(_value, field.show)) {
+              return null;
+            }
+
             const component = fieldComponents[field.class];
 
             return React.createElement(component, {
               key: i,
-              label: field.label,
+              ...field,
               value: _value[field.field],
               onChange: (v => {
                 const updated = {};

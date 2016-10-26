@@ -1,6 +1,6 @@
 /* @flow */
 
-export { RadioGroup } from './RadioGroup';
+export { RadioGroup, RadioGroupComponent } from './RadioGroup';
 export { TextInput, TextInputComponent } from './TextInput';
 export { TextArea } from './TextArea';
 export { TextUnitInput, TextUnitInputComponent } from './TextUnitInput';
