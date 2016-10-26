@@ -166,9 +166,6 @@ export default {
           field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
         },
         {
-          field: 'symptoms', label: 'Symptoms', class: 'multiinput',
-        },
-        {
           field: 'signs_select', label: 'Physical Exams', class: 'checkgroup',
           options: [
             { id: 'jaundice', label: 'Jaundice' },
@@ -318,9 +315,6 @@ export default {
         },
         {
           field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
-        },
-        {
-          field: 'symptoms', label: 'Symptoms', class: 'multiinput',
         },
         {
           field: 'signs_select', label: 'Physical Exams', class: 'checkgroup',
