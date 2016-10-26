@@ -80,6 +80,7 @@ const RowComponent = ({
             return React.createElement(component, {
               key: i,
               ...field,
+              size: 'small',
               value: _value[field.field],
               onChange: (v => {
                 const updated = {};
