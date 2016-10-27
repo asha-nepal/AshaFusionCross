@@ -162,7 +162,7 @@ export default {
           field: 'symptoms', label: 'Symptoms', class: 'multiinput',
         },
         {
-          field: 'signs_select', label: 'Signs', class: 'checkgroup',
+          field: 'signs_select', label: 'Physical Exams', class: 'checkgroup',
           options: [
             { id: 'jaundice', label: 'Jaundice' },
             { id: 'anemia', label: 'Anemia' },
@@ -184,7 +184,7 @@ export default {
     },
     {
       id: 'physical',
-      label: 'Physical',
+      label: 'Physician',
       style: [
         {
           class: 'guide',
@@ -316,7 +316,7 @@ export default {
           field: 'symptoms', label: 'Symptoms', class: 'multiinput',
         },
         {
-          field: 'signs_select', label: 'Signs', class: 'checkgroup',
+          field: 'signs_select', label: 'Physical Exams', class: 'checkgroup',
           options: [
             { id: 'jaundice', label: 'Jaundice' },
             { id: 'anemia', label: 'Anemia' },
@@ -334,7 +334,17 @@ export default {
           field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',
         },
         {
+          field: 'plan', label: 'Plan', class: 'checkgroup',
+          options: [
+            { id: 'prescription', label: 'Prescription' },
+            { id: 'refer', label: 'Refer' },
+            { id: 'test', label: 'Test' },
+            { id: 'advice', label: 'Advice' },
+          ],
+        },
+        {
           field: 'prescription', label: 'Prescriptions', class: 'subformlist',
+          show: 'plan:prescription',
           fields: [
             { field: 'freetext', label: 'Medicine', class: 'textinput', primary: true },
             { field: 'stat', label: 'Stat', class: 'check' },
@@ -359,6 +369,18 @@ export default {
               ],
             },
           ],
+        },
+        {
+          field: 'refer', label: 'Refer', class: 'textarea',
+          show: 'plan:refer',
+        },
+        {
+          field: 'test', label: 'Test', class: 'textarea',
+          show: 'plan:test',
+        },
+        {
+          field: 'advice', label: 'Advice', class: 'textarea',
+          show: 'plan:advice',
         },
         {
           field: 'attachments.images', label: 'Images', class: 'attachment',
