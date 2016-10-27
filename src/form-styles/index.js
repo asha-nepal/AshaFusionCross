@@ -334,7 +334,31 @@ export default {
           field: 'diagnoses', label: 'Diagnoses', class: 'diagnoses',
         },
         {
-          field: 'prescription', label: 'Prescriptions', class: 'multiinput',
+          field: 'prescription', label: 'Prescriptions', class: 'subformlist',
+          fields: [
+            { field: 'freetext', label: 'Medicine', class: 'textinput', primary: true },
+            { field: 'stat', label: 'Stat', class: 'check' },
+            { field: 'sos', label: 'SOS', class: 'check' },
+            {
+              field: 'once_pcs', class: 'textinput', type: 'number', style: { width: 50 },
+              label: 'Once', suffix: 'pcs',
+            },
+            {
+              field: 'daily_times', class: 'textinput', type: 'number', style: { width: 50 },
+              label: 'Daily', suffix: 'times', show: 'sos',
+            },
+            {
+              field: 'days', class: 'textinput', type: 'number', style: { width: 60 },
+              label: 'Days', suffix: 'days', show: 'sos',
+            },
+            {
+              field: 'meal', class: 'radio',
+              options: [
+                { id: 'before', label: 'Before the meal' },
+                { id: 'after', label: 'After the meal' },
+              ],
+            },
+          ],
         },
         {
           field: 'attachments.images', label: 'Images', class: 'attachment',

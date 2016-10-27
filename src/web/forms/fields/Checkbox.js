@@ -5,42 +5,48 @@ import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 
-const CheckboxComponent = ({
+export const CheckboxComponent = ({
   label,
-  isChecked,
+  value,
   readonly = false,
+  size,
   onChange,
 }: {
   label: string,
-  isChecked: ?boolean,
+  value: ?boolean,
   readonly: boolean,
+  size?: string,
   onChange: (newValue: boolean) => void,
-}) => (
-  <div className="control">
-    {label && <label className="label">{label}</label>}
-    {readonly ? (
-      <p className="form-static">
-        {isChecked ? <span className="icon"><i className="fa fa-check" /></span> : '---'}
-      </p>
-    ) : (
-      <p className="control">
-        <a
-          className={isChecked ? 'button is-primary' : 'button'}
-          style={{ width: 32 }}
-          onClick={e => {
-            e.preventDefault();
-            onChange(!isChecked);
-          }}
-        >
-          {isChecked && <i className="fa fa-check" />}
-        </a>
-      </p>
-    )}
-  </div>
-);
+}) => {
+  const checkedClassName = value ? ' is-primary' : '';
+  const sizeClassName = size ? ` is-${size}` : '';
+  return (
+    <div className="control">
+      {label && <label className="label">{label}</label>}
+      {readonly ? (
+        <p className="form-static">
+          {value ? <span className="icon"><i className="fa fa-check" /></span> : '---'}
+        </p>
+      ) : (
+        <p className="control">
+          <a
+            className={`button ${checkedClassName}${sizeClassName}`}
+            style={{ width: 32 }}
+            onClick={e => {
+              e.preventDefault();
+              onChange(!value);
+            }}
+          >
+            {value && <i className="fa fa-check" />}
+          </a>
+        </p>
+      )}
+    </div>
+  );
+};
 
 const mapStateToProps = (state, ownProps) => ({
-  isChecked: _get(state, ownProps.model, false),
+  value: _get(state, ownProps.model, false),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
