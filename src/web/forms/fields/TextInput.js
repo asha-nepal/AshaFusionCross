@@ -44,6 +44,7 @@ export const TextInputComponent = ({
   size,
   required = false,
   readonly = false,
+  expanded = false,
 }: {
   label: ?string,
   value: ?string,
@@ -61,6 +62,7 @@ export const TextInputComponent = ({
   size?: string,
   required?: boolean,
   readonly: boolean,
+  expanded?: boolean,
 }) => {
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
@@ -86,7 +88,7 @@ export const TextInputComponent = ({
   const sizeClassName = size ? ` is-${size}` : '';
 
   return (
-    <div className="control">
+    <div className={expanded ? 'control is-expanded' : 'control'}>
       {label && <label className="label">{label}</label>}
       <p className={hasAddons ? 'control has-addons' : 'control'}>
         {prefix &&
