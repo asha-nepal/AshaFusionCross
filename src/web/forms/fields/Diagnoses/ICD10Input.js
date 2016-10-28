@@ -5,10 +5,48 @@ import Autosuggest from 'react-autosuggest';
 import ICD10Modal from './ICD10Modal';
 import { ICD10 } from '../../../../data';
 
+const ICD10Display = ({
+  label,
+  value,
+  onClearRequest,
+  size,
+  readonly,
+  width,
+}: {
+  label?: ?string,
+  value: string,
+  onClearRequest: ?() => void,
+  size?: string,
+  readonly?: boolean,
+  width?: string | number,
+}) => {
+  const sizeClassName = size ? ` is-${size}` : '';
+  const icd10Datum = value && ICD10.find(item => item.code === value);
 
-type Props = {
-  placeholder: ?string,
-  onChange: (newCode: string) => void,
+  return (
+    <div className="control" style={{ width }}>
+      {label && <label className="label">{label}</label>}
+      <div className={readonly ? 'level form-static' : 'level'}>
+        <span className="level-left">
+          <div className={`content${sizeClassName}`}>
+            <small style={{ marginRight: '1em' }}>{value || ''}</small>
+            {icd10Datum ? icd10Datum.description : ''}
+          </div>
+        </span>
+        {!readonly && onClearRequest &&
+          <span className="level-right">
+            <a
+              className={`button${sizeClassName}`}
+              onClick={e => {
+                e.preventDefault();
+                if (onClearRequest) onClearRequest();
+              }}
+            ><i className="fa fa-times" /></a>
+          </span>
+        }
+      </div>
+    </div>
+  );
 };
 
 export const getSuggestions = (candidates: Array<{_query: string}>, value: string) => {
@@ -21,12 +59,6 @@ export const getSuggestions = (candidates: Array<{_query: string}>, value: strin
     queries.every(query => icd10._query.indexOf(` ${query}`) > -1)
   );
 };
-
-const getSuggestionValue = (suggestion) => suggestion.description;
-
-const renderSuggestion = (suggestion) => (
-  <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
-);
 
 const theme = {
   container: {
@@ -57,13 +89,19 @@ const theme = {
   },
 };
 
-export default class ICD10Input extends Component {
+type Props = {
+  label?: ?string,
+  value: string,
+  onChange: (newValue: ?string) => void,
+  placeholder?: string,
+  size?: string,
+  readonly?: boolean,
+  width?: string | number,
+}
+
+export default class extends Component {
   constructor(props: Props) {
     super(props);
-
-    this._onSuggestionsUpdateRequested = this._onSuggestionsUpdateRequested.bind(this);
-    this._onSuggestionSelected = this._onSuggestionSelected.bind(this);
-    this._onInputBlur = this._onInputBlur.bind(this);
 
     this.state = {
       value: '',
@@ -76,74 +114,98 @@ export default class ICD10Input extends Component {
     value: string,
     suggestions: Array<Object>,
     isModalOpen: boolean,
-  };
+  }
 
-  props: Props;
-
-  _onSuggestionsUpdateRequested: (args: { value: string }) => void;
-  _onSuggestionSelected: (event: Object, args: { suggestion: ICD10Type }) => void;
-  _onInputBlur: (evnet: Object, args: { focusedSuggestion: ICD10Type }) => void;
-
-  _onSuggestionsUpdateRequested({ value }: { value: string }) {
+  onSuggestionsUpdateRequested = ({ value }: { value: string }) => {
     this.setState({
       suggestions: getSuggestions(ICD10, value),
     });
   }
 
-  _onSuggestionSelected(event: Object, { suggestion }: { suggestion: ICD10Type }) {
+  onSuggestionSelected = (event: Object, { suggestion }: { suggestion: ICD10Type }) => {
     event.preventDefault();
     this.props.onChange(suggestion.code);
   }
 
-  _onInputBlur(event: Object, { focusedSuggestion }: { focusedSuggestion: ICD10Type }) {
+  onInputBlur = (event: Object, { focusedSuggestion }: { focusedSuggestion: ICD10Type }) => {
     if (focusedSuggestion) {
       this.props.onChange(focusedSuggestion.code);
     }
   }
 
+  onInputChange = (event: Object, { newValue }: { newValue: string }) => {
+    this.setState({ value: newValue });
+  }
+
+  props: Props
+
   render() {
+    const {
+      label,
+      value,
+      onChange,
+      placeholder,
+      size,
+      readonly,
+      width,
+    } = this.props;
+
+    if (value) {
+      return (
+        <ICD10Display
+          label={label}
+          value={value}
+          onClearRequest={() => {
+            onChange(null);
+            this.setState({ value: '' });
+          }}
+          size={size}
+          readonly={readonly}
+          width={width}
+        />
+      );
+    }
+
+    const sizeClassName = size ? ` is-${size}` : '';
+
     return (
-      <div>
-        <div className="control has-addons" style={{ width: '100%' }}>
+      <div className="control" style={{ width }}>
+        {label && <label className="label">{label}</label>}
+        <div className="control has-addons">
           <Autosuggest
             suggestions={this.state.suggestions}
-            getSuggestionValue={getSuggestionValue}
-            onSuggestionsUpdateRequested={this._onSuggestionsUpdateRequested}
-            renderSuggestion={renderSuggestion}
-            onSuggestionSelected={this._onSuggestionSelected}
+            getSuggestionValue={(suggestion) => suggestion.description}
+            onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
+            renderSuggestion={(suggestion) => (
+              <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
+            )}
+            onSuggestionSelected={this.onSuggestionSelected}
             inputProps={{
-              className: 'input',
-              placeholder: this.props.placeholder,
+              className: `input${sizeClassName}`,
+              placeholder,
               value: this.state.value,
-              onBlur: this._onInputBlur,
-              onChange: (e, { newValue }) => {
-                this.setState({ value: newValue });
-              },
+              onBlur: this.onInputBlur,
+              onChange: this.onInputChange,
             }}
             theme={theme}
           />
           <a
-            className="button"
+            className={`button${sizeClassName}`}
             onClick={e => {
               e.preventDefault();
               this.setState({ isModalOpen: true });
             }}
           ><i className="fa fa-list-alt" /></a>
+          <ICD10Modal
+            isOpen={this.state.isModalOpen}
+            onClose={() => this.setState({ isModalOpen: false })}
+            onSelect={(code) => {
+              this.setState({ isModalOpen: false });
+              onChange(code);
+            }}
+          />
         </div>
-        <ICD10Modal
-          isOpen={this.state.isModalOpen}
-          onClose={() => this.setState({ isModalOpen: false })}
-          onSelect={(code) => {
-            this.setState({ isModalOpen: false });
-            this.props.onChange(code);
-          }}
-        />
       </div>
     );
   }
 }
-
-ICD10Input.propTypes = {
-  onChange: React.PropTypes.func.isRequired,
-  placeholder: React.PropTypes.string,
-};
