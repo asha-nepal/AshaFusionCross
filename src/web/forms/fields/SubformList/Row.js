@@ -52,7 +52,8 @@ export default ({
               return null;
             }
 
-            const component = fieldComponents[field.class];
+            const component = typeof field.class === 'string'
+              ? fieldComponents[field.class] : field.class;
 
             return React.createElement(component, {
               key: i,
