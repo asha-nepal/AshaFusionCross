@@ -8,15 +8,19 @@ export function checkVisibility(state: Object, rootPath: ?string, showProp: stri
   }
 
   if (typeof showProp === 'string') {
-    const [referPath, containedInArray] = showProp.split(':');
-    const absReferPath = rootPath ? `${rootPath}.${referPath}` : referPath;
-    const referent = _get(state, absReferPath, false);
+    const conditions = showProp.split('|');
 
-    if (!referent) { return false; }
+    return conditions.some(condition => {
+      const [referPath, containedInArray] = condition.split(':');
+      const absReferPath = rootPath ? `${rootPath}.${referPath}` : referPath;
+      const referent = _get(state, absReferPath, false);
 
-    if (containedInArray) {
-      return referent.indexOf(containedInArray) > -1;
-    }
+      if (containedInArray && Array.isArray(referent)) {
+        return referent.indexOf(containedInArray) > -1;
+      }
+
+      return !!referent;
+    });
   }
 
   return true;

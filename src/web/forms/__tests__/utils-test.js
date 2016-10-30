@@ -48,4 +48,15 @@ describe('checkVisibility', () => {
     expect(checkVisibility(state, null, 'foo')).toBe(true);
     expect(checkVisibility(state, 'hoge', 'foo')).toBe(false);
   });
+
+  it('handles OR condition', () => {
+    const state = {
+      root: {
+        foo: false,
+        bar: true,
+      },
+    };
+
+    expect(checkVisibility(state, 'root', 'foo|bar')).toBe(true);
+  });
 });
