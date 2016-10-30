@@ -44,7 +44,11 @@ export default ({
         <div className="column">
           <div className="control is-grouped" style={{ flexWrap: 'wrap' }} >
           {fields.map((field, i) => {
-            if (!checkVisibility(_value, null, field.show)) {
+            if (typeof field.show !== 'undefined'
+              && !checkVisibility(_value, null, field.show)) {
+              return null;
+            } else if (typeof field.hide !== 'undefined'
+              && checkVisibility(_value, null, field.hide)) {
               return null;
             }
 
