@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
-import _get from 'lodash.get';
 import type { FormFieldDefinition } from '.';
+import { checkVisibility } from '../../utils';
 import {
   TextInputComponent,
   CheckboxComponent,
@@ -13,25 +13,6 @@ const fieldComponents = {
   check: CheckboxComponent,
   radio: RadioGroupComponent,
 };
-
-function checkVisibility(state: Object, showProp: ?string|boolean) {
-  if (showProp === false) {
-    return false;
-  }
-
-  if (typeof showProp === 'string') {
-    const [referPath, containedInArray] = showProp.split(':');
-    const referent = _get(state, referPath, false);
-
-    if (!referent) { return false; }
-
-    if (containedInArray) {
-      return referent.indexOf(containedInArray) > -1;
-    }
-  }
-
-  return true;
-}
 
 export default ({
   value,
@@ -63,7 +44,7 @@ export default ({
         <div className="column">
           <div className="control is-grouped" style={{ flexWrap: 'wrap' }} >
           {fields.map((field, i) => {
-            if (!checkVisibility(_value, field.show)) {
+            if (!checkVisibility(_value, null, field.show)) {
               return null;
             }
 

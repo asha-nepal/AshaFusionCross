@@ -3,7 +3,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'react-redux-form';
-import _get from 'lodash.get';
 import {
   TextInput,
   TextUnitInput,
@@ -44,24 +43,7 @@ const fieldComponents = {
   block: Block,
 };
 
-export function checkVisibility(state: Object, rootModel: string, showProp: string|boolean) {
-  if (showProp === false) {
-    return false;
-  }
-
-  if (typeof showProp === 'string') {
-    const [referPath, containedInArray] = showProp.split(':');
-    const referent = _get(state, `${rootModel}.${referPath}`, false);
-
-    if (!referent) { return false; }
-
-    if (containedInArray) {
-      return referent.indexOf(containedInArray) > -1;
-    }
-  }
-
-  return true;
-}
+import { checkVisibility } from './utils';
 
 function createChildFields(state, rootModel, fields, warnings) {
   if (!fields) { return []; }
