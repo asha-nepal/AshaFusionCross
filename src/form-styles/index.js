@@ -355,11 +355,11 @@ export default {
             },
             {
               field: 'daily_times', class: 'textinput', type: 'number', style: { width: 50 },
-              label: 'Daily', suffix: 'times', show: 'sos',
+              label: 'Daily', suffix: 'times', hide: 'sos|stat',
             },
             {
               field: 'days', class: 'textinput', type: 'number', style: { width: 60 },
-              label: 'Days', suffix: 'days', show: 'sos',
+              label: 'Days', suffix: 'days', hide: 'sos|stat',
             },
             {
               field: 'meal', class: 'radio',

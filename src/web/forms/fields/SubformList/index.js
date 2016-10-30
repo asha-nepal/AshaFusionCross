@@ -15,6 +15,7 @@ export type FormFieldDefinition = {
   label?: string,
   primary?: boolean,
   show?: boolean | string,
+  hide?: string,
 }
 
 export const SubformListComponent = ({
