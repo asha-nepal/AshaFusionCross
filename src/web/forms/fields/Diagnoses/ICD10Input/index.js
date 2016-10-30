@@ -3,51 +3,10 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import ICD10Modal from './ICD10Modal';
-import { ICD10 } from '../../../../data';
+import ICD10Display from './ICD10Display';
+import { ICD10 } from '../../../../../data';
+import theme from './theme';
 
-const ICD10Display = ({
-  label,
-  value,
-  onClearRequest,
-  size,
-  readonly,
-  width,
-}: {
-  label?: ?string,
-  value: string,
-  onClearRequest: ?() => void,
-  size?: string,
-  readonly?: boolean,
-  width?: string | number,
-}) => {
-  const sizeClassName = size ? ` is-${size}` : '';
-  const icd10Datum = value && ICD10.find(item => item.code === value);
-
-  return (
-    <div className="control" style={{ width }}>
-      {label && <label className="label">{label}</label>}
-      <div className={readonly ? 'level form-static' : 'level'}>
-        <span className="level-left">
-          <div className={`content${sizeClassName}`}>
-            <small style={{ marginRight: '1em' }}>{value || ''}</small>
-            {icd10Datum ? icd10Datum.description : ''}
-          </div>
-        </span>
-        {!readonly && onClearRequest &&
-          <span className="level-right">
-            <a
-              className={`button${sizeClassName}`}
-              onClick={e => {
-                e.preventDefault();
-                if (onClearRequest) onClearRequest();
-              }}
-            ><i className="fa fa-times" /></a>
-          </span>
-        }
-      </div>
-    </div>
-  );
-};
 
 export const getSuggestions = (candidates: Array<{_query: string}>, value: string) => {
   const inputValue = value.trim().toLowerCase();
@@ -58,35 +17,6 @@ export const getSuggestions = (candidates: Array<{_query: string}>, value: strin
   return candidates.filter(icd10 =>
     queries.every(query => icd10._query.indexOf(` ${query}`) > -1)
   );
-};
-
-const theme = {
-  container: {
-    position: 'relative',
-    width: '100%',
-  },
-  suggestionsList: {
-    position: 'absolute',
-    width: '100%',
-    border: '1px solid #aaa',
-    backgroundColor: '#fff',
-    borderBottomLeftRadius: '4px',
-    borderBottomRightRadius: '4px',
-    zIndex: 1999,
-    maxHeight: '14em',
-    overflow: 'scroll',
-  },
-  input: {
-    width: '100%',
-  },
-  suggestion: {
-    cursor: 'pointer',
-    lineHeight: '1.6em',
-    padding: '0 0.5em',
-  },
-  suggestionFocused: {
-    backgroundColor: '#ddd',
-  },
 };
 
 type Props = {

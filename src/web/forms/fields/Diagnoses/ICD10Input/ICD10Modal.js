@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '../../../components/Modal';
-import { ICD10 } from '../../../../data';
+import Modal from '../../../../components/Modal';
+import { ICD10 } from '../../../../../data';
 
 
 export default ({
