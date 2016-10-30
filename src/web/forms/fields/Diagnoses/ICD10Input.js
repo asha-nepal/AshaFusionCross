@@ -150,7 +150,7 @@ export default class extends Component {
       width,
     } = this.props;
 
-    if (value) {
+    if (value || readonly) {
       return (
         <ICD10Display
           label={label}

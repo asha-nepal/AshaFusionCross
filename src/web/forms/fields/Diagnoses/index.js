@@ -18,7 +18,8 @@ export const Diagnoses = (props: Object) => (
 export const ReadonlyDiagnoses = ({
   value,
 }: {
-  value: Array<Object>
+  value: Array<Object | string>
+  // FIXME: stringは本当は消したいが，flowの制約でstringを付加．caller, calleeの関係を考慮すれば要らないことは分かるはず．
 }) => (
   <ReadonlySubformList
     values={value}
