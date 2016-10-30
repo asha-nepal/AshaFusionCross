@@ -1,93 +1,31 @@
 /* @flow */
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
 
-import { ICD10 } from '../../../../data';
+import { SubformList, ReadonlySubformList } from '..';
+import ICD10Input from './ICD10Input';
 
-import DiagnosisInput from './DiagnosisInput';
-
-type diagnosisType = {
-  icd10: ?string,
-  text: ?string,
-};
-
-export const DiagnosesComponent = ({
-  label,
-  diagnoses,
-  addDiagnosis,
-  removeDiagnosis,
-  readonly = false,
-}: {
-  label?: ?string,
-  diagnoses: Array<diagnosisType>,
-  addDiagnosis?: (diagnosis: diagnosisType) => void,
-  removeDiagnosis?: (index: number) => void,
-  readonly: boolean,
-}) => (
-  <div>
-    <div className="control">
-      {label && <label className="label">{label}</label>}
-      <table className="table">
-        <thead>
-          <tr>
-            <th>ICD-10</th>
-            <th>Free description</th>
-            {!readonly &&
-              <th></th>
-            }
-          </tr>
-        </thead>
-        <tbody>
-        {diagnoses && diagnoses.map && diagnoses.map((diagnosis, i) =>
-          <tr key={i}>
-            <td>
-              {diagnosis.icd10}{' '}
-              {(() => {
-                const icd10 = ICD10.find(row => row.code === diagnosis.icd10);
-                return icd10 && icd10.description;
-              })()}
-            </td>
-            <td>{diagnosis.text}</td>
-            {!readonly &&
-              <td className="is-narrow">
-                <a
-                  className="button is-danger"
-                  onClick={e => {
-                    e.preventDefault();
-                    if (removeDiagnosis) {
-                      removeDiagnosis(i);
-                    }
-                  }}
-                >
-                  <i className="fa fa-times" />
-                </a>
-              </td>
-            }
-          </tr>
-        )}
-        </tbody>
-      </table>
-    </div>
-    {!readonly &&
-      <DiagnosisInput
-        onDiagnosisAdded={addDiagnosis}
-      />
-    }
-  </div>
+export const Diagnoses = (props: Object) => (
+  <SubformList
+    {...props}
+    fields={[
+      { field: 'icd10', label: 'ICD10', class: ICD10Input, width: '30%' },
+      { field: 'text', label: 'Free description', class: 'textinput', expanded: true },
+    ]}
+  />
 );
 
-const mapStateToProps = (state, ownProps) => ({
-  diagnoses: _get(state, ownProps.model),
-});
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  addDiagnosis: (diagnosis) => dispatch(actions.push(ownProps.model, diagnosis)),
-  removeDiagnosis: (index) => dispatch(actions.remove(ownProps.model, index)),
-});
-
-export const Diagnoses = connect(
-  mapStateToProps, mapDispatchToProps
-)(DiagnosesComponent);
+export const ReadonlyDiagnoses = ({
+  value,
+}: {
+  value: Array<Object | string>
+  // FIXME: stringは本当は消したいが，flowの制約でstringを付加．caller, calleeの関係を考慮すれば要らないことは分かるはず．
+}) => (
+  <ReadonlySubformList
+    values={value}
+    fields={[
+      { field: 'icd10', class: ICD10Input },
+      { field: 'text', class: 'textinput' },
+    ]}
+  />
+);

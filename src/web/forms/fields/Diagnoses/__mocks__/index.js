@@ -1,7 +1,5 @@
 import React from 'react';
 
-export default () => (
-  <div>
-    Diagnoses
-  </div>
+export const Diagnoses = () => (
+  <div>Diagnoses</div>
 );

@@ -11,7 +11,7 @@ export const ReadonlySubformList = Readonly;
 
 export type FormFieldDefinition = {
   field: string,
-  class: string,
+  class: string | ReactClass<any>,
   label?: string,
   primary?: boolean,
   show?: boolean | string,

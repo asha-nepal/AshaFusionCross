@@ -8,7 +8,7 @@ import { ReadonlyTextArea } from '../../forms/fields/TextArea';
 import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
 import { ReadonlySubformList } from '../../forms/fields/SubformList';
 import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
-import { DiagnosesComponent } from '../../forms/fields/Diagnoses';
+import { ReadonlyDiagnoses } from '../../forms/fields/Diagnoses';
 
 function getStr(obj: Object, path: string, defaultValue: string = ''): string {
   const value = _get(obj, path, defaultValue);
@@ -180,9 +180,8 @@ export default ({
             <tr>
               <th>Diagnoses</th>
               <td>
-                <DiagnosesComponent
-                  diagnoses={_get(record, 'diagnoses')}
-                  readonly
+                <ReadonlyDiagnoses
+                  value={_get(record, 'diagnoses')}
                 />
               </td>
             </tr>
