@@ -224,6 +224,10 @@ export default ({
                         { id: 'after', label: 'After the meal' },
                       ],
                     },
+                    {
+                      field: 'remark', class: 'textinput', label: 'Remark', expanded: true,
+                      show: 'use_remark',
+                    },
                   ]}
                 />
               </td>
