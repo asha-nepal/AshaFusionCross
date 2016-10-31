@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const ReadOnly = ({
+export const ReadOnly = ({
   options,
   value,
 }: {
