@@ -346,20 +346,20 @@ export default {
           field: 'prescription', label: 'Prescriptions', class: 'subformlist',
           show: 'plan:prescription',
           fields: [
-            { field: 'freetext', label: 'Medicine', class: 'textinput', primary: true },
+            { field: 'medicine', label: 'Medicine', class: 'textinput', primary: true },
             { field: 'stat', label: 'Stat', class: 'check' },
             { field: 'sos', label: 'SOS', class: 'check' },
             {
-              field: 'once_pcs', class: 'textinput', type: 'number', style: { width: 50 },
-              label: 'Once', suffix: 'pcs',
+              field: 'dose', class: 'textinput', type: 'number', style: { width: 50 },
+              label: 'Dose', suffix: 'pcs',
             },
             {
-              field: 'daily_times', class: 'textinput', type: 'number', style: { width: 50 },
-              label: 'Daily', suffix: 'times', hide: 'sos|stat',
+              field: 'freq', class: 'textinput', type: 'number', style: { width: 50 },
+              label: 'Frequency', suffix: 'times', hide: 'sos|stat',
             },
             {
-              field: 'days', class: 'textinput', type: 'number', style: { width: 60 },
-              label: 'Days', suffix: 'days', hide: 'sos|stat',
+              field: 'duration', class: 'textinput', type: 'number', style: { width: 60 },
+              label: 'Duration', suffix: 'days', hide: 'sos|stat',
             },
             {
               field: 'meal', class: 'radio',
