@@ -191,23 +191,34 @@ export default ({
                 <ReadonlySubformList
                   values={_get(record, 'prescription')}
                   fields={[
-                    { field: 'freetext', label: 'Medicine', class: 'textinput', primary: true },
+                    { field: 'medicine', label: 'Medicine', class: 'textinput', primary: true },
                     { field: 'stat', label: 'Stat', class: 'check' },
                     { field: 'sos', label: 'SOS', class: 'check' },
                     {
-                      field: 'once_pcs', class: 'textinput',
-                      label: 'Once', suffix: 'pcs',
+                      field: 'dose', class: 'textinput', type: 'number', style: { width: 50 },
+                      label: 'Dose', suffix: 'pcs',
                     },
                     {
-                      field: 'daily_times', class: 'textinput',
-                      label: 'Daily', suffix: 'times', hide: 'sos|stat',
+                      field: 'freq', class: 'textinput', type: 'number', style: { width: 50 },
+                      label: 'Frequency', suffix: 'times', hide: 'sos|stat',
                     },
                     {
-                      field: 'days', class: 'textinput',
-                      label: 'Days', suffix: 'days', hide: 'sos|stat',
+                      field: 'duration', class: 'textinput', type: 'number', style: { width: 60 },
+                      label: 'Duration', suffix: 'days', hide: 'sos|stat',
                     },
                     {
-                      field: 'meal', class: 'radio',
+                      field: 'route', class: 'select', label: 'Route',
+                      options: [
+                        { id: 'po', label: 'PO' },
+                        { id: 'ih', label: 'IH' },
+                        { id: 'pr', label: 'PR' },
+                        { id: 'sc', label: 'SC' },
+                        { id: 'sl', label: 'SL' },
+                        { id: 'top', label: 'TOP' },
+                      ],
+                    },
+                    {
+                      field: 'meal', class: 'select', label: 'Meal',
                       options: [
                         { id: 'before', label: 'Before the meal' },
                         { id: 'after', label: 'After the meal' },
