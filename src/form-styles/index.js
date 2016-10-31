@@ -379,6 +379,13 @@ export default {
                 { id: 'after', label: 'After the meal' },
               ],
             },
+            {
+              field: 'use_remark', class: 'check', label: 'Remark',
+            },
+            {
+              field: 'remark', class: 'textinput', label: 'Remark', expanded: true,
+              show: 'use_remark',
+            },
           ],
         },
         {
