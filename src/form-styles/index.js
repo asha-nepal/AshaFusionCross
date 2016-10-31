@@ -362,7 +362,18 @@ export default {
               label: 'Duration', suffix: 'days', hide: 'sos|stat',
             },
             {
-              field: 'meal', class: 'radio',
+              field: 'route', class: 'select', label: 'Route',
+              options: [
+                { id: 'po', label: 'PO' },
+                { id: 'ih', label: 'IH' },
+                { id: 'pr', label: 'PR' },
+                { id: 'sc', label: 'SC' },
+                { id: 'sl', label: 'SL' },
+                { id: 'top', label: 'TOP' },
+              ],
+            },
+            {
+              field: 'meal', class: 'select', label: 'Meal',
               options: [
                 { id: 'before', label: 'Before the meal' },
                 { id: 'after', label: 'After the meal' },

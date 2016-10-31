@@ -6,12 +6,14 @@ import {
   TextInputComponent,
   CheckboxComponent,
   RadioGroupComponent,
+  SelectComponent,
 } from '../index';
 
 const fieldComponents = {
   textinput: TextInputComponent,
   check: CheckboxComponent,
   radio: RadioGroupComponent,
+  select: SelectComponent,
 };
 
 export default ({
