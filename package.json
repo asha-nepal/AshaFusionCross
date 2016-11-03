@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "compression": "^1.6.2",
+    "electron": "^1.4.5",
     "express": "^4.14.0",
     "if-env": "^1.0.0",
     "react": "^15.1.0",

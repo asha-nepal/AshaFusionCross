@@ -1,30 +1,49 @@
-'use strict';
+const { app, BrowserWindow, protocol } = require('electron');
+const path = require('path');
+const url = require('url');
 
-const electron = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
+// Override file path resolver to handle absolute path
+app.on('ready', () => {
+  protocol.interceptFileProtocol('file', (req, callback) => {
+    const requestedUrl = req.url.substr(7);
 
-let mainWindow
+    if (requestedUrl && !requestedUrl.includes(__dirname)) {
+      callback(path.normalize(path.join(__dirname, 'public', requestedUrl)));
+    } else {
+      callback(requestedUrl);
+    }
+  });
+});
+
+let win;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({width: 800, height: 600})
-  mainWindow.loadURL(`file://${__dirname}/public/index.html`)
-  mainWindow.webContents.openDevTools() // For development
-  mainWindow.on('closed', function() {
-    mainWindow = null
-  })
+  win = new BrowserWindow({ width: 800, height: 600 });
+
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'public', 'index.html'),
+    protocol: 'file:',
+    slashes: true,
+  }));
+
+  // Open the DevTools.
+  win.webContents.openDevTools();
+
+  win.on('closed', () => {
+    win = null;
+  });
 }
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
-app.on('window-all-closed', function() {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
 
-app.on('active', function() {
-  if (mainWindow === null) {
-    createWindow()
+app.on('activate', () => {
+  if (win === null) {
+    createWindow();
   }
-})
+});
