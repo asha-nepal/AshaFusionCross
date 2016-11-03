@@ -8,7 +8,7 @@ app.on('ready', () => {
     const requestedUrl = req.url.substr(7);
 
     if (requestedUrl && !requestedUrl.includes(__dirname)) {
-      callback(path.normalize(path.join(__dirname, 'build', requestedUrl)));
+      callback(path.normalize(path.join(__dirname, requestedUrl)));
     } else {
       callback(requestedUrl);
     }
@@ -21,7 +21,7 @@ function createWindow() {
   win = new BrowserWindow({ width: 800, height: 600 });
 
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'build', 'index.html'),
+    pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true,
   }));
