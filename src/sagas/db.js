@@ -1,5 +1,7 @@
-import PouchDB from 'pouchdb';
-PouchDB.plugin(require('pouchdb-authentication'));
+const PouchDB = (typeof window !== 'undefined' && window.PouchDB)
+  ? window.PouchDB
+  : require('pouchdb').plugin(require('pouchdb-authentication'));
+
 import { take, call, put, select, race } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import {
