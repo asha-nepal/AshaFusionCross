@@ -14,3 +14,5 @@ export default class {
   get = jest.fn();
   put = jest.fn();
 }
+
+export const plugin = jest.fn();  // Work around: "static plugin = jest.fn()" does not work
