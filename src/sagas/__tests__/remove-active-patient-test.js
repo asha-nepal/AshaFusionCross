@@ -6,7 +6,7 @@ jest.unmock('../../actions');
 
 import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
-import { browserHistory } from 'react-router';
+import history from '../../web/history';
 import {
   requestRemovePatient,
   successRemovePatient,
@@ -75,7 +75,7 @@ describe('removeActivePatient', () => {
     saga.next(mockResponse);
 
     expect(saga.next().value)
-      .toEqual(call([browserHistory, browserHistory.push], '/'));
+      .toEqual(call([history, history.push], '/'));
 
     expect(saga.next().value)
       .toEqual(put(successRemovePatient()));
@@ -207,6 +207,6 @@ describe('removeActivePatient', () => {
     saga.next(mockResponse);
 
     expect(saga.next().value)
-      .toEqual(call([browserHistory, browserHistory.push], '/'));
+      .toEqual(call([history, history.push], '/'));
   });
 });

@@ -4,8 +4,8 @@ import {
   Router,
   Route,
   IndexRoute,
-  browserHistory,
 } from 'react-router';
+import history from '../history';
 
 import Root from '../../common/Root.react';
 import Auth from '../containers/Auth';
@@ -25,7 +25,7 @@ export default function () {
     <Root>
       <App>
         <Auth>
-          <Router history={browserHistory}>
+          <Router history={history}>
             <Route path="/">
               <IndexRoute component={PatientSelect} />
               <Route path="patient/" component={PatientView} />

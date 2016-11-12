@@ -1,5 +1,5 @@
 import { take, put, call, select } from 'redux-saga/effects';
-import { browserHistory } from 'react-router';
+import history from '../web/history';
 import {
   PUT_ACTIVE_PATIENT,
   requestPutPatient,
@@ -46,7 +46,7 @@ export function* putActivePatient(db: PouchInstance) {
     }
 
     // Router (No effect on native)
-    yield call([browserHistory, browserHistory.replace], `/patient/${patient._id}`);
+    yield call([history, history.replace], `/patient/${patient._id}`);
 
     yield put(successPutPatient());
   } catch (error) {
