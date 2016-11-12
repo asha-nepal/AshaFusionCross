@@ -160,4 +160,20 @@ describe('<TextUnitInput />', () => {
     getInput().simulate('change', { target: { value: '160.5' } });
     expect(onChange).toBeCalledWith({ value: 160.5, unit: 'cm' });
   });
+
+  it('clears <input /> value if null is given as new prop', () => {
+    const wrapper = shallow(
+      <TextUnitInputComponent
+        value={{ value: 160, unit: 'cm' }}
+        units={['cm']}
+      />
+    );
+
+    const getInput = () => wrapper.find('input').at(0);
+
+    expect(getInput().prop('value')).toEqual('160');
+
+    wrapper.setProps({ value: null });
+    expect(getInput().prop('value')).toEqual('');
+  });
 });
