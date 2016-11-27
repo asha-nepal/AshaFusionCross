@@ -6,6 +6,7 @@ import {
   failureFetchPatient,
   changeActivePatient,
   changeActiveRecords,
+  setActiveRecordPristine,
   selectActiveRecord,
   alertInfo,
   alertError,
@@ -29,6 +30,9 @@ export function* fetchPatient(db: PouchInstance, patientId: string) {
     const records = recordDocs.rows.map(r => r.doc);
     yield put(changeActivePatient(patient, { silent: true }));
     yield put(changeActiveRecords(records, { silent: true }));
+    for (let i = 0; i < records.length; ++i) {
+      yield put(setActiveRecordPristine(i));
+    }
     yield put(alertInfo('Patient data and records loaded'));
     yield put(successFetchPatient());
     if (records && records.length > 0) {

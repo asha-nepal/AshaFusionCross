@@ -37,6 +37,7 @@ type Props = {
     name: boolean,
     number: boolean,
   },
+  activeRecordsFormPristineness: Array<boolean>,
 };
 
 export default class PatientView extends Component {
@@ -68,6 +69,7 @@ export default class PatientView extends Component {
       recordFormStyleId,
       recordFormStyle,
       duplicatedPatientsExist,
+      activeRecordsFormPristineness,
     } = this.props;
 
     if (isFetching) {
@@ -130,6 +132,7 @@ export default class PatientView extends Component {
                   selectedActiveRecordIndex={selectedActiveRecordIndex}
                   selectActiveRecord={selectActiveRecord}
                   addNewActiveRecord={addNewActiveRecord}
+                  pristinenessList={activeRecordsFormPristineness}
                 />
                 <div className="column is-narrow control">
                   <span className="select">

@@ -1,6 +1,7 @@
 /* @flow */
 
 import { createSelector } from 'reselect';
+import _get from 'lodash.get';
 
 export const getPatientList = (state: Object) => state.patientList;
 export const getPatientSelectFilter = (state: Object) =>
@@ -92,6 +93,20 @@ export const getSelectedActiveRecordIndex = createSelector(
   [getActiveRecords, getSelectedActiveRecordId],
   (activeRecords, selectedActiveRecordId) =>
     activeRecords.findIndex(r => r._id === selectedActiveRecordId)
+);
+
+function isFormPristine(formState, path) {
+  const result = _get(formState, path, {});
+  if ('$form' in result) return result.$form.pristine;
+
+  return true;
+}
+
+export const getActiveRecordsForm = (state: Object) => state.activeRecordsForm;
+export const getActiveRecordsFormPristineness = createSelector(
+  [getActiveRecords, getActiveRecordsForm],
+  (activeRecords, activeRecordsForm) =>
+    activeRecords.map((r, i) => isFormPristine(activeRecordsForm, `[${i}]`)),
 );
 
 import formStyles from '../form-styles';

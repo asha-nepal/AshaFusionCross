@@ -7,15 +7,20 @@ jest.unmock('react-redux-form');
 jest.unmock('mockdate');
 jest.unmock('../../actions');
 jest.unmock('../add-new-active-record');
+jest.unmock('../../selectors');
 
 import MockDate from 'mockdate';
 import { delay } from 'redux-saga';
-import { take, put, call } from 'redux-saga/effects';
-// import { actions } from 'react-redux-form';
+import { take, put, call, select } from 'redux-saga/effects';
+
 import {
   ADD_NEW_ACTIVE_RECORD,
+  changeActiveRecord,
   selectActiveRecord,
 } from '../../actions';
+import {
+  getActiveRecords,
+} from '../../selectors';
 import {
   addNewActiveRecord,
   watchAddNewActiveRecord,
@@ -35,36 +40,15 @@ describe('ADD_NEW_ACTIVE_RECORD', () => {
   it('calls actions.push() with new ID', () => {
     const saga = addNewActiveRecord('patient_foo');
 
-//    expect(saga.next().value)
-//      .toEqual(put(actions.push('activeRecords', {  // TODO: thunk actionの比較
-//        _id: 'record_foo_mocked-datetime',
-//        type: 'record',
-//        $initialized_at: 1234567890123,
-//      })));
-// 本来は上記のようなテストを短く書きたいが，redux-thunk actionの取り扱いに手間取り，以下の様なテストになった
-    const value1 = saga.next().value;
-    const action1 = value1.PUT.action;
-    expect(action1).toEqual(jasmine.any(Function));
+    expect(saga.next().value)
+      .toEqual(select(getActiveRecords));
 
-    const dummyDispatch = jest.fn(action => {
-      // jestはObjectのsubsetを比較するassertionが無いので，各要素を個別にassertする
-      expect(action.model).toEqual('activeRecords');
-      expect(action.value).toEqual([
-        'existing data',
-        {
-          _id: 'record_foo_1234567890123',
-          type: 'record',
-          $initialized_at: 1234567890123,
-        },
-      ]);
-    });
-    const dummyGetState = jest.fn().mockReturnValue({
-      activeRecords: [
-        'existing data',
-      ],
-    });
-    action1(dummyDispatch, dummyGetState);
-    expect(dummyDispatch).toBeCalled();
+    expect(saga.next([{}, {}]).value)
+      .toEqual(put(changeActiveRecord(2, {
+        _id: 'record_foo_1234567890123',
+        type: 'record',
+        $initialized_at: 1234567890123,
+      }, { silent: true })));
 
     expect(saga.next().value)
       .toEqual(put(selectActiveRecord('record_foo_1234567890123')));

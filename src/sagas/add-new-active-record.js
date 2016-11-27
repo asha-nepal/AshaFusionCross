@@ -1,20 +1,26 @@
 import { delay } from 'redux-saga';
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import {
   ADD_NEW_ACTIVE_RECORD,
-  pushActiveRecord,
   selectActiveRecord,
+  changeActiveRecord,
 } from '../actions';
+import {
+  getActiveRecords,
+} from '../selectors';
 
 export function* addNewActiveRecord(patientId) {
   const patientIdBody = patientId.replace(/^patient_/, '');
   const now = (new Date()).getTime(); // Unix Millisecond Timestamp
   const newId = `record_${patientIdBody}_${now}`;
-  yield put(pushActiveRecord({
+  const newRecord = {
     _id: newId,
     type: 'record',
     $initialized_at: now,
-  }));
+  };
+
+  const activeRecords = yield select(getActiveRecords);
+  yield put(changeActiveRecord(activeRecords.length, newRecord, { silent: true }));
   yield put(selectActiveRecord(newId));
 }
 

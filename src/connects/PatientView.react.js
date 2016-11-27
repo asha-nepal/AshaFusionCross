@@ -22,6 +22,7 @@ import {
   getPatientFormStyle,
   getActiveRecords,
   getSelectedActiveRecordIndex,
+  getActiveRecordsFormPristineness,
 } from '../selectors';
 
 const getNameDuplicatedPatients = makeGetDuplicatedPatients('name');
@@ -47,6 +48,7 @@ const mapStateToProps = (state) => {
       name: getNameDuplicatedPatients(state).length > 0,
       number: getNumberDuplicatedPatients(state).length > 0,
     },
+    activeRecordsFormPristineness: getActiveRecordsFormPristineness(state),
   };
 };
 
