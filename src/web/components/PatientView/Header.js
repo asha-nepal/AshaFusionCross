@@ -14,17 +14,29 @@ export default ({
   patient,
   verbose,
   onPatientFormShowRequested,
+  onBackClick,
 }: {
   patient: ?PatientObject,
   verbose: boolean,
   onPatientFormShowRequested: () => void,
+  onBackClick?: () => boolean,
 }) => (
   <section className="hero is-primary is-bold header-fixed">
     <div className="hero-head">
       <div className="container">
         <nav className="nav">
           <div className="nav-left">
-            <Link className="nav-item" to="/">
+            <Link
+              className="nav-item"
+              to="/"
+              onClick={e => {
+                if (onBackClick && !onBackClick()) {
+                  e.preventDefault();
+                  return false;
+                }
+                return true;
+              }}
+            >
               <span className="icon"><i className="fa fa-arrow-left" /></span>
             </Link>
             {verbose && patient && [

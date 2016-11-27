@@ -82,6 +82,12 @@ export default class PatientView extends Component {
           patient={patient}
           verbose={!isNew && !patientFormVisibility}
           onPatientFormShowRequested={() => setPatientFormVisibility(true)}
+          onBackClick={() => {
+            if (activeRecordsFormPristineness.some(x => !x)) {
+              return confirm('Record(s) is (are) changed but not saved.\nIs it ok to go back?');
+            }
+            return true;
+          }}
         />
 
         {(isNew || patientFormVisibility) &&
