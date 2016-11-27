@@ -174,7 +174,11 @@ export default class PatientView extends Component {
 
         {!isNew &&
           <Footer
-            onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
+            onSubmit={
+              selectedActiveRecordIndex > -1
+              && !activeRecordsFormPristineness[selectedActiveRecordIndex]
+                ? () => putActiveRecord(selectedActiveRecordIndex) : undefined
+            }
             freeze={isPuttingRecord}
           />
         }
