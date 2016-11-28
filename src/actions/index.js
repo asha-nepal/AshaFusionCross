@@ -69,9 +69,10 @@ export const changeActiveRecord = (index: number, record: RecordObject, option: 
 
 export const changeActiveRecords = formActions.change.bind(null, 'activeRecords');
 
-export const resetActiveRecords = formActions.reset.bind(null, 'activeRecords');
+export const setActiveRecordPristine = (index: number) =>
+  formActions.setPristine(`activeRecords[${index}]`);
 
-export const pushActiveRecord = formActions.push.bind(null, 'activeRecords');
+export const resetActiveRecords = formActions.reset.bind(null, 'activeRecords');
 
 export const insertOrChangeActiveRecord = (record: RecordObject, option: ?Object) =>
   (dispatch: Function, getState: Function) => {

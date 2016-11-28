@@ -37,6 +37,7 @@ type Props = {
     name: boolean,
     number: boolean,
   },
+  activeRecordsFormPristineness: Array<boolean>,
 };
 
 export default class PatientView extends Component {
@@ -68,6 +69,7 @@ export default class PatientView extends Component {
       recordFormStyleId,
       recordFormStyle,
       duplicatedPatientsExist,
+      activeRecordsFormPristineness,
     } = this.props;
 
     if (isFetching) {
@@ -80,6 +82,12 @@ export default class PatientView extends Component {
           patient={patient}
           verbose={!isNew && !patientFormVisibility}
           onPatientFormShowRequested={() => setPatientFormVisibility(true)}
+          onBackClick={() => {
+            if (activeRecordsFormPristineness.some(x => !x)) {
+              return confirm('Record(s) is (are) changed but not saved.\nIs it ok to go back?');
+            }
+            return true;
+          }}
         />
 
         {(isNew || patientFormVisibility) &&
@@ -130,6 +138,7 @@ export default class PatientView extends Component {
                   selectedActiveRecordIndex={selectedActiveRecordIndex}
                   selectActiveRecord={selectActiveRecord}
                   addNewActiveRecord={addNewActiveRecord}
+                  pristinenessList={activeRecordsFormPristineness}
                 />
                 <div className="column is-narrow control">
                   <span className="select">
@@ -165,7 +174,11 @@ export default class PatientView extends Component {
 
         {!isNew &&
           <Footer
-            onSubmit={() => putActiveRecord(selectedActiveRecordIndex)}
+            onSubmit={
+              selectedActiveRecordIndex > -1
+              && !activeRecordsFormPristineness[selectedActiveRecordIndex]
+                ? () => putActiveRecord(selectedActiveRecordIndex) : undefined
+            }
             freeze={isPuttingRecord}
           />
         }

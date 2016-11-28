@@ -21,7 +21,7 @@ export default combineReducers({
   activePatient: modelReducer('activePatient'),
   activePatientForm: formReducer('activePatient'),
   activeRecords: modelReducer('activeRecords', []),
-  activeRecordsForm: formReducer('activeRecords'),
+  activeRecordsForm: formReducer('activeRecords', []),
   status,
   alerts,
   db,

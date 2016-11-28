@@ -15,6 +15,7 @@ import {
   successPutRecord,
   failurePutRecord,
   changeActiveRecord,
+  setActiveRecordPristine,
   alertInfo,
   alertError,
 } from '../../actions';
@@ -72,6 +73,9 @@ describe('PUT_ACTIVE_RECORD', () => {
       }, {
         silent: true,
       })));
+
+    expect(saga.next().value)
+      .toEqual(put(setActiveRecordPristine(mockIndex)));
 
     expect(saga.next().value)
       .toEqual(put(alertInfo('Record updated')));
