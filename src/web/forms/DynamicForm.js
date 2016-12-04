@@ -50,37 +50,40 @@ import {
   getFieldDefinition,
 } from './utils';
 
-function createChildFields(state, rootModel, styles, fieldDefs, warnings) {
-  if (!styles) { return []; }
-  return styles.map((style, i) => {
-    const field = getFieldDefinition(style, fieldDefs);
-    if (!field) { return null; }
+function makeCreateChildFields(state, rootModel, fieldDefs, warnings) {
+  return function createChildFields(styles) {
+    if (!styles) { return []; }
 
-    // Handle "show" prop
-    if (!checkVisibility(state, rootModel, field.show)) {
-      return null;
-    }
+    return styles.map((style, i) => {
+      const field = getFieldDefinition(style, fieldDefs);
+      if (!field) { return null; }
 
-    const component = fieldComponents[field.class] || TextInput;
-    let children = null;
+      // Handle "show" prop
+      if (!checkVisibility(state, rootModel, field.show)) {
+        return null;
+      }
 
-    if (field.class === 'block' || field.class === 'accordion') {
-      children = createChildFields(state, rootModel, field.children, fieldDefs, warnings);
-    }
+      const component = fieldComponents[field.class] || TextInput;
+      let children = null;
 
-    return React.createElement(
-      component,
-      {
-        key: i,
-        model: `${rootModel}.${field.field}`,
-        label: field.label,
-        warning: warnings[field.field],
-        rootModel,
-        ...field,
-      },
-      children
-    );
-  });
+      if (field.class === 'block' || field.class === 'accordion') {
+        children = createChildFields(field.children);
+      }
+
+      return React.createElement(
+        component,
+        {
+          key: i,
+          model: `${rootModel}.${field.field}`,
+          label: field.label,
+          warning: warnings[field.field],
+          rootModel,
+          ...field,
+        },
+        children
+      );
+    });
+  };
 }
 
 export const DynamicFormComponent = ({
@@ -101,38 +104,42 @@ export const DynamicFormComponent = ({
   onRemove: ?() => void,
   freeze: boolean,
   warnings?: Object,
-}) => (
-  <Form
-    model={model}
-    onSubmit={onSubmit}
-  >
-    {createChildFields(state, model, style, fieldDefs, warnings)}
+}) => {
+  const createChildFields = makeCreateChildFields(state, model, fieldDefs, warnings);
 
-    {(onSubmit || onRemove) &&
-      <div className="level">
-        {onSubmit &&
-          <p className="level-left">
-            <button type="submit" className="button is-primary" disabled={freeze}>
-              Submit
-            </button>
-          </p>
-        }
-        {onRemove &&
-          <p className="level-right">
-            <a
-              className="button is-danger"
-              disabled={freeze}
-              onClick={e => {
-                e.preventDefault();
-                if (!freeze && onRemove) { onRemove(); }
-              }}
-            ><i className="fa fa-times" />Remove</a>
-          </p>
-        }
-      </div>
-    }
-  </Form>
-);
+  return (
+    <Form
+      model={model}
+      onSubmit={onSubmit}
+    >
+      {createChildFields(style)}
+
+      {(onSubmit || onRemove) &&
+        <div className="level">
+          {onSubmit &&
+            <p className="level-left">
+              <button type="submit" className="button is-primary" disabled={freeze}>
+                Submit
+              </button>
+            </p>
+          }
+          {onRemove &&
+            <p className="level-right">
+              <a
+                className="button is-danger"
+                disabled={freeze}
+                onClick={e => {
+                  e.preventDefault();
+                  if (!freeze && onRemove) { onRemove(); }
+                }}
+              ><i className="fa fa-times" />Remove</a>
+            </p>
+          }
+        </div>
+      }
+    </Form>
+  );
+};
 
 export default connect(
   state => ({ state })
