@@ -109,22 +109,20 @@ export const getActiveRecordsFormPristineness = createSelector(
     activeRecords.map((r, i) => isFormPristine(activeRecordsForm, `[${i}]`)),
 );
 
-import formStyles from '../form-styles';
-const recordFormStyles = formStyles.record || [];
-const defaultRecordFormStyleId = recordFormStyles[0] && recordFormStyles[0].id;
-
-// TODO: formStylesをstateとして管理することを見越してselectorとして書いておく
-export const getRecordFormStyles = () => recordFormStyles;
+export const getRecordFormStyles = (state: Object) => state.formStyles.record || [];
+export const getDefaultRecordFormStyleId = (state: Object) =>
+  getRecordFormStyles(state)[0] && getRecordFormStyles(state)[0].id;
 
 export const getRecordFormStyleId = (state: Object) =>
-  state.patientView.recordFormStyleId || defaultRecordFormStyleId;
+  state.patientView.recordFormStyleId || getDefaultRecordFormStyleId(state);
 
 export const getRecordFormStyle = createSelector(
-  [getRecordFormStyleId],
-  (recordFormStyleId) => {
+  [getRecordFormStyleId, getRecordFormStyles],
+  (recordFormStyleId, recordFormStyles) => {
     const recordFormStyle = recordFormStyles.find(s => s.id === recordFormStyleId);
     return recordFormStyle && recordFormStyle.style;
   }
 );
 
-export const getPatientFormStyle = () => formStyles.patient[0].style;  // TODO とりあえず固定で
+export const getPatientFormStyle = (state: Object) =>
+  state.formStyles.patient[0].style;  // TODO とりあえず固定で

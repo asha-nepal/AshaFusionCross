@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
     isPuttingPatient: state.status.isPuttingPatient,
     isPuttingRecord: state.status.isPuttingRecord,
     patientFormVisibility: state.patientView.patientFormVisibility,
-    patientFormStyle: getPatientFormStyle(),
+    patientFormStyle: getPatientFormStyle(state),
     recordFormStyles: getRecordFormStyles(state),
     recordFormStyleId: getRecordFormStyleId(state),
     recordFormStyle: getRecordFormStyle(state),
