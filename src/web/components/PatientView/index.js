@@ -9,6 +9,7 @@ import Footer from './Footer';
 import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import DynamicForm from '../../forms/DynamicForm';
+import { fields as fieldDefs } from '../../../form-styles';
 
 type Props = {
   init: () => void,
@@ -163,6 +164,7 @@ export default class PatientView extends Component {
                 <div className="container">
                   <DynamicForm
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
+                    fieldDefs={fieldDefs.record}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
                   />

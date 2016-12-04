@@ -45,11 +45,17 @@ const fieldComponents = {
   block: Block,
 };
 
-import { checkVisibility } from './utils';
+import {
+  checkVisibility,
+  getFieldDefinition,
+} from './utils';
 
-function createChildFields(state, rootModel, fields, warnings) {
-  if (!fields) { return []; }
-  return fields.map((field, i) => {
+function createChildFields(state, rootModel, styles, fieldDefs, warnings) {
+  if (!styles) { return []; }
+  return styles.map((style, i) => {
+    const field = getFieldDefinition(style, fieldDefs);
+    if (!field) { return null; }
+
     // Handle "show" prop
     if (!checkVisibility(state, rootModel, field.show)) {
       return null;
@@ -59,7 +65,7 @@ function createChildFields(state, rootModel, fields, warnings) {
     let children = null;
 
     if (field.class === 'block' || field.class === 'accordion') {
-      children = createChildFields(state, rootModel, field.children, warnings);
+      children = createChildFields(state, rootModel, field.children, fieldDefs, warnings);
     }
 
     return React.createElement(
@@ -81,6 +87,7 @@ export const DynamicFormComponent = ({
   state,
   model,
   style,
+  fieldDefs,
   onSubmit,
   onRemove,
   freeze,
@@ -89,6 +96,7 @@ export const DynamicFormComponent = ({
   state: Object,
   model: string,
   style: Array<Object>,
+  fieldDefs?: Object,
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
   freeze: boolean,
@@ -98,7 +106,7 @@ export const DynamicFormComponent = ({
     model={model}
     onSubmit={onSubmit}
   >
-    {createChildFields(state, model, style, warnings)}
+    {createChildFields(state, model, style, fieldDefs, warnings)}
 
     {(onSubmit || onRemove) &&
       <div className="level">

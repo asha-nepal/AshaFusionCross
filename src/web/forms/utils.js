@@ -25,3 +25,29 @@ export function checkVisibility(state: Object, rootPath: ?string, showProp: stri
 
   return true;
 }
+
+export function getFieldDefinition(
+  style: string | Object,
+  defaultStyles: ?{[key: string]: FormField}
+): ?FormField {
+  if (!defaultStyles) {
+    if (typeof style === 'string') { return null; }
+    return style;
+  }
+
+  if (typeof style === 'object') {
+    const defaultStyle = defaultStyles[style.field];
+    if (defaultStyle) {
+      return {
+        ...defaultStyle,
+        ...style,
+      };
+    }
+
+    return style;
+  } else if (typeof style === 'string') {
+    return defaultStyles[style];
+  }
+
+  return null;
+}
