@@ -19,6 +19,7 @@ import {
   getRecordFormStyles,
   getRecordFormStyleId,
   getRecordFormStyle,
+  getRecordFieldTypes,
   getPatientFormStyle,
   getActiveRecords,
   getSelectedActiveRecordIndex,
@@ -44,6 +45,7 @@ const mapStateToProps = (state) => {
     recordFormStyles: getRecordFormStyles(state),
     recordFormStyleId: getRecordFormStyleId(state),
     recordFormStyle: getRecordFormStyle(state),
+    recordFieldTypes: getRecordFieldTypes(state),
     duplicatedPatientsExist: {
       name: getNameDuplicatedPatients(state).length > 0,
       number: getNumberDuplicatedPatients(state).length > 0,

@@ -3,6 +3,12 @@
 import { createSelector } from 'reselect';
 import _get from 'lodash.get';
 
+export {
+  getRecordFormStyles, getDefaultRecordFormStyleId, getRecordFormStyleId, getRecordFormStyle,
+  getRecordFieldTypes,
+  getPatientFormStyle,
+} from './dform';
+
 export const getPatientList = (state: Object) => state.patientList;
 export const getPatientSelectFilter = (state: Object) =>
   state.patientSelect.filter.trim().toLowerCase();
@@ -108,21 +114,3 @@ export const getActiveRecordsFormPristineness = createSelector(
   (activeRecords, activeRecordsForm) =>
     activeRecords.map((r, i) => isFormPristine(activeRecordsForm, `[${i}]`)),
 );
-
-export const getRecordFormStyles = (state: Object) => state.formStyles.record || [];
-export const getDefaultRecordFormStyleId = (state: Object) =>
-  getRecordFormStyles(state)[0] && getRecordFormStyles(state)[0].id;
-
-export const getRecordFormStyleId = (state: Object) =>
-  state.patientView.recordFormStyleId || getDefaultRecordFormStyleId(state);
-
-export const getRecordFormStyle = createSelector(
-  [getRecordFormStyleId, getRecordFormStyles],
-  (recordFormStyleId, recordFormStyles) => {
-    const recordFormStyle = recordFormStyles.find(s => s.id === recordFormStyleId);
-    return recordFormStyle && recordFormStyle.style;
-  }
-);
-
-export const getPatientFormStyle = (state: Object) =>
-  state.formStyles.patient[0].style;  // TODO とりあえず固定で

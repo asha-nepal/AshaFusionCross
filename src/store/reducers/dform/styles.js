@@ -1,6 +1,6 @@
 /* @flow */
 
-import initialFormStyles from '../../form-styles';
+import initialFormStyles from './initial/styles';
 
 export default function (
   formStyles: Object = initialFormStyles,
