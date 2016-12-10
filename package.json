@@ -64,6 +64,7 @@
     "json-loader": "^0.5.4",
     "lodash.get": "^4.4.2",
     "lodash.sortby": "^4.7.0",
+    "lodash.topath": "^4.5.2",
     "lodash.uniqby": "^4.7.0",
     "mathjs": "^3.3.0",
     "mockdate": "^1.0.4",
