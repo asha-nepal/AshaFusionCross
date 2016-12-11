@@ -1,10 +1,12 @@
 /* eslint-env jest */
 
 jest.unmock('react-redux-form');
+jest.unmock('immutable');
 jest.unmock('../index');
 
 import { shallow } from 'enzyme';
 import React from 'react';
+import Immutable from 'immutable';
 
 import PatientView from '../index';
 import Footer from '../Footer';
@@ -59,10 +61,10 @@ describe('<PatientView />', () => {
       addNewActiveRecord={jest.fn()}
       putActivePatient={jest.fn()}
       putActiveRecord={jest.fn()}
-      recordFormStyles={[
+      recordFormStyles={Immutable.fromJS([
         { id: 'hoge', label: 'Hoge' },
         { id: 'fuga', label: 'Fuga' },
-      ]}
+      ])}
     />);
 
     const select = wrapper.find('select');

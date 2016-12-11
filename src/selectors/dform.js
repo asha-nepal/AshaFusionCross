@@ -1,23 +1,27 @@
 /* @flow */
 
+import Immutable from 'immutable';
 import { createSelector } from 'reselect';
 
-export const getRecordFormStyles = (state: Object) => state.dform.styles.record || [];
-export const getDefaultRecordFormStyleId = (state: Object) =>
-  getRecordFormStyles(state)[0] && getRecordFormStyles(state)[0].id;
+export const getRecordFormStyles = (state: Object): List<Map<string, any>> =>
+  state.dform.styles.get('record', Immutable.List([]));
 
-export const getRecordFormStyleId = (state: Object) =>
+export const getDefaultRecordFormStyleId = (state: Object): ?number =>
+  getRecordFormStyles(state).getIn([0, 'id']);
+
+export const getRecordFormStyleId = (state: Object): ?number =>
   state.patientView.recordFormStyleId || getDefaultRecordFormStyleId(state);
 
 export const getRecordFormStyle = createSelector(
   [getRecordFormStyleId, getRecordFormStyles],
   (recordFormStyleId, recordFormStyles) => {
-    const recordFormStyle = recordFormStyles.find(s => s.id === recordFormStyleId);
-    return recordFormStyle && recordFormStyle.style;
+    const recordFormStyle = recordFormStyles.find(s => s.get('id') === recordFormStyleId);
+    return recordFormStyle.get('style');
   }
 );
 
-export const getRecordFieldTypes = (state: Object) => state.dform.fieldTypes.record;
+export const getRecordFieldTypes = (state: Object): Object =>
+  state.dform.fieldTypes.record;
 
-export const getPatientFormStyle = (state: Object) =>
-  state.dform.styles.patient[0].style;  // TODO とりあえず固定で
+export const getPatientFormStyle = (state: Object): List<Map<string, any>> =>
+  state.dform.styles.getIn(['patient', 0, 'style']);  // TODO とりあえず固定で

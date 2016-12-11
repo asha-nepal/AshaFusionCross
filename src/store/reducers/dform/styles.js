@@ -1,4 +1,6 @@
 /* @flow */
+
+import Immutable from 'immutable';
 import {
   DFORM_STYLE_INSERT,
   DFORM_STYLE_UPDATE,
@@ -14,7 +16,7 @@ import _get from 'lodash.get';
 import _toPath from 'lodash.topath';
 
 export default function (
-  formStyles: Object = initialFormStyles,
+  formStyles: Map<string, List<Map<string, any>>> = Immutable.fromJS(initialFormStyles),
   action: DformStyleAction,
 ) {
   switch (action.type) {
