@@ -150,9 +150,11 @@ export default class PatientView extends Component {
                         setRecordFormStyleId(e.target.value);
                       }}
                     >
-                    {recordFormStyles.map(style =>
-                      <option key={style.id} value={style.id}>{style.label}</option>
-                    )}
+                    {recordFormStyles.map(style => {
+                      const id = style.get('id');
+                      const label = style.get('label');
+                      return <option key={id} value={id}>{label}</option>;
+                    })}
                     </select>
                   </span>
                   <RecordChartToggle />
