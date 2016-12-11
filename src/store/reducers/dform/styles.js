@@ -7,12 +7,6 @@ import {
   DFORM_STYLE_DELETE,
 } from '../../../actions';
 import initialFormStyles from './initial/styles';
-// TODO: lodash & icepick are mixed to use. Immutable.js should be use instead..
-import {
-  setIn,
-  updateIn,
-} from 'icepick';
-import _get from 'lodash.get';
 import _toPath from 'lodash.topath';
 
 export default function (
@@ -29,16 +23,15 @@ export default function (
         field,
       } = action.payload;
 
-      const formIndex = formStyles[group].findIndex(f => f.id === id);
+      const formIndex = formStyles.get(group).findIndex(f => f.get('id') === id);
       if (formIndex === -1) return formStyles;
 
       const fullParentPathArray = [group, formIndex, 'style', ..._toPath(parentPath)];
 
-      return updateIn(formStyles, fullParentPathArray, (prev) => [
-        ...prev.slice(0, index),
-        field,
-        ...prev.slice(index),
-      ]);
+      return formStyles.updateIn(
+        fullParentPathArray,
+        prev => prev.splice(index, 0, Immutable.fromJS(field))
+      );
     }
 
     case DFORM_STYLE_UPDATE: {
@@ -51,14 +44,14 @@ export default function (
         merge,
       } = action.payload;
 
-      const formIndex = formStyles[group].findIndex(f => f.id === id);
+      const formIndex = formStyles.get(group).findIndex(f => f.get('id') === id);
       if (formIndex === -1) return formStyles;
 
       const fullPathArray = [group, formIndex, 'style', ..._toPath(parentPath), index];
 
-      const newValue = merge ? { ..._get(formStyles, fullPathArray), ...field } : field;
-
-      return setIn(formStyles, fullPathArray, newValue);
+      return merge
+        ? formStyles.mergeIn(fullPathArray, Immutable.fromJS(field))
+        : formStyles.setIn(fullPathArray, Immutable.fromJS(field));
     }
 
     case DFORM_STYLE_DELETE: {
@@ -69,15 +62,12 @@ export default function (
         index,
       } = action.payload;
 
-      const formIndex = formStyles[group].findIndex(f => f.id === id);
+      const formIndex = formStyles.get(group).findIndex(f => f.get('id') === id);
       if (formIndex === -1) return formStyles;
 
       const fullParentPathArray = [group, formIndex, 'style', ..._toPath(parentPath)];
 
-      return updateIn(formStyles, fullParentPathArray, (prev) => [
-        ...prev.slice(0, index),
-        ...prev.slice(index + 1),
-      ]);
+      return formStyles.updateIn(fullParentPathArray, prev => prev.splice(index, 1));
     }
 
     default:

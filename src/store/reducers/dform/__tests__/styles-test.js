@@ -2,12 +2,11 @@
 
 jest.unmock('../../../../actions');
 jest.unmock('../../../../actions/dform');
-jest.unmock('icepick');
-jest.unmock('lodash.get');
 jest.unmock('lodash.topath');
+jest.unmock('immutable');
 jest.unmock('../styles');
 
-import deepFreeze from 'deep-freeze';
+import Immutable from 'immutable';
 
 import {
   dformStyleInsert,
@@ -19,7 +18,7 @@ import reducer from '../styles';
 
 describe('DFORM_STYLE_INSERT', () => {
   it('inserts field', () => {
-    const stateBefore = {
+    const stateBefore = Immutable.fromJS({
       record: [
         {
           id: 'form01',
@@ -35,7 +34,7 @@ describe('DFORM_STYLE_INSERT', () => {
           ],
         },
       ],
-    };
+    });
 
     const action = dformStyleInsert(
       'record',
@@ -45,7 +44,7 @@ describe('DFORM_STYLE_INSERT', () => {
       { class: 'textunitinput', label: 'XXX' }
     );
 
-    const stateAfter = {
+    const stateAfter = Immutable.fromJS({
       record: [
         {
           id: 'form01',
@@ -62,10 +61,7 @@ describe('DFORM_STYLE_INSERT', () => {
           ],
         },
       ],
-    };
-
-    deepFreeze(stateBefore);
-    deepFreeze(action);
+    });
 
     expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
@@ -74,7 +70,7 @@ describe('DFORM_STYLE_INSERT', () => {
 
 describe('DFORM_STYLE_UPDATE', () => {
   it('updates field', () => {
-    const stateBefore = {
+    const stateBefore = Immutable.fromJS({
       record: [
         {
           id: 'form01',
@@ -90,7 +86,7 @@ describe('DFORM_STYLE_UPDATE', () => {
           ],
         },
       ],
-    };
+    });
 
     const action = dformStyleUpdate(
       'record',
@@ -100,7 +96,7 @@ describe('DFORM_STYLE_UPDATE', () => {
       { class: 'textunitinput', label: 'XXX' }
     );
 
-    const stateAfter = {
+    const stateAfter = Immutable.fromJS({
       record: [
         {
           id: 'form01',
@@ -116,17 +112,14 @@ describe('DFORM_STYLE_UPDATE', () => {
           ],
         },
       ],
-    };
-
-    deepFreeze(stateBefore);
-    deepFreeze(action);
+    });
 
     expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
   });
 
   it('merges field if specified', () => {
-    const stateBefore = {
+    const stateBefore = Immutable.fromJS({
       record: [
         {
           id: 'form01',
@@ -142,7 +135,7 @@ describe('DFORM_STYLE_UPDATE', () => {
           ],
         },
       ],
-    };
+    });
 
     const action = dformStyleUpdate(
       'record',
@@ -153,7 +146,7 @@ describe('DFORM_STYLE_UPDATE', () => {
       true
     );
 
-    const stateAfter = {
+    const stateAfter = Immutable.fromJS({
       record: [
         {
           id: 'form01',
@@ -169,10 +162,7 @@ describe('DFORM_STYLE_UPDATE', () => {
           ],
         },
       ],
-    };
-
-    deepFreeze(stateBefore);
-    deepFreeze(action);
+    });
 
     expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
@@ -181,7 +171,7 @@ describe('DFORM_STYLE_UPDATE', () => {
 
 describe('DFORM_STYLE_DELETE', () => {
   it('deletes field', () => {
-    const stateBefore = {
+    const stateBefore = Immutable.fromJS({
       record: [
         {
           id: 'form01',
@@ -197,7 +187,7 @@ describe('DFORM_STYLE_DELETE', () => {
           ],
         },
       ],
-    };
+    });
 
     const action = dformStyleDelete(
       'record',
@@ -206,7 +196,7 @@ describe('DFORM_STYLE_DELETE', () => {
       1,
     );
 
-    const stateAfter = {
+    const stateAfter = Immutable.fromJS({
       record: [
         {
           id: 'form01',
@@ -221,10 +211,7 @@ describe('DFORM_STYLE_DELETE', () => {
           ],
         },
       ],
-    };
-
-    deepFreeze(stateBefore);
-    deepFreeze(action);
+    });
 
     expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
