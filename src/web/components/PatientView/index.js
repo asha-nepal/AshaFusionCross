@@ -9,7 +9,6 @@ import Footer from './Footer';
 import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import DynamicForm from '../../forms/DynamicForm';
-import { fields as fieldDefs } from '../../../form-styles';
 
 type Props = {
   init: () => void,
@@ -28,10 +27,11 @@ type Props = {
   selectedActiveRecordIndex: number,
   selectActiveRecord: (id: string) => void,
   setRecordFormStyleId: (styleId: string) => void,
-  patientFormStyle: Array<Object>,
-  recordFormStyles: Array<Object>,
+  patientFormStyle: DformStyle,
+  recordFormStyles: List<Map<string, DformStyle | string>>,
   recordFormStyleId: string,
-  recordFormStyle: ?string,
+  recordFormStyle: ?DformStyle,
+  recordFieldTypes: Array<FormField>,
   params: ?Object,
   patientId: ?string,
   duplicatedPatientsExist: {
@@ -69,6 +69,7 @@ export default class PatientView extends Component {
       recordFormStyles,
       recordFormStyleId,
       recordFormStyle,
+      recordFieldTypes,
       duplicatedPatientsExist,
       activeRecordsFormPristineness,
     } = this.props;
@@ -149,9 +150,11 @@ export default class PatientView extends Component {
                         setRecordFormStyleId(e.target.value);
                       }}
                     >
-                    {recordFormStyles.map(style =>
-                      <option key={style.id} value={style.id}>{style.label}</option>
-                    )}
+                    {recordFormStyles.map(style => {
+                      const id = style.get('id');
+                      const label = style.get('label');
+                      return <option key={id} value={id}>{label}</option>;
+                    })}
                     </select>
                   </span>
                   <RecordChartToggle />
@@ -164,7 +167,7 @@ export default class PatientView extends Component {
                 <div className="container">
                   <DynamicForm
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
-                    fieldDefs={fieldDefs.record}
+                    fieldDefs={recordFieldTypes}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
                   />

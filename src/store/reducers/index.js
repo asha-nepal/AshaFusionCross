@@ -13,6 +13,7 @@ import status from './status';
 import alerts from './alerts';
 import db from './db';
 import auth from './auth';
+import dform from './dform';
 
 export default combineReducers({
   patientSelect,
@@ -26,4 +27,5 @@ export default combineReducers({
   alerts,
   db,
   auth,
+  dform,
 });

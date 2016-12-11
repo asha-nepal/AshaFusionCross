@@ -55,7 +55,8 @@ function makeCreateChildFields(state, rootModel, fieldDefs, warnings) {
     if (!styles) { return []; }
 
     return styles.map((style, i) => {
-      const field = getFieldDefinition(style, fieldDefs);
+      // TODO: toJS() should be removed and handle Immutable object directly
+      const field = getFieldDefinition(style.toJS ? style.toJS() : style, fieldDefs);
       if (!field) { return null; }
 
       // Handle "show" prop
@@ -98,7 +99,7 @@ export const DynamicFormComponent = ({
 }: {
   state: Object,
   model: string,
-  style: Array<Object>,
+  style: DformStyle,
   fieldDefs?: Object,
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
