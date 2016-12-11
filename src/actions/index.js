@@ -23,6 +23,12 @@ export {
   SET_PATIENT_LIST_SORT_ORDER, setPatientListSortOrder,
 } from './patient-select';
 
+export {
+  DFORM_STYLE_INSERT, dformStyleInsert,
+  DFORM_STYLE_UPDATE, dformStyleUpdate,
+  DFORM_STYLE_DELETE, dformStyleDelete,
+} from './dform';
+
 // for saga
 export const FETCH_PATIENT_LIST = 'FETCH_PATIENT_LIST';
 export const fetchPatientList = () => ({
