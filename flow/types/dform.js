@@ -1,5 +1,7 @@
 import { PayloadAction } from './action';
 
+export type DformStyle = List<Map<string, any> | string>
+
 interface DformStyleInsertPayload {
   group: string,
   id: string,

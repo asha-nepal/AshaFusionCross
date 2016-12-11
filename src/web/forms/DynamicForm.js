@@ -99,7 +99,7 @@ export const DynamicFormComponent = ({
 }: {
   state: Object,
   model: string,
-  style: List<Map<string, any>>,
+  style: DformStyle,
   fieldDefs?: Object,
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
