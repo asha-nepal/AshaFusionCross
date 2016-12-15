@@ -5,45 +5,8 @@ import { connect } from 'react-redux';
 import { Form } from 'react-redux-form';
 import {
   TextInput,
-  TextUnitInput,
-  TextArea,
-  RadioGroup,
-  Select,
-  Attachment,
-  AttachmentInput,
-  AttachmentViewer,
-  Accordion,
-  Checkbox,
-  CheckGroup,
-  AutoCalc,
-  GuideTools,
-  Diagnoses,
-  MultiInput,
-  MultiDoubleInput,
-  SubformList,
-  Block,
+  fieldComponentList as fieldComponents,
 } from './fields';
-
-const fieldComponents = {
-  textinput: TextInput,
-  textunitinput: TextUnitInput,
-  textarea: TextArea,
-  radio: RadioGroup,
-  select: Select,
-  attachment: Attachment,
-  attachmentinput: AttachmentInput,
-  attachmentviewer: AttachmentViewer,
-  accordion: Accordion,
-  check: Checkbox,
-  checkgroup: CheckGroup,
-  autocalc: AutoCalc,
-  guide: GuideTools,
-  diagnoses: Diagnoses,
-  multiinput: MultiInput,
-  multidoubleinput: MultiDoubleInput,
-  subformlist: SubformList,
-  block: Block,
-};
 
 import {
   dformStyleUpdate,

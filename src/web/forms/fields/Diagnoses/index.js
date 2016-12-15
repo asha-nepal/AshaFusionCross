@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { SubformList, ReadonlySubformList } from '..';
+import { SubformList, ReadonlySubformList } from '../SubformList';
 import ICD10Input from './ICD10Input';
 
 export const Diagnoses = (props: Object) => (

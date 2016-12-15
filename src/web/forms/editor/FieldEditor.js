@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import { fieldComponentList } from '../fields';
 
 export default ({
   field,
@@ -32,6 +33,25 @@ export default ({
             })}
           />
         </label>
+      </div>
+
+      <div className="control">
+        <label className="label">
+          Type
+        </label>
+        <span className="select">
+          <select
+            value={field.class}
+            onChange={e => onFieldChange({
+              ...field,
+              class: e.target.value,
+            })}
+          >
+            {Object.keys(fieldComponentList).map(key =>
+              <option value={key} key={key}>{key}</option>
+            )}
+          </select>
+        </span>
       </div>
     </div>
   </div>
