@@ -2,6 +2,9 @@
 
 import React from 'react';
 
+import EditableFieldWrapper from '../editor/EditableFieldWrapper';
+import type { FieldEditPropsType } from '../editor/type';
+
 const alertIcons = {
   danger: <i className="fa fa-warning is-danger" />,
   warning: <i className="fa fa-warning is-warning" />,
@@ -45,6 +48,7 @@ export const TextInputComponent = ({
   required = false,
   readonly = false,
   expanded = false,
+  fieldEditProps,
 }: {
   label: ?string,
   value: ?string,
@@ -63,6 +67,7 @@ export const TextInputComponent = ({
   required?: boolean,
   readonly: boolean,
   expanded?: boolean,
+  fieldEditProps: FieldEditPropsType,
 }) => {
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
@@ -88,7 +93,10 @@ export const TextInputComponent = ({
   const sizeClassName = size ? ` is-${size}` : '';
 
   return (
-    <div className={expanded ? 'control is-expanded' : 'control'}>
+    <EditableFieldWrapper
+      className={expanded ? 'control is-expanded' : 'control'}
+      fieldEditProps={fieldEditProps}
+    >
       {label && <label className="label">{label}</label>}
       <p className={hasAddons ? 'control has-addons' : 'control'}>
         {prefix &&
@@ -125,7 +133,7 @@ export const TextInputComponent = ({
         }
       </p>
       <span className="help is-warning">{warning}</span>
-    </div>
+    </EditableFieldWrapper>
   );
 };
 
