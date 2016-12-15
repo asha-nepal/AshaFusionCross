@@ -5,19 +5,22 @@ import type { FieldEditPropsType } from './type';
 export default ({
   children,
   fieldEditProps,
+  style,
   ...props
 }: {
   children?: React$Element<any>,
   fieldEditProps: FieldEditPropsType,
+  style?: Object,
 }) => {
   if (!fieldEditProps) {
-    return <div {...props}>{children}</div>;
+    return <div style={style} {...props}>{children}</div>;
   }
 
   return (
     <div
       {...props}
       style={{
+        ...style,
         position: 'relative',
       }}
       onClick={e => {
