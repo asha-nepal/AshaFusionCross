@@ -26,7 +26,12 @@ export default ({
       />
       <i className="fa fa-search" />
     </p>
-    <button onClick={() => onFilterChange('')}>Clear</button>
+    <button
+      className="button is-danger is-outlined"
+      onClick={() => onFilterChange('')}
+    >
+    Clear
+    </button>
     <span className="form-static">Sort:</span>
     <p className="control">
       <span className="select">
