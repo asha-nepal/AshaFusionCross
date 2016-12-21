@@ -36,11 +36,11 @@ export const TextAreaComponent = ({
 }: {
   value: ?string,
   label?: ?string,
-  style: ?Object,
-  placeholder: ?string,
-  readonly: boolean,
+  style?: Object,
+  placeholder?: string,
+  readonly?: boolean,
   onChange: (newValue: string) => void,
-  fieldEditProps: FieldEditPropsType,
+  fieldEditProps?: FieldEditPropsType,
 }) => (readonly ? (
   <ReadonlyTextArea label={label} value={value} />
 ) : (

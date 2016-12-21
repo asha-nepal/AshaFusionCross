@@ -9,7 +9,7 @@ export default ({
   ...props
 }: {
   children?: React$Element<any>,
-  fieldEditProps: FieldEditPropsType,
+  fieldEditProps?: FieldEditPropsType,
   style?: Object,
 }) => {
   if (!fieldEditProps) {
@@ -25,7 +25,7 @@ export default ({
       }}
       onClick={e => {
         e.preventDefault();
-        fieldEditProps.onFocus();
+        if (fieldEditProps) fieldEditProps.onFocus();
       }}
     >{children}{fieldEditProps.fieldEditor}</div>
   );

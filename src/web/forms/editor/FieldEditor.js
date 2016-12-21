@@ -1,7 +1,12 @@
 /* @flow */
 
 import React from 'react';
-import { fieldComponentList } from '../fields';
+import {
+  TextInputComponent,
+  SelectComponent,
+  CheckboxComponent,
+  fieldComponentList,
+} from '../fields';
 
 export default ({
   field,
@@ -9,50 +14,57 @@ export default ({
 }: {
   field: FormField,
   onFieldChange: (updatedField: FormField) => void,
-}) => (
-  <div
-    className="card"
-    style={{
-      position: 'absolute',
-      zIndex: 1000,
-      maxWidth: 'initial',
-      width: 300,
-    }}
-  >
-    <div className="card-content">
-      <div className="control">
-        <label className="label">
-          Label
-          <input
-            className="input"
-            type="text"
-            value={field.label}
-            onChange={e => onFieldChange({
-              ...field,
-              label: e.target.value,
-            })}
-          />
-        </label>
-      </div>
+}) => {
+  const fieldProps = fieldComponentList[field.class].fieldProps;
 
-      <div className="control">
-        <label className="label">
-          Type
-        </label>
-        <span className="select">
-          <select
-            value={field.class}
-            onChange={e => onFieldChange({
+  return (
+    <div
+      className="card"
+      style={{
+        position: 'absolute',
+        zIndex: 1000,
+        maxWidth: 'initial',
+        width: 300,
+      }}
+    >
+      <div className="card-content">
+        <TextInputComponent
+          label="Label"
+          value={field.label}
+          onChange={v => onFieldChange({
+            ...field,
+            label: v,
+          })}
+        />
+
+        <SelectComponent
+          label="Type"
+          options={Object.keys(fieldComponentList).map(key => ({ id: key, label: key }))}
+          value={field.class}
+          onChange={v => onFieldChange({
+            ...field,
+            class: v,
+          })}
+        />
+
+        {fieldProps && fieldProps.map((fieldProp, i) => {
+          const editorComponent =
+            fieldProp.type === 'boolean'
+            ? CheckboxComponent : TextInputComponent;
+
+          // $FlowFixMe
+          return React.createElement(editorComponent, {
+            key: i,
+            label: fieldProp.name,
+            type: fieldProp.type,
+            value: field[fieldProp.name],
+            onChange: v => onFieldChange({
               ...field,
-              class: e.target.value,
-            })}
-          >
-            {Object.keys(fieldComponentList).map(key =>
-              <option value={key} key={key}>{key}</option>
-            )}
-          </select>
-        </span>
+              [fieldProp.name]: v,
+            }),
+          });
+        })}
       </div>
     </div>
-  </div>
-);
+  );
+};

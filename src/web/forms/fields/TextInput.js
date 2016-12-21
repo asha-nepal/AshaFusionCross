@@ -53,21 +53,21 @@ export const TextInputComponent = ({
   label: ?string,
   value: ?string,
   onChange: (newValue: string) => void,
-  style: ?Object,
-  type: string,
+  style?: Object,
+  type?: string,
   prefix?: string,
   suffix?: string,
-  placeholder: ?string,
-  min: ?number,
-  max: ?number,
-  precision: ?number,
-  alerts: ?Array<Object>,
+  placeholder?: string,
+  min?: number,
+  max?: number,
+  precision?: number,
+  alerts?: Array<Object>,
   warning?: string,
   size?: string,
   required?: boolean,
-  readonly: boolean,
+  readonly?: boolean,
   expanded?: boolean,
-  fieldEditProps: FieldEditPropsType,
+  fieldEditProps?: FieldEditPropsType,
 }) => {
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
@@ -137,6 +137,19 @@ export const TextInputComponent = ({
   );
 };
 
+TextInputComponent.fieldProps = [
+  { name: 'type', type: 'string' },
+  { name: 'prefix', type: 'string' },
+  { name: 'suffix', type: 'string' },
+  { name: 'placeholder', type: 'string' },
+  { name: 'min', type: 'number' },
+  { name: 'max', type: 'number' },
+  { name: 'precision', type: 'number' },
+  { name: 'size', type: 'number' },
+  { name: 'required', type: 'boolean' },
+  { name: 'readonly', type: 'boolean' },
+  { name: 'expanded', type: 'boolean' },
+];
 
 import connect from '../../../common/forms/fields/TextInput';
 
