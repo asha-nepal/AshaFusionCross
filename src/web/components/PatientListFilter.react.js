@@ -25,20 +25,10 @@ export default ({
         onChange={e => onFilterChange(e.target.value)}
       />
       <span className="clearbuttonwrapper">
-        <svg
-          viewBox="0 0 52 52"
-          className="clearbuttonbox"
-        >
-          <circle
-            cx="26"
-            cy="26"
-            r="15"
-            className="clearbutton"
-            onClick={() => onFilterChange('')}
-          >
-          </circle>
-          <path d="M20 20 32 32 M32 20 20 32" stroke="white"></path>
-        </svg>
+        <i
+          className="fa fa-times-circle"
+          onClick={() => onFilterChange('')}
+        />
       </span>
       <i className="fa fa-search" />
     </p>
