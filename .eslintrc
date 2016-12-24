@@ -8,7 +8,17 @@
     "rules": {
         "no-underscore-dangle": 0,
         "no-constant-condition": [2, { "checkLoops": false }],
-        "new-cap": [2, { "capIsNewExceptionPattern" : "^Immutable\\.." }],
+        "new-cap": [
+            2,
+            {
+                "capIsNewExceptions": [
+                    "DragDropContext",
+                    "DragSource",
+                    "DropTarget"
+                ],
+                "capIsNewExceptionPattern" : "^Immutable\\.."
+            }
+        ],
         "flow-vars/define-flow-type": 1,
         "flow-vars/use-flow-type": 1
     },
