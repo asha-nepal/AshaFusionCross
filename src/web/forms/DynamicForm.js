@@ -3,6 +3,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'react-redux-form';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import {
   TextInput,
   fieldComponentList as fieldComponents,
@@ -15,7 +17,9 @@ import {
 import {
   checkVisibility,
 } from './utils';
+import FieldDnDTarget from './editor/FieldDnDTarget';
 import FieldEditor from './editor/FieldEditor';
+import type { FieldEditPropsType } from './editor/type';
 
 function makeCreateChildFields(
   state,
@@ -31,7 +35,7 @@ function makeCreateChildFields(
 
     if (!styles) { return []; }
 
-    return styles.map((field, i) => {
+    const elements = styles.map((field, i) => {
       // Handle "show" prop
       if (!checkVisibility(state, rootModel, field.show)) {
         return null;
@@ -45,11 +49,13 @@ function makeCreateChildFields(
         children = createChildFields(field.children, `${childFieldPath}.children`);
       }
 
-      let fieldEditProps = null;
+      let fieldEditProps: ?FieldEditPropsType = null;
       if (editing) {
         fieldEditProps = {};
 
         const focused = childFieldPath === editFocusOn;
+
+        fieldEditProps.path = childFieldPath;
 
         fieldEditProps.focused = focused;
         fieldEditProps.onFocus = () => {
@@ -79,6 +85,24 @@ function makeCreateChildFields(
         children
       );
     });
+
+    // Add DnD targets for field editing
+    if (editing) {
+      return elements.reduce((a, b, i) => a.concat([
+        <FieldDnDTarget
+          key={`dnd-target-${i}`}
+          path={`${fieldPath}[${i}]`}
+        />,
+        b,
+      ]), []).concat(
+        <FieldDnDTarget
+          key={`dnd-target-${elements.length}`}
+          path={`${fieldPath}[${elements.length}]`}
+        />
+      );
+    }
+
+    return elements;
   };
 }
 
@@ -187,4 +211,6 @@ export default connect(
     onFieldChange: (group, id, parentPath, index, field) =>
       dispatch(dformStyleUpdate(group, id, parentPath, index, field)),
   })
-)(DynamicFormComponent);
+)(
+  DragDropContext(HTML5Backend)(DynamicFormComponent)
+);
