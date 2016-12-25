@@ -42,7 +42,14 @@ const EditableFieldWrapper = ({
     return <div style={style} {...props}>{children}</div>;
   }
 
-  return connectDragSource(
+  let child;
+  try {
+    child = React.Children.only(children);
+  } catch (e) {
+    child = <div>{children}</div>;
+  }
+
+  return (
     <div
       {...props}
       className={classNames(
@@ -60,7 +67,10 @@ const EditableFieldWrapper = ({
         e.preventDefault();
         if (fieldEditProps) fieldEditProps.onFocus();
       }}
-    >{children}{fieldEditProps.fieldEditor}</div>
+    >
+      {connectDragSource(child)}
+      {fieldEditProps.fieldEditor}
+    </div>
   );
 };
 
