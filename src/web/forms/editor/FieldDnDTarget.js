@@ -1,11 +1,30 @@
 import React from 'react';
+import { connect as reduxConnect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
+import {
+  dformStyleMove,
+} from '../../../actions';
+
+function splitIndex(path) {
+  const match = path.match(/(.*)\[(\d+)]$/);
+  return [match[1], parseInt(match[2], 10)];
+}
 
 const editableFieldTarget = {
   drop(props, monitor) {
     const item = monitor.getItem();
 
-    console.log(`Move ${item.moveFrom} to ${props.path}`);
+    const [fromParentPath, fromIndex] = splitIndex(item.moveFrom);
+    const [toParentPath, toIndex] = splitIndex(props.path);
+
+    props.moveField(
+      'record',
+      'reception',
+      fromParentPath,
+      fromIndex,
+      toParentPath,
+      toIndex,
+    );
   },
 };
 
@@ -16,15 +35,24 @@ function collect(connect, monitor) {
   };
 }
 
-export default DropTarget('editable-field', editableFieldTarget, collect)(({
-  connectDropTarget,
-  isOver,
-}) => connectDropTarget(
-  <div
-    style={{
-      minWidth: 10,
-      minHeight: 10,
-      backgroundColor: isOver ? 'red' : null,
-    }}
-  ></div>
-));
+const mapDispatchToProps = dispatch => ({
+  moveField: (group, id, fromParentPath, fromIndex, toParentPath, toIndex) =>
+    dispatch(dformStyleMove(group, id, fromParentPath, fromIndex, toParentPath, toIndex)),
+});
+
+export default reduxConnect(null, mapDispatchToProps)(
+  DropTarget('editable-field', editableFieldTarget, collect)(
+    ({
+      connectDropTarget,
+      isOver,
+    }) => connectDropTarget(
+      <div
+        style={{
+          minWidth: 10,
+          minHeight: 10,
+          backgroundColor: isOver ? 'red' : null,
+        }}
+      ></div>
+    )
+  )
+);
