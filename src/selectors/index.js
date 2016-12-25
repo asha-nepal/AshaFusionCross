@@ -5,7 +5,6 @@ import _get from 'lodash.get';
 
 export {
   getRecordFormStyles, getDefaultRecordFormStyleId, getRecordFormStyleId, getRecordFormStyle,
-  getRecordFieldTypes,
   getPatientFormStyle,
 } from './dform';
 

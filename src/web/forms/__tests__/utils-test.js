@@ -3,10 +3,7 @@
 jest.unmock('lodash.get');
 jest.unmock('../utils');
 
-import {
-  checkVisibility,
-  getFieldDefinition,
-} from '../utils';
+import { checkVisibility } from '../utils';
 
 describe('checkVisibility', () => {
   it('returns false if `show` prop is false', () => {
@@ -61,42 +58,5 @@ describe('checkVisibility', () => {
     };
 
     expect(checkVisibility(state, 'root', 'foo|bar')).toBe(true);
-  });
-});
-
-describe('getFieldDefinition', () => {
-  it('merges default style', () => {
-    const defaultStyles = {
-      foo: { label: 'Foo', class: 'textinput' },
-      bar: { label: 'Bar', class: 'textinput' },
-    };
-
-    const fieldStyle = {
-      field: 'foo', label: 'FooFoo',
-    };
-
-    expect(getFieldDefinition(fieldStyle, defaultStyles))
-      .toEqual({
-        field: 'foo', label: 'FooFoo', class: 'textinput',
-      });
-  });
-
-  it('retrieves a style from defaultStyles if string given as styly arg', () => {
-    const defaultStyles = {
-      foo: { field: 'foo', label: 'Foo', class: 'textinput' },
-      bar: { field: 'bar', label: 'Bar', class: 'textinput' },
-    };
-
-    const fieldStyle = 'foo';
-
-    expect(getFieldDefinition(fieldStyle, defaultStyles))
-      .toEqual({
-        field: 'foo', label: 'Foo', class: 'textinput',
-      });
-  });
-
-  it('returns fieldStyle directly if defaultStyles not given', () => {
-    expect(getFieldDefinition({ field: 'foo', label: 'Foo' }))
-      .toEqual({ field: 'foo', label: 'Foo' });
   });
 });

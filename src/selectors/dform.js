@@ -20,8 +20,5 @@ export const getRecordFormStyle = createSelector(
   }
 );
 
-export const getRecordFieldTypes = (state: Object): Object =>
-  state.dform.fieldTypes.record;
-
 export const getPatientFormStyle = (state: Object): List<Map<string, any>> =>
   state.dform.styles.getIn(['patient', 0, 'style']);  // TODO とりあえず固定で

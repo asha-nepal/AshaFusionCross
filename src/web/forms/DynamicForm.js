@@ -45,20 +45,12 @@ const fieldComponents = {
   block: Block,
 };
 
-import {
-  checkVisibility,
-  getFieldDefinition,
-} from './utils';
+import { checkVisibility } from './utils';
 
-function makeCreateChildFields(state, rootModel, fieldDefs, warnings) {
-  return function createChildFields(styles) {
-    if (!styles) { return []; }
-
-    return styles.map((style, i) => {
-      // TODO: toJS() should be removed and handle Immutable object directly
-      const field = getFieldDefinition(style.toJS ? style.toJS() : style, fieldDefs);
-      if (!field) { return null; }
-
+function makeCreateChildFields(state, rootModel, warnings) {
+  return function createChildFields(fields) {
+    if (!fields) { return []; }
+    return fields.map((field, i) => {
       // Handle "show" prop
       if (!checkVisibility(state, rootModel, field.show)) {
         return null;
@@ -91,7 +83,6 @@ export const DynamicFormComponent = ({
   state,
   model,
   style,
-  fieldDefs,
   onSubmit,
   onRemove,
   freeze,
@@ -100,20 +91,20 @@ export const DynamicFormComponent = ({
   state: Object,
   model: string,
   style: DformStyle,
-  fieldDefs?: Object,
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
   freeze: boolean,
   warnings?: Object,
 }) => {
-  const createChildFields = makeCreateChildFields(state, model, fieldDefs, warnings);
+  const createChildFields = makeCreateChildFields(state, model, warnings);
 
   return (
     <Form
       model={model}
       onSubmit={onSubmit}
     >
-      {createChildFields(style)}
+      {/* TODO: toJS() should be removed and handle Immutable object directly */}
+      {createChildFields(style.toJS ? style.toJS() : style)}
 
       {(onSubmit || onRemove) &&
         <div className="level">

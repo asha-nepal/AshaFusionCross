@@ -31,7 +31,6 @@ type Props = {
   recordFormStyles: List<Map<string, DformStyle | string>>,
   recordFormStyleId: string,
   recordFormStyle: ?DformStyle,
-  recordFieldTypes: Array<FormField>,
   params: ?Object,
   patientId: ?string,
   duplicatedPatientsExist: {
@@ -69,7 +68,6 @@ export default class PatientView extends Component {
       recordFormStyles,
       recordFormStyleId,
       recordFormStyle,
-      recordFieldTypes,
       duplicatedPatientsExist,
       activeRecordsFormPristineness,
     } = this.props;
@@ -167,7 +165,6 @@ export default class PatientView extends Component {
                 <div className="container">
                   <DynamicForm
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
-                    fieldDefs={recordFieldTypes}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
                   />
