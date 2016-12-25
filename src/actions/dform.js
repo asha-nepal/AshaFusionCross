@@ -53,3 +53,23 @@ export const dformStyleDelete = (
     index,
   },
 });
+
+export const DFORM_STYLE_MOVE = 'DFORM_STYLE_MOVE';
+export const dformStyleMove = (
+  group: string,
+  id: string,
+  fromParentPath: string,
+  fromIndex: number,
+  toParentPath: string,
+  toIndex: number,
+): DformStyleMoveAction => ({
+  type: DFORM_STYLE_MOVE,
+  payload: {
+    group,
+    id,
+    fromParentPath,
+    fromIndex,
+    toParentPath,
+    toIndex,
+  },
+});

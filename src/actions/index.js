@@ -27,6 +27,7 @@ export {
   DFORM_STYLE_INSERT, dformStyleInsert,
   DFORM_STYLE_UPDATE, dformStyleUpdate,
   DFORM_STYLE_DELETE, dformStyleDelete,
+  DFORM_STYLE_MOVE, dformStyleMove,
 } from './dform';
 
 // for saga

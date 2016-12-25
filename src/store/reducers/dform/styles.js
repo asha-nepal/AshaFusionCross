@@ -5,6 +5,7 @@ import {
   DFORM_STYLE_INSERT,
   DFORM_STYLE_UPDATE,
   DFORM_STYLE_DELETE,
+  DFORM_STYLE_MOVE,
 } from '../../../actions';
 import initialFormStyles from './initial/styles';
 import _toPath from 'lodash.topath';
@@ -68,6 +69,53 @@ export default function (
       const fullParentPathArray = [group, formIndex, 'style', ..._toPath(parentPath)];
 
       return formStyles.updateIn(fullParentPathArray, prev => prev.splice(index, 1));
+    }
+
+    case DFORM_STYLE_MOVE: {
+      const {
+        group,
+        id,
+        fromParentPath,
+        fromIndex,
+        toParentPath,
+        toIndex,
+      } = action.payload;
+
+      const formIndex = formStyles.get(group).findIndex(f => f.get('id') === id);
+      if (formIndex === -1) return formStyles;
+
+      // If no change occurs
+      if (fromParentPath === toParentPath && fromIndex === toIndex) return formStyles;
+
+      // Prepare Paths to use in the manupulation
+      const fromPathArray = [..._toPath(fromParentPath), fromIndex];
+      const toPathArray = [..._toPath(toParentPath), toIndex];
+      const toPathArrayAfterRemoval = toPathArray.map((toSegment, i) => {
+        const fromSegment = fromPathArray[i];
+        if (isNaN(toSegment) || isNaN(fromSegment)) {  // If either is not numeric
+          return toSegment;
+        }
+
+        const toSegmentInt = parseInt(toSegment, 10);
+        const fromSegmentInt = parseInt(fromSegment, 10);
+
+        return toSegmentInt > fromSegmentInt ? toSegmentInt - 1 : toSegment;
+      });
+
+      const fullFromPathArray = [group, formIndex, 'style', ...fromPathArray];
+      const fullToParentPathArrayAfterRemoval =
+        [group, formIndex, 'style', ...toPathArrayAfterRemoval.slice(0, -1)];
+      const toIndexAfterRemoval = toPathArrayAfterRemoval[toPathArrayAfterRemoval.length - 1];
+
+      // Move the field by removing and inserting
+      const movingField = formStyles.getIn(fullFromPathArray);
+
+      const removedFormStyles = formStyles.deleteIn(fullFromPathArray);
+
+      return removedFormStyles.updateIn(
+        fullToParentPathArrayAfterRemoval,
+        prev => prev.insert(toIndexAfterRemoval, movingField)
+      );
     }
 
     default:
