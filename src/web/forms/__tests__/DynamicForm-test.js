@@ -1,16 +1,15 @@
 /* eslint-env jest */
 
 jest.unmock('react-redux');
+jest.unmock('immutable');
 jest.unmock('../DynamicForm');
-jest.unmock('../fields');
-jest.unmock('../utils');
 
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import Immutable from 'immutable';
 import { Form } from 'react-redux-form';
 import { DynamicFormComponent } from '../DynamicForm';
-import { TextInput } from '../fields';
 
 describe('<DynamicFormComponent />', () => {
   it('shows submit button if onSubmit prop provided', () => {
@@ -18,6 +17,7 @@ describe('<DynamicFormComponent />', () => {
 
     const wrapper = shallow(
       <DynamicFormComponent
+        style={Immutable.List()}
         onSubmit={onSubmit}
       />
     );
@@ -30,7 +30,9 @@ describe('<DynamicFormComponent />', () => {
 
   it('hides submit button if onSubmit not provided', () => {
     const wrapper = shallow(
-      <DynamicFormComponent />
+      <DynamicFormComponent
+        style={Immutable.List()}
+      />
     );
 
     expect(wrapper.find('button[type="submit"]').length).toBe(0);
@@ -42,6 +44,7 @@ describe('<DynamicFormComponent />', () => {
 
     const wrapper = shallow(
       <DynamicFormComponent
+        style={Immutable.List()}
         onRemove={onRemove}
       />
     );
@@ -53,37 +56,11 @@ describe('<DynamicFormComponent />', () => {
 
   it('hides remove button if onRemove not provided', () => {
     const wrapper = shallow(
-      <DynamicFormComponent />
-    );
-
-    expect(wrapper.find('a').length).toBe(0);
-  });
-
-  it('creates field components based on style definition and fieldDefs', () => {
-    const style = [
-      { field: 'foo', class: 'textinput' },
-      'bar',
-      {
-        class: 'block',
-        children: [
-          { field: 'yo', class: 'textinput' },
-        ],
-      },
-    ];
-
-    const fieldDefs = {
-      bar: {
-        field: 'bar', class: 'textinput',
-      },
-    };
-
-    const wrapper = shallow(
       <DynamicFormComponent
-        style={style}
-        fieldDefs={fieldDefs}
+        style={Immutable.List()}
       />
     );
 
-    expect(wrapper.find(TextInput).length).toBe(3);
+    expect(wrapper.find('a').length).toBe(0);
   });
 });
