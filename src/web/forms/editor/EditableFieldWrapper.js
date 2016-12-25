@@ -1,6 +1,7 @@
 /* @flow */
 import React from 'react';
 import { DragSource } from 'react-dnd';
+import classNames from 'classnames';
 import type { FieldEditPropsType } from './type';
 
 const editableFieldSource = {
@@ -21,6 +22,7 @@ function collect(connect, monitor) {
 const EditableFieldWrapper = ({
   children,
   fieldEditProps,
+  className,
   style,
 
   connectDragSource,
@@ -30,6 +32,7 @@ const EditableFieldWrapper = ({
 }: {
   children?: React$Element<any>,
   fieldEditProps?: FieldEditPropsType,
+  className?: string,
   style?: Object,
 
   connectDragSource: Function,
@@ -42,11 +45,16 @@ const EditableFieldWrapper = ({
   return connectDragSource(
     <div
       {...props}
+      className={classNames(
+        className,
+        'form-editor-drag-source',
+        {
+          dragging: isDragging,
+        }
+      )}
       style={{
         ...style,
         position: 'relative',
-
-        backgroundColor: isDragging ? 'yellow' : null,
       }}
       onClick={e => {
         e.preventDefault();

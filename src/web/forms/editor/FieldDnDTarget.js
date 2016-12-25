@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect as reduxConnect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
+import classNames from 'classnames';
 import {
   dformStyleMove,
 } from '../../../actions';
@@ -47,12 +48,13 @@ export default reduxConnect(null, mapDispatchToProps)(
       isOver,
     }) => connectDropTarget(
       <div
-        style={{
-          minWidth: 10,
-          minHeight: 10,
-          backgroundColor: isOver ? 'red' : null,
-        }}
-      ></div>
+        className={classNames(
+          'form-editor-drop-target',
+          {
+            hover: isOver,
+          }
+        )}
+      />
     )
   )
 );
