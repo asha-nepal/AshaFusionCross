@@ -66,9 +66,7 @@ export default function (
       const formIndex = formStyles.get(group).findIndex(f => f.get('id') === id);
       if (formIndex === -1) return formStyles;
 
-      const fullParentPathArray = [group, formIndex, 'style', ..._toPath(parentPath)];
-
-      return formStyles.updateIn(fullParentPathArray, prev => prev.splice(index, 1));
+      return formStyles.deleteIn([group, formIndex, 'style', ..._toPath(parentPath), index]);
     }
 
     case DFORM_STYLE_MOVE: {
