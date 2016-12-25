@@ -3,6 +3,7 @@ import { connect as reduxConnect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import classNames from 'classnames';
 import {
+  dformStyleInsert,
   dformStyleMove,
 } from '../../../actions';
 
@@ -19,8 +20,8 @@ const editableFieldTarget = {
     const [toParentPath, toIndex] = splitIndex(props.path);
 
     props.moveField(
-      'record',
-      'reception',
+      'record',  // FIXME: tmp
+      'reception',  // FIXME: tmp
       fromParentPath,
       fromIndex,
       toParentPath,
@@ -37,24 +38,49 @@ function collect(connect, monitor) {
 }
 
 const mapDispatchToProps = dispatch => ({
+  addField: (group, id, parentPath, index, field) =>
+    dispatch(dformStyleInsert(group, id, parentPath, index, field)),
   moveField: (group, id, fromParentPath, fromIndex, toParentPath, toIndex) =>
     dispatch(dformStyleMove(group, id, fromParentPath, fromIndex, toParentPath, toIndex)),
 });
 
+const FieldDnDTarget = ({
+  path,
+  addField,
+
+  connectDropTarget,
+  isOver,
+}) => connectDropTarget(
+  <div
+    className={classNames(
+      'form-editor-drop-target',
+      {
+        hover: isOver,
+      }
+    )}
+    onClick={e => {
+      e.preventDefault();
+
+      const [parentPath, index] = splitIndex(path);
+
+      const field = {  // FIXME: tmp
+        label: '(New field)',
+        class: 'textinput',
+      };
+
+      addField(
+        'record',  // FIXME: tmp
+        'reception',  // FIXME: tmp
+        parentPath,
+        index,
+        field,
+      );
+    }}
+  />
+);
+
 export default reduxConnect(null, mapDispatchToProps)(
   DropTarget('editable-field', editableFieldTarget, collect)(
-    ({
-      connectDropTarget,
-      isOver,
-    }) => connectDropTarget(
-      <div
-        className={classNames(
-          'form-editor-drop-target',
-          {
-            hover: isOver,
-          }
-        )}
-      />
-    )
+    FieldDnDTarget
   )
 );
