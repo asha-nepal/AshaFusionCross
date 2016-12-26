@@ -20,10 +20,16 @@ export default ({
     <p className="control has-icon is-expanded">
       <input
         type="text"
-        className="input"
+        className="input withclear"
         value={filter}
         onChange={e => onFilterChange(e.target.value)}
       />
+      <span className="clearbuttonwrapper">
+        <i
+          className="fa fa-times-circle clearbutton"
+          onClick={() => onFilterChange('')}
+        />
+      </span>
       <i className="fa fa-search" />
     </p>
     <span className="form-static">Sort:</span>
