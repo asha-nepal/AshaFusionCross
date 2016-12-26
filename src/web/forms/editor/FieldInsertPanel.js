@@ -7,7 +7,7 @@ import {
   dformStyleMove,
 } from '../../../actions';
 
-function splitIndex(path) {
+function splitIndex(path: string): [string, number] {
   const match = path.match(/(.*)\[(\d+)]$/);
   return [match[1], parseInt(match[2], 10)];
 }
@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(dformStyleMove(group, id, fromParentPath, fromIndex, toParentPath, toIndex)),
 });
 
-const FieldDnDTarget = ({
+const FieldInsertPanel = ({
   path,
   addField,
 
@@ -81,6 +81,6 @@ const FieldDnDTarget = ({
 
 export default reduxConnect(null, mapDispatchToProps)(
   DropTarget('editable-field', editableFieldTarget, collect)(
-    FieldDnDTarget
+    FieldInsertPanel
   )
 );

@@ -18,7 +18,7 @@ import {
 import {
   checkVisibility,
 } from './utils';
-import FieldDnDTarget from './editor/FieldDnDTarget';
+import FieldInsertPanel from './editor/FieldInsertPanel';
 import FieldEditor from './editor/FieldEditor';
 import type { FieldEditPropsType } from './editor/type';
 
@@ -87,16 +87,16 @@ function makeCreateChildFields(
       );
     });
 
-    // Add DnD targets for field editing
+    // Insert <FieldInsertPanel /> between fields for field editing
     if (editing) {
       return elements.reduce((a, b, i) => a.concat([
-        <FieldDnDTarget
+        <FieldInsertPanel
           key={`dnd-target-${i}`}
           path={`${fieldPath}[${i}]`}
         />,
         b,
       ]), []).concat(
-        <FieldDnDTarget
+        <FieldInsertPanel
           key={`dnd-target-${elements.length}`}
           path={`${fieldPath}[${elements.length}]`}
         />
