@@ -11,9 +11,11 @@ import {
 export default ({
   field,
   onFieldChange,
+  onFieldRemove,
 }: {
   field: FormField,
   onFieldChange: (updatedField: FormField) => void,
+  onFieldRemove: () => void,
 }) => {
   const fieldProps = fieldComponentList[field.class].fieldProps;
 
@@ -74,6 +76,14 @@ export default ({
             },
           });
         })}
+
+        <a
+          className="button is-danger"
+          onClick={e => {
+            e.preventDefault();
+            onFieldRemove();
+          }}
+        >Remove</a>
       </div>
     </div>
   );
