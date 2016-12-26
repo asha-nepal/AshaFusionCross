@@ -26,7 +26,7 @@ export default ({
       />
       <span className="clearbuttonwrapper">
         <i
-          className="fa fa-times-circle"
+          className="fa fa-times-circle clearbutton"
           onClick={() => onFilterChange('')}
         />
       </span>
