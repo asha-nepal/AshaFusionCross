@@ -39,7 +39,7 @@ const EditableFieldWrapper = ({
   isDragging: boolean,
 }) => {
   if (!fieldEditProps) {
-    return <div style={style} {...props}>{children}</div>;
+    return <div className={className} style={style} {...props}>{children}</div>;
   }
 
   let child;
