@@ -29,6 +29,15 @@ export default ({
     >
       <div className="card-content">
         <TextInputComponent
+          label="Field"
+          value={field.field}
+          onChange={v => onFieldChange({
+            ...field,
+            field: v,
+          })}
+        />
+
+        <TextInputComponent
           label="Label"
           value={field.label}
           onChange={v => onFieldChange({
