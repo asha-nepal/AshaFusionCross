@@ -1,16 +1,16 @@
 .form-editor-drop-target
-  min-width: 10px
-  min-height: 10px
+  min-width: 12px
+  min-height: 12px
+  margin: 2px
   background-color: $light
   border-radius: 5px
-  border-width: 0
+  border: 1px solid darken($light, 5%)
+  cursor: pointer
 
   &.hover
     background-color: transparent
-    border-width: 1px
     border-color: $primary
-    border-style: solid
 
 .form-editor-drag-source
   &.dragging
-    background-color: yellow
+    background-color: lighten($warning, 20%)
