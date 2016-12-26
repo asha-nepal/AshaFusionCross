@@ -12,6 +12,7 @@ import {
 
 import {
   dformStyleUpdate,
+  dformStyleDelete,
 } from '../../actions';
 
 import {
@@ -29,6 +30,7 @@ function makeCreateChildFields(
   onEditFocus: (fieldPath: string) => void,
   editFocusOn: ?string,
   onFieldChange: (parentPath: string, index: number, field: FormField) => void,
+  onFieldRemove: (parentPath: string, index: number) => void,
 ) {
   return function createChildFields(styles, fieldPath = '') {
     // fieldPath is string rather than array because it's easy to check equality
@@ -58,14 +60,13 @@ function makeCreateChildFields(
         fieldEditProps.path = childFieldPath;
 
         fieldEditProps.focused = focused;
-        fieldEditProps.onFocus = () => {
-          onEditFocus(childFieldPath);
-        };
+        fieldEditProps.onFocus = () => onEditFocus(childFieldPath);
         if (focused) {
           fieldEditProps.fieldEditor = (
             <FieldEditor
               field={field}
               onFieldChange={updatedField => onFieldChange(fieldPath, i, updatedField)}
+              onFieldRemove={() => onFieldRemove(fieldPath, i)}
             />
           );
         }
@@ -121,6 +122,12 @@ type Props = {
     index: number,
     field: FormField
   ) => void,
+  onFieldRemove: (
+    group: string,
+    id: string,
+    parentPath: string,
+    index: number
+  ) => void,
 }
 
 export class DynamicFormComponent extends React.Component {
@@ -129,6 +136,7 @@ export class DynamicFormComponent extends React.Component {
 
     this.onEditFocus = this.onEditFocus.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
+    this.onFieldRemove = this.onFieldRemove.bind(this);
 
     this.state = {
       editing: true,
@@ -151,6 +159,11 @@ export class DynamicFormComponent extends React.Component {
     this.props.onFieldChange('record', 'reception', parentPath, index, field);
   }
 
+  onFieldRemove: Function
+  onFieldRemove(parentPath: string, index: number) {
+    this.props.onFieldRemove('record', 'reception', parentPath, index);
+  }
+
   props: Props
 
   render() {
@@ -166,7 +179,8 @@ export class DynamicFormComponent extends React.Component {
 
     const createChildFields = makeCreateChildFields(
       state, model, warnings,
-      this.state.editing, this.onEditFocus, this.state.editFocusOn, this.onFieldChange
+      this.state.editing, this.onEditFocus, this.state.editFocusOn,
+      this.onFieldChange, this.onFieldRemove
     );
 
     return (
@@ -210,6 +224,8 @@ export default connect(
   dispatch => ({
     onFieldChange: (group, id, parentPath, index, field) =>
       dispatch(dformStyleUpdate(group, id, parentPath, index, field)),
+    onFieldRemove: (group, id, parentPath, index) =>
+      dispatch(dformStyleDelete(group, id, parentPath, index)),
   })
 )(
   DragDropContext(HTML5Backend)(DynamicFormComponent)
