@@ -8,6 +8,10 @@ import {
   fieldComponentList,
 } from '../fields';
 
+const avaliableComponentKeys =
+  Object.keys(fieldComponentList)
+    .filter(key => 'fieldProps' in fieldComponentList[key]);
+
 export default ({
   field,
   onFieldChange,
@@ -50,7 +54,7 @@ export default ({
 
         <SelectComponent
           label="Type"
-          options={Object.keys(fieldComponentList).map(key => ({ id: key, label: key }))}
+          options={avaliableComponentKeys.map(key => ({ id: key, label: key }))}
           value={field.class}
           onChange={v => onFieldChange({
             ...field,

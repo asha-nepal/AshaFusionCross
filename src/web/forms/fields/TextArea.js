@@ -57,6 +57,8 @@ export const TextAreaComponent = ({
   </EditableFieldWrapper>
 ));
 
+TextAreaComponent.fieldProps = [];
+
 const mapStateToProps = (state, ownProps) => ({
   value: _get(state, ownProps.model),
 });
