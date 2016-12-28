@@ -11,10 +11,10 @@ import {
 } from './fields';
 
 import {
-  dformStyleInsert,
-  dformStyleMove,
-  dformStyleUpdate,
-  dformStyleDelete,
+  dformStyleFieldInsert,
+  dformStyleFieldMove,
+  dformStyleFieldUpdate,
+  dformStyleFieldRemove,
 } from '../../actions';
 
 import {
@@ -256,18 +256,18 @@ export default connect(
   (dispatch, ownProps) => ({
     onFieldInsert: (parentPath, index, field) =>
       dispatch(
-        dformStyleInsert(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
+        dformStyleFieldInsert(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
     onFieldMove: (fromParentPath, fromIndex, toParentPath, toIndex) =>
       dispatch(
-        dformStyleMove(
+        dformStyleFieldMove(
           ownProps.formGroup, ownProps.formStyleId,
           fromParentPath, fromIndex, toParentPath, toIndex)),
     onFieldChange: (parentPath, index, field) =>
       dispatch(
-        dformStyleUpdate(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
+        dformStyleFieldUpdate(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
     onFieldRemove: (parentPath, index) =>
       dispatch(
-        dformStyleDelete(ownProps.formGroup, ownProps.formStyleId, parentPath, index)),
+        dformStyleFieldRemove(ownProps.formGroup, ownProps.formStyleId, parentPath, index)),
   })
 )(
   DragDropContext(HTML5Backend)(DynamicFormComponent)
