@@ -1,11 +1,6 @@
 import React from 'react';
-import { connect as reduxConnect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import classNames from 'classnames';
-import {
-  dformStyleInsert,
-  dformStyleMove,
-} from '../../../actions';
 
 function splitIndex(path: string): [string, number] {
   const match = path.match(/(.*)\[(\d+)]$/);
@@ -17,15 +12,10 @@ const editableFieldTarget = {
     const item = monitor.getItem();
 
     const [fromParentPath, fromIndex] = splitIndex(item.moveFrom);
-    const [toParentPath, toIndex] = splitIndex(props.path);
 
-    props.moveField(
-      'record',  // FIXME: tmp
-      'reception',  // FIXME: tmp
+    props.onFieldMove(
       fromParentPath,
-      fromIndex,
-      toParentPath,
-      toIndex,
+      fromIndex
     );
   },
 };
@@ -37,16 +27,8 @@ function collect(connect, monitor) {
   };
 }
 
-const mapDispatchToProps = dispatch => ({
-  addField: (group, id, parentPath, index, field) =>
-    dispatch(dformStyleInsert(group, id, parentPath, index, field)),
-  moveField: (group, id, fromParentPath, fromIndex, toParentPath, toIndex) =>
-    dispatch(dformStyleMove(group, id, fromParentPath, fromIndex, toParentPath, toIndex)),
-});
-
 const FieldInsertPanel = ({
-  path,
-  addField,
+  onFieldInsert,
 
   connectDropTarget,
   isOver,
@@ -61,26 +43,18 @@ const FieldInsertPanel = ({
     onClick={e => {
       e.preventDefault();
 
-      const [parentPath, index] = splitIndex(path);
-
       const field = {  // FIXME: tmp
         label: '(New field)',
         class: 'textinput',
       };
 
-      addField(
-        'record',  // FIXME: tmp
-        'reception',  // FIXME: tmp
-        parentPath,
-        index,
-        field,
-      );
+      onFieldInsert(field);
     }}
   />
 );
 
-export default reduxConnect(null, mapDispatchToProps)(
-  DropTarget('editable-field', editableFieldTarget, collect)(
-    FieldInsertPanel
-  )
+export default DropTarget(
+  'editable-field', editableFieldTarget, collect
+)(
+  FieldInsertPanel
 );

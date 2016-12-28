@@ -11,6 +11,8 @@ import {
 } from './fields';
 
 import {
+  dformStyleInsert,
+  dformStyleMove,
   dformStyleUpdate,
   dformStyleDelete,
 } from '../../actions';
@@ -29,6 +31,10 @@ function makeCreateChildFields(
   editing: boolean,
   onEditFocus: (fieldPath: string) => void,
   editFocusOn: ?string,
+  onFieldInsert: (parentPath: string, index: number, field: FormField) => void,
+  onFieldMove: (
+    fromParentPath: string, fromIndex: number, toParentPath: string, toIndex: number
+  ) => void,
   onFieldChange: (parentPath: string, index: number, field: FormField) => void,
   onFieldRemove: (parentPath: string, index: number) => void,
 ) {
@@ -92,13 +98,17 @@ function makeCreateChildFields(
       return elements.reduce((a, b, i) => a.concat([
         <FieldInsertPanel
           key={`dnd-target-${i}`}
-          path={`${fieldPath}[${i}]`}
+          onFieldInsert={field => onFieldInsert(fieldPath, i, field)}
+          onFieldMove={(fromParentPath, fromIndex) =>
+            onFieldMove(fromParentPath, fromIndex, fieldPath, i)}
         />,
         b,
       ]), []).concat(
         <FieldInsertPanel
           key={`dnd-target-${elements.length}`}
-          path={`${fieldPath}[${elements.length}]`}
+          onFieldInsert={field => onFieldInsert(fieldPath, elements.length, field)}
+          onFieldMove={(fromParentPath, fromIndex) =>
+            onFieldMove(fromParentPath, fromIndex, fieldPath, elements.length)}
         />
       );
     }
@@ -128,6 +138,21 @@ type Props = {
     parentPath: string,
     index: number
   ) => void,
+  onFieldInsert: (
+    group: string,
+    id: string,
+    parentPath: string,
+    index: number,
+    field: FormField
+  ) => void,
+  onFieldMove: (
+    group: string,
+    id: string,
+    fromParentPath: string,
+    fromIndex: number,
+    toParentPath: string,
+    toIndex: number
+  ) => void,
 }
 
 export class DynamicFormComponent extends React.Component {
@@ -135,6 +160,8 @@ export class DynamicFormComponent extends React.Component {
     super(props);
 
     this.onEditFocus = this.onEditFocus.bind(this);
+    this.onFieldInsert = this.onFieldInsert.bind(this);
+    this.onFieldMove = this.onFieldMove.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onFieldRemove = this.onFieldRemove.bind(this);
 
@@ -152,6 +179,16 @@ export class DynamicFormComponent extends React.Component {
   onEditFocus: Function
   onEditFocus(fieldPath: string): void {
     this.setState({ editFocusOn: fieldPath });
+  }
+
+  onFieldInsert: Function
+  onFieldInsert(parentPath: string, index: number, field: FormField) {
+    this.props.onFieldInsert('record', 'reception', parentPath, index, field);
+  }
+
+  onFieldMove: Function
+  onFieldMove(fromParentPath: string, fromIndex: number, toParentPath: string, toIndex: number) {
+    this.props.onFieldMove('record', 'reception', fromParentPath, fromIndex, toParentPath, toIndex);
   }
 
   onFieldChange: Function
@@ -180,6 +217,7 @@ export class DynamicFormComponent extends React.Component {
     const createChildFields = makeCreateChildFields(
       state, model, warnings,
       this.state.editing, this.onEditFocus, this.state.editFocusOn,
+      this.onFieldInsert, this.onFieldMove,
       this.onFieldChange, this.onFieldRemove
     );
 
@@ -222,6 +260,10 @@ export class DynamicFormComponent extends React.Component {
 export default connect(
   state => ({ state }),
   dispatch => ({
+    onFieldInsert: (group, id, parentPath, index, field) =>
+      dispatch(dformStyleInsert(group, id, parentPath, index, field)),
+    onFieldMove: (group, id, fromParentPath, fromIndex, toParentPath, toIndex) =>
+      dispatch(dformStyleMove(group, id, fromParentPath, fromIndex, toParentPath, toIndex)),
     onFieldChange: (group, id, parentPath, index, field) =>
       dispatch(dformStyleUpdate(group, id, parentPath, index, field)),
     onFieldRemove: (group, id, parentPath, index) =>
