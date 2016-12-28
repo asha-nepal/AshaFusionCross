@@ -13,6 +13,7 @@ import {
   dformStyleFieldUpdate,
   dformStyleFieldRemove,
   dformStyleFieldMove,
+  dformStyleFormAdd,
 } from '../../../../actions';
 
 import reducer from '../styles';
@@ -499,6 +500,76 @@ describe('DFORM_STYLE_FIELD_MOVE', () => {
                 { class: 'textinput', label: 'text0' },
               ],
             },
+          ],
+        },
+      ],
+    });
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+});
+
+
+describe('DFORM_STYLE_FORM_ADD', () => {
+  it('adds new form', () => {
+    const stateBefore = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          style: [
+            { class: 'textinput', label: 'text0' },
+            { class: 'textinput', label: 'text1' },
+          ],
+        },
+      ],
+    });
+
+    const action = dformStyleFormAdd('record', 'form02', 'NEW FORM');
+
+    const stateAfter = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          style: [
+            { class: 'textinput', label: 'text0' },
+            { class: 'textinput', label: 'text1' },
+          ],
+        },
+        {
+          id: 'form02',
+          label: 'NEW FORM',
+          style: [],
+        },
+      ],
+    });
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('does not add new form if id already exists', () => {
+    const stateBefore = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          style: [
+            { class: 'textinput', label: 'text0' },
+            { class: 'textinput', label: 'text1' },
+          ],
+        },
+      ],
+    });
+
+    const action = dformStyleFormAdd('record', 'form01', 'NEW FORM');
+
+    const stateAfter = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          style: [
+            { class: 'textinput', label: 'text0' },
+            { class: 'textinput', label: 'text1' },
           ],
         },
       ],

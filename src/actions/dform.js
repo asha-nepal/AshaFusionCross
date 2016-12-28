@@ -73,3 +73,17 @@ export const dformStyleFieldMove = (
     toIndex,
   },
 });
+
+export const DFORM_STYLE_FORM_ADD = 'DFORM_STYLE_FORM_ADD';
+export const dformStyleFormAdd = (
+  group: string,
+  id: string,
+  label: string,
+) => ({
+  type: DFORM_STYLE_FORM_ADD,
+  payload: {
+    group,
+    id,
+    label,
+  },
+});
