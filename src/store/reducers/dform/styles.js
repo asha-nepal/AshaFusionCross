@@ -2,10 +2,11 @@
 
 import Immutable from 'immutable';
 import {
-  DFORM_STYLE_INSERT,
-  DFORM_STYLE_UPDATE,
-  DFORM_STYLE_DELETE,
-  DFORM_STYLE_MOVE,
+  DFORM_STYLE_FIELD_INSERT,
+  DFORM_STYLE_FIELD_UPDATE,
+  DFORM_STYLE_FIELD_REMOVE,
+  DFORM_STYLE_FIELD_MOVE,
+  DFORM_STYLE_FORM_ADD,
 } from '../../../actions';
 import initialFormStyles from './initial/styles';
 import _toPath from 'lodash.topath';
@@ -15,7 +16,7 @@ export default function (
   action: DformStyleAction,
 ) {
   switch (action.type) {
-    case DFORM_STYLE_INSERT: {
+    case DFORM_STYLE_FIELD_INSERT: {
       const {
         group,
         id,
@@ -35,7 +36,7 @@ export default function (
       );
     }
 
-    case DFORM_STYLE_UPDATE: {
+    case DFORM_STYLE_FIELD_UPDATE: {
       const {
         group,
         id,
@@ -55,7 +56,7 @@ export default function (
         : formStyles.setIn(fullPathArray, Immutable.fromJS(field));
     }
 
-    case DFORM_STYLE_DELETE: {
+    case DFORM_STYLE_FIELD_REMOVE: {
       const {
         group,
         id,
@@ -69,7 +70,7 @@ export default function (
       return formStyles.deleteIn([group, formIndex, 'style', ..._toPath(parentPath), index]);
     }
 
-    case DFORM_STYLE_MOVE: {
+    case DFORM_STYLE_FIELD_MOVE: {
       const {
         group,
         id,
@@ -114,6 +115,22 @@ export default function (
         fullToParentPathArrayAfterRemoval,
         prev => prev.insert(toIndexAfterRemoval, movingField)
       );
+    }
+
+    case DFORM_STYLE_FORM_ADD: {
+      const {
+        group,
+        id,
+        label,
+      } = action.payload;
+
+      const newForm = {
+        id,
+        label,
+        style: [],
+      };
+
+      return formStyles.update(group, prev => prev.push(Immutable.fromJS(newForm)));
     }
 
     default:

@@ -24,10 +24,11 @@ export {
 } from './patient-select';
 
 export {
-  DFORM_STYLE_INSERT, dformStyleInsert,
-  DFORM_STYLE_UPDATE, dformStyleUpdate,
-  DFORM_STYLE_DELETE, dformStyleDelete,
-  DFORM_STYLE_MOVE, dformStyleMove,
+  DFORM_STYLE_FIELD_INSERT, dformStyleFieldInsert,
+  DFORM_STYLE_FIELD_UPDATE, dformStyleFieldUpdate,
+  DFORM_STYLE_FIELD_REMOVE, dformStyleFieldRemove,
+  DFORM_STYLE_FIELD_MOVE, dformStyleFieldMove,
+  DFORM_STYLE_FORM_ADD, dformStyleFormAdd,
 } from './dform';
 
 // for saga

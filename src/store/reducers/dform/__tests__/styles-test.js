@@ -9,15 +9,16 @@ jest.unmock('../styles');
 import Immutable from 'immutable';
 
 import {
-  dformStyleInsert,
-  dformStyleUpdate,
-  dformStyleDelete,
-  dformStyleMove,
+  dformStyleFieldInsert,
+  dformStyleFieldUpdate,
+  dformStyleFieldRemove,
+  dformStyleFieldMove,
+  dformStyleFormAdd,
 } from '../../../../actions';
 
 import reducer from '../styles';
 
-describe('DFORM_STYLE_INSERT', () => {
+describe('DFORM_STYLE_FIELD_INSERT', () => {
   it('inserts field', () => {
     const stateBefore = Immutable.fromJS({
       record: [
@@ -37,7 +38,7 @@ describe('DFORM_STYLE_INSERT', () => {
       ],
     });
 
-    const action = dformStyleInsert(
+    const action = dformStyleFieldInsert(
       'record',
       'form01',
       '[0].children',
@@ -69,7 +70,7 @@ describe('DFORM_STYLE_INSERT', () => {
   });
 });
 
-describe('DFORM_STYLE_UPDATE', () => {
+describe('DFORM_STYLE_FIELD_UPDATE', () => {
   it('updates field', () => {
     const stateBefore = Immutable.fromJS({
       record: [
@@ -89,7 +90,7 @@ describe('DFORM_STYLE_UPDATE', () => {
       ],
     });
 
-    const action = dformStyleUpdate(
+    const action = dformStyleFieldUpdate(
       'record',
       'form01',
       '[0].children',
@@ -138,7 +139,7 @@ describe('DFORM_STYLE_UPDATE', () => {
       ],
     });
 
-    const action = dformStyleUpdate(
+    const action = dformStyleFieldUpdate(
       'record',
       'form01',
       '[0].children',
@@ -170,7 +171,7 @@ describe('DFORM_STYLE_UPDATE', () => {
   });
 });
 
-describe('DFORM_STYLE_DELETE', () => {
+describe('DFORM_STYLE_FIELD_REMOVE', () => {
   it('deletes field', () => {
     const stateBefore = Immutable.fromJS({
       record: [
@@ -190,7 +191,7 @@ describe('DFORM_STYLE_DELETE', () => {
       ],
     });
 
-    const action = dformStyleDelete(
+    const action = dformStyleFieldRemove(
       'record',
       'form01',
       '[0].children',
@@ -219,7 +220,7 @@ describe('DFORM_STYLE_DELETE', () => {
   });
 });
 
-describe('DFORM_STYLE_MOVE', () => {
+describe('DFORM_STYLE_FIELD_MOVE', () => {
   it('moves field backward', () => {
     const stateBefore = Immutable.fromJS({
       record: [
@@ -238,7 +239,7 @@ describe('DFORM_STYLE_MOVE', () => {
       ],
     });
 
-    const action = dformStyleMove(
+    const action = dformStyleFieldMove(
       'record',
       'form01',
       '[0].children',
@@ -286,7 +287,7 @@ describe('DFORM_STYLE_MOVE', () => {
       ],
     });
 
-    const action = dformStyleMove(
+    const action = dformStyleFieldMove(
       'record',
       'form01',
       '',
@@ -334,7 +335,7 @@ describe('DFORM_STYLE_MOVE', () => {
       ],
     });
 
-    const action = dformStyleMove(
+    const action = dformStyleFieldMove(
       'record',
       'form01',
       '[0].children',
@@ -382,7 +383,7 @@ describe('DFORM_STYLE_MOVE', () => {
       ],
     });
 
-    const action = dformStyleMove(
+    const action = dformStyleFieldMove(
       'record',
       'form01',
       '[0].children',
@@ -430,7 +431,7 @@ describe('DFORM_STYLE_MOVE', () => {
       ],
     });
 
-    const action = dformStyleMove(
+    const action = dformStyleFieldMove(
       'record',
       'form01',
       '[0].children',
@@ -478,7 +479,7 @@ describe('DFORM_STYLE_MOVE', () => {
       ],
     });
 
-    const action = dformStyleMove(
+    const action = dformStyleFieldMove(
       'record',
       'form01',
       '[0].children',
@@ -500,6 +501,45 @@ describe('DFORM_STYLE_MOVE', () => {
               ],
             },
           ],
+        },
+      ],
+    });
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+});
+
+
+describe('DFORM_STYLE_FORM_ADD', () => {
+  it('adds new form', () => {
+    const stateBefore = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          style: [
+            { class: 'textinput', label: 'text0' },
+            { class: 'textinput', label: 'text1' },
+          ],
+        },
+      ],
+    });
+
+    const action = dformStyleFormAdd('record', 'form02', 'NEW FORM');
+
+    const stateAfter = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          style: [
+            { class: 'textinput', label: 'text0' },
+            { class: 'textinput', label: 'text1' },
+          ],
+        },
+        {
+          id: 'form02',
+          label: 'NEW FORM',
+          style: [],
         },
       ],
     });
