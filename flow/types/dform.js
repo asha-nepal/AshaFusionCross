@@ -35,13 +35,21 @@ interface DformStyleFieldMovePayload {
   toIndex: number,
 }
 
+interface DformStyleFormAddPayload {
+  group: string,
+  id: string,
+  label: string,
+}
+
 interface DformStyleFieldInsertAction extends PayloadAction<DformStyleFieldInsertPayload> {}
 interface DformStyleFieldUpdateAction extends PayloadAction<DformStyleFieldUpdatePayload> {}
 interface DformStyleFieldRemoveAction extends PayloadAction<DformStyleFieldRemovePayload> {}
 interface DformStyleFieldMoveAction extends PayloadAction<DformStyleFieldMovePayload> {}
+interface DformStyleFormAddAction extends PayloadAction<DformStyleFormAddPayload> {}
 
 export type DformStyleAction =
   DformStyleFieldInsertAction &
   DformStyleFieldUpdateAction &
   DformStyleFieldRemoveAction &
-  DformStyleFieldMoveAction
+  DformStyleFieldMoveAction &
+  DformStyleFormAddAction
