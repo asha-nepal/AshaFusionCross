@@ -6,6 +6,7 @@ import {
   DFORM_STYLE_FIELD_UPDATE,
   DFORM_STYLE_FIELD_REMOVE,
   DFORM_STYLE_FIELD_MOVE,
+  DFORM_STYLE_FORM_ADD,
 } from '../../../actions';
 import initialFormStyles from './initial/styles';
 import _toPath from 'lodash.topath';
@@ -114,6 +115,22 @@ export default function (
         fullToParentPathArrayAfterRemoval,
         prev => prev.insert(toIndexAfterRemoval, movingField)
       );
+    }
+
+    case DFORM_STYLE_FORM_ADD: {
+      const {
+        group,
+        id,
+        label,
+      } = action.payload;
+
+      const newForm = {
+        id,
+        label,
+        style: [],
+      };
+
+      return formStyles.update(group, prev => prev.push(Immutable.fromJS(newForm)));
     }
 
     default:
