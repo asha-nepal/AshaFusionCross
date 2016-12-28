@@ -11,10 +11,10 @@ import {
 } from './fields';
 
 import {
-  dformStyleInsert,
-  dformStyleMove,
-  dformStyleUpdate,
-  dformStyleDelete,
+  dformStyleFieldInsert,
+  dformStyleFieldMove,
+  dformStyleFieldUpdate,
+  dformStyleFieldRemove,
 } from '../../actions';
 
 import {
@@ -261,13 +261,13 @@ export default connect(
   state => ({ state }),
   dispatch => ({
     onFieldInsert: (group, id, parentPath, index, field) =>
-      dispatch(dformStyleInsert(group, id, parentPath, index, field)),
+      dispatch(dformStyleFieldInsert(group, id, parentPath, index, field)),
     onFieldMove: (group, id, fromParentPath, fromIndex, toParentPath, toIndex) =>
-      dispatch(dformStyleMove(group, id, fromParentPath, fromIndex, toParentPath, toIndex)),
+      dispatch(dformStyleFieldMove(group, id, fromParentPath, fromIndex, toParentPath, toIndex)),
     onFieldChange: (group, id, parentPath, index, field) =>
-      dispatch(dformStyleUpdate(group, id, parentPath, index, field)),
+      dispatch(dformStyleFieldUpdate(group, id, parentPath, index, field)),
     onFieldRemove: (group, id, parentPath, index) =>
-      dispatch(dformStyleDelete(group, id, parentPath, index)),
+      dispatch(dformStyleFieldRemove(group, id, parentPath, index)),
   })
 )(
   DragDropContext(HTML5Backend)(DynamicFormComponent)
