@@ -15,6 +15,7 @@ import {
   dformStyleFieldMove,
   dformStyleFieldUpdate,
   dformStyleFieldRemove,
+  dformStyleFormAdd,
 } from '../../actions';
 
 import {
@@ -22,6 +23,7 @@ import {
 } from './utils';
 import FieldInsertPanel from './editor/FieldInsertPanel';
 import FieldEditor from './editor/FieldEditor';
+import FormAdder from './editor/FormAdder';
 import type { FieldEditPropsType } from './editor/type';
 
 function makeCreateChildFields(
@@ -147,6 +149,10 @@ type Props = {
     toParentPath: string,
     toIndex: number
   ) => void,
+  onFormAdd: (
+    id: string,
+    label: string,
+  ) => void,
 }
 
 export class DynamicFormComponent extends React.Component {
@@ -158,6 +164,7 @@ export class DynamicFormComponent extends React.Component {
     this.onFieldMove = this.onFieldMove.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onFieldRemove = this.onFieldRemove.bind(this);
+    this.onFormAdd = this.onFormAdd.bind(this);
 
     this.state = {
       editing: true,
@@ -195,6 +202,11 @@ export class DynamicFormComponent extends React.Component {
     this.props.onFieldRemove(parentPath, index);
   }
 
+  onFormAdd: Function
+  onFormAdd(id: string, label: string) {
+    this.props.onFormAdd(id, label);
+  }
+
   props: Props
 
   render() {
@@ -220,6 +232,12 @@ export class DynamicFormComponent extends React.Component {
         model={model}
         onSubmit={onSubmit}
       >
+        {this.state.editing &&
+          <FormAdder
+            onFormAdd={this.onFormAdd}
+          />
+        }
+
         {/* TODO: toJS() should be removed and handle Immutable object directly */}
         {createChildFields(style.toJS ? style.toJS() : style)}
 
@@ -268,6 +286,8 @@ export default connect(
     onFieldRemove: (parentPath, index) =>
       dispatch(
         dformStyleFieldRemove(ownProps.formGroup, ownProps.formStyleId, parentPath, index)),
+    onFormAdd: (id, label) =>
+      dispatch(dformStyleFormAdd(ownProps.formGroup, id, label)),
   })
 )(
   DragDropContext(HTML5Backend)(DynamicFormComponent)
