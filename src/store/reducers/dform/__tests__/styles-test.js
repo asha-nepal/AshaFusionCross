@@ -83,7 +83,7 @@ describe('DFORM_STYLE_FIELD_INSERT', () => {
       ],
     });
 
-    const action = dformStyleInsert(
+    const action = dformStyleFieldInsert(
       'record',
       'form01',
       '[0].children',
