@@ -125,29 +125,23 @@ type Props = {
   onRemove: ?() => void,
   freeze: boolean,
   warnings: Object,
+  formGroup: string,
+  formStyleId: string,
   onFieldChange: (
-    group: string,
-    id: string,
     parentPath: string,
     index: number,
     field: FormField
   ) => void,
   onFieldRemove: (
-    group: string,
-    id: string,
     parentPath: string,
     index: number
   ) => void,
   onFieldInsert: (
-    group: string,
-    id: string,
     parentPath: string,
     index: number,
     field: FormField
   ) => void,
   onFieldMove: (
-    group: string,
-    id: string,
     fromParentPath: string,
     fromIndex: number,
     toParentPath: string,
@@ -183,22 +177,22 @@ export class DynamicFormComponent extends React.Component {
 
   onFieldInsert: Function
   onFieldInsert(parentPath: string, index: number, field: FormField) {
-    this.props.onFieldInsert('record', 'reception', parentPath, index, field);
+    this.props.onFieldInsert(parentPath, index, field);
   }
 
   onFieldMove: Function
   onFieldMove(fromParentPath: string, fromIndex: number, toParentPath: string, toIndex: number) {
-    this.props.onFieldMove('record', 'reception', fromParentPath, fromIndex, toParentPath, toIndex);
+    this.props.onFieldMove(fromParentPath, fromIndex, toParentPath, toIndex);
   }
 
   onFieldChange: Function
   onFieldChange(parentPath: string, index: number, field: FormField) {
-    this.props.onFieldChange('record', 'reception', parentPath, index, field);
+    this.props.onFieldChange(parentPath, index, field);
   }
 
   onFieldRemove: Function
   onFieldRemove(parentPath: string, index: number) {
-    this.props.onFieldRemove('record', 'reception', parentPath, index);
+    this.props.onFieldRemove(parentPath, index);
   }
 
   props: Props
@@ -259,15 +253,21 @@ export class DynamicFormComponent extends React.Component {
 
 export default connect(
   state => ({ state }),
-  dispatch => ({
-    onFieldInsert: (group, id, parentPath, index, field) =>
-      dispatch(dformStyleInsert(group, id, parentPath, index, field)),
-    onFieldMove: (group, id, fromParentPath, fromIndex, toParentPath, toIndex) =>
-      dispatch(dformStyleMove(group, id, fromParentPath, fromIndex, toParentPath, toIndex)),
-    onFieldChange: (group, id, parentPath, index, field) =>
-      dispatch(dformStyleUpdate(group, id, parentPath, index, field)),
-    onFieldRemove: (group, id, parentPath, index) =>
-      dispatch(dformStyleDelete(group, id, parentPath, index)),
+  (dispatch, ownProps) => ({
+    onFieldInsert: (parentPath, index, field) =>
+      dispatch(
+        dformStyleInsert(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
+    onFieldMove: (fromParentPath, fromIndex, toParentPath, toIndex) =>
+      dispatch(
+        dformStyleMove(
+          ownProps.formGroup, ownProps.formStyleId,
+          fromParentPath, fromIndex, toParentPath, toIndex)),
+    onFieldChange: (parentPath, index, field) =>
+      dispatch(
+        dformStyleUpdate(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
+    onFieldRemove: (parentPath, index) =>
+      dispatch(
+        dformStyleDelete(ownProps.formGroup, ownProps.formStyleId, parentPath, index)),
   })
 )(
   DragDropContext(HTML5Backend)(DynamicFormComponent)

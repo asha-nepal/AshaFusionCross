@@ -165,6 +165,8 @@ export default class PatientView extends Component {
                 <div className="container">
                   <DynamicForm
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
+                    formGroup="record"
+                    formStyleId={recordFormStyleId}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
                   />
