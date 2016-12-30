@@ -29,7 +29,7 @@ function makeCreateChildFields(
   rootModel,
   warnings: Object,
   editing: boolean,
-  onEditFocus: (fieldPath: string) => void,
+  onEditFocus: (fieldPath: ?string) => void,
   editFocusOn: ?string,
   onFieldInsert: (parentPath: string, index: number, field: FormField) => void,
   onFieldMove: (
@@ -71,6 +71,7 @@ function makeCreateChildFields(
           fieldEditProps.fieldEditor = (
             <FieldEditor
               field={field}
+              onUnfocus={() => onEditFocus(null)}
               onFieldChange={updatedField => onFieldChange(fieldPath, i, updatedField)}
               onFieldRemove={() => onFieldRemove(fieldPath, i)}
             />
@@ -171,7 +172,7 @@ export class DynamicFormComponent extends React.Component {
   }
 
   onEditFocus: Function
-  onEditFocus(fieldPath: string): void {
+  onEditFocus(fieldPath: ?string): void {
     this.setState({ editFocusOn: fieldPath });
   }
 

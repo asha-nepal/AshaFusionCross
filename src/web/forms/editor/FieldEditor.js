@@ -14,10 +14,12 @@ const avaliableComponentKeys =
 
 export default ({
   field,
+  onUnfocus,
   onFieldChange,
   onFieldRemove,
 }: {
   field: FormField,
+  onUnfocus: () => void,
   onFieldChange: (updatedField: FormField) => void,
   onFieldRemove: () => void,
 }) => {
@@ -34,6 +36,17 @@ export default ({
       }}
     >
       <div className="card-content">
+        <p className="is-clearfix">
+          <a
+            className="is-pulled-right"
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              onUnfocus();
+            }}
+          ><span className="icon is-small"><i className="fa fa-times-circle" /></span></a>
+        </p>
+
         <TextInputComponent
           label="Field"
           value={field.field}
