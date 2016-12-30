@@ -67,6 +67,48 @@ describe('DFORM_STYLE_INSERT', () => {
     expect(reducer(stateBefore, action))
       .toEqual(stateAfter);
   });
+
+  it('inserts field into empty field', () => {
+    const stateBefore = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          style: [
+            {
+              class: 'block',
+            },
+          ],
+        },
+      ],
+    });
+
+    const action = dformStyleInsert(
+      'record',
+      'form01',
+      '[0].children',
+      0,
+      { class: 'textunitinput', label: 'XXX' }
+    );
+
+    const stateAfter = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          style: [
+            {
+              class: 'block',
+              children: [
+                { class: 'textunitinput', label: 'XXX' },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
 });
 
 describe('DFORM_STYLE_UPDATE', () => {

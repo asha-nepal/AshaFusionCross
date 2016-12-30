@@ -29,9 +29,11 @@ export default function (
 
       const fullParentPathArray = [group, formIndex, 'style', ..._toPath(parentPath)];
 
+      const fieldObj = Immutable.fromJS(field);
+
       return formStyles.updateIn(
         fullParentPathArray,
-        prev => prev.splice(index, 0, Immutable.fromJS(field))
+        prev => (prev ? prev.splice(index, 0, fieldObj) : Immutable.List([fieldObj]))
       );
     }
 
