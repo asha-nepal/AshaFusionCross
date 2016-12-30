@@ -41,9 +41,7 @@ function makeCreateChildFields(
   return function createChildFields(styles, fieldPath = '') {
     // fieldPath is string rather than array because it's easy to check equality
 
-    if (!styles) { return []; }
-
-    const elements = styles.map((field, i) => {
+    const elements = !styles ? [] : styles.map((field, i) => {
       // Handle "show" prop
       if (!checkVisibility(state, rootModel, field.show)) {
         return null;
