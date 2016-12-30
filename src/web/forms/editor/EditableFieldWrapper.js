@@ -65,6 +65,7 @@ const EditableFieldWrapper = ({
       }}
       onClick={e => {
         e.preventDefault();
+        e.stopPropagation();
         if (fieldEditProps) fieldEditProps.onFocus();
       }}
     >
