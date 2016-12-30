@@ -12,7 +12,7 @@ export const Block = ({
   fieldEditProps,
 }: {
   label?: string,
-  children?: React$Element<any>,  // FIXME: flow@0.32.0がJSXのchildren propを正しく検出してくれないためWorkaround
+  children: React$Element<any>,
   wrap?: boolean,
   fieldEditProps?: FieldEditPropsType,
 }): React$Element<any> => (
