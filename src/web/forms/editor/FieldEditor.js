@@ -69,6 +69,7 @@ export default ({
           label="Type"
           options={avaliableComponentKeys.map(key => ({ id: key, label: key }))}
           value={field.class}
+          nullable={false}
           onChange={v => onFieldChange({
             ...field,
             class: v,
