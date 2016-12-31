@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 type Props = {
   loggedIn: boolean,
@@ -62,6 +63,7 @@ export default class extends Component {
                       }}
                     >Log out</a>
                   }
+                  <Link className="nav-item" to="admin">Admin</Link>
                 </div>
               }
             </nav>
