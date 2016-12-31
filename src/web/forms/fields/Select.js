@@ -8,6 +8,7 @@ export const SelectComponent = ({
   label,
   value,
   options,
+  nullable = true,
   onChange,
   size,
   readonly = false,
@@ -15,6 +16,7 @@ export const SelectComponent = ({
   label?: ?string,
   value: string,
   options: Array<{id: string, label: string}>,
+  nullable: boolean,
   onChange: (newValue: string) => void,
   size?: string,
   readonly?: boolean,
@@ -32,7 +34,7 @@ export const SelectComponent = ({
             value={value || ''}
             onChange={e => onChange(e.target.value || null)}
           >
-            <option value="" ></option>
+            {nullable && <option value="" ></option>}
             {options.map((option, i) =>
               <option
                 key={i}
