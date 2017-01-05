@@ -57,7 +57,7 @@ export default ({
           />
         }
 
-        {isDBConnected &&
+        {isDBConnected && isDBPublic &&
           <SignupForm
             signup={signup}
           />
