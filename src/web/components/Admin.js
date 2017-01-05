@@ -2,8 +2,13 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import SignupForm from './Auth/SignupForm';
 
-export default () => (
+export default ({
+  signup,
+}: {
+  signup: (username: string, password: string) => void,
+}) => (
   <div>
     <section className="hero is-primary is-bold">
       <div className="hero-head">
@@ -25,7 +30,9 @@ export default () => (
 
     <section className="section">
       <div className="container">
-        <h1 className="title">Admin</h1>
+        <SignupForm
+          signup={signup}
+        />
       </div>
     </section>
   </div>
