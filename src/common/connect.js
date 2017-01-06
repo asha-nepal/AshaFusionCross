@@ -1,5 +1,3 @@
-/* Deplicated. Use `connect` instead. */
-
 import React from 'react';
 
 import {
@@ -12,8 +10,12 @@ import configureStore from '../store/configureStore';
 const store = configureStore();
 store.runSaga(rootSaga);
 
-export default (props: {children: ReactClass<{}>}) => (
+export default (
+  WrappedComponent: ReactClass<{}>
+) => (() => (
   <Provider store={store} >
-    {props.children}
+    <WrappedComponent
+      getState={store.getState}
+    />
   </Provider>
-);
+));
