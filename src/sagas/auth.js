@@ -156,7 +156,7 @@ export function* signupFlow() {
       continue;
     }
 
-    const { username, password } = payload;
+    const { username, password, andLogin } = payload;
     const option = {
       metadata: {
         roles: ['staff'],
@@ -166,12 +166,14 @@ export function* signupFlow() {
     try {
       yield call([db, db.signup], username, password, option);
       yield put(alertInfo('Success'));
-      yield put(requestLogin(username, password));
+      if (andLogin) {
+        yield put(requestLogin(username, password));
+      }
     } catch (error) {
       if (error.name === 'conflict') {
         yield put(alertError(`"${username}" already exists, choose another username`, 5000));
       } else if (error.name === 'forbidden') {
-        yield put(alertError('Invalid username', 5000));
+        yield put(alertError('Forbidden', 5000));
       } else {
         yield put(alertError(`${error.name}: ${error.message || ''}`));
       }
