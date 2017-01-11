@@ -1,79 +1,106 @@
 /* @flow */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import classNames from 'classnames';
+import {
+  Form,
+  Control,
+  actions,
+} from 'react-redux-form';
 
-export default class extends React.Component {
-  props: {
-    signup: (username: string, password: string) => void,
-  }
+const TextControl = ({
+  label,
+  form,
+  ...props
+}: {
+  label: string,
+  form: Object,
+}) => (
+  <p className="control">
+    <label className="label">
+      {label}
+      <Control.text
+        {...props}
+        className={classNames('input', { 'is-danger': !form.valid })}
+      />
+      {!form.valid &&
+        <span className="help is-danger">
+          {Object.keys(form.errors).filter(key => form.errors[key]).join(', ')}
+        </span>
+      }
+    </label>
+  </p>
+);
 
-  render() {
-    const {
-      signup,
-    } = this.props;
+const SignupForm = ({
+  form,
+  signup,
+  reset,
+}: {
+  form: Object,
+  signup: (username: string, password: string) => void,
+  reset: () => void,
+}) => (
+  <div className="columns">
+    <div className="column is-half-tablet is-offset-one-quarter-tablet">
+      <div className="box">
+        <h1 className="title">Sign up</h1>
+        <Form
+          model="forms.signup"
+          validators={{
+            '': {
+              // Form-level validator
+              passwordsMatch: (vals) => vals.password === vals.passwordConfirm,
+            },
+          }}
+          onSubmit={({ username, password }) =>
+            form.$form.valid && signup(username, password) && reset()}
+        >
+          <TextControl
+            label="Username"
+            form={form.username}
+            model=".username"
+            type="text"
+            autoCorrect="off"
+            autoCapitalize="off"
+            required
+          />
 
-    return (
-      <div className="columns">
-        <div className="column is-half-tablet is-offset-one-quarter-tablet">
-          <div className="box">
-            <h1 className="title">Sign up</h1>
-            <form>
-              <p className="control">
-                <label className="label">
-                  Username
-                  <input
-                    className="input"
-                    type="text"
-                    ref="signup_username"
-                    autoCorrect="off"
-                    autoCapitalize="off"
-                  />
-                </label>
-              </p>
-              <p className="control">
-                <label className="label">
-                  Password
-                  <input className="input" type="password" ref="signup_password" />
-                </label>
-              </p>
-              <p className="control">
-                <label className="label">
-                  Password (confirm)
-                  <input type="password" className="input" ref="signup_password_confirm" />
-                </label>
-              </p>
-              <p className="control">
-                <button
-                  className="button is-primary"
-                  onClick={e => {
-                    e.preventDefault();
-                    const username = this.refs.signup_username.value;
-                    const password = this.refs.signup_password.value;
-                    const passwordConfirm = this.refs.signup_password_confirm.value;
+          <TextControl
+            label="Password"
+            form={form.password}
+            model=".password"
+            type="password"
+            required
+          />
 
-                    if (!username) {
-                      alert('Please input valid username');  // TODO Validationは然るべき場所に移す
-                      return;
-                    }
+          <TextControl
+            label="Password (confirm)"
+            form={form.passwordConfirm}
+            model=".passwordConfirm"
+            type="password"
+            required
+          />
 
-                    if (!password) {
-                      alert('Please input valid password');  // TODO Validationは然るべき場所に移す
-                      return;
-                    }
-
-                    if (password !== passwordConfirm) {
-                      alert('Password mismatch');  // TODO Validationは然るべき場所に移す
-                      return;
-                    }
-
-                    signup(username, password);
-                  }}
-                >Sign up</button>
-              </p>
-            </form>
-          </div>
-        </div>
+          <p className="control">
+            <button
+              className="button is-primary"
+              disabled={!form.$form.valid}
+              type="submit"
+            >Sign up</button>
+          </p>
+        </Form>
       </div>
-    );
-  }
-}
+    </div>
+  </div>
+);
+
+export default connect(
+  state => ({
+    form: state.forms.forms.signup,
+  }),
+  dispatch => ({
+    reset: () => dispatch(actions.reset('forms.signup')),
+  })
+)(SignupForm);

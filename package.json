@@ -43,6 +43,7 @@
     "blob-polyfill": "^1.0.20150320",
     "bulma": "^0.2.3",
     "chance": "^1.0.3",
+    "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
     "deep-freeze": "0.0.1",
     "electron-packager": "^8.2.0",
