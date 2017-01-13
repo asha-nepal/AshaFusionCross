@@ -5,7 +5,7 @@ import logo from '../../../../assets/img/logo.svg';
 
 import DBConfigForm from './DBConfigForm';
 import LoginForm from './LoginForm';
-import SignupForm from './SignupForm';
+import SignupForm from '../../containers/forms/SignupForm';
 
 export default ({
   isDBConnected,
