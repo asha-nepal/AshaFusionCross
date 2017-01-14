@@ -23,7 +23,7 @@ export default ({
   onFieldChange: (updatedField: FormField) => void,
   onFieldRemove: () => void,
 }) => {
-  const fieldProps = fieldComponentList[field.class].fieldProps;
+  const fieldProps = (fieldComponentList[field.class] || fieldComponentList.textinput).fieldProps;
 
   return (
     <div
