@@ -12,6 +12,8 @@ import { call, put } from 'redux-saga/effects';
 import PouchDB from 'pouchdb';
 import {
   setDformStyleForm,
+  alertInfo,
+  alertError,
 } from '../../actions';
 import {
   fetchDformStyles,
@@ -116,5 +118,39 @@ describe('putDformStyles', () => {
           { field: 'baz', class: 'textunitinput' },
         ],
       }));
+
+    expect(saga.next().value)
+      .toEqual(put(alertInfo('Form styles saved')));
+
+    expect(saga.next())
+      .toEqual({ done: true, value: undefined });
+  });
+
+  it('handles errors at putting', () => {
+    const db = new PouchDB();
+    const mockError = {};
+
+    const mockDformStyleState = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          label: 'Form01',
+          style: [
+            { field: 'bar', class: 'textinput' },
+          ],
+        },
+      ],
+    });
+
+    const saga = putDformStyles(db);
+
+    saga.next();
+    saga.next(mockDformStyleState);
+
+    expect(saga.throw(mockError).value)
+      .toEqual(put(alertError('Failed to save form styles')));
+
+    expect(saga.next())
+      .toEqual({ done: true, value: undefined });
   });
 });

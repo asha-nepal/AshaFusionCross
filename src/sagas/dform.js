@@ -4,6 +4,8 @@ import {
   DFORM_STYLES_PUT,
   LOGIN_SUCCESS,
   setDformStyleForm,
+  alertInfo,
+  alertError,
 } from '../actions';
 import {
   getDformStyles,
@@ -42,19 +44,24 @@ export function * watchDformStyleFetch() {
 export function * putDformStyles(db: PouchInstance) {
   const dformState: Map<> = yield select(getDformStyles);
 
-  const groups = dformState.keys();
-  for (const group of groups) {
-    const groupForms = dformState.get(group);
+  try {
+    const groups = dformState.keys();
+    for (const group of groups) {
+      const groupForms = dformState.get(group);
 
-    yield* groupForms.map(form => {
-      const putDoc = {
-        _id: `dformStyle:${group}:${form.get('id')}`,
-        label: form.get('label'),
-        style: form.get('style').toJS(),
-      };
+      yield* groupForms.map(form => {
+        const putDoc = {
+          _id: `dformStyle:${group}:${form.get('id')}`,
+          label: form.get('label'),
+          style: form.get('style').toJS(),
+        };
 
-      return call([db, db.put], putDoc);
-    }).toArray();
+        return call([db, db.put], putDoc);
+      }).toArray();
+    }
+    yield put(alertInfo('Form styles saved'));
+  } catch (error) {
+    yield put(alertError('Failed to save form styles'));
   }
 }
 
