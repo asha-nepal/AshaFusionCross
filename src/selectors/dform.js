@@ -3,6 +3,9 @@
 import Immutable from 'immutable';
 import { createSelector } from 'reselect';
 
+export const getDformStyles = (state: Object): {[key: string]: List<DformStyle>} =>
+  state.dform.styles;
+
 export const getRecordFormStyles = (state: Object): List<Map<string, any>> =>
   state.dform.styles.get('record', Immutable.List([]));
 

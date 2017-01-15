@@ -1,12 +1,16 @@
 import { call, put, take, select } from 'redux-saga/effects';
 import {
   DFORM_STYLES_FETCH,
+  DFORM_STYLES_PUT,
   LOGIN_SUCCESS,
   setDformStyleForm,
 } from '../actions';
+import {
+  getDformStyles,
+} from '../selectors';
 
 export function * fetchDformStyles(db: PouchInstance) {
-  const group = 'record';  // TODO: To be configurable
+  const group = 'record';  // TODO: To be confgiurable
   const docPrefix = `dformStyle:${group}:`;
   const docQuery = {
     startkey: docPrefix,
@@ -32,5 +36,32 @@ export function * watchDformStyleFetch() {
     yield take([DFORM_STYLES_FETCH, LOGIN_SUCCESS]);
     const db = yield select(state => state.db.instance);
     yield call(fetchDformStyles, db);
+  }
+}
+
+export function * putDformStyles(db: PouchInstance) {
+  const dformState: Map<> = yield select(getDformStyles);
+
+  const groups = dformState.keys();
+  for (const group of groups) {
+    const groupForms = dformState.get(group);
+
+    yield* groupForms.map(form => {
+      const putDoc = {
+        _id: `dformStyle:${group}:${form.get('id')}`,
+        label: form.get('label'),
+        style: form.get('style').toJS(),
+      };
+
+      return call([db, db.put], putDoc);
+    }).toArray();
+  }
+}
+
+export function * watchDformStylePut() {
+  while (true) {
+    yield take(DFORM_STYLES_PUT);
+    const db = yield select(state => state.db.instance);
+    yield call(putDformStyles, db);
   }
 }

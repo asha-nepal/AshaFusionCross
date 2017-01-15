@@ -103,3 +103,8 @@ export const DFORM_STYLES_FETCH = 'DFORM_STYLES_FETCH';
 export const fetchDformStyles = () => ({
   type: DFORM_STYLES_FETCH,
 });
+
+export const DFORM_STYLES_PUT = 'DFORM_STYLES_PUT';
+export const putDformStyles = () => ({
+  type: DFORM_STYLES_PUT,
+});

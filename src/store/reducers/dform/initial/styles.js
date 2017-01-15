@@ -3,6 +3,7 @@ import math from 'mathjs';
 export default {
   patient: [
     {
+      id: 'default',
       style: [
         { field: 'number', label: 'No.', style: { width: 200 } },
         { field: 'name', label: 'Name', class: 'textinput', required: true },

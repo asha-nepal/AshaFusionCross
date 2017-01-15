@@ -21,7 +21,7 @@ import { watchPutActiveRecord } from './put-active-record';
 import { watchRemoveActivePatient } from './remove-active-patient';
 import { watchInitActivePatient } from './init-active-patient';
 import { watchAddNewActiveRecord } from './add-new-active-record';
-import { watchDformStyleFetch } from './dform';
+import { watchDformStyleFetch, watchDformStylePut } from './dform';
 import { watchOnPouchChanges } from './db';
 
 const authedSagas = [
@@ -33,6 +33,7 @@ const authedSagas = [
   watchInitActivePatient,
   watchAddNewActiveRecord,
   watchDformStyleFetch,
+  watchDformStylePut,
 ];
 
 let authedTask = null;
