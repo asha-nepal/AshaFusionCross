@@ -94,9 +94,10 @@ export const setDformStyleForm = (
   id: string,
   label: string,
   style: DformStyle,
+  rev: string,
 ) => ({
   type: DFORM_STYLE_FORM_SET,
-  payload: { group, id, label, style },
+  payload: { group, id, label, style, rev },
 });
 
 export const DFORM_STYLES_FETCH = 'DFORM_STYLES_FETCH';

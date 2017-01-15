@@ -144,17 +144,22 @@ export default function (
       const {
         group,
         id,
+        rev,
         label,
         style,
       } = action.payload;
 
       const formIndex = formStyles.get(group, []).findIndex(f => f.get('id') === id);
 
-      const newForm = {
+      const newForm: { id: string, rev?: string, label: string, style: DformStyle } = {
         id,
         label,
         style,
       };
+
+      if (rev) {
+        newForm.rev = rev;
+      }
 
       return formIndex > -1
         ? formStyles.setIn([group, formIndex], Immutable.fromJS(newForm))

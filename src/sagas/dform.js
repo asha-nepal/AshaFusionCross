@@ -12,8 +12,7 @@ import {
 } from '../selectors';
 
 export function * fetchDformStyles(db: PouchInstance) {
-  const group = 'record';  // TODO: To be confgiurable
-  const docPrefix = `dformStyle:${group}:`;
+  const docPrefix = 'dformStyle:';
   const docQuery = {
     startkey: docPrefix,
     endkey: `${docPrefix}\uffff`,
@@ -26,10 +25,11 @@ export function * fetchDformStyles(db: PouchInstance) {
   for (let i = 0; i < rows.length; ++i) {
     const row = rows[i];
     const doc = row.doc;
-    const idMatch = doc._id.match(new RegExp(`dformStyle:${group}:(.+)`));
+    const idMatch = doc._id.match(/dformStyle:([^:]+):([^:]+)/);
     if (!idMatch) continue;
-    const formId = idMatch[1];
-    yield put(setDformStyleForm(group, formId, doc.label, doc.style));
+    const group = idMatch[1];
+    const formId = idMatch[2];
+    yield put(setDformStyleForm(group, formId, doc.label, doc.style, doc._rev));
   }
 }
 
@@ -55,6 +55,9 @@ export function * putDformStyles(db: PouchInstance) {
           label: form.get('label'),
           style: form.get('style').toJS(),
         };
+        if (form.get('rev')) {
+          putDoc._rev = form.get('rev');
+        }
 
         return call([db, db.put], putDoc);
       }).toArray();

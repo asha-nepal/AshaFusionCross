@@ -21,16 +21,27 @@ import {
 } from '../dform';
 
 describe('fetchDformStyles', () => {
-  it('calls db.allDocs with startkey and endkey', () => {
+  it('calls db.allDocs with startkey and endkey and load form styles', () => {
     const db = new PouchDB();
     const mockFetchedDocs = {
       total_rows: 123,
       offset: 42,
       rows: [
         {
+          _id: 'dformStyle:record:',
+          doc: {
+            _id: 'dformStyle:record:',
+            label: 'Invalid ID form',
+            style: [
+              { field: 'foo', class: 'textinput' },
+            ],
+          },
+        },
+        {
           _id: 'dformStyle:record:some-form',
           doc: {
             _id: 'dformStyle:record:some-form',
+            _rev: '123-abcdefg',
             label: 'Some form',
             style: [
               { field: 'foo', class: 'textinput' },
@@ -41,6 +52,7 @@ describe('fetchDformStyles', () => {
           _id: 'dformStyle:record:another-form',
           doc: {
             _id: 'dformStyle:record:another-form',
+            _rev: '987-opqrstu',
             label: 'Another form',
             style: [
               { field: 'bar', class: 'textunitinput' },
@@ -54,20 +66,20 @@ describe('fetchDformStyles', () => {
 
     expect(saga.next().value)
       .toEqual(call([db, db.allDocs], {
-        startkey: 'dformStyle:record:',
-        endkey: 'dformStyle:record:\uffff',
+        startkey: 'dformStyle:',
+        endkey: 'dformStyle:\uffff',
         include_docs: true,
       }));
 
     expect(saga.next(mockFetchedDocs).value)
       .toEqual(put(setDformStyleForm('record', 'some-form', 'Some form', [
         { field: 'foo', class: 'textinput' },
-      ])));
+      ], '123-abcdefg')));
 
     expect(saga.next().value)
       .toEqual(put(setDformStyleForm('record', 'another-form', 'Another form', [
         { field: 'bar', class: 'textunitinput' },
-      ])));
+      ], '987-opqrstu')));
   });
 });
 
