@@ -9,10 +9,10 @@ jest.unmock('../styles');
 import Immutable from 'immutable';
 
 import {
-  dformStyleFieldInsert,
-  dformStyleFieldUpdate,
-  dformStyleFieldRemove,
-  dformStyleFieldMove,
+  insertDformStyleField,
+  updateDformStyleField,
+  removeDformStyleField,
+  moveDformStyleField,
   dformStyleFormAdd,
 } from '../../../../actions';
 
@@ -38,7 +38,7 @@ describe('DFORM_STYLE_FIELD_INSERT', () => {
       ],
     });
 
-    const action = dformStyleFieldInsert(
+    const action = insertDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -83,7 +83,7 @@ describe('DFORM_STYLE_FIELD_INSERT', () => {
       ],
     });
 
-    const action = dformStyleFieldInsert(
+    const action = insertDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -132,7 +132,7 @@ describe('DFORM_STYLE_FIELD_UPDATE', () => {
       ],
     });
 
-    const action = dformStyleFieldUpdate(
+    const action = updateDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -181,7 +181,7 @@ describe('DFORM_STYLE_FIELD_UPDATE', () => {
       ],
     });
 
-    const action = dformStyleFieldUpdate(
+    const action = updateDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -233,7 +233,7 @@ describe('DFORM_STYLE_FIELD_REMOVE', () => {
       ],
     });
 
-    const action = dformStyleFieldRemove(
+    const action = removeDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -281,7 +281,7 @@ describe('DFORM_STYLE_FIELD_MOVE', () => {
       ],
     });
 
-    const action = dformStyleFieldMove(
+    const action = moveDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -329,7 +329,7 @@ describe('DFORM_STYLE_FIELD_MOVE', () => {
       ],
     });
 
-    const action = dformStyleFieldMove(
+    const action = moveDformStyleField(
       'record',
       'form01',
       '',
@@ -377,7 +377,7 @@ describe('DFORM_STYLE_FIELD_MOVE', () => {
       ],
     });
 
-    const action = dformStyleFieldMove(
+    const action = moveDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -425,7 +425,7 @@ describe('DFORM_STYLE_FIELD_MOVE', () => {
       ],
     });
 
-    const action = dformStyleFieldMove(
+    const action = moveDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -473,7 +473,7 @@ describe('DFORM_STYLE_FIELD_MOVE', () => {
       ],
     });
 
-    const action = dformStyleFieldMove(
+    const action = moveDformStyleField(
       'record',
       'form01',
       '[0].children',
@@ -521,7 +521,7 @@ describe('DFORM_STYLE_FIELD_MOVE', () => {
       ],
     });
 
-    const action = dformStyleFieldMove(
+    const action = moveDformStyleField(
       'record',
       'form01',
       '[0].children',

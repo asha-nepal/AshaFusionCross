@@ -1,13 +1,13 @@
 /* @flow */
 
 export const DFORM_STYLE_FIELD_INSERT = 'DFORM_STYLE_FIELD_INSERT';
-export const dformStyleFieldInsert = (
+export const insertDformStyleField = (
   group: string,
   id: string,
   parentPath: string,
   index: number,
   field: FormField,
-): DformStyleFieldInsertAction => ({
+): insertDformStyleFieldAction => ({
   type: DFORM_STYLE_FIELD_INSERT,
   payload: {
     group,
@@ -19,14 +19,14 @@ export const dformStyleFieldInsert = (
 });
 
 export const DFORM_STYLE_FIELD_UPDATE = 'DFORM_STYLE_FIELD_UPDATE';
-export const dformStyleFieldUpdate = (
+export const updateDformStyleField = (
   group: string,
   id: string,
   parentPath: string,
   index: number,
   field: FormField,
   merge: boolean = false,
-): DformStyleFieldUpdateAction => ({
+): updateDformStyleFieldAction => ({
   type: DFORM_STYLE_FIELD_UPDATE,
   payload: {
     group,
@@ -39,12 +39,12 @@ export const dformStyleFieldUpdate = (
 });
 
 export const DFORM_STYLE_FIELD_REMOVE = 'DFORM_STYLE_FIELD_REMOVE';
-export const dformStyleFieldRemove = (
+export const removeDformStyleField = (
   group: string,
   id: string,
   parentPath: string,
   index: number,
-): DformStyleFieldRemoveAction => ({
+): removeDformStyleFieldAction => ({
   type: DFORM_STYLE_FIELD_REMOVE,
   payload: {
     group,
@@ -55,14 +55,14 @@ export const dformStyleFieldRemove = (
 });
 
 export const DFORM_STYLE_FIELD_MOVE = 'DFORM_STYLE_FIELD_MOVE';
-export const dformStyleFieldMove = (
+export const moveDformStyleField = (
   group: string,
   id: string,
   fromParentPath: string,
   fromIndex: number,
   toParentPath: string,
   toIndex: number,
-): DformStyleFieldMoveAction => ({
+): moveDformStyleFieldAction => ({
   type: DFORM_STYLE_FIELD_MOVE,
   payload: {
     group,

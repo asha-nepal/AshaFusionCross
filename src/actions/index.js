@@ -24,10 +24,10 @@ export {
 } from './patient-select';
 
 export {
-  DFORM_STYLE_FIELD_INSERT, dformStyleFieldInsert,
-  DFORM_STYLE_FIELD_UPDATE, dformStyleFieldUpdate,
-  DFORM_STYLE_FIELD_REMOVE, dformStyleFieldRemove,
-  DFORM_STYLE_FIELD_MOVE, dformStyleFieldMove,
+  DFORM_STYLE_FIELD_INSERT, insertDformStyleField,
+  DFORM_STYLE_FIELD_UPDATE, updateDformStyleField,
+  DFORM_STYLE_FIELD_REMOVE, removeDformStyleField,
+  DFORM_STYLE_FIELD_MOVE, moveDformStyleField,
   DFORM_STYLE_FORM_ADD, dformStyleFormAdd,
 } from './dform';
 

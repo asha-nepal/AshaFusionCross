@@ -2,7 +2,7 @@ import { PayloadAction } from './action';
 
 export type DformStyle = List<Map<string, any> | string>
 
-interface DformStyleFieldInsertPayload {
+interface insertDformStyleFieldPayload {
   group: string,
   id: string,
   parentPath: string,
@@ -10,7 +10,7 @@ interface DformStyleFieldInsertPayload {
   field: FormField,
 }
 
-interface DformStyleFieldUpdatePayload {
+interface updateDformStyleFieldPayload {
   group: string,
   id: string,
   parentPath: string,
@@ -19,14 +19,14 @@ interface DformStyleFieldUpdatePayload {
   merge: boolean,
 }
 
-interface DformStyleFieldRemovePayload {
+interface removeDformStyleFieldPayload {
   group: string,
   id: string,
   parentPath: string,
   index: number,
 }
 
-interface DformStyleFieldMovePayload {
+interface moveDformStyleFieldPayload {
   group: string,
   id: string,
   fromParentPath: string,
@@ -41,15 +41,15 @@ interface DformStyleFormAddPayload {
   label: string,
 }
 
-interface DformStyleFieldInsertAction extends PayloadAction<DformStyleFieldInsertPayload> {}
-interface DformStyleFieldUpdateAction extends PayloadAction<DformStyleFieldUpdatePayload> {}
-interface DformStyleFieldRemoveAction extends PayloadAction<DformStyleFieldRemovePayload> {}
-interface DformStyleFieldMoveAction extends PayloadAction<DformStyleFieldMovePayload> {}
+interface insertDformStyleFieldAction extends PayloadAction<insertDformStyleFieldPayload> {}
+interface updateDformStyleFieldAction extends PayloadAction<updateDformStyleFieldPayload> {}
+interface removeDformStyleFieldAction extends PayloadAction<removeDformStyleFieldPayload> {}
+interface moveDformStyleFieldAction extends PayloadAction<moveDformStyleFieldPayload> {}
 interface DformStyleFormAddAction extends PayloadAction<DformStyleFormAddPayload> {}
 
 export type DformStyleAction =
-  DformStyleFieldInsertAction &
-  DformStyleFieldUpdateAction &
-  DformStyleFieldRemoveAction &
-  DformStyleFieldMoveAction &
+  insertDformStyleFieldAction &
+  updateDformStyleFieldAction &
+  removeDformStyleFieldAction &
+  moveDformStyleFieldAction &
   DformStyleFormAddAction

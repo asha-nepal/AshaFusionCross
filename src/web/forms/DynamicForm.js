@@ -11,10 +11,10 @@ import {
 } from './fields';
 
 import {
-  dformStyleFieldInsert,
-  dformStyleFieldMove,
-  dformStyleFieldUpdate,
-  dformStyleFieldRemove,
+  insertDformStyleField,
+  moveDformStyleField,
+  updateDformStyleField,
+  removeDformStyleField,
   dformStyleFormAdd,
 } from '../../actions';
 
@@ -273,18 +273,18 @@ export default connect(
   (dispatch, ownProps) => ({
     onFieldInsert: (parentPath, index, field) =>
       dispatch(
-        dformStyleFieldInsert(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
+        insertDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
     onFieldMove: (fromParentPath, fromIndex, toParentPath, toIndex) =>
       dispatch(
-        dformStyleFieldMove(
+        moveDformStyleField(
           ownProps.formGroup, ownProps.formStyleId,
           fromParentPath, fromIndex, toParentPath, toIndex)),
     onFieldChange: (parentPath, index, field) =>
       dispatch(
-        dformStyleFieldUpdate(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
+        updateDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
     onFieldRemove: (parentPath, index) =>
       dispatch(
-        dformStyleFieldRemove(ownProps.formGroup, ownProps.formStyleId, parentPath, index)),
+        removeDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index)),
     onFormAdd: (id, label) =>
       dispatch(dformStyleFormAdd(ownProps.formGroup, id, label)),
   })
