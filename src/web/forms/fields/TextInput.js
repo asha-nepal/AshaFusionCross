@@ -2,6 +2,9 @@
 
 import React from 'react';
 
+import EditableFieldWrapper from '../editor/EditableFieldWrapper';
+import type { FieldEditPropsType } from '../editor/type';
+
 const alertIcons = {
   danger: <i className="fa fa-warning is-danger" />,
   warning: <i className="fa fa-warning is-warning" />,
@@ -45,24 +48,26 @@ export const TextInputComponent = ({
   required = false,
   readonly = false,
   expanded = false,
+  fieldEditProps,
 }: {
   label: ?string,
   value: ?string,
   onChange: (newValue: string) => void,
-  style: ?Object,
-  type: string,
+  style?: Object,
+  type?: string,
   prefix?: string,
   suffix?: string,
-  placeholder: ?string,
-  min: ?number,
-  max: ?number,
-  precision: ?number,
-  alerts: ?Array<Object>,
+  placeholder?: string,
+  min?: number,
+  max?: number,
+  precision?: number,
+  alerts?: Array<Object>,
   warning?: string,
   size?: string,
   required?: boolean,
-  readonly: boolean,
+  readonly?: boolean,
   expanded?: boolean,
+  fieldEditProps?: FieldEditPropsType,
 }) => {
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
@@ -88,7 +93,10 @@ export const TextInputComponent = ({
   const sizeClassName = size ? ` is-${size}` : '';
 
   return (
-    <div className={expanded ? 'control is-expanded' : 'control'}>
+    <EditableFieldWrapper
+      className={expanded ? 'control is-expanded' : 'control'}
+      fieldEditProps={fieldEditProps}
+    >
       {label && <label className="label">{label}</label>}
       <p className={hasAddons ? 'control has-addons' : 'control'}>
         {prefix &&
@@ -125,10 +133,23 @@ export const TextInputComponent = ({
         }
       </p>
       <span className="help is-warning">{warning}</span>
-    </div>
+    </EditableFieldWrapper>
   );
 };
 
+TextInputComponent.fieldProps = [
+  { name: 'type', type: 'string' },
+  { name: 'prefix', type: 'string' },
+  { name: 'suffix', type: 'string' },
+  { name: 'placeholder', type: 'string' },
+  { name: 'min', type: 'number' },
+  { name: 'max', type: 'number' },
+  { name: 'precision', type: 'number' },
+  { name: 'size', type: 'number' },
+  { name: 'required', type: 'boolean' },
+  { name: 'readonly', type: 'boolean' },
+  { name: 'expanded', type: 'boolean' },
+];
 
 import connect from '../../../common/forms/fields/TextInput';
 

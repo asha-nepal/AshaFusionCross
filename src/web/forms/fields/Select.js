@@ -17,7 +17,7 @@ export const SelectComponent = ({
   options: Array<{id: string, label: string}>,
   onChange: (newValue: string) => void,
   size?: string,
-  readonly: boolean,
+  readonly?: boolean,
 }) => {
   const sizeClassName = size ? ` is-${size}` : '';
 

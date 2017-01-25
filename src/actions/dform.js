@@ -1,14 +1,14 @@
 /* @flow */
 
-export const DFORM_STYLE_INSERT = 'DFORM_STYLE_INSERT';
-export const dformStyleInsert = (
+export const DFORM_STYLE_FIELD_INSERT = 'DFORM_STYLE_FIELD_INSERT';
+export const dformStyleFieldInsert = (
   group: string,
   id: string,
   parentPath: string,
   index: number,
   field: FormField,
-): DformStyleInsertAction => ({
-  type: DFORM_STYLE_INSERT,
+): DformStyleFieldInsertAction => ({
+  type: DFORM_STYLE_FIELD_INSERT,
   payload: {
     group,
     id,
@@ -18,16 +18,16 @@ export const dformStyleInsert = (
   },
 });
 
-export const DFORM_STYLE_UPDATE = 'DFORM_STYLE_UPDATE';
-export const dformStyleUpdate = (
+export const DFORM_STYLE_FIELD_UPDATE = 'DFORM_STYLE_FIELD_UPDATE';
+export const dformStyleFieldUpdate = (
   group: string,
   id: string,
   parentPath: string,
   index: number,
   field: FormField,
   merge: boolean = false,
-): DformStyleUpdateAction => ({
-  type: DFORM_STYLE_UPDATE,
+): DformStyleFieldUpdateAction => ({
+  type: DFORM_STYLE_FIELD_UPDATE,
   payload: {
     group,
     id,
@@ -38,18 +38,52 @@ export const dformStyleUpdate = (
   },
 });
 
-export const DFORM_STYLE_DELETE = 'DFORM_STYLE_DELETE';
-export const dformStyleDelete = (
+export const DFORM_STYLE_FIELD_REMOVE = 'DFORM_STYLE_FIELD_REMOVE';
+export const dformStyleFieldRemove = (
   group: string,
   id: string,
   parentPath: string,
   index: number,
-): DformStyleDeleteAction => ({
-  type: DFORM_STYLE_DELETE,
+): DformStyleFieldRemoveAction => ({
+  type: DFORM_STYLE_FIELD_REMOVE,
   payload: {
     group,
     id,
     parentPath,
     index,
+  },
+});
+
+export const DFORM_STYLE_FIELD_MOVE = 'DFORM_STYLE_FIELD_MOVE';
+export const dformStyleFieldMove = (
+  group: string,
+  id: string,
+  fromParentPath: string,
+  fromIndex: number,
+  toParentPath: string,
+  toIndex: number,
+): DformStyleFieldMoveAction => ({
+  type: DFORM_STYLE_FIELD_MOVE,
+  payload: {
+    group,
+    id,
+    fromParentPath,
+    fromIndex,
+    toParentPath,
+    toIndex,
+  },
+});
+
+export const DFORM_STYLE_FORM_ADD = 'DFORM_STYLE_FORM_ADD';
+export const dformStyleFormAdd = (
+  group: string,
+  id: string,
+  label: string,
+) => ({
+  type: DFORM_STYLE_FORM_ADD,
+  payload: {
+    group,
+    id,
+    label,
   },
 });
