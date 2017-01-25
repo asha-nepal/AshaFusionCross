@@ -5,6 +5,8 @@ command-timeout: 60
 build:
   steps:
     - npm-install
+    - install-packages:
+      packages: libelf-dev
     - script:
       name: flow
       code: |
