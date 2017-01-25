@@ -29,6 +29,9 @@ export {
   DFORM_STYLE_FIELD_REMOVE, removeDformStyleField,
   DFORM_STYLE_FIELD_MOVE, moveDformStyleField,
   DFORM_STYLE_FORM_ADD, dformStyleFormAdd,
+  DFORM_STYLE_FORM_SET, setDformStyleForm,
+  DFORM_STYLES_FETCH, fetchDformStyles,
+  DFORM_STYLES_PUT, putDformStyles,
 } from './dform';
 
 // for saga

@@ -14,6 +14,7 @@ import {
   removeDformStyleField,
   moveDformStyleField,
   dformStyleFormAdd,
+  setDformStyleForm,
 } from '../../../../actions';
 
 import reducer from '../styles';
@@ -612,6 +613,95 @@ describe('DFORM_STYLE_FORM_ADD', () => {
           style: [
             { class: 'textinput', label: 'text0' },
             { class: 'textinput', label: 'text1' },
+          ],
+        },
+      ],
+    });
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+});
+
+describe('DFORM_STYLE_FORM_SET', () => {
+  it('sets new form if not exists', () => {
+    const stateBefore = Immutable.fromJS({
+      record: [],
+    });
+
+    const action = setDformStyleForm('record', 'form01', 'NEW FORM', [
+      { field: 'foo', class: 'textinput' },
+      { field: 'bar', class: 'textinput' },
+    ]);
+
+    const stateAfter = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          label: 'NEW FORM',
+          style: [
+            { field: 'foo', class: 'textinput' },
+            { field: 'bar', class: 'textinput' },
+          ],
+        },
+      ],
+    });
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('updates specified form if exists', () => {
+    const stateBefore = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          label: 'EXISTING FORM',
+          style: [
+            { field: 'baz', class: 'textunitinput' },
+          ],
+        },
+      ],
+    });
+
+    const action = setDformStyleForm('record', 'form01', 'UPDATED FORM', [
+      { field: 'foo', class: 'textinput' },
+      { field: 'bar', class: 'textinput' },
+    ]);
+
+    const stateAfter = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          label: 'UPDATED FORM',
+          style: [
+            { field: 'foo', class: 'textinput' },
+            { field: 'bar', class: 'textinput' },
+          ],
+        },
+      ],
+    });
+
+    expect(reducer(stateBefore, action))
+      .toEqual(stateAfter);
+  });
+
+  it('sets new group and form if not exists', () => {
+    const stateBefore = Immutable.fromJS({});
+
+    const action = setDformStyleForm('record', 'form01', 'NEW FORM', [
+      { field: 'foo', class: 'textinput' },
+      { field: 'bar', class: 'textinput' },
+    ]);
+
+    const stateAfter = Immutable.fromJS({
+      record: [
+        {
+          id: 'form01',
+          label: 'NEW FORM',
+          style: [
+            { field: 'foo', class: 'textinput' },
+            { field: 'bar', class: 'textinput' },
           ],
         },
       ],
