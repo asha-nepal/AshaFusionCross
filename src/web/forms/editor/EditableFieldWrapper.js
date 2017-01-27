@@ -31,17 +31,13 @@ const EditableFieldWrapper = ({
   ...props
 }: {
   children?: React$Element<any>,
-  fieldEditProps?: FieldEditPropsType,
+  fieldEditProps: FieldEditPropsType,
   className?: string,
   style?: Object,
 
   connectDragSource: Function,
   isDragging: boolean,
 }) => {
-  if (!fieldEditProps) {
-    return <div className={className} style={style} {...props}>{children}</div>;
-  }
-
   let child;
   try {
     child = React.Children.only(children);
@@ -66,7 +62,7 @@ const EditableFieldWrapper = ({
       onClick={e => {
         e.preventDefault();
         e.stopPropagation();
-        if (fieldEditProps) fieldEditProps.onFocus();
+        fieldEditProps.onFocus();
       }}
     >
       {connectDragSource(child)}
@@ -75,4 +71,27 @@ const EditableFieldWrapper = ({
   );
 };
 
-export default DragSource('editable-field', editableFieldSource, collect)(EditableFieldWrapper);
+const ConnectedEditableFieldWrapper =
+  DragSource('editable-field', editableFieldSource, collect)(EditableFieldWrapper);
+
+export default ({
+  children,
+  fieldEditProps,
+
+  ...props
+}: {
+  children?: React$Element<any>,
+  fieldEditProps?: FieldEditPropsType,
+}) => {
+  if (!fieldEditProps) {
+    return <div {...props}>{children}</div>;
+  }
+
+  return (
+    <ConnectedEditableFieldWrapper
+      fieldEditProps={fieldEditProps}
+      children={children}
+      {...props}
+    />
+  );
+};
