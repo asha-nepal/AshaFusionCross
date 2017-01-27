@@ -28,3 +28,4 @@ export const Block = ({
 );
 
 Block.fieldProps = [];
+Block.isUnbound = true;

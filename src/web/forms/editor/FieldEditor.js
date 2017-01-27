@@ -23,7 +23,8 @@ export default ({
   onFieldChange: (updatedField: FormField) => void,
   onFieldRemove: () => void,
 }) => {
-  const fieldProps = (fieldComponentList[field.class] || fieldComponentList.textinput).fieldProps;
+  const fieldComponent = fieldComponentList[field.class] || fieldComponentList.textinput;
+  const fieldProps = fieldComponent.fieldProps;
 
   return (
     <div
@@ -47,24 +48,6 @@ export default ({
           ><span className="icon is-small"><i className="fa fa-times-circle" /></span></a>
         </p>
 
-        <TextInputComponent
-          label="Field"
-          value={field.field}
-          onChange={v => onFieldChange({
-            ...field,
-            field: v,
-          })}
-        />
-
-        <TextInputComponent
-          label="Label"
-          value={field.label}
-          onChange={v => onFieldChange({
-            ...field,
-            label: v,
-          })}
-        />
-
         <SelectComponent
           label="Type"
           options={avaliableComponentKeys.map(key => ({ id: key, label: key }))}
@@ -73,6 +56,26 @@ export default ({
           onChange={v => onFieldChange({
             ...field,
             class: v,
+          })}
+        />
+
+        {!fieldComponent.isUnbound &&
+          <TextInputComponent
+            label="Field"
+            value={field.field}
+            onChange={v => onFieldChange({
+              ...field,
+              field: v,
+            })}
+          />
+        }
+
+        <TextInputComponent
+          label="Label"
+          value={field.label}
+          onChange={v => onFieldChange({
+            ...field,
+            label: v,
           })}
         />
 
