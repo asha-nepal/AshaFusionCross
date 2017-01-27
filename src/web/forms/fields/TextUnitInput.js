@@ -3,6 +3,9 @@
 import React, { Component } from 'react';
 import math from 'mathjs';
 
+import EditableFieldWrapper from '../editor/EditableFieldWrapper';
+import type { FieldEditPropsType } from '../editor/type';
+
 export const convert = (
   value: ?ValueUnitType,
   targetUnit: ?string,
@@ -32,9 +35,17 @@ type Props = {
   placeholder?: string,
   readonly?: boolean,
   onChange?: (value: ?ValueUnitType) => void,
+  fieldEditProps?: FieldEditPropsType,
 }
 
 export class TextUnitInputComponent extends Component {
+  static fieldProps: Array<Object> = [
+    { name: 'units', type: 'array' },
+    { name: 'precision', type: 'number' },
+    { name: 'forceFixed', type: 'boolean' },
+    { name: 'placeholder', type: 'string' },
+  ];
+
   constructor(props: Props) {
     super(props);
 
@@ -92,6 +103,7 @@ export class TextUnitInputComponent extends Component {
       placeholder,
       readonly = false,
       onChange,
+      fieldEditProps,
     } = this.props;
 
     const _value = (typeof value === 'number' || typeof value === 'string')
@@ -101,7 +113,10 @@ export class TextUnitInputComponent extends Component {
     const inputValue = this.getInputValue(_value);
 
     return (
-      <div className="control">
+      <EditableFieldWrapper
+        className="control"
+        fieldEditProps={fieldEditProps}
+      >
         {label && <label className="label">{label}</label>}
         <p className={readonly ? 'control' : 'control has-addons'}>
           {readonly ? (
@@ -154,7 +169,7 @@ export class TextUnitInputComponent extends Component {
             </select>
           </span>
         </p>
-      </div>
+      </EditableFieldWrapper>
     );
   }
 }
