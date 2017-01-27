@@ -8,6 +8,13 @@ import {
   fieldComponentList,
 } from '../fields';
 
+import ArrayEditor from './field-prop-editors/ArrayEditor';
+
+const fieldPropEditors = {
+  boolean: CheckboxComponent,
+  array: ArrayEditor,
+};
+
 const avaliableComponentKeys =
   Object.keys(fieldComponentList)
     .filter(key => 'fieldProps' in fieldComponentList[key]);
@@ -80,9 +87,7 @@ export default ({
         />
 
         {fieldProps && fieldProps.map((fieldProp, i) => {
-          const editorComponent =
-            fieldProp.type === 'boolean'
-            ? CheckboxComponent : TextInputComponent;
+          const editorComponent = fieldPropEditors[fieldProp.type] || TextInputComponent;
 
           // $FlowFixMe
           return React.createElement(editorComponent, {
