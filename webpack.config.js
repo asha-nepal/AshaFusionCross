@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -69,4 +70,24 @@ module.exports = {
     inline: true,
     historyApiFallback: true,
   },
+  devtool: '#eval-source-map',
 };
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map';
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+      },
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+  ]);
+}
