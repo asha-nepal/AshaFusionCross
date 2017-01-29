@@ -53,6 +53,11 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    alias: {
+      lib: path.resolve(__dirname, './lib'),
+    },
+  },
   plugins: [
     new ExtractTextPlugin('style.css', {
       allChunks: true,
