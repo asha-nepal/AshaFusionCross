@@ -13,6 +13,10 @@
         "flow-vars/use-flow-type": 1
     },
     "settings": {
-        "import/resolver": "webpack"
+        "import/resolver": {
+            "webpack": {
+                "config": "webpack.config.base.js"
+            }
+        }
     }
 }

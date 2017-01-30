@@ -1,10 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -12,11 +10,6 @@ module.exports = {
     './src/web/app.js',
     './src/web/sass/style.sass',
   ],
-  output: {
-    filename: 'app.js',
-    path: path.resolve('./public'),
-    publicPath: '/',
-  },
   module: {
     loaders: [
       {
@@ -69,16 +62,8 @@ module.exports = {
     },
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: './src/web/.htaccess' },
-      { from: './src/web/assets', to: 'assets' },
-    ]),
     new ExtractTextPlugin('style.css', {
       allChunks: true,
-    }),
-    new FaviconsWebpackPlugin({
-      logo: path.resolve('./assets/img/logo.svg'),
-      title: 'ASHA fusion',
     }),
     new HtmlWebpackPlugin({
       template: 'src/web/index.ejs',
@@ -92,12 +77,6 @@ module.exports = {
     }),
     new HtmlWebpackExcludeAssetsPlugin(),
   ],
-  devServer: {
-    contentBase: './public',
-    port: 8080,
-    inline: true,
-    historyApiFallback: true,
-  },
   devtool: '#eval-source-map',
 };
 
