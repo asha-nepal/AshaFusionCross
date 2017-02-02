@@ -1,13 +1,10 @@
 /* @flow */
 
-import Chance from 'chance';
 import base64 from 'base64-js';
-
-const chance = new Chance();
-const idStringPool = '0123456789abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; // URLセーフな文字のみ
+import randomstring from 'randomstring';
 
 export function createId(length: number = 16) {
-  return chance.string({ pool: idStringPool, length });
+  return randomstring.generate(length);
 }
 
 // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html

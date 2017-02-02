@@ -1,3 +1,8 @@
 {
-  "presets": ["react-native-stage-0"]
+  "presets": ["react-native-stage-0"],
+  "env": {
+    "production": {
+      "presets": ["react-optimize"]
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import math from 'mathjs';
+import math from 'lib/mathjs';
 
 export default {
   patient: [

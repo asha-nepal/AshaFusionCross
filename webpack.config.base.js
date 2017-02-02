@@ -1,16 +1,15 @@
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
 
 module.exports = {
   entry: [
+    'babel-polyfill',
     './src/web/app.js',
     './src/web/sass/style.sass',
   ],
-  output: {
-    filename: 'app.js',
-    path: path.resolve('./public'),
-    publicPath: '/',
-  },
   module: {
     loaders: [
       {
@@ -51,17 +50,51 @@ module.exports = {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
       },
+      {
+        test: /\.ejs$/,
+        loader: 'ejs-loader',
+      },
     ],
+  },
+  resolve: {
+    alias: {
+      lib: path.resolve(__dirname, './lib'),
+    },
   },
   plugins: [
     new ExtractTextPlugin('style.css', {
       allChunks: true,
     }),
+    new HtmlWebpackPlugin({
+      template: 'src/web/index.ejs',
+      title: '',
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/web/index.ejs',
+      filename: 'print.html',
+      title: 'Print',
+      excludeAssets: [/app.js/],
+    }),
+    new HtmlWebpackExcludeAssetsPlugin(),
   ],
-  devServer: {
-    contentBase: './public',
-    port: 8080,
-    inline: true,
-    historyApiFallback: true,
-  },
+  devtool: '#eval-source-map',
 };
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map';
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+      },
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+  ]);
+}

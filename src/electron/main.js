@@ -26,11 +26,6 @@ function createWindow() {
     slashes: true,
   }));
 
-  // Open the DevTools.
-  if (process.env.NODE_ENV === 'development') {
-    win.webContents.openDevTools();
-  }
-
   win.on('closed', () => {
     win = null;
   });

@@ -5,7 +5,7 @@ jest.unmock('../TextUnitInput');
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import math from 'mathjs';
+import math from 'lib/mathjs';
 
 import { convert, TextUnitInputComponent } from '../TextUnitInput';
 
