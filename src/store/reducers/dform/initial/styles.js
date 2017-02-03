@@ -1,5 +1,7 @@
 import math from 'lib/mathjs';
 
+import prescriptions from '../../../../../data/dhulikhel-medicine-list.json';
+
 export default {
   patient: [
     {
@@ -346,7 +348,10 @@ export default {
           field: 'prescription', label: 'Prescriptions', class: 'subformlist',
           show: 'plan:prescription',
           fields: [
-            { field: 'medicine', label: 'Medicine', class: 'textinput', primary: true },
+            {
+              field: 'medicine', label: 'Medicine', class: 'textinput', primary: true,
+              suggestions: prescriptions.map(p => p.BRANDNAME),
+            },
             { field: 'stat', label: 'Stat', class: 'check' },
             { field: 'sos', label: 'SOS', class: 'check' },
             {
