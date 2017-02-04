@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import AutosuggestInput from './AutosuggestInput';
 
 const alertIcons = {
   danger: <i className="fa fa-warning is-danger" />,
@@ -45,6 +46,7 @@ export const TextInputComponent = ({
   required = false,
   readonly = false,
   expanded = false,
+  suggestions,
 }: {
   label: ?string,
   value: ?string,
@@ -63,6 +65,7 @@ export const TextInputComponent = ({
   required?: boolean,
   readonly: boolean,
   expanded?: boolean,
+  suggestions?: Array<string>,
 }) => {
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
@@ -87,10 +90,14 @@ export const TextInputComponent = ({
   const warningClassName = warning ? ' is-warning' : '';
   const sizeClassName = size ? ` is-${size}` : '';
 
+  const useSuggestions = suggestions && suggestions.length > 0;
+  const InputComponent = useSuggestions ? AutosuggestInput : 'input';
+  const additionalProps = useSuggestions ? { candidates: suggestions } : null;
+
   return (
     <div className={expanded ? 'control is-expanded' : 'control'}>
       {label && <label className="label">{label}</label>}
-      <p className={hasAddons ? 'control has-addons' : 'control'}>
+      <div className={hasAddons ? 'control has-addons' : 'control'}>
         {prefix &&
           <span className={`button is-disabled${sizeClassName}`}>
             {prefix}
@@ -101,7 +108,7 @@ export const TextInputComponent = ({
           data-balloon={alert && alert.label}
           data-balloon-pos="up"
         >
-          <input
+          <InputComponent
             type={type}
             className={`input${warningClassName}${sizeClassName}`}
             style={{
@@ -115,6 +122,7 @@ export const TextInputComponent = ({
             step={typeof precision === 'number' && Math.pow(10, -precision)}
             onChange={e => onChange(e.target.value)}
             required={required}
+            {...additionalProps}
           />
           {alert ? alertIcons[alert.type] : <span />}
         </span>
@@ -123,7 +131,7 @@ export const TextInputComponent = ({
             {suffix}
           </span>
         }
-      </p>
+      </div>
       <span className="help is-warning">{warning}</span>
     </div>
   );
