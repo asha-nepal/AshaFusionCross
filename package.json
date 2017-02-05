@@ -112,9 +112,11 @@
       "<rootDir>/node_modules/enzyme/",
       "<rootDir>/node_modules/react-redux-form/"
     ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
     "moduleNameMapper": {
-      "^.+\\.(gif|png|jpg|jpeg|html)$": "<rootDir>/test/fileMock.js",
-      "^lib/(.*/)?(.*)$": "<rootDir>/lib/$1__mocks__/$2"
+      "^.+\\.(gif|png|jpg|jpeg|html)$": "<rootDir>/test/fileMock.js"
     }
   }
 }
