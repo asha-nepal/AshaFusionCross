@@ -4,6 +4,9 @@ import {
   REQUEST_FETCH_PATIENT_LIST,
   SUCCESS_FETCH_PATIENT_LIST,
   FAILURE_FETCH_PATIENT_LIST,
+  REQUEST_FETCH_RECORD_LIST,
+  SUCCESS_FETCH_RECORD_LIST,
+  FAILURE_FETCH_RECORD_LIST,
   REQUEST_FETCH_PATIENT,
   SUCCESS_FETCH_PATIENT,
   FAILURE_FETCH_PATIENT,
@@ -17,6 +20,7 @@ import {
 
 const initialState = {
   isFetchingPatientList: false,
+  isFetchingRecordList: false,
   isFetchingPatient: false,
   isPuttingPatient: false,
   isPuttingRecord: false,
@@ -46,6 +50,24 @@ export default function (
     case FAILURE_FETCH_PATIENT_LIST:
       return Object.assign({}, state, {
         isFetchingPatientList: false,
+        error: action.error,
+      });
+
+    /* Fetch Record list */
+    case REQUEST_FETCH_RECORD_LIST:
+      return Object.assign({}, state, {
+        isFetchingRecordList: true,
+      });
+
+    case SUCCESS_FETCH_RECORD_LIST:
+      return Object.assign({}, state, {
+        isFetchingRecordList: false,
+        error: null,
+      });
+
+    case FAILURE_FETCH_RECORD_LIST:
+      return Object.assign({}, state, {
+        isFetchingRecordList: false,
         error: action.error,
       });
 

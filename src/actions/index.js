@@ -24,6 +24,13 @@ export {
 } from './patient-select';
 
 export {
+  FETCH_RECORD_LIST, fetchRecordList,
+  REQUEST_FETCH_RECORD_LIST, requestFetchRecordList,
+  SUCCESS_FETCH_RECORD_LIST, successFetchRecordList,
+  FAILURE_FETCH_RECORD_LIST, failureFetchRecordList,
+} from './record-list';
+
+export {
   DFORM_STYLE_INSERT, dformStyleInsert,
   DFORM_STYLE_UPDATE, dformStyleUpdate,
   DFORM_STYLE_DELETE, dformStyleDelete,
