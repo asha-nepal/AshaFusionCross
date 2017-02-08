@@ -1,31 +1,16 @@
 /* @flow */
 
 import { connect } from 'react-redux';
-import { tableize } from 'lib/tableizer';
+import {
+  tableize,
+  reduceTable,
+} from 'lib/tableizer';
+import {
+  fetchRecordList,
+} from '../actions';
 
-// Dummy data
-const records = [
-  {
-    patient: {
-      name: 'John',
-    },
-    height: { value: 5.8, unit: 'ft' },
-    bp: { s: 120, d: 75 },
-  },
-  {
-    patient: {
-      name: 'Mike',
-    },
-    height: { value: 180, unit: 'cm' },
-    bp: { s: 130, d: 80 },
-  },
-];
-
+// tmp
 const rules = [
-  {
-    key: 'name',
-    entry: 'patient.name',
-  },
   {
     key: 'height',
     type: 'value_unit',
@@ -37,19 +22,36 @@ const rules = [
   {
     key: 'bp.d',
   },
+  {
+    key: 'symptoms',
+  },
+  {
+    key: '$updated_at',
+    type: 'moment',
+  },
 ];
 
 const columns = [
-  { key: 'name', name: 'Name' },
-  { key: 'height', name: 'Height' },
-  { key: 'bp.s', name: 'BP (s)' },
-  { key: 'bp.d', name: 'BP (d)' },
+  { key: 'height', name: 'Height (cm)' },
+  { key: 'bp.s', name: 'BP/s (mmHg)' },
+  { key: 'bp.d', name: 'BP/d (mmHg)' },
+  { key: 'symptoms', name: 'Symptoms' },
+  { key: '$updated_at', name: 'Updated at' },
 ];
 
-const mapStateToProps = () => ({
+const statsRules = [
+  { key: 'height', type: 'mean' },
+  { key: 'symptoms', type: 'mode' },
+];
+
+const mapStateToProps = (state) => ({
   columns,
-  rows: tableize(records, rules),
+  rows: tableize(state.recordList, rules, ''),
+  stats: reduceTable(tableize(state.recordList, rules), statsRules),
 });
-const mapDispatchToProps = null;
+
+const mapDispatchToProps = (dispatch) => ({
+  load: () => dispatch(fetchRecordList()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps);
