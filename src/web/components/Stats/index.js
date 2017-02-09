@@ -2,10 +2,9 @@
 
 import React from 'react';
 import ReactDataGrid from 'react-data-grid';
-import stringify from 'csv-stringify';
-import moment from 'moment';
-import Header from './common/Header';
-import Content from './common/Content';
+import Header from '../common/Header';
+import Content from '../common/Content';
+import CsvExporter from './CsvExporter';
 
 const ArrayFormatter = ({
   value,
@@ -62,20 +61,10 @@ export default({
           )}
         </ul>
 
-        <a
-          className="button"
-          onClick={e => {
-            e.preventDefault();
-            stringify(rows, { header: true }, (err, output) => {
-              const blob = new Blob([output], { type: 'text/comma-separated-values' });
-              const link = document.createElement('a');
-              const datetimeString = moment().format('YYYY-MM-DD-HH-mm-ss');
-              link.download = `asha-${datetimeString}.csv`;
-              link.href = URL.createObjectURL(blob);
-              link.click();
-            });
-          }}
-        >Export as CSV</a>
+        <CsvExporter
+          rows={rows}
+          columns={columns}
+        />
       </Content>
     </div>
   );
