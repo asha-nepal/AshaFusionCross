@@ -16,6 +16,7 @@ import db from './db';
 import auth from './auth';
 import dform from './dform';
 import forms from './forms';
+import stats from './stats';
 
 export default combineReducers({
   patientSelect,
@@ -32,4 +33,5 @@ export default combineReducers({
   auth,
   dform,
   forms,
+  stats,
 });

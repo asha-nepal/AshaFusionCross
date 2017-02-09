@@ -16,11 +16,13 @@ export default({
   columns,
   rows,
   stats,
+  statsRules,
   load,
 }: {
   columns: Array<{ key: string, name: string }>,
   rows: Array<Object>,
   stats: {[key: string]: number | string},
+  statsRules: {[key: string]: {name: string}},
   load: () => void,
 }) => {
   const _columns = columns.map(column => {
@@ -56,8 +58,8 @@ export default({
         />
 
         <ul>
-          {columns.map(column =>
-            <li key={column.key}>{column.name}: {stats[column.key]}</li>
+          {Object.keys(stats).map(key =>
+            <li key={key}>{statsRules[key].name || key}: {stats[key]}</li>
           )}
         </ul>
 
