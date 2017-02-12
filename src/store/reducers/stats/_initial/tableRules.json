@@ -1,0 +1,20 @@
+[
+  {
+    "key": "height",
+    "type": "value_unit",
+    "unit": "cm"
+  },
+  {
+    "key": "bp.s"
+  },
+  {
+    "key": "bp.d"
+  },
+  {
+    "key": "symptoms"
+  },
+  {
+    "key": "$updated_at",
+    "type": "moment"
+  }
+]

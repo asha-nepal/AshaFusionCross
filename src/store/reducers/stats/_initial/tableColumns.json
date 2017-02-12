@@ -1,0 +1,7 @@
+[
+  { "key": "height", "name": "Height (cm)" },
+  { "key": "bp.s", "name": "BP/s (mmHg)" },
+  { "key": "bp.d", "name": "BP/d (mmHg)" },
+  { "key": "symptoms", "name": "Symptoms" },
+  { "key": "$updated_at", "name": "Updated at" }
+]
