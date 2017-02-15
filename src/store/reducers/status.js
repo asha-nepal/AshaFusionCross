@@ -4,9 +4,9 @@ import {
   REQUEST_FETCH_PATIENT_LIST,
   SUCCESS_FETCH_PATIENT_LIST,
   FAILURE_FETCH_PATIENT_LIST,
-  REQUEST_FETCH_RECORD_LIST,
-  SUCCESS_FETCH_RECORD_LIST,
-  FAILURE_FETCH_RECORD_LIST,
+  POUCH_DOCS_FETCH_REQUEST,
+  POUCH_DOCS_FETCH_SUCCESS,
+  POUCH_DOCS_FETCH_FAILURE,
   REQUEST_FETCH_PATIENT,
   SUCCESS_FETCH_PATIENT,
   FAILURE_FETCH_PATIENT,
@@ -20,10 +20,10 @@ import {
 
 const initialState = {
   isFetchingPatientList: false,
-  isFetchingRecordList: false,
   isFetchingPatient: false,
   isPuttingPatient: false,
   isPuttingRecord: false,
+  isFetching: {},
   error: null,
 };
 
@@ -31,6 +31,7 @@ export default function (
   state: Object = initialState,
   action: {
     type: string,
+    payload: Object,
     error: ErrorObject,
   }
 ): Object {
@@ -53,23 +54,35 @@ export default function (
         error: action.error,
       });
 
-    /* Fetch Record list */
-    case REQUEST_FETCH_RECORD_LIST:
-      return Object.assign({}, state, {
-        isFetchingRecordList: true,
-      });
+    /* Fetch Pouch Docs */
+    case POUCH_DOCS_FETCH_REQUEST:
+      return {
+        ...state,
+        isFetching: {
+          ...state.isFetching,
+          [action.payload.name]: true,
+        },
+      };
 
-    case SUCCESS_FETCH_RECORD_LIST:
-      return Object.assign({}, state, {
-        isFetchingRecordList: false,
+    case POUCH_DOCS_FETCH_SUCCESS:
+      return {
+        ...state,
+        isFetching: {
+          ...state.isFetching,
+          [action.payload.name]: false,
+        },
         error: null,
-      });
+      };
 
-    case FAILURE_FETCH_RECORD_LIST:
-      return Object.assign({}, state, {
-        isFetchingRecordList: false,
+    case POUCH_DOCS_FETCH_FAILURE:
+      return {
+        ...state,
+        isFetching: {
+          ...state.isFetching,
+          [action.payload.name]: false,
+        },
         error: action.error,
-      });
+      };
 
     /* Fetch patient */
     case REQUEST_FETCH_PATIENT:
