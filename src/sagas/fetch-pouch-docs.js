@@ -8,6 +8,9 @@ import {
   alertInfo,
   alertError,
 } from '../actions';
+import {
+  capitalize,
+} from '../utils';
 
 function pouchFetchDocs(db: PouchInstance, prefix: string): Promise<Array<PouchDocType>> {
   return db.allDocs({
@@ -23,15 +26,16 @@ export function* fetchPouchDocs(
   name: string,
   opts: Object
 ): Generator<*, void, *> {
+  const { prefix, label } = opts;
+
   yield put(requestFetchingPouchDocs(name));
   try {
-    const { prefix } = opts;
     // $FlowFixMe
     const data: Array<PouchDocType> = yield call(pouchFetchDocs, db, prefix);
-    yield put(alertInfo('Loaded'));
+    yield put(alertInfo(capitalize(`${label && `${label} `}loaded`)));
     yield put(successFetchingPouchDocs(name, data));
   } catch (error) {
-    yield put(alertError('Failed loading'));
+    yield put(alertError(`Failed loading${label && ` ${label}`}`));
     yield put(failFetchingPouchDocs(name, error));
   }
 }

@@ -6,7 +6,6 @@ import {
   formReducer,
 } from 'react-redux-form';
 
-import patientList from './patient-list';
 import patientSelect from './patient-select';
 import patientView from './patient-view';
 import status from './status';
@@ -21,7 +20,7 @@ import { generatePouchDocsReducer } from './generator';
 export default combineReducers({
   patientSelect,
   patientView,
-  patientList,
+  patientList: generatePouchDocsReducer('patients'),
   recordList: generatePouchDocsReducer('records'),
   activePatient: modelReducer('activePatient'),
   activePatientForm: formReducer('activePatient'),

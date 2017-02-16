@@ -41,3 +41,7 @@ const createBTOA = () => {
 };
 
 export const btoa = createBTOA();
+
+export const capitalize = (str: string) => (
+  str.length === 0 ? str : str.charAt(0).toUpperCase() + str.substring(1)
+);

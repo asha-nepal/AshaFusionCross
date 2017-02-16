@@ -16,7 +16,7 @@ import {
   DB_CONNECT_REQUEST,
   DB_DISCONNECT_REQUEST,
   dbSetInstance,
-  fetchPatientList,
+  fetchPouchDocs,
   changeActivePatient,
   insertOrChangeActiveRecord,
   requestLogout,
@@ -76,7 +76,7 @@ export function* watchOnPouchChanges(db: PouchInstance) {
         const { change } = payload;
 
         // For PatientSelect
-        yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
+        yield put(fetchPouchDocs('patients', { prefix: 'patient_', label: 'patient list' }));
 
         // For PatientView
         const activePatientId = yield select(state => state.activePatient._id);

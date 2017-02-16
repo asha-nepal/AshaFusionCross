@@ -1,9 +1,6 @@
 /* @flow */
 
 import {
-  REQUEST_FETCH_PATIENT_LIST,
-  SUCCESS_FETCH_PATIENT_LIST,
-  FAILURE_FETCH_PATIENT_LIST,
   POUCH_DOCS_FETCH_REQUEST,
   POUCH_DOCS_FETCH_SUCCESS,
   POUCH_DOCS_FETCH_FAILURE,
@@ -36,24 +33,6 @@ export default function (
   }
 ): Object {
   switch (action.type) {
-    /* Fetch Patient list */
-    case REQUEST_FETCH_PATIENT_LIST:
-      return Object.assign({}, state, {
-        isFetchingPatientList: true,
-      });
-
-    case SUCCESS_FETCH_PATIENT_LIST:
-      return Object.assign({}, state, {
-        isFetchingPatientList: false,
-        error: null,
-      });
-
-    case FAILURE_FETCH_PATIENT_LIST:
-      return Object.assign({}, state, {
-        isFetchingPatientList: false,
-        error: action.error,
-      });
-
     /* Fetch Pouch Docs */
     case POUCH_DOCS_FETCH_REQUEST:
       return {

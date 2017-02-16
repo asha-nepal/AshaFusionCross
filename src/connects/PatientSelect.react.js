@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {
-  fetchPatientList,
+  fetchPouchDocs,
   requestLogout,
 } from '../actions';
 import {
@@ -13,7 +13,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPatientList: () => dispatch(fetchPatientList()),
+  fetchPatientList: () =>
+    dispatch(fetchPouchDocs(
+      'patients',
+      { prefix: 'patient_', label: 'patient list' }
+    )),
   logout: () => dispatch(requestLogout()),
 });
 
