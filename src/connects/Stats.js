@@ -6,7 +6,7 @@ import {
   reduceTable,
 } from 'lib/tableizer';
 import {
-  fetchPouchDocs,
+  fetchRecordList,
 } from '../actions';
 
 const mapStateToProps = (state) => ({
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  load: () => dispatch(fetchPouchDocs('records', { prefix: 'record_' })),
+  load: () => dispatch(fetchRecordList()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps);

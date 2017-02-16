@@ -35,3 +35,15 @@ export const failFetchingPouchDocs = (name: string, error: ErrorObject) => ({
   },
   error,
 });
+
+export const fetchPatientList = () =>
+  fetchPouchDocs(
+    'patients',
+    { prefix: 'patient_', label: 'patient list' }
+  );
+
+export const fetchRecordList = () =>
+  fetchPouchDocs(
+    'records',
+    { prefix: 'record_' }
+  );

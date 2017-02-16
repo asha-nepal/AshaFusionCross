@@ -28,6 +28,9 @@ export {
   POUCH_DOCS_FETCH_REQUEST, requestFetchingPouchDocs,
   POUCH_DOCS_FETCH_SUCCESS, successFetchingPouchDocs,
   POUCH_DOCS_FETCH_FAILURE, failFetchingPouchDocs,
+
+  fetchPatientList,
+  fetchRecordList,
 } from './pouch-docs';
 
 export {
