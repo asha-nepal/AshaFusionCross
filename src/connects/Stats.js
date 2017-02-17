@@ -7,7 +7,7 @@ import {
 } from 'lib/tableizer';
 import {
   fetchRecordList,
-} from '../actions';
+} from 'actions';
 
 const mapStateToProps = (state) => ({
   columns: state.stats.tableColumns,

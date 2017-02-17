@@ -7,10 +7,10 @@ import {
   failFetchingPouchDocs,
   alertInfo,
   alertError,
-} from '../actions';
+} from 'actions';
 import {
   capitalize,
-} from '../utils';
+} from 'utils';
 
 function pouchFetchDocs(db: PouchInstance, prefix: string): Promise<Array<PouchDocType>> {
   return db.allDocs({

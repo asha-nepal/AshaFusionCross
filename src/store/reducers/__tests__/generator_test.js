@@ -1,6 +1,6 @@
 /* eslint-env jest */
-jest.unmock('../../../actions');
-jest.unmock('../../../actions/pouch-docs');
+jest.unmock('actions');
+jest.unmock('actions/pouch-docs');
 jest.unmock('../generator');
 
 import {

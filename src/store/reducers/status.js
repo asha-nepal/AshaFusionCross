@@ -13,7 +13,7 @@ import {
   REQUEST_PUT_RECORD,
   SUCCESS_PUT_RECORD,
   FAILURE_PUT_RECORD,
-} from '../../actions';
+} from 'actions';
 
 const initialState = {
   isFetchingPatientList: false,

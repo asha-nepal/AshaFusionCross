@@ -1,6 +1,6 @@
 import {
   POUCH_DOCS_FETCH_SUCCESS,
-} from '../../actions';
+} from 'actions';
 
 
 export const generatePouchDocsReducer = (name: string) =>

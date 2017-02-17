@@ -30,6 +30,7 @@
 .*/node_modules/electron-packager/
 
 [include]
+./src/
 
 [libs]
 node_modules/immutable/dist/immutable.js.flow
@@ -66,6 +67,8 @@ module.file_ext=.ios.js
 module.file_ext=.android.js
 module.file_ext=.js
 module.file_ext=.json
+
+module.system.node.resolve_dirname=src
 
 [version]
 ^0.32.0
