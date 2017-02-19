@@ -12,15 +12,18 @@ import {
 const TextControl = ({
   label,
   form,
+  type = 'text',
   ...props
 }: {
   label: string,
+  type: string,
   form: Object,
 }) => (
   <p className="control">
     <label className="label">
       {label}
-      <Control.text
+      <Control.input
+        type={type}
         {...props}
         className={classNames('input', { 'is-danger': !form.valid })}
       />
