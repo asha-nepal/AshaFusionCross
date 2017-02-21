@@ -3,7 +3,9 @@
 import React from 'react';
 
 const RankDisplay = ({
-  value
+  value,
+}: {
+  value: Array<[Array<string>, number]>,
 }) => (
   <table className="table">
     <tbody>
@@ -25,17 +27,17 @@ const ValueDisplay = ({
   if (typeof value === 'string' || typeof value === 'number') return <span>{value}</span>;
 
   if (Array.isArray(value)) {  // `rank` type
-    return <RankDisplay value={value} />
+    return <RankDisplay value={value} />;
   }
 
   return null;
-}
+};
 
 export default({
   stats,
   statsRules,
 }: {
-  stats: {[key: string]: number | string | Array<any>},
+  stats: {[key: string]: any},
   statsRules: {[key: string]: {name: string}},
 }) => (
   <div>
