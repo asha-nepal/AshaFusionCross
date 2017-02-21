@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Form } from 'react-redux-form';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import classnames from 'classnames';
 import {
   TextInput,
   fieldComponentList as fieldComponents,
@@ -128,6 +129,7 @@ type Props = {
   warnings: Object,
   formGroup: string,
   formStyleId: string,
+  customizable: boolean,
   onFieldChange: (
     parentPath: string,
     index: number,
@@ -166,7 +168,7 @@ export class DynamicFormComponent extends React.Component {
     this.onFormAdd = this.onFormAdd.bind(this);
 
     this.state = {
-      editing: true,
+      editing: false,
       editFocusOn: null,
     };
   }
@@ -217,6 +219,7 @@ export class DynamicFormComponent extends React.Component {
       onRemove,
       freeze,
       warnings = {},
+      customizable = false,
     } = this.props;
 
     const createChildFields = makeCreateChildFields(
@@ -232,9 +235,12 @@ export class DynamicFormComponent extends React.Component {
         onSubmit={onSubmit}
       >
         {this.state.editing &&
-          <FormAdder
-            onFormAdd={this.onFormAdd}
-          />
+          <div className="block is-clearfix">
+            <FormAdder
+              className="is-pulled-right"
+              onFormAdd={this.onFormAdd}
+            />
+          </div>
         }
 
         {/* TODO: toJS() should be removed and handle Immutable object directly */}
@@ -261,6 +267,21 @@ export class DynamicFormComponent extends React.Component {
                 ><i className="fa fa-times" />Remove</a>
               </p>
             }
+          </div>
+        }
+
+        {customizable &&
+          <div className="block is-clearfix">
+            <a
+              className={classnames(
+                'button is-pulled-right',
+                this.state.editing ? 'is-success' : 'is-small'
+              )}
+              onClick={e => {
+                e.preventDefault();
+                this.setState({ editing: !this.state.editing });
+              }}
+            >{this.state.editing ? 'Finish customizing' : 'Customize form'}</a>
           </div>
         }
       </Form>

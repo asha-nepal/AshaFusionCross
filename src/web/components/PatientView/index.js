@@ -169,6 +169,7 @@ export default class PatientView extends Component {
                     formStyleId={recordFormStyleId}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
+                    customizable
                   />
                 </div>
               )}

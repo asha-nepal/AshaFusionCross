@@ -8,6 +8,7 @@ import {
 
 type Props = {
   onFormAdd: (id: string, label: string) => void,
+  className?: string,
 }
 
 export default class extends React.Component {
@@ -32,19 +33,18 @@ export default class extends React.Component {
   render() {
     const {
       onFormAdd,
+      className,
     } = this.props;
 
     return (
-      <div className="control is-clearfix">
-        <p className="control is-pulled-right">
-          <a
-            className="button"
-            onClick={e => {
-              e.preventDefault();
-              this.setState({ isModalOpen: true });
-            }}
-          >Add new form</a>
-        </p>
+      <span className={className}>
+        <a
+          className="button is-primary"
+          onClick={e => {
+            e.preventDefault();
+            this.setState({ isModalOpen: true });
+          }}
+        >Add new form</a>
 
         <Modal
           isOpen={this.state.isModalOpen}
@@ -78,7 +78,7 @@ export default class extends React.Component {
             </p>
           </div>
         </Modal>
-      </div>
+      </span>
     );
   }
 }
