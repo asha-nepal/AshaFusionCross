@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'react-redux-form';
 import {
@@ -79,15 +79,7 @@ function makeCreateChildFields(state, rootModel, warnings) {
   };
 }
 
-export const DynamicFormComponent = ({
-  state,
-  model,
-  style,
-  onSubmit,
-  onRemove,
-  freeze,
-  warnings = {},
-}: {
+type Props = {
   state: Object,
   model: string,
   style: DformStyle,
@@ -95,43 +87,59 @@ export const DynamicFormComponent = ({
   onRemove: ?() => void,
   freeze: boolean,
   warnings?: Object,
-}) => {
-  const createChildFields = makeCreateChildFields(state, model, warnings);
+}
 
-  return (
-    <Form
-      model={model}
-      onSubmit={onSubmit}
-    >
-      {/* TODO: toJS() should be removed and handle Immutable object directly */}
-      {createChildFields(style.toJS ? style.toJS() : style)}
+class DynamicFormComponent extends PureComponent {
+  props: Props
 
-      {(onSubmit || onRemove) &&
-        <div className="level">
-          {onSubmit &&
-            <p className="level-left">
-              <button type="submit" className="button is-primary" disabled={freeze}>
-                Submit
-              </button>
-            </p>
-          }
-          {onRemove &&
-            <p className="level-right">
-              <a
-                className="button is-danger"
-                disabled={freeze}
-                onClick={e => {
-                  e.preventDefault();
-                  if (!freeze && onRemove) { onRemove(); }
-                }}
-              ><i className="fa fa-times" />Remove</a>
-            </p>
-          }
-        </div>
-      }
-    </Form>
-  );
-};
+  render() {
+    const {
+      state,
+      model,
+      style,
+      onSubmit,
+      onRemove,
+      freeze,
+      warnings = {},
+    } = this.props;
+
+    const createChildFields = makeCreateChildFields(state, model, warnings);
+
+    return (
+      <Form
+        model={model}
+        onSubmit={onSubmit}
+      >
+        {/* TODO: toJS() should be removed and handle Immutable object directly */}
+        {createChildFields(style.toJS ? style.toJS() : style)}
+
+        {(onSubmit || onRemove) &&
+          <div className="level">
+            {onSubmit &&
+              <p className="level-left">
+                <button type="submit" className="button is-primary" disabled={freeze}>
+                  Submit
+                </button>
+              </p>
+            }
+            {onRemove &&
+              <p className="level-right">
+                <a
+                  className="button is-danger"
+                  disabled={freeze}
+                  onClick={e => {
+                    e.preventDefault();
+                    if (!freeze && onRemove) { onRemove(); }
+                  }}
+                ><i className="fa fa-times" />Remove</a>
+              </p>
+            }
+          </div>
+        }
+      </Form>
+    );
+  }
+}
 
 export default connect(
   state => ({ state })
