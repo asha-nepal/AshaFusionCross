@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import AutosuggestInput from './AutosuggestInput';
 
 import EditableFieldWrapper from '../editor/EditableFieldWrapper';
 import type { FieldEditPropsType } from '../editor/type';
@@ -48,6 +49,7 @@ export const TextInputComponent = ({
   required = false,
   readonly = false,
   expanded = false,
+  suggestions,
   fieldEditProps,
 }: {
   label: ?string,
@@ -67,6 +69,7 @@ export const TextInputComponent = ({
   required?: boolean,
   readonly?: boolean,
   expanded?: boolean,
+  suggestions?: Array<string>,
   fieldEditProps?: FieldEditPropsType,
 }) => {
   if (readonly) {
@@ -92,13 +95,17 @@ export const TextInputComponent = ({
   const warningClassName = warning ? ' is-warning' : '';
   const sizeClassName = size ? ` is-${size}` : '';
 
+  const useSuggestions = suggestions && suggestions.length > 0;
+  const InputComponent = useSuggestions ? AutosuggestInput : 'input';
+  const additionalProps = useSuggestions ? { candidates: suggestions } : null;
+
   return (
     <EditableFieldWrapper
       className={expanded ? 'control is-expanded' : 'control'}
       fieldEditProps={fieldEditProps}
     >
       {label && <label className="label">{label}</label>}
-      <p className={hasAddons ? 'control has-addons' : 'control'}>
+      <div className={hasAddons ? 'control has-addons' : 'control'}>
         {prefix &&
           <span className={`button is-disabled${sizeClassName}`}>
             {prefix}
@@ -109,7 +116,7 @@ export const TextInputComponent = ({
           data-balloon={alert && alert.label}
           data-balloon-pos="up"
         >
-          <input
+          <InputComponent
             type={type}
             className={`input${warningClassName}${sizeClassName}`}
             style={{
@@ -123,6 +130,7 @@ export const TextInputComponent = ({
             step={typeof precision === 'number' && Math.pow(10, -precision)}
             onChange={e => onChange(e.target.value)}
             required={required}
+            {...additionalProps}
           />
           {alert ? alertIcons[alert.type] : <span />}
         </span>
@@ -131,7 +139,7 @@ export const TextInputComponent = ({
             {suffix}
           </span>
         }
-      </p>
+      </div>
       <span className="help is-warning">{warning}</span>
     </EditableFieldWrapper>
   );

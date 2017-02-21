@@ -24,8 +24,8 @@
     },
     "settings": {
         "import/resolver": {
-            "node": {
-                "extensions": [".js", ".android.js", ".ios.js"]
+            "webpack": {
+                "config": "webpack.config.base.js"
             }
         }
     }

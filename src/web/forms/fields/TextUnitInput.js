@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import math from 'mathjs';
+import math from 'lib/mathjs';
 
 export const convert = (
   value: ?ValueUnitType,

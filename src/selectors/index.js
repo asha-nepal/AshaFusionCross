@@ -4,6 +4,12 @@ import { createSelector } from 'reselect';
 import _get from 'lodash.get';
 
 export {
+  getIsLoggedIn,
+  getLoggedInUser,
+  getIsAdmin,
+} from './auth';
+
+export {
   getDformStyles,
   getRecordFormStyles, getDefaultRecordFormStyleId, getRecordFormStyleId, getRecordFormStyle,
   getPatientFormStyle,
