@@ -44,13 +44,16 @@ export default({
       />
 
       <Content>
-        <a
-          className="button"
-          onClick={e => {
-            e.preventDefault();
-            load();
-          }}
-        >Load</a>
+        <div className="block">
+          <a
+            className="button"
+            onClick={e => {
+              e.preventDefault();
+              load();
+            }}
+          >Load</a>
+        </div>
+
         <ReactDataGrid
           columns={_columns}
           rowGetter={i => rows[i]}
@@ -58,15 +61,20 @@ export default({
           minHeight={500}
         />
 
-        <CsvExporter
-          rows={rows}
-          columns={columns}
-        />
+        <div className="block is-clearfix">
+          <CsvExporter
+            rows={rows}
+            columns={columns}
+            className="is-pulled-right"
+          />
+        </div>
 
-        <StatsList
-          stats={stats}
-          statsRules={statsRules}
-        />
+        <div className="box">
+          <StatsList
+            stats={stats}
+            statsRules={statsRules}
+          />
+        </div>
       </Content>
     </div>
   );

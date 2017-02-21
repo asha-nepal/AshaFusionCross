@@ -2,16 +2,21 @@
 import React from 'react';
 import stringify from 'csv-stringify';
 import moment from 'moment';
+import classnames from 'classnames';
 
 export default ({
   rows,
   columns,
+  className,
+  ...rest
 }: {
   columns: Array<{ key: string, name: string }>,
   rows: Array<Object>,
+  className?: string,
 }) => (
   <a
-    className="button"
+    {...rest}
+    className={classnames(['button', className])}
     onClick={e => {
       e.preventDefault();
 
