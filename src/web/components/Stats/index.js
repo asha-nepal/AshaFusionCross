@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDataGrid from 'react-data-grid';
 import Header from '../common/Header';
 import Content from '../common/Content';
+import StatsList from './StatsList';
 import CsvExporter from './CsvExporter';
 
 const ArrayFormatter = ({
@@ -57,15 +58,14 @@ export default({
           minHeight={500}
         />
 
-        <ul>
-          {Object.keys(stats).map(key =>
-            <li key={key}>{statsRules[key].name || key}: {stats[key]}</li>
-          )}
-        </ul>
-
         <CsvExporter
           rows={rows}
           columns={columns}
+        />
+
+        <StatsList
+          stats={stats}
+          statsRules={statsRules}
         />
       </Content>
     </div>
