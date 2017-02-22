@@ -18,6 +18,7 @@ type Props = {
   addNewActiveRecord: () => void,
   putActivePatient: () => void,
   putActiveRecord: (index: number) => void,
+  putDformStyles: () => void,
   removeActivePatient: () => void,
   isNew: boolean,
   isPuttingPatient: boolean,
@@ -55,6 +56,7 @@ export default class PatientView extends Component {
       addNewActiveRecord,
       putActivePatient,
       putActiveRecord,
+      putDformStyles,
       removeActivePatient,
       isNew,
       isPuttingPatient,
@@ -169,6 +171,7 @@ export default class PatientView extends Component {
                     formStyleId={recordFormStyleId}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
+                    onFormsSave={putDformStyles}
                     customizable
                   />
                 </div>

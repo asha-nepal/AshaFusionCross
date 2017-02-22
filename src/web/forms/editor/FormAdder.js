@@ -67,7 +67,7 @@ export default class extends React.Component {
                 className="button"
                 onClick={e => {
                   e.preventDefault();
-                  onFormAdd('form001', this.state.newFormLabel);
+                  onFormAdd(this.state.newFormId, this.state.newFormLabel);
                   this.setState({
                     isModalOpen: false,
                     newFormId: '',

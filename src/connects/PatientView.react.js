@@ -11,6 +11,7 @@ import {
   selectActiveRecord,
   setPatientFormVisibility,
   setRecordFormStyleId,
+  putDformStyles,
 } from '../actions';
 
 import {
@@ -64,6 +65,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
     putActivePatient: () => dispatch(putActivePatient()),
     putActiveRecord: (index) => dispatch(putActiveRecord(index)),
+    putDformStyles: () => dispatch(putDformStyles()),
     removeActivePatient: () => dispatch(removeActivePatient()),
     setPatientFormVisibility: (visibility: boolean) =>
       dispatch(setPatientFormVisibility(visibility)),

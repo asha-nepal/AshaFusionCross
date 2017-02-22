@@ -130,6 +130,7 @@ type Props = {
   formGroup: string,
   formStyleId: string,
   customizable: boolean,
+  onFormsSave?: () => void,
   onFieldChange: (
     parentPath: string,
     index: number,
@@ -220,6 +221,7 @@ export class DynamicFormComponent extends React.Component {
       freeze,
       warnings = {},
       customizable = false,
+      onFormsSave,
     } = this.props;
 
     const createChildFields = makeCreateChildFields(
@@ -272,16 +274,34 @@ export class DynamicFormComponent extends React.Component {
 
         {customizable &&
           <div className="block is-clearfix">
-            <a
-              className={classnames(
-                'button is-pulled-right',
-                this.state.editing ? 'is-success' : 'is-small'
-              )}
-              onClick={e => {
-                e.preventDefault();
-                this.setState({ editing: !this.state.editing });
-              }}
-            >{this.state.editing ? 'Finish customizing' : 'Customize form'}</a>
+            {!this.state.editing &&
+              <a
+                className="button is-pulled-right is-small"
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ editing: true });
+                }}
+              >Customize form</a>
+            }
+            {this.state.editing &&
+              <div className="block is-pulled-right">
+                <a
+                  className="button is-success"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ editing: false });
+                    if (onFormsSave) onFormsSave();
+                  }}
+                >Finish customizing</a>
+                <a
+                  className="button is-default"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ editing: false });
+                  }}
+                >Cancel</a>
+              </div>
+            }
           </div>
         }
       </Form>
