@@ -147,7 +147,7 @@ export const TextInputComponent = ({
               className="button"
               onClick={e => {
                 e.preventDefault();
-                onChange(setValue);
+                onChange(String(setValue));
               }}
             >{valueSetter.label}</a>
           );
