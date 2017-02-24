@@ -1,6 +1,9 @@
 import { take, put, call } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import {
   INIT_ACTIVE_PATIENT,
+  requestFetchPatient,
+  successFetchPatient,
   changeActivePatient,
   resetActiveRecords,
 } from '../actions';
@@ -9,6 +12,12 @@ import {
 } from '../utils';
 
 export function* initActivePatient() {
+  // FIXME:
+  // requestFetchPatient, delay, and successFetchPatient are just work-around
+  // to solve https://github.com/asha-nepal/AshaFusionCross/issues/419
+  yield put(requestFetchPatient());
+  yield call(delay, 100);
+
   const id = createId(16);
   yield put(changeActivePatient({
     _id: `patient_${id}`,
@@ -17,6 +26,8 @@ export function* initActivePatient() {
     silent: true,
   }));
   yield put(resetActiveRecords());
+
+  yield put(successFetchPatient());
 }
 
 export function* watchInitActivePatient() {
