@@ -37,6 +37,7 @@ export default class DatePicker extends Component {
         focusedInput={this.state.focused}
         onDatesChange={onDatesChange}
         onFocusChange={(focused) => { this.setState({ focused }); }}
+        isOutsideRange={() => false}
       />
     );
   }
