@@ -4,8 +4,10 @@ import React from 'react';
 import ReactDataGrid from 'react-data-grid';
 import Header from '../common/Header';
 import Content from '../common/Content';
+import DatePicker from './DatePicker';
 import StatsList from './StatsList';
 import CsvExporter from './CsvExporter';
+import type { Moment } from 'moment';
 
 const ArrayFormatter = ({
   value,
@@ -13,18 +15,23 @@ const ArrayFormatter = ({
   value: ?Array<string>,
 }) => <span>{(value && value.join) ? value.join(', ') : ''}</span>;
 
+
 export default({
   columns,
   rows,
   stats,
   statsRules,
   load,
+  date,
+  setDate,
 }: {
   columns: Array<{ key: string, name: string }>,
   rows: Array<Object>,
   stats: {[key: string]: number | string},
   statsRules: {[key: string]: {name: string}},
   load: () => void,
+  date: Moment,
+  setDate: (date: Moment) => void,
 }) => {
   const _columns = columns.map(column => {
     if (column.key === 'symptoms') {
@@ -53,6 +60,11 @@ export default({
             }}
           >Load</a>
         </div>
+
+        <DatePicker
+          date={date}
+          onDatesChange={setDate}
+        />
 
         <ReactDataGrid
           columns={_columns}

@@ -28,6 +28,7 @@
 .*/node_modules/react-native-experimental-navigation/
 .*/node_modules/react-static-container/
 .*/node_modules/electron-packager/
+.*/__tests__/.*
 
 [include]
 ./src/

@@ -39,6 +39,10 @@ export {
   DFORM_STYLE_DELETE, dformStyleDelete,
 } from './dform';
 
+export {
+  STATS_DATE_SET, setStatsDate,
+} from './stats';
+
 // for saga
 export const FETCH_PATIENT = 'FETCH_PATIENT';
 export const fetchPatient = (patientId: string) => ({
