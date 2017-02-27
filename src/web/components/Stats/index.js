@@ -51,20 +51,23 @@ export default({
       />
 
       <Content>
-        <div className="block">
-          <a
-            className="button"
-            onClick={e => {
-              e.preventDefault();
-              load();
-            }}
-          >Load</a>
+        <div className="level">
+          <div className="level-left">
+            <a
+              className="button is-large"
+              onClick={e => {
+                e.preventDefault();
+                load();
+              }}
+            >Load</a>
+          </div>
+          <div className="level-right">
+            <DatePicker
+              date={date}
+              onDatesChange={setDate}
+            />
+          </div>
         </div>
-
-        <DatePicker
-          date={date}
-          onDatesChange={setDate}
-        />
 
         <ReactDataGrid
           columns={_columns}
