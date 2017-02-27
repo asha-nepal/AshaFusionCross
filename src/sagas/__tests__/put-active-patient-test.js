@@ -8,7 +8,7 @@ jest.unmock('../../actions');
 import MockDate from 'mockdate';
 import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
-import { browserHistory } from 'react-router';
+import history from '../../web/history';
 
 import {
   requestPutPatient,
@@ -82,7 +82,7 @@ describe('putActivePatient', () => {
       .toEqual(put(alertInfo('Patient data updated')));
 
     expect(saga.next().value)
-      .toEqual(call([browserHistory, browserHistory.replace], '/patient/patient_1234'));
+      .toEqual(call([history, history.replace], '/patient/patient_1234'));
 
     expect(saga.next().value)
       .toEqual(put(successPutPatient()));
@@ -154,7 +154,7 @@ describe('putActivePatient', () => {
       .toEqual(put(addNewActiveRecord('patient_1234')));
 
     expect(saga.next().value)
-      .toEqual(call([browserHistory, browserHistory.replace], '/patient/patient_1234'));
+      .toEqual(call([history, history.replace], '/patient/patient_1234'));
 
     expect(saga.next().value)
       .toEqual(put(successPutPatient()));
@@ -195,7 +195,7 @@ describe('putActivePatient', () => {
       .toEqual(put(addNewActiveRecord('patient_1234')));
 
     expect(saga.next().value)
-      .toEqual(call([browserHistory, browserHistory.replace], '/patient/patient_1234'));
+      .toEqual(call([history, history.replace], '/patient/patient_1234'));
 
     expect(saga.next().value)
       .toEqual(put(successPutPatient()));

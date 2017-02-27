@@ -1,5 +1,5 @@
 import { take, put, call, select } from 'redux-saga/effects';
-import { browserHistory } from 'react-router';
+import history from '../web/history';
 import {
   REMOVE_ACTIVE_PATIENT,
   requestRemovePatient,
@@ -39,7 +39,7 @@ export function* removeActivePatient(db: PouchInstance) {
     yield put(alertInfo('Patient data and related records removed'));
 
     // Router (No effect on native)
-    yield call([browserHistory, browserHistory.push], '/');
+    yield call([history, history.push], '/');
 
     yield put(successRemovePatient());
   } catch (error) {

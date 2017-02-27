@@ -2,16 +2,20 @@
 
 import React from 'react';
 
+const dirtyIcon = <span className="icon is-small is-warning fa fa-circle" />;
+
 export default ({
   records,
   selectedActiveRecordIndex,
   selectActiveRecord,
   addNewActiveRecord,
+  pristinenessList = [],
 }: {
   records: Array<RecordObject>,
   selectedActiveRecordIndex: number,
   selectActiveRecord: (id: string) => void,
   addNewActiveRecord: () => void,
+  pristinenessList: Array<boolean>,
 }) => (
   <div className="tabs is-boxed column">
     <ul>
@@ -44,6 +48,7 @@ export default ({
                   {date.toDateString()}
                 </small>
               }
+              {!pristinenessList[i] && dirtyIcon}
             </a>
           </li>
         );

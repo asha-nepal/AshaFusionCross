@@ -47,34 +47,37 @@ const fieldComponents = {
 
 import { checkVisibility } from './utils';
 
-function createChildFields(state, rootModel, fields, warnings) {
-  if (!fields) { return []; }
-  return fields.map((field, i) => {
-    // Handle "show" prop
-    if (!checkVisibility(state, rootModel, field.show)) {
-      return null;
-    }
+function makeCreateChildFields(state, rootModel, fieldOptions, warnings) {
+  return function createChildFields(fields) {
+    if (!fields) { return []; }
+    return fields.map((field, i) => {
+      // Handle "show" prop
+      if (!checkVisibility(state, rootModel, field.show)) {
+        return null;
+      }
 
-    const component = fieldComponents[field.class] || TextInput;
-    let children = null;
+      const component = fieldComponents[field.class] || TextInput;
+      let children = null;
 
-    if (field.class === 'block' || field.class === 'accordion') {
-      children = createChildFields(state, rootModel, field.children, warnings);
-    }
+      if (field.class === 'block' || field.class === 'accordion') {
+        children = createChildFields(field.children);
+      }
 
-    return React.createElement(
-      component,
-      {
-        key: i,
-        model: `${rootModel}.${field.field}`,
-        label: field.label,
-        warning: warnings[field.field],
-        rootModel,
-        ...field,
-      },
-      children
-    );
-  });
+      return React.createElement(
+        component,
+        {
+          key: i,
+          model: `${rootModel}.${field.field}`,
+          label: field.label,
+          fieldOptions: fieldOptions[field.field],
+          warning: warnings[field.field],
+          rootModel,
+          ...field,
+        },
+        children
+      );
+    });
+  };
 }
 
 export const DynamicFormComponent = ({
@@ -84,47 +87,54 @@ export const DynamicFormComponent = ({
   onSubmit,
   onRemove,
   freeze,
+  fieldOptions = {},
   warnings = {},
 }: {
   state: Object,
   model: string,
-  style: Array<Object>,
+  style: DformStyle,
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
   freeze: boolean,
+  fieldOptions?: Object,
   warnings?: Object,
-}) => (
-  <Form
-    model={model}
-    onSubmit={onSubmit}
-  >
-    {createChildFields(state, model, style, warnings)}
+}) => {
+  const createChildFields = makeCreateChildFields(state, model, fieldOptions, warnings);
 
-    {(onSubmit || onRemove) &&
-      <div className="level">
-        {onSubmit &&
-          <p className="level-left">
-            <button type="submit" className="button is-primary" disabled={freeze}>
-              Submit
-            </button>
-          </p>
-        }
-        {onRemove &&
-          <p className="level-right">
-            <a
-              className="button is-danger"
-              disabled={freeze}
-              onClick={e => {
-                e.preventDefault();
-                if (!freeze && onRemove) { onRemove(); }
-              }}
-            ><i className="fa fa-times" />Remove</a>
-          </p>
-        }
-      </div>
-    }
-  </Form>
-);
+  return (
+    <Form
+      model={model}
+      onSubmit={onSubmit}
+    >
+      {/* TODO: toJS() should be removed and handle Immutable object directly */}
+      {createChildFields(style.toJS ? style.toJS() : style)}
+
+      {(onSubmit || onRemove) &&
+        <div className="level">
+          {onSubmit &&
+            <p className="level-left">
+              <button type="submit" className="button is-primary" disabled={freeze}>
+                Submit
+              </button>
+            </p>
+          }
+          {onRemove &&
+            <p className="level-right">
+              <a
+                className="button is-danger"
+                disabled={freeze}
+                onClick={e => {
+                  e.preventDefault();
+                  if (!freeze && onRemove) { onRemove(); }
+                }}
+              ><i className="fa fa-times" />Remove</a>
+            </p>
+          }
+        </div>
+      }
+    </Form>
+  );
+};
 
 export default connect(
   state => ({ state })

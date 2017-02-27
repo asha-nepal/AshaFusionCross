@@ -5,9 +5,15 @@ interface LoginSuccessPayload {
   roles: Array<string>,
 }
 
-interface AuthPayload {
+interface LoginPayload {
   username: string,
   password: string,
+}
+
+interface SignupPayload {
+  username: string,
+  password: string,
+  andLogin: boolean,
 }
 
 interface SetIsDBPublicPayload {
@@ -15,8 +21,8 @@ interface SetIsDBPublicPayload {
 }
 
 interface LoginSuccessAction extends PayloadAction<LoginSuccessPayload> {}
-interface RequestLoginAction extends PayloadAction<AuthPayload> {}
-interface RequestSignupAction extends PayloadAction<AuthPayload> {}
+interface RequestLoginAction extends PayloadAction<LoginPayload> {}
+interface RequestSignupAction extends PayloadAction<SignupPayload> {}
 interface SetIsDBPublicAction extends PayloadAction<SetIsDBPublicPayload> {}
 
 export type AuthAction =

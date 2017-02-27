@@ -8,13 +8,14 @@
     "rules": {
         "no-underscore-dangle": 0,
         "no-constant-condition": [2, { "checkLoops": false }],
+        "new-cap": [2, { "capIsNewExceptionPattern" : "^Immutable\\.." }],
         "flow-vars/define-flow-type": 1,
         "flow-vars/use-flow-type": 1
     },
     "settings": {
         "import/resolver": {
-            "node": {
-                "extensions": [".js", ".android.js", ".ios.js"]
+            "webpack": {
+                "config": "webpack.config.base.js"
             }
         }
     }

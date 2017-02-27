@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
   connectDB: (config: PouchConfig) => dispatch(dbConnectRequest(config)),
   login: (username, password) => dispatch(requestLogin(username, password)),
   anonymousLogin: () => dispatch(requestAnonymousLogin()),
-  signup: (username, password) => dispatch(requestSignup(username, password)),
+  signup: (username, password) => dispatch(requestSignup(username, password, true)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps);

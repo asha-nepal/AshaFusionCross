@@ -1,7 +1,11 @@
 type FormField = {
+  field: string,
   model: string,
-  label: string,
-  style: ?Object,
+  class: string,
+  label?: string,
+  style?: Object,
+  children?: Array<FormField>,
+  show?: boolean | string,
 }
 
 export type TextAreaProps = FormField & {

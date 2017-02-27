@@ -1,11 +1,13 @@
 /* eslint-env jest */
 
 jest.unmock('react-redux');
+jest.unmock('immutable');
 jest.unmock('../DynamicForm');
 
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import Immutable from 'immutable';
 import { Form } from 'react-redux-form';
 import { DynamicFormComponent } from '../DynamicForm';
 
@@ -15,6 +17,7 @@ describe('<DynamicFormComponent />', () => {
 
     const wrapper = shallow(
       <DynamicFormComponent
+        style={Immutable.List()}
         onSubmit={onSubmit}
       />
     );
@@ -27,7 +30,9 @@ describe('<DynamicFormComponent />', () => {
 
   it('hides submit button if onSubmit not provided', () => {
     const wrapper = shallow(
-      <DynamicFormComponent />
+      <DynamicFormComponent
+        style={Immutable.List()}
+      />
     );
 
     expect(wrapper.find('button[type="submit"]').length).toBe(0);
@@ -39,6 +44,7 @@ describe('<DynamicFormComponent />', () => {
 
     const wrapper = shallow(
       <DynamicFormComponent
+        style={Immutable.List()}
         onRemove={onRemove}
       />
     );
@@ -50,7 +56,9 @@ describe('<DynamicFormComponent />', () => {
 
   it('hides remove button if onRemove not provided', () => {
     const wrapper = shallow(
-      <DynamicFormComponent />
+      <DynamicFormComponent
+        style={Immutable.List()}
+      />
     );
 
     expect(wrapper.find('a').length).toBe(0);

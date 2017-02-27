@@ -1,3 +1,5 @@
+/* Deplicated. Use `connect` instead. */
+
 import React from 'react';
 
 import {

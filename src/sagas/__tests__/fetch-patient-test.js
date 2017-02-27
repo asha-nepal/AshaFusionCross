@@ -14,6 +14,7 @@ import {
   changeActivePatient,
   changeActiveRecords,
   selectActiveRecord,
+  setActiveRecordPristine,
   alertInfo,
   alertError,
 } from '../../actions';
@@ -60,6 +61,11 @@ describe('fetchPatient saga', () => {
       .toEqual(
         put(changeActiveRecords(mockFetchedRecordDocs.rows.map(r => r.doc), { silent: true }))
       );
+
+    expect(saga.next().value)
+      .toEqual(put(setActiveRecordPristine(0)));
+    expect(saga.next().value)
+      .toEqual(put(setActiveRecordPristine(1)));
 
     expect(saga.next().value)
       .toEqual(put(alertInfo('Patient data and records loaded')));
