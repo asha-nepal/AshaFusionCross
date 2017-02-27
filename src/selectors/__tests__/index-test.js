@@ -12,7 +12,6 @@ import {
   checkPatientMatchesQueries,
   getFilteredPatientList,
   getSortedFilteredPatientList,
-  getRecordFormStyleId,
   makeGetDuplicatedPatients,
 } from '../index';
 
@@ -299,21 +298,6 @@ describe('getSortedFilteredPatientList', () => {
         { hoge: null },
         { hoge: null },
       ]);
-  });
-});
-
-describe('getRecordFormStyleId', () => {
-  it('selects recordFormStyleId', () => {
-    const state = {
-      patientView: {
-        recordFormStyleId: 'dummystyleid',
-      },
-    };
-
-    deepFreeze(state);
-
-    expect(getRecordFormStyleId(state))
-      .toEqual('dummystyleid');
   });
 });
 

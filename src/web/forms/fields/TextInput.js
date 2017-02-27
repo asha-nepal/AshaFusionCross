@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import AutosuggestInput from './AutosuggestInput';
 
 const alertIcons = {
   danger: <i className="fa fa-warning is-danger" />,
@@ -45,6 +46,9 @@ export const TextInputComponent = ({
   required = false,
   readonly = false,
   expanded = false,
+  valueSetters,
+  suggestions,
+  fieldOptions = {},
 }: {
   label: ?string,
   value: ?string,
@@ -60,9 +64,12 @@ export const TextInputComponent = ({
   alerts: ?Array<Object>,
   warning?: string,
   size?: string,
-  required?: boolean,
+  required: boolean,
   readonly: boolean,
-  expanded?: boolean,
+  expanded: boolean,
+  valueSetters?: Array<{ label: string, optionKey?: string, value?: string | number}>,
+  suggestions?: Array<string>,
+  fieldOptions?: Object,
 }) => {
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
@@ -87,43 +94,65 @@ export const TextInputComponent = ({
   const warningClassName = warning ? ' is-warning' : '';
   const sizeClassName = size ? ` is-${size}` : '';
 
+  const useSuggestions = suggestions && suggestions.length > 0;
+  const InputComponent = useSuggestions ? AutosuggestInput : 'input';
+  const additionalProps = useSuggestions ? { candidates: suggestions } : null;
+
   return (
     <div className={expanded ? 'control is-expanded' : 'control'}>
       {label && <label className="label">{label}</label>}
-      <p className={hasAddons ? 'control has-addons' : 'control'}>
-        {prefix &&
-          <span className={`button is-disabled${sizeClassName}`}>
-            {prefix}
+      <div className="control is-grouped">
+        <div className={hasAddons ? 'control has-addons' : 'control'}>
+          {prefix &&
+            <span className={`button is-disabled${sizeClassName}`}>
+              {prefix}
+            </span>
+          }
+          <span
+            className={alert && 'control has-icon'}
+            data-balloon={alert && alert.label}
+            data-balloon-pos="up"
+          >
+            <InputComponent
+              type={type}
+              className={`input${warningClassName}${sizeClassName}`}
+              style={{
+                ...style,
+                ...overrideStyle,
+              }}
+              placeholder={placeholder}
+              value={value || ''}
+              min={min}
+              max={max}
+              step={typeof precision === 'number' && Math.pow(10, -precision)}
+              onChange={e => onChange(e.target.value)}
+              required={required}
+              {...additionalProps}
+            />
+            {alert ? alertIcons[alert.type] : <span />}
           </span>
-        }
-        <span
-          className={alert && 'control has-icon'}
-          data-balloon={alert && alert.label}
-          data-balloon-pos="up"
-        >
-          <input
-            type={type}
-            className={`input${warningClassName}${sizeClassName}`}
-            style={{
-              ...style,
-              ...overrideStyle,
-            }}
-            placeholder={placeholder}
-            value={value || ''}
-            min={min}
-            max={max}
-            step={typeof precision === 'number' && Math.pow(10, -precision)}
-            onChange={e => onChange(e.target.value)}
-            required={required}
-          />
-          {alert ? alertIcons[alert.type] : <span />}
-        </span>
-        {suffix &&
-          <span className={`button is-disabled${sizeClassName}`}>
-            {suffix}
-          </span>
-        }
-      </p>
+          {suffix &&
+            <span className={`button is-disabled${sizeClassName}`}>
+              {suffix}
+            </span>
+          }
+        </div>
+        {valueSetters && valueSetters.map && valueSetters.map((valueSetter, i) => {
+          const setValue = valueSetter.value || fieldOptions[valueSetter.optionKey];
+          if (setValue == null) { return null; }
+
+          return (
+            <a
+              key={i}
+              className="button"
+              onClick={e => {
+                e.preventDefault();
+                onChange(String(setValue));
+              }}
+            >{valueSetter.label}</a>
+          );
+        })}
+      </div>
       <span className="help is-warning">{warning}</span>
     </div>
   );

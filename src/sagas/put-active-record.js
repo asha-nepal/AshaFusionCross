@@ -5,6 +5,7 @@ import {
   successPutRecord,
   failurePutRecord,
   changeActiveRecord,
+  setActiveRecordPristine,
   alertInfo,
   alertError,
 } from '../actions';
@@ -35,6 +36,7 @@ export function* putActiveRecord(db: PouchInstance, index: number) {
     }, {
       silent: true,
     }));
+    yield put(setActiveRecordPristine(index));
 
     yield put(alertInfo('Record updated'));
     yield put(successPutRecord());

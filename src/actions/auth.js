@@ -21,11 +21,16 @@ export const requestLogout = (): Action => ({
 });
 
 export const REQUEST_SIGNUP = 'REQUEST_SIGNUP';
-export const requestSignup = (username: string, password: string): RequestSignupAction => ({
+export const requestSignup = (
+  username: string,
+  password: string,
+  andLogin: boolean
+): RequestSignupAction => ({
   type: REQUEST_SIGNUP,
   payload: {
     username,
     password,
+    andLogin,
   },
 });
 

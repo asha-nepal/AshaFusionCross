@@ -1,6 +1,22 @@
 /* @flow */
 
 import { createSelector } from 'reselect';
+import _get from 'lodash.get';
+
+export {
+  getIsLoggedIn,
+  getLoggedInUser,
+  getIsAdmin,
+} from './auth';
+
+export {
+  getRecordFormStyles, getDefaultRecordFormStyleId, getRecordFormStyleId, getRecordFormStyle,
+  getPatientFormStyle,
+} from './dform';
+
+export {
+  getPatientMax,
+} from './patient-list';
 
 export const getPatientList = (state: Object) => state.patientList;
 export const getPatientSelectFilter = (state: Object) =>
@@ -94,22 +110,16 @@ export const getSelectedActiveRecordIndex = createSelector(
     activeRecords.findIndex(r => r._id === selectedActiveRecordId)
 );
 
-import formStyles from '../form-styles';
-const recordFormStyles = formStyles.record || [];
-const defaultRecordFormStyleId = recordFormStyles[0] && recordFormStyles[0].id;
+function isFormPristine(formState, path) {
+  const result = _get(formState, path, {});
+  if ('$form' in result) return result.$form.pristine;
 
-// TODO: formStylesをstateとして管理することを見越してselectorとして書いておく
-export const getRecordFormStyles = () => recordFormStyles;
+  return true;
+}
 
-export const getRecordFormStyleId = (state: Object) =>
-  state.patientView.recordFormStyleId || defaultRecordFormStyleId;
-
-export const getRecordFormStyle = createSelector(
-  [getRecordFormStyleId],
-  (recordFormStyleId) => {
-    const recordFormStyle = recordFormStyles.find(s => s.id === recordFormStyleId);
-    return recordFormStyle && recordFormStyle.style;
-  }
+export const getActiveRecordsForm = (state: Object) => state.activeRecordsForm;
+export const getActiveRecordsFormPristineness = createSelector(
+  [getActiveRecords, getActiveRecordsForm],
+  (activeRecords, activeRecordsForm) =>
+    activeRecords.map((r, i) => isFormPristine(activeRecordsForm, `[${i}]`)),
 );
-
-export const getPatientFormStyle = () => formStyles.patient[0].style;  // TODO とりあえず固定で

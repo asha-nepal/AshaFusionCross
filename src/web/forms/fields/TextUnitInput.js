@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import math from 'mathjs';
+import math from 'lib/mathjs';
 
 export const convert = (
   value: ?ValueUnitType,
@@ -65,6 +65,20 @@ export class TextUnitInputComponent extends Component {
     inputValue: string,
   };
 
+  getInputValue = (value: ?ValueUnitType): string => {
+    if (!value) {
+      return '';
+    }
+
+    const converted = convert(value, this.state.unit, this.props.precision);
+
+    if (!converted || parseFloat(this.state.inputValue) === converted) {
+      return this.state.inputValue;  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
+    }
+
+    return converted.toString();
+  }
+
   props: Props
 
   render() {
@@ -84,11 +98,7 @@ export class TextUnitInputComponent extends Component {
       ? { value, unit: units[0] }
       : value;
 
-    const converted = convert(_value, this.state.unit, precision);
-
-    const inputValue = !converted || parseFloat(this.state.inputValue) === converted
-      ? this.state.inputValue  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
-      : converted.toString();
+    const inputValue = this.getInputValue(_value);
 
     return (
       <div className="control">

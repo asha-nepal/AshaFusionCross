@@ -6,7 +6,7 @@ export default ({
   onSubmit,
   freeze,
 }: {
-  onSubmit: () => void,
+  onSubmit?: () => void,
   freeze: boolean,
 }) => (
   <section className="hero footer-fixed">
@@ -17,10 +17,10 @@ export default ({
             <span className="nav-item">
               <button
                 className="button is-primary"
-                disabled={freeze}
+                disabled={freeze || !onSubmit}
                 onClick={e => {
                   e.preventDefault();
-                  onSubmit();
+                  if (onSubmit) onSubmit();
                 }}
               >Submit</button>
             </span>

@@ -1,10 +1,12 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 type Props = {
-  loggedIn: boolean,
+  isLoggedIn: boolean,
   loggedInUser: ?string,
+  isAdmin: boolean,
   logout?: () => void,
 };
 
@@ -25,8 +27,9 @@ export default class extends Component {
 
   render() {
     const {
-      loggedIn,
+      isLoggedIn,
       loggedInUser,
+      isAdmin,
       logout,
     } = this.props;
 
@@ -50,7 +53,7 @@ export default class extends Component {
                 <span></span>
                 <span></span>
               </span>
-              {loggedIn &&
+              {isLoggedIn &&
                 <div className={`nav-right nav-menu${this.state.isMenuOpen ? ' is-active' : ''}`}>
                   <p className="nav-item">{loggedInUser || '(anonymous user)'}</p>
                   {logout &&
@@ -61,6 +64,9 @@ export default class extends Component {
                         logout();
                       }}
                     >Log out</a>
+                  }
+                  {isAdmin &&
+                    <Link className="nav-item" to="admin">Admin</Link>
                   }
                 </div>
               }
