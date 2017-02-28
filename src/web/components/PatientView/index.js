@@ -39,6 +39,7 @@ type Props = {
     number: boolean,
   },
   activeRecordsFormPristineness: Array<boolean>,
+  nextPatientNumber: number,
 };
 
 export default class PatientView extends Component {
@@ -72,6 +73,7 @@ export default class PatientView extends Component {
       recordFormStyle,
       duplicatedPatientsExist,
       activeRecordsFormPristineness,
+      nextPatientNumber = 1,
     } = this.props;
 
     if (isFetching) {
@@ -111,6 +113,9 @@ export default class PatientView extends Component {
                       name: duplicatedPatientsExist.name && 'Duplicated',
                       number: duplicatedPatientsExist.number && 'Duplicated',
                     } : undefined}
+                    fieldOptions={{
+                      number: { nextPatientNumber },
+                    }}
                   />
                 </div>
               </div>

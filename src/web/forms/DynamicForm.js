@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Form } from 'react-redux-form';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import classnames from 'classnames';
 import {
   TextInput,
   fieldComponentList as fieldComponents,
@@ -30,6 +29,7 @@ import type { FieldEditPropsType } from './editor/type';
 function makeCreateChildFields(
   state,
   rootModel,
+  fieldOptions,
   warnings: Object,
   editing: boolean,
   onEditFocus: (fieldPath: ?string) => void,
@@ -86,6 +86,7 @@ function makeCreateChildFields(
           key: i,
           model: `${rootModel}.${field.field}`,
           label: field.label,
+          fieldOptions: fieldOptions[field.field],
           warning: warnings[field.field],
           rootModel,
           fieldEditProps,
@@ -126,7 +127,8 @@ type Props = {
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
   freeze: boolean,
-  warnings: Object,
+  fieldOptions?: Object,
+  warnings?: Object,
   formGroup: string,
   formStyleId: string,
   customizable: boolean,
@@ -219,13 +221,14 @@ export class DynamicFormComponent extends React.Component {
       onSubmit,
       onRemove,
       freeze,
+      fieldOptions = {},
       warnings = {},
       customizable = false,
       onFormsSave,
     } = this.props;
 
     const createChildFields = makeCreateChildFields(
-      state, model, warnings,
+      state, model, fieldOptions, warnings,
       this.state.editing, this.onEditFocus, this.state.editFocusOn,
       this.onFieldInsert, this.onFieldMove,
       this.onFieldChange, this.onFieldRemove

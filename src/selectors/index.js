@@ -15,6 +15,15 @@ export {
   getPatientFormStyle,
 } from './dform';
 
+export {
+  getRecordList,
+  getRecordListForStats,
+} from './stats';
+
+export {
+  getPatientMax,
+} from './patient-list';
+
 export const getPatientList = (state: Object) => state.patientList;
 export const getPatientSelectFilter = (state: Object) =>
   state.patientSelect.filter.trim().toLowerCase();
