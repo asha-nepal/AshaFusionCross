@@ -1,7 +1,13 @@
 [
   { "key": "height", "name": "Height (cm)" },
+  { "key": "weight", "name": "Weight (kg)" },
   { "key": "bp.s", "name": "BP/s (mmHg)" },
   { "key": "bp.d", "name": "BP/d (mmHg)" },
+  { "key": "pulse", "name": "Pulse" },
+  { "key": "temperature", "name": "Temperature (degC)" },
+  { "key": "spo2", "name": "SpO2" },
+  { "key": "rr", "name": "Respiration rate" },
+  { "key": "bs", "name": "Blood sugar" },
   { "key": "symptoms", "name": "Symptoms", "isArray": true },
   { "key": "diagnoses_icd10", "name": "Diagnoses (ICD10)", "isArray": true },
   { "key": "diagnoses_text", "name": "Diagnoses (Text)", "isArray": true },
