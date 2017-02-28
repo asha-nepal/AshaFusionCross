@@ -2,6 +2,8 @@
   { "key": "height", "name": "Height (cm)" },
   { "key": "bp.s", "name": "BP/s (mmHg)" },
   { "key": "bp.d", "name": "BP/d (mmHg)" },
-  { "key": "symptoms", "name": "Symptoms" },
+  { "key": "symptoms", "name": "Symptoms", "isArray": true },
+  { "key": "diagnoses_icd10", "name": "Diagnoses (ICD10)", "isArray": true },
+  { "key": "diagnoses_text", "name": "Diagnoses (Text)", "isArray": true },
   { "key": "$updated_at", "name": "Updated at" }
 ]

@@ -34,7 +34,7 @@ export default({
   setDate: (date: Moment) => void,
 }) => {
   const _columns = columns.map(column => {
-    if (column.key === 'symptoms') {
+    if (column.isArray) {
       return {
         ...column,
         formatter: ArrayFormatter,

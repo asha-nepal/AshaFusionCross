@@ -1,6 +1,7 @@
 {
-    "height.mean": { "name": "Mean(Height)", "entry": "height", "type": "mean" },
-    "height.max": { "name": "Max(Height)", "entry": "height", "type": "max" },
-    "height.min": { "name": "Min(Height)", "entry": "height", "type": "min" },
-    "symptoms.rank": { "name": "Rank(Symptoms)", "entry": "symptoms", "type": "rank", "order": "desc" }
-  }
+  "height.mean": { "name": "Mean(Height)", "entry": "height", "type": "mean" },
+  "height.max": { "name": "Max(Height)", "entry": "height", "type": "max" },
+  "height.min": { "name": "Min(Height)", "entry": "height", "type": "min" },
+  "symptoms.rank": { "name": "Rank(Symptoms)", "entry": "symptoms", "type": "rank", "order": "desc" },
+  "diagnoses_icd10.rank": { "name": "Rank(Diagnoses.ICD10)", "entry": "diagnoses_icd10", "type": "rank", "order": "desc" }
+}
