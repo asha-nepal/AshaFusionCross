@@ -49,7 +49,6 @@ export const TextInputComponent = ({
   valueSetters,
   suggestions,
   fieldOptions = {},
-  getPreviousData,
 }: {
   label: ?string,
   value: ?string,
@@ -71,7 +70,6 @@ export const TextInputComponent = ({
   valueSetters?: Array<{ label: string, optionKey?: string, value?: string | number}>,
   suggestions?: Array<string>,
   fieldOptions?: Object,
-  getPreviousData?: () => string,
 }) => {
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
@@ -154,27 +152,6 @@ export const TextInputComponent = ({
             >{valueSetter.label}</a>
           );
         })}
-        {getPreviousData &&
-          <a
-            className="button"
-            onClick={e => {
-              e.preventDefault();
-
-              if (!getPreviousData) return;  // Flow bug? Duplicated check
-
-              const prev = getPreviousData();
-              if (!prev) return;
-
-              if (value && value !== prev) {
-                const confirmText = `This field is already filled. Are you sure to update?
-(The previous value is ${prev})`;
-                if (!confirm(confirmText)) return;
-              }
-
-              onChange(prev);
-            }}
-          >Ditto</a>
-        }
       </div>
       <span className="help is-warning">{warning}</span>
     </div>

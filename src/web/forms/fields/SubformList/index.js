@@ -6,6 +6,7 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 import Row from './Row';
 import Readonly from './Readonly';
+import FieldComponentWrapper from '../common/FieldComponentWrapper';
 
 export const ReadonlySubformList = Readonly;
 
@@ -26,14 +27,16 @@ export const SubformListComponent = ({
   onAddItemRequested,
   onRemoveItemRequested,
   readonly,
+  getPreviousData,
 }: {
   label?: ?string,
   values: ?Array<Object | string>,
   fields: Array<FormFieldDefinition>,
-  onChange: (index: number, newValue: Object) => void,
+  onChange: (index: ?number, newValue: Object) => void,
   onAddItemRequested: (value: Object) => void,
   onRemoveItemRequested: (index: number) => void,
   readonly?: boolean,
+  getPreviousData: () => ?Array<Object | string>,
 }) => {
   if (readonly) {
     return (
@@ -48,7 +51,12 @@ export const SubformListComponent = ({
   const _values = values || [];
 
   return (
-    <div className="control">
+    <FieldComponentWrapper
+      className="control"
+      value={values}
+      onChange={(newValues) => onChange(null, newValues)}
+      getPreviousData={getPreviousData}
+    >
       {label && <label className="label">{label}</label>}
       <div className="panel">
       {_values.map((value, i) =>
@@ -68,7 +76,7 @@ export const SubformListComponent = ({
         />
       )}
       </div>
-    </div>
+    </FieldComponentWrapper>
   );
 };
 
@@ -78,7 +86,9 @@ const mapStateToProps = (state, ownProps) => ({
   values: _get(state, ownProps.model),
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (index, value) => dispatch(actions.change(`${ownProps.model}[${index}]`, value)),
+  onChange: (index, value) =>
+    dispatch(actions.change(
+      index == null ? ownProps.model : `${ownProps.model}[${index}]`, value)),
   onAddItemRequested: (value) => dispatch(actions.push(ownProps.model, value)),
   onRemoveItemRequested: (index) => dispatch(actions.remove(ownProps.model, index)),
 });
