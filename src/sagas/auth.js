@@ -14,8 +14,8 @@ import {
 } from '../actions';
 import { btoa as _btoa } from '../utils';
 
-import { watchFetchPatientList } from './fetch-patient-list';
 import { watchFetchPatient } from './fetch-patient';
+import { watchFetchPouchDocs } from './fetch-pouch-docs';
 import { watchPutActivePatient } from './put-active-patient';
 import { watchPutActiveRecord } from './put-active-record';
 import { watchRemoveActivePatient } from './remove-active-patient';
@@ -24,8 +24,8 @@ import { watchAddNewActiveRecord } from './add-new-active-record';
 import { watchOnPouchChanges } from './db';
 
 const authedSagas = [
-  watchFetchPatientList,
   watchFetchPatient,
+  watchFetchPouchDocs,
   watchPutActivePatient,
   watchPutActiveRecord,
   watchRemoveActivePatient,

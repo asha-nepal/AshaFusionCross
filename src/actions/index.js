@@ -24,17 +24,26 @@ export {
 } from './patient-select';
 
 export {
+  POUCH_DOCS_FETCH, fetchPouchDocs,
+  POUCH_DOCS_FETCH_REQUEST, requestFetchingPouchDocs,
+  POUCH_DOCS_FETCH_SUCCESS, successFetchingPouchDocs,
+  POUCH_DOCS_FETCH_FAILURE, failFetchingPouchDocs,
+
+  fetchPatientList,
+  fetchRecordList,
+} from './pouch-docs';
+
+export {
   DFORM_STYLE_INSERT, dformStyleInsert,
   DFORM_STYLE_UPDATE, dformStyleUpdate,
   DFORM_STYLE_DELETE, dformStyleDelete,
 } from './dform';
 
-// for saga
-export const FETCH_PATIENT_LIST = 'FETCH_PATIENT_LIST';
-export const fetchPatientList = () => ({
-  type: FETCH_PATIENT_LIST,
-});
+export {
+  STATS_DATE_SET, setStatsDate,
+} from './stats';
 
+// for saga
 export const FETCH_PATIENT = 'FETCH_PATIENT';
 export const fetchPatient = (patientId: string) => ({
   type: FETCH_PATIENT,
@@ -116,25 +125,6 @@ export const alertInfo = pushAlert.bind(this, 'info');
 
 
 // for reducers
-export const REQUEST_FETCH_PATIENT_LIST = 'REQUEST_FETCH_PATIENT_LIST';
-export const SUCCESS_FETCH_PATIENT_LIST = 'SUCCESS_FETCH_PATIENT_LIST';
-export const FAILURE_FETCH_PATIENT_LIST = 'FAILURE_FETCH_PATIENT_LIST';
-
-export const requestFetchPatientList = () => ({
-  type: REQUEST_FETCH_PATIENT_LIST,
-});
-
-export const successFetchPatientList = (patientList: Array<PatientObject>) => ({
-  type: SUCCESS_FETCH_PATIENT_LIST,
-  patientList,
-});
-
-export const failureFetchPatientList = (error: ErrorObject) => ({
-  type: FAILURE_FETCH_PATIENT_LIST,
-  error,
-});
-
-
 export const REQUEST_FETCH_PATIENT = 'REQUEST_FETCH_PATIENT';
 export const SUCCESS_FETCH_PATIENT = 'SUCCESS_FETCH_PATIENT';
 export const FAILURE_FETCH_PATIENT = 'FAILURE_FETCH_PATIENT';

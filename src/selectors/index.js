@@ -15,6 +15,11 @@ export {
 } from './dform';
 
 export {
+  getRecordList,
+  getRecordListForStats,
+} from './stats';
+
+export {
   getPatientMax,
 } from './patient-list';
 

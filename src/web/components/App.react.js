@@ -13,6 +13,7 @@ import Alerts from '../containers/Alerts.react';
 import PatientSelect from '../containers/PatientSelect';
 import PatientView from '../containers/PatientView.react';
 import Admin from '../containers/Admin';
+import Stats from '../containers/Stats';
 
 import {
   getIsAdmin,
@@ -48,6 +49,7 @@ export default connect(({
             <Route path="patient/" component={PatientView} />
             <Route path="patient/:patientId" component={PatientView} />
             <Route path="admin" component={Admin} onEnter={requireAdmin} />
+            <Route path="stats" component={Stats} />
           </Route>
         </Router>
       </Auth>

@@ -47,7 +47,7 @@ const fieldComponents = {
 
 import { checkVisibility } from './utils';
 
-function makeCreateChildFields(state, rootModel, fieldOptions, warnings) {
+function makeCreateChildFields(state, rootModel, getPreviousData, fieldOptions, warnings) {
   return function createChildFields(fields) {
     if (!fields) { return []; }
     return fields.map((field, i) => {
@@ -72,6 +72,8 @@ function makeCreateChildFields(state, rootModel, fieldOptions, warnings) {
           fieldOptions: fieldOptions[field.field],
           warning: warnings[field.field],
           rootModel,
+          getPreviousData: field.ditto && getPreviousData &&
+            (() => getPreviousData && getPreviousData(field.field)),
           ...field,
         },
         children
@@ -87,6 +89,7 @@ export const DynamicFormComponent = ({
   onSubmit,
   onRemove,
   freeze,
+  getPreviousData,
   fieldOptions = {},
   warnings = {},
 }: {
@@ -96,10 +99,16 @@ export const DynamicFormComponent = ({
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
   freeze: boolean,
+  getPreviousData?: (field: string) => any,
   fieldOptions?: Object,
   warnings?: Object,
 }) => {
-  const createChildFields = makeCreateChildFields(state, model, fieldOptions, warnings);
+  const createChildFields = makeCreateChildFields(
+    state,
+    model,
+    getPreviousData,
+    fieldOptions,
+  warnings);
 
   return (
     <Form

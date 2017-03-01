@@ -1,0 +1,52 @@
+[
+  {
+    "key": "height",
+    "type": "value_unit",
+    "unit": "cm"
+  },
+  {
+    "key": "weight",
+    "type": "value_unit",
+    "unit": "kg"
+  },
+  {
+    "key": "bp.s"
+  },
+  {
+    "key": "bp.d"
+  },
+  {
+    "key": "pulse"
+  },
+  {
+    "key": "temperature",
+    "type": "value_unit",
+    "unit": "degC"
+  },
+  {
+    "key": "spo2"
+  },
+  {
+    "key": "rr"
+  },
+  {
+    "key": "bs"
+  },
+  {
+    "key": "symptoms"
+  },
+  {
+    "key": "diagnoses_icd10",
+    "entry": "diagnoses",
+    "pluck": "icd10"
+  },
+  {
+    "key": "diagnoses_text",
+    "entry": "diagnoses",
+    "pluck": "text"
+  },
+  {
+    "key": "$updated_at",
+    "type": "moment"
+  }
+]
