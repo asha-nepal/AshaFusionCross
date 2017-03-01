@@ -36,43 +36,42 @@ class DittoWrapper extends React.Component {
     return (
       <div
         {...rest}
+        ref="outer"
+        style={{
+          position: 'relative',
+        }}
         onMouseEnter={() => this.setState({ hover: true })}
         onMouseLeave={() => this.setState({ hover: false })}
       >
-        {children}
         {this.state.hover && getPreviousData &&
           <div
             style={{
-              position: 'relative',
+              top: this.refs.outer && this.refs.outer.getBoundingClientRect().height || 0,
+              left: 0,
+              position: 'absolute',
+              zIndex: 500,
             }}
           >
-            <div
-              style={{
-                top: -20,  // FIXME: Just for prescription. Currently not generalized.
-                position: 'absolute',
-                zIndex: 500,
+            <a
+              className="button is-primary"
+              onClick={e => {
+                e.preventDefault();
+
+                if (!getPreviousData) return;
+
+                const prev = getPreviousData();
+                if (!prev) return;
+
+                if (value && value !== prev) {
+                  if (!confirm('This field is already filled. Are you sure to update?')) return;
+                }
+
+                onChange(prev);
               }}
-            >
-              <a
-                className="button is-primary"
-                onClick={e => {
-                  e.preventDefault();
-
-                  if (!getPreviousData) return;
-
-                  const prev = getPreviousData();
-                  if (!prev) return;
-
-                  if (value && value !== prev) {
-                    if (!confirm('This field is already filled. Are you sure to update?')) return;
-                  }
-
-                  onChange(prev);
-                }}
-              >Ditto</a>
-            </div>
+            >Ditto</a>
           </div>
         }
+        {children}
       </div>
     );
   }
