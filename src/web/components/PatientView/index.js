@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import _get from 'lodash.get';
 
 import Header from './Header';
 import RecordsTab from './RecordsTab';
@@ -172,6 +173,17 @@ export default class PatientView extends Component {
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
+                    getPreviousData={(path: string) => {
+                      // FIXME: Logics in view component.
+                      // This function should be outside of this component.
+                      const prevIndex = selectedActiveRecordIndex - 1;
+                      const prevRecord = records[prevIndex];
+                      if (prevRecord) {
+                        return _get(prevRecord, path);
+                      }
+
+                      return null;
+                    }}
                   />
                 </div>
               )}

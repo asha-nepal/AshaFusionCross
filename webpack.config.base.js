@@ -57,6 +57,9 @@ module.exports = {
     ],
   },
   resolve: {
+    root: [
+      path.resolve('./src'),
+    ],
     alias: {
       lib: path.resolve(__dirname, './lib'),
     },
