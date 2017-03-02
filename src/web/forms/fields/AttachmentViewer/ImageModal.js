@@ -2,18 +2,18 @@
 
 import React from 'react';
 import Modal from '../../../components/Modal';
+import downloadBlob from 'lib/download-blob';
 
 export default ({
   isOpen,
   onClose,
-  onDownload,
   imageBlob,
   imageName,
 }: {
   isOpen: boolean,
   onClose: () => void,
-  imageBlob: Blob,
-  imageName: string,
+  imageBlob: ?Blob,
+  imageName: ?string,
 }) => {
   if (!imageBlob) return null;
 
@@ -43,7 +43,7 @@ export default ({
             className="icon is-large"
             onClick={e => {
               e.preventDefault();
-              onDownload();
+              if (imageBlob) downloadBlob(imageBlob, imageName || 'file');
             }}
           ><i className="fa fa-download" /></a>
         }

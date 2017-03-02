@@ -6,6 +6,7 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 import ImageModal from './ImageModal';
 import { makeCancelable } from 'utils';
+import downloadBlob from 'lib/download-blob';
 
 class AttachmentViewerComponent extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class AttachmentViewerComponent extends Component {
     this.state = {
       cache: {},
       isModalOpen: false,
+      modalImageBlob: null,
+      modalImageName: null,
     };
 
     this._loadAttachmentsToCache = this._loadAttachmentsToCache.bind(this);
@@ -22,6 +25,8 @@ class AttachmentViewerComponent extends Component {
   state: {
     cache: Object,
     isModalOpen: boolean,
+    modalImageBlob: ?Blob,
+    modalImageName: ?string,
   };
 
   componentDidMount() {
@@ -99,22 +104,6 @@ class AttachmentViewerComponent extends Component {
       .catch(() => {});
   }
 
-  _downloadBlob(blob: Object, name: string) {
-    if (window.navigator.msSaveBlob) {
-      // IEなら独自関数を使います。
-      window.navigator.msSaveBlob(blob, name);
-    } else {
-      // それ以外はaタグを利用してイベントを発火させます
-      const a = document.createElement('a');
-      const url = URL.createObjectURL(blob);
-      a.href = url;
-      a.target = '_blank';
-      a.download = name;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    }
-  }
-
   props: {
     label: string,
     docId: string,
@@ -172,7 +161,7 @@ class AttachmentViewerComponent extends Component {
             content = (
               <div
                 style={{ textAlign: 'center', cursor: 'pointer' }}
-                onClick={() => this._downloadBlob(blob, m.name)}
+                onClick={() => downloadBlob(blob, m.name)}
               >
                 <span className="icon is-large">
                   <i className="fa fa-file" />
@@ -201,7 +190,6 @@ class AttachmentViewerComponent extends Component {
         <ImageModal
           isOpen={this.state.isModalOpen}
           onClose={() => this.setState({ isModalOpen: false })}
-          onDownload={() => this._downloadBlob(this.state.modalImageBlob, this.state.modalImageName)}
           imageBlob={this.state.modalImageBlob}
           imageName={this.state.modalImageName}
         />
