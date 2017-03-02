@@ -52,12 +52,10 @@ class DittoWrapper extends React.Component {
         {this.state.hover && getPreviousData &&
           <div
             key="tooltip"
+            className="field-tooltip"
             style={{
               top: this.refs.outer && this.refs.outer.getBoundingClientRect().height || 0,
               left: 0,
-              position: 'absolute',
-              zIndex: 500,
-              overflow: 'hidden',
             }}
           >
             <a
