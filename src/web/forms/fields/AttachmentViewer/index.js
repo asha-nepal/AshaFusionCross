@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
-import { makeCancelable } from '../../../utils';
+import ImageModal from './ImageModal';
+import { makeCancelable } from 'utils';
 
 class AttachmentViewerComponent extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class AttachmentViewerComponent extends Component {
 
     this.state = {
       cache: {},
+      isModalOpen: false,
     };
 
     this._loadAttachmentsToCache = this._loadAttachmentsToCache.bind(this);
@@ -19,6 +21,7 @@ class AttachmentViewerComponent extends Component {
 
   state: {
     cache: Object,
+    isModalOpen: boolean,
   };
 
   componentDidMount() {
@@ -149,21 +152,21 @@ class AttachmentViewerComponent extends Component {
           } else if (blob.type && blob.type.match(/image\/*/)) {
             const url = URL.createObjectURL(blob);
             content = (
-              <figure className="image is-128x128">
-                <a href={url} target="_blank">
-                  <img
-                    src={url}
-                    alt={m.name}
-                    style={{
-                      width: 'auto',
-                      height: 'auto',
-                      maxWidth: 128,
-                      maxHeight: 128,
-                      margin: '0 auto',
-                    }}
-                  />
-                </a>
-              </figure>
+              <a
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({
+                    isModalOpen: true,
+                    modalImageBlob: blob,
+                    modalImageName: m.name,
+                  });
+                }}
+              >
+                <img
+                  src={url}
+                  alt={m.name}
+                />
+              </a>
             );
           } else {
             content = (
@@ -195,6 +198,13 @@ class AttachmentViewerComponent extends Component {
           );
         })}
         </div>
+        <ImageModal
+          isOpen={this.state.isModalOpen}
+          onClose={() => this.setState({ isModalOpen: false })}
+          onDownload={() => this._downloadBlob(this.state.modalImageBlob, this.state.modalImageName)}
+          imageBlob={this.state.modalImageBlob}
+          imageName={this.state.modalImageName}
+        />
       </div>
     );
   }
