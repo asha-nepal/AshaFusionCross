@@ -35,7 +35,13 @@ export default ({
           const datetimeString = moment().format('YYYY-MM-DD-HH-mm-ss');
           link.download = `asha-${datetimeString}.csv`;
           link.href = URL.createObjectURL(blob);
-          link.click();
+
+          const clickEvent = new MouseEvent('click', {
+            view: window,
+            bubbles: false,
+            cancelable: false,
+          });
+          link.dispatchEvent(clickEvent);
         }
       );
     }}
