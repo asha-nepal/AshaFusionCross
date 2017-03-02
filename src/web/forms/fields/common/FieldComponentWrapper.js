@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 type Props = {
   children?: React$Element<any>,
@@ -43,13 +44,20 @@ class DittoWrapper extends React.Component {
         onMouseEnter={() => this.setState({ hover: true })}
         onMouseLeave={() => this.setState({ hover: false })}
       >
+        <ReactCSSTransitionGroup
+          transitionName="field-tooltip"
+          transitionEnterTimeout={100}
+          transitionLeaveTimeout={100}
+        >
         {this.state.hover && getPreviousData &&
           <div
+            key="tooltip"
             style={{
               top: this.refs.outer && this.refs.outer.getBoundingClientRect().height || 0,
               left: 0,
               position: 'absolute',
               zIndex: 500,
+              overflow: 'hidden',
             }}
           >
             <a
@@ -71,6 +79,7 @@ class DittoWrapper extends React.Component {
             >Ditto</a>
           </div>
         }
+        </ReactCSSTransitionGroup>
         {children}
       </div>
     );

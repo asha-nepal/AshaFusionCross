@@ -93,3 +93,17 @@ $fa-font-path: "~font-awesome/fonts"
   color: #D5D5D5
   &:hover
     color: #000000
+
+.field-tooltip-enter
+  max-height: 0
+
+.field-tooltip-enter.field-tooltip-enter-active
+  max-height: 32px
+  transition: 100ms ease-in
+
+.field-tooltip-leave
+  max-height: 32px
+
+.field-tooltip-leave.field-tooltip-leave-active
+  max-height: 0
+  transition: 100ms ease-in
