@@ -1,0 +1,76 @@
+.control.has-icon
+  .fa
+    @each $name, $pair in $colors
+      $color: nth($pair, 1)
+      $color-invert: nth($pair, 2)
+      &.is-#{$name}
+        color: $color
+  .input
+    &:focus + .fa
+      @each $name, $pair in $colors
+        $color: nth($pair, 1)
+        $color-invert: nth($pair, 2)
+        &.is-#{$name}
+          color: $color
+
+.guidetool ul
+  list-style-type: disc
+  margin-left: 20px
+
+// =control をコピペして不要なスタイルを削除
+.form-static
+  -moz-appearance: none
+  -webkit-appearance: none
+  align-items: center
+  display: inline-flex
+  font-size: $size-normal
+  height: 32px
+  justify-content: flex-start
+  line-height: 24px
+  padding-left: 8px
+  padding-right: 8px
+  position: relative
+  vertical-align: top
+
+  &.is-small
+    +control-small
+  &.is-medium
+    +control-medium
+  &.is-large
+    +control-large
+  // Modifiers
+  &.is-fullwidth
+    display: block
+    width: 100%
+  &.is-inline
+    display: inline
+    width: auto
+  &.is-multiline
+    display: block
+    width: auto
+    height: auto
+
+    ul
+      list-style: disc outside
+      margin-left: 2em
+      margin-right: 2em
+      margin-top: 1em
+
+.field-tooltip
+  position: absolute
+  z-index: 500
+  overflow: hidden
+
+.field-tooltip-enter
+  max-height: 0
+
+.field-tooltip-enter.field-tooltip-enter-active
+  max-height: 32px
+  transition: 100ms ease-in
+
+.field-tooltip-leave
+  max-height: 32px
+
+.field-tooltip-leave.field-tooltip-leave-active
+  max-height: 0
+  transition: 100ms ease-in
