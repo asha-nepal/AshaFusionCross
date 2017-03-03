@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
+import ImageThumbnail from './ImageThumbnail';
+import FileThumbnail from './FileThumbnail';
 import ImageModal from './ImageModal';
 import { makeCancelable } from 'utils';
 import downloadBlob from 'lib/download-blob';
@@ -139,41 +141,29 @@ class AttachmentViewerComponent extends Component {
           if (!blob) {
             content = `Loading, ${m.id} ${m.name}`;
           } else if (blob.type && blob.type.match(/image\/*/)) {
-            const url = URL.createObjectURL(blob);
             content = (
-              <a
-                onClick={e => {
-                  e.preventDefault();
-                  this.setState({
-                    isModalOpen: true,
-                    modalImageBlob: blob,
-                    modalImageName: m.name,
-                  });
-                }}
-              >
-                <img
-                  src={url}
-                  alt={m.name}
-                />
-              </a>
+              <ImageThumbnail
+                blob={blob}
+                alt={m.name}
+                onClick={() => this.setState({
+                  isModalOpen: true,
+                  modalImageBlob: blob,
+                  modalImageName: m.name,
+                })}
+              />
             );
           } else {
             content = (
-              <div
-                style={{ textAlign: 'center', cursor: 'pointer' }}
+              <FileThumbnail
+                label={m.name}
                 onClick={() => downloadBlob(blob, m.name)}
-              >
-                <span className="icon is-large">
-                  <i className="fa fa-file" />
-                </span>
-                <p>{m.name}</p>
-              </div>
+              />
             );
           }
 
           return (
             <div key={m.id} className="column is-narrow" style={{ display: 'inline-block' }}>
-              <div className="image is-128x128">
+              <div className="image is-128x128" style={{ overflow: 'scroll' }}>
                 {content}
               </div>
               <button
