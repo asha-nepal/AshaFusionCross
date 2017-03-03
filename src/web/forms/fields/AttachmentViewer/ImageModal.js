@@ -40,7 +40,7 @@ export default ({
       <div className="has-text-centered">
         {imageBlob &&
           <a
-            className="icon is-large"
+            className="icon is-medium inverse"
             onClick={e => {
               e.preventDefault();
               if (imageBlob) downloadBlob(imageBlob, imageName || 'file');
@@ -49,7 +49,7 @@ export default ({
         }
         {imageUrl &&
           <a
-            className="icon is-large"
+            className="icon is-medium inverse"
             href={imageUrl}
             target="_blank"
           ><i className="fa fa-external-link" /></a>
