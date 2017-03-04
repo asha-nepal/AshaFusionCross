@@ -84,7 +84,7 @@ function makeCreateChildFields(
         component,
         {
           key: i,
-          model: `${rootModel}.${field.field}`,
+          model: field.field ? `${rootModel}.${field.field}` : null,
           label: field.label,
           fieldOptions: fieldOptions[field.field],
           warning: warnings[field.field],
