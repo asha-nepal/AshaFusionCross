@@ -15,6 +15,12 @@ const ArrayFormatter = ({
   value: ?Array<string>,
 }) => <span>{(value && value.join) ? value.join(', ') : ''}</span>;
 
+const BooleanFormatter = ({
+  value,
+}: {
+  value: ?boolean,
+}) => <span>{(value != null) && value.toString()}</span>;
+
 
 export default({
   columns,
@@ -38,6 +44,11 @@ export default({
       return {
         ...column,
         formatter: ArrayFormatter,
+      };
+    } else if (column.isBoolean) {
+      return {
+        ...column,
+        formatter: BooleanFormatter,
       };
     }
 
