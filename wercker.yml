@@ -74,6 +74,42 @@ deploy-web:
       file: ${ZIP_ARCHIVE_NAME}
       url: s3://asha-fusion-archive/${ZIP_ARCHIVE_NAME}
 
+electron-build-and-upload:
+  box: node:6.10
+  steps:
+    - script:
+      name: install packages
+      code: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update -y
+        sudo apt-get upgrade -y
+        sudo apt-get install -y zip
+        sudo apt-get install -y wine wine-development
+    - script:
+      # http://qiita.com/Quramy/items/6fb900018060cf2e738e
+      name: Rebuild
+      code: npm rebuild
+    - script:
+      name: Build electron app
+      code: npm run electron:build:prod
+    - script:
+      name: Pack electron app
+      code: npm run electron:pack:all
+    # Create zip archives within the same pipeline to building app since symlinks are not kept over pipelines
+    - script:
+      name: Create zip archives
+      code: |
+        export DESTINATION_DIR_NAME=${WERCKER_MAIN_PIPELINE_STARTED}-${WERCKER_GIT_COMMIT}-desktop
+        mkdir ${DESTINATION_DIR_NAME}
+        cd electron
+        for f in `ls .`; do zip -ry ../${DESTINATION_DIR_NAME}/$f.zip $f; done
+        cd ..
+    - koding/s3put:
+      key-id: $AWS_ACCESS_KEY_ID
+      key-secret: $AWS_SECRET_ACCESS_KEY
+      file: ./${DESTINATION_DIR_NAME}
+      url: s3://asha-fusion-archive/
+
 deploy-debug:
   steps:
     - create-file:
