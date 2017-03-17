@@ -2,7 +2,7 @@
 
 import { createSelector } from 'reselect';
 import _get from 'lodash.get';
-import  moment  from 'moment';
+import moment from 'moment';
 
 export {
   getIsLoggedIn,
