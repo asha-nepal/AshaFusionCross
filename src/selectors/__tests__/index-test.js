@@ -3,8 +3,10 @@
 jest.unmock('reselect');
 jest.unmock('deep-freeze');
 jest.unmock('../index');
+jest.unmock('moment');
 
 import deepFreeze from 'deep-freeze';
+import moment from 'moment';
 import {
   getPatientList,
   getPatientSelectFilter,
@@ -14,7 +16,7 @@ import {
   getSortedFilteredPatientList,
   makeGetDuplicatedPatients,
 } from '../index';
-const currentTime = Date.now();
+const currentTime = moment(Date.now());
 describe('getPatientList', () => {
   it('selects patientList from state', () => {
     const state = {
