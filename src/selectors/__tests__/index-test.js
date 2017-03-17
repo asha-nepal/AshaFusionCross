@@ -3,8 +3,10 @@
 jest.unmock('reselect');
 jest.unmock('deep-freeze');
 jest.unmock('../index');
+jest.unmock('moment');
 
 import deepFreeze from 'deep-freeze';
+import moment from 'moment';
 import {
   getPatientList,
   getPatientSelectFilter,
@@ -14,7 +16,7 @@ import {
   getSortedFilteredPatientList,
   makeGetDuplicatedPatients,
 } from '../index';
-
+const currentTime = moment(Date.now());
 describe('getPatientList', () => {
   it('selects patientList from state', () => {
     const state = {
@@ -177,9 +179,9 @@ describe('getSortedFilteredPatientList', () => {
   it('handles empty name', () => {
     const state = {
       patientList: [
-        { name: 'hoge fuga' },
-        { name: 'Hoge foo' },
-        { name: '' },
+        { name: 'hoge fuga', $updated_at: currentTime },
+        { name: 'Hoge foo', $updated_at: currentTime },
+        { name: '', $updated_at: currentTime },
       ],
       patientSelect: {
         filter: '',
@@ -192,17 +194,17 @@ describe('getSortedFilteredPatientList', () => {
 
     expect(getSortedFilteredPatientList(state))
       .toEqual([
-        { name: 'Hoge foo' },
-        { name: 'hoge fuga' },
-        { name: '' },  // 空データは末尾に来る
+        { name: 'Hoge foo', $updated_at: currentTime },
+        { name: 'hoge fuga', $updated_at: currentTime },
+        { name: '', $updated_at: currentTime },  // 空データは末尾に来る
       ]);
   });
 
   it('sorts according in ASC if sortInAsc is true', () => {
     const state = {
       patientList: [
-        { name: 'aaa' },
-        { name: 'zzz' },
+        { name: 'aaa', $updated_at: currentTime },
+        { name: 'zzz', $updated_at: currentTime },
       ],
       patientSelect: {
         filter: '',
@@ -215,16 +217,16 @@ describe('getSortedFilteredPatientList', () => {
 
     expect(getSortedFilteredPatientList(state))
       .toEqual([
-        { name: 'aaa' },
-        { name: 'zzz' },
+        { name: 'aaa', $updated_at: currentTime },
+        { name: 'zzz', $updated_at: currentTime },
       ]);
   });
 
   it('sorts according in DESC if sortInAsc is false', () => {
     const state = {
       patientList: [
-        { name: 'aaa' },
-        { name: 'zzz' },
+        { name: 'aaa', $updated_at: currentTime },
+        { name: 'zzz', $updated_at: currentTime },
       ],
       patientSelect: {
         filter: '',
@@ -237,17 +239,17 @@ describe('getSortedFilteredPatientList', () => {
 
     expect(getSortedFilteredPatientList(state))
       .toEqual([
-        { name: 'zzz' },
-        { name: 'aaa' },
+        { name: 'zzz', $updated_at: currentTime },
+        { name: 'aaa', $updated_at: currentTime },
       ]);
   });
 
   it('sorts by speficied field', () => {
     const state = {
       patientList: [
-        { hoge: 'ccc' },
-        { hoge: 'aaa' },
-        { hoge: 'bbb' },
+        { hoge: 'ccc', $updated_at: currentTime },
+        { hoge: 'aaa', $updated_at: currentTime },
+        { hoge: 'bbb', $updated_at: currentTime },
       ],
       patientSelect: {
         filter: '',
@@ -260,19 +262,19 @@ describe('getSortedFilteredPatientList', () => {
 
     expect(getSortedFilteredPatientList(state))
       .toEqual([
-        { hoge: 'aaa' },
-        { hoge: 'bbb' },
-        { hoge: 'ccc' },
+        { hoge: 'aaa', $updated_at: currentTime },
+        { hoge: 'bbb', $updated_at: currentTime },
+        { hoge: 'ccc', $updated_at: currentTime },
       ]);
   });
 
   it('places entities whose values are null regardless of sortBy and sortInAsc', () => {
     const state = {
       patientList: [
-        { hoge: null },
-        { hoge: 'aaa' },
-        { hoge: 'zzz' },
-        { hoge: null },
+        { hoge: null, $updated_at: currentTime },
+        { hoge: 'aaa', $updated_at: currentTime },
+        { hoge: 'zzz', $updated_at: currentTime },
+        { hoge: null, $updated_at: currentTime },
       ],
       patientSelect: {
         filter: '',
@@ -283,20 +285,20 @@ describe('getSortedFilteredPatientList', () => {
 
     expect(getSortedFilteredPatientList(state))
       .toEqual([
-        { hoge: 'aaa' },
-        { hoge: 'zzz' },
-        { hoge: null },
-        { hoge: null },
+        { hoge: 'aaa', $updated_at: currentTime },
+        { hoge: 'zzz', $updated_at: currentTime },
+        { hoge: null, $updated_at: currentTime },
+        { hoge: null, $updated_at: currentTime },
       ]);
 
     state.patientSelect.sortInAsc = false;
 
     expect(getSortedFilteredPatientList(state))
       .toEqual([
-        { hoge: 'zzz' },
-        { hoge: 'aaa' },
-        { hoge: null },
-        { hoge: null },
+        { hoge: 'zzz', $updated_at: currentTime },
+        { hoge: 'aaa', $updated_at: currentTime },
+        { hoge: null, $updated_at: currentTime },
+        { hoge: null, $updated_at: currentTime },
       ]);
   });
 });
