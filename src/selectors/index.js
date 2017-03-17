@@ -2,7 +2,6 @@
 
 import { createSelector } from 'reselect';
 import _get from 'lodash.get';
-import moment from 'moment';
 
 export {
   getIsLoggedIn,
@@ -46,9 +45,9 @@ export const checkPatientMatchesQueries = (queries: Array<string>, patient: Pati
   });
 
 function isPatientOfToday(patient) {
-  const currentMoment = moment.unix(Math.floor(Date.now() / 1000));
-  const patientCreatedMoment = moment.unix(Math.floor(patient.$updated_at / 1000));
-  return currentMoment.isSame(patientCreatedMoment, 'day');
+  const currentMoment = new Date();
+  const patientCreatedMoment = new Date(patient.$updated_at);
+  return currentMoment.toDateString() == patientCreatedMoment.toDateString();
 }
 
 export const getFilteredPatientList = createSelector(
