@@ -47,7 +47,7 @@ export const checkPatientMatchesQueries = (queries: Array<string>, patient: Pati
 function isPatientOfToday(patient) {
   const currentMoment = new Date();
   const patientCreatedMoment = new Date(patient.$updated_at);
-  return currentMoment.toDateString() == patientCreatedMoment.toDateString();
+  return currentMoment.toDateString() === patientCreatedMoment.toDateString();
 }
 
 export const getFilteredPatientList = createSelector(
