@@ -4,9 +4,19 @@ import {
   DB_SET_INSTANCE,
 } from '../../actions';
 
-const defaultHost = (typeof location !== 'undefined' && location.hostname)
-  ? location.hostname
-  : '127.0.0.1';
+const getDefaultHost = () => {
+  if (process.env.COUCH_HOST) {
+    return process.env.COUCH_HOST;
+  }
+
+  if (typeof location !== 'undefined' && location.hostname) {
+    return location.hostname;
+  }
+
+  return '127.0.0.1';
+};
+
+const defaultHost = getDefaultHost();
 const defaultPouchConfig: PouchConfig = {
   isLocal: false,
   local: {

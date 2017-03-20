@@ -10,6 +10,7 @@
     "flow": "flow",
     "lint": "eslint src",
     "build": "NODE_ENV=production webpack --progress --colors --config webpack.config.web.js",
+    "build:demo": "npm run build -- --define process.env.COUCH_HOST='\"demo.asha-np.org\"'",
     "electron:build:dev": "NODE_ENV=development webpack --progress --colors --config webpack.config.electron.dev.js",
     "electron:build:prod": "NODE_ENV=production webpack --progress --colors --config webpack.config.electron.prod.js",
     "electron:pack": "electron-packager build asha-fusion --asar",
