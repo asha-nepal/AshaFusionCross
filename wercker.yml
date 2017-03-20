@@ -38,7 +38,7 @@ build:
       name: slack-notify-coverage
       code: node slack-istanbul.js
 
-web-build:
+demo-build-and-deploy:
   box: node:6.10
   steps:
     - script:
@@ -46,23 +46,29 @@ web-build:
       name: Rebuild
       code: npm rebuild
     - script:
-      name: Build web app
-      code: npm run build
-
-web-deploy:
-  box: node:6.10
-  steps:
+      name: Build web app for demo
+      code: npm run build:demo
     - s3sync:
       key_id: $AWS_ACCESS_KEY_ID
       key_secret: $AWS_SECRET_ACCESS_KEY
       bucket_url: s3://dev.asha-np.org
       source_dir: ./public
+
+web-build-and-upload:
+  box: node:6.10
+  steps:
     - script:
       name: install zip
       code: |
         sudo apt-get update -y
         sudo apt-get upgrade -y
         sudo apt-get install -y zip
+    - script:
+      name: Rebuild
+      code: npm rebuild
+    - script:
+      name: Build web app
+      code: npm run build
     - script:
       name: Create zip archive
       code: |
