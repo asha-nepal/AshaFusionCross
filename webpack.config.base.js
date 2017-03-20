@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -99,5 +100,20 @@ if (process.env.NODE_ENV === 'production') {
       },
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
+  ]);
+}
+
+// Additional options configured by environment variables
+const envKeys = [
+  'COUCH_HOST',
+];
+
+const envs = _.pick(process.env, envKeys);
+
+if (Object.keys(envs).length > 0) {
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': envs,
+    }),
   ]);
 }
