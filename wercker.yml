@@ -38,7 +38,7 @@ build:
       name: slack-notify-coverage
       code: node slack-istanbul.js
 
-build-web:
+web-build:
   box: node:6.10
   steps:
     - script:
@@ -49,7 +49,7 @@ build-web:
       name: Build web app
       code: npm run build
 
-deploy-web:
+web-deploy:
   box: node:6.10
   steps:
     - s3sync:
@@ -72,7 +72,7 @@ deploy-web:
       key-id: $AWS_ACCESS_KEY_ID
       key-secret: $AWS_SECRET_ACCESS_KEY
       file: ${ZIP_ARCHIVE_NAME}
-      url: s3://asha-fusion-archive/${ZIP_ARCHIVE_NAME}
+      url: s3://asha-fusion-archive/webapp/${ZIP_ARCHIVE_NAME}
 
 electron-build-and-upload:
   box: node:6.10
@@ -99,7 +99,7 @@ electron-build-and-upload:
     - script:
       name: Create zip archives
       code: |
-        export DESTINATION_DIR_NAME=${WERCKER_MAIN_PIPELINE_STARTED}-${WERCKER_GIT_COMMIT}-desktop
+        export DESTINATION_DIR_NAME=${WERCKER_MAIN_PIPELINE_STARTED}-${WERCKER_GIT_COMMIT}
         mkdir ${DESTINATION_DIR_NAME}
         cd electron
         for f in `ls .`; do zip -ry ../${DESTINATION_DIR_NAME}/$f.zip $f; done
@@ -108,7 +108,7 @@ electron-build-and-upload:
       key-id: $AWS_ACCESS_KEY_ID
       key-secret: $AWS_SECRET_ACCESS_KEY
       file: ./${DESTINATION_DIR_NAME}
-      url: s3://asha-fusion-archive/
+      url: s3://asha-fusion-archive/desktop/
 
 deploy-debug:
   steps:
