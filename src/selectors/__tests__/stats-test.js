@@ -3,6 +3,7 @@
 jest.unmock('reselect');
 jest.unmock('moment');
 jest.unmock('../stats');
+jest.unmock('../patient-list');
 
 import moment from 'moment';
 import {
@@ -52,5 +53,34 @@ describe('getRecordListForStats', () => {
 
     expect(getRecordListForStats(state))
       .toEqual([recordList[0], recordList[1], recordList[2]]);
+  });
+
+  it('merges patient data', () => {
+    const recordList = [
+      { _id: 'record_yo_123' },
+      { _id: 'record_ho_456' },
+    ];
+
+    const patientList = [
+      { _id: 'patient_yo' },
+      { _id: 'patient_ho' },
+    ];
+
+    const state = {
+      recordList,
+      patientList,
+      stats: {
+        date: {
+          startDate: null,
+          endDate: null,
+        },
+      },
+    };
+
+    expect(getRecordListForStats(state))
+      .toEqual([
+        { _id: 'record_yo_123', _patient: { _id: 'patient_yo' } },
+        { _id: 'record_ho_456', _patient: { _id: 'patient_ho' } },
+      ]);
   });
 });
