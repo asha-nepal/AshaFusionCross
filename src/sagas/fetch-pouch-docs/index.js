@@ -1,4 +1,3 @@
-/* @flow */
 import { take, select, call, put } from 'redux-saga/effects';
 import {
   POUCH_DOCS_FETCH,
@@ -11,6 +10,9 @@ import {
 import {
   capitalize,
 } from 'utils';
+import {
+  pouchFetchPatientList,
+} from './fetch-patient-list';
 
 function pouchFetchDocs(db: PouchInstance, prefix: string): Promise<Array<PouchDocType>> {
   return db.allDocs({
@@ -30,8 +32,10 @@ export function* fetchPouchDocs(
 
   yield put(requestFetchingPouchDocs(name));
   try {
-    // $FlowFixMe
-    const data: Array<PouchDocType> = yield call(pouchFetchDocs, db, prefix);
+    // TODO: fetching patient is a exception: has to use the same function
+    const fetchFunc = prefix === 'patient_' ? pouchFetchPatientList : pouchFetchDocs;
+
+    const data: Array<PouchDocType> = yield call(fetchFunc, db, prefix);
     yield put(alertInfo(capitalize(`${label && `${label} `}loaded`)));
     yield put(successFetchingPouchDocs(name, data));
   } catch (error) {
