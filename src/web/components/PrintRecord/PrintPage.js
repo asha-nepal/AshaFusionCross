@@ -50,7 +50,7 @@ export default ({
 
   return (
     <section className="section is-print">
-      <img src={DhulikhelIconImg} alt="Hospital logo" className="logo"/>
+      <img src={DhulikhelIconImg} alt="Hospital logo" className="logo" />
       <div className="header is-clearfix">
         <h1 className="title is-pulled-left">
           {number && <small>No. {number} </small>}
@@ -74,18 +74,18 @@ export default ({
         <div>
           <p className="section-header">B) Physical Information</p>
           <div className="control is-grouped">
-              <div className="control">
-                <label className="label">Height</label>
-                <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
-              </div>
-              <div className="control">
-                <label className="label">Weight</label>
-                <p className="form-static">{weight ? `${weight} kg` : '---'}</p>
-              </div>
-              <div className="control">
-                <label className="label">BMI</label>
-                <p className="form-static">{bmiRounded || '---'}</p>
-              </div>
+            <div className="control">
+              <label className="label">Height</label>
+              <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
+            </div>
+            <div className="control">
+              <label className="label">Weight</label>
+              <p className="form-static">{weight ? `${weight} kg` : '---'}</p>
+            </div>
+            <div className="control">
+              <label className="label">BMI</label>
+              <p className="form-static">{bmiRounded || '---'}</p>
+            </div>
           </div>
         </div>
         <div>
@@ -136,38 +136,38 @@ export default ({
             <tbody>
               <tr>
                 <th>Vitals</th>
-                  <td>
-                    <div className="control is-grouped">
-                      <div className="control">
-                        <label className="label">Blood pressure</label>
-                        <p className="form-static">
-                          {getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg
-                        </p>
-                      </div>
-                      <div className="control">
-                        <label className="label">Pulse</label>
-                        <p className="form-static">{getStr(record, 'pulse', '---')} /min</p>
-                      </div>
-                      <div className="control">
-                        <label className="label">Temperature</label>
-                        <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
-                      </div>
+                <td>
+                  <div className="control is-grouped">
+                    <div className="control">
+                      <label className="label">Blood pressure</label>
+                      <p className="form-static">
+                        {getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg
+                      </p>
                     </div>
-                    <div className="control is-grouped">
-                      <div className="control">
-                        <label className="label">SpO2</label>
-                        <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
-                      </div>
-                      <div className="control">
-                        <label className="label">Respiration rate</label>
-                        <p className="form-static">{getStr(record, 'rr', '---')} /min</p>
-                      </div>
-                      <div className="control">
-                        <label className="label">Blood sugar</label>
-                        <p className="form-static">{getStr(record, 'bs', '---')} mg/dL</p>
-                      </div>
+                    <div className="control">
+                      <label className="label">Pulse</label>
+                      <p className="form-static">{getStr(record, 'pulse', '---')} /min</p>
                     </div>
-                  </td>
+                    <div className="control">
+                      <label className="label">Temperature</label>
+                      <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
+                    </div>
+                  </div>
+                  <div className="control is-grouped">
+                    <div className="control">
+                      <label className="label">SpO2</label>
+                      <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
+                    </div>
+                    <div className="control">
+                      <label className="label">Respiration rate</label>
+                      <p className="form-static">{getStr(record, 'rr', '---')} /min</p>
+                    </div>
+                    <div className="control">
+                      <label className="label">Blood sugar</label>
+                      <p className="form-static">{getStr(record, 'bs', '---')} mg/dL</p>
+                    </div>
+                  </div>
+                </td>
               </tr>
               <tr>
                 <th>Symptoms</th>
