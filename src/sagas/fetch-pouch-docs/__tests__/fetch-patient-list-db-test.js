@@ -1,6 +1,7 @@
 /* eslint-env jest */
 /* eslint-env jasmine */
 
+jest.disableAutomock();
 jest.unmock('pouchdb');
 jest.unmock('../fetch-patient-list');
 
