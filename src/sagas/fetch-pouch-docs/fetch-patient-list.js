@@ -3,6 +3,7 @@
 declare function emit(key: string | Array<any>): void;
 
 export function pouchFetchPatientList(db: PouchInstance): Promise<Array<PatientObject>> {
+  /* istanbul ignore next */
   function map(doc) {
     const idPartials = doc._id.split('_');
     const type = idPartials[0];
