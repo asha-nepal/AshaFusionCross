@@ -39,7 +39,11 @@ export function* fetchPouchDocs(
     yield put(alertInfo(capitalize(`${label && `${label} `}loaded`)));
     yield put(successFetchingPouchDocs(name, data));
   } catch (error) {
-    yield put(alertError(`Failed loading${label && ` ${label}`}`));
+    if (error.status === 401) {
+      yield put(alertError(`Failed loading${label && ` ${label}`} (Unauthorized)`));
+    } else {
+      yield put(alertError(`Failed loading${label && ` ${label}`}`));
+    }
     yield put(failFetchingPouchDocs(name, error));
   }
 }
