@@ -1,10 +1,11 @@
 {
-"presets": ["react-native"],
+"presets": ["react-native-stage-0"],
 "plugins": [
 ["module-alias", [
   { "src": "./src/actions", "expose": "actions" },
   { "src": "./src/utils", "expose": "utils" },
   { "src": "./lib", "expose": "lib" }
-]]
+]],
+"transform-runtime"
 ]
 }

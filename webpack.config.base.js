@@ -17,11 +17,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
-          plugins: [
-            'transform-runtime',
-          ],
-        },
       },
       {
         test: /\.json$/,
