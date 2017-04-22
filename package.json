@@ -32,6 +32,7 @@
     "react-dates": "^7.0.1",
     "react-native": "^0.42.3",
     "react-native-material-kit": "^0.4.1",
+    "react-native-router-flux": "^3.38.0",
     "react-native-vector-icons": "^4.0.1"
   },
   "devDependencies": {
@@ -95,7 +96,6 @@
     "react-autosuggest": "^5.1.0",
     "react-dom": "^15.0.2",
     "react-native-drawer": "^2.3.0",
-    "react-native-router-flux": "^3.30.2",
     "react-redux": "^4.4.5",
     "react-redux-form": "^1.0.13",
     "react-router": "^2.4.1",
