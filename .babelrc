@@ -5,6 +5,7 @@
       "root": ["./src"],
       "alias": {
         "lib": "./lib",
+        "randomstring": "randomstring-promise/react-native"
       }
     }]
   ]
