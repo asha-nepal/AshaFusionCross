@@ -10,12 +10,12 @@ build:
       code: npm install babel-preset-es2015-minimal babel-preset-stage-0
     - install-packages:
       packages: libelf-dev
-    - script:
-      name: flow
-      code: |
-        npm install flow-typed
-        ./node_modules/.bin/flow-typed install jest@12
-        npm run flow
+#    - script:
+#      name: flow
+#      code: |
+#        npm install flow-typed
+#        ./node_modules/.bin/flow-typed install jest@12
+#        npm run flow
     - script:
       name: eslint
       code: npm run lint
