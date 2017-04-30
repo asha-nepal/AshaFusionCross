@@ -20,6 +20,11 @@ module.exports = {
         query: {
           plugins: [
             'transform-runtime',
+            ['module-resolver', {
+              alias: {
+                randomstring: 'randomstring-promise',
+              },
+            }],
           ],
         },
       },

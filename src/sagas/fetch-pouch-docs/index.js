@@ -50,7 +50,6 @@ export function* fetchPouchDocs(
 
 export function* watchFetchPouchDocs(): Generator<*, void, *> {
   while (true) {
-    // $FlowFixMe
     const { payload } = yield take(POUCH_DOCS_FETCH);
     const db = yield select(state => state.db.instance);
     yield call(fetchPouchDocs, db, payload.name, payload.opts);
