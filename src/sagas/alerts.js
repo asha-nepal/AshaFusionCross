@@ -1,6 +1,6 @@
 import { delay } from 'redux-saga';
 import { take, put, call, fork } from 'redux-saga/effects';
-import randomstring from 'randomstring';
+import randomstringPromise from 'randomstring';
 import {
   PUSH_ALERT,
   addAlert,
@@ -8,7 +8,7 @@ import {
 } from '../actions';
 
 export function* pushAlert(message: string, type: string, timeout: number = 2000) {
-  const id = randomstring.generate();
+  const id = yield call(randomstringPromise);
   yield put(addAlert(id, message, type));
   yield call(delay, timeout);
   yield put(removeAlert(id));
