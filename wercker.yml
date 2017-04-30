@@ -31,6 +31,9 @@ build:
         echo "node version $(node -v) running"
         echo "npm version $(npm -v) running"
   after-steps:
+    - script:
+      name: install necessary packages for coverage notification
+      code: npm install istanbul
     - slack-notifier:
       url: $SLACK_URL
       username: wercker-ci
