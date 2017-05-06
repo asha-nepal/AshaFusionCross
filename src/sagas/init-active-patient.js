@@ -7,9 +7,7 @@ import {
   changeActivePatient,
   resetActiveRecords,
 } from '../actions';
-import {
-  createId,
-} from '../utils';
+import randomstringPromise from 'randomstring';
 
 export function* initActivePatient() {
   // FIXME:
@@ -18,7 +16,7 @@ export function* initActivePatient() {
   yield put(requestFetchPatient());
   yield call(delay, 100);
 
-  const id = createId(16);
+  const id = yield call(randomstringPromise, 16);
   yield put(changeActivePatient({
     _id: `patient_${id}`,
     type: 'patient',

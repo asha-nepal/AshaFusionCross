@@ -24,6 +24,9 @@ const initialSagas = [
 
 
 export default function* rootSaga() {
+  // Polyfill for ReactNative
+  process.nextTick = process.nextTick || setImmediate;
+
   for (let i = 0; i < initialSagas.length; ++i) {
     yield fork(initialSagas[i]);
   }

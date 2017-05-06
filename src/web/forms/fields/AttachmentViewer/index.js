@@ -4,7 +4,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
-import { makeCancelable } from '../../../utils';
+import ImageThumbnail from './ImageThumbnail';
+import FileThumbnail from './FileThumbnail';
+import ImageModal from './ImageModal';
+import { makeCancelable } from 'utils';
+import downloadBlob from 'lib/download-blob';
 
 class AttachmentViewerComponent extends Component {
   constructor(props) {
@@ -12,6 +16,9 @@ class AttachmentViewerComponent extends Component {
 
     this.state = {
       cache: {},
+      isModalOpen: false,
+      modalImageBlob: null,
+      modalImageName: null,
     };
 
     this._loadAttachmentsToCache = this._loadAttachmentsToCache.bind(this);
@@ -19,6 +26,9 @@ class AttachmentViewerComponent extends Component {
 
   state: {
     cache: Object,
+    isModalOpen: boolean,
+    modalImageBlob: ?Blob,
+    modalImageName: ?string,
   };
 
   componentDidMount() {
@@ -96,22 +106,6 @@ class AttachmentViewerComponent extends Component {
       .catch(() => {});
   }
 
-  _downloadBlob(blob: Object, name: string) {
-    if (window.navigator.msSaveBlob) {
-      // IEなら独自関数を使います。
-      window.navigator.msSaveBlob(blob, name);
-    } else {
-      // それ以外はaタグを利用してイベントを発火させます
-      const a = document.createElement('a');
-      const url = URL.createObjectURL(blob);
-      a.href = url;
-      a.target = '_blank';
-      a.download = name;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    }
-  }
-
   props: {
     label: string,
     docId: string,
@@ -147,41 +141,29 @@ class AttachmentViewerComponent extends Component {
           if (!blob) {
             content = `Loading, ${m.id} ${m.name}`;
           } else if (blob.type && blob.type.match(/image\/*/)) {
-            const url = URL.createObjectURL(blob);
             content = (
-              <figure className="image is-128x128">
-                <a href={url} target="_blank">
-                  <img
-                    src={url}
-                    alt={m.name}
-                    style={{
-                      width: 'auto',
-                      height: 'auto',
-                      maxWidth: 128,
-                      maxHeight: 128,
-                      margin: '0 auto',
-                    }}
-                  />
-                </a>
-              </figure>
+              <ImageThumbnail
+                blob={blob}
+                alt={m.name}
+                onClick={() => this.setState({
+                  isModalOpen: true,
+                  modalImageBlob: blob,
+                  modalImageName: m.name,
+                })}
+              />
             );
           } else {
             content = (
-              <div
-                style={{ textAlign: 'center', cursor: 'pointer' }}
-                onClick={() => this._downloadBlob(blob, m.name)}
-              >
-                <span className="icon is-large">
-                  <i className="fa fa-file" />
-                </span>
-                <p>{m.name}</p>
-              </div>
+              <FileThumbnail
+                label={m.name}
+                onClick={() => downloadBlob(blob, m.name)}
+              />
             );
           }
 
           return (
             <div key={m.id} className="column is-narrow" style={{ display: 'inline-block' }}>
-              <div className="image is-128x128">
+              <div className="image is-128x128" style={{ overflow: 'scroll' }}>
                 {content}
               </div>
               <button
@@ -195,6 +177,12 @@ class AttachmentViewerComponent extends Component {
           );
         })}
         </div>
+        <ImageModal
+          isOpen={this.state.isModalOpen}
+          onClose={() => this.setState({ isModalOpen: false })}
+          imageBlob={this.state.modalImageBlob}
+          imageName={this.state.modalImageName}
+        />
       </div>
     );
   }

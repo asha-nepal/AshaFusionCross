@@ -33,6 +33,27 @@
     "key": "bs"
   },
   {
+    "key": "allergy"
+  },
+  {
+    "key": "allergy_memo"
+  },
+  {
+    "key": "past_medical_history"
+  },
+  {
+    "key": "current_medicine"
+  },
+  {
+    "key": "present_medical_history"
+  },
+  {
+    "key": "signs_select"
+  },
+  {
+    "key": "signs"
+  },
+  {
     "key": "symptoms"
   },
   {

@@ -3,6 +3,7 @@ import React from 'react';
 import stringify from 'csv-stringify';
 import moment from 'moment';
 import classnames from 'classnames';
+import downloadBlob from 'lib/download-blob';
 
 export default ({
   rows,
@@ -31,11 +32,9 @@ export default ({
         },
         (err, output) => {
           const blob = new Blob([output], { type: 'text/comma-separated-values' });
-          const link = document.createElement('a');
           const datetimeString = moment().format('YYYY-MM-DD-HH-mm-ss');
-          link.download = `asha-${datetimeString}.csv`;
-          link.href = URL.createObjectURL(blob);
-          link.click();
+
+          downloadBlob(blob, `asha-${datetimeString}.csv`);
         }
       );
     }}

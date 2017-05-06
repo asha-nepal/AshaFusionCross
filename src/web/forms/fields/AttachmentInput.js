@@ -3,9 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
-import {
-  createId,
-} from '../../../utils';
+import randomstring from 'randomstring';
 
 const AttachmentInputComponent = ({
   label,
@@ -28,27 +26,35 @@ const AttachmentInputComponent = ({
       onChange={e => {
         const files = e.target.files;
 
-        const meta = [];
+        const meta = Array(files.length);
         const attachments = {};
+        const idPromises = Array(files.length);
+
         for (let i = 0; i < files.length; ++i) {
-          const file = files[i];
-          const id = createId(16);
-
-          meta.push({
-            id,
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            lastModified: file.lastModified,
-          });
-
-          attachments[id] = {
-            content_type: file.type,
-            data: file,
-          };
+          idPromises[i] = randomstring(16);
         }
 
-        addAttachments(attachments, meta);
+        Promise.all(idPromises)
+        .then(ids => {
+          ids.forEach((id, i) => {
+            const file = files[i];
+
+            meta[i] = {
+              id,
+              name: file.name,
+              size: file.size,
+              type: file.type,
+              lastModified: file.lastModified,
+            };
+
+            attachments[id] = {
+              content_type: file.type,
+              data: file,
+            };
+          });
+
+          addAttachments(attachments, meta);
+        });
       }}
     />
   </p>

@@ -355,6 +355,7 @@ export default {
         {
           field: 'prescription', label: 'Prescriptions', class: 'subformlist',
           show: 'plan:prescription',
+          ditto: true,
           fields: [
             {
               field: 'medicine', label: 'Medicine', class: 'textinput', primary: true,

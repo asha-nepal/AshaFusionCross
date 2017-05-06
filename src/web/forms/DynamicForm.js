@@ -29,6 +29,7 @@ import type { FieldEditPropsType } from './editor/type';
 function makeCreateChildFields(
   state,
   rootModel,
+  getPreviousData,
   fieldOptions,
   warnings: Object,
   editing: boolean,
@@ -90,6 +91,8 @@ function makeCreateChildFields(
           warning: warnings[field.field],
           rootModel,
           fieldEditProps,
+          getPreviousData: field.ditto && getPreviousData &&
+            (() => getPreviousData && getPreviousData(field.field)),
           ...field,
         },
         children
@@ -127,6 +130,7 @@ type Props = {
   onSubmit?: (data: Object) => void,
   onRemove: ?() => void,
   freeze: boolean,
+  getPreviousData?: (field: string) => any,
   fieldOptions?: Object,
   warnings?: Object,
   formGroup: string,
@@ -221,6 +225,7 @@ export class DynamicFormComponent extends React.Component {
       onSubmit,
       onRemove,
       freeze,
+      getPreviousData,
       fieldOptions = {},
       warnings = {},
       customizable = false,
@@ -228,7 +233,7 @@ export class DynamicFormComponent extends React.Component {
     } = this.props;
 
     const createChildFields = makeCreateChildFields(
-      state, model, fieldOptions, warnings,
+      state, model, getPreviousData, fieldOptions, warnings,
       this.state.editing, this.onEditFocus, this.state.editFocusOn,
       this.onFieldInsert, this.onFieldMove,
       this.onFieldChange, this.onFieldRemove
