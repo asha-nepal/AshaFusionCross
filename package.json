@@ -13,8 +13,8 @@
     "build:demo": "COUCH_HOST='\"demo.asha-np.org\"' npm run build",
     "electron:build:dev": "NODE_ENV=development webpack --progress --colors --config webpack.config.electron.dev.js",
     "electron:build:prod": "NODE_ENV=production webpack --progress --colors --config webpack.config.electron.prod.js",
-    "electron:pack": "electron-packager build asha-fusion --asar",
-    "electron:pack:all": "electron-packager build asha-fusion --asar --all --out=electron",
+    "electron:pack": "electron-packager build asha-fusion --asar --icon=assets/icons/AshaFusionCross.icns",
+    "electron:pack:all": "electron-packager build asha-fusion --asar --all --icon=assets/img/icons/AshaFusionCross.icns --out=electron",
     "server": "if-env NODE_ENV=production && npm run server:prod || npm run server:dev",
     "server:dev": "webpack-dev-server --config webpack.config.web.js",
     "server:prod": "node server.js"
