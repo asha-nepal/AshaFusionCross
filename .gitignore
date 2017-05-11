@@ -54,6 +54,7 @@ fastlane/screenshots
 
 # App specific
 public
+electron
 android/app/crashlytics.properties
 
 # Wercker CLI
