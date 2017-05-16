@@ -16,6 +16,7 @@ const config = merge(baseConfig, {
       { from: 'node_modules/pouchdb/dist/pouchdb.min.js' },
       { from: 'node_modules/pouchdb-authentication/dist/pouchdb.authentication.min.js' },
       { from: './src/electron' },
+      { from: './assets/img/logo.png' },
     ]),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
