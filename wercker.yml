@@ -110,7 +110,7 @@ electron-build-and-upload:
       code: |
         export DESTINATION_DIR_NAME=${WERCKER_MAIN_PIPELINE_STARTED}-${WERCKER_GIT_COMMIT}
         mkdir ${DESTINATION_DIR_NAME}
-        cd electron
+        cd electron-build
         for f in `ls .`; do zip -ry ../${DESTINATION_DIR_NAME}/$f.zip $f; done
         cd ..
     - koding/s3put:
