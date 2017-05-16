@@ -54,7 +54,7 @@ demo-build-and-deploy:
     - s3sync:
       key_id: $AWS_ACCESS_KEY_ID
       key_secret: $AWS_SECRET_ACCESS_KEY
-      bucket_url: s3://dev.asha-np.org
+      bucket_url: $S3_BUCKET_DEPLOY_TO
       source_dir: ./public
 
 web-build-and-upload:
