@@ -14,7 +14,7 @@ convert_icon() {
 }
 
 create_mac() {
-    local DST_DIR=$DST/mac/asha.iconset/
+    local DST_DIR=$DST/asha.iconset/
     local sizes=(16 32 128 256 512 1024)
 
     mkdir -p $DST_DIR
@@ -30,24 +30,13 @@ create_mac() {
     rm -rf $DST_DIR
 }
 
-create_win() {
-    local DST_DIR=$DST/win
-    local DST_FILE=$DST_DIR/asha.ico
+create_ico() {
+    local DST_FILE=$DST/asha.ico
     local SIZE="256x256"
 
-    mkdir -p $DST_DIR
+    mkdir -p $DST
     convert_icon $SIZE $SRC $DST_FILE
 }
 
-create_png() {
-    local DST_DIR=$DST/png
-    local SIZE="1024x1024"
-    local DST_FILE=$DST_DIR/1024x1024.png
-
-    mkdir -p $DST_DIR
-    convert_icon $SIZE $SRC $DST_FILE
-}
-
-create_win
 create_mac
-create_png
+create_ico
