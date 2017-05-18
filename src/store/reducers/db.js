@@ -10,10 +10,13 @@ const getDefaultHost = () => {
   }
 
   if (typeof location !== 'undefined' && location.hostname) {
-    return location.hostname;
+    const host = location.protocol
+      ? `${location.protocol}//${location.hostname}`
+      : location.hostname;
+    return `${host}:5984`;
   }
 
-  return '127.0.0.1';
+  return '127.0.0.1:5984';
 };
 
 const defaultHost = getDefaultHost();
@@ -24,7 +27,7 @@ const defaultPouchConfig: PouchConfig = {
     isSynced: false,
   },
   remote: {
-    hostname: `${defaultHost}:5984`,
+    hostname: defaultHost,
     dbname: 'asha-fusion-dev',
   },
 };

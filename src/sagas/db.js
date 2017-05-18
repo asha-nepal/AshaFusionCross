@@ -113,16 +113,22 @@ const pouchOpts = {
 };
 
 export function formatHostname(hostname: string) {
-  if (!hostname.match(/:\d+$/)) {
-    return `${hostname}:5984`;
+  let result = hostname;
+
+  if (!result.match(/^https?:\/\//)) {
+    result = `http://${result}`;
   }
 
-  return hostname;
+  if (result.charAt(result.length - 1) === '/') {
+    result = result.slice(0, -1);
+  }
+
+  return result;
 }
 
 export function * connect(config: PouchConfig) {
   const hostname = formatHostname(config.remote.hostname);
-  const remoteUrl = `http://${hostname}/${config.remote.dbname}`;
+  const remoteUrl = `${hostname}/${config.remote.dbname}`;
   let db;
 
   if (config.isLocal) {

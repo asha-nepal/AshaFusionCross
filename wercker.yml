@@ -10,12 +10,12 @@ build:
       code: npm install babel-preset-es2015-minimal babel-preset-stage-0
     - install-packages:
       packages: libelf-dev
-    - script:
-      name: flow
-      code: |
-        npm install flow-typed
-        ./node_modules/.bin/flow-typed install jest@12
-        npm run flow
+#    - script:
+#      name: flow
+#      code: |
+#        npm install flow-typed
+#        ./node_modules/.bin/flow-typed install jest@12
+#        npm run flow
     - script:
       name: eslint
       code: npm run lint
@@ -31,6 +31,9 @@ build:
         echo "node version $(node -v) running"
         echo "npm version $(npm -v) running"
   after-steps:
+    - script:
+      name: install necessary packages for coverage notification
+      code: npm install istanbul
     - slack-notifier:
       url: $SLACK_URL
       username: wercker-ci
@@ -51,7 +54,7 @@ demo-build-and-deploy:
     - s3sync:
       key_id: $AWS_ACCESS_KEY_ID
       key_secret: $AWS_SECRET_ACCESS_KEY
-      bucket_url: s3://dev.asha-np.org
+      bucket_url: $S3_BUCKET_DEPLOY_TO
       source_dir: ./public
 
 web-build-and-upload:
@@ -107,7 +110,7 @@ electron-build-and-upload:
       code: |
         export DESTINATION_DIR_NAME=${WERCKER_MAIN_PIPELINE_STARTED}-${WERCKER_GIT_COMMIT}
         mkdir ${DESTINATION_DIR_NAME}
-        cd electron
+        cd electron-build
         for f in `ls .`; do zip -ry ../${DESTINATION_DIR_NAME}/$f.zip $f; done
         cd ..
     - koding/s3put:
