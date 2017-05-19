@@ -19,17 +19,7 @@ function collect(connect, monitor) {
   };
 }
 
-const EditableFieldWrapper = ({
-  children,
-  fieldEditProps,
-  className,
-  style,
-
-  connectDragSource,
-  isDragging,
-
-  ...props
-}: {
+type Props = {
   children?: React$Element<any>,
   fieldEditProps?: FieldEditPropsType,
   className?: string,
@@ -37,42 +27,107 @@ const EditableFieldWrapper = ({
 
   connectDragSource: Function,
   isDragging: boolean,
+}
+
+
+class DraggableFieldEditor extends React.Component {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      hover: false,
+    };
+  }
+
+  state: {
+    hover: boolean,
+  };
+
+  props: Props;
+
+  render() {
+    const {
+      children,
+      fieldEditProps,
+      className,
+      style,
+
+      connectDragSource,
+      isDragging,
+
+      ...props
+    } = this.props;
+
+    let child;
+    try {
+      child = React.Children.only(children);
+    } catch (e) {
+      child = <div>{children}</div>;
+    }
+
+    return (
+      <div
+        {...props}
+        className={classNames(
+          className,
+          'form-editor-drag-source',
+          {
+            dragging: isDragging,
+            hover: this.state.hover && !isDragging,
+          }
+        )}
+        style={{
+          ...style,
+          position: 'relative',
+        }}
+        onClick={e => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (fieldEditProps) fieldEditProps.onFocus();
+        }}
+        onMouseOver={e => {
+          e.stopPropagation();
+          this.setState({ hover: true });
+        }}
+        onMouseOut={e => {
+          e.stopPropagation();
+          this.setState({ hover: false });
+        }}
+      >
+        {this.state.hover ? connectDragSource(child) : child}
+        {fieldEditProps.fieldEditor}
+      </div>
+    );
+  }
+}
+
+const ConnectedDraggableFieldEditor = DragSource(
+  'editable-field', editableFieldSource, collect
+)(DraggableFieldEditor);
+
+export default ({
+  children,
+  fieldEditProps,
+  className,
+  style,
+
+  ...props
+}: {
+  children?: React$Element<any>,
+  fieldEditProps?: FieldEditPropsType,
+  className?: string,
+  style?: Object,
 }) => {
   if (!fieldEditProps) {
     return <div className={className} style={style} {...props}>{children}</div>;
   }
 
-  let child;
-  try {
-    child = React.Children.only(children);
-  } catch (e) {
-    child = <div>{children}</div>;
-  }
-
   return (
-    <div
+    <ConnectedDraggableFieldEditor
+      fieldEditProps={fieldEditProps}
+      className={className}
+      style={style}
       {...props}
-      className={classNames(
-        className,
-        'form-editor-drag-source',
-        {
-          dragging: isDragging,
-        }
-      )}
-      style={{
-        ...style,
-        position: 'relative',
-      }}
-      onClick={e => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (fieldEditProps) fieldEditProps.onFocus();
-      }}
-    >
-      {connectDragSource(child)}
-      {fieldEditProps.fieldEditor}
-    </div>
+    >{children}</ConnectedDraggableFieldEditor>
   );
 };
-
-export default DragSource('editable-field', editableFieldSource, collect)(EditableFieldWrapper);
