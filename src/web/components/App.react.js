@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
+  HashRouter,
   Route,
 } from 'react-router-dom';
 
@@ -16,6 +17,9 @@ import Stats from '../containers/Stats';
 import {
   getIsAdmin,
 } from '../../selectors';
+
+// Electron or Web?
+const Router = (window && window.process && window.process.type) ? HashRouter : BrowserRouter;
 
 const App = ({ children }: { children: ReactClass }) => (
   <div>
