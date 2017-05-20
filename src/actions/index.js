@@ -51,8 +51,11 @@ export const fetchPatient = (patientId: string) => ({
 });
 
 export const PUT_ACTIVE_PATIENT = 'PUT_ACTIVE_PATIENT';
-export const putActivePatient = () => ({
+export const putActivePatient = (cb: ?Function) => ({
   type: PUT_ACTIVE_PATIENT,
+  payload: {
+    cb,
+  },
 });
 
 export const PUT_ACTIVE_RECORD = 'PUT_ACTIVE_RECORD';
@@ -62,8 +65,11 @@ export const putActiveRecord = (index: number) => ({
 });
 
 export const REMOVE_ACTIVE_PATIENT = 'REMOVE_ACTIVE_PATIENT';
-export const removeActivePatient = () => ({
+export const removeActivePatient = (cb: ?Function) => ({
   type: REMOVE_ACTIVE_PATIENT,
+  payload: {
+    cb,
+  },
 });
 
 export const INIT_ACTIVE_PATIENT = 'INIT_ACTIVE_PATIENT';

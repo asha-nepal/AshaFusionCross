@@ -1,11 +1,9 @@
 import React from 'react';
 
 import {
-  Router,
+  BrowserRouter as Router,
   Route,
-  IndexRoute,
-} from 'react-router';
-import history from '../history';
+} from 'react-router-dom';
 
 import connect from '../../common/connect';
 import Auth from '../containers/Auth';
@@ -43,14 +41,13 @@ export default connect(({
   return (
     <App>
       <Auth>
-        <Router history={history}>
-          <Route path="/">
-            <IndexRoute component={PatientSelect} />
-            <Route path="patient/" component={PatientView} />
-            <Route path="patient/:patientId" component={PatientView} />
-            <Route path="admin" component={Admin} onEnter={requireAdmin} />
-            <Route path="stats" component={Stats} />
-          </Route>
+        <Router>
+          <div>
+            <Route exact path="/" component={PatientSelect} />
+            <Route path="/patient/:patientId?" component={PatientView} />
+            <Route path="/admin" component={Admin} onEnter={requireAdmin} />
+            <Route path="/stats" component={Stats} />
+          </div>
         </Router>
       </Auth>
     </App>
