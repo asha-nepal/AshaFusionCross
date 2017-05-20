@@ -13,10 +13,7 @@ import PatientSelect from '../containers/PatientSelect';
 import PatientView from '../containers/PatientView.react';
 import Admin from '../containers/Admin';
 import Stats from '../containers/Stats';
-
-import {
-  getIsAdmin,
-} from '../../selectors';
+import AdminRoute from '../containers/AdminRoute';
 
 // Electron or Web?
 const Router = (window && window.process && window.process.type) ? HashRouter : BrowserRouter;
@@ -28,32 +25,17 @@ const App = ({ children }: { children: ReactClass }) => (
   </div>
 );
 
-export default connect(({
-  getState,
-}) => {
-  function requireAdmin(nextState, replace) {
-    const state = getState();
-
-    if (!getIsAdmin(state)) {
-      replace({
-        pathname: '/',
-        state: { nextPathname: nextState.location.pathname },
-      });
-    }
-  }
-
-  return (
-    <App>
-      <Auth>
-        <Router>
-          <div>
-            <Route exact path="/" component={PatientSelect} />
-            <Route path="/patient/:patientId?" component={PatientView} />
-            <Route path="/admin" component={Admin} onEnter={requireAdmin} />
-            <Route path="/stats" component={Stats} />
-          </div>
-        </Router>
-      </Auth>
-    </App>
-  );
-});
+export default connect(() => (
+  <App>
+    <Auth>
+      <Router>
+        <div>
+          <Route exact path="/" component={PatientSelect} />
+          <Route path="/patient/:patientId?" component={PatientView} />
+          <AdminRoute path="/admin" component={Admin} />
+          <Route path="/stats" component={Stats} />
+        </div>
+      </Router>
+    </Auth>
+  </App>
+));
