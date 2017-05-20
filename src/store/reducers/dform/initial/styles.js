@@ -1,5 +1,3 @@
-import math from 'lib/mathjs';
-
 import prescriptions from '../../../../../data/dhulikhel-medicine-list.json';
 
 export default {
@@ -59,17 +57,9 @@ export default {
               units: ['kg', 'lbm'],
             },
             {
-              label: 'BMI', class: 'autocalc', style: { width: 50 },
+              label: 'BMI', class: 'autocalc', style: { width: 50 }, precision: 2,
+              func: 'asha:bmi',
               inputs: ['height', 'weight'],
-              calc: (height, weight) => {
-                try {
-                  const h = math.unit(height.value, height.unit).toNumber('m');
-                  const w = math.unit(weight.value, weight.unit).toNumber('kg');
-                  return (w / h ** 2).toFixed(2);
-                } catch (e) {
-                  return null;
-                }
-              },
             },
           ],
         },
@@ -213,17 +203,9 @@ export default {
               units: ['kg', 'lbm'],
             },
             {
-              label: 'BMI', class: 'autocalc', style: { width: 50 },
+              label: 'BMI', class: 'autocalc', style: { width: 50 }, precision: 2,
+              func: 'asha:bmi',
               inputs: ['height', 'weight'],
-              calc: (height, weight) => {
-                try {
-                  const h = math.unit(height.value, height.unit).toNumber('m');
-                  const w = math.unit(weight.value, weight.unit).toNumber('kg');
-                  return (w / h ** 2).toFixed(2);
-                } catch (e) {
-                  return null;
-                }
-              },
             },
           ],
         },
