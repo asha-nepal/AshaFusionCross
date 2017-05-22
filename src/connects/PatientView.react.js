@@ -69,7 +69,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     )),
     putActiveRecord: (index) => dispatch(putActiveRecord(index)),
     removeActivePatient: () => dispatch(removeActivePatient(() =>
-      ownProps.history && ownProps.history.push('/')
+      ownProps.history && ownProps.history.replace('/')
     )),
     setPatientFormVisibility: (visibility: boolean) =>
       dispatch(setPatientFormVisibility(visibility)),
