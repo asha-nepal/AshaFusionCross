@@ -17,7 +17,7 @@ const AdminComponent = ({
 }: {
   isAdmin: boolean,
   location: Object,
-  component: React.Component<void, *, *>,
+  component: ReactClass<any>,
 }) => (
   isAdmin
   ? <Component {...props} />

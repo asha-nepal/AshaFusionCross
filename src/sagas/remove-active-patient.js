@@ -8,7 +8,7 @@ import {
   alertError,
 } from '../actions';
 
-export function* removeActivePatient(db: PouchInstance, cb: ?Function) {
+export function* removeActivePatient(db: PouchInstance, cb: ?() => void) {
   yield put(requestRemovePatient());
 
   const patient = yield select(state => state.activePatient);

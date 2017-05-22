@@ -10,7 +10,7 @@ import {
   alertError,
 } from '../actions';
 
-export function* putActivePatient(db: PouchInstance, cb: ?Function) {
+export function* putActivePatient(db: PouchInstance, cb: ?(patient: PatientObject) => void) {
   yield put(requestPutPatient());
 
   const patient = yield select(state => state.activePatient);
