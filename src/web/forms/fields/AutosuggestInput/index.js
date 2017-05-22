@@ -53,9 +53,15 @@ export default class extends React.Component {
     }
   }
 
-  onSuggestionsUpdateRequested = ({ value }: { value: string }) => {
+  onSuggestionsFetchRequested = ({ value }: { value: string }) => {
     this.setState({
       suggestions: getSuggestions(this.state.candidates, value),
+    });
+  }
+
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: [],
     });
   }
 
@@ -72,8 +78,9 @@ export default class extends React.Component {
       <div className="control">
         <Autosuggest
           suggestions={this.state.suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           getSuggestionValue={s => s}
-          onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
           renderSuggestion={suggestion => <span>{suggestion}</span>}
           onSuggestionSelected={this.onSuggestionSelected}
           inputProps={_.omit(this.props, 'candidates')}
