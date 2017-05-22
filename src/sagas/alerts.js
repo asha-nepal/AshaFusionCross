@@ -7,7 +7,7 @@ import {
 } from '../actions';
 
 let _id = 0;
-function getId() {
+export function getId() {
   return _id++;
 }
 
