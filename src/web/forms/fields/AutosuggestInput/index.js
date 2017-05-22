@@ -70,6 +70,9 @@ export default class extends React.Component {
     this.props.onChange({ target: { value: suggestion } });
   }
 
+  onInputChange = (event: Object, { newValue }: { newValue: string }) => {
+    this.props.onChange({ target: { value: newValue } });
+  }
 
   props: Props
 
@@ -83,7 +86,10 @@ export default class extends React.Component {
           getSuggestionValue={s => s}
           renderSuggestion={suggestion => <span>{suggestion}</span>}
           onSuggestionSelected={this.onSuggestionSelected}
-          inputProps={_.omit(this.props, 'candidates')}
+          inputProps={{
+            ..._.omit(this.props, 'candidates'),
+            onChange: this.onInputChange,
+          }}
           theme={theme}
         />
       </div>
