@@ -116,7 +116,6 @@ export default class extends Component {
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={(suggestion) => suggestion.description}
-            // onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
             renderSuggestion={(suggestion) => (
               <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
             )}
