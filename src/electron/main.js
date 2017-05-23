@@ -18,7 +18,11 @@ app.on('ready', () => {
 let win;
 
 function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 600 });
+  win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    icon: path.join(__dirname, './logo.png'),
+  });
 
   win.loadURL(url.format({
     pathname: '/index.html',

@@ -1,5 +1,4 @@
 import { take, put, call, select } from 'redux-saga/effects';
-import history from '../web/history';
 import {
   REMOVE_ACTIVE_PATIENT,
   requestRemovePatient,
@@ -9,7 +8,7 @@ import {
   alertError,
 } from '../actions';
 
-export function* removeActivePatient(db: PouchInstance) {
+export function* removeActivePatient(db: PouchInstance, cb: ?() => void) {
   yield put(requestRemovePatient());
 
   const patient = yield select(state => state.activePatient);
@@ -38,8 +37,7 @@ export function* removeActivePatient(db: PouchInstance) {
 
     yield put(alertInfo('Patient data and related records removed'));
 
-    // Router (No effect on native)
-    yield call([history, history.push], '/');
+    if (typeof cb === 'function') { cb(); }
 
     yield put(successRemovePatient());
   } catch (error) {
@@ -51,8 +49,8 @@ export function* removeActivePatient(db: PouchInstance) {
 
 export function* watchRemoveActivePatient() {
   while (true) {
-    yield take(REMOVE_ACTIVE_PATIENT);
+    const { payload } = yield take(REMOVE_ACTIVE_PATIENT);
     const db = yield select(state => state.db.instance);
-    yield call(removeActivePatient, db);
+    yield call(removeActivePatient, db, payload.cb);
   }
 }

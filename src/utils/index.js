@@ -1,11 +1,6 @@
 /* @flow */
 
 import base64 from 'base64-js';
-import randomstring from 'randomstring';
-
-export function createId(length: number = 16) {
-  return randomstring.generate(length);
-}
 
 // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
 export const makeCancelable = (promise: Promise<any>) => {

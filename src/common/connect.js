@@ -14,8 +14,6 @@ export default (
   WrappedComponent: ReactClass<{}>
 ) => (() => (
   <Provider store={store} >
-    <WrappedComponent
-      getState={store.getState}
-    />
+    <WrappedComponent />
   </Provider>
 ));

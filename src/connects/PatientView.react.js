@@ -55,7 +55,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const patientId = ownProps.patientId || ownProps.params && ownProps.params.patientId;
+  const patientId = ownProps.patientId || ownProps.match && ownProps.match.params.patientId;
 
   return {
     init: () => {
@@ -64,9 +64,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     addNewActiveRecord: () => dispatch(addNewActiveRecord(patientId)),
     selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
-    putActivePatient: () => dispatch(putActivePatient()),
+    putActivePatient: () => dispatch(putActivePatient(patient =>
+      ownProps.history && ownProps.history.push(`/patient/${patient._id}`)
+    )),
     putActiveRecord: (index) => dispatch(putActiveRecord(index)),
-    removeActivePatient: () => dispatch(removeActivePatient()),
+    removeActivePatient: () => dispatch(removeActivePatient(() =>
+      ownProps.history && ownProps.history.replace('/')
+    )),
     setPatientFormVisibility: (visibility: boolean) =>
       dispatch(setPatientFormVisibility(visibility)),
     setRecordFormStyleId: (styleId) => dispatch(setRecordFormStyleId(styleId)),
