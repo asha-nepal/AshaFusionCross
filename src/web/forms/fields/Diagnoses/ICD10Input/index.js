@@ -46,9 +46,15 @@ export default class extends Component {
     isModalOpen: boolean,
   }
 
-  onSuggestionsUpdateRequested = ({ value }: { value: string }) => {
+  onSuggestionsFetchRequested = ({ value }: { value: string }) => {
     this.setState({
       suggestions: getSuggestions(ICD10, value),
+    });
+  }
+
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: [],
     });
   }
 
@@ -57,9 +63,12 @@ export default class extends Component {
     this.props.onChange(suggestion.code);
   }
 
-  onInputBlur = (event: Object, { focusedSuggestion }: { focusedSuggestion: ICD10Type }) => {
-    if (focusedSuggestion) {
-      this.props.onChange(focusedSuggestion.code);
+  onInputBlur = (
+    event: Object,
+    { highlightedSuggestion }: { highlightedSuggestion: ICD10Type }
+  ) => {
+    if (highlightedSuggestion) {
+      this.props.onChange(highlightedSuggestion.code);
     }
   }
 
@@ -104,8 +113,9 @@ export default class extends Component {
         <div className="control has-addons">
           <Autosuggest
             suggestions={this.state.suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={(suggestion) => suggestion.description}
-            onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
             renderSuggestion={(suggestion) => (
               <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
             )}
