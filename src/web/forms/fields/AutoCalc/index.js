@@ -24,7 +24,7 @@ export const AutoCalcComponent = ({
   </div>
 );
 
-export function getValue(targetModel, argKeys, calc) {
+export function getValue(targetModel: Object, argKeys: Array<string>, calc: Function) {
   if (!targetModel) return null;
   if (typeof calc !== 'function') return null;
 
