@@ -4,9 +4,22 @@ import {
   DB_SET_INSTANCE,
 } from '../../actions';
 
-const defaultHost = (typeof location !== 'undefined' && location.hostname)
-  ? location.hostname
-  : '127.0.0.1';
+const getDefaultHost = () => {
+  if (process.env.COUCH_HOST) {
+    return process.env.COUCH_HOST;
+  }
+
+  if (typeof location !== 'undefined' && location.hostname) {
+    const host = location.protocol
+      ? `${location.protocol}//${location.hostname}`
+      : location.hostname;
+    return `${host}:5984`;
+  }
+
+  return '127.0.0.1:5984';
+};
+
+const defaultHost = getDefaultHost();
 const defaultPouchConfig: PouchConfig = {
   isLocal: false,
   local: {
@@ -14,7 +27,7 @@ const defaultPouchConfig: PouchConfig = {
     isSynced: false,
   },
   remote: {
-    hostname: `${defaultHost}:5984`,
+    hostname: defaultHost,
     dbname: 'asha-fusion-dev',
   },
 };

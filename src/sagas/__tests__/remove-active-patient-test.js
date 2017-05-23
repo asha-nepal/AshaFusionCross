@@ -6,7 +6,6 @@ jest.unmock('../../actions');
 
 import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
-import history from '../../web/history';
 import {
   requestRemovePatient,
   successRemovePatient,
@@ -20,6 +19,7 @@ import {
 describe('removeActivePatient', () => {
   it('calls db.bulkDocs to remove patient and all related records at once', () => {
     const db = new PouchDB();
+    const cb = jest.fn();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-hogehoge',
@@ -43,7 +43,7 @@ describe('removeActivePatient', () => {
       { id: 'record_1234_9999', ok: true, rev: 'revrevrev' },
     ];
 
-    const saga = removeActivePatient(db);
+    const saga = removeActivePatient(db, cb);
 
     expect(saga.next().value)
       .toEqual(put(requestRemovePatient()));
@@ -75,10 +75,9 @@ describe('removeActivePatient', () => {
     saga.next(mockResponse);
 
     expect(saga.next().value)
-      .toEqual(call([history, history.push], '/'));
-
-    expect(saga.next().value)
       .toEqual(put(successRemovePatient()));
+
+    expect(cb).toBeCalled();
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });
@@ -189,13 +188,14 @@ describe('removeActivePatient', () => {
 
   it('ignore invalid response about removing a record', () => {
     const db = new PouchDB();
+    const cb = jest.fn();
     const mockResponse = [
       { id: 'patient_1234', ok: true, rev: 'revrevrev' },
       { id: 'record_1234_8888', ok: false },
       { id: 'record_1234_9999', ok: true, rev: 'revrevrev' },
     ];
 
-    const saga = removeActivePatient(db);
+    const saga = removeActivePatient(db, cb);
 
     expect(saga.next().value)
       .toEqual(put(requestRemovePatient()));
@@ -206,7 +206,8 @@ describe('removeActivePatient', () => {
 
     saga.next(mockResponse);
 
-    expect(saga.next().value)
-      .toEqual(call([history, history.push], '/'));
+    saga.next();
+
+    expect(cb).toBeCalled();
   });
 });

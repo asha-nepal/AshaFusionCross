@@ -10,12 +10,12 @@ build:
       code: npm install babel-preset-es2015-minimal babel-preset-stage-0
     - install-packages:
       packages: libelf-dev
-    - script:
-      name: flow
-      code: |
-        npm install flow-typed
-        ./node_modules/.bin/flow-typed install jest@12
-        npm run flow
+#    - script:
+#      name: flow
+#      code: |
+#        npm install flow-typed
+#        ./node_modules/.bin/flow-typed install jest@12
+#        npm run flow
     - script:
       name: eslint
       code: npm run lint
@@ -31,12 +31,93 @@ build:
         echo "node version $(node -v) running"
         echo "npm version $(npm -v) running"
   after-steps:
+    - script:
+      name: install necessary packages for coverage notification
+      code: npm install istanbul
     - slack-notifier:
       url: $SLACK_URL
       username: wercker-ci
     - script:
       name: slack-notify-coverage
       code: node slack-istanbul.js
+
+demo-build-and-deploy:
+  box: node:6.10
+  steps:
+    - script:
+      # http://qiita.com/Quramy/items/6fb900018060cf2e738e
+      name: Rebuild
+      code: npm rebuild
+    - script:
+      name: Build web app for demo
+      code: npm run build:demo
+    - s3sync:
+      key_id: $AWS_ACCESS_KEY_ID
+      key_secret: $AWS_SECRET_ACCESS_KEY
+      bucket_url: $S3_BUCKET_DEPLOY_TO
+      source_dir: ./public
+
+web-build-and-upload:
+  box: node:6.10
+  steps:
+    - script:
+      name: install zip
+      code: |
+        sudo apt-get update -y
+        sudo apt-get upgrade -y
+        sudo apt-get install -y zip
+    - script:
+      name: Rebuild
+      code: npm rebuild
+    - script:
+      name: Build web app
+      code: npm run build
+    - script:
+      name: Create zip archive
+      code: |
+        export ZIP_ARCHIVE_NAME=${WERCKER_MAIN_PIPELINE_STARTED}-${WERCKER_GIT_COMMIT}.zip
+        zip -r ${ZIP_ARCHIVE_NAME} public
+    - koding/s3put:
+      key-id: $AWS_ACCESS_KEY_ID
+      key-secret: $AWS_SECRET_ACCESS_KEY
+      file: ${ZIP_ARCHIVE_NAME}
+      url: s3://asha-fusion-archive/webapp/${ZIP_ARCHIVE_NAME}
+
+electron-build-and-upload:
+  box: node:6.10
+  steps:
+    - script:
+      name: install packages
+      code: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update -y
+        sudo apt-get upgrade -y
+        sudo apt-get install -y zip
+        sudo apt-get install -y wine wine-development
+    - script:
+      # http://qiita.com/Quramy/items/6fb900018060cf2e738e
+      name: Rebuild
+      code: npm rebuild
+    - script:
+      name: Build electron app
+      code: npm run electron:build:prod
+    - script:
+      name: Pack electron app
+      code: npm run electron:pack:all
+    # Create zip archives within the same pipeline to building app since symlinks are not kept over pipelines
+    - script:
+      name: Create zip archives
+      code: |
+        export DESTINATION_DIR_NAME=${WERCKER_MAIN_PIPELINE_STARTED}-${WERCKER_GIT_COMMIT}
+        mkdir ${DESTINATION_DIR_NAME}
+        cd electron-build
+        for f in `ls .`; do zip -ry ../${DESTINATION_DIR_NAME}/$f.zip $f; done
+        cd ..
+    - koding/s3put:
+      key-id: $AWS_ACCESS_KEY_ID
+      key-secret: $AWS_SECRET_ACCESS_KEY
+      file: ./${DESTINATION_DIR_NAME}
+      url: s3://asha-fusion-archive/desktop/
 
 deploy-debug:
   steps:
