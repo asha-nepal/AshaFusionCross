@@ -63,7 +63,10 @@ export default class extends Component {
     this.props.onChange(suggestion.code);
   }
 
-  onInputBlur = (event: Object, { highlightedSuggestion }: { highlightedSuggestion: ICD10Type }) => {
+  onInputBlur = (
+    event: Object,
+    { highlightedSuggestion }: { highlightedSuggestion: ICD10Type }
+  ) => {
     if (highlightedSuggestion) {
       this.props.onChange(highlightedSuggestion.code);
     }
