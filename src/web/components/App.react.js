@@ -5,6 +5,7 @@ import {
   HashRouter,
   Route,
 } from 'react-router-dom';
+import Async from './Async';
 
 import connect from '../../common/connect';
 import Auth from '../containers/Auth';
@@ -12,11 +13,13 @@ import Alerts from '../containers/Alerts.react';
 import PatientSelect from '../containers/PatientSelect';
 import PatientView from '../containers/PatientView.react';
 import Admin from '../containers/Admin';
-import Stats from '../containers/Stats';
 import AdminRoute from '../containers/AdminRoute';
 
 // Electron or Web?
 const Router = (window && window.process && window.process.type) ? HashRouter : BrowserRouter;
+
+// Lazily loaded components
+const Stats = () => <Async load={import('../containers/Stats')} />;
 
 const App = ({ children }: { children: ReactClass }) => (
   <div>
