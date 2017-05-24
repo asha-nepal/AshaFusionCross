@@ -9,6 +9,7 @@ import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
 import { ReadonlySubformList } from '../../forms/fields/SubformList';
 import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
 import { ReadonlyDiagnoses } from '../../forms/fields/Diagnoses';
+import { RadioGroupComponent } from '../../forms/fields/RadioGroup';
 
 import DhulikhelIconImg from '../../../../assets/img/Dhulikhel-icon.png';
 
@@ -39,6 +40,9 @@ export default ({
   const timestamp = record.$created_at || record.$initialized_at;
   const date = timestamp && new Date(timestamp);
 
+  const location = 'Baunepati';  // FIXME: Specific just for one site
+  const signature = 'Dhulikhel Hospital';  // FIXME: Specific just for one site
+
   const number = _get(patient, 'number');
 
   const heightMeter = convert(_get(record, 'height'), 'm', 1);
@@ -57,11 +61,12 @@ export default ({
           {getStr(patient, 'name')}
         </h1>
 
-        {date &&
-          <p className="is-pulled-right">
-            {date.toDateString()}
-          </p>
-        }
+        <p className="is-pulled-right has-text-right">
+          {location}
+          {date && `, ${date.toDateString()}`}
+          <br />
+          {signature}
+        </p>
       </div>
 
       <div className="container">
@@ -213,6 +218,22 @@ export default ({
                   />
                 </td>
               </tr>
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　<tr>
+              　　　　<th>Plan</th>
+              　　　　<td>
+                　　　　<CheckGroupComponent
+                  　　　　value={_get(record, 'plan')}
+                  　　　　options={[
+                    　　　　{ id: 'prescription', label: 'Prescription' },
+                    　　　　{ id: 'refer', label: 'Refer' },
+                    　　　　{ id: 'test', label: 'Test' },
+                    　　　　{ id: 'advice', label: 'Advice' },
+                  　　　　]}
+                  　　　　readonly
+                　　　　/>
+              　　　　</td>
+            　　　　</tr>
+              {_get(record, 'plan', []).indexOf('prescription') > -1 &&
               <tr>
                 <th>Prescriptions</th>
                 <td>
@@ -260,9 +281,44 @@ export default ({
                   />
                 </td>
               </tr>
-            </tbody>
-          </table>
-        </div>
+            }
+            {_get(record, 'plan', []).indexOf('refer') > -1 &&
+              <tr>
+                <th>Refer</th>
+                <td>
+                  <RadioGroupComponent
+                    value={_get(record, 'refer')}
+                    options={[
+                      { id: 'dhulikhel', label: 'Dhulikhel' },
+                      { id: 'other', label: 'Other' },
+                    ]}
+                    readonly
+                  />
+                </td>
+              </tr>
+            }
+            {_get(record, 'plan', []).indexOf('test') > -1 &&
+              <tr>
+                <th>Test</th>
+                <td>
+                  <ReadonlyTextArea
+                    value={_get(record, 'test')}
+                  />
+                </td>
+              </tr>
+            }
+            {_get(record, 'plan', []).indexOf('advice') > -1 &&
+              <tr>
+                <th>Advice</th>
+                <td>
+                  <ReadonlyTextArea
+                    value={_get(record, 'advice')}
+                  />
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
     </section>
   );
