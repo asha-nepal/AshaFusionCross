@@ -26,12 +26,12 @@ const config = merge(baseConfig, {
       append: false,
     }),
   ],
-  debug: true,
+  //debug: true,
 });
 
 if (process.env.NODE_ENV === 'production') {
   config.devtool = false;
-  config.debug = false;
+  //config.debug = false;
 }
 
 config.target = webpackTargetElectronRenderer(config);
