@@ -320,6 +320,7 @@ export default ({
           </tbody>
         </table>
       </div>
-    </section>
+    </div>
+  </section>
   );
 };
