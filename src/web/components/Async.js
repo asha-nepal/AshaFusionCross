@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 type Props = {
-  load: () => Promise<ReactClass<any>>,
+  load: Promise<ReactClass<any>>,
 }
 
 export default class extends Component {
@@ -32,18 +32,19 @@ export default class extends Component {
 
   props: Props
 
-  executeLoad(load: () => Promise<ReactClass<any>>) {
+  executeLoad(load: Promise<ReactClass<any>>) {
     this.setState({
       failed: false,
       component: null,
     });
+
     load
-      .then(c => {
-        this.setState({ component: c.default || c, failed: false });
-      })
-      .catch(() => {
-        this.setState({ component: null, failed: true });
-      });
+    .then(c => {
+      this.setState({ component: c.default || c, failed: false });
+    })
+    .catch(() => {
+      this.setState({ component: null, failed: true });
+    });
   }
 
   render() {
