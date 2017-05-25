@@ -11,7 +11,7 @@ import {
   Scatter,
 } from 'recharts';
 import _get from 'lodash.get';
-import { convert } from '../forms/fields/TextUnitInput';
+import { convert } from '../../forms/fields/TextUnitInput';
 
 export default ({
   records,
