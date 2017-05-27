@@ -5,35 +5,24 @@ export default {
     {
       style: [
         {
-          field: 'number',
-          label: 'No.',
-          style: { width: 200 },
-          valueSetters: [
-            { label: 'Set next No.', optionKey: 'nextPatientNumber' },
+          class: 'block',
+          children: [
+            { field: 'name', label: 'Name', class: 'textinput', required: true },
+            { field: 'age', label: 'Age', class: 'textinput' },
+            { field: 'address', label: 'Address', class: 'textinput' },
           ],
         },
-        { field: 'name', label: 'Name', class: 'textinput', required: true },
         {
           class: 'block',
           children: [
-            {
-              field: 'sex',
-              label: 'Sex',
-              class: 'radio',
-              options: [
-                { id: 'male', label: 'Male' },
-                { id: 'female', label: 'Female' },
-              ],
-            },
-            {
-              field: 'age', label: 'Age', class: 'textunitinput',
-              units: ['years', 'months'], precision: 0,
-            },
+            { field: 'education', label: 'Education', class: 'textinput' },
+            { field: 'age_of_marriage', label: 'Age of marriage',
+              class: 'textinput', type: 'number' },
           ],
         },
-        { field: 'address', label: 'Address', class: 'textinput' },
-        { field: 'tel', label: 'Tel', class: 'textinput' },
-        { field: 'ethnicity', label: 'Ethnicity', class: 'textinput' },
+        { field: 'history_of_smoking', label: 'History of smoking', class: 'textinput' },
+        { field: 'children', label: 'Living children / abortion', class: 'textinput' },
+        { field: 'menstrual_period', label: 'Last menstrual period', class: 'textinput' },
       ],
     },
   ],
