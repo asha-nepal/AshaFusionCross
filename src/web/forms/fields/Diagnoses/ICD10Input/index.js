@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import ICD10Modal from './ICD10Modal';
 import ICD10Display from './ICD10Display';
-import { ICD10 } from '../../../../../data';
+import { getICD10 } from '../../../../../data';
 import theme from './theme';
 
 
@@ -48,7 +48,7 @@ export default class extends Component {
 
   onSuggestionsFetchRequested = ({ value }: { value: string }) => {
     this.setState({
-      suggestions: getSuggestions(ICD10, value),
+      suggestions: getSuggestions(getICD10(), value),
     });
   }
 
