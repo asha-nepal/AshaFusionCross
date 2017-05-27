@@ -21,7 +21,6 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             plugins: [
-              'transform-runtime',
               'syntax-dynamic-import',
               ['module-resolver', {
                 alias: {
