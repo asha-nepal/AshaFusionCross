@@ -49,7 +49,9 @@ export default class extends Component {
 
   render() {
     if (this.state.failed) return <div>error</div>;
-    if (!this.state.component) return <div>loading...</div>;
+    if (!this.state.component) return (
+      <div className="loading-container"><div className="loading-content" /></div>
+    );
 
     return React.createElement(this.state.component, this.props);
   }
