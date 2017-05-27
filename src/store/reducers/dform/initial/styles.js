@@ -4,25 +4,37 @@ export default {
   patient: [
     {
       style: [
+        { field: 'name', label: 'Name', class: 'textinput', required: true },
         {
           class: 'block',
           children: [
-            { field: 'name', label: 'Name', class: 'textinput', required: true },
             { field: 'age', label: 'Age', class: 'textinput' },
             { field: 'address', label: 'Address', class: 'textinput' },
           ],
         },
-        {
-          class: 'block',
-          children: [
-            { field: 'education', label: 'Education', class: 'textinput' },
-            { field: 'age_of_marriage', label: 'Age of marriage',
-              class: 'textinput', type: 'number' },
+        { field: 'education', label: 'Education', class: 'textinput' },
+        { field: 'has_been_married',
+          label: 'Has the patient ever been married?', class: 'radio',
+          options: [
+            { id: true, label: 'Yes' },
+            { id: false, label: 'No' },
           ],
         },
+        { field: 'age_first_marriage', show: 'has_been_married',
+          label: 'At what age did the patient have the first marriage?',
+          class: 'textinput', type: 'number' },
         { field: 'history_of_smoking', label: 'History of smoking', class: 'textinput' },
         { field: 'children', label: 'Living children / abortion', class: 'textinput' },
         { field: 'menstrual_period', label: 'Last menstrual period', class: 'textinput' },
+        { field: 'Pap_smear', label: 'Has the patient had Pap smear before?', class: 'radio',
+          options: [
+            { id: true, label: 'Yes' },
+            { id: false, label: 'No' },
+          ],
+        },
+        { field: 'previous_Pap_smear_detail', show: 'Pap_smear',
+          label: 'Please specify', class: 'textarea',
+          placeholder: 'When? Was the result normal or abnormal? If the latter, how?' },
       ],
     },
   ],
