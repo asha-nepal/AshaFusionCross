@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { ICD10 } from '../../../../../data';
+import { getICD10 } from '../../../../../data';
 
 
 export default ({
@@ -19,7 +19,7 @@ export default ({
   width?: string | number,
 }) => {
   const sizeClassName = size ? ` is-${size}` : '';
-  const icd10Datum = value && ICD10.find(item => item.code === value);
+  const icd10Datum = value && getICD10().find(item => item.code === value);
 
   return (
     <div className="control" style={{ width }}>
