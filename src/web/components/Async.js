@@ -48,7 +48,12 @@ export default class extends Component {
   }
 
   render() {
-    if (this.state.failed) return <div>error</div>;
+    if (this.state.failed) return (
+      <div>
+        <h1 className="title">Error occurred</h1>
+        <p>Please check the network connection or some other incidents.</p>
+      </div>
+    );
     if (!this.state.component) return (
       <div className="loading-container"><div className="loading-content" /></div>
     );
