@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
@@ -21,8 +22,8 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             plugins: [
-              'transform-runtime',
               'syntax-dynamic-import',
+              'lodash',
               ['module-resolver', {
                 alias: {
                   randomstring: 'randomstring-promise',
@@ -113,6 +114,8 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new LodashModuleReplacementPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|ja|ne/),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
