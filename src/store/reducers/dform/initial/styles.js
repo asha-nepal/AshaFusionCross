@@ -66,31 +66,38 @@ export default {
       label: 'Treatment',
       style: [
         {
-          class: 'block',
+          class: 'accordion',
+          label: 'Reported symptoms',
           children: [
-            {
-              field: 'height', label: 'Height', class: 'textunitinput', type: 'number',
-              units: ['ft', 'cm', 'in'], precision: 1,
-              style: { width: 100 },
+            { field: 'symptoms', label: 'Complaint of', class: 'radio',
+              options: [
+                { id: 'none', label: 'None' },
+                { id: 'pain_abdomen', label: 'Pain in abdomen' },
+                { id: 'vaginal_discharge', label: 'Abnormal vaginal discharge' },
+                { id: 'coital_bleeding', label: 'Post coital bleeding' },
+                { id: 'other_symptoms', label: 'Others' },
+              ],
             },
-            {
-              field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
-              style: { width: 100 }, precision: 1,
-              units: ['kg', 'lbm'],
+            { field: 'vaginal_discharge_detail', label: 'Please specify',
+              class: 'textarea', show: 'symptoms:vaginal_discharge',
             },
-            {
-              label: 'BMI', class: 'autocalc', style: { width: 50 }, precision: 2,
-              func: 'asha:bmi',
-              inputs: ['height', 'weight'],
+            { field: 'other_symptoms_detail', label: 'Please specify',
+              class: 'textarea', show: 'symptoms:other_symptoms',
+              placeholder: 'Describe the symptom(s)',
             },
           ],
         },
         {
-          class: 'block',
+          class: 'accordion',
+          label: 'Examinations',
           children: [
             {
-              class: 'block',
-              label: 'Blood pressure',
+              field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
+              style: { width: 100 },
+              units: ['kg', 'lbm'],
+            },
+            {
+              class: 'block', label: 'Blood Pressure',
               children: [
                 {
                   field: 'bp.s', class: 'textinput', placeholder: 'sBP',
@@ -117,90 +124,96 @@ export default {
               ],
             },
             {
-              field: 'pulse', label: 'Pulse', class: 'textinput', type: 'number',
-              style: { width: 60 },
-              suffix: '/min',
-              alerts: [
-                { type: 'danger', label: 'Alert', range: [null, 35] },
-                { type: 'warning', label: 'Low', range: [35, 50] },
-                { type: 'success', label: 'Normal', range: [50, 100] },
-                { type: 'warning', label: 'High', range: [100, 150] },
-                { type: 'danger', label: 'Alert', range: [150, null] },
+              class: 'accordion', label: 'Per abdomen Eexamination',
+              children: [
+                {
+                  field: 'abdomen_is_abnormal', label: 'Result of abdomen examination was',
+                  class: 'radio',
+                  options: [
+                    { id: false, label: 'Normal' },
+                    { id: true, label: 'Abnormal' },
+                  ],
+                },
+                {
+                  field: 'abdomen_result_details', label: 'Please specify',
+                  class: 'textarea', show: 'abdomen_is_normal',
+                },
               ],
             },
             {
-              field: 'temperature', label: 'Temperature', class: 'textunitinput', type: 'number',
-              style: { width: 60 },
-              units: ['degF', 'degC'],
-              precision: 1,
-            },
-            {
-              field: 'spo2', label: 'SpO2', class: 'textinput', type: 'number',
-              style: { width: 60 }, suffix: '%',
-              min: 0, max: 100, precision: 0,
-              alerts: [
-                { type: 'danger', label: 'Alert', range: [null, 80] },
-                { type: 'warning', label: 'Low', range: [80, 95] },
-                { type: 'success', label: 'Normal', range: [95, null] },
+              class: 'accordion', label: 'Per speculum examination',
+              children: [
+                {
+                  field: 'cervix_is_unhealthy', label: 'Cervix',
+                  class: 'radio',
+                  options: [
+                    { id: false, label: 'Healthy' },
+                    { id: true, label: 'Unhealthy' },
+                  ],
+                },
+                {
+                  field: 'cervix_problem', label: 'Problem',
+                  class: 'checkgroup', show: 'cervix_is_unhealthy',
+                  options: [
+                    { id: 'ectropion', label: 'Ectropion' },
+                    { id: 'growth', label: 'Growth' },
+                    { id: 'polyp', label: 'Polyp' },
+                  ],
+                },
+                {
+                  field: 'cervix_consistency', label: 'Consistency', class: 'radio',
+                  options: [
+                    { id: 'firm', label: 'Firm' },
+                    { id: 'soft', label: 'Soft' },
+                  ],
+                },
               ],
             },
             {
-              field: 'rr', label: 'Respiration rate', class: 'textinput', type: 'number',
-              style: { width: 60 }, suffix: '/min',
-              min: 1, precision: 0,
-            },
-            {
-              field: 'bs', label: 'Blood sugar', class: 'textinput', type: 'number',
-              style: { width: 60 }, suffix: 'mg/dL',
-              min: 1, precision: 0,
-            },
-            {
-              field: 'allergy', label: 'Allergy', class: 'check',
+              class: 'accordion', label: 'Per vaginal examination',
+              children: [
+                {
+                  field: 'uterus', label: 'Uterus',
+                  options: [
+                    { id: 'anterverted', label: 'Anterverted' },
+                    { id: 'retroverted', label: 'Retroverted' },
+                  ],
+                },
+                {
+                  field: 'size', label: 'Size',
+                  options: [
+                    { id: 'normal', label: 'Normal' },
+                    { id: 'bulky', label: 'Bulky' },
+                  ],
+                },
+                {
+                  field: 'adnexa', label: 'Adnexa',
+                  options: [
+                    { id: 'normal', label: 'Normal' },
+                    { id: 'mass', label: 'Mass' },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          field: 'allergy_memo', label: 'Allergy memo', class: 'textarea',
-          show: 'allergy',
-        },
-        {
-          class: 'block',
-          wrap: false,
+          class: 'accordion', label: 'Management',
           children: [
             {
-              field: 'past_medical_history', label: 'Past medical history', class: 'textarea',
-              style: { width: '50%' },
+              field: 'management', label: 'Management of patient', class: 'radio',
+              options: [
+                { id: 'counselling_only', label: 'Counselling only' },
+                { id: 'counselling_with_medication', label: 'Counselling with medication' },
+                { id: 'referral', label: 'Referral to higher center' },
+                { id: 'others', label: 'Others' },
+              ],
             },
             {
-              field: 'current_medicine', label: 'Current medicines', class: 'textarea',
-              style: { width: '50%' },
+              field: 'other_management_details', label: 'Please specify',
+              class: 'textarea', show: 'management:others',
             },
           ],
-        },
-        {
-          field: 'present_medical_history', label: 'Present medical history', class: 'textarea',
-        },
-        {
-          field: 'symptoms', label: 'Symptoms', class: 'multiinput',
-        },
-        {
-          field: 'signs_select', label: 'Physical Exams', class: 'checkgroup',
-          options: [
-            { id: 'jaundice', label: 'Jaundice' },
-            { id: 'anemia', label: 'Anemia' },
-            { id: 'lymphadenopathy', label: 'Lymphadenopathy' },
-            { id: 'cyanosis', label: 'Cyanosis' },
-            { id: 'clubbing', label: 'Clubbing' },
-            { id: 'oedema', label: 'Oedema' },
-            { id: 'dehydration', label: 'Dehydration' },
-          ],
-        },
-        {
-          field: 'signs', class: 'textarea',
-        },
-        {
-          field: 'attachments.images', label: 'Images', class: 'attachment',
-          accept: 'image/*', multiple: true,
         },
       ],
     },
