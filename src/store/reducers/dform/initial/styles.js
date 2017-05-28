@@ -62,8 +62,8 @@ export default {
   ],
   record: [
     {
-      id: 'reception',
-      label: 'Reception',
+      id: 'treatment',
+      label: 'Treatment',
       style: [
         {
           class: 'block',
