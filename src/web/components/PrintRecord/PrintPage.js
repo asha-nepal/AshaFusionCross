@@ -37,6 +37,8 @@ export default ({
   const timestamp = record.$created_at || record.$initialized_at;
   const date = timestamp && new Date(timestamp);
 
+  const location = 'Trishuli Clinic Public Hospital';  // FIXME: Specific just for one site
+
   const number = _get(patient, 'number');
 
   const heightMeter = convert(_get(record, 'height'), 'm', 1);
@@ -54,11 +56,12 @@ export default ({
           {getStr(patient, 'name')}
         </h1>
 
-        {date &&
-          <p className="is-pulled-right">
-            {date.toDateString()}
-          </p>
-        }
+        <p className="is-pulled-right has-text-right">
+          {date && date.toDateString()}<br />
+          <b>{location}</b><br />
+          Trishuli Bazaar, Trishuli<br /> {/* FIXME: Specific just for one site */}
+          Tel: 010-560322
+        </p>
       </div>
 
       <div className="container">
