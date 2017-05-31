@@ -15,9 +15,6 @@ export function checkVisibility(state: Object, rootPath: ?string, showProp: stri
       const absReferPath = rootPath ? `${rootPath}.${referPath}` : referPath;
       const referent = _get(state, absReferPath, false);
 
-      if (valueToCheck && Array.isArray(referent)) {
-        return referent.indexOf(valueToCheck) > -1;
-      }
       if (valueToCheck) {
         if (Array.isArray(referent)) {
           return referent.indexOf(valueToCheck) > -1;
