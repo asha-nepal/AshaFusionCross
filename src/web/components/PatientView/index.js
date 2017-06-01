@@ -7,6 +7,7 @@ import Header from './Header';
 import RecordsTab from './RecordsTab';
 import Footer from './Footer';
 
+import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import DynamicForm from '../../forms/DynamicForm';
 
@@ -160,6 +161,7 @@ export default class PatientView extends Component {
                     })}
                     </select>
                   </span>
+                  <RecordChartToggle />
                 </div>
               </div>
 
