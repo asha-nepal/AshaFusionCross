@@ -21,7 +21,13 @@ export default {
         { field: 'age_first_marriage', show: 'has_been_married',
           label: 'At what age did the patient have the first marriage?',
           class: 'textinput', type: 'number' },
-        { field: 'history_of_smoking', label: 'History of smoking', class: 'textinput' },
+        { field: 'history_of_smoking', label: 'History of smoking',
+          class: 'radio',
+          options: [
+            { id: true, label: 'Yes' },
+            { id: false, label: 'No' },
+          ],
+        },
         { field: 'children', label: 'Living children / abortion', class: 'textinput' },
         { field: 'menstrual_period', label: 'Last menstrual period', class: 'textinput' },
         { field: 'had_previous_Pap_smear', label: 'Has the patient had Pap smear before?',
@@ -122,7 +128,7 @@ export default {
               ],
             },
             {
-              class: 'accordion', label: 'Per abdomen Eexamination',
+              class: 'accordion', label: 'Per abdomen Examination',
               children: [
                 {
                   field: 'abdomen_is_abnormal', label: 'Result of abdomen examination was',
