@@ -2,7 +2,7 @@ const PouchDB = (typeof window !== 'undefined' && window.PouchDB)
   ? window.PouchDB
   : require('pouchdb').plugin(require('pouchdb-authentication'));
 
-import { take, call, put, select, race } from 'redux-saga/effects';
+import { take, call, put, select, race, cancelled } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import {
   checkAccessibility,
@@ -98,6 +98,11 @@ export function* watchOnPouchChanges(db: PouchInstance) {
       }
     }
   } finally {
+    if (yield cancelled()) {
+      // Called if this saga cancelled
+      pouchChannel.close()
+      console.log('PouchDB listener cancelled');
+    }
     console.log('PouchDB listener terminated');
   }
 }
