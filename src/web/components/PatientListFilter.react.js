@@ -17,6 +17,7 @@ export default ({
   onFilterChange: (newFilter: string) => void,
 }) => (
   <div className="control is-grouped">
+    <Popup />
     <p className="control has-icon is-expanded">
       <input
         type="text"

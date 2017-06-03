@@ -95,6 +95,7 @@
     "react-addons-test-utils": "^15.1.0",
     "react-dom": "^15.0.2",
     "react-native-drawer": "^2.3.0",
+    "react-popup": "^0.8.0",
     "react-redux": "^4.4.5",
     "react-redux-form": "^1.0.13",
     "react-router-dom": "^4.1.1",
