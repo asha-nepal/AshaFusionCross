@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import Popup from 'react-popup';
 export default ({
   filter,
   sortBy,
@@ -33,6 +34,9 @@ export default ({
       </span>
       <i className="fa fa-search" />
     </p>
+    <i className="fa fa-calendar date-picker-trigger"
+       onClick={() => {Popup.alert('Hello!')}}
+    />
     <span className="form-static">Sort:</span>
     <p className="control">
       <span className="select">

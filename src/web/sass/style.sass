@@ -12,6 +12,7 @@ $fa-font-path: "~font-awesome/fonts"
 @import "./checkgroup"
 @import "./attachment"
 @import "./print"
+@import "./popup"
 
 a.inverse
   color: $link
@@ -43,3 +44,8 @@ a.inverse
   color: #D5D5D5
   &:hover
     color: #000000
+
+.date-picker-trigger
+  @extend .clearbutton
+  margin-top: 1.3%
+  margin-left: 0
