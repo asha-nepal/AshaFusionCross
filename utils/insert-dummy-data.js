@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const argv = require('argv');
 const PouchDB = require('pouchdb');
 const Chance = require('chance');
