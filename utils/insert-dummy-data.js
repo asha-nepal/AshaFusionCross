@@ -3,6 +3,7 @@
 const argv = require('argv');
 const PouchDB = require('pouchdb');
 const Chance = require('chance');
+const moment = require('moment');
 const randomstringPromise = require('randomstring-promise').default;
 
 argv.option([
@@ -24,12 +25,26 @@ argv.option([
     type: 'int',
     description: 'Number of records per patient',
   },
+  {
+    name: 'date-begin',
+    short: 'b',
+    type: 'date',
+  },
+  {
+    name: 'date-end',
+    short: 'e',
+    type: 'date',
+  },
 ]);
+
+argv.type('date', value => moment(value));
 
 const options = argv.run().options;
 const database = options.database;
 const nPatients = options['n-patients'];
 const nRecordsPerPatient = options['n-records'];
+const dateBegin = options['date-begin'] || moment({ hour: 0, minute: 0, seconds: 0 });
+const dateEnd = options['date-end'] || moment({ hour: 23, minute: 59, seconds: 59 });
 
 if (!database || !nPatients || !nRecordsPerPatient) {
   argv.help();
@@ -64,9 +79,9 @@ function generateRandomRecord() {
   };
 }
 
-const now = Date.now();
-
 for (let iPatient = 0; iPatient < nPatients; ++iPatient) {
+  const now = chance.integer({ min: dateBegin.valueOf(), max: dateEnd.valueOf() });
+
   randomstringPromise(16)
   .then((patientIdBody) => {
     const patient = Object.assign(generateRandomPersonality(), {
