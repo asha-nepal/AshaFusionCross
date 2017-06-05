@@ -1,7 +1,40 @@
+const argv = require('argv');
 const PouchDB = require('pouchdb');
 const Chance = require('chance');
 const randomstringPromise = require('randomstring-promise').default;
 
+argv.option([
+  {
+    name: 'database',
+    short: 'd',
+    type: 'string',
+    description: 'Database name that PouchDB attempts to connect',
+  },
+  {
+    name: 'n-patients',
+    short: 'p',
+    type: 'int',
+    description: 'Number of patients to be generated',
+  },
+  {
+    name: 'n-records',
+    short: 'r',
+    type: 'int',
+    description: 'Number of records per patient',
+  },
+]);
+
+const options = argv.run().options;
+const database = options.database;
+const nPatients = options['n-patients'];
+const nRecordsPerPatient = options['n-records'];
+
+if (!database || !nPatients || !nRecordsPerPatient) {
+  argv.help();
+  process.exit();
+}
+
+const db = new PouchDB(database);
 const chance = new Chance();
 
 function generateRandomPersonality() {
@@ -28,12 +61,6 @@ function generateRandomRecord() {
     },
   };
 }
-
-const db = new PouchDB('http://localhost:5984/asha-fusion-dummy-data');
-
-const nPatients = 2;
-const nRecordsPerPatient = 3;
-
 
 const now = Date.now();
 

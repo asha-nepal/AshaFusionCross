@@ -37,6 +37,7 @@
     "react-native-vector-icons": "^4.0.1"
   },
   "devDependencies": {
+    "argv": "0.0.2",
     "babel-eslint": "^7.2.3",
     "babel-jest": "19.0.0",
     "babel-loader": "^6.2.4",
