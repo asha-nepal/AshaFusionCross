@@ -248,7 +248,7 @@ describe('getSortedFilteredPatientList', () => {
       ]);
   });
 
-  it('sorts by speficied field', () => {
+  it('sorts by specified field', () => {
     const state = {
       patientList: [
         { hoge: 'ccc', $updated_at: currentTime },
@@ -259,6 +259,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'hoge',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -284,6 +285,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'hoge',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
