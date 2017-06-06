@@ -23,7 +23,6 @@ export default ({
   setFilterTime: (date: Moment) => void,
 }) => (
   <div className="control is-grouped">
-    <Popup />
     <p className="control has-icon is-expanded">
       <input
         type="text"
