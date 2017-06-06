@@ -27,6 +27,8 @@ export {
 export const getPatientList = (state: Object) => state.patientList;
 export const getPatientSelectFilter = (state: Object) =>
   state.patientSelect.filter.trim().toLowerCase();
+export const getPatientSelectTimeRange = (state: Object) =>
+  state.patientSelect.filterDate;
 export const getPatientSelectQueryList = (state: Object) =>
   getPatientSelectFilter(state).split(' ').filter(q => q.length > 0);
 
@@ -45,17 +47,28 @@ export const checkPatientMatchesQueries = (queries: Array<string>, patient: Pati
     return false;
   });
 
-function isPatientOfToday(patient) {
-  const currentMoment = moment();
+function patientInTimeRange(timeRange, patient) {
+  const startDate = timeRange.startDate;
+  const endDate = timeRange.endDate;
   const patientCreatedMoment = moment(patient.$updated_at);
-  return currentMoment.isSame(patientCreatedMoment, 'day');
+  if (!startDate && !endDate) {
+    const currentMoment = moment();
+    return currentMoment.isSame(patientCreatedMoment, 'day');
+  }
+  const conditions = [];
+  if (startDate) conditions.push(patientCreatedMoment.isAfter(startDate));
+  if (endDate) {
+    conditions.push(patientCreatedMoment.isBefore(endDate) ||
+    patientCreatedMoment.isSame(endDate, 'day'));
+  }
+  return conditions.reduce((conclusion, b) => conclusion & b);
 }
 
 export const getFilteredPatientList = createSelector(
-  [getPatientList, getPatientSelectQueryList],
-  (patientList, queryList) => {
+  [getPatientList, getPatientSelectQueryList, getPatientSelectTimeRange],
+  (patientList, queryList, timeRange) => {
     if (queryList.length === 0) {
-      return patientList.filter(patient => isPatientOfToday(patient));
+      return patientList.filter(patient => patientInTimeRange(timeRange, patient));
     }
 
     return patientList.filter(patient => checkPatientMatchesQueries(queryList, patient));
