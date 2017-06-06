@@ -160,6 +160,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: ' hoge ',
         sortBy: 'name',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -187,6 +188,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'name',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -210,6 +212,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'name',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -232,6 +235,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'name',
         sortInAsc: false,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
