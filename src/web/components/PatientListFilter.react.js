@@ -38,10 +38,12 @@ export default ({
       </span>
       <i className="fa fa-search" />
     </p>
-    <DatePicker
-      date={filterDate}
-      onDatesChange={setFilterTime}
-    />
+    <div>
+      <DatePicker
+        date={filterDate}
+        onDatesChange={setFilterTime}
+      />
+    </div>
     <span className="form-static">Sort:</span>
     <p className="control">
       <span className="select">
