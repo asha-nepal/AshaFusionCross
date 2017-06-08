@@ -56,11 +56,8 @@ function patientInTimeRange(timeRange, patient) {
     return currentMoment.isSame(patientCreatedMoment, 'day');
   }
   const conditions = [];
-  if (startDate) conditions.push(patientCreatedMoment.isAfter(startDate));
-  if (endDate) {
-    conditions.push(patientCreatedMoment.isBefore(endDate) ||
-    patientCreatedMoment.isSame(endDate, 'day'));
-  }
+  if (startDate) conditions.push(patientCreatedMoment.isSameOrAfter(startDate, 'day'));
+  if (endDate) conditions.push(patientCreatedMoment.isSameOrBefore(endDate, 'day'));
   return conditions.reduce((conclusion, b) => conclusion & b);
 }
 
