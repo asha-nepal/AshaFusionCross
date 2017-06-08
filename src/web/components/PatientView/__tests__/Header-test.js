@@ -1,8 +1,8 @@
 /* eslint-env jest */
-jest.unmock('react-router');
+jest.unmock('react-router-dom');
 jest.unmock('../Header');
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { shallow } from 'enzyme';
 import React from 'react';
 

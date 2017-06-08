@@ -163,9 +163,7 @@ class AttachmentViewerComponent extends Component {
 
           return (
             <div key={m.id} className="column is-narrow" style={{ display: 'inline-block' }}>
-              <div className="image is-128x128" style={{ overflow: 'scroll' }}>
-                {content}
-              </div>
+              {content}
               <button
                 className="button is-danger"
                 onClick={e => {

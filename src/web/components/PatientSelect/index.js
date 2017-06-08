@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import Header from '../../containers/PatientSelect/Header';
 import PatientListFilter from '../../containers/PatientListFilter.react';
