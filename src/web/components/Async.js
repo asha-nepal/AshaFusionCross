@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 type Props = {
   load: Promise<ReactClass<any>>,
+  innerProps: ?Object,
 }
 
 export default class extends Component {
@@ -62,6 +63,6 @@ export default class extends Component {
       );
     }
 
-    return React.createElement(this.state.component, this.props);
+    return React.createElement(this.state.component, this.props.innerProps);
   }
 }
