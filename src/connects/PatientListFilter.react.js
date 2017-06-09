@@ -1,6 +1,7 @@
 /* @flow */
 
 import { connect } from 'react-redux';
+import type Moment from 'moment';
 import {
   setPatientListFilter,
   setPatientListSortField,
@@ -23,7 +24,8 @@ const mapDispatchToProps = (dispatch) => ({
   onFilterChange: (newFilter) => dispatch(setPatientListFilter(newFilter)),
   setPatientListSortField: (sortBy: string) => dispatch(setPatientListSortField(sortBy)),
   setPatientListSortOrder: (sortInAsc: boolean) => dispatch(setPatientListSortOrder(sortInAsc)),
-  setFilterDate: (date: Moment) => dispatch(setPatientListTimeFilter(date)),
+  setFilterDate: (date: {startDate: Moment,
+                         endDate: Moment}) => dispatch(setPatientListTimeFilter(date)),
 });
 
 export default connect(

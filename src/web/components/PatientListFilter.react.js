@@ -2,6 +2,7 @@
 
 import React from 'react';
 import DatePicker from './DatePicker';
+import type { Moment } from 'moment';
 
 export default ({
   filter,
@@ -16,11 +17,11 @@ export default ({
   filter: string,
   sortBy: string,
   sortInAsc: boolean,
-  filterDate: Moment,
+  filterDate: {startDate: Moment, endDate: Moment},
   setPatientListSortField: (sortBy: string) => void,
   setPatientListSortOrder: (sortInAsc: boolean) => void,
   onFilterChange: (newFilter: string) => void,
-  setFilterDate: (date: Moment) => void,
+  setFilterDate: (date: {startDate: Moment, endDate: Moment}) => void,
 }) => (
   <div className="control is-grouped">
     <p className="control has-icon is-expanded">
