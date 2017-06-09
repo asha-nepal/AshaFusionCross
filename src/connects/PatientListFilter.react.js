@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
   onFilterChange: (newFilter) => dispatch(setPatientListFilter(newFilter)),
   setPatientListSortField: (sortBy: string) => dispatch(setPatientListSortField(sortBy)),
   setPatientListSortOrder: (sortInAsc: boolean) => dispatch(setPatientListSortOrder(sortInAsc)),
-  setFilterTime: (date: Moment) => dispatch(setPatientListTimeFilter(date)),
+  setFilterDate: (date: Moment) => dispatch(setPatientListTimeFilter(date)),
 });
 
 export default connect(
