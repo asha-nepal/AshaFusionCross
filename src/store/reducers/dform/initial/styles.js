@@ -6,7 +6,10 @@ export default {
         {
           class: 'block',
           children: [
-            { field: 'age', label: 'Age', class: 'textinput' },
+            {
+              field: 'age', label: 'Age', class: 'textunitinput',
+              units: ['years', 'months'], precision: 0,
+            },
             { field: 'address', label: 'Address', class: 'textinput' },
           ],
         },
