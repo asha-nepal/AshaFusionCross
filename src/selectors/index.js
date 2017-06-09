@@ -55,10 +55,7 @@ function patientInTimeRange(timeRange, patient) {
     const currentMoment = moment();
     return currentMoment.isSame(patientCreatedMoment, 'day');
   }
-  const conditions = [];
-  if (startDate) conditions.push(patientCreatedMoment.isSameOrAfter(startDate, 'day'));
-  if (endDate) conditions.push(patientCreatedMoment.isSameOrBefore(endDate, 'day'));
-  return conditions.reduce((conclusion, b) => conclusion & b);
+  return patientCreatedMoment.isBetween(startDate, endDate, 'day', []);
 }
 
 export const getFilteredPatientList = createSelector(
