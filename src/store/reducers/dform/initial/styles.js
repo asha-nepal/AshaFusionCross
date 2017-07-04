@@ -2,6 +2,18 @@ export default {
   patient: [
     {
       style: [
+        {
+          field: 'number', label: 'No.',
+          style: {
+            width: 200,
+          },
+          valueSetters: [
+            {
+              label: 'Set next No.',
+              optionKey: 'nextPatientNumber',
+            },
+          ],
+        },
         { field: 'name', label: 'Name', class: 'textinput', required: true },
         {
           class: 'block',
