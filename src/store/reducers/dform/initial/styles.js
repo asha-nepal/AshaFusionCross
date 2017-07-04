@@ -6,7 +6,10 @@ export default {
         {
           class: 'block',
           children: [
-            { field: 'age', label: 'Age', class: 'textinput' },
+            {
+              field: 'age', label: 'Age', class: 'textunitinput',
+              units: ['years', 'months'], precision: 0,
+            },
             { field: 'address', label: 'Address', class: 'textinput' },
           ],
         },
@@ -21,7 +24,13 @@ export default {
         { field: 'age_first_marriage', show: 'has_been_married',
           label: 'At what age did the patient have the first marriage?',
           class: 'textinput', type: 'number' },
-        { field: 'history_of_smoking', label: 'History of smoking', class: 'textinput' },
+        { field: 'history_of_smoking', label: 'History of smoking',
+          class: 'radio',
+          options: [
+            { id: true, label: 'Yes' },
+            { id: false, label: 'No' },
+          ],
+        },
         { field: 'children', label: 'Living children / abortion', class: 'textinput' },
         { field: 'menstrual_period', label: 'Last menstrual period', class: 'textinput' },
         { field: 'had_previous_Pap_smear', label: 'Has the patient had Pap smear before?',
@@ -55,10 +64,78 @@ export default {
             { id: false, label: 'No' },
           ],
         },
+        {
+          field: 'contraceptive_history', label: 'Contraceptive History',
+          class: 'radio',
+          options: [
+            { id: 'none', label: 'None' },
+            { id: 'barrier', label: 'Barrier' },
+            { id: 'CuT', label: 'CuT' },
+            { id: 'intradermal_implant', label: 'Intradermal Implant' },
+            { id: 'oral_contraceptive_pills', label: 'Oral Contraceptive Pills' },
+            { id: 'injection_depo-provera', label: 'Depo-Provera Injection' },
+          ],
+        },
+        {
+          field: 'knows_HPV',
+          label: 'Does the patient know about human papilloma virus vaccine(HPV)?',
+          class: 'radio',
+          options: [
+            { id: true, label: 'Yes' },
+            { id: false, label: 'No' },
+          ],
+        },
+        {
+          field: 'family_vaccinated',
+          label: 'Has anyone in the patient\'s family been vaccinated?',
+          class: 'radio',
+          options: [
+            { id: true, label: 'Yes' },
+            { id: false, label: 'No' },
+          ],
+        },
       ],
     },
   ],
   record: [
+    {
+      id: 'exam_staff',
+      label: 'Exam Staff',
+      style: [
+        {
+          field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
+          style: { width: 100 },
+          units: ['kg', 'lbm'],
+        },
+        {
+          class: 'block', label: 'Blood Pressure',
+          children: [
+            {
+              field: 'bp.s', class: 'textinput', placeholder: 'sBP',
+              type: 'number', style: { width: 60 },
+              min: 1, precision: 0,
+              alerts: [
+                { type: 'warning', label: 'Low', range: [null, 100] },
+                { type: 'success', label: 'Normal', range: [100, 140] },
+                { type: 'warning', label: 'High', range: [140, 180] },
+                { type: 'danger', label: 'Alert', range: [180, null] },
+              ],
+            },
+            {
+              field: 'bp.d', class: 'textinput', placeholder: 'dBP',
+              type: 'number', style: { width: 60 }, suffix: 'mmHg',
+              min: 1, precision: 0,
+              alerts: [
+                { type: 'warning', label: 'Low', range: [null, 60] },
+                { type: 'success', label: 'Normal', range: [60, 90] },
+                { type: 'warning', label: 'High', range: [90, 110] },
+                { type: 'danger', label: 'Alert', range: [110, null] },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     {
       id: 'gynaecologist',
       label: 'Gynaecologist',
@@ -90,39 +167,7 @@ export default {
           label: 'Examinations',
           children: [
             {
-              field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
-              style: { width: 100 },
-              units: ['kg', 'lbm'],
-            },
-            {
-              class: 'block', label: 'Blood Pressure',
-              children: [
-                {
-                  field: 'bp.s', class: 'textinput', placeholder: 'sBP',
-                  type: 'number', style: { width: 60 },
-                  min: 1, precision: 0,
-                  alerts: [
-                    { type: 'warning', label: 'Low', range: [null, 100] },
-                    { type: 'success', label: 'Normal', range: [100, 140] },
-                    { type: 'warning', label: 'High', range: [140, 180] },
-                    { type: 'danger', label: 'Alert', range: [180, null] },
-                  ],
-                },
-                {
-                  field: 'bp.d', class: 'textinput', placeholder: 'dBP',
-                  type: 'number', style: { width: 60 }, suffix: 'mmHg',
-                  min: 1, precision: 0,
-                  alerts: [
-                    { type: 'warning', label: 'Low', range: [null, 60] },
-                    { type: 'success', label: 'Normal', range: [60, 90] },
-                    { type: 'warning', label: 'High', range: [90, 110] },
-                    { type: 'danger', label: 'Alert', range: [110, null] },
-                  ],
-                },
-              ],
-            },
-            {
-              class: 'accordion', label: 'Per abdomen Eexamination',
+              class: 'accordion', label: 'Per abdomen Examination',
               children: [
                 {
                   field: 'abdomen_is_abnormal', label: 'Result of abdomen examination was',
@@ -134,7 +179,7 @@ export default {
                 },
                 {
                   field: 'abdomen_result_details', label: 'Please specify',
-                  class: 'textarea', show: 'abdomen_is_normal',
+                  class: 'textarea', show: 'abdomen_is_abnormal',
                 },
               ],
             },
@@ -171,21 +216,21 @@ export default {
               class: 'accordion', label: 'Per vaginal examination',
               children: [
                 {
-                  field: 'uterus', label: 'Uterus',
+                  field: 'uterus', label: 'Uterus', class: 'radio',
                   options: [
                     { id: 'anterverted', label: 'Anterverted' },
                     { id: 'retroverted', label: 'Retroverted' },
                   ],
                 },
                 {
-                  field: 'size', label: 'Size',
+                  field: 'size', label: 'Size', class: 'radio',
                   options: [
                     { id: 'normal', label: 'Normal' },
                     { id: 'bulky', label: 'Bulky' },
                   ],
                 },
                 {
-                  field: 'adnexa', label: 'Adnexa',
+                  field: 'adnexa', label: 'Adnexa', class: 'radio',
                   options: [
                     { id: 'normal', label: 'Normal' },
                     { id: 'mass', label: 'Mass' },
