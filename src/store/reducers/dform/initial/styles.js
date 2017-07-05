@@ -268,6 +268,116 @@ export default {
               field: 'other_management_details', label: 'Please specify',
               class: 'textarea', show: 'management:others',
             },
+            {
+              field: 'prescriptions', label: 'Prescriptions',
+              class: 'subformlist', show: 'management:counselling_with_medication',
+              fields: [
+                {
+                  field: 'medicine', label: 'Medicine',
+                  class: 'textinput', primary: true, suggestions: [],
+                },
+                {
+                  field: 'stat',
+                  label: 'Stat',
+                  class: 'check',
+                },
+                {
+                  field: 'sos',
+                  label: 'SOS',
+                  class: 'check',
+                },
+                {
+                  field: 'dose',
+                  class: 'textinput',
+                  type: 'number',
+                  style: {
+                    width: 50,
+                  },
+                  label: 'Dose',
+                  suffix: 'pcs',
+                },
+                {
+                  field: 'freq',
+                  class: 'textinput',
+                  type: 'number',
+                  style: {
+                    width: 50,
+                  },
+                  label: 'Frequency',
+                  suffix: 'times',
+                  hide: 'sos|stat',
+                },
+                {
+                  field: 'duration',
+                  class: 'textinput',
+                  type: 'number',
+                  style: {
+                    width: 60,
+                  },
+                  label: 'Duration',
+                  suffix: 'days',
+                  hide: 'sos|stat',
+                },
+                {
+                  field: 'route',
+                  class: 'select',
+                  label: 'Route',
+                  options: [
+                    {
+                      id: 'po',
+                      label: 'PO',
+                    },
+                    {
+                      id: 'ih',
+                      label: 'IH',
+                    },
+                    {
+                      id: 'pr',
+                      label: 'PR',
+                    },
+                    {
+                      id: 'sc',
+                      label: 'SC',
+                    },
+                    {
+                      id: 'sl',
+                      label: 'SL',
+                    },
+                    {
+                      id: 'top',
+                      label: 'TOP',
+                    },
+                  ],
+                },
+                {
+                  field: 'meal',
+                  class: 'select',
+                  label: 'Meal',
+                  options: [
+                    {
+                      id: 'before',
+                      label: 'Before the meal',
+                    },
+                    {
+                      id: 'after',
+                      label: 'After the meal',
+                    },
+                  ],
+                },
+                {
+                  field: 'use_remark',
+                  class: 'check',
+                  label: 'Remark',
+                },
+                {
+                  field: 'remark',
+                  class: 'textinput',
+                  label: 'Remark',
+                  expanded: true,
+                  show: 'use_remark',
+                },
+              ],
+            },
           ],
         },
       ],
