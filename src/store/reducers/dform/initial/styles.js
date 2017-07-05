@@ -262,7 +262,7 @@ export default {
               fields: [
                 {
                   field: 'medicine', label: 'Medicine',
-                  class: 'textinput', primary: 'true', suggestions: [],
+                  class: 'textinput', primary: true, suggestions: [],
                 },
                 {
                   field: 'stat',
