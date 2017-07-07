@@ -160,13 +160,13 @@ export default {
               options: [
                 { id: 'none', label: 'None' },
                 { id: 'pain_abdomen', label: 'Pain in abdomen' },
-                { id: 'vaginal_discharge', label: 'Abnormal vaginal discharge' },
+                { id: 'abnormal_vaginal_discharge', label: 'Abnormal vaginal discharge' },
                 { id: 'coital_bleeding', label: 'Post coital bleeding' },
                 { id: 'other_symptoms', label: 'Others' },
               ],
             },
             { field: 'vaginal_discharge_detail', label: 'Please specify',
-              class: 'textarea', show: 'symptoms:vaginal_discharge',
+              class: 'textarea', show: 'symptoms:abnormal_vaginal_discharge',
             },
             { field: 'other_symptoms_detail', label: 'Please specify',
               class: 'textarea', show: 'symptoms:other_symptoms',
@@ -228,21 +228,21 @@ export default {
               class: 'accordion', label: 'Per vaginal examination',
               children: [
                 {
-                  field: 'uterus', label: 'Uterus', class: 'radio',
+                  field: 'uterus_tip', label: 'Uterus', class: 'radio',
                   options: [
                     { id: 'anterverted', label: 'Anterverted' },
                     { id: 'retroverted', label: 'Retroverted' },
                   ],
                 },
                 {
-                  field: 'size', label: 'Size', class: 'radio',
+                  field: 'uterus_size', label: 'Size', class: 'radio',
                   options: [
                     { id: 'normal', label: 'Normal' },
                     { id: 'bulky', label: 'Bulky' },
                   ],
                 },
                 {
-                  field: 'adnexa', label: 'Adnexa', class: 'radio',
+                  field: 'uterus_adnexa', label: 'Adnexa', class: 'radio',
                   options: [
                     { id: 'normal', label: 'Normal' },
                     { id: 'mass', label: 'Mass' },
@@ -356,11 +356,11 @@ export default {
                   options: [
                     {
                       id: 'before',
-                      label: 'Before the meal',
+                      label: 'Before meal',
                     },
                     {
                       id: 'after',
-                      label: 'After the meal',
+                      label: 'After meal',
                     },
                   ],
                 },
