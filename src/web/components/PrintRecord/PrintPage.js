@@ -4,11 +4,6 @@ import React from 'react';
 import _get from 'lodash.get';
 
 import { convert } from '../../forms/fields/TextUnitInput';
-import { ReadonlyTextArea } from '../../forms/fields/TextArea';
-import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
-import { ReadonlySubformList } from '../../forms/fields/SubformList';
-import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
-import { ReadonlyDiagnoses } from '../../forms/fields/Diagnoses';
 
 function getStr(obj: Object, path: string, defaultValue: string = ''): string {
   const value = _get(obj, path, defaultValue);
@@ -31,210 +26,160 @@ export default ({
   patient: PatientObject,
   record: RecordObject,
 }) => {
-  const precision = 2;
-  const e = Math.pow(10, precision);
-
   const timestamp = record.$created_at || record.$initialized_at;
   const date = timestamp && new Date(timestamp);
-
   const number = _get(patient, 'number');
-
-  const heightMeter = convert(_get(record, 'height'), 'm', 1);
-  const heightFoot = convert(_get(record, 'height'), 'ft', 1);
   const weight = convert(_get(record, 'weight'), 'kg', 1);
-  const bmi = heightMeter && weight && (weight / Math.pow(heightMeter, 2));
-  const bmiRounded = bmi && Math.round(bmi * e) / e;
-  const temperature = convert(_get(record, 'temperature'), 'degF', 1);
-
+  const abdomenIsAbnormal = _get(record, 'abdomen_is_abnormal');
+  const abdomenDescription = abdomenIsAbnormal ? _get(record, 'abdomen_result_details') : '';
+  const complaints = _get(record, 'symptoms');
+  const complaintsDetails = () => {
+    if (complaints === 'abnormal_vaginal_discharge') {
+      return ` (${_get(record, 'vaginal_discharge_detail')})`;
+    }
+    if (complaints === 'other_symptoms') {
+      return ` (${_get(record, 'other_symptoms_detail')})`;
+    }
+    return '';
+  };
+  const cervixIsUnhealthy = _get(record, 'cervix_is_unhealthy', null);
+  const cervixConsistency = _get(record, 'cervix_consistency');
+  const uterusTip = _get(record, 'uterus_tip');
+  const uterusSize = _get(record, 'uterus_size');
+  const uterusAdnexa = _get(record, 'uterus_adnexa');
+  const perVaginalIsVisible = uterusTip || uterusSize || uterusAdnexa;
+  const management = _get(record, 'management');
   return (
-    <section className="section is-print">
-      <div className="header is-clearfix">
-        <h1 className="title is-pulled-left">
-          {number && <small>No. {number} </small>}
-          {getStr(patient, 'name')}
-        </h1>
-
-        {date &&
-          <p className="is-pulled-right">
-            {date.toDateString()}
+    <div>
+      <section className="section">
+        <div className="hero has-text-centered">
+          <h1 className="title">Cervical Cancer Screening</h1>
+          <h2 className="subtitle">Community Health Service Center, Nagbahal</h2>
+          <h3 className="title is-6">{date.toDateString()}</h3>
+        </div>
+      </section>
+      <section className="section">
+        <h3 className="title is-4">No.{number || '---'}</h3>
+        <h3 className="title subtitle">{_get(patient, 'name')}</h3>
+        <p className="is-left print-info-group">
+          <span>
+            Age: <strong>{getStr(patient, 'age') || '---'}</strong>
+          </span>
+          <span>
+            Address: <strong>{_get(patient, 'address') || '---'}</strong>
+          </span>
+        </p>
+        <p className="is-left print-info-group">
+          <span>
+            Weight: <strong>{weight ? `${weight} kg` : '---'}</strong>
+          </span>
+          <span>Blood Pressure:
+            <strong>{getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg</strong>
+          </span>
+        </p>
+        {complaints &&
+          <p className="is-left print-info-group">
+            Major Complaints:
+            <strong>
+              {{
+                none: 'None', pain_abdomen: 'Pain in abdomen', other_symptoms: 'Others',
+                coital_bleeding: 'Post coital bleeding',
+                abnormal_vaginal_discharge: 'Abnormal vaginal discharge',
+              }[complaints]}
+            </strong>
+            <strong>{complaintsDetails()}</strong>
           </p>
         }
-      </div>
-
-      <div className="container">
-        <h2 className="subtitle">
-          <p>Age: {getStr(patient, 'age')}</p>
-          <p>Sex: {{ male: 'Male', female: 'Female' }[_get(patient, 'sex')]}</p>
-          <p>Address: {getStr(patient, 'address')}</p>
-        </h2>
-
-        <div className="control is-grouped">
-          <div className="control">
-            <label className="label">Height</label>
-            <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
+        <br />
+        <h3 className="title is-4">Examinations</h3>
+        <p>
+          Result of abdomen examination:
+          <strong>{abdomenIsAbnormal ? `Abnormal(${abdomenDescription})` : 'Normal'}</strong>
+        </p>
+        <br />
+        {(cervixIsUnhealthy !== null) &&
+          <div className="content">
+            <h3 className="title is-5">Per speculum</h3>
+            <ul>
+              <li>Cervix:
+                <strong>{cervixIsUnhealthy ? 'Unhealthy' : 'Healthy'}</strong>
+                {cervixIsUnhealthy &&
+                  <strong> ({_get(record, 'cervix_problem')})</strong>
+                }
+              </li>
+              <li>Consistency: <strong> {cervixConsistency || '---'}</strong></li>
+            </ul>
           </div>
-          <div className="control">
-            <label className="label">Weight</label>
-            <p className="form-static">{weight ? `${weight} kg` : '---'}</p>
+        }
+        {(perVaginalIsVisible) &&
+          <div className="content">
+            <h3 className="title is-5">Per vaginal</h3>
+            <ul>
+              <li>Uterus: <strong>{uterusTip || '---'}</strong></li>
+              <li>Size: <strong>{uterusSize || '---'}</strong></li>
+              <li>Adnexa: <strong>{uterusAdnexa || '---'}</strong></li>
+            </ul>
           </div>
-          <div className="control">
-            <label className="label">BMI</label>
-            <p className="form-static">{bmiRounded || '---'}</p>
+        }
+        <h3 className="title is-4">Management</h3>
+        <p>Management of patient:
+          <strong>
+            {{
+              counselling_only: 'Counselling only',
+              counselling_with_medication: 'Counselling with medication',
+              referral: 'Referral to higher center',
+              others: 'Others',
+            }[management]}
+          </strong>
+          {(management === 'others') &&
+            <strong> ({_get(record, 'other_management_details')})</strong>
+          }
+        </p>
+        <br />
+        {(management === 'counselling_with_medication') &&
+          <div className="has-text-centered">
+            <strong>Precriptions</strong>
+            <table className="table is-striped">
+              <thead>
+                <tr>
+                  <th>Medicine</th>
+                  <th>Stat</th>
+                  <th>SOS</th>
+                  <th>Dose(pcs)</th>
+                  <th>Frequency(times)</th>
+                  <th>Duration(days)</th>
+                  <th>Route</th>
+                  <th>Meal</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                {_get(record, 'prescriptions').map((prescription) => (
+                  <tr>
+                    <td><p className="has-text-centered">{prescription.medicine}</p></td>
+                    <td><p className="has-text-centered">{prescription.stat ? 'Y' : 'N'}</p></td>
+                    <td><p className="has-text-centered">{prescription.sos ? 'Y' : 'N'}</p></td>
+                    <td><p className="has-text-centered">{prescription.dose}</p></td>
+                    <td><p className="has-text-centered">{prescription.freq}</p></td>
+                    <td><p className="has-text-centered">{prescription.duration}</p></td>
+                    <td><p className="has-text-centered">{prescription.route}</p></td>
+                    <td>
+                      <p className="has-text-centered">
+                        {{
+                          before: 'Before meal',
+                          after: 'After meal',
+                        }[prescription.meal]}
+                      </p>
+                    </td>
+                    <td><p className="has-text-centered">{prescription.remark}</p></td>
+                  </tr>
+                ))
+                }
+              </tbody>
+            </table>
           </div>
-        </div>
-        <div className="control is-grouped">
-          <div className="control">
-            <label className="label">Blood pressure</label>
-            <p className="form-static">
-              {getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg
-            </p>
-          </div>
-          <div className="control">
-            <label className="label">Pulse</label>
-            <p className="form-static">{getStr(record, 'pulse', '---')} /min</p>
-          </div>
-          <div className="control">
-            <label className="label">Temperature</label>
-            <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
-          </div>
-          <div className="control">
-            <label className="label">SpO2</label>
-            <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
-          </div>
-          <div className="control">
-            <label className="label">Respiration rate</label>
-            <p className="form-static">{getStr(record, 'rr', '---')} /min</p>
-          </div>
-          <div className="control">
-            <label className="label">Blood sugar</label>
-            <p className="form-static">{getStr(record, 'bs', '---')} mg/dL</p>
-          </div>
-        </div>
-
-        <table className="table">
-          <tbody>
-            <tr>
-              <th>Allergy</th>
-              <td>{_get(record, 'allergy') ? (
-                <div>
-                  <strong>&lt;Yes&gt;</strong>
-                  <ReadonlyTextArea
-                    value={_get(record, 'allergy_memo')}
-                  />
-                </div>
-              ) : '---'}</td>
-            </tr>
-            <tr>
-              <th>Past medical history</th>
-              <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'past_medical_history')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Current medicines</th>
-              <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'current_medicine')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Present medical history</th>
-              <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'present_medical_history')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Symptoms</th>
-              <td>
-                <ReadonlyMultiInput
-                  values={_get(record, 'symptoms')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Signs</th>
-              <td>
-                <CheckGroupComponent
-                  value={_get(record, 'signs_select')}
-                  options={[
-                    { id: 'jaundice', label: 'Jaundice' },
-                    { id: 'anemia', label: 'Anemia' },
-                    { id: 'lymphadenopathy', label: 'Lymphadenopathy' },
-                    { id: 'cyanosis', label: 'Cyanosis' },
-                    { id: 'clubbing', label: 'Clubbing' },
-                    { id: 'oedema', label: 'Oedema' },
-                    { id: 'dehydration', label: 'Dehydration' },
-                  ]}
-                  readonly
-                />
-                <ReadonlyTextArea
-                  value={_get(record, 'signs')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Diagnoses</th>
-              <td>
-                <ReadonlyDiagnoses
-                  value={_get(record, 'diagnoses')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Prescriptions</th>
-              <td>
-                <ReadonlySubformList
-                  values={_get(record, 'prescription')}
-                  fields={[
-                    { field: 'medicine', label: 'Medicine', class: 'textinput', primary: true },
-                    { field: 'stat', label: 'Stat', class: 'check' },
-                    { field: 'sos', label: 'SOS', class: 'check' },
-                    {
-                      field: 'dose', class: 'textinput', type: 'number', style: { width: 50 },
-                      label: 'Dose', suffix: 'pcs',
-                    },
-                    {
-                      field: 'freq', class: 'textinput', type: 'number', style: { width: 50 },
-                      label: 'Frequency', suffix: 'times', hide: 'sos|stat',
-                    },
-                    {
-                      field: 'duration', class: 'textinput', type: 'number', style: { width: 60 },
-                      label: 'Duration', suffix: 'days', hide: 'sos|stat',
-                    },
-                    {
-                      field: 'route', class: 'select', label: 'Route',
-                      options: [
-                        { id: 'po', label: 'PO' },
-                        { id: 'ih', label: 'IH' },
-                        { id: 'pr', label: 'PR' },
-                        { id: 'sc', label: 'SC' },
-                        { id: 'sl', label: 'SL' },
-                        { id: 'top', label: 'TOP' },
-                      ],
-                    },
-                    {
-                      field: 'meal', class: 'select', label: 'Meal',
-                      options: [
-                        { id: 'before', label: 'Before the meal' },
-                        { id: 'after', label: 'After the meal' },
-                      ],
-                    },
-                    {
-                      field: 'remark', class: 'textinput', label: 'Remark', expanded: true,
-                      show: 'use_remark',
-                    },
-                  ]}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+        }
+      </section>
+    </div>
   );
 };
