@@ -17,6 +17,7 @@ describe('<PrintPage/>', () => {
     };
 
     const record = {
+      $created_at: (new Date()).getTime(),
       height: { value: 178, unit: 'cm' },
       weight: { vakue: 68, unti: 'kg' },
       pulse: 90,
