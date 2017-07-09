@@ -11,6 +11,9 @@ module.exports = merge(baseConfig, {
     path: path.resolve('./public'),
     publicPath: '/',
   },
+  resolve: {
+    mainFiles: ['browser', 'index'],
+  },
   plugins: [
     new CopyWebpackPlugin([
       { from: './src/web/.htaccess' },

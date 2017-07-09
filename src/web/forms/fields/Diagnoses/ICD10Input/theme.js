@@ -24,7 +24,7 @@ export default {
     lineHeight: '1.6em',
     padding: '0 0.5em',
   },
-  suggestionFocused: {
+  suggestionHighlighted: {
     backgroundColor: '#ddd',
   },
 };

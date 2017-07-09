@@ -27,6 +27,7 @@ export default class extends Component {
 
     return (
       <a
+        className="image is-128x128"
         onClick={e => {
           e.preventDefault();
           onClick();
