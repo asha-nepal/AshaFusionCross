@@ -1349,7 +1349,8 @@
           "label": "Haematology Test",
           "children": [
             {
-              "field": "pathology.haematology.tlc_wbc", "label": "TLC/WBC", "type": "number", "style": { "width": 100 },
+              "field": "pathology.haematology.tlc_wbc", "label": "TLC/WBC", "style": { "width": 100 },
+              "type": "number", "min": 0,
               "alerts": [
                 {
                   "type": "warning",
@@ -1359,12 +1360,12 @@
                 {
                   "type": "success",
                   "label": "Normal",
-                  "range": [ 4000, 10000 ]
+                  "range": [ 4000, 11000 ]
                 },
                 {
                   "type": "warning",
                   "label": "High",
-                  "range": [ 10000, null]
+                  "range": [ 11000, null]
                 }
               ]
             },
@@ -1470,13 +1471,16 @@
               ]
             },
             {
-              "field": "pathology.haematology.hemoglobin", "label": "Hemoglobin (Hb)", "type": "number", "suffix": "gm%", "style": { "width": 100 }
+              "field": "pathology.haematology.hemoglobin", "label": "Hemoglobin (Hb)", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "gm%"
             },
             {
-              "field": "pathology.haematology.esr", "label": "ESR (wintrobe)", "type": "number", "suffix": "mm/hrs", "style": { "width": 100 }
+              "field": "pathology.haematology.esr", "label": "ESR (wintrobe)", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mm/hrs"
             },
             {
-              "field": "pathology.haematology.rbc", "label": "RBC", "type": "number", "suffix": "millioin/cumm", "style": { "width": 100 },
+              "field": "pathology.haematology.rbc", "label": "RBC", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "millioin/cumm",
               "alerts": [
                 {
                   "type": "warning",
@@ -1496,7 +1500,8 @@
               ]
             },
             {
-              "field": "pathology.haematology.platelets", "label": "Platelets", "type": "number", "suffix": "lakh/cumm", "style": { "width": 100 },
+              "field": "pathology.haematology.platelets", "label": "Platelets", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "lakh/cumm",
               "alerts": [
                 {
                   "type": "warning",
@@ -1516,13 +1521,16 @@
               ]
             },
             {
-              "field": "pathology.haematology.pcv", "label": "PCV", "type": "number", "suffix": "%", "min": 0, "max": 100, "style": { "width": 100 }
+              "field": "pathology.haematology.pcv", "label": "PCV", "style": { "width": 100 },
+              "type": "number", "suffix": "%", "min": 0, "max": 100
             },
             {
-              "field": "pathology.haematology.pt", "label": "PT", "type": "number", "suffix": "sec", "style": { "width": 100 }
+              "field": "pathology.haematology.pt", "label": "PT", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "sec"
             },
             {
-              "field": "pathology.haematology.aptt", "label": "APTT", "type": "number", "suffix": "sec", "style": { "width": 100 },
+              "field": "pathology.haematology.aptt", "label": "APTT", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "sec",
               "alerts": [
                 {
                   "type": "warning",
@@ -1548,7 +1556,8 @@
           "label": "Biochemistry Test",
           "children": [
             {
-              "field": "pathology.biochemistry.bs_f", "label": "Blood Suger (F)", "type": "number", "suffix": "mg%", "style": { "width": 100 },
+              "field": "pathology.biochemistry.bs_f", "label": "Blood Suger (F)", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mg%",
               "alerts": [
                 {
                   "type": "warning",
@@ -1568,7 +1577,8 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.bs_r", "label": "Blood Suger (R)", "type": "number", "suffix": "mg%", "style": { "width": 100 },
+              "field": "pathology.biochemistry.bs_r", "label": "Blood Suger (R)", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mg%",
               "alerts": [
                 {
                   "type": "warning",
@@ -1588,7 +1598,8 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.bs_pp", "label": "Blood Suger (PP)", "type": "number", "suffix": "mg%", "style": { "width": 100 },
+              "field": "pathology.biochemistry.bs_pp", "label": "Blood Suger (PP)", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mg%",
               "alerts": [
                 {
                   "type": "success",
@@ -1603,10 +1614,12 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.uric_acid", "label": "Uric Acid", "type": "number", "suffix": "mg%", "style": { "width": 100 }
+              "field": "pathology.biochemistry.uric_acid", "label": "Uric Acid", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mg%"
             },
             {
-              "field": "pathology.biochemistry.bilirubin_t", "label": "Bilirubin (T)", "type": "number", "suffix": "mg%", "style": { "width": 100 },
+              "field": "pathology.biochemistry.bilirubin_t", "label": "Bilirubin (T)", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mg%",
               "alerts": [
                 {
                   "type": "success",
@@ -1621,7 +1634,8 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.bilirubin_d", "label": "Bilirubin (D)", "type": "number", "suffix": "mg%", "style": { "width": 100 },
+              "field": "pathology.biochemistry.bilirubin_d", "label": "Bilirubin (D)", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mg%",
               "alerts": [
                 {
                   "type": "success",
@@ -1636,7 +1650,8 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.urea", "label": "Urea", "type": "number", "suffix": "mg%", "style": { "width": 100 },
+              "field": "pathology.biochemistry.urea", "label": "Urea", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mg%",
               "alerts": [
                 {
                   "type": "warning",
@@ -1656,10 +1671,12 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.creatinine", "label": "Creatinine", "type": "number", "suffix": "mg/dl", "style": { "width": 100 }
+              "field": "pathology.biochemistry.creatinine", "label": "Creatinine", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mg/dl"
             },
             {
-              "field": "pathology.biochemistry.total_protein", "label": "Total Protein", "type": "number", "suffix": "g/dl", "style": { "width": 100 },
+              "field": "pathology.biochemistry.total_protein", "label": "Total Protein", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "g/dl",
               "alerts": [
                 {
                   "type": "warning",
@@ -1679,7 +1696,8 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.albumin", "label": "Albumin", "type": "number", "suffix": "g/dl", "style": { "width": 100 },
+              "field": "pathology.biochemistry.albumin", "label": "Albumin", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "g/dl",
               "alerts": [
                 {
                   "type": "warning",
@@ -1699,13 +1717,16 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.total_chloesterol", "label": "Total Chloesterol", "type": "number", "style": { "width": 100 }
+              "field": "pathology.biochemistry.total_chloesterol", "label": "Total Chloesterol",  "style": { "width": 100 },
+              "type": "number", "min": 0
             },
             {
-              "field": "pathology.biochemistry.triaglycerol", "label": "Triaglycerol", "type": "number", "style": { "width": 100 }
+              "field": "pathology.biochemistry.triaglycerol", "label": "Triaglycerol", "style": { "width": 100 },
+              "type": "number", "min": 0
             },
             {
-              "field": "pathology.biochemistry.gama_gt", "label": "Gama GT", "type": "number", "suffix": "IU/L", "style": { "width": 100 },
+              "field": "pathology.biochemistry.gama_gt", "label": "Gama GT", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "IU/L",
               "alerts": [
                 {
                   "type": "warning",
@@ -1725,16 +1746,20 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.hdl_cholesterol", "label": "HDL-Cholesterol", "type": "number", "style": { "width": 100 }
+              "field": "pathology.biochemistry.hdl_cholesterol", "label": "HDL-Cholesterol",  "style": { "width": 100 },
+              "type": "number", "min": 0
             },
             {
-              "field": "pathology.biochemistry.ldl_cholesterol", "label": "LDL-Cholesterol", "type": "number", "style": { "width": 100 }
+              "field": "pathology.biochemistry.ldl_cholesterol", "label": "LDL-Cholesterol", "style": { "width": 100 },
+              "type": "number", "min": 0
             },
             {
-              "field": "pathology.biochemistry.non_hdl_cholesterol", "label": "Non-HDL Cholesterol", "type": "number", "style": { "width": 100 }
+              "field": "pathology.biochemistry.non_hdl_cholesterol", "label": "Non-HDL Cholesterol", "style": { "width": 100 },
+              "type": "number", "min": 0
             },
             {
-              "field": "pathology.biochemistry.sgot", "label": "SGOT", "type": "number", "suffix": "IU/L", "style": { "width": 100 },
+              "field": "pathology.biochemistry.sgot", "label": "SGOT", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "IU/L",
               "alerts": [
                 {
                   "type": "warning",
@@ -1754,7 +1779,8 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.sgpt", "label": "SGPT", "type": "number", "suffix": "IU/L", "style": { "width": 100 },
+              "field": "pathology.biochemistry.sgpt", "label": "SGPT", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "IU/L",
               "alerts": [
                 {
                   "type": "warning",
@@ -1774,10 +1800,12 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.alp", "label": "ALP", "type": "number", "style": { "width": 100 }
+              "field": "pathology.biochemistry.alp", "label": "ALP", "style": { "width": 100 },
+              "type": "number", "min": 0
             },
             {
-              "field": "pathology.biochemistry.sodium", "label": "Sodium", "type": "number", "suffix": "mEq/L", "style": { "width": 100 },
+              "field": "pathology.biochemistry.sodium", "label": "Sodium", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mEq/L",
               "alerts": [
                 {
                   "type": "warning",
@@ -1797,7 +1825,8 @@
               ]
             },
             {
-              "field": "pathology.biochemistry.potassium", "label": "Potassium", "type": "number", "suffix": "mEq/L", "style": { "width": 100 },
+              "field": "pathology.biochemistry.potassium", "label": "Potassium", "style": { "width": 100 },
+              "type": "number", "min": 0, "suffix": "mEq/L",
               "alerts": [
                 {
                   "type": "warning",
