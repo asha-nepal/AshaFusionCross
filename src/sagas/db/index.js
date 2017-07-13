@@ -8,7 +8,7 @@ import {
   checkAccessibility,
   alreadyLoggedIn,
   logout,
-} from './auth';
+} from '../auth';
 import {
   alertError,
   alertInfo,
@@ -21,7 +21,7 @@ import {
   insertOrChangeActiveRecord,
   requestLogout,
   requestAnonymousLogin,
-} from '../actions';
+} from '../../actions';
 
 function createPouchChangeChannel(db: PouchInstance) {
   return eventChannel(emit => {
