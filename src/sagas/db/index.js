@@ -16,12 +16,10 @@ import {
   DB_CONNECT_REQUEST,
   DB_DISCONNECT_REQUEST,
   dbSetInstance,
-  fetchPatientList,
-  changeActivePatient,
-  insertOrChangeActiveRecord,
   requestLogout,
   requestAnonymousLogin,
 } from '../../actions';
+import handlePouchChanges from './handle-changes';
 
 function createPouchChangeChannel(db: PouchInstance) {
   return eventChannel(emit => {
@@ -74,24 +72,7 @@ export function* watchOnPouchChanges(db: PouchInstance) {
 
       if (type === 'change') {
         const { change } = payload;
-
-        // For PatientSelect
-        yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
-
-        // For PatientView
-        const activePatientId = yield select(state => state.activePatient._id);
-        if (!activePatientId) { continue; }
-
-        const doc = change.doc;
-        if (doc._id === activePatientId) {
-          yield put(changeActivePatient(doc, { silent: true }));
-        } else if (doc.type === 'record') {
-          const activePatientIdBody = activePatientId.replace(/^patient_/, '');
-          const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
-          if (match && (match[1] === activePatientIdBody)) {
-            yield put(insertOrChangeActiveRecord(doc, { silent: true }));
-          }
-        }
+        yield call(handlePouchChanges, change);
       } else if (error) {
         yield put(alertError(`ERR: change listener ${error.message || ''}`));
         yield put(requestLogout());
@@ -100,7 +81,7 @@ export function* watchOnPouchChanges(db: PouchInstance) {
   } finally {
     if (yield cancelled()) {
       // Called if this saga cancelled
-      pouchChannel.close()
+      pouchChannel.close();
       console.log('PouchDB listener cancelled');
     }
     console.log('PouchDB listener terminated');
