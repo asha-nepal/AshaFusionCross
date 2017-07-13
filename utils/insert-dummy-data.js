@@ -6,6 +6,8 @@ const Chance = require('chance');
 const moment = require('moment');
 const randomstringPromise = require('randomstring-promise').default;
 
+argv.type('date', value => moment(value));
+
 argv.option([
   {
     name: 'database',
@@ -36,8 +38,6 @@ argv.option([
     type: 'date',
   },
 ]);
-
-argv.type('date', value => moment(value));
 
 const options = argv.run().options;
 const database = options.database;
