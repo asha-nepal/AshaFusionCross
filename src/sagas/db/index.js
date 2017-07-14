@@ -75,7 +75,6 @@ export function* watchOnPouchChanges(db: PouchInstance) {
         yield call(handlePouchChanges, change);
       } else if (error) {
         yield put(alertError(`ERR: change listener ${error.message || ''}`));
-        yield put(requestLogout());
       }
     }
   } finally {
@@ -84,6 +83,8 @@ export function* watchOnPouchChanges(db: PouchInstance) {
       pouchChannel.close();
       console.log('PouchDB listener cancelled');
     }
+
+    yield put(requestLogout());
     console.log('PouchDB listener terminated');
   }
 }
