@@ -3,7 +3,6 @@ const PouchDB = (typeof window !== 'undefined' && window.PouchDB)
   : require('pouchdb').plugin(require('pouchdb-authentication'));
 
 import { take, call, put, select, race, cancelled } from 'redux-saga/effects';
-import { eventChannel, END } from 'redux-saga';
 import {
   checkAccessibility,
   alreadyLoggedIn,
@@ -20,48 +19,7 @@ import {
   requestAnonymousLogin,
 } from '../../actions';
 import handlePouchChanges from './handle-changes';
-
-function createPouchChangeChannel(db: PouchInstance) {
-  return eventChannel(emit => {
-    const feed = db.changes({
-      since: 'now',
-      live: true,
-      include_docs: true,
-    })
-    .on('change', change => {
-      // handle change
-      emit({
-        type: 'change',
-        payload: {
-          change,
-        },
-      });
-    })
-    .on('complete', info => {
-      // changes() was canceled
-      emit({
-        type: 'complete',
-        payload: {
-          info,
-        },
-      });
-      feed.cancel();
-      emit(END);
-    })
-    .on('error', error => {
-      emit({
-        type: 'error',
-        error,
-      });
-      feed.cancel();
-      emit(END);
-    });
-
-    const unsubscribe = () => feed.cancel();
-
-    return unsubscribe;
-  });
-}
+import createPouchChangeChannel from './create-pouch-change-channel';
 
 export function* watchOnPouchChanges(db: PouchInstance) {
   const pouchChannel = yield call(createPouchChangeChannel, db);
