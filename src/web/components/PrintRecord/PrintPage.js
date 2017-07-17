@@ -9,9 +9,6 @@ import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
 import { ReadonlySubformList } from '../../forms/fields/SubformList';
 import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
 import { ReadonlyDiagnoses } from '../../forms/fields/Diagnoses';
-import { RadioGroupComponent } from '../../forms/fields/RadioGroup';
-
-import DhulikhelIconImg from '../../../../assets/img/Dhulikhel-icon.png';
 
 function getStr(obj: Object, path: string, defaultValue: string = ''): string {
   const value = _get(obj, path, defaultValue);
@@ -40,9 +37,6 @@ export default ({
   const timestamp = record.$created_at || record.$initialized_at;
   const date = timestamp && new Date(timestamp);
 
-  const location = 'Baunepati';  // FIXME: Specific just for one site
-  const signature = 'Dhulikhel Hospital';  // FIXME: Specific just for one site
-
   const number = _get(patient, 'number');
 
   const heightMeter = convert(_get(record, 'height'), 'm', 1);
@@ -54,7 +48,6 @@ export default ({
 
   return (
     <section className="section is-print">
-      <img src={DhulikhelIconImg} alt="Hospital logo" className="logo" />
       <div className="header is-clearfix">
         <h1 className="title is-pulled-left">
           {number && <small>No. {number} </small>}
@@ -62,10 +55,7 @@ export default ({
         </h1>
 
         <p className="is-pulled-right has-text-right">
-          {location}
-          {date && `, ${date.toDateString()}`}
-          <br />
-          {signature}
+          {date && date.toDateString()}
         </p>
       </div>
 
@@ -287,13 +277,8 @@ export default ({
               <tr>
                 <th>Refer</th>
                 <td>
-                  <RadioGroupComponent
+                  <ReadonlyTextArea
                     value={_get(record, 'refer')}
-                    options={[
-                      { id: 'dhulikhel', label: 'Dhulikhel' },
-                      { id: 'other', label: 'Other' },
-                    ]}
-                    readonly
                   />
                 </td>
               </tr>

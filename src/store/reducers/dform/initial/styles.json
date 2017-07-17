@@ -956,18 +956,8 @@
         {
           "field": "refer",
           "label": "Refer",
-          "class": "radio",
-          "show": "plan:refer",
-          "options": [
-            {
-              "id": "dhulikhel",
-              "label": "Dhulikhel"
-            },
-            {
-              "id": "other",
-              "label": "Other"
-            }
-          ]
+          "class": "textarea",
+          "show": "plan:refer"
         },
         {
           "field": "test",
