@@ -6,8 +6,8 @@ jest.unmock('../put-active-patient');
 jest.unmock('../../actions');
 
 import MockDate from 'mockdate';
-import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
+import PouchDB from 'lib/pouchdb';
 
 import {
   requestPutPatient,
