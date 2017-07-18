@@ -2,14 +2,14 @@
 
 jest.unmock('redux-saga/effects');
 jest.unmock('../index');
-jest.mock('../handle-changes', () => jest.fn());
+jest.mock('../handle-pouch-changes', () => jest.fn());
 
 import { call } from 'redux-saga/effects';
 import {
   formatHostname,
   watchOnPouchChanges,
 } from '../index';
-import handlePouchChanges from '../handle-changes';
+import handlePouchChanges from '../handle-pouch-changes';
 
 describe('formatHostname', () => {
   it('does nothing if scheme provided', () => {

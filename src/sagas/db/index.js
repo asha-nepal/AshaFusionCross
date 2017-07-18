@@ -18,7 +18,7 @@ import {
   requestLogout,
   requestAnonymousLogin,
 } from '../../actions';
-import handlePouchChanges from './handle-changes';
+import handlePouchChanges from './handle-pouch-changes';
 import createPouchChangeChannel from './create-pouch-change-channel';
 
 export function* watchOnPouchChanges(db: PouchInstance) {
