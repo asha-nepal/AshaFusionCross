@@ -160,6 +160,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: ' hoge ',
         sortBy: 'name',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -187,6 +188,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'name',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -210,6 +212,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'name',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -232,6 +235,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'name',
         sortInAsc: false,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -244,7 +248,7 @@ describe('getSortedFilteredPatientList', () => {
       ]);
   });
 
-  it('sorts by speficied field', () => {
+  it('sorts by specified field', () => {
     const state = {
       patientList: [
         { hoge: 'ccc', $updated_at: currentTime },
@@ -255,6 +259,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'hoge',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
@@ -280,6 +285,7 @@ describe('getSortedFilteredPatientList', () => {
         filter: '',
         sortBy: 'hoge',
         sortInAsc: true,
+        filterDate: { startDate: null, endDate: null },
       },
     };
 
