@@ -34,8 +34,15 @@ export default class PatientSelect extends Component {
         <Header logout={logout} />
         <section className="section">
           <div className="container">
-            <div className="block">
+            <div className="block is-clearfix">
               <AddButton />
+
+              <Link to="stats" className="button is-default is-pulled-right">
+                <span className="icon">
+                  <i className="fa fa-table" />
+                </span>
+                <span>Stats</span>
+              </Link>
             </div>
 
             <nav className="panel">
