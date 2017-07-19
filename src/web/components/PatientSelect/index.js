@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../../containers/PatientSelect/Header';
-import PatientListFilter from '../../containers/PatientListFilter.react';
+import PatientListFilter from '../../containers/PatientListFilter';
 
 export default class PatientSelect extends Component {
   componentWillMount() {

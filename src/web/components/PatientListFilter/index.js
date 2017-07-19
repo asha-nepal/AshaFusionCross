@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import DatePicker from './DatePicker';
+import DatePicker from '../DatePicker';
 import type { Moment } from 'moment';
 
 export default ({
