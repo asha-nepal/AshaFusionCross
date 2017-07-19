@@ -4,8 +4,8 @@ jest.unmock('redux-saga/effects');
 jest.unmock('../remove-active-patient');
 jest.unmock('../../actions');
 
-import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
+import PouchDB from 'lib/pouchdb';
 import {
   requestRemovePatient,
   successRemovePatient,
