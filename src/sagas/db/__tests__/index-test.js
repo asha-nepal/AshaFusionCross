@@ -1,10 +1,10 @@
 /* eslint-env jest, jasmine */
 
-jest.unmock('../db');
+jest.unmock('../index');
 
 import {
   formatHostname,
-} from '../db';
+} from '../index';
 
 describe('formatHostname', () => {
   it('does nothing if scheme provided', () => {

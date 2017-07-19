@@ -1,11 +1,10 @@
-import { take, call, put, select, race } from 'redux-saga/effects';
-import { eventChannel, END } from 'redux-saga';
+import { take, call, put, select, race, cancelled } from 'redux-saga/effects';
 import PouchDB from 'lib/pouchdb';
 import {
   checkAccessibility,
   alreadyLoggedIn,
   logout,
-} from './auth';
+} from '../auth';
 import {
   alertError,
   alertInfo,
@@ -13,54 +12,11 @@ import {
   DB_CONNECT_REQUEST,
   DB_DISCONNECT_REQUEST,
   dbSetInstance,
-  fetchPatientList,
-  changeActivePatient,
-  insertOrChangeActiveRecord,
   requestLogout,
   requestAnonymousLogin,
-} from '../actions';
-
-function createPouchChangeChannel(db: PouchInstance) {
-  return eventChannel(emit => {
-    const feed = db.changes({
-      since: 'now',
-      live: true,
-      include_docs: true,
-    })
-    .on('change', change => {
-      // handle change
-      emit({
-        type: 'change',
-        payload: {
-          change,
-        },
-      });
-    })
-    .on('complete', info => {
-      // changes() was canceled
-      emit({
-        type: 'complete',
-        payload: {
-          info,
-        },
-      });
-      feed.cancel();
-      emit(END);
-    })
-    .on('error', error => {
-      emit({
-        type: 'error',
-        error,
-      });
-      feed.cancel();
-      emit(END);
-    });
-
-    const unsubscribe = () => feed.cancel();
-
-    return unsubscribe;
-  });
-}
+} from '../../actions';
+import handlePouchChanges from './handle-changes';
+import createPouchChangeChannel from './create-pouch-change-channel';
 
 export function* watchOnPouchChanges(db: PouchInstance) {
   const pouchChannel = yield call(createPouchChangeChannel, db);
@@ -71,30 +27,19 @@ export function* watchOnPouchChanges(db: PouchInstance) {
 
       if (type === 'change') {
         const { change } = payload;
-
-        // For PatientSelect
-        yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
-
-        // For PatientView
-        const activePatientId = yield select(state => state.activePatient._id);
-        if (!activePatientId) { continue; }
-
-        const doc = change.doc;
-        if (doc._id === activePatientId) {
-          yield put(changeActivePatient(doc, { silent: true }));
-        } else if (doc.type === 'record') {
-          const activePatientIdBody = activePatientId.replace(/^patient_/, '');
-          const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
-          if (match && (match[1] === activePatientIdBody)) {
-            yield put(insertOrChangeActiveRecord(doc, { silent: true }));
-          }
-        }
+        yield call(handlePouchChanges, change);
       } else if (error) {
         yield put(alertError(`ERR: change listener ${error.message || ''}`));
-        yield put(requestLogout());
       }
     }
   } finally {
+    if (yield cancelled()) {
+      // Called if this saga cancelled
+      pouchChannel.close();
+      console.log('PouchDB listener cancelled');
+    }
+
+    yield put(requestLogout());
     console.log('PouchDB listener terminated');
   }
 }
