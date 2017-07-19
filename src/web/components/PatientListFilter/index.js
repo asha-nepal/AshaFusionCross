@@ -25,22 +25,24 @@ export default ({
   onFilterChange: (newFilter: string) => void,
   setFilterDate: (date: {startDate: Moment, endDate: Moment}) => void,
 }) => (
-  <div className="control is-grouped">
-    <TextSearchInput
-      value={filter}
-      onChange={onFilterChange}
-    />
-    <div>
+  <div className="columns">
+    <div className="column">
+      <TextSearchInput
+        value={filter}
+        onChange={onFilterChange}
+      />
+    </div>
+    <div className="column is-narrow control is-grouped">
+      <SortControl
+        field={sortBy}
+        asc={sortInAsc}
+        onFieldChange={setPatientListSortField}
+        onOrderChange={setPatientListSortOrder}
+      />
       <DatePicker
         date={filterDate}
         onDatesChange={setFilterDate}
       />
     </div>
-    <SortControl
-      field={sortBy}
-      asc={sortInAsc}
-      onFieldChange={setPatientListSortField}
-      onOrderChange={setPatientListSortOrder}
-    />
   </div>
 );
