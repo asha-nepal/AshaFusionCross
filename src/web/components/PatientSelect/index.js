@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import Header from '../../containers/PatientSelect/Header';
 import PatientListFilter from '../../containers/PatientListFilter';
+import AddButton from './AddButton';
 
 export default class PatientSelect extends Component {
   componentWillMount() {
@@ -36,16 +36,7 @@ export default class PatientSelect extends Component {
           <div className="container">
             <nav className="panel">
               <div className="panel-block">
-                <div className="columns">
-                  <div className="column">
-                    <PatientListFilter />
-                  </div>
-                  <div className="column is-one-quarter-tablet">
-                    <Link to={'/patient/'} className="button is-primary is-outlined is-fullwidth">
-                      New
-                    </Link>
-                  </div>
-                </div>
+                <PatientListFilter />
               </div>
               {patientList.map((patient) =>
                 <Link
@@ -56,6 +47,8 @@ export default class PatientSelect extends Component {
               )}
             </nav>
           </div>
+
+          <AddButton />
         </section>
       </div>
     );
