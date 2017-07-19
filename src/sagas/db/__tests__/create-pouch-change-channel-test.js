@@ -13,7 +13,7 @@ eventChannel.mockImplementation((factory) => {
 });
 
 describe('createPouchChangeChannel', () => {
-  it('retries after ETIMEDOUT error', () => {
+  beforeEach(() => {
     const db = jest.fn();
     db.changes = jest.fn();
 
@@ -21,17 +21,35 @@ describe('createPouchChangeChannel', () => {
     feed.cancel = jest.fn();
     db.changes.mockReturnValue(feed);
 
+    this.db = db;
+    this.feed = feed;
+  });
+
+  it('retries after ETIMEDOUT error', () => {
     // First db.changes() starts
-    createPouchChangeChannel(db);
-    expect(db.changes.mock.calls.length).toBe(1);
+    createPouchChangeChannel(this.db);
+    expect(this.db.changes.mock.calls.length).toBe(1);
 
     // Next db.changes() starts when ETIMEDOUT occurs
     const errorTimedout = new Error('ETIMEDOUT');
     errorTimedout.code = 'ETIMEDOUT';
-    feed.emit('error', errorTimedout);
+    this.feed.emit('error', errorTimedout);
 
-    expect(db.changes.mock.calls.length).toBe(2);
-    expect(feed.cancel.mock.calls.length).toBe(1);
+    expect(this.db.changes.mock.calls.length).toBe(2);
+    expect(this.feed.cancel.mock.calls.length).toBe(1);
     expect(emit).not.toBeCalled();
+  });
+
+  it('emits at change event', () => {
+    createPouchChangeChannel(this.db);
+
+    this.feed.emit('change', { foo: 'bar' });
+
+    expect(emit).toBeCalledWith({
+      type: 'change',
+      payload: {
+        change: { foo: 'bar' },
+      },
+    });
   });
 });
