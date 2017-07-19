@@ -2,6 +2,7 @@
 
 import React from 'react';
 import TextSearchInput from './TextSearchInput';
+import SortControl from './SortControl';
 import DatePicker from '../DatePicker';
 import type { Moment } from 'moment';
 
@@ -35,29 +36,11 @@ export default ({
         onDatesChange={setFilterDate}
       />
     </div>
-    <span className="form-static">Sort:</span>
-    <p className="control">
-      <span className="select">
-        <select
-          value={sortBy}
-          onChange={e => setPatientListSortField(e.target.value)}
-        >
-          <option value="name">Name</option>
-          <option value="number">No.</option>
-        </select>
-      </span>
-    </p>
-    <p className="form-static">
-      <a
-        onClick={e => {
-          e.preventDefault();
-          setPatientListSortOrder(!sortInAsc);
-        }}
-      >
-        <span className="icon is-small" style={{ verticalAlign: 'middle' }}>
-          <i className={`fa fa-sort-${sortInAsc ? 'asc' : 'desc'}`} />
-        </span>
-      </a>
-    </p>
+    <SortControl
+      field={sortBy}
+      asc={sortInAsc}
+      onFieldChange={setPatientListSortField}
+      onOrderChange={setPatientListSortOrder}
+    />
   </div>
 );
