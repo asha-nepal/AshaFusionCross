@@ -11,6 +11,9 @@ const config = merge(baseConfig, {
     path: path.resolve('./build'),
     publicPath: '/',
   },
+  resolve: {
+    mainFiles: ['electron', 'index'],
+  },
   plugins: [
     new CopyWebpackPlugin([
       { from: 'node_modules/pouchdb/dist/pouchdb.min.js' },

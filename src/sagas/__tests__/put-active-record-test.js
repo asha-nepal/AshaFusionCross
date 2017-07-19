@@ -7,8 +7,8 @@ jest.unmock('mockdate');
 
 import deepFreeze from 'deep-freeze';
 import MockDate from 'mockdate';
-import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
+import PouchDB from 'lib/pouchdb';
 
 import {
   requestPutRecord,
