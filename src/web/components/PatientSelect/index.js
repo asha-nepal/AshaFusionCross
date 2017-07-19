@@ -34,6 +34,10 @@ export default class PatientSelect extends Component {
         <Header logout={logout} />
         <section className="section">
           <div className="container">
+            <div className="block">
+              <AddButton />
+            </div>
+
             <nav className="panel">
               <div className="panel-block">
                 <PatientListFilter />
@@ -47,8 +51,6 @@ export default class PatientSelect extends Component {
               )}
             </nav>
           </div>
-
-          <AddButton />
         </section>
       </div>
     );
