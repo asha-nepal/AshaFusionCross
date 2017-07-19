@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import TextSearchInput from './TextSearchInput';
 import DatePicker from '../DatePicker';
 import type { Moment } from 'moment';
 
@@ -24,21 +25,10 @@ export default ({
   setFilterDate: (date: {startDate: Moment, endDate: Moment}) => void,
 }) => (
   <div className="control is-grouped">
-    <p className="control has-icon is-expanded">
-      <input
-        type="text"
-        className="input withclear"
-        value={filter}
-        onChange={e => onFilterChange(e.target.value)}
-      />
-      <span className="clearbuttonwrapper">
-        <i
-          className="fa fa-times-circle clearbutton"
-          onClick={() => onFilterChange('')}
-        />
-      </span>
-      <i className="fa fa-search" />
-    </p>
+    <TextSearchInput
+      value={filter}
+      onChange={onFilterChange}
+    />
     <div>
       <DatePicker
         date={filterDate}
