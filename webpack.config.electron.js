@@ -2,14 +2,17 @@ const path = require('path');
 const merge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
-const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
 const baseConfig = require('./webpack.config.base');
 
 const config = merge(baseConfig, {
+  target: 'electron-renderer',
   output: {
     filename: 'app.js',
     path: path.resolve('./build'),
     publicPath: '/',
+  },
+  resolve: {
+    mainFiles: ['electron', 'index'],
   },
   plugins: [
     new CopyWebpackPlugin([
@@ -20,20 +23,16 @@ const config = merge(baseConfig, {
     ]),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
-        'pouchdb.authentication.min.js',
         'pouchdb.min.js',
+        'pouchdb.authentication.min.js',
       ],
       append: false,
     }),
   ],
-  debug: true,
 });
 
 if (process.env.NODE_ENV === 'production') {
   config.devtool = false;
-  config.debug = false;
 }
-
-config.target = webpackTargetElectronRenderer(config);
 
 module.exports = config;

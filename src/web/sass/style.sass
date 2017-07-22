@@ -6,9 +6,11 @@ $fa-font-path: "~font-awesome/fonts"
 
 @import "~react-dates/lib/css/_datepicker"
 
+@import "loading"
 @import "./form"
 @import "./design"
 @import "./checkgroup"
+@import "./attachment"
 @import "./print"
 
 a.inverse
@@ -41,3 +43,17 @@ a.inverse
   color: #D5D5D5
   &:hover
     color: #000000
+
+p + div
+  div.block
+    .DateInput
+      font-size: 12px
+
+    .DateInput__display-text
+      height: 16px
+      line-height: 1.5
+      padding-top: 0
+      text-align: center
+
+    .button
+      height: 34px

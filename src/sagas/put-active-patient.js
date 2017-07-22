@@ -17,7 +17,7 @@ export function* putActivePatient(db: PouchInstance, cb: ?(patient: PatientObjec
   const records = yield select(state => state.activeRecords);
   const { loggedInUser } = yield select(state => state.auth);
 
-  const now = (new Date()).getTime();  // Unix Millisecond Timestamp
+  const now = Date.now();  // Unix Millisecond Timestamp
 
   try {
     const res = yield call([db, db.put], {

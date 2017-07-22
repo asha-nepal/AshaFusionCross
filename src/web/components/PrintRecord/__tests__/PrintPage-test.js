@@ -1,7 +1,6 @@
 /* eslint-env jest */
 
 jest.unmock('../PrintPage');
-jest.unmock('../lodash.get');
 
 import PrintPage from '../PrintPage';
 

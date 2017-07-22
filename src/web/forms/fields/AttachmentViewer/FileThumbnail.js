@@ -10,19 +10,15 @@ export default ({
 }) => (
   <a
     title={label}
-    style={{
-      display: 'block',
-      textAlign: 'center',
-      wordWrap: 'break-word',
-    }}
+    className="image is-128x128 attachment-file"
     onClick={e => {
       e.preventDefault();
       onClick();
     }}
   >
-    <span className="icon is-large">
+    <span className="icon">
       <i className="fa fa-file" />
     </span>
-    {label}
+    <span className="filename">{label}</span>
   </a>
 );
