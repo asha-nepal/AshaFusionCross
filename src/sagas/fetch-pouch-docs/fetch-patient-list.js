@@ -16,7 +16,7 @@ function map(doc) {
   }
 }
 
-const ddocName = 'patients_records_00000';
+const ddocName = 'patients_records_00000'; // Versioning of the design document
 
 const ddoc = {
   _id: `_design/${ddocName}`,
@@ -27,14 +27,14 @@ const ddoc = {
   },
 };
 
-function reduceRecordsAndSetLastRecordUpdatedAt(patientsAndRecords) {
-  const records = patientsAndRecords.rows.reduce((a, b) => {
+export function reduceRecordsAndSetLastRecordUpdatedAt(patientsAndRecords) {
+  const patients = patientsAndRecords.rows.reduce((a, b) => {
     if (b.key[1] == null) {
-      // patient
+      // If b is a patient
       return a.concat(b.doc);
     }
 
-    // record related to the patient
+    // If b is a record related to the patient
     const lastPatient = a[a.length - 1];
 
     const updatedAt = b.key[2] || b.key[1];
@@ -48,7 +48,7 @@ function reduceRecordsAndSetLastRecordUpdatedAt(patientsAndRecords) {
     return a;
   }, []);
 
-  return records;
+  return patients;
 }
 
 export function pouchFetchPatientList(db: PouchInstance): Promise<Array<PatientObject>> {

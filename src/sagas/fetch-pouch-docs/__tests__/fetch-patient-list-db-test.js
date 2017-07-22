@@ -9,6 +9,7 @@ import PouchDB from 'pouchdb';
 PouchDB.plugin(require('pouchdb-adapter-memory'));
 import {
   pouchFetchPatientList,
+  reduceRecordsAndSetLastRecordUpdatedAt,
 } from '../fetch-patient-list';
 
 const objectContaining = jasmine.objectContaining;
@@ -62,5 +63,48 @@ describe('pouchFetchPatientList', () => {
     })
     .catch(err => done.fail(err))
     .then(done);
+  });
+});
+
+describe('reduceRecordsAndSetLastRecordUpdatedAt', () => {
+  it('sets patient.$last_record_updated_at', () => {
+    // It is assumed that PouchDB.query() returns the result of the following form
+    const pouchFetchResult = {
+      rows: [
+        {
+          key: ['patient_1', null, null],
+          doc: { _id: 'patient_1' },
+        },
+        {
+          key: ['record_1_1', 1100, 1101],
+          doc: {},
+        },
+        {
+          key: ['record_1_2', 1200, 1201],
+          doc: {},
+        },
+        {
+          key: ['patient_2', null, null],
+          doc: { _id: 'patient_2' },
+        },
+        {
+          key: ['record_2_1', 2100, null],
+          doc: {},
+        },
+        {
+          key: ['record_2_2', 2200, null],
+          doc: {},
+        },
+      ],
+    };
+
+    const result = reduceRecordsAndSetLastRecordUpdatedAt(pouchFetchResult);
+
+    const expected = [
+      { _id: 'patient_1', $last_record_updated_at: 1201 },
+      { _id: 'patient_2', $last_record_updated_at: 2200 },
+    ];
+
+    expect(result).toEqual(expected);
   });
 });
