@@ -80,16 +80,24 @@ function generateRandomRecord() {
 }
 
 for (let iPatient = 0; iPatient < nPatients; ++iPatient) {
-  const now = chance.integer({ min: dateBegin.valueOf(), max: dateEnd.valueOf() });
+  const recordCreationTiems = [];
+  for (let iRecord = 0; iRecord < nRecordsPerPatient; ++iRecord) {
+    recordCreationTiems[iRecord] =
+      chance.integer({ min: dateBegin.valueOf(), max: dateEnd.valueOf() });
+  }
+  recordCreationTiems.sort();
+  const patientCreationTime = recordCreationTiems[0];
 
   randomstringPromise(16)
   .then((patientIdBody) => {
     const patient = Object.assign(generateRandomPersonality(), {
       _id: `patient_${patientIdBody}`,
       type: 'patient',
-      $created_at: now,
-      $updated_at: now,
+      $created_at: patientCreationTime,
+      $updated_at: patientCreationTime,
     });
+
+    console.log(patient);
 
     db.put(patient)
     .then((resPatient) => {
@@ -99,8 +107,8 @@ for (let iPatient = 0; iPatient < nPatients; ++iPatient) {
           const record = Object.assign(generateRandomRecord(), {
             _id: `record_${patientIdBody}_${recordIdBody}`,
             type: 'record',
-            $created_at: now,
-            $updated_at: now,
+            $created_at: recordCreationTiems[iRecord],
+            $updated_at: recordCreationTiems[iRecord],
           });
 
           db.put(record)
