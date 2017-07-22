@@ -18,14 +18,9 @@ export const getRecordListForStats = createSelector(
     if (date.startDate == null && date.endDate == null) return recordList;
 
     let filteredRecordList = recordList.filter(record => record.$updated_at);
-    if (date.startDate) {
-      filteredRecordList = filteredRecordList
-        .filter(record => moment(record.$updated_at).isAfter(date.startDate));
-    }
-    if (date.endDate) {
-      filteredRecordList = filteredRecordList
-        .filter(record => moment(record.$updated_at).isBefore(date.endDate));
-    }
+    filteredRecordList = filteredRecordList
+      .filter(record =>
+        moment(record.$updated_at).isBetween(date.startDate, date.endDate, 'day', '[]'));
 
     return filteredRecordList;
   }

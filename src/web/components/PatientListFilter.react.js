@@ -1,20 +1,27 @@
 /* @flow */
 
 import React from 'react';
+import DatePicker from './DatePicker';
+import type { Moment } from 'moment';
+
 export default ({
   filter,
   sortBy,
   sortInAsc,
+  filterDate,
   setPatientListSortField,
   setPatientListSortOrder,
   onFilterChange,
+  setFilterDate,
 }: {
   filter: string,
   sortBy: string,
   sortInAsc: boolean,
+  filterDate: {startDate: Moment, endDate: Moment},
   setPatientListSortField: (sortBy: string) => void,
   setPatientListSortOrder: (sortInAsc: boolean) => void,
   onFilterChange: (newFilter: string) => void,
+  setFilterDate: (date: {startDate: Moment, endDate: Moment}) => void,
 }) => (
   <div className="control is-grouped">
     <p className="control has-icon is-expanded">
@@ -32,6 +39,12 @@ export default ({
       </span>
       <i className="fa fa-search" />
     </p>
+    <div>
+      <DatePicker
+        date={filterDate}
+        onDatesChange={setFilterDate}
+      />
+    </div>
     <span className="form-static">Sort:</span>
     <p className="control">
       <span className="select">
