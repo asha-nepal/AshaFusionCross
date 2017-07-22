@@ -37,6 +37,11 @@ argv.option([
     short: 'e',
     type: 'date',
   },
+  {
+    name: 'verbose',
+    short: 'v',
+    type: 'boolean',
+  },
 ]);
 
 const options = argv.run().options;
@@ -45,6 +50,7 @@ const nPatients = options['n-patients'];
 const nRecordsPerPatient = options['n-records'];
 const dateBegin = options['date-begin'] || moment({ hour: 0, minute: 0, seconds: 0 });
 const dateEnd = options['date-end'] || moment({ hour: 23, minute: 59, seconds: 59 });
+const verbose = options.verbose;
 
 if (!database || !nPatients || !nRecordsPerPatient) {
   argv.help();
@@ -97,7 +103,7 @@ for (let iPatient = 0; iPatient < nPatients; ++iPatient) {
       $updated_at: patientCreationTime,
     });
 
-    console.log(patient);
+    if (verbose) console.log(patient);
 
     db.put(patient)
     .then((resPatient) => {
@@ -113,11 +119,11 @@ for (let iPatient = 0; iPatient < nPatients; ++iPatient) {
 
           db.put(record)
           .then((resRecord) => {
-            console.log(resRecord);
+            if (verbose) console.log(resRecord);
           });
         });
       }
-      console.log(resPatient);
+      if (verbose) console.log(resPatient);
     });
   });
 }
