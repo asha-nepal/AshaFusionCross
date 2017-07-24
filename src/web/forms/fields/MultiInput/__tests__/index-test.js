@@ -2,6 +2,7 @@
 
 jest.unmock('react-redux');
 jest.unmock('../index');
+jest.unmock('../RowComponent');
 
 import { mount } from 'enzyme';
 import React from 'react';
