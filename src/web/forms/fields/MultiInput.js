@@ -82,6 +82,12 @@ const RowComponent = ({
   </p>
 );
 
+export function asArray(value) {
+  if (value == null) return [];
+  if (Array.isArray(value)) return value;
+  return [value];
+}
+
 export class MultiInputComponent extends Component {
   constructor(props: Props) {
     super(props);
@@ -112,7 +118,7 @@ export class MultiInputComponent extends Component {
       return <ReadonlyMultiInput label={label} values={values} />;
     }
 
-    const _values = values || [];
+    const _values = asArray(values);
     const inputNodes = [];
 
     return (
