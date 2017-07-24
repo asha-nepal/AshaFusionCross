@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 jest.unmock('react-redux');
-jest.unmock('../MultiInput');
+jest.unmock('../index');
 
 import { mount } from 'enzyme';
 import React from 'react';
@@ -9,7 +9,7 @@ import React from 'react';
 import {
   MultiInputComponent,
   asArray,
-} from '../MultiInput';
+} from '../index';
 
 describe('<MultiInputComponent />', () => {
   it('shows <input />s according to given values', () => {
