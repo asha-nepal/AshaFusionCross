@@ -17,7 +17,7 @@ type Props = {
   onRemoveItemRequested: (index: number) => void,
 };
 
-export function asArray(value) {
+export function asArray(value: any): Array<any> {
   if (value == null) return [];
   if (Array.isArray(value)) return value;
   return [value];
