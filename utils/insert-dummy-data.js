@@ -86,13 +86,13 @@ function generateRandomRecord() {
 }
 
 for (let iPatient = 0; iPatient < nPatients; ++iPatient) {
-  const recordCreationTiems = [];
+  const recordCreationTimes = [];
   for (let iRecord = 0; iRecord < nRecordsPerPatient; ++iRecord) {
-    recordCreationTiems[iRecord] =
+    recordCreationTimes[iRecord] =
       chance.integer({ min: dateBegin.valueOf(), max: dateEnd.valueOf() });
   }
-  recordCreationTiems.sort();
-  const patientCreationTime = recordCreationTiems[0];
+  recordCreationTimes.sort();
+  const patientCreationTime = recordCreationTimes[0];
 
   randomstringPromise(16)
   .then((patientIdBody) => {
@@ -113,8 +113,8 @@ for (let iPatient = 0; iPatient < nPatients; ++iPatient) {
           const record = Object.assign(generateRandomRecord(), {
             _id: `record_${patientIdBody}_${recordIdBody}`,
             type: 'record',
-            $created_at: recordCreationTiems[iRecord],
-            $updated_at: recordCreationTiems[iRecord],
+            $created_at: recordCreationTimes[iRecord],
+            $updated_at: recordCreationTimes[iRecord],
           });
 
           db.put(record)
