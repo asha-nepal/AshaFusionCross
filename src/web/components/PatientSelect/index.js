@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import Header from '../../containers/PatientSelect/Header';
-import PatientListFilter from '../../containers/PatientListFilter.react';
+import PatientListFilter from '../../containers/PatientListFilter';
+import AddButton from './AddButton';
 
 export default class PatientSelect extends Component {
   componentWillMount() {
@@ -34,18 +34,20 @@ export default class PatientSelect extends Component {
         <Header logout={logout} />
         <section className="section">
           <div className="container">
+            <div className="block is-clearfix">
+              <AddButton />
+
+              <Link to="stats" className="button is-default is-pulled-right">
+                <span className="icon">
+                  <i className="fa fa-table" />
+                </span>
+                <span>Stats</span>
+              </Link>
+            </div>
+
             <nav className="panel">
               <div className="panel-block">
-                <div className="columns">
-                  <div className="column">
-                    <PatientListFilter />
-                  </div>
-                  <div className="column is-one-quarter-tablet">
-                    <Link to={'/patient/'} className="button is-primary is-outlined is-fullwidth">
-                      New
-                    </Link>
-                  </div>
-                </div>
+                <PatientListFilter />
               </div>
               {patientList.map((patient) =>
                 <Link
