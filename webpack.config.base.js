@@ -7,6 +7,8 @@ const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plug
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
   entry: [
     'babel-polyfill',
@@ -42,7 +44,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 1024,
-          name: 'assets/img/[name].[ext]',
+          name: 'assets/img/[name]-[hash].[ext]',
         },
       },
       {
@@ -84,7 +86,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: isProd ? 'style-[hash].css' : 'style.css',
       allChunks: true,
     }),
     new HtmlWebpackPlugin({
@@ -102,7 +104,7 @@ module.exports = {
   devtool: '#eval-source-map',
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (isProd) {
   module.exports.devtool = '#source-map';
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.LoaderOptionsPlugin({

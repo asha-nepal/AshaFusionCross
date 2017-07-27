@@ -5,9 +5,11 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = merge(baseConfig, {
   output: {
-    filename: 'app.js',
+    filename: isProd ? 'app-[hash].js' : 'app.js',
     path: path.resolve('./public'),
     publicPath: '/',
   },
@@ -28,7 +30,7 @@ module.exports = merge(baseConfig, {
   },
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (isProd) {
   module.exports.plugins = (module.exports.plugins || []).concat([
     new FaviconsWebpackPlugin({
       logo: path.resolve('./assets/img/logo.svg'),
