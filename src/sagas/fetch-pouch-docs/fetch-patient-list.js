@@ -1,3 +1,5 @@
+import pouchFetchDocs from './fetch-docs';
+
 /* @flow */
 /* global emit */
 declare function emit(key: string | Array<any>): void;
@@ -57,5 +59,9 @@ export function pouchFetchPatientList(db: PouchInstance): Promise<Array<PatientO
     .catch(() => db.put(ddoc)
       .then(() => db.query(`${ddocName}/${ddocName}`, { include_docs: true }))
       .then(reduceRecordsAndSetLastRecordUpdatedAt)
+      .catch(() => {
+        console.error('Please log in as an administrator once to set advanced data fetching method.');  // eslint-disable-line max-len
+        return pouchFetchDocs(db, 'patient_'); // Fall back to normal fetch method
+      })
     );
 }

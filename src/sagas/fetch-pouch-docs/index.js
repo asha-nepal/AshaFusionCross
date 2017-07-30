@@ -10,18 +10,11 @@ import {
 import {
   capitalize,
 } from 'utils';
+import pouchFetchDocs from './fetch-docs';
 import {
   pouchFetchPatientList,
 } from './fetch-patient-list';
 
-function pouchFetchDocs(db: PouchInstance, prefix: string): Promise<Array<PouchDocType>> {
-  return db.allDocs({
-    include_docs: true,
-    startkey: prefix,
-    endkey: `${prefix}\uffff`,
-  })
-  .then(res => res.rows.map(r => r.doc));
-}
 
 export function* fetchPouchDocs(
   db: PouchInstance,
