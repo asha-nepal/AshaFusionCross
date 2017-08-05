@@ -200,3 +200,19 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+--------------------------------------------------------------------------------
+
+This product includes code from the React Native.
+
+* android/* are based on the code from the React Native.
+* ios/* are based on the code from the React Native.
+* .buckconfig is based on the code from the React Native.
+* .flowconfig is based on the code from the React Native.
+* .watchmanconfig is based on the code from the React Native.
+* .flowconfig is based on the code from the React Native.
+* app.json is based on the code from the React Native.
+
+Copyright: 2015-present, Facebook, Inc. All rights reserved.
+Homepage: https://github.com/facebook/react-native
+License: 3-clause BSD
