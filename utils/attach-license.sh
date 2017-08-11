@@ -3,6 +3,8 @@
 # Usage:
 # $ find src -name "*.js" | xargs -I{} ./utils/attach-license.sh {} contributors.csv
 
+PUBLISH_YEAR=2017
+
 function getSedForNames() {
     local cmd='sed'
 
@@ -26,22 +28,17 @@ function getCopyrights() {
     fi
 
     local filename=$1
-    local yearSortFlag=''
-    local cmdContributorsWithStartYear="git log --follow --date=format:%Y --pretty=format:'%ad %an' ${filename} | ${sedNames} | sort -k2 -k1n${yearSortFlag} | uniq -c -f 1 | sort -k1nr | sed -e 's/^[ ]*[0-9]* //'"
-    local yearSortFlag='r'
-    local cmdContributorsWithEndYear="git log --follow --date=format:%Y --pretty=format:'%ad %an' ${filename} | ${sedNames} | sort -k2 -k1n${yearSortFlag} | uniq -c -f 1 | sort -k1nr | sed -e 's/^[ ]*[0-9]* //'"
-    local contributorsWithStartYear=($(eval $cmdContributorsWithStartYear))
-    local contributorsWithEndYear=($(eval $cmdContributorsWithEndYear))
+    local cmdContributors="git log --follow --pretty=format:'%an' ${filename} | ${sedNames} | sort | uniq -c -f 1 | sort -k1nr | sed -e 's/^[ ]*[0-9]* //'"
+    local contributors=($(eval $cmdContributors))
 
     local copyrights=''
-    for ((i=0;i<${#contributorsWithStartYear[@]};i++)); do
-        local copyright=$(echo ${contributorsWithStartYear[i]} | cut -d ' ' -f 1)-${contributorsWithEndYear[i]}
-        local copyrightCanonical=$(echo $copyright | sed -E 's/([0-9]{4})-\1/\1/')
+    for ((i=0;i<${#contributors[@]};i++)); do
+        local copyright=$PUBLISH_YEAR" "$(echo ${contributors[i]})
 
         if [ $i -eq 0 ]; then
-            copyrights=${copyrightCanonical}
+            copyrights=${copyright}
         else
-            copyrights=${copyrights}"\n"${copyrightCanonical}
+            copyrights=${copyrights}"\n"${copyright}
         fi
     done
 
