@@ -55,13 +55,8 @@ export default class extends Component {
               </span>
               {isLoggedIn &&
                 <div className={`nav-right nav-menu${this.state.isMenuOpen ? ' is-active' : ''}`}>
-                  <Link className="nav-item" to="stats">Stats</Link>
-                  <span className="nav-item">|</span>
-
-                  {isAdmin && <Link className="nav-item" to="admin">Admin</Link>}
-                  {isAdmin && <span className="nav-item">|</span>}
-
                   <p className="nav-item">{loggedInUser || '(anonymous user)'}</p>
+                  {isAdmin && <Link className="nav-item" to="admin">Admin</Link>}
                   {logout &&
                     <a
                       className="nav-item"

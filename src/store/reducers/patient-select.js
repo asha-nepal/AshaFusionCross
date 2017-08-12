@@ -4,12 +4,14 @@ import {
   SET_PATIENT_LIST_FILTER,
   SET_PATIENT_LIST_SORT_FIELD,
   SET_PATIENT_LIST_SORT_ORDER,
+  SET_PATIENT_LIST_TIME_FILTER,
 } from '../../actions';
 
 const initialState: PatientSelectState = {
   filter: '',
   sortBy: 'name',
   sortInAsc: true,
+  filterDate: { startDate: null, endDate: null },
 };
 
 export default function (
@@ -30,6 +32,11 @@ export default function (
     case SET_PATIENT_LIST_SORT_ORDER:
       return Object.assign({}, state, {
         sortInAsc: action.payload.sortInAsc,
+      });
+
+    case SET_PATIENT_LIST_TIME_FILTER:
+      return Object.assign({}, state, {
+        filterDate: action.payload.date,
       });
 
     default:

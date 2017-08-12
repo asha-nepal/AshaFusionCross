@@ -23,3 +23,11 @@ export const setPatientListSortOrder = (sortInAsc: boolean): SetPatientListSortO
     sortInAsc,
   },
 });
+
+export const SET_PATIENT_LIST_TIME_FILTER = 'SET_PATIENT_LIST_TIME_FILTER';
+export const setPatientListTimeFilter = (date: Moment): SetPatientListTimeFilterAction => ({
+  type: SET_PATIENT_LIST_TIME_FILTER,
+  payload: {
+    date,
+  },
+});

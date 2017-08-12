@@ -23,6 +23,7 @@
     "csv-stringify": "^1.0.4",
     "express": "^4.14.0",
     "if-env": "^1.0.0",
+    "pouchdb": "^6.3.4",
     "randomstring-promise": "0.0.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
@@ -37,6 +38,7 @@
     "react-native-vector-icons": "^4.0.1"
   },
   "devDependencies": {
+    "argv": "0.0.2",
     "babel-eslint": "^7.2.3",
     "babel-jest": "19.0.0",
     "babel-loader": "^6.2.4",
@@ -52,6 +54,7 @@
     "balloon-css": "^0.3.0",
     "blob-polyfill": "^1.0.20150320",
     "bulma": "^0.2.3",
+    "chance": "^1.0.9",
     "classnames": "^2.2.5",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.2",
@@ -93,7 +96,7 @@
     "pouchdb-authentication": "^0.5.3",
     "react-addons-perf": "^15.3.1",
     "react-addons-test-utils": "^15.1.0",
-    "react-dom": "^15.0.2",
+    "react-dom": "^15.5.4",
     "react-native-drawer": "^2.3.0",
     "react-redux": "^4.4.5",
     "react-redux-form": "^1.0.13",
