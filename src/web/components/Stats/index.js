@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDataGrid from 'react-data-grid';
 import Header from '../common/Header';
 import Content from '../common/Content';
-import DatePicker from './DatePicker';
+import DatePicker from '../DatePicker';
 import StatsList from './StatsList';
 import CsvExporter from './CsvExporter';
 import type { Moment } from 'moment';

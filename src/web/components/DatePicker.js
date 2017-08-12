@@ -1,8 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
 import { DateRangePicker } from 'react-dates';
-import type { Moment } from 'moment';
 import { START_DATE, END_DATE } from 'react-dates/constants';
+import type { Moment } from 'moment';
 
 type Props = {
   date: Moment,
@@ -30,16 +30,22 @@ export default class DatePicker extends Component {
       onDatesChange,
     } = this.props;
 
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const opts = {
+      numberOfMonths: isMobile ? 1 : 2,
+      withPortal: isMobile,
+    };
+
     return (
       <div className="block">
         <DateRangePicker
-          id="date_input"
           startDate={date.startDate}
           endDate={date.endDate}
           focusedInput={this.state.focused}
           onDatesChange={onDatesChange}
           onFocusChange={(focused) => { this.setState({ focused }); }}
           isOutsideRange={() => false}
+          {...opts}
         />
         <a
           className="button is-large"
