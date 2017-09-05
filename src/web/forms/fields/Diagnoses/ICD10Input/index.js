@@ -1,10 +1,26 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import ICD10Modal from './ICD10Modal';
 import ICD10Display from './ICD10Display';
-import { ICD10 } from '../../../../../data';
+import { getICD10 } from '../../../../../data';
 import theme from './theme';
 
 
@@ -46,9 +62,15 @@ export default class extends Component {
     isModalOpen: boolean,
   }
 
-  onSuggestionsUpdateRequested = ({ value }: { value: string }) => {
+  onSuggestionsFetchRequested = ({ value }: { value: string }) => {
     this.setState({
-      suggestions: getSuggestions(ICD10, value),
+      suggestions: getSuggestions(getICD10(), value),
+    });
+  }
+
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: [],
     });
   }
 
@@ -57,9 +79,12 @@ export default class extends Component {
     this.props.onChange(suggestion.code);
   }
 
-  onInputBlur = (event: Object, { focusedSuggestion }: { focusedSuggestion: ICD10Type }) => {
-    if (focusedSuggestion) {
-      this.props.onChange(focusedSuggestion.code);
+  onInputBlur = (
+    event: Object,
+    { highlightedSuggestion }: { highlightedSuggestion: ICD10Type }
+  ) => {
+    if (highlightedSuggestion) {
+      this.props.onChange(highlightedSuggestion.code);
     }
   }
 
@@ -104,8 +129,9 @@ export default class extends Component {
         <div className="control has-addons">
           <Autosuggest
             suggestions={this.state.suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={(suggestion) => suggestion.description}
-            onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
             renderSuggestion={(suggestion) => (
               <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
             )}

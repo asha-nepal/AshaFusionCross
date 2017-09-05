@@ -1,3 +1,20 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2017 Yuguan Xing
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 import { actions as formActions } from 'react-redux-form';
 
@@ -21,6 +38,7 @@ export {
   SET_PATIENT_LIST_FILTER, setPatientListFilter,
   SET_PATIENT_LIST_SORT_FIELD, setPatientListSortField,
   SET_PATIENT_LIST_SORT_ORDER, setPatientListSortOrder,
+  SET_PATIENT_LIST_TIME_FILTER, setPatientListTimeFilter,
 } from './patient-select';
 
 export {
@@ -51,8 +69,11 @@ export const fetchPatient = (patientId: string) => ({
 });
 
 export const PUT_ACTIVE_PATIENT = 'PUT_ACTIVE_PATIENT';
-export const putActivePatient = () => ({
+export const putActivePatient = (cb: ?(patient: PatientObject) => void) => ({
   type: PUT_ACTIVE_PATIENT,
+  payload: {
+    cb,
+  },
 });
 
 export const PUT_ACTIVE_RECORD = 'PUT_ACTIVE_RECORD';
@@ -62,8 +83,11 @@ export const putActiveRecord = (index: number) => ({
 });
 
 export const REMOVE_ACTIVE_PATIENT = 'REMOVE_ACTIVE_PATIENT';
-export const removeActivePatient = () => ({
+export const removeActivePatient = (cb: ?() => void) => ({
   type: REMOVE_ACTIVE_PATIENT,
+  payload: {
+    cb,
+  },
 });
 
 export const INIT_ACTIVE_PATIENT = 'INIT_ACTIVE_PATIENT';

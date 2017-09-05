@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* eslint-env jest */
 
 jest.unmock('reselect');
@@ -11,48 +27,59 @@ import {
 } from '../stats';
 
 describe('getRecordListForStats', () => {
-  it('selects records filtered by date', () => {
+  describe('record filtering by date', () => {
     const recordList = [
-      { _id: 'foo', $updated_at: moment([2017, 1, 25, 10, 0, 0]).valueOf() },
-      { _id: 'bar', $updated_at: moment([2017, 1, 26, 10, 0, 0]).valueOf() },
-      { _id: 'baz', $updated_at: moment([2017, 1, 27, 10, 0, 0]).valueOf() },
+      { _id: '0', $updated_at: moment([2017, 1, 25, 0, 0, 0]).valueOf() },
+      { _id: '1', $updated_at: moment([2017, 1, 25, 4, 0, 0]).valueOf() },
+      { _id: '2', $updated_at: moment([2017, 1, 25, 23, 59, 59]).valueOf() },
+      { _id: '3', $updated_at: moment([2017, 1, 26, 0, 0, 0]).valueOf() },
+      { _id: '4', $updated_at: moment([2017, 1, 26, 4, 0, 0]).valueOf() },
+      { _id: '5', $updated_at: moment([2017, 1, 26, 23, 59, 59]).valueOf() },
+      { _id: '6', $updated_at: moment([2017, 1, 27, 0, 0, 0]).valueOf() },
+      { _id: '7', $updated_at: moment([2017, 1, 27, 10, 0, 0]).valueOf() },
+      { _id: '8', $updated_at: moment([2017, 1, 27, 23, 59, 59]).valueOf() },
+      { _id: '9', $updated_at: moment([2017, 1, 28, 0, 0, 0]).valueOf() },
+      { _id: '10', $updated_at: moment([2017, 1, 28, 4, 0, 0]).valueOf() },
+      { _id: '11', $updated_at: moment([2017, 1, 28, 23, 59, 59]).valueOf() },
     ];
 
-    const state = {
-      recordList,
-      stats: {
-        date: {
-          startDate: moment([2017, 1, 26, 0, 0, 0]),
-          endDate: moment([2017, 1, 27, 0, 0, 0]),
-        },
-      },
-    };
+    [
+      [
+        moment([2017, 1, 26, 4, 0, 0]),
+        moment([2017, 1, 27, 4, 0, 0]),
+        ['3', '4', '5', '6', '7', '8'],
+      ],
+      [
+        null,
+        moment([2017, 1, 27, 4, 0, 0]),
+        ['0', '1', '2', '3', '4', '5', '6', '7', '8'],
+      ],
+      [
+        moment([2017, 1, 26, 4, 0, 0]),
+        null,
+        ['3', '4', '5', '6', '7', '8', '9', '10', '11'],
+      ],
+      [
+        null,
+        null,
+        ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+      ],
+    ].forEach(([startDate, endDate, expected]) => {
+      it('selects records filtered by date', () => {
+        const state = {
+          recordList,
+          stats: {
+            date: {
+              startDate,
+              endDate,
+            },
+          },
+        };
 
-    expect(getRecordListForStats(state))
-      .toEqual([
-        recordList[1],
-      ]);
-  });
-
-  it('returns records without filtering if date not specified', () => {
-    const recordList = [
-      { _id: 'foo', $updated_at: moment([2017, 1, 25, 10, 0, 0]).valueOf() },
-      { _id: 'bar', $updated_at: moment([2017, 1, 26, 10, 0, 0]).valueOf() },
-      { _id: 'baz', $updated_at: moment([2017, 1, 27, 10, 0, 0]).valueOf() },
-    ];
-
-    const state = {
-      recordList,
-      stats: {
-        date: {
-          startDate: null,
-          endDate: null,
-        },
-      },
-    };
-
-    expect(getRecordListForStats(state))
-      .toEqual([recordList[0], recordList[1], recordList[2]]);
+        expect(getRecordListForStats(state).map(r => r._id))
+          .toEqual(expected);
+      });
+    });
   });
 
   it('merges patient data', () => {

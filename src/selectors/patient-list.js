@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 
 import { createSelector } from 'reselect';
@@ -9,6 +25,8 @@ export const getPatientList = (state: Object) => state.patientList;
 
 export const getPatientSelectFilter = (state: Object) =>
   state.patientSelect.filter.trim().toLowerCase();
+export const getPatientSelectTimeRange = (state: Object) =>
+  state.patientSelect.filterDate;
 export const getPatientSelectQueryList = (state: Object) =>
   getPatientSelectFilter(state).split(' ').filter(q => q.length > 0);
 
@@ -27,17 +45,22 @@ export const checkPatientMatchesQueries = (queries: Array<string>, patient: Pati
     return false;
   });
 
-function isPatientOfToday(patient) {
-  const currentMoment = moment();
+function patientInTimeRange(timeRange, patient) {
+  const startDate = timeRange.startDate;
+  const endDate = timeRange.endDate;
   const patientCreatedMoment = moment(patient.$updated_at);
-  return currentMoment.isSame(patientCreatedMoment, 'day');
+  if (!startDate && !endDate) {
+    const currentMoment = moment();
+    return currentMoment.isSame(patientCreatedMoment, 'day');
+  }
+  return patientCreatedMoment.isBetween(startDate, endDate, 'day', []);
 }
 
 export const getFilteredPatientList = createSelector(
-  [getPatientList, getPatientSelectQueryList],
-  (patientList, queryList) => {
+  [getPatientList, getPatientSelectQueryList, getPatientSelectTimeRange],
+  (patientList, queryList, timeRange) => {
     if (queryList.length === 0) {
-      return patientList.filter(patient => isPatientOfToday(patient));
+      return patientList.filter(patient => patientInTimeRange(timeRange, patient));
     }
 
     return patientList.filter(patient => checkPatientMatchesQueries(queryList, patient));

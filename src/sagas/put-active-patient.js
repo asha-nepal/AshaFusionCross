@@ -1,5 +1,20 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { take, put, call, select } from 'redux-saga/effects';
-import history from '../web/history';
 import {
   PUT_ACTIVE_PATIENT,
   requestPutPatient,
@@ -11,14 +26,14 @@ import {
   alertError,
 } from '../actions';
 
-export function* putActivePatient(db: PouchInstance) {
+export function* putActivePatient(db: PouchInstance, cb: ?(patient: PatientObject) => void) {
   yield put(requestPutPatient());
 
   const patient = yield select(state => state.activePatient);
   const records = yield select(state => state.activeRecords);
   const { loggedInUser } = yield select(state => state.auth);
 
-  const now = (new Date()).getTime();  // Unix Millisecond Timestamp
+  const now = Date.now();  // Unix Millisecond Timestamp
 
   try {
     const res = yield call([db, db.put], {
@@ -45,8 +60,7 @@ export function* putActivePatient(db: PouchInstance) {
       yield put(addNewActiveRecord(patient._id));
     }
 
-    // Router (No effect on native)
-    yield call([history, history.replace], `/patient/${patient._id}`);
+    if (typeof cb === 'function') { cb(patient); }
 
     yield put(successPutPatient());
   } catch (error) {
@@ -58,8 +72,8 @@ export function* putActivePatient(db: PouchInstance) {
 
 export function* watchPutActivePatient() {
   while (true) {
-    yield take(PUT_ACTIVE_PATIENT);
+    const { payload } = yield take(PUT_ACTIVE_PATIENT);
     const db = yield select(state => state.db.instance);
-    yield call(putActivePatient, db);
+    yield call(putActivePatient, db, payload.cb);
   }
 }

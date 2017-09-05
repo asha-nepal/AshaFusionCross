@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* eslint-env jest, jasmine */
 
 jest.unmock('redux-saga/effects');
@@ -6,9 +22,8 @@ jest.unmock('../put-active-patient');
 jest.unmock('../../actions');
 
 import MockDate from 'mockdate';
-import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
-import history from '../../web/history';
+import PouchDB from 'lib/pouchdb';
 
 import {
   requestPutPatient,
@@ -36,6 +51,7 @@ describe('putActivePatient', () => {
 
   it('calls db.put(patient) with specified id and updates activePatient with new rev', () => {
     const db = new PouchDB();
+    const cb = jest.fn();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -51,7 +67,7 @@ describe('putActivePatient', () => {
       rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
     };
 
-    const saga = putActivePatient(db);
+    const saga = putActivePatient(db, cb);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -82,10 +98,9 @@ describe('putActivePatient', () => {
       .toEqual(put(alertInfo('Patient data updated')));
 
     expect(saga.next().value)
-      .toEqual(call([history, history.replace], '/patient/patient_1234'));
-
-    expect(saga.next().value)
       .toEqual(put(successPutPatient()));
+
+    expect(cb).toBeCalledWith(jasmine.objectContaining({ _id: 'patient_1234' }));
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });
@@ -124,6 +139,7 @@ describe('putActivePatient', () => {
 
   it('puts ADD_NEW_ACTIVE_RECORD if activeRecords is null', () => {
     const db = new PouchDB();
+    const cb = jest.fn();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -136,7 +152,7 @@ describe('putActivePatient', () => {
       rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
     };
 
-    const saga = putActivePatient(db);
+    const saga = putActivePatient(db, cb);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -154,10 +170,9 @@ describe('putActivePatient', () => {
       .toEqual(put(addNewActiveRecord('patient_1234')));
 
     expect(saga.next().value)
-      .toEqual(call([history, history.replace], '/patient/patient_1234'));
-
-    expect(saga.next().value)
       .toEqual(put(successPutPatient()));
+
+    expect(cb).toBeCalledWith(jasmine.objectContaining({ _id: 'patient_1234' }));
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });
@@ -165,6 +180,7 @@ describe('putActivePatient', () => {
 
   it('puts ADD_NEW_ACTIVE_RECORD if activeRecords.length === 0', () => {
     const db = new PouchDB();
+    const cb = jest.fn();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-9AF304BE281790604D1D8A4B0F4C9ADB',
@@ -177,7 +193,7 @@ describe('putActivePatient', () => {
       rev: '3-9AF304BE281790604D1D8A4B0F4C9ADB',
     };
 
-    const saga = putActivePatient(db);
+    const saga = putActivePatient(db, cb);
 
     expect(saga.next().value)
       .toEqual(put(requestPutPatient()));
@@ -195,10 +211,9 @@ describe('putActivePatient', () => {
       .toEqual(put(addNewActiveRecord('patient_1234')));
 
     expect(saga.next().value)
-      .toEqual(call([history, history.replace], '/patient/patient_1234'));
-
-    expect(saga.next().value)
       .toEqual(put(successPutPatient()));
+
+    expect(cb).toBeCalledWith(jasmine.objectContaining({ _id: 'patient_1234' }));
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });

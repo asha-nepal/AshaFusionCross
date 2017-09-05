@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
@@ -53,9 +69,15 @@ export default class extends React.Component {
     }
   }
 
-  onSuggestionsUpdateRequested = ({ value }: { value: string }) => {
+  onSuggestionsFetchRequested = ({ value }: { value: string }) => {
     this.setState({
       suggestions: getSuggestions(this.state.candidates, value),
+    });
+  }
+
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: [],
     });
   }
 
@@ -64,6 +86,9 @@ export default class extends React.Component {
     this.props.onChange({ target: { value: suggestion } });
   }
 
+  onInputChange = (event: Object, { newValue }: { newValue: string }) => {
+    this.props.onChange({ target: { value: newValue } });
+  }
 
   props: Props
 
@@ -72,11 +97,15 @@ export default class extends React.Component {
       <div className="control">
         <Autosuggest
           suggestions={this.state.suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           getSuggestionValue={s => s}
-          onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
           renderSuggestion={suggestion => <span>{suggestion}</span>}
           onSuggestionSelected={this.onSuggestionSelected}
-          inputProps={_.omit(this.props, 'candidates')}
+          inputProps={{
+            ..._.omit(this.props, 'candidates'),
+            onChange: this.onInputChange,
+          }}
           theme={theme}
         />
       </div>

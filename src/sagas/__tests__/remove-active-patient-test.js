@@ -1,12 +1,27 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* eslint-env jest, jasmine */
 
 jest.unmock('redux-saga/effects');
 jest.unmock('../remove-active-patient');
 jest.unmock('../../actions');
 
-import PouchDB from 'pouchdb';
 import { put, call } from 'redux-saga/effects';
-import history from '../../web/history';
+import PouchDB from 'lib/pouchdb';
 import {
   requestRemovePatient,
   successRemovePatient,
@@ -20,6 +35,7 @@ import {
 describe('removeActivePatient', () => {
   it('calls db.bulkDocs to remove patient and all related records at once', () => {
     const db = new PouchDB();
+    const cb = jest.fn();
     const mockPatient = {
       _id: 'patient_1234',
       _rev: '2-hogehoge',
@@ -43,7 +59,7 @@ describe('removeActivePatient', () => {
       { id: 'record_1234_9999', ok: true, rev: 'revrevrev' },
     ];
 
-    const saga = removeActivePatient(db);
+    const saga = removeActivePatient(db, cb);
 
     expect(saga.next().value)
       .toEqual(put(requestRemovePatient()));
@@ -75,10 +91,9 @@ describe('removeActivePatient', () => {
     saga.next(mockResponse);
 
     expect(saga.next().value)
-      .toEqual(call([history, history.push], '/'));
-
-    expect(saga.next().value)
       .toEqual(put(successRemovePatient()));
+
+    expect(cb).toBeCalled();
 
     expect(saga.next())
       .toEqual({ done: true, value: undefined });
@@ -189,13 +204,14 @@ describe('removeActivePatient', () => {
 
   it('ignore invalid response about removing a record', () => {
     const db = new PouchDB();
+    const cb = jest.fn();
     const mockResponse = [
       { id: 'patient_1234', ok: true, rev: 'revrevrev' },
       { id: 'record_1234_8888', ok: false },
       { id: 'record_1234_9999', ok: true, rev: 'revrevrev' },
     ];
 
-    const saga = removeActivePatient(db);
+    const saga = removeActivePatient(db, cb);
 
     expect(saga.next().value)
       .toEqual(put(requestRemovePatient()));
@@ -206,7 +222,8 @@ describe('removeActivePatient', () => {
 
     saga.next(mockResponse);
 
-    expect(saga.next().value)
-      .toEqual(call([history, history.push], '/'));
+    saga.next();
+
+    expect(cb).toBeCalled();
   });
 });
