@@ -17,12 +17,16 @@
 /* eslint-env jest */
 
 jest.unmock('react-redux');
-jest.unmock('../MultiInput');
+jest.unmock('../index');
+jest.unmock('../RowComponent');
 
 import { mount } from 'enzyme';
 import React from 'react';
 
-import { MultiInputComponent } from '../MultiInput';
+import {
+  MultiInputComponent,
+  asArray,
+} from '../index';
 
 describe('<MultiInputComponent />', () => {
   it('shows <input />s according to given values', () => {
@@ -78,5 +82,32 @@ describe('<MultiInputComponent />', () => {
 
     targetInput.simulate('change', { target: { value: 'a' } });
     expect(onAddItemRequested).toBeCalledWith('a');
+  });
+
+  it('shows single <input /> if a scalar value given', () => {
+    const wrapper = mount(
+      <MultiInputComponent
+        values={'XXX'}
+      />
+    );
+
+    const inputs = wrapper.find('input');
+    expect(inputs.length).toEqual(2);
+    expect(inputs.at(0).prop('value')).toEqual('XXX');
+  });
+});
+
+describe('asArray()', () => {
+  it('returns input as it is if an array', () => {
+    expect(asArray([1, 2, 3])).toEqual([1, 2, 3]);
+  });
+
+  it('converts scalar value to an array which contains it', () => {
+    expect(asArray(42)).toEqual([42]);
+  });
+
+  it('converts null and undefined to an empty array', () => {
+    expect(asArray(null)).toEqual([]);
+    expect(asArray(undefined)).toEqual([]);
   });
 });
