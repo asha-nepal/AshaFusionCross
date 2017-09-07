@@ -9,7 +9,7 @@ jest.unmock('../dform');
 
 import Immutable from 'immutable';
 import { call, put } from 'redux-saga/effects';
-import PouchDB from 'pouchdb';
+import PouchDB from 'lib/pouchdb';
 import {
   setDformStyleForm,
   alertInfo,
