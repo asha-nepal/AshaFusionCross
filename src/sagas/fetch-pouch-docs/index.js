@@ -27,15 +27,11 @@ import {
 import {
   capitalize,
 } from 'utils';
+import pouchFetchDocs from './fetch-docs';
+import {
+  pouchFetchPatientList,
+} from './fetch-patient-list';
 
-function pouchFetchDocs(db: PouchInstance, prefix: string): Promise<Array<PouchDocType>> {
-  return db.allDocs({
-    include_docs: true,
-    startkey: prefix,
-    endkey: `${prefix}\uffff`,
-  })
-  .then(res => res.rows.map(r => r.doc));
-}
 
 export function* fetchPouchDocs(
   db: PouchInstance,
@@ -46,11 +42,18 @@ export function* fetchPouchDocs(
 
   yield put(requestFetchingPouchDocs(name));
   try {
-    const data: Array<PouchDocType> = yield call(pouchFetchDocs, db, prefix);
+    // TODO: fetching patient is a exception: has to use the same function
+    const fetchFunc = prefix === 'patient_' ? pouchFetchPatientList : pouchFetchDocs;
+
+    const data: Array<PouchDocType> = yield call(fetchFunc, db, prefix);
     yield put(alertInfo(capitalize(`${label && `${label} `}loaded`)));
     yield put(successFetchingPouchDocs(name, data));
   } catch (error) {
-    yield put(alertError(`Failed loading${label && ` ${label}`}`));
+    if (error.status === 401) {
+      yield put(alertError(`Failed loading${label && ` ${label}`} (Unauthorized)`));
+    } else {
+      yield put(alertError(`Failed loading${label && ` ${label}`}`));
+    }
     yield put(failFetchingPouchDocs(name, error));
   }
 }
