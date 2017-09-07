@@ -206,7 +206,7 @@ export default class PatientView extends Component {
                       return null;
                     }}
                     onFormsSave={putDformStyles}
-                    customizable
+                    // customizable // TODO: Temporarily disabled
                   />
                 </div>
               )}
