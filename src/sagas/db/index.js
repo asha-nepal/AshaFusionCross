@@ -1,14 +1,26 @@
-const PouchDB = (typeof window !== 'undefined' && window.PouchDB)
-  ? window.PouchDB
-  : require('pouchdb').plugin(require('pouchdb-authentication'));
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import { take, call, put, select, race } from 'redux-saga/effects';
-import { eventChannel, END } from 'redux-saga';
+import { take, call, put, select, race, cancelled } from 'redux-saga/effects';
+import PouchDB from 'lib/pouchdb';
 import {
   checkAccessibility,
   alreadyLoggedIn,
   logout,
-} from './auth';
+} from '../auth';
 import {
   alertError,
   alertInfo,
@@ -16,54 +28,11 @@ import {
   DB_CONNECT_REQUEST,
   DB_DISCONNECT_REQUEST,
   dbSetInstance,
-  fetchPatientList,
-  changeActivePatient,
-  insertOrChangeActiveRecord,
   requestLogout,
   requestAnonymousLogin,
-} from '../actions';
-
-function createPouchChangeChannel(db: PouchInstance) {
-  return eventChannel(emit => {
-    const feed = db.changes({
-      since: 'now',
-      live: true,
-      include_docs: true,
-    })
-    .on('change', change => {
-      // handle change
-      emit({
-        type: 'change',
-        payload: {
-          change,
-        },
-      });
-    })
-    .on('complete', info => {
-      // changes() was canceled
-      emit({
-        type: 'complete',
-        payload: {
-          info,
-        },
-      });
-      feed.cancel();
-      emit(END);
-    })
-    .on('error', error => {
-      emit({
-        type: 'error',
-        error,
-      });
-      feed.cancel();
-      emit(END);
-    });
-
-    const unsubscribe = () => feed.cancel();
-
-    return unsubscribe;
-  });
-}
+} from '../../actions';
+import handlePouchChanges from './handle-pouch-changes';
+import createPouchChangeChannel from './create-pouch-change-channel';
 
 export function* watchOnPouchChanges(db: PouchInstance) {
   const pouchChannel = yield call(createPouchChangeChannel, db);
@@ -74,32 +43,19 @@ export function* watchOnPouchChanges(db: PouchInstance) {
 
       if (type === 'change') {
         const { change } = payload;
-        const doc = change.doc;
-
-        // For PatientSelect
-        if (doc.type === 'patient' || doc.type === 'record') {
-          yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
-        }
-
-        // For PatientView
-        const activePatientId = yield select(state => state.activePatient._id);
-        if (!activePatientId) { continue; }
-
-        if (doc._id === activePatientId) {
-          yield put(changeActivePatient(doc, { silent: true }));
-        } else if (doc.type === 'record') {
-          const activePatientIdBody = activePatientId.replace(/^patient_/, '');
-          const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
-          if (match && (match[1] === activePatientIdBody)) {
-            yield put(insertOrChangeActiveRecord(doc, { silent: true }));
-          }
-        }
+        yield call(handlePouchChanges, change);
       } else if (error) {
         yield put(alertError(`ERR: change listener ${error.message || ''}`));
-        yield put(requestLogout());
       }
     }
   } finally {
+    if (yield cancelled()) {
+      // Called if this saga cancelled
+      pouchChannel.close();
+      console.log('PouchDB listener cancelled');
+    }
+
+    yield put(requestLogout());
     console.log('PouchDB listener terminated');
   }
 }
