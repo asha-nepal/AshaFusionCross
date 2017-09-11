@@ -21,6 +21,9 @@ import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 
+import EditableFieldWrapper from '../editor/EditableFieldWrapper';
+import type { FieldEditPropsType } from '../editor/type';
+
 export const ReadonlyTextArea = ({
   label,
   value,
@@ -45,17 +48,21 @@ export const TextAreaComponent = ({
   placeholder,
   readonly = false,
   onChange,
+  fieldEditProps,
 }: {
   value: ?string,
   label?: ?string,
-  style: ?Object,
-  placeholder: ?string,
-  readonly: boolean,
+  style?: Object,
+  placeholder?: string,
+  readonly?: boolean,
   onChange: (newValue: string) => void,
+  fieldEditProps?: FieldEditPropsType,
 }) => (readonly ? (
   <ReadonlyTextArea label={label} value={value} />
 ) : (
-  <p className="control" style={style}>
+  <EditableFieldWrapper
+    className="control" style={style} fieldEditProps={fieldEditProps}
+  >
     {label && <label className="label">{label}</label>}
     <textarea
       className="textarea"
@@ -63,8 +70,10 @@ export const TextAreaComponent = ({
       value={value || ''}
       onChange={e => onChange(e.target.value)}
     />
-  </p>
+  </EditableFieldWrapper>
 ));
+
+TextAreaComponent.fieldProps = [];
 
 const mapStateToProps = (state, ownProps) => ({
   value: _get(state, ownProps.model),

@@ -5,6 +5,8 @@ command-timeout: 60
 build:
   steps:
     - npm-install
+    - install-packages:
+      packages: libelf-dev
     - script:
       name: Install dev packages (work around)
       code: npm install babel-preset-es2015-minimal babel-preset-stage-0

@@ -36,6 +36,7 @@ type Props = {
   addNewActiveRecord: () => void,
   putActivePatient: () => void,
   putActiveRecord: (index: number) => void,
+  putDformStyles: () => void,
   removeActivePatient: () => void,
   isNew: boolean,
   isPuttingPatient: boolean,
@@ -74,6 +75,7 @@ export default class PatientView extends Component {
       addNewActiveRecord,
       putActivePatient,
       putActiveRecord,
+      putDformStyles,
       removeActivePatient,
       isNew,
       isPuttingPatient,
@@ -188,6 +190,8 @@ export default class PatientView extends Component {
                 <div className="container">
                   <DynamicForm
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
+                    formGroup="record"
+                    formStyleId={recordFormStyleId}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
                     getPreviousData={(path: string) => {
@@ -201,6 +205,8 @@ export default class PatientView extends Component {
 
                       return null;
                     }}
+                    onFormsSave={putDformStyles}
+                    // customizable // TODO: Temporarily disabled
                   />
                 </div>
               )}

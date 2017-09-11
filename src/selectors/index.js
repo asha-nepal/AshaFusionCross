@@ -27,6 +27,7 @@ export {
 } from './auth';
 
 export {
+  getDformStyles,
   getRecordFormStyles, getDefaultRecordFormStyleId, getRecordFormStyleId, getRecordFormStyle,
   getPatientFormStyle,
 } from './dform';

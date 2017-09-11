@@ -18,6 +18,8 @@
 
 jest.unmock('react-redux');
 jest.unmock('immutable');
+jest.unmock('react-dnd');
+jest.unmock('react-dnd-html5-backend');
 jest.unmock('../DynamicForm');
 
 import React from 'react';

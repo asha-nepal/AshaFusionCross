@@ -30,7 +30,7 @@ export const CheckboxComponent = ({
 }: {
   label: string,
   value: ?boolean,
-  readonly: boolean,
+  readonly?: boolean,
   size?: string,
   onChange: (newValue: boolean) => void,
 }) => {

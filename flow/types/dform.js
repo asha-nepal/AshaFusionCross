@@ -18,7 +18,7 @@ import { PayloadAction } from './action';
 
 export type DformStyle = List<Map<string, any> | string>
 
-interface DformStyleInsertPayload {
+interface insertDformStyleFieldPayload {
   group: string,
   id: string,
   parentPath: string,
@@ -26,7 +26,7 @@ interface DformStyleInsertPayload {
   field: FormField,
 }
 
-interface DformStyleUpdatePayload {
+interface updateDformStyleFieldPayload {
   group: string,
   id: string,
   parentPath: string,
@@ -35,18 +35,37 @@ interface DformStyleUpdatePayload {
   merge: boolean,
 }
 
-interface DformStyleDeletePayload {
+interface removeDformStyleFieldPayload {
   group: string,
   id: string,
   parentPath: string,
   index: number,
 }
 
-interface DformStyleInsertAction extends PayloadAction<DformStyleInsertPayload> {}
-interface DformStyleUpdateAction extends PayloadAction<DformStyleUpdatePayload> {}
-interface DformStyleDeleteAction extends PayloadAction<DformStyleDeletePayload> {}
+interface moveDformStyleFieldPayload {
+  group: string,
+  id: string,
+  fromParentPath: string,
+  fromIndex: number,
+  toParentPath: string,
+  toIndex: number,
+}
+
+interface DformStyleFormAddPayload {
+  group: string,
+  id: string,
+  label: string,
+}
+
+interface insertDformStyleFieldAction extends PayloadAction<insertDformStyleFieldPayload> {}
+interface updateDformStyleFieldAction extends PayloadAction<updateDformStyleFieldPayload> {}
+interface removeDformStyleFieldAction extends PayloadAction<removeDformStyleFieldPayload> {}
+interface moveDformStyleFieldAction extends PayloadAction<moveDformStyleFieldPayload> {}
+interface DformStyleFormAddAction extends PayloadAction<DformStyleFormAddPayload> {}
 
 export type DformStyleAction =
-  DformStyleInsertAction &
-  DformStyleUpdateAction &
-  DformStyleDeleteAction
+  insertDformStyleFieldAction &
+  updateDformStyleFieldAction &
+  removeDformStyleFieldAction &
+  moveDformStyleFieldAction &
+  DformStyleFormAddAction

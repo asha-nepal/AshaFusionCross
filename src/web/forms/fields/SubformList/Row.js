@@ -18,12 +18,11 @@
 import React from 'react';
 import type { FormFieldDefinition } from '.';
 import { checkVisibility } from '../../utils';
-import {
-  TextInputComponent,
-  CheckboxComponent,
-  RadioGroupComponent,
-  SelectComponent,
-} from '../index';
+
+import { TextInputComponent } from '../TextInput';
+import { CheckboxComponent } from '../Checkbox';
+import { RadioGroupComponent } from '../RadioGroup';
+import { SelectComponent } from '../Select';
 
 const fieldComponents = {
   textinput: TextInputComponent,

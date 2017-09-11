@@ -22,14 +22,17 @@ import {
 } from 'actions';
 
 export default function * (change) {
+  const doc = change.doc;
+
   // For PatientSelect
-  yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
+  if (doc.type === 'patient' || doc.type === 'record') {
+    yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
+  }
 
   // For PatientView
   const activePatientId = yield select(state => state.activePatient._id);
   if (!activePatientId) { return; }
 
-  const doc = change.doc;
   if (doc._id === activePatientId) {
     yield put(changeActivePatient(doc, { silent: true }));
   } else if (doc.type === 'record') {
