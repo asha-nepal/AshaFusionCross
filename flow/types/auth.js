@@ -19,6 +19,7 @@ import PayloadAction from './action';
 interface LoginSuccessPayload {
   name: ?string,
   roles: Array<string>,
+  meta: ?Object,
 }
 
 interface LoginPayload {
