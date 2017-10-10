@@ -25,19 +25,7 @@
           "class": "block",
           "children": [
             {
-              "field": "sex",
-              "label": "Sex",
-              "class": "radio",
-              "options": [
-                {
-                  "id": "male",
-                  "label": "Male"
-                },
-                {
-                  "id": "female",
-                  "label": "Female"
-                }
-              ]
+              "field": "sex"
             },
             {
               "field": "age",
