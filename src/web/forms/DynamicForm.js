@@ -60,9 +60,9 @@ function makeCreateChildFields(
   onFieldChange: (parentPath: string, index: number, field: FormField) => void,
   onFieldRemove: (parentPath: string, index: number) => void,
 ) {
-  return function createChildFields(styles, fieldPath = '') {
+  return function createChildFields(fieldList, fieldPath = '') {
     // fieldPath is string rather than array because it's easy to check equality
-    const elements = !styles ? [] : styles.map((_field, i) => {
+    const elements = !fieldList ? [] : fieldList.map((_field, i) => {
       const fieldTemplate = fieldTemplates[_field.field] || {};
       const field = { ...fieldTemplate, ..._field };
 
