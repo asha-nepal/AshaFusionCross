@@ -27,6 +27,7 @@ import Footer from './Footer';
 import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import DynamicForm from '../../forms/DynamicForm';
+import Select from '../Select';
 
 type Props = {
   init: () => void,
@@ -168,20 +169,15 @@ export default class PatientView extends Component {
                   pristinenessList={activeRecordsFormPristineness}
                 />
                 <div className="column is-narrow control">
-                  <span className="select">
-                    <select
+                  {recordFormStyles.size > 1 &&
+                    <Select
                       value={recordFormStyleId}
-                      onChange={e => {
-                        setRecordFormStyleId(e.target.value);
-                      }}
-                    >
-                    {recordFormStyles.map(style => {
-                      const id = style.get('id');
-                      const label = style.get('label');
-                      return <option key={id} value={id}>{label}</option>;
-                    })}
-                    </select>
-                  </span>
+                      onChange={setRecordFormStyleId}
+                      options={recordFormStyles.map(style =>
+                        ({ id: style.get('id'), label: style.get('label') })
+                      )}
+                    />
+                  }
                   <RecordChartToggle />
                 </div>
               </div>
