@@ -16,14 +16,21 @@
 
 /* eslint-env jest */
 
+jest.unmock('immutable');
 jest.unmock('reselect');
 jest.unmock('deep-freeze');
 jest.unmock('../dform');
 
+import Immutable from 'immutable';
 import deepFreeze from 'deep-freeze';
 import {
   getRecordFormStyleId,
+  getViewableRecordFormStyles,
 } from '../dform';
+import {
+  getIsAdmin,
+  getUserRoles,
+} from '../auth';
 
 describe('getRecordFormStyleId', () => {
   it('selects recordFormStyleId', () => {
@@ -37,5 +44,49 @@ describe('getRecordFormStyleId', () => {
 
     expect(getRecordFormStyleId(state))
       .toEqual('dummystyleid');
+  });
+});
+
+describe('getViewableRecordFormStyles', () => {
+  let state;
+
+  beforeEach(() => {
+    const recordFormStyles = [
+      {
+        id: 'reception',
+        roles: ['reception'],
+      },
+      {
+        id: 'physician',
+        roles: ['physician'],
+      },
+      {
+        id: 'free',
+        roles: null,
+      },
+    ];
+    state = { dform: { styles: Immutable.fromJS({ record: recordFormStyles }) } };
+    deepFreeze(state);
+  });
+
+  [
+    [['reception'], ['reception', 'free']],
+    [[], ['free']],
+    [null, ['free']],
+  ].forEach(([userRoles, expectedViewableStyleIds]) => {
+    it(`returns ${expectedViewableStyleIds} for a user whose roles are ${userRoles}`, () => {
+      getIsAdmin.mockReturnValue(false);
+      getUserRoles.mockReturnValue(userRoles);
+
+      expect(getViewableRecordFormStyles(state).map(style => style.get('id')))
+        .toEqual(Immutable.fromJS(expectedViewableStyleIds));
+    });
+  });
+
+  it('returns all styles for admin user', () => {
+    getIsAdmin.mockReturnValue(true);
+
+    expect(getViewableRecordFormStyles(state).map(style => style.get('id')))
+      .toEqual(Immutable.fromJS(['reception', 'physician', 'free']));
   });
 });

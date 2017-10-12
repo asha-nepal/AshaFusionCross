@@ -20,3 +20,5 @@ export const getIsLoggedIn = (state: Object): boolean => state.auth.loggedIn;
 export const getLoggedInUser = (state: Object): ?string => state.auth.loggedInUser;
 export const getIsAdmin = (state: Object): boolean =>
   state.auth.loggedInRoles && state.auth.loggedInRoles.includes('_admin');
+export const getUserRoles = (state: Object): Array<string> =>
+  state.auth.loggedInUserMeta && state.auth.loggedInUserMeta.roles;

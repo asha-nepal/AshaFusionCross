@@ -98,6 +98,8 @@ export default class PatientView extends Component {
       return <div>Fetching...</div>;
     }
 
+    const showRecord = !isNew && recordFormStyle;
+
     return (
       <div className="header-fixed-container footer-fixed-container">
         <Header
@@ -154,7 +156,7 @@ export default class PatientView extends Component {
           </section>
         }
 
-        {!isNew &&
+        {showRecord &&
           <section className="section">
             <div className="container">
               <div className="columns">
@@ -214,7 +216,7 @@ export default class PatientView extends Component {
           </section>
         }
 
-        {!isNew &&
+        {showRecord &&
           <Footer
             onSubmit={
               selectedActiveRecordIndex > -1

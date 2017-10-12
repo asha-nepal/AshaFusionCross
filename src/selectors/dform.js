@@ -18,6 +18,10 @@
 
 import Immutable from 'immutable';
 import { createSelector } from 'reselect';
+import {
+  getIsAdmin,
+  getUserRoles,
+} from './auth';
 
 export const getDformStyles = (state: Object): {[key: string]: List<DformStyle>} =>
   state.dform.styles;
@@ -25,16 +29,33 @@ export const getDformStyles = (state: Object): {[key: string]: List<DformStyle>}
 export const getRecordFormStyles = (state: Object): List<Map<string, any>> =>
   state.dform.styles.get('record', Immutable.List([]));
 
+export const getViewableRecordFormStyles = createSelector(
+  [getRecordFormStyles, getIsAdmin, getUserRoles],
+  (recordFormStyles, isAdmin, userRoles) => {
+    if (isAdmin) return recordFormStyles;
+
+    return recordFormStyles.filter(style => {
+      const requiredRoles = style.get('roles');
+
+      if (!requiredRoles) return true;  // If no role required
+      if (!userRoles) return false;  // If a user has no role
+
+      return userRoles.some(role => requiredRoles.includes(role));
+    });
+  }
+);
+
 export const getDefaultRecordFormStyleId = (state: Object): ?number =>
-  getRecordFormStyles(state).getIn([0, 'id']);
+  getViewableRecordFormStyles(state).getIn([0, 'id']);
 
 export const getRecordFormStyleId = (state: Object): ?number =>
   state.patientView.recordFormStyleId || getDefaultRecordFormStyleId(state);
 
 export const getRecordFormStyle = createSelector(
-  [getRecordFormStyleId, getRecordFormStyles],
+  [getRecordFormStyleId, getViewableRecordFormStyles],
   (recordFormStyleId, recordFormStyles) => {
     const recordFormStyle = recordFormStyles.find(s => s.get('id') === recordFormStyleId);
+    if (!recordFormStyle) return null;
     return recordFormStyle.get('style');
   }
 );
