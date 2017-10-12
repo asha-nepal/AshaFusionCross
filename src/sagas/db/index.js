@@ -28,7 +28,6 @@ import {
   DB_CONNECT_REQUEST,
   DB_DISCONNECT_REQUEST,
   dbSetInstance,
-  requestLogout,
   requestAnonymousLogin,
 } from '../../actions';
 import handlePouchChanges from './handle-pouch-changes';
@@ -55,7 +54,6 @@ export function* watchOnPouchChanges(db: PouchInstance) {
       console.log('PouchDB listener cancelled');
     }
 
-    yield put(requestLogout());
     console.log('PouchDB listener terminated');
   }
 }
