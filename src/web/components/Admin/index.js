@@ -18,7 +18,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SignupForm from '../containers/forms/SignupForm';
+import SignupForm from '../../containers/forms/SignupForm';
 
 export default ({
   signup,
