@@ -27,6 +27,7 @@ import patientView from './patient-view';
 import status from './status';
 import alerts from './alerts';
 import db from './db';
+import admin from './admin';
 import auth from './auth';
 import dform from './dform';
 import forms from './forms';
@@ -45,6 +46,7 @@ export default combineReducers({
   status,
   alerts,
   db,
+  admin,
   auth,
   dform,
   forms,

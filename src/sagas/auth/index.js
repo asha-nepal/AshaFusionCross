@@ -31,6 +31,7 @@ import {
 import { btoa as _btoa } from '../../utils';
 
 import authedSagas from './authed-sagas';
+import adminSaga from '../admin';
 
 let authedTask = null;
 
@@ -55,6 +56,11 @@ export function* afterLoggedIn(db: PouchInstance) {
   if (name) {
     const user = yield call([db, db.getUser], name);
     meta = user.asha || null;
+  }
+
+  const isAdmin = roles.includes('_admin');
+  if (isAdmin) {
+    yield fork(adminSaga);
   }
 
   yield put(loginSuccess(name, roles, meta));

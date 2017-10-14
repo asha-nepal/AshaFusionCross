@@ -39,7 +39,8 @@
     "react-native-router-flux": "^3.38.0",
     "react-native-vector-icons": "^4.0.1",
     "redux": "^3.5.2",
-    "redux-saga": "^0.15.6"
+    "redux-saga": "^0.15.6",
+    "redux-saga-routines": "^2.0.2"
   },
   "devDependencies": {
     "argv": "0.0.2",

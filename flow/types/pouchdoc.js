@@ -14,21 +14,33 @@
  * limitations under the License.
  */
 
-export type ErrorObject = {}
-
-export type PouchConfig = {
-  isLocal: boolean,
-  local: {
-    dbname: string,
-    isSynced: boolean,
-  },
-  remote: {
-    hostname: string,
-    dbname: string,
-  }
+interface PouchDocType {
+  _id: string,
+  _rev: string,
+  _attachments?: Object,
 }
 
-export type ValueUnitType = {
-  value: ?string | ?number,
-  unit: ?string,
+export type PatientObject = PouchDocType & {
+  type: string,
+  name: string,
+  age?: number,
+  sex?: number,
+  address?: string,
+  number?: number,
+}
+
+export type RecordObject = PouchDocType & {
+  type: string,
+  $created_at: ?number,
+  $updated_at: ?number,
+  $initialized_at: ?number,
+}
+
+export type UserObject = PouchDocType & {
+  type: string,
+  name: string,
+  roles: Array<string>,
+  asha?: {
+    roles: Array<string>,
+  },
 }

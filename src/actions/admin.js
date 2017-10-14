@@ -14,21 +14,11 @@
  * limitations under the License.
  */
 
-export type ErrorObject = {}
+/* @flow */
 
-export type PouchConfig = {
-  isLocal: boolean,
-  local: {
-    dbname: string,
-    isSynced: boolean,
-  },
-  remote: {
-    hostname: string,
-    dbname: string,
-  }
-}
+import { createRoutine } from 'redux-saga-routines';
 
-export type ValueUnitType = {
-  value: ?string | ?number,
-  unit: ?string,
-}
+// For saga
+export const routines = {
+  fetchUsers: createRoutine('USERS_FETCH'),
+};

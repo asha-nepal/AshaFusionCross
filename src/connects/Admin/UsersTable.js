@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-export type ErrorObject = {}
+/* @flow */
 
-export type PouchConfig = {
-  isLocal: boolean,
-  local: {
-    dbname: string,
-    isSynced: boolean,
-  },
-  remote: {
-    hostname: string,
-    dbname: string,
-  }
-}
+import { connect } from 'react-redux';
+import {
+  routines,
+} from 'actions/admin';
+import {
+  getUsers,
+} from '../../selectors/admin/users';
 
-export type ValueUnitType = {
-  value: ?string | ?number,
-  unit: ?string,
-}
+const mapStateToProps = (state) => ({
+  users: getUsers(state),
+});
+
+const mapDispatchToProps = {
+  fetchUsers: routines.fetchUsers,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps);
