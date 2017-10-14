@@ -16,6 +16,7 @@
 
 /* @flow */
 
+export const getIsDBPublic = (state: Object): boolean => state.auth.isDBPublic;
 export const getIsLoggedIn = (state: Object): boolean => state.auth.loggedIn;
 export const getLoggedInUser = (state: Object): ?string => state.auth.loggedInUser;
 export const getIsAdmin = (state: Object): boolean =>

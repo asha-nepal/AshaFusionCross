@@ -28,6 +28,7 @@ import {
   getViewableRecordFormStyles,
 } from '../dform';
 import {
+  getIsDBPublic,
   getIsAdmin,
   getUserRoles,
 } from '../auth';
@@ -75,6 +76,7 @@ describe('getViewableRecordFormStyles', () => {
     [null, ['free']],
   ].forEach(([userRoles, expectedViewableStyleIds]) => {
     it(`returns ${expectedViewableStyleIds} for a user whose roles are ${userRoles}`, () => {
+      getIsDBPublic.mockReturnValue(false);
       getIsAdmin.mockReturnValue(false);
       getUserRoles.mockReturnValue(userRoles);
 
@@ -84,7 +86,16 @@ describe('getViewableRecordFormStyles', () => {
   });
 
   it('returns all styles for admin user', () => {
+    getIsDBPublic.mockReturnValue(false);
     getIsAdmin.mockReturnValue(true);
+
+    expect(getViewableRecordFormStyles(state).map(style => style.get('id')))
+      .toEqual(Immutable.fromJS(['reception', 'physician', 'free']));
+  });
+
+  it('returns all styles if the DB is public', () => {
+    getIsDBPublic.mockReturnValue(true);
+    getIsAdmin.mockReturnValue(false);
 
     expect(getViewableRecordFormStyles(state).map(style => style.get('id')))
       .toEqual(Immutable.fromJS(['reception', 'physician', 'free']));
