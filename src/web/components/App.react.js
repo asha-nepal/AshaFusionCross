@@ -27,7 +27,7 @@ import Auth from '../containers/Auth';
 import Alerts from '../containers/Alerts.react';
 import PatientSelect from '../containers/PatientSelect';
 import PatientView from '../containers/PatientView.react';
-import Admin from '../containers/Admin';
+import Admin from '../components/Admin';
 import Stats from '../containers/Stats';
 import AdminRoute from '../containers/AdminRoute';
 
