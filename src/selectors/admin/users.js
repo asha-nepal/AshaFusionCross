@@ -14,21 +14,7 @@
  * limitations under the License.
  */
 
-export type ErrorObject = {}
+/* @flow */
 
-export type PouchConfig = {
-  isLocal: boolean,
-  local: {
-    dbname: string,
-    isSynced: boolean,
-  },
-  remote: {
-    hostname: string,
-    dbname: string,
-  }
-}
-
-export type ValueUnitType = {
-  value: ?string | ?number,
-  unit: ?string,
-}
+export const getUsers = (state: Object): List<UserObject> =>
+  state.admin.users;

@@ -14,21 +14,10 @@
  * limitations under the License.
  */
 
-export type ErrorObject = {}
+import { fork } from 'redux-saga/effects';
+import { watchFetchUsers } from './users';
 
-export type PouchConfig = {
-  isLocal: boolean,
-  local: {
-    dbname: string,
-    isSynced: boolean,
-  },
-  remote: {
-    hostname: string,
-    dbname: string,
-  }
-}
 
-export type ValueUnitType = {
-  value: ?string | ?number,
-  unit: ?string,
+export default function* adminSaga() {
+  yield fork(watchFetchUsers);
 }

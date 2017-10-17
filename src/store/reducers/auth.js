@@ -27,6 +27,7 @@ const initialState: Object = {
   loggedIn: false,
   loggedInUser: null,
   loggedInRoles: null,
+  loggedInUserMeta: null,
 };
 
 export default function (
@@ -40,6 +41,7 @@ export default function (
         loggedIn: true,
         loggedInUser: action.payload.name,
         loggedInRoles: action.payload.roles,
+        loggedInUserMeta: action.payload.meta,
       };
 
     case LOGOUT_SUCCESS:
@@ -48,6 +50,7 @@ export default function (
         loggedIn: false,
         loggedInUser: null,
         loggedInRoles: null,
+        loggedInUserMeta: null,
       };
 
     case SET_IS_DB_PUBLIC:

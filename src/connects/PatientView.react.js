@@ -33,15 +33,17 @@ import {
 import {
   getActivePatient,
   makeGetDuplicatedPatients,
-  getRecordFormStyles,
-  getRecordFormStyleId,
-  getRecordFormStyle,
-  getPatientFormStyle,
   getActiveRecords,
   getSelectedActiveRecordIndex,
   getActiveRecordsFormPristineness,
   getPatientMax,
 } from '../selectors';
+import {
+  getViewableRecordFormStyles,
+  getRecordFormStyleId,
+  getRecordFormStyle,
+  getPatientFormStyle,
+} from '../selectors/dform';
 
 const getNameDuplicatedPatients = makeGetDuplicatedPatients('name');
 const getNumberDuplicatedPatients = makeGetDuplicatedPatients('number');
@@ -59,7 +61,7 @@ const mapStateToProps = (state) => {
     isPuttingRecord: state.status.isPuttingRecord,
     patientFormVisibility: state.patientView.patientFormVisibility,
     patientFormStyle: getPatientFormStyle(state),
-    recordFormStyles: getRecordFormStyles(state),
+    recordFormStyles: getViewableRecordFormStyles(state),
     recordFormStyleId: getRecordFormStyleId(state),
     recordFormStyle: getRecordFormStyle(state),
     duplicatedPatientsExist: {

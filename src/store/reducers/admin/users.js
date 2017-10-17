@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-export type ErrorObject = {}
+/* @flow */
 
-export type PouchConfig = {
-  isLocal: boolean,
-  local: {
-    dbname: string,
-    isSynced: boolean,
-  },
-  remote: {
-    hostname: string,
-    dbname: string,
+import Immutable from 'immutable';
+import {
+  routines,
+} from 'actions/admin';
+
+const initialState = Immutable.List();
+
+export default function (state: List<UserObject> = initialState, action: PayloadAction<Object>) {
+  switch (action.type) {
+    case routines.fetchUsers.SUCCESS:
+      return Immutable.fromJS(action.payload.users);
+
+    default:
+      return state;
   }
-}
-
-export type ValueUnitType = {
-  value: ?string | ?number,
-  unit: ?string,
 }

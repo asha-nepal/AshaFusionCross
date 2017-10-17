@@ -53,11 +53,16 @@ export const requestSignup = (
 
 // for reducers
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const loginSuccess = (name: string, roles: Array<string>): LoginSuccessAction => ({
+export const loginSuccess = (
+  name: string,
+  roles: Array<string>,
+  meta: ?Object,
+): LoginSuccessAction => ({
   type: LOGIN_SUCCESS,
   payload: {
     name,
     roles,
+    meta,
   },
 });
 
