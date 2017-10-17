@@ -16,7 +16,29 @@
 
 /* @flow */
 
-import Admin from '../components/Admin';
-import connect from '../../connects/Admin';
+import React from 'react';
 
-export default connect(Admin);
+const Select = <T>({
+  value,
+  onChange,
+  options = [],
+}: {
+  value: T,
+  onChange: (value: T) => void,
+  options: Array<{ id: T, label: string }>,
+}) => (
+  <span className="select">
+    <select
+      value={value}
+      onChange={e => {
+        onChange(e.target.value);
+      }}
+    >
+    {options.map((option, i) =>
+      <option key={i} value={option.id}>{option.label}</option>
+    )}
+    </select>
+  </span>
+);
+
+export default Select;

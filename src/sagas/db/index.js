@@ -28,7 +28,6 @@ import {
   DB_CONNECT_REQUEST,
   DB_DISCONNECT_REQUEST,
   dbSetInstance,
-  requestLogout,
   requestAnonymousLogin,
 } from '../../actions';
 import handlePouchChanges from './handle-pouch-changes';
@@ -55,7 +54,6 @@ export function* watchOnPouchChanges(db: PouchInstance) {
       console.log('PouchDB listener cancelled');
     }
 
-    yield put(requestLogout());
     console.log('PouchDB listener terminated');
   }
 }
@@ -84,13 +82,12 @@ export function formatHostname(hostname: string) {
   return result;
 }
 
-export function * connect(config: PouchConfig) {
+export function createPouchInstance(config: PouchConfig) {
   const hostname = formatHostname(config.remote.hostname);
   const remoteUrl = `${hostname}/${config.remote.dbname}`;
-  let db;
 
   if (config.isLocal) {
-    db = new PouchDB(config.local.dbname);
+    const db = new PouchDB(config.local.dbname);
     if (config.local.isSynced) {
       db.sync(remoteUrl, {
         ...pouchOpts,
@@ -98,9 +95,14 @@ export function * connect(config: PouchConfig) {
         retry: true,
       });
     }
-  } else {
-    db = new PouchDB(remoteUrl, pouchOpts);
+    return db;
   }
+
+  return new PouchDB(remoteUrl, pouchOpts);
+}
+
+export function * connect(config: PouchConfig) {
+  const db = createPouchInstance(config);
 
   // 接続可能か確かめる
   const isDBConnectable = yield call(checkConnectable, db);

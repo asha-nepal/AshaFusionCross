@@ -18,7 +18,8 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SignupForm from '../containers/forms/SignupForm';
+import SignupForm from '../../containers/forms/SignupForm';
+import UsersTable from '../../containers/Admin/UsersTable';
 
 export default ({
   signup,
@@ -49,6 +50,12 @@ export default ({
         <SignupForm
           signup={signup}
         />
+      </div>
+    </section>
+
+    <section className="section">
+      <div className="container">
+        <UsersTable />
       </div>
     </section>
   </div>

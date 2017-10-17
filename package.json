@@ -37,7 +37,10 @@
     "react-native-material-kit": "^0.4.1",
     "react-native-randombytes": "^2.2.0",
     "react-native-router-flux": "^3.38.0",
-    "react-native-vector-icons": "^4.0.1"
+    "react-native-vector-icons": "^4.0.1",
+    "redux": "^3.5.2",
+    "redux-saga": "^0.15.6",
+    "redux-saga-routines": "^2.0.2"
   },
   "devDependencies": {
     "argv": "0.0.2",
@@ -104,8 +107,7 @@
     "react-redux-form": "^1.0.13",
     "react-router-dom": "^4.1.1",
     "recharts": "^0.13.4",
-    "redux": "^3.5.2",
-    "redux-saga": "^0.10.4",
+    "redux-saga-test-plan": "^3.2.0",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.3",
     "sass-loader": "^6.0.5",
@@ -123,7 +125,9 @@
       "<rootDir>/node_modules/react-dom/",
       "<rootDir>/node_modules/react-addons-test-utils/",
       "<rootDir>/node_modules/enzyme/",
-      "<rootDir>/node_modules/react-redux-form/"
+      "<rootDir>/node_modules/react-redux-form/",
+      "<rootDir>/node_modules/redux-saga-test-plan/",
+      "<rootDir>/node_modules/redux-saga-routines/"
     ],
     "modulePaths": [
       "<rootDir>",

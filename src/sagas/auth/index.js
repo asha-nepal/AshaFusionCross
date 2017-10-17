@@ -27,30 +27,11 @@ import {
   alertError,
   alertInfo,
   setIsDBPublic,
-} from '../actions';
-import { btoa as _btoa } from '../utils';
+} from '../../actions';
+import { btoa as _btoa } from '../../utils';
 
-import { watchFetchPatient } from './fetch-patient';
-import { watchFetchPouchDocs } from './fetch-pouch-docs';
-import { watchPutActivePatient } from './put-active-patient';
-import { watchPutActiveRecord } from './put-active-record';
-import { watchRemoveActivePatient } from './remove-active-patient';
-import { watchInitActivePatient } from './init-active-patient';
-import { watchAddNewActiveRecord } from './add-new-active-record';
-import { watchDformStyleFetch, watchDformStylePut } from './dform';
-import { watchOnPouchChanges } from './db';
-
-const authedSagas = [
-  watchFetchPatient,
-  watchFetchPouchDocs,
-  watchPutActivePatient,
-  watchPutActiveRecord,
-  watchRemoveActivePatient,
-  watchInitActivePatient,
-  watchAddNewActiveRecord,
-  watchDformStyleFetch,
-  watchDformStylePut,
-];
+import authedSagas from './authed-sagas';
+import adminSaga from '../admin';
 
 let authedTask = null;
 
@@ -65,12 +46,24 @@ export function checkAccessibility(db: PouchInstance) {
 
 export function* afterLoggedIn(db: PouchInstance) {
   for (let i = 0; i < authedSagas.length; ++i) {
-    yield fork(authedSagas[i]);
+    yield fork(authedSagas[i], db);
   }
-  yield fork(watchOnPouchChanges, db);
 
   const session = yield call([db, db.getSession]);
-  yield put(loginSuccess(session.userCtx.name, session.userCtx.roles));
+  const { name, roles } = session.userCtx;
+
+  let meta = null;
+  if (name) {
+    const user = yield call([db, db.getUser], name);
+    meta = user.asha || null;
+  }
+
+  const isAdmin = roles.includes('_admin');
+  if (isAdmin) {
+    yield fork(adminSaga);
+  }
+
+  yield put(loginSuccess(name, roles, meta));
 }
 
 export function* logout(db: PouchInstance) {

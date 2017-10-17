@@ -14,21 +14,9 @@
  * limitations under the License.
  */
 
-export type ErrorObject = {}
+/* @flow */
 
-export type PouchConfig = {
-  isLocal: boolean,
-  local: {
-    dbname: string,
-    isSynced: boolean,
-  },
-  remote: {
-    hostname: string,
-    dbname: string,
-  }
-}
+import UsersTable from '../../components/Admin/UsersTable';
+import connect from '../../../connects/Admin/UsersTable';
 
-export type ValueUnitType = {
-  value: ?string | ?number,
-  unit: ?string,
-}
+export default connect(UsersTable);

@@ -25,6 +25,8 @@ import {
   actions,
 } from 'react-redux-form';
 
+import outerConnect from '../../../connects/forms/SignupForm';
+
 const TextControl = ({
   label,
   form,
@@ -52,7 +54,7 @@ const TextControl = ({
   </p>
 );
 
-const SignupForm = ({
+let SignupForm = ({
   form,
   signup,
   reset,
@@ -115,7 +117,7 @@ const SignupForm = ({
   </div>
 );
 
-export default connect(
+SignupForm = connect(
   state => ({
     form: state.forms.forms.signup,
   }),
@@ -123,3 +125,5 @@ export default connect(
     reset: () => dispatch(actions.reset('forms.signup')),
   })
 )(SignupForm);
+
+export default outerConnect(SignupForm);

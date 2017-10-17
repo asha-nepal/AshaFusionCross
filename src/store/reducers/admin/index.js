@@ -14,21 +14,14 @@
  * limitations under the License.
  */
 
-export type ErrorObject = {}
+/* @flow */
 
-export type PouchConfig = {
-  isLocal: boolean,
-  local: {
-    dbname: string,
-    isSynced: boolean,
-  },
-  remote: {
-    hostname: string,
-    dbname: string,
-  }
-}
+import {
+  combineReducers,
+} from 'redux';
 
-export type ValueUnitType = {
-  value: ?string | ?number,
-  unit: ?string,
-}
+import users from './users';
+
+export default combineReducers({
+  users,
+});
