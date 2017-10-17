@@ -30,6 +30,7 @@ const UserRow = ({
 }) => (
   <tr>
     <td>{user.get('name')}</td>
+    <td>{user.getIn(['asha', 'roles'], []).join(', ')}</td>
   </tr>
 );
 
@@ -52,6 +53,7 @@ export default class extends Component {
           <thead>
             <tr>
               <th>Username</th>
+              <th>Roles</th>
             </tr>
           </thead>
           <tbody>
