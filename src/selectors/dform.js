@@ -19,6 +19,7 @@
 import Immutable from 'immutable';
 import { createSelector } from 'reselect';
 import {
+  getIsDBPublic,
   getIsAdmin,
   getUserRoles,
 } from './auth';
@@ -30,9 +31,9 @@ export const getRecordFormStyles = (state: Object): List<Map<string, any>> =>
   state.dform.styles.get('record', Immutable.List([]));
 
 export const getViewableRecordFormStyles = createSelector(
-  [getRecordFormStyles, getIsAdmin, getUserRoles],
-  (recordFormStyles, isAdmin, userRoles) => {
-    if (isAdmin) return recordFormStyles;
+  [getRecordFormStyles, getIsDBPublic, getIsAdmin, getUserRoles],
+  (recordFormStyles, isDBPublic, isAdmin, userRoles) => {
+    if (isDBPublic || isAdmin) return recordFormStyles;
 
     return recordFormStyles.filter(style => {
       const requiredRoles = style.get('roles');

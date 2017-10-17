@@ -73,6 +73,7 @@
     {
       "id": "reception",
       "label": "Reception",
+      "roles": ["reception"],
       "style": [
         {
           "class": "block",
@@ -446,6 +447,7 @@
     {
       "id": "physical",
       "label": "Physician",
+      "roles": ["physician"],
       "style": [
         {
           "class": "guide"
@@ -982,6 +984,7 @@
     {
       "id": "mental",
       "label": "Mental",
+      "roles": ["psychiatrist"],
       "style": [
         {
           "class": "accordion",
@@ -1164,6 +1167,7 @@
     {
       "id": "ksix",
       "label": "K6",
+      "roles": ["reception", "psychiatrist"],
       "style": [
         {
           "field": "ksix.nervious",

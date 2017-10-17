@@ -126,7 +126,8 @@
       "<rootDir>/node_modules/react-addons-test-utils/",
       "<rootDir>/node_modules/enzyme/",
       "<rootDir>/node_modules/react-redux-form/",
-      "<rootDir>/node_modules/redux-saga-test-plan/"
+      "<rootDir>/node_modules/redux-saga-test-plan/",
+      "<rootDir>/node_modules/redux-saga-routines/"
     ],
     "modulePaths": [
       "<rootDir>",
