@@ -150,6 +150,7 @@ if (isProd) {
 // Additional options configured by environment variables
 const envKeys = [
   'COUCH_HOST',
+  'COUCH_DATABASE',
 ];
 
 const envs = _.pick(process.env, envKeys);
