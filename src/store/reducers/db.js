@@ -35,16 +35,18 @@ const getDefaultHost = () => {
   return '127.0.0.1:5984';
 };
 
+const defaultDatabase = process.env.COUCH_DATABASE || 'asha-fusion-dev';
+
 const defaultHost = getDefaultHost();
 const defaultPouchConfig: PouchConfig = {
   isLocal: false,
   local: {
-    dbname: 'asha-fusion-dev',
+    dbname: defaultDatabase,
     isSynced: false,
   },
   remote: {
     hostname: defaultHost,
-    dbname: 'asha-fusion-dev',
+    dbname: defaultDatabase,
   },
 };
 
