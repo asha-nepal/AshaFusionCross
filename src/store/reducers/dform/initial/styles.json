@@ -75,7 +75,30 @@
         {
           "field": "ethnicity",
           "label": "Ethnicity",
-          "class": "textinput"
+          "class": "radio",
+          "options": [
+            {
+              "id": "hindu",
+              "label": "Hindu"
+            },
+            {
+              "id": "muslim",
+              "label": "Muslim"
+            },
+            {
+              "id": "buddhist",
+              "label": "Buddhist"
+            },
+            {
+              "id": "christian",
+              "label": "Christian"
+            }
+          ]
+        },
+        {
+          "field": "ethnicity",
+          "class": "textinput",
+          "expanded": true
         }
       ]
     }
