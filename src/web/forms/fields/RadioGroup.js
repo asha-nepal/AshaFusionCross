@@ -49,19 +49,19 @@ export const RadioGroupComponent = ({
   size?: string,
   onChange?: (newValue: string) => void,
 }) => (
-  <div className="control">
+  <div className="field">
     {label && <label className="label">{label}</label>}
     {readonly ? (
       <ReadOnly options={options} value={value} />
     ) : (
-      <div className="checkgroup is-equiv">
+      <div className="buttons is-equiv">
         {options.map(option => {
           const checkedClassName = option.id === value ? ' is-primary' : '';
           const sizeClassName = size ? ` is-${size}` : '';
           return (
             <a
               key={option.id}
-              className={`control button${checkedClassName}${sizeClassName}`}
+              className={`button${checkedClassName}${sizeClassName}`}
               onClick={e => {
                 e.preventDefault();
                 if (onChange) {

@@ -37,7 +37,7 @@ export const CheckboxComponent = ({
   const checkedClassName = value ? ' is-primary' : '';
   const sizeClassName = size ? ` is-${size}` : '';
   return (
-    <div className="control">
+    <div className="field">
       {label && <label className="label">{label}</label>}
       {readonly ? (
         <p className="form-static">

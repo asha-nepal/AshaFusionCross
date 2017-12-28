@@ -75,7 +75,7 @@ export class MultiInputComponent extends Component {
     const inputNodes = [];
 
     return (
-      <div className="control">
+      <div className="field">
         {label && <label className="label">{label}</label>}
         {_values.map((value, i) =>
           <RowComponent

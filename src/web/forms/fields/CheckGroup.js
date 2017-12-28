@@ -58,18 +58,18 @@ export const CheckGroupComponent = ({
   readonly?: boolean,
   onChange?: (newValue: Array<string>) => void,
 }) => (
-  <div className="control">
+  <div className="field">
     {label && <label className="label">{label}</label>}
     {readonly ? (
       <ReadOnly value={value} options={options} />
     ) : (
-      <div className="checkgroup">
+      <div className="buttons">
         {options.map(option => {
           const isChecked = value && value.indexOf(option.id) > -1;
           return (
             <a
               key={option.id}
-              className={isChecked ? 'control button is-primary' : 'control button'}
+              className={isChecked ? 'button is-primary' : 'button'}
               onClick={e => {
                 e.preventDefault();
                 if (onChange) {

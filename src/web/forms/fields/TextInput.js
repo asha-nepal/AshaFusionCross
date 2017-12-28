@@ -17,15 +17,16 @@
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 import AutosuggestInput from './AutosuggestInput';
 
 import EditableFieldWrapper from '../editor/EditableFieldWrapper';
 import type { FieldEditPropsType } from '../editor/type';
 
-const alertIcons = {
-  danger: <i className="fa fa-warning is-danger" />,
-  warning: <i className="fa fa-warning is-warning" />,
-  success: <i className="fa fa-check is-success" />,
+const alertFaIconClasses = {
+  danger: 'warning',
+  warning: 'warning',
+  success: 'check',
 };
 
 const ReadOnly = ({
@@ -112,7 +113,6 @@ export const TextInputComponent = ({
     }
   }
 
-  const warningClassName = warning ? ' is-warning' : '';
   const sizeClassName = size ? ` is-${size}` : '';
 
   const useSuggestions = suggestions && suggestions.length > 0;
@@ -121,25 +121,39 @@ export const TextInputComponent = ({
 
   return (
     <EditableFieldWrapper
-      className={expanded ? 'control is-expanded' : 'control'}
+      className={expanded ? 'field is-expanded' : 'field'}
       fieldEditProps={fieldEditProps}
     >
       {label && <label className="label">{label}</label>}
-      <div className="control is-grouped">
-        <div className={hasAddons ? 'control has-addons' : 'control'}>
+      <div className="field is-grouped">
+        <div className={classNames('field', { 'has-addons': hasAddons })}>
           {prefix &&
-            <span className={`button is-disabled${sizeClassName}`}>
-              {prefix}
-            </span>
+            <div className="control">
+              <span className={`button is-static${sizeClassName}`}>
+                {prefix}
+              </span>
+            </div>
           }
-          <span
-            className={alert && 'control has-icon'}
+          <div
+            className={classNames(
+              'control',
+              {
+                'is-expanded': expanded,
+                'has-icons-left': alert,
+              }
+            )}
             data-balloon={alert && alert.label}
             data-balloon-pos="up"
           >
             <InputComponent
               type={type}
-              className={`input${warningClassName}${sizeClassName}`}
+              className={classNames(
+                'input',
+                {
+                  'is-warning': warning,
+                  [`is-${size}`]: size,
+                }
+              )}
               style={{
                 ...style,
                 ...overrideStyle,
@@ -153,12 +167,26 @@ export const TextInputComponent = ({
               required={required}
               {...additionalProps}
             />
-            {alert ? alertIcons[alert.type] : <span />}
-          </span>
+            {alert
+              ?
+              <span
+                className={classNames(
+                  'icon is-small is-left',
+                  { [`has-text-${alert.type}`]: true }
+                )}
+              >
+                <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+              </span>
+              :
+              <span />
+            }
+          </div>
           {suffix &&
-            <span className={`button is-disabled${sizeClassName}`}>
-              {suffix}
-            </span>
+            <p className="control">
+              <span className={`button is-static${sizeClassName}`}>
+                {suffix}
+              </span>
+            </p>
           }
         </div>
         {valueSetters && valueSetters.map && valueSetters.map((valueSetter, i) => {
@@ -166,14 +194,15 @@ export const TextInputComponent = ({
           if (setValue == null) { return null; }
 
           return (
-            <a
-              key={i}
-              className="button"
-              onClick={e => {
-                e.preventDefault();
-                onChange(String(setValue));
-              }}
-            >{valueSetter.label}</a>
+            <div key={i} className="control">
+              <a
+                className="button"
+                onClick={e => {
+                  e.preventDefault();
+                  onChange(String(setValue));
+                }}
+              >{valueSetter.label}</a>
+            </div>
           );
         })}
       </div>

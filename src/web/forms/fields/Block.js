@@ -33,11 +33,11 @@ export const Block = ({
   fieldEditProps?: FieldEditPropsType,
 }): React$Element<any> => (
   <EditableFieldWrapper
-    className="control"
+    className="field"
     fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
-    <div className="control is-grouped" style={wrap ? { flexWrap: 'wrap' } : {}}>
+    <div className="field is-grouped" style={wrap ? { flexWrap: 'wrap' } : {}}>
       {children}
     </div>
   </EditableFieldWrapper>

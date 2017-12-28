@@ -40,25 +40,27 @@ export const SelectComponent = ({
   const sizeClassName = size ? ` is-${size}` : '';
 
   return (
-    <div className="control">
+    <div className="field">
       {label && <label className="label">{label}</label>}
       {readonly ? (
         <ReadOnly value={value} options={options} />
       ) : (
-        <span className={`select${sizeClassName}`}>
-          <select
-            value={value || ''}
-            onChange={e => onChange(e.target.value || null)}
-          >
-            {nullable && <option value="" ></option>}
-            {options.map((option, i) =>
-              <option
-                key={i}
-                value={option.id}
-              >{option.label}</option>
-            )}
-          </select>
-        </span>
+        <div className="control">
+          <div className={`select${sizeClassName}`}>
+            <select
+              value={value || ''}
+              onChange={e => onChange(e.target.value || null)}
+            >
+              {nullable && <option value="" ></option>}
+              {options.map((option, i) =>
+                <option
+                  key={i}
+                  value={option.id}
+                >{option.label}</option>
+              )}
+            </select>
+          </div>
+        </div>
       )}
     </div>
   );

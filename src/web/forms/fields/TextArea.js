@@ -61,15 +61,17 @@ export const TextAreaComponent = ({
   <ReadonlyTextArea label={label} value={value} />
 ) : (
   <EditableFieldWrapper
-    className="control" style={style} fieldEditProps={fieldEditProps}
+    className="field" style={style} fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
-    <textarea
-      className="textarea"
-      placeholder={placeholder}
-      value={value || ''}
-      onChange={e => onChange(e.target.value)}
-    />
+    <div className="control">
+      <textarea
+        className="textarea"
+        placeholder={placeholder}
+        value={value || ''}
+        onChange={e => onChange(e.target.value)}
+      />
+    </div>
   </EditableFieldWrapper>
 ));
 
