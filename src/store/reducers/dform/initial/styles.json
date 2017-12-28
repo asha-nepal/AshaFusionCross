@@ -70,12 +70,67 @@
         },
         {
           "field": "occupation",
-          "label": "Occupation"
+          "label": "Occupation",
+          "class": "radio",
+          "options": [
+            {
+              "id": "housewife",
+              "label": "Housewife"
+            },
+            {
+              "id": "student",
+              "label": "Student"
+            },
+            {
+              "id": "service",
+              "label": "Service"
+            },
+            {
+              "id": "retired service",
+              "label": "Retired service"
+            },
+            {
+              "id": "business",
+              "label": "Business"
+            },
+            {
+              "id": "agriculture",
+              "label": "Agriculture"
+            }
+          ]
+        },
+        {
+          "field": "occupation",
+          "class": "textinput",
+          "expanded": true
         },
         {
           "field": "ethnicity",
           "label": "Ethnicity",
-          "class": "textinput"
+          "class": "radio",
+          "options": [
+            {
+              "id": "hindu",
+              "label": "Hindu"
+            },
+            {
+              "id": "muslim",
+              "label": "Muslim"
+            },
+            {
+              "id": "buddhist",
+              "label": "Buddhist"
+            },
+            {
+              "id": "christian",
+              "label": "Christian"
+            }
+          ]
+        },
+        {
+          "field": "ethnicity",
+          "class": "textinput",
+          "expanded": true
         }
       ]
     }
@@ -375,31 +430,213 @@
           "show": "allergy"
         },
         {
-          "class": "block",
-          "wrap": false,
-          "children": [
+          "field": "past_medical_history_select",
+          "label": "Past medical history",
+          "class": "checkgroup",
+          "options": [
             {
-              "field": "past_medical_history",
-              "label": "Past medical history",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "id": "htn",
+              "label": "HTN"
             },
             {
-              "field": "current_medicine",
-              "label": "Current medicines",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "id": "dmii",
+              "label": "DM II"
+            },
+            {
+              "id": "copd",
+              "label": "COPD"
+            },
+            {
+              "id": "ptb",
+              "label": "PTB"
+            },
+            {
+              "id": "jaundice",
+              "label": "Jaundice"
+            },
+            {
+              "id": "typhoid",
+              "label": "Typhoid"
+            },
+            {
+              "id": "pneumonia",
+              "label": "Pneumonia"
+            },
+            {
+              "id": "not_significant",
+              "label": "Not Significant"
+            }
+          ]
+        },
+        {
+          "field": "past_medical_history",
+          "class": "textarea"
+        },
+        {
+          "field": "current_medicine",
+          "label": "Current medicines",
+          "class": "textarea"
+        },
+        {
+          "field": "present_medical_history_select",
+          "label": "Present medical history",
+          "class": "checkgroup",
+          "options": [
+            {
+              "id": "fever",
+              "label": "Fever"
+            },
+            {
+              "id": "cough",
+              "label": "Cough"
+            },
+            {
+              "id": "runny_nose",
+              "label": "Runny Nose"
+            },
+            {
+              "id": "sore_throat",
+              "label": "Sore throat"
+            },
+            {
+              "id": "headache",
+              "label": "Headache"
+            },
+            {
+              "id": "earache",
+              "label": "Earache"
+            },
+            {
+              "id": "sob",
+              "label": "SOB"
+            },
+            {
+              "id": "chest_pain",
+              "label": "Chest Pain"
+            },
+            {
+              "id": "palpitation",
+              "label": "Palpitation"
+            },
+            {
+              "id": "orthopnea",
+              "label": "Orthopnea"
+            },
+            {
+              "id": "pnd",
+              "label": "PND"
+            },
+            {
+              "id": "easy_fatigability",
+              "label": "Easy Fatigability"
+            },
+            {
+              "id": "abdominal_pain",
+              "label": "Abdominal pain"
+            },
+            {
+              "id": "nausea",
+              "label": "Nausea"
+            },
+            {
+              "id": "vomiting",
+              "label": "Vomiting"
+            },
+            {
+              "id": "diarrhoea",
+              "label": "Diarrhoea"
             }
           ]
         },
         {
           "field": "present_medical_history",
-          "label": "Present medical history",
           "class": "textarea"
+        },
+        {
+          "field": "past_surgical_history",
+          "label": "Past surgical history",
+          "class": "textarea"
+        },
+        {
+          "field": "social_history.text",
+          "label": "Social history",
+          "class": "textarea"
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "social_history.alcohol.history",
+              "label": "Alcohol",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "social_history.alcohol.years",
+              "label": "How many years?",
+              "class": "textinput",
+              "show": "social_history.alcohol.history",
+              "suffix": "years",
+              "type": "number",
+              "min": 0
+            },
+            {
+              "field": "social_history.alcohol.freq",
+              "label": "Frequency",
+              "class": "textinput",
+              "show": "social_history.alcohol.history",
+              "suffix": "times / week",
+              "type": "number",
+              "min": 0
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "social_history.smoking.history",
+              "label": "Smoking",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "social_history.smoking.years",
+              "label": "How many years?",
+              "class": "textinput",
+              "show": "social_history.smoking.history",
+              "suffix": "years",
+              "type": "number",
+              "min": 0
+            },
+            {
+              "field": "social_history.smoking.freq",
+              "label": "Frequency",
+              "class": "textinput",
+              "show": "social_history.smoking.history",
+              "suffix": "cigarettes / day",
+              "type": "number",
+              "min": 0
+            }
+          ]
         },
         {
           "field": "signs_select",
@@ -744,31 +981,213 @@
           "show": "allergy"
         },
         {
-          "class": "block",
-          "wrap": false,
-          "children": [
+          "field": "past_medical_history_select",
+          "label": "Past medical history",
+          "class": "checkgroup",
+          "options": [
             {
-              "field": "past_medical_history",
-              "label": "Past medical history",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "id": "htn",
+              "label": "HTN"
             },
             {
-              "field": "current_medicine",
-              "label": "Current medicines",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "id": "dmii",
+              "label": "DM II"
+            },
+            {
+              "id": "copd",
+              "label": "COPD"
+            },
+            {
+              "id": "ptb",
+              "label": "PTB"
+            },
+            {
+              "id": "jaundice",
+              "label": "Jaundice"
+            },
+            {
+              "id": "typhoid",
+              "label": "Typhoid"
+            },
+            {
+              "id": "pneumonia",
+              "label": "Pneumonia"
+            },
+            {
+              "id": "not_significant",
+              "label": "Not Significant"
+            }
+          ]
+        },
+        {
+          "field": "past_medical_history",
+          "class": "textarea"
+        },
+        {
+          "field": "current_medicine",
+          "label": "Current medicines",
+          "class": "textarea"
+        },
+        {
+          "field": "present_medical_history_select",
+          "label": "Present medical history",
+          "class": "checkgroup",
+          "options": [
+            {
+              "id": "fever",
+              "label": "Fever"
+            },
+            {
+              "id": "cough",
+              "label": "Cough"
+            },
+            {
+              "id": "runny_nose",
+              "label": "Runny Nose"
+            },
+            {
+              "id": "sore_throat",
+              "label": "Sore throat"
+            },
+            {
+              "id": "headache",
+              "label": "Headache"
+            },
+            {
+              "id": "earache",
+              "label": "Earache"
+            },
+            {
+              "id": "sob",
+              "label": "SOB"
+            },
+            {
+              "id": "chest_pain",
+              "label": "Chest Pain"
+            },
+            {
+              "id": "palpitation",
+              "label": "Palpitation"
+            },
+            {
+              "id": "orthopnea",
+              "label": "Orthopnea"
+            },
+            {
+              "id": "pnd",
+              "label": "PND"
+            },
+            {
+              "id": "easy_fatigability",
+              "label": "Easy Fatigability"
+            },
+            {
+              "id": "abdominal_pain",
+              "label": "Abdominal pain"
+            },
+            {
+              "id": "nausea",
+              "label": "Nausea"
+            },
+            {
+              "id": "vomiting",
+              "label": "Vomiting"
+            },
+            {
+              "id": "diarrhoea",
+              "label": "Diarrhoea"
             }
           ]
         },
         {
           "field": "present_medical_history",
-          "label": "Present medical history",
           "class": "textarea"
+        },
+        {
+          "field": "past_surgical_history",
+          "label": "Past surgical history",
+          "class": "textarea"
+        },
+        {
+          "field": "social_history.text",
+          "label": "Social history",
+          "class": "textarea"
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "social_history.alcohol.history",
+              "label": "Alcohol",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "social_history.alcohol.years",
+              "label": "How many years?",
+              "class": "textinput",
+              "show": "social_history.alcohol.history",
+              "suffix": "years",
+              "type": "number",
+              "min": 0
+            },
+            {
+              "field": "social_history.alcohol.freq",
+              "label": "Frequency",
+              "class": "textinput",
+              "show": "social_history.alcohol.history",
+              "suffix": "times / week",
+              "type": "number",
+              "min": 0
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "social_history.smoking.history",
+              "label": "Smoking",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "social_history.smoking.years",
+              "label": "How many years?",
+              "class": "textinput",
+              "show": "social_history.smoking.history",
+              "suffix": "years",
+              "type": "number",
+              "min": 0
+            },
+            {
+              "field": "social_history.smoking.freq",
+              "label": "Frequency",
+              "class": "textinput",
+              "show": "social_history.smoking.history",
+              "suffix": "cigarettes / day",
+              "type": "number",
+              "min": 0
+            }
+          ]
         },
         {
           "field": "signs_select",
@@ -870,6 +1289,16 @@
               },
               "label": "Dose",
               "suffix": "pcs"
+            },
+            {
+              "field": "dose_syrup",
+              "class": "textinput",
+              "type": "number",
+              "style": {
+                "width": 50
+              },
+              "label": "Dose (syrup)",
+              "suffix": "ml"
             },
             {
               "field": "freq",
