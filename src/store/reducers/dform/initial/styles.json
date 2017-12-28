@@ -104,7 +104,7 @@
               "precision": 1,
               "units": [
                 "kg",
-                "lbm"
+                "lb"
               ]
             },
             {
@@ -479,7 +479,7 @@
               },
               "units": [
                 "kg",
-                "lbm"
+                "lb"
               ]
             },
             {
