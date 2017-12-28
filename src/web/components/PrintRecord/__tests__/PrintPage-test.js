@@ -34,7 +34,7 @@ describe('<PrintPage/>', () => {
 
     const record = {
       height: { value: 178, unit: 'cm' },
-      weight: { vakue: 68, unti: 'kg' },
+      weight: { value: 68, unit: 'kg' },
       pulse: 90,
     };
 
