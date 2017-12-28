@@ -70,7 +70,39 @@
         },
         {
           "field": "occupation",
-          "label": "Occupation"
+          "label": "Occupation",
+          "class": "radio",
+          "options": [
+            {
+              "id": "housewife",
+              "label": "Housewife"
+            },
+            {
+              "id": "student",
+              "label": "Student"
+            },
+            {
+              "id": "service",
+              "label": "Service"
+            },
+            {
+              "id": "retired service",
+              "label": "Retired service"
+            },
+            {
+              "id": "business",
+              "label": "Business"
+            },
+            {
+              "id": "agriculture",
+              "label": "Agriculture"
+            }
+          ]
+        },
+        {
+          "field": "occupation",
+          "class": "textinput",
+          "expanded": true
         },
         {
           "field": "ethnicity",
