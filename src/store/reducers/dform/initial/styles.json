@@ -462,6 +462,87 @@
           "class": "textarea"
         },
         {
+          "field": "social_history.text",
+          "label": "Social history",
+          "class": "textarea"
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "social_history.alcohol.history",
+              "label": "Alcohol",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "social_history.alcohol.years",
+              "label": "How many years?",
+              "class": "textinput",
+              "show": "social_history.alcohol.history",
+              "suffix": "years",
+              "type": "number",
+              "min": 0
+            },
+            {
+              "field": "social_history.alcohol.freq",
+              "label": "Frequency",
+              "class": "textinput",
+              "show": "social_history.alcohol.history",
+              "suffix": "times / week",
+              "type": "number",
+              "min": 0
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "social_history.smoking.history",
+              "label": "Smoking",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "social_history.smoking.years",
+              "label": "How many years?",
+              "class": "textinput",
+              "show": "social_history.smoking.history",
+              "suffix": "years",
+              "type": "number",
+              "min": 0
+            },
+            {
+              "field": "social_history.smoking.freq",
+              "label": "Frequency",
+              "class": "textinput",
+              "show": "social_history.smoking.history",
+              "suffix": "cigarettes / day",
+              "type": "number",
+              "min": 0
+            }
+          ]
+        },
+        {
           "field": "signs_select",
           "label": "Physical Exams",
           "class": "checkgroup",
@@ -834,6 +915,87 @@
           "field": "past_surgical_history",
           "label": "Past surgical history",
           "class": "textarea"
+        },
+        {
+          "field": "social_history.text",
+          "label": "Social history",
+          "class": "textarea"
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "social_history.alcohol.history",
+              "label": "Alcohol",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "social_history.alcohol.years",
+              "label": "How many years?",
+              "class": "textinput",
+              "show": "social_history.alcohol.history",
+              "suffix": "years",
+              "type": "number",
+              "min": 0
+            },
+            {
+              "field": "social_history.alcohol.freq",
+              "label": "Frequency",
+              "class": "textinput",
+              "show": "social_history.alcohol.history",
+              "suffix": "times / week",
+              "type": "number",
+              "min": 0
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "social_history.smoking.history",
+              "label": "Smoking",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "social_history.smoking.years",
+              "label": "How many years?",
+              "class": "textinput",
+              "show": "social_history.smoking.history",
+              "suffix": "years",
+              "type": "number",
+              "min": 0
+            },
+            {
+              "field": "social_history.smoking.freq",
+              "label": "Frequency",
+              "class": "textinput",
+              "show": "social_history.smoking.history",
+              "suffix": "cigarettes / day",
+              "type": "number",
+              "min": 0
+            }
+          ]
         },
         {
           "field": "signs_select",
