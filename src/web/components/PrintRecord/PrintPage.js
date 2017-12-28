@@ -84,44 +84,44 @@ export default ({
           <p>Address: {getStr(patient, 'address')}</p>
         </h2>
 
-        <div className="control is-grouped">
-          <div className="control">
+        <div className="field is-grouped">
+          <div className="field">
             <label className="label">Height</label>
             <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
           </div>
-          <div className="control">
+          <div className="field">
             <label className="label">Weight</label>
             <p className="form-static">{weight ? `${weight} kg` : '---'}</p>
           </div>
-          <div className="control">
+          <div className="field">
             <label className="label">BMI</label>
             <p className="form-static">{bmiRounded || '---'}</p>
           </div>
         </div>
-        <div className="control is-grouped">
-          <div className="control">
+        <div className="field is-grouped">
+          <div className="field">
             <label className="label">Blood pressure</label>
             <p className="form-static">
               {getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg
             </p>
           </div>
-          <div className="control">
+          <div className="field">
             <label className="label">Pulse</label>
             <p className="form-static">{getStr(record, 'pulse', '---')} /min</p>
           </div>
-          <div className="control">
+          <div className="field">
             <label className="label">Temperature</label>
             <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
           </div>
-          <div className="control">
+          <div className="field">
             <label className="label">SpO2</label>
             <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
           </div>
-          <div className="control">
+          <div className="field">
             <label className="label">Respiration rate</label>
             <p className="form-static">{getStr(record, 'rr', '---')} /min</p>
           </div>
-          <div className="control">
+          <div className="field">
             <label className="label">Blood sugar</label>
             <p className="form-static">{getStr(record, 'bs', '---')} mg/dL</p>
           </div>
