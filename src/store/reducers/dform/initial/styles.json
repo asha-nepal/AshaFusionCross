@@ -430,26 +430,52 @@
           "show": "allergy"
         },
         {
-          "class": "block",
-          "wrap": false,
-          "children": [
+          "field": "past_medical_history_select",
+          "label": "Past medical history",
+          "class": "checkgroup",
+          "options": [
             {
-              "field": "past_medical_history",
-              "label": "Past medical history",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "id": "htn",
+              "label": "HTN"
             },
             {
-              "field": "current_medicine",
-              "label": "Current medicines",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "id": "dmii",
+              "label": "DM II"
+            },
+            {
+              "id": "copd",
+              "label": "COPD"
+            },
+            {
+              "id": "ptb",
+              "label": "PTB"
+            },
+            {
+              "id": "jaundice",
+              "label": "Jaundice"
+            },
+            {
+              "id": "typhoid",
+              "label": "Typhoid"
+            },
+            {
+              "id": "pneumonia",
+              "label": "Pneumonia"
+            },
+            {
+              "id": "not_significant",
+              "label": "Not Significant"
             }
           ]
+        },
+        {
+          "field": "past_medical_history",
+          "class": "textarea"
+        },
+        {
+          "field": "current_medicine",
+          "label": "Current medicines",
+          "class": "textarea"
         },
         {
           "field": "present_medical_history",
@@ -885,26 +911,52 @@
           "show": "allergy"
         },
         {
-          "class": "block",
-          "wrap": false,
-          "children": [
+          "field": "past_medical_history_select",
+          "label": "Past medical history",
+          "class": "checkgroup",
+          "options": [
             {
-              "field": "past_medical_history",
-              "label": "Past medical history",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "id": "htn",
+              "label": "HTN"
             },
             {
-              "field": "current_medicine",
-              "label": "Current medicines",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "id": "dmii",
+              "label": "DM II"
+            },
+            {
+              "id": "copd",
+              "label": "COPD"
+            },
+            {
+              "id": "ptb",
+              "label": "PTB"
+            },
+            {
+              "id": "jaundice",
+              "label": "Jaundice"
+            },
+            {
+              "id": "typhoid",
+              "label": "Typhoid"
+            },
+            {
+              "id": "pneumonia",
+              "label": "Pneumonia"
+            },
+            {
+              "id": "not_significant",
+              "label": "Not Significant"
             }
           ]
+        },
+        {
+          "field": "past_medical_history",
+          "class": "textarea"
+        },
+        {
+          "field": "current_medicine",
+          "label": "Current medicines",
+          "class": "textarea"
         },
         {
           "field": "present_medical_history",
