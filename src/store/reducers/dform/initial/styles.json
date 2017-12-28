@@ -1099,6 +1099,16 @@
               "suffix": "pcs"
             },
             {
+              "field": "dose_syrup",
+              "class": "textinput",
+              "type": "number",
+              "style": {
+                "width": 50
+              },
+              "label": "Dose (syrup)",
+              "suffix": "ml"
+            },
+            {
               "field": "freq",
               "class": "textinput",
               "type": "number",
