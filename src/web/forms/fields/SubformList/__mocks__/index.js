@@ -20,6 +20,10 @@ export const SubformList = () => (
   <div>SubformListComponent</div>
 );
 
+export const ReadonlySubformList = () => (
+  <div>ReadonlySubformList</div>
+);
+
 export const SubformListComponent = () => (
   <div>SubformListComponent</div>
 );
