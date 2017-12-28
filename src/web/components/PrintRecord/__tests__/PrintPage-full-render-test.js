@@ -14,16 +14,35 @@
  * limitations under the License.
  */
 
+/* eslint-env jest */
+
+jest.disableAutomock();
+
+import PrintPage from '../PrintPage';
+
 import React from 'react';
+import { mount } from 'enzyme';
 
-export const SubformList = () => (
-  <div>SubformListComponent</div>
-);
+describe('<PrintPage/>', () => {
+  it('takes patient and record data and can be rendered in Full Rendering mode', () => {
+    const patient = {
+      _id: 'patient_foo',
+      name: 'Foo Bar',
+      age: { value: 25, unit: 'years' },
+      address: 'Tokyo',
+    };
 
-export const ReadonlySubformList = () => (
-  <div>ReadonlySubformList</div>
-);
+    const record = {
+      height: { value: 178, unit: 'cm' },
+      weight: { value: 68, unit: 'kg' },
+      pulse: 90,
+    };
 
-export const SubformListComponent = () => (
-  <div>SubformListComponent</div>
-);
+    mount(
+      <PrintPage
+        patient={patient}
+        record={record}
+      />
+    );
+  });
+});

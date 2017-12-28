@@ -19,3 +19,7 @@ import React from 'react';
 export const Diagnoses = () => (
   <div>Diagnoses</div>
 );
+
+export const ReadonlyDiagnoses = () => (
+  <div>ReadonlyDiagnoses</div>
+);

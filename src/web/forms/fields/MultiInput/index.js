@@ -23,6 +23,8 @@ import _get from 'lodash.get';
 import RowComponent from './RowComponent';
 import Readonly from './Readonly';
 
+export const ReadonlyMultiInput = Readonly;
+
 type Props = {
   label: string,
   type?: string,
