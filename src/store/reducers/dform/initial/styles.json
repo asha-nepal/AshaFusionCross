@@ -457,6 +457,11 @@
           "class": "textarea"
         },
         {
+          "field": "past_surgical_history",
+          "label": "Past surgical history",
+          "class": "textarea"
+        },
+        {
           "field": "signs_select",
           "label": "Physical Exams",
           "class": "checkgroup",
@@ -823,6 +828,11 @@
         {
           "field": "present_medical_history",
           "label": "Present medical history",
+          "class": "textarea"
+        },
+        {
+          "field": "past_surgical_history",
+          "label": "Past surgical history",
           "class": "textarea"
         },
         {
