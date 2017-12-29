@@ -367,22 +367,17 @@
         {
           "class": "block",
           "wrap": false,
+          "widthaligned": true,
           "children": [
             {
               "field": "past_medical_history",
               "label": "Past medical history",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "class": "textarea"
             },
             {
               "field": "current_medicine",
               "label": "Current medicines",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "class": "textarea"
             }
           ]
         },
@@ -742,22 +737,17 @@
         {
           "class": "block",
           "wrap": false,
+          "widthaligned": true,
           "children": [
             {
               "field": "past_medical_history",
               "label": "Past medical history",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "class": "textarea"
             },
             {
               "field": "current_medicine",
               "label": "Current medicines",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "class": "textarea"
             }
           ]
         },

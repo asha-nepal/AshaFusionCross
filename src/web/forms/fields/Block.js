@@ -17,6 +17,7 @@
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 
 import EditableFieldWrapper from '../editor/EditableFieldWrapper';
 import type { FieldEditPropsType } from '../editor/type';
@@ -24,11 +25,13 @@ import type { FieldEditPropsType } from '../editor/type';
 export const Block = ({
   label,
   children,
+  widthaligned = false,
   wrap = true,
   fieldEditProps,
 }: {
   label?: string,
   children: React$Element<any>,
+  widthaligned: boolean,
   wrap?: boolean,
   fieldEditProps?: FieldEditPropsType,
 }): React$Element<any> => (
@@ -37,8 +40,15 @@ export const Block = ({
     fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
-    <div className="field is-grouped" style={wrap ? { flexWrap: 'wrap' } : {}}>
-      {children}
+    <div className={classNames('columns is-variable is-1', { 'is-multiline': wrap })}>
+      {children.map((child, i) =>
+        <div
+          key={i}
+          className={classNames('column', { 'is-narrow': !widthaligned })}
+        >
+          {child}
+        </div>
+      )}
     </div>
   </EditableFieldWrapper>
 );
