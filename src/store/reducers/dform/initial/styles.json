@@ -366,7 +366,6 @@
         },
         {
           "class": "block",
-          "wrap": false,
           "widthaligned": true,
           "children": [
             {
@@ -736,7 +735,6 @@
         },
         {
           "class": "block",
-          "wrap": false,
           "widthaligned": true,
           "children": [
             {

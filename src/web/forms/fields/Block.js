@@ -26,7 +26,6 @@ export const Block = ({
   label,
   children,
   widthaligned = false,
-  wrap = true,
   fieldEditProps,
 }: {
   label?: string,
@@ -40,11 +39,12 @@ export const Block = ({
     fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
-    <div className={classNames('columns is-variable is-1', { 'is-multiline': wrap })}>
+    <div className={classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })}>
       {children.map((child, i) =>
         <div
           key={i}
           className={classNames('column', { 'is-narrow': !widthaligned })}
+          style={widthaligned ? {} : { paddingBottom: 0 }}
         >
           {child}
         </div>
