@@ -62,7 +62,10 @@ export default class PatientSelect extends Component {
             </div>
 
             <nav className="panel">
-              <div className="panel-block">
+              <div
+                className="panel-block"
+                style={{ display: 'block' }} // Workaround: https://github.com/jgthms/bulma/issues/812
+              >
                 <PatientListFilter />
               </div>
               {patientList.map((patient) =>

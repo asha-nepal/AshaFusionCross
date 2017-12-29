@@ -28,7 +28,7 @@ export default ({
   onFieldChange: (field: string) => void,
   onOrderChange: (asc: boolean) => void,
 }) => (
-  <div className="control is-grouped">
+  <div className="field is-grouped">
     <span className="form-static">Sort:</span>
     <p className="control">
       <span className="select">

@@ -54,23 +54,29 @@ export default class DatePicker extends Component {
     };
 
     return (
-      <div className="block">
-        <DateRangePicker
-          startDate={date.startDate}
-          endDate={date.endDate}
-          focusedInput={this.state.focused}
-          onDatesChange={onDatesChange}
-          onFocusChange={(focused) => { this.setState({ focused }); }}
-          isOutsideRange={() => false}
-          {...opts}
-        />
-        <a
-          className="button is-large"
-          onClick={e => {
-            e.preventDefault();
-            onDatesChange({ startDate: null, endDate: null });
-          }}
-        ><i className="fa fa-times" /></a>
+      <div className="columns">
+        <div className="column is-narrow">
+          <DateRangePicker
+            startDate={date.startDate}
+            endDate={date.endDate}
+            focusedInput={this.state.focused}
+            onDatesChange={onDatesChange}
+            onFocusChange={(focused) => { this.setState({ focused }); }}
+            isOutsideRange={() => false}
+            {...opts}
+          />
+        </div>
+        <div className="column is-narrow">
+          <div style={{ display: 'flex', height: '100%', alignItems: 'center' }}>
+            <a
+              className="delete"
+              onClick={e => {
+                e.preventDefault();
+                onDatesChange({ startDate: null, endDate: null });
+              }}
+            />
+          </div>
+        </div>
       </div>
     );
   }

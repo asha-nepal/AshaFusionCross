@@ -24,19 +24,24 @@ export default ({
   value: string,
   onChange: (value: string) => void,
 }) => (
-  <p className="control has-icon is-expanded">
-    <input
-      type="text"
-      className="input withclear"
-      value={value}
-      onChange={e => onChange(e.target.value)}
-    />
-    <span className="clearbuttonwrapper">
-      <i
-        className="fa fa-times-circle clearbutton"
-        onClick={() => onChange('')}
+  <div className="field">
+    <p className="control has-icons-left has-icons-right is-expanded">
+      <input
+        type="text"
+        className="input"
+        value={value}
+        onChange={e => onChange(e.target.value)}
       />
-    </span>
-    <i className="fa fa-search" />
-  </p>
+      <span className="icon is-right">
+        <a
+          style={{ pointerEvents: 'auto' }}
+          className="delete is-small"
+          onClick={() => onChange('')}
+        />
+      </span>
+      <span className="icon is-left">
+        <i className="fa fa-search" />
+      </span>
+    </p>
+  </div>
 );
