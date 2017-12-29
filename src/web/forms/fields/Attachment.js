@@ -27,7 +27,7 @@ export const Attachment = ({
   accept,
   multiple,
 }: AttachmentProps) => (
-  <div className="control">
+  <div className="field">
     {label && <label className="label">{label}</label>}
     <AttachmentViewer
       rootModel={rootModel}

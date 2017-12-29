@@ -145,9 +145,9 @@ class AttachmentViewerComponent extends Component {
     }
 
     return (
-      <div className="control">
+      <div className="field">
         {label && <label className="label">{label}</label>}
-        <div style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
+        <div className="columns is-multiline">
         {metadata.map(m => {
           const blob = (this.state.cache[docId] && this.state.cache[docId][m.id])
             || (_attachments && _attachments[m.id] && _attachments[m.id].data);
@@ -178,7 +178,7 @@ class AttachmentViewerComponent extends Component {
           }
 
           return (
-            <div key={m.id} className="column is-narrow" style={{ display: 'inline-block' }}>
+            <div key={m.id} className="column is-narrow">
               {content}
               <button
                 className="button is-danger"
