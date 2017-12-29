@@ -38,7 +38,7 @@ export default ({
   const icd10Datum = value && getICD10().find(item => item.code === value);
 
   return (
-    <div className="control" style={{ width }}>
+    <div className="field" style={{ width }}>
       {label && <label className="label">{label}</label>}
       <div className={readonly ? 'level form-static' : 'level'}>
         <span className="level-left">

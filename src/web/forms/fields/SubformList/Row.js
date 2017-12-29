@@ -16,6 +16,7 @@
 
 /* @flow */
 import React from 'react';
+import classNames from 'classnames';
 import type { FormFieldDefinition } from '.';
 import { checkVisibility } from '../../utils';
 
@@ -56,11 +57,14 @@ export default ({
   }
 
   return (
-    <div className="panel-block">
+    <div
+      className="panel-block"
+      style={{ display: 'block' }} // Workaround: https://github.com/jgthms/bulma/issues/812
+    >
       <div className="columns is-mobile">
         <div className="column">
-          <div className="control is-grouped" style={{ flexWrap: 'wrap' }} >
-          {fields.map((field, i) => {
+          <div className="columns is-multiline is-variable is-1">
+          {fields.map(field => {
             if (typeof field.show !== 'undefined'
               && !checkVisibility(_value, null, field.show)) {
               return null;
@@ -73,7 +77,6 @@ export default ({
               ? fieldComponents[field.class] : field.class;
 
             return React.createElement(component, {
-              key: i,
               ...field,
               readonly,
               size: 'small',
@@ -90,22 +93,33 @@ export default ({
                 });
               }),
             });
-          })}
+          })
+          .filter(field => field != null)
+          .map((field, i, allFields) => (
+            <div
+              key={i}
+              className={classNames(
+                'column',
+                { 'is-narrow': i !== allFields.length - 1 }
+              )}
+            >
+              {field}
+            </div>
+          ))}
           </div>
         </div>
 
         {onRemoveItemRequested &&
-          <div style={{ position: 'relative' }}>
+          <div
+            className="column is-narrow"
+          >
             <a
-              style={{ height: '100%' }}
-              className="button is-danger"
+              className="delete"
               onClick={e => {
                 e.preventDefault();
                 if (onRemoveItemRequested) onRemoveItemRequested();
               }}
-            >
-              <i className="fa fa-times" />
-            </a>
+            />
           </div>
         }
       </div>

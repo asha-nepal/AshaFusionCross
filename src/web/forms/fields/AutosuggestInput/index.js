@@ -94,21 +94,19 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div className="control">
-        <Autosuggest
-          suggestions={this.state.suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={s => s}
-          renderSuggestion={suggestion => <span>{suggestion}</span>}
-          onSuggestionSelected={this.onSuggestionSelected}
-          inputProps={{
-            ..._.omit(this.props, 'candidates'),
-            onChange: this.onInputChange,
-          }}
-          theme={theme}
-        />
-      </div>
+      <Autosuggest
+        suggestions={this.state.suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        getSuggestionValue={s => s}
+        renderSuggestion={suggestion => <span>{suggestion}</span>}
+        onSuggestionSelected={this.onSuggestionSelected}
+        inputProps={{
+          ..._.omit(this.props, 'candidates'),
+          onChange: this.onInputChange,
+        }}
+        theme={theme}
+      />
     );
   }
 }
