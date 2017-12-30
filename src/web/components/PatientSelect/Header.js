@@ -18,7 +18,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
+import Header from '../Header';
 import logo from '../../../../assets/img/logo-white.svg';
 
 type Props = {
@@ -52,44 +52,28 @@ export default class extends Component {
     } = this.props;
 
     return (
-      <nav className="navbar is-primary">
-        <div className="container">
-          <div className="navbar-brand">
-            <div className="navbar-item">
-              <img src={logo} alt="ASHA fusion" />
-            </div>
-            <div
-              className={classNames('navbar-burger', { 'is-active': this.state.isMenuOpen })}
-              onClick={e => {
-                e.preventDefault();
-                this.setState({ isMenuOpen: !this.state.isMenuOpen });
-              }}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+      <Header
+        brand={
+          <div className="navbar-item">
+            <img src={logo} alt="ASHA fusion" />
           </div>
-
-          <div className={classNames('navbar-menu', { 'is-active': this.state.isMenuOpen })}>
-            {isLoggedIn &&
-              <div className="navbar-end">
-                <div className="navbar-item">{loggedInUser || '(anonymous user)'}</div>
-                {isAdmin && <Link className="navbar-item" to="admin">Admin</Link>}
-                {logout &&
-                  <a
-                    className="navbar-item"
-                    onClick={e => {
-                      e.preventDefault();
-                      logout();
-                    }}
-                  >Log out</a>
-                }
-              </div>
+        }
+        menu={isLoggedIn &&
+          <div className="navbar-end">
+            <div className="navbar-item">{loggedInUser || '(anonymous user)'}</div>
+            {isAdmin && <Link className="navbar-item" to="admin">Admin</Link>}
+            {logout &&
+              <a
+                className="navbar-item"
+                onClick={e => {
+                  e.preventDefault();
+                  logout();
+                }}
+              >Log out</a>
             }
           </div>
-        </div>
-      </nav>
+        }
+      />
     );
   }
 }
