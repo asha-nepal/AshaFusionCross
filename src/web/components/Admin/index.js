@@ -18,6 +18,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../common/Header';
 import SignupForm from '../../containers/forms/SignupForm';
 import UsersTable from '../../containers/Admin/UsersTable';
 
@@ -27,23 +28,23 @@ export default ({
   signup: (username: string, password: string) => void,
 }) => (
   <div>
-    <section className="hero is-primary is-bold">
-      <div className="hero-head">
-        <div className="container">
-          <nav className="nav">
-            <div className="nav-left">
-              <Link
-                className="nav-item"
-                to="/"
-              >
-                <span className="icon"><i className="fa fa-arrow-left" /></span>
-              </Link>
-              <span className="nav-item is-brand title">Admin</span>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </section>
+    <Header
+      brand={[
+        <Link
+          key="back"
+          className="navbar-item"
+          to="/"
+        >
+          <span className="icon"><i className="fa fa-arrow-left" /></span>
+        </Link>,
+        <span
+          key="title"
+          className="is-size-3"
+        >
+          Admin
+        </span>,
+      ]}
+    />
 
     <section className="section">
       <div className="container">
