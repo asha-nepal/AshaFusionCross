@@ -29,7 +29,7 @@ export default ({
   values: ?Array<Object | string>,
   fields: Array<FormFieldDefinition>,
 }) => (
-  <div className="control">
+  <div className="field">
     {label && <label className="label">{label}</label>}
     <div className="panel">
       {(values || []).map((value, i) =>

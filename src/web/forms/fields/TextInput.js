@@ -40,7 +40,7 @@ const ReadOnly = ({
   prefix: ?string,
   suffix: ?string,
 }) => (
-  <div className="control">
+  <div className="field">
     {label && <label className="label">{label}</label>}
     {value &&
       <span className="form-static">{[prefix, value, suffix].join(' ')}</span>

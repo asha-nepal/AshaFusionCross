@@ -24,7 +24,7 @@ export default ({
   label?: ?string,
   values: ?Array<string>,
 }) => (
-  <div className="control">
+  <div className="field">
   {label && <label className="label">{label}</label>}
   {values &&
     <div className="form-static is-multiline">

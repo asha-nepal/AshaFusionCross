@@ -31,7 +31,7 @@ export const ReadonlyTextArea = ({
   label?: ?string,
   value: ?string,
 }) => (
-  <p className="control">
+  <p className="field">
     {label && <label className="label">{label}</label>}
     <span className="form-static is-multiline">
       {value && value.split('\n').reduce(
