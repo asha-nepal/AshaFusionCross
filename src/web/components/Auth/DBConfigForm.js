@@ -36,9 +36,11 @@ export default class extends Component {
           <div className="box">
             <h1 className="title">Connect</h1>
             <form>
-              <p className="control">
+              <div className="field">
                 <label className="label">
                   Host
+                </label>
+                <p className="control">
                   <input
                     ref="hostname"
                     type="text"
@@ -46,11 +48,13 @@ export default class extends Component {
                     className="input"
                     autoCapitalize="off"
                   />
-                </label>
-              </p>
-              <p className="control">
+                </p>
+              </div>
+              <div className="field">
                 <label className="label">
                   DB name
+                </label>
+                <p className="control">
                   <input
                     ref="dbname"
                     type="text"
@@ -58,24 +62,28 @@ export default class extends Component {
                     className="input"
                     autoCapitalize="off"
                   />
-                </label>
-              </p>
+                </p>
+              </div>
 
-              <button
-                className="button is-primary"
-                onClick={e => {
-                  e.preventDefault();
+              <div className="field">
+                <p className="control">
+                  <button
+                    className="button is-primary"
+                    onClick={e => {
+                      e.preventDefault();
 
-                  const config = Object.assign({}, defaultValue, {
-                    remote: {
-                      hostname: this.refs.hostname.value,
-                      dbname: this.refs.dbname.value,
-                    },
-                  });
+                      const config = Object.assign({}, defaultValue, {
+                        remote: {
+                          hostname: this.refs.hostname.value,
+                          dbname: this.refs.dbname.value,
+                        },
+                      });
 
-                  onConnect(config);
-                }}
-              >Connect</button>
+                      onConnect(config);
+                    }}
+                  >Connect</button>
+                </p>
+              </div>
             </form>
           </div>
         </div>
