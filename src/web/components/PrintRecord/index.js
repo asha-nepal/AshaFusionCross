@@ -31,27 +31,28 @@ export default ({
   record: RecordObject,
   className: ?string,
 }) => (
-  <span className={className}>
-    <a
-      className="icon"
-      onClick={e => {
-        e.preventDefault();
+  <a
+    className={className}
+    onClick={e => {
+      e.preventDefault();
 
-        const printWindow = window.open('/print.html');
-        if (printWindow) {
-          printWindow.onload = () => {
-            ReactDOM.render(
-              <PrintPage patient={patient} record={record} />,
-              printWindow.document.getElementById('root'),
-              () => {
-                printWindow.focus();
-                setTimeout(() => printWindow.print(), 1);
+      const printWindow = window.open('/print.html');
+      if (printWindow) {
+        printWindow.onload = () => {
+          ReactDOM.render(
+            <PrintPage patient={patient} record={record} />,
+            printWindow.document.getElementById('root'),
+            () => {
+              printWindow.focus();
+              setTimeout(() => printWindow.print(), 1);
 //                printWindow.close();
-              }
-            );
-          };
-        }
-      }}
-    ><i className="fa fa-print" /></a>
-  </span>
+            }
+          );
+        };
+      }
+    }}
+  >
+    <span className="icon"><i className="fa fa-print" /></span>
+    Print
+  </a>
 );

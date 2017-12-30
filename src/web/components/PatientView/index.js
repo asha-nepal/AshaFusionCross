@@ -21,6 +21,7 @@ import React, { Component } from 'react';
 import _get from 'lodash.get';
 
 import Header from './Header';
+import PatientInfoOneline from './PatientInfoOneline';
 import RecordsTab from './RecordsTab';
 import Footer from './Footer';
 
@@ -102,11 +103,9 @@ export default class PatientView extends Component {
     const showRecord = !isNew && recordFormStyle;
 
     return (
-      <div className="header-fixed-container footer-fixed-container">
+      <div className="footer-fixed-container">
         <Header
           patient={patient}
-          verbose={!isNew && !patientFormVisibility}
-          onPatientFormShowRequested={() => setPatientFormVisibility(true)}
           onBackClick={() => {
             if (activeRecordsFormPristineness.some(x => !x)) {
               return confirm('Record(s) is (are) changed but not saved.\nIs it ok to go back?');
@@ -115,11 +114,14 @@ export default class PatientView extends Component {
           }}
         />
 
-        {(isNew || patientFormVisibility) &&
-          <section className="section">
-            <div className="card is-fullwidth">
-              <div className="card-content">
-                <div className="container">
+        {/* TODO: <Refactoring> Extract the block below to another component */}
+        <div className="card">
+          <div className="card-content">
+            <div className="container">
+            {(isNew || patientFormVisibility)
+              ?
+              <div className="columns">
+                <div className="column">
                   <DynamicForm
                     model="activePatient"
                     style={patientFormStyle}
@@ -139,23 +141,46 @@ export default class PatientView extends Component {
                     }}
                   />
                 </div>
+                {!isNew &&
+                  <div className="column is-narrow">
+                    <a
+                      aria-label="close"
+                      onClick={e => {
+                        e.preventDefault();
+                        setPatientFormVisibility(false);
+                      }}
+                    >
+                      <span className="delete" />
+                    </a>
+                  </div>
+                }
               </div>
-              {!isNew &&
-                <footer className="card-footer">
-                  <a
-                    className="card-footer-item"
-                    onClick={e => {
-                      e.preventDefault();
-                      setPatientFormVisibility(false);
-                    }}
-                  >
-                    <i className="fa fa-caret-square-o-up" />
-                  </a>
-                </footer>
-              }
+              :
+              <div className="columns">
+                <div className="column">
+                  <PatientInfoOneline
+                    patient={patient}
+                  />
+                </div>
+                {!isNew && !patientFormVisibility && (
+                  <div className="column is-narrow">
+                    <a
+                      className="icon"
+                      aria-label="edit"
+                      onClick={e => {
+                        e.preventDefault();
+                        setPatientFormVisibility(true);
+                      }}
+                    >
+                      <i className="fa fa-pencil-square-o" />
+                    </a>
+                  </div>
+                )}
+              </div>
+            }
             </div>
-          </section>
-        }
+          </div>
+        </div>
 
         {showRecord &&
           <section className="section">
@@ -168,7 +193,7 @@ export default class PatientView extends Component {
                   addNewActiveRecord={addNewActiveRecord}
                   pristinenessList={activeRecordsFormPristineness}
                 />
-                <div className="column is-narrow control">
+                <div className="column is-narrow">
                   {recordFormStyles.size > 1 &&
                     <Select
                       value={recordFormStyleId}

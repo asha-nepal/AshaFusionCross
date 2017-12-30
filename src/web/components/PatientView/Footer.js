@@ -25,24 +25,20 @@ export default ({
   onSubmit?: () => void,
   freeze: boolean,
 }) => (
-  <section className="hero footer-fixed">
-    <div className="hero-head">
-      <div className="container">
-        <nav className="nav">
-          <div className="nav-left">
-            <span className="nav-item">
-              <button
-                className="button is-primary"
-                disabled={freeze || !onSubmit}
-                onClick={e => {
-                  e.preventDefault();
-                  if (onSubmit) onSubmit();
-                }}
-              >Submit</button>
-            </span>
-          </div>
-        </nav>
+  <nav className="navbar footer-fixed">
+    <div className="container">
+      <div className="navbar-brand">
+        <div className="navbar-item">
+          <button
+            className="button is-primary"
+            disabled={freeze || !onSubmit}
+            onClick={e => {
+              e.preventDefault();
+              if (onSubmit) onSubmit();
+            }}
+          >Submit</button>
+        </div>
       </div>
     </div>
-  </section>
+  </nav>
 );

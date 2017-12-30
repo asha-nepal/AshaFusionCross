@@ -48,6 +48,7 @@ type Props = {
   forceFixed?: boolean,
   placeholder?: string,
   readonly?: boolean,
+  inline: boolean,
   onChange?: (value: ?ValueUnitType) => void,
 }
 
@@ -109,6 +110,7 @@ export class TextUnitInputComponent extends Component {
       placeholder,
       readonly = false,
       onChange,
+      inline = false,
     } = this.props;
 
     const _value = (typeof value === 'number' || typeof value === 'string')
@@ -118,7 +120,10 @@ export class TextUnitInputComponent extends Component {
     const inputValue = this.getInputValue(_value);
 
     return (
-      <div className="field">
+      <div
+        className="field"
+        style={inline ? { display: 'inline-block' } : null}
+      >
         {label && <label className="label">{label}</label>}
         <div
           className={classNames(
