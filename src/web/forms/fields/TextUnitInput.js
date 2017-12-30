@@ -120,7 +120,12 @@ export class TextUnitInputComponent extends Component {
     return (
       <div className="field">
         {label && <label className="label">{label}</label>}
-        <div className={classNames('field', { 'has-addons': !readonly })}>
+        <div
+          className={classNames(
+            'field',
+            { [readonly ? 'is-grouped' : 'has-addons']: true }
+          )}
+        >
           {readonly ? (
             <span className="form-static">
               {inputValue}
