@@ -19,6 +19,7 @@
 
 import React from 'react';
 import ReactDataGrid from 'react-data-grid';
+import { Link } from 'react-router-dom';
 import Header from '../common/Header';
 import Content from '../common/Content';
 import DatePicker from '../DatePicker';
@@ -75,7 +76,21 @@ export default({
   return (
     <div>
       <Header
-        title="Stats"
+        brand={[
+          <Link
+            key="back"
+            className="navbar-item"
+            to="/"
+          >
+            <span className="icon"><i className="fa fa-arrow-left" /></span>
+          </Link>,
+          <span
+            key="title"
+            className="is-size-3"
+          >
+            Stats
+          </span>,
+        ]}
       />
 
       <Content>

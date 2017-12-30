@@ -21,7 +21,7 @@ import {
   Link,
 } from 'react-router-dom';
 
-import Header from '../Header';
+import Header from '../common/Header';
 import PrintRecord from '../../containers/PrintRecord';
 
 export default ({
