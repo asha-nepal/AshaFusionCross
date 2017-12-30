@@ -54,7 +54,7 @@ export default class DatePicker extends Component {
     };
 
     return (
-      <div className="columns">
+      <div className="columns is-mobile">
         <div className="column is-narrow">
           <DateRangePicker
             startDate={date.startDate}
