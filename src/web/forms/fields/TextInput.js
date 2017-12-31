@@ -118,6 +118,74 @@ export const TextInputComponent = ({
   const useSuggestions = suggestions && suggestions.length > 0;
   const InputComponent = useSuggestions ? AutosuggestInput : 'input';
   const additionalProps = useSuggestions ? { candidates: suggestions } : null;
+  const hasValueSetters = valueSetters && valueSetters.map;
+
+  const innerControl = (
+    <div className={classNames('field', { 'has-addons': hasAddons })}>
+      {prefix &&
+        <div className="control">
+          <span className={`button is-static${sizeClassName}`}>
+            {prefix}
+          </span>
+        </div>
+      }
+      <div
+        className={classNames(
+          'control',
+          {
+            'is-expanded': expanded,
+            'has-icons-left': alert,
+          }
+        )}
+        data-balloon={alert && alert.label}
+        data-balloon-pos="up"
+      >
+        <InputComponent
+          type={type}
+          className={classNames(
+            'input',
+            {
+              'is-warning': warning,
+              [`is-${size}`]: size,
+            }
+          )}
+          style={{
+            ...style,
+            ...overrideStyle,
+          }}
+          placeholder={placeholder}
+          value={value || ''}
+          min={min}
+          max={max}
+          step={typeof precision === 'number' && Math.pow(10, -precision)}
+          onChange={e => onChange(e.target.value)}
+          required={required}
+          {...additionalProps}
+        />
+        {alert
+          ?
+          <span
+            className={classNames(
+              'icon is-small is-left',
+              { [`has-text-${alert.type}`]: true }
+            )}
+          >
+            <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+          </span>
+          :
+          <span />
+        }
+      </div>
+      {suffix &&
+        <p className="control">
+          <span className={`button is-static${sizeClassName}`}>
+            {suffix}
+          </span>
+        </p>
+      }
+      {warning && <span className="help is-warning">{warning}</span>}
+    </div>
+  );
 
   return (
     <EditableFieldWrapper
@@ -125,88 +193,27 @@ export const TextInputComponent = ({
       fieldEditProps={fieldEditProps}
     >
       {label && <label className="label">{label}</label>}
-      <div className="field is-grouped">
-        <div className={classNames('field', { 'has-addons': hasAddons })}>
-          {prefix &&
-            <div className="control">
-              <span className={`button is-static${sizeClassName}`}>
-                {prefix}
-              </span>
-            </div>
-          }
-          <div
-            className={classNames(
-              'control',
-              {
-                'is-expanded': expanded,
-                'has-icons-left': alert,
-              }
-            )}
-            data-balloon={alert && alert.label}
-            data-balloon-pos="up"
-          >
-            <InputComponent
-              type={type}
-              className={classNames(
-                'input',
-                {
-                  'is-warning': warning,
-                  [`is-${size}`]: size,
-                }
-              )}
-              style={{
-                ...style,
-                ...overrideStyle,
-              }}
-              placeholder={placeholder}
-              value={value || ''}
-              min={min}
-              max={max}
-              step={typeof precision === 'number' && Math.pow(10, -precision)}
-              onChange={e => onChange(e.target.value)}
-              required={required}
-              {...additionalProps}
-            />
-            {alert
-              ?
-              <span
-                className={classNames(
-                  'icon is-small is-left',
-                  { [`has-text-${alert.type}`]: true }
-                )}
-              >
-                <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
-              </span>
-              :
-              <span />
-            }
-          </div>
-          {suffix &&
-            <p className="control">
-              <span className={`button is-static${sizeClassName}`}>
-                {suffix}
-              </span>
-            </p>
-          }
-        </div>
-        {valueSetters && valueSetters.map && valueSetters.map((valueSetter, i) => {
-          const setValue = valueSetter.value || fieldOptions[valueSetter.optionKey];
-          if (setValue == null) { return null; }
+      {hasValueSetters ? (
+        <div className={classNames('field', { 'is-grouped': hasValueSetters })}>
+          {innerControl}
+          {hasValueSetters && valueSetters.map((valueSetter, i) => {
+            const setValue = valueSetter.value || fieldOptions[valueSetter.optionKey];
+            if (setValue == null) { return null; }
 
-          return (
-            <div key={i} className="control">
-              <a
-                className="button"
-                onClick={e => {
-                  e.preventDefault();
-                  onChange(String(setValue));
-                }}
-              >{valueSetter.label}</a>
-            </div>
-          );
-        })}
-      </div>
-      <span className="help is-warning">{warning}</span>
+            return (
+              <div key={i} className="control">
+                <a
+                  className="button"
+                  onClick={e => {
+                    e.preventDefault();
+                    onChange(String(setValue));
+                  }}
+                >{valueSetter.label}</a>
+              </div>
+            );
+          })}
+        </div>
+      ) : innerControl}
     </EditableFieldWrapper>
   );
 };
