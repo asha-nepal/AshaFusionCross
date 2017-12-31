@@ -63,7 +63,7 @@ export default ({
     >
       <div className="columns is-mobile">
         <div className="column">
-          <div className="columns is-multiline is-variable is-1">
+          <div className="columns is-mobile is-multiline is-variable is-1">
           {fields.map((field, i) => {
             if (typeof field.show !== 'undefined'
               && !checkVisibility(_value, null, field.show)) {

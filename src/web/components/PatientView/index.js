@@ -144,14 +144,13 @@ export default class PatientView extends Component {
                 {!isNew &&
                   <div className="column is-narrow">
                     <a
+                      className="delete is-pulled-right"
                       aria-label="close"
                       onClick={e => {
                         e.preventDefault();
                         setPatientFormVisibility(false);
                       }}
-                    >
-                      <span className="delete" />
-                    </a>
+                    />
                   </div>
                 }
               </div>
@@ -162,20 +161,18 @@ export default class PatientView extends Component {
                     patient={patient}
                   />
                 </div>
-                {!isNew && !patientFormVisibility && (
-                  <div className="column is-narrow">
-                    <a
-                      className="icon"
-                      aria-label="edit"
-                      onClick={e => {
-                        e.preventDefault();
-                        setPatientFormVisibility(true);
-                      }}
-                    >
-                      <i className="fa fa-pencil-square-o" />
-                    </a>
-                  </div>
-                )}
+                <div className="column is-narrow">
+                  <a
+                    className="icon is-pulled-right"
+                    aria-label="edit"
+                    onClick={e => {
+                      e.preventDefault();
+                      setPatientFormVisibility(true);
+                    }}
+                  >
+                    <i className="fa fa-pencil-square-o" />
+                  </a>
+                </div>
               </div>
             }
             </div>

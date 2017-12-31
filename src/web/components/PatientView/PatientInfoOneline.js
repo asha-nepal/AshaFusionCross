@@ -44,14 +44,14 @@ export default ({
   ]
   .filter(element => element != null);
 
-  const delimiter = ' / ';
+  const delimiter = '/';
   const delimited = elements.reduce(
     (a, b, i) => (i === 0 ? a.concat(b) : a.concat([delimiter, b])), []
   );
 
   return (
-    <div {...rest}>
-      {delimited.map((elem, i) => <span key={i}>{elem}</span>)}
+    <div {...rest} className="columns is-vcentered is-mobile is-multiline is-variable is-1">
+      {delimited.map((elem, i) => <span key={i} className="column is-narrow">{elem}</span>)}
     </div>
   );
 };

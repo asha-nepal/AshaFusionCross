@@ -147,7 +147,7 @@ class AttachmentViewerComponent extends Component {
     return (
       <div className="field">
         {label && <label className="label">{label}</label>}
-        <div className="columns is-multiline">
+        <div className="columns is-mobile is-multiline">
         {metadata.map(m => {
           const blob = (this.state.cache[docId] && this.state.cache[docId][m.id])
             || (_attachments && _attachments[m.id] && _attachments[m.id].data);
