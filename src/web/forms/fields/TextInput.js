@@ -65,7 +65,6 @@ export const TextInputComponent = ({
   size,
   required = false,
   readonly = false,
-  expanded = false,
   suggestions,
   valueSetters,
   fieldOptions = {},
@@ -87,7 +86,6 @@ export const TextInputComponent = ({
   size?: string,
   required?: boolean,
   readonly?: boolean,
-  expanded?: boolean,
   suggestions?: Array<string>,
   valueSetters?: Array<{ label: string, optionKey?: string, value?: string | number}>,
   fieldOptions?: Object,
@@ -133,7 +131,7 @@ export const TextInputComponent = ({
         className={classNames(
           'control',
           {
-            'is-expanded': expanded,
+            'is-expanded': !style || !style.width,
             'has-icons-left': alert,
           }
         )}
@@ -189,7 +187,7 @@ export const TextInputComponent = ({
 
   return (
     <EditableFieldWrapper
-      className={expanded ? 'field is-expanded' : 'field'}
+      className="field"
       fieldEditProps={fieldEditProps}
     >
       {label && <label className="label">{label}</label>}
@@ -229,7 +227,6 @@ TextInputComponent.fieldProps = [
   { name: 'size', type: 'number' },
   { name: 'required', type: 'boolean' },
   { name: 'readonly', type: 'boolean' },
-  { name: 'expanded', type: 'boolean' },
 ];
 
 import connect from '../../../common/forms/fields/TextInput';
