@@ -19,6 +19,12 @@
 import React from 'react';
 import classNames from 'classnames';
 
+type Props = {
+  fixed: boolean,
+  brand?: React$Element,
+  menu?: React$Element,
+}
+
 
 export default class extends React.Component {
   constructor(props: Props) {
@@ -51,27 +57,31 @@ export default class extends React.Component {
           <div className="navbar-brand">
             {brand}
 
-            <div
-              className={classNames('navbar-burger', { 'is-active': this.state.isMenuOpen })}
-              onClick={e => {
-                e.preventDefault();
-                this.setState({ isMenuOpen: !this.state.isMenuOpen });
-              }}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+            {menu &&
+              <div
+                className={classNames('navbar-burger', { 'is-active': this.state.isMenuOpen })}
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ isMenuOpen: !this.state.isMenuOpen });
+                }}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            }
           </div>
 
-          <div
-            className={classNames(
-              'navbar-menu',
-              { 'is-active': this.state.isMenuOpen }
-            )}
-          >
-            {menu}
-          </div>
+          {menu &&
+            <div
+              className={classNames(
+                'navbar-menu',
+                { 'is-active': this.state.isMenuOpen }
+              )}
+            >
+              {menu}
+            </div>
+          }
         </div>
       </nav>
     );
