@@ -127,7 +127,7 @@ export default class extends Component {
       <div className="field" style={{ width }}>
         {label && <label className="label">{label}</label>}
         <div className="field has-addons">
-          <div className="control">
+          <div className="control is-expanded">
             <Autosuggest
               suggestions={this.state.suggestions}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

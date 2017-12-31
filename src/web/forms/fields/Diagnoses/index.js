@@ -25,8 +25,8 @@ export const Diagnoses = (props: Object) => (
   <SubformList
     {...props}
     fields={[
-      { field: 'icd10', label: 'ICD10', class: ICD10Input },
-      { field: 'text', label: 'Free description', class: 'textinput', expanded: true },
+      { field: 'icd10', label: 'ICD10', class: ICD10Input, subformstyle: { width: '30%' } },
+      { field: 'text', label: 'Free description', class: 'textinput' },
     ]}
   />
 );
