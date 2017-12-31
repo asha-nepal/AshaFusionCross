@@ -64,7 +64,7 @@ export default ({
       <div className="columns is-mobile">
         <div className="column">
           <div className="columns is-multiline is-variable is-1">
-          {fields.map(field => {
+          {fields.map((field, i) => {
             if (typeof field.show !== 'undefined'
               && !checkVisibility(_value, null, field.show)) {
               return null;
@@ -76,7 +76,7 @@ export default ({
             const component = typeof field.class === 'string'
               ? fieldComponents[field.class] : field.class;
 
-            return React.createElement(component, {
+            const element = React.createElement(component, {
               ...field,
               readonly,
               size: 'small',
@@ -93,19 +93,20 @@ export default ({
                 });
               }),
             });
-          })
-          .filter(field => field != null)
-          .map((field, i, allFields) => (
-            <div
-              key={i}
-              className={classNames(
-                'column',
-                { 'is-narrow': i !== allFields.length - 1 }
-              )}
-            >
-              {field}
-            </div>
-          ))}
+
+            return (
+              <div
+                key={i}
+                className={classNames(
+                  'column',
+                  { 'is-narrow': i !== fields.length - 1 }
+                )}
+                style={field.subformstyle}
+              >
+                {element}
+              </div>
+            );
+          })}
           </div>
         </div>
 
