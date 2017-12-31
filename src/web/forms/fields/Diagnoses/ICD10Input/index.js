@@ -17,6 +17,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import Autosuggest from 'react-autosuggest';
 import ICD10Modal from './ICD10Modal';
 import ICD10Display from './ICD10Display';
@@ -121,8 +122,6 @@ export default class extends Component {
       );
     }
 
-    const sizeClassName = size ? ` is-${size}` : '';
-
     return (
       <div className="field" style={{ width }}>
         {label && <label className="label">{label}</label>}
@@ -138,7 +137,7 @@ export default class extends Component {
               )}
               onSuggestionSelected={this.onSuggestionSelected}
               inputProps={{
-                className: `input${sizeClassName}`,
+                className: classNames('input', { [`is-${size}`]: size }),
                 placeholder,
                 value: this.state.value,
                 onBlur: this.onInputBlur,
@@ -149,7 +148,7 @@ export default class extends Component {
           </div>
           <div className="control">
             <a
-              className={`button${sizeClassName}`}
+              className={classNames('button', { [`is-${size}`]: size })}
               onClick={e => {
                 e.preventDefault();
                 this.setState({ isModalOpen: true });

@@ -17,6 +17,7 @@
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 
 import { ReadOnly } from './RadioGroup';
 
@@ -36,35 +37,36 @@ export const SelectComponent = ({
   onChange: (newValue: string) => void,
   size?: string,
   readonly?: boolean,
-}) => {
-  const sizeClassName = size ? ` is-${size}` : '';
-
-  return (
-    <div className="field">
-      {label && <label className="label">{label}</label>}
-      {readonly ? (
-        <ReadOnly value={value} options={options} />
-      ) : (
-        <div className="control">
-          <div className={`select${sizeClassName}`}>
-            <select
-              value={value || ''}
-              onChange={e => onChange(e.target.value || null)}
-            >
-              {nullable && <option value="" ></option>}
-              {options.map((option, i) =>
-                <option
-                  key={i}
-                  value={option.id}
-                >{option.label}</option>
-              )}
-            </select>
-          </div>
+}) => (
+  <div className="field">
+    {label && <label className="label">{label}</label>}
+    {readonly ? (
+      <ReadOnly value={value} options={options} />
+    ) : (
+      <div className="control">
+        <div
+          className={classNames(
+            'select',
+            { [`is-${size}`]: size }
+          )}
+        >
+          <select
+            value={value || ''}
+            onChange={e => onChange(e.target.value || null)}
+          >
+            {nullable && <option value="" ></option>}
+            {options.map((option, i) =>
+              <option
+                key={i}
+                value={option.id}
+              >{option.label}</option>
+            )}
+          </select>
         </div>
-      )}
-    </div>
-  );
-};
+      </div>
+    )}
+  </div>
+);
 
 // TODO connectの名前
 import connect from '../../../common/forms/fields/RadioGroup';
