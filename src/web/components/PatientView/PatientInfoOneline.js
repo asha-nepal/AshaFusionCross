@@ -28,7 +28,7 @@ export default ({
   patient: ?PatientObject,
 }) => {
   const elements = [
-    (patient.number ? `[${patient.number}] ` : '') + patient.name,
+    (patient.number ? `[${patient.number}] ` : '') + (patient.name || ''),
     patient.age &&
       <span>
         Age:

@@ -51,7 +51,7 @@ export default ({
         key="name"
         className="navbar-item is-hidden-touch"
       >
-        {(patient.number ? `[${patient.number}] ` : '') + patient.name}
+        {(patient.number ? `[${patient.number}] ` : '') + (patient.name || '(No name)')}
       </span>,
     ]}
     menu={
