@@ -26,13 +26,13 @@ export const CheckboxComponent = ({
   label,
   value,
   readonly = false,
-  size,
+  size = '',
   onChange,
 }: {
   label: string,
   value: ?boolean,
   readonly?: boolean,
-  size?: string,
+  size: string,
   onChange: (newValue: boolean) => void,
 }) => (
   <div className="field">

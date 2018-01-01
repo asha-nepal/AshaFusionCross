@@ -24,14 +24,14 @@ export default ({
   label,
   value,
   onClearRequest,
-  size,
+  size = '',
   readonly,
   width,
 }: {
   label?: ?string,
   value: string,
   onClearRequest: ?() => void,
-  size?: string,
+  size: string,
   readonly?: boolean,
   width?: string | number,
 }) => {

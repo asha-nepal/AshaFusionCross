@@ -40,14 +40,14 @@ export const RadioGroupComponent = ({
   label,
   value,
   readonly = false,
-  size,
+  size = '',
   onChange,
 }: {
   options: Array<{id: string, label: string}>,
   label?: ?string,
   value: string,
   readonly?: boolean,
-  size?: string,
+  size: string,
   onChange?: (newValue: string) => void,
 }) => (
   <div className="field">

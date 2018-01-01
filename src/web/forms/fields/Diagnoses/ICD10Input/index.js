@@ -41,7 +41,7 @@ type Props = {
   value: string,
   onChange: (newValue: ?string) => void,
   placeholder?: string,
-  size?: string,
+  size: string,
   readonly?: boolean,
   width?: string | number,
 }
@@ -101,7 +101,7 @@ export default class extends Component {
       value,
       onChange,
       placeholder,
-      size,
+      size = '',
       readonly,
       width,
     } = this.props;

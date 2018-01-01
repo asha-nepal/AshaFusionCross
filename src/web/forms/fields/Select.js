@@ -27,7 +27,7 @@ export const SelectComponent = ({
   options,
   nullable = true,
   onChange,
-  size,
+  size = '',
   readonly = false,
 }: {
   label?: ?string,
@@ -35,7 +35,7 @@ export const SelectComponent = ({
   options: Array<{id: string, label: string}>,
   nullable: boolean,
   onChange: (newValue: string) => void,
-  size?: string,
+  size: string,
   readonly?: boolean,
 }) => (
   <div className="field">
