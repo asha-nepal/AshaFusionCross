@@ -1324,6 +1324,10 @@
             {
               "id": "advice",
               "label": "Advice"
+            },
+            {
+              "id": "procedures",
+              "label": "Procedures"
             }
           ]
         },
@@ -1478,6 +1482,12 @@
           "label": "Advice",
           "class": "textarea",
           "show": "plan:advice"
+        },
+        {
+          "field": "procedures",
+          "label": "Procedures",
+          "class": "textarea",
+          "show": "plan:procedures"
         },
         {
           "field": "attachments.images",
