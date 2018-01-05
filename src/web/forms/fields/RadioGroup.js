@@ -17,6 +17,7 @@
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 
 export const ReadOnly = ({
   options,
@@ -39,14 +40,14 @@ export const RadioGroupComponent = ({
   label,
   value,
   readonly = false,
-  size,
+  size = '',
   onChange,
 }: {
   options: Array<{id: string, label: string}>,
   label?: ?string,
   value: string,
   readonly?: boolean,
-  size?: string,
+  size: string,
   onChange?: (newValue: string) => void,
 }) => (
   <div className="field">
@@ -55,22 +56,24 @@ export const RadioGroupComponent = ({
       <ReadOnly options={options} value={value} />
     ) : (
       <div className="buttons is-equiv">
-        {options.map(option => {
-          const checkedClassName = option.id === value ? ' is-primary' : '';
-          const sizeClassName = size ? ` is-${size}` : '';
-          return (
-            <a
-              key={option.id}
-              className={`button${checkedClassName}${sizeClassName}`}
-              onClick={e => {
-                e.preventDefault();
-                if (onChange) {
-                  onChange(option.id);
-                }
-              }}
-            >{option.label}</a>
-          );
-        })}
+        {options.map(option => (
+          <a
+            key={option.id}
+            className={classNames(
+              'button',
+              {
+                'is-primary': option.id === value,
+                [`is-${size}`]: size,
+              }
+            )}
+            onClick={e => {
+              e.preventDefault();
+              if (onChange) {
+                onChange(option.id);
+              }
+            }}
+          >{option.label}</a>
+        ))}
       </div>
     )}
   </div>

@@ -62,7 +62,7 @@ export const TextInputComponent = ({
   precision,
   alerts,
   warning,
-  size,
+  size = '',
   required = false,
   readonly = false,
   suggestions,
@@ -83,7 +83,7 @@ export const TextInputComponent = ({
   precision?: number,
   alerts?: Array<Object>,
   warning?: string,
-  size?: string,
+  size: string,
   required?: boolean,
   readonly?: boolean,
   suggestions?: Array<string>,
@@ -94,8 +94,6 @@ export const TextInputComponent = ({
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
   }
-
-  const hasAddons = prefix || suffix;
 
   let alert = null;
   const overrideStyle = {};
@@ -111,8 +109,7 @@ export const TextInputComponent = ({
     }
   }
 
-  const sizeClassName = size ? ` is-${size}` : '';
-
+  const hasAddons = prefix || suffix;
   const useSuggestions = suggestions && suggestions.length > 0;
   const InputComponent = useSuggestions ? AutosuggestInput : 'input';
   const additionalProps = useSuggestions ? { candidates: suggestions } : null;
@@ -122,7 +119,12 @@ export const TextInputComponent = ({
     <div className={classNames('field', { 'has-addons': hasAddons })}>
       {prefix &&
         <div className="control">
-          <span className={`button is-static${sizeClassName}`}>
+          <span
+            className={classNames(
+              'button is-static',
+              { [`is-${size}`]: size }
+            )}
+          >
             {prefix}
           </span>
         </div>
@@ -176,7 +178,12 @@ export const TextInputComponent = ({
       </div>
       {suffix &&
         <p className="control">
-          <span className={`button is-static${sizeClassName}`}>
+          <span
+            className={classNames(
+              'button is-static',
+              { [`is-${size}`]: size }
+            )}
+          >
             {suffix}
           </span>
         </p>
@@ -224,7 +231,7 @@ TextInputComponent.fieldProps = [
   { name: 'min', type: 'number' },
   { name: 'max', type: 'number' },
   { name: 'precision', type: 'number' },
-  { name: 'size', type: 'number' },
+  { name: 'size', type: 'string' },
   { name: 'required', type: 'boolean' },
   { name: 'readonly', type: 'boolean' },
 ];

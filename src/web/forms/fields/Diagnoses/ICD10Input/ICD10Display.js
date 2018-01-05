@@ -16,6 +16,7 @@
 
 /* @flow */
 import React from 'react';
+import classNames from 'classnames';
 import { getICD10 } from '../../../../../data';
 
 
@@ -23,18 +24,17 @@ export default ({
   label,
   value,
   onClearRequest,
-  size,
+  size = '',
   readonly,
   width,
 }: {
   label?: ?string,
   value: string,
   onClearRequest: ?() => void,
-  size?: string,
+  size: string,
   readonly?: boolean,
   width?: string | number,
 }) => {
-  const sizeClassName = size ? ` is-${size}` : '';
   const icd10Datum = value && getICD10().find(item => item.code === value);
 
   return (
@@ -42,7 +42,7 @@ export default ({
       {label && <label className="label">{label}</label>}
       <div className={readonly ? 'level form-static' : 'level'}>
         <span className="level-left">
-          <div className={`content${sizeClassName}`}>
+          <div className={classNames('content', { [`is-${size}`]: size })}>
             <small style={{ marginRight: '1em' }}>{value || ''}</small>
             {icd10Datum ? icd10Datum.description : ''}
           </div>
@@ -50,7 +50,7 @@ export default ({
         {!readonly && onClearRequest &&
           <span className="level-right">
             <a
-              className={`button${sizeClassName}`}
+              className={classNames('button', { [`is-${size}`]: size })}
               onClick={e => {
                 e.preventDefault();
                 if (onClearRequest) onClearRequest();
