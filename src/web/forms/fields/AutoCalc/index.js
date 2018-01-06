@@ -22,22 +22,17 @@ import _get from 'lodash.get';
 import functions from './functions';
 
 export const AutoCalcComponent = ({
-  label,
   value,
   style,
   precision,
 }: {
-  label: string,
   value: string,
   style: ?Object,
   precision: ?number,
 }) => (
-  <div className="field">
-    {label && <label className="label">{label}</label>}
-    <span className="form-static" style={style}>
-      {(precision && typeof value === 'number') ? value.toFixed(precision) : value}
-    </span>
-  </div>
+  <span className="form-static" style={style}>
+    {(precision && typeof value === 'number') ? value.toFixed(precision) : value}
+  </span>
 );
 
 export function getValue(targetModel: Object, argKeys: Array<string>, calc: Function) {

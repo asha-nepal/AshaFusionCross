@@ -22,13 +22,11 @@ import { AttachmentViewer } from './AttachmentViewer';
 
 export const Attachment = ({
   model,
-  label,
   rootModel,
   accept,
   multiple,
 }: AttachmentProps) => (
-  <div className="field">
-    {label && <label className="label">{label}</label>}
+  <div className="field"> {/* TODO: Remove outer div.field after upgrading React to v16*/}
     <AttachmentViewer
       rootModel={rootModel}
       model={model}

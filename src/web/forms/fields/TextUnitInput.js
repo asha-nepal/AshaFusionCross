@@ -40,7 +40,6 @@ export const convert = (
 };
 
 type Props = {
-  label?: string,
   units: Array<string>,
   value: ?(ValueUnitType | number | string),
   style?: Object,
@@ -48,7 +47,6 @@ type Props = {
   forceFixed?: boolean,
   placeholder?: string,
   readonly?: boolean,
-  inline: boolean,
   onChange?: (value: ?ValueUnitType) => void,
 }
 
@@ -101,7 +99,6 @@ export class TextUnitInputComponent extends Component {
 
   render() {
     const {
-      label,
       units,
       value,
       style,
@@ -110,7 +107,6 @@ export class TextUnitInputComponent extends Component {
       placeholder,
       readonly = false,
       onChange,
-      inline = false,
     } = this.props;
 
     const _value = (typeof value === 'number' || typeof value === 'string')
@@ -121,69 +117,63 @@ export class TextUnitInputComponent extends Component {
 
     return (
       <div
-        className="field"
-        style={inline ? { display: 'inline-block' } : null}
+        className={classNames(
+          'field',
+          { [readonly ? 'is-grouped' : 'has-addons']: true }
+        )}
       >
-        {label && <label className="label">{label}</label>}
-        <div
-          className={classNames(
-            'field',
-            { [readonly ? 'is-grouped' : 'has-addons']: true }
-          )}
-        >
-          {readonly ? (
-            <span className="form-static">
-              {inputValue}
-            </span>
-          ) : (
-            <div className="control">
-              <input
-                type="number"
-                className="input"
-                style={style}
-                value={inputValue}
-                step={precision ? Math.pow(10, -precision) : null}
-                placeholder={placeholder}
-                onChange={(e) => {
-                  let v = e.target.value;
-
-                  if (forceFixed && precision) {
-                    // 入力桁数を制限
-                    v = v.replace(new RegExp(`(\\.\\d{1,${precision}})\\d*`), '$1');
-                  }
-
-                  const asFloat = parseFloat(v);
-                  if (v && isNaN(asFloat)) { return false; }
-
-                  // convert()等に通さない，inputの生の値を持っておく．小数点対策
-                  this.setState({ inputValue: v });
-
-                  if (!onChange) { return true; }
-
-                  if (v.trim() === '') {
-                    onChange({ value: null, unit: null });
-                  } else {
-                    onChange({ value: asFloat, unit: this.state.unit });
-                  }
-
-                  return true;
-                }}
-              />
-            </div>
-          )}
+        {readonly ? (
+          <span className="form-static">
+            {inputValue}
+          </span>
+        ) : (
           <div className="control">
-            <span className="select">
-              <select
-                tabIndex="-1"
-                value={this.state.unit}
-                onChange={e => this.setState({ unit: e.target.value })}
-              >
-              {units.map(unit =>
-                <option key={unit} value={unit}>{unit}</option>
-              )}
-              </select>
-            </span>
+            <input
+              type="number"
+              className="input"
+              style={style}
+              value={inputValue}
+              step={precision ? Math.pow(10, -precision) : null}
+              placeholder={placeholder}
+              onChange={(e) => {
+                let v = e.target.value;
+
+                if (forceFixed && precision) {
+                  // 入力桁数を制限
+                  v = v.replace(new RegExp(`(\\.\\d{1,${precision}})\\d*`), '$1');
+                }
+
+                const asFloat = parseFloat(v);
+                if (v && isNaN(asFloat)) { return false; }
+
+                // convert()等に通さない，inputの生の値を持っておく．小数点対策
+                this.setState({ inputValue: v });
+
+                if (!onChange) { return true; }
+
+                if (v.trim() === '') {
+                  onChange({ value: null, unit: null });
+                } else {
+                  onChange({ value: asFloat, unit: this.state.unit });
+                }
+
+                return true;
+              }}
+            />
           </div>
+        )}
+        <div className="control">
+          <span className="select">
+            <select
+              tabIndex="-1"
+              value={this.state.unit}
+              onChange={e => this.setState({ unit: e.target.value })}
+            >
+            {units.map(unit =>
+              <option key={unit} value={unit}>{unit}</option>
+            )}
+            </select>
+          </span>
         </div>
       </div>
     );

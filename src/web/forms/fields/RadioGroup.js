@@ -37,46 +37,41 @@ export const ReadOnly = ({
 
 export const RadioGroupComponent = ({
   options,
-  label,
   value,
   readonly = false,
   size = '',
   onChange,
 }: {
   options: Array<{id: string, label: string}>,
-  label?: ?string,
   value: string,
   readonly?: boolean,
   size: string,
   onChange?: (newValue: string) => void,
 }) => (
-  <div className="field">
-    {label && <label className="label">{label}</label>}
-    {readonly ? (
-      <ReadOnly options={options} value={value} />
-    ) : (
-      <div className="buttons is-equiv">
-        {options.map(option => (
-          <a
-            key={option.id}
-            className={classNames(
-              'button',
-              {
-                'is-primary': option.id === value,
-                [`is-${size}`]: size,
-              }
-            )}
-            onClick={e => {
-              e.preventDefault();
-              if (onChange) {
-                onChange(option.id);
-              }
-            }}
-          >{option.label}</a>
-        ))}
-      </div>
-    )}
-  </div>
+  readonly ? (
+    <ReadOnly options={options} value={value} />
+  ) : (
+    <div className="buttons is-equiv">
+      {options.map(option => (
+        <a
+          key={option.id}
+          className={classNames(
+            'button',
+            {
+              'is-primary': option.id === value,
+              [`is-${size}`]: size,
+            }
+          )}
+          onClick={e => {
+            e.preventDefault();
+            if (onChange) {
+              onChange(option.id);
+            }
+          }}
+        >{option.label}</a>
+      ))}
+    </div>
+  )
 );
 
 import connect from '../../../common/forms/fields/RadioGroup';

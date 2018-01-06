@@ -72,7 +72,14 @@ function makeCreateChildFields(
       let children = null;
 
       if (field.class === 'block' || field.class === 'accordion') {
-        children = createChildFields(field.children, `${childFieldPath}.children`);
+        // Delegate `layout` prop to children
+        let childFields = field.children;
+        if (field.layout) {
+          childFields = childFields.map(child =>
+            Object.assign({}, { layout: field.layout }, child)
+          );
+        }
+        children = createChildFields(childFields, `${childFieldPath}.children`);
       }
 
       let fieldEditProps: ?FieldEditPropsType = null;

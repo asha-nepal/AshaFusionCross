@@ -34,24 +34,25 @@ import { Diagnoses } from './Diagnoses';
 import { MultiInput } from './MultiInput';
 import { SubformList, SubformListComponent, ReadonlySubformList } from './SubformList';
 import { Block } from './Block';
+import bless from './common/bless';
 
 const fieldComponentList = {
-  textinput: TextInput,
-  textunitinput: TextUnitInput,
-  textarea: TextArea,
-  radio: RadioGroup,
-  select: Select,
-  attachment: Attachment,
-  attachmentinput: AttachmentInput,
-  attachmentviewer: AttachmentViewer,
+  textinput: bless(TextInput),
+  textunitinput: bless(TextUnitInput),
+  textarea: bless(TextArea),
+  radio: bless(RadioGroup),
+  select: bless(Select),
+  attachment: bless(Attachment),
+  attachmentinput: bless(AttachmentInput),
+  attachmentviewer: bless(AttachmentViewer),
   accordion: Accordion,
-  check: Checkbox,
-  checkgroup: CheckGroup,
-  autocalc: AutoCalc,
+  check: bless(Checkbox),
+  checkgroup: bless(CheckGroup),
+  autocalc: bless(AutoCalc),
   guide: GuideTools,
   diagnoses: Diagnoses,
-  multiinput: MultiInput,
-  subformlist: SubformList,
+  multiinput: bless(MultiInput),
+  subformlist: bless(SubformList),
   block: Block,
 };
 

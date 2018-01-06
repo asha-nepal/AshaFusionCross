@@ -22,7 +22,6 @@ import classNames from 'classnames';
 import { ReadOnly } from './RadioGroup';
 
 export const SelectComponent = ({
-  label,
   value,
   options,
   nullable = true,
@@ -30,7 +29,6 @@ export const SelectComponent = ({
   size = '',
   readonly = false,
 }: {
-  label?: ?string,
   value: string,
   options: Array<{id: string, label: string}>,
   nullable: boolean,
@@ -38,34 +36,31 @@ export const SelectComponent = ({
   size: string,
   readonly?: boolean,
 }) => (
-  <div className="field">
-    {label && <label className="label">{label}</label>}
-    {readonly ? (
-      <ReadOnly value={value} options={options} />
-    ) : (
-      <div className="control">
-        <div
-          className={classNames(
-            'select',
-            { [`is-${size}`]: size }
-          )}
+  readonly ? (
+    <ReadOnly value={value} options={options} />
+  ) : (
+    <div className="control">
+      <div
+        className={classNames(
+          'select',
+          { [`is-${size}`]: size }
+        )}
+      >
+        <select
+          value={value || ''}
+          onChange={e => onChange(e.target.value || null)}
         >
-          <select
-            value={value || ''}
-            onChange={e => onChange(e.target.value || null)}
-          >
-            {nullable && <option value="" ></option>}
-            {options.map((option, i) =>
-              <option
-                key={i}
-                value={option.id}
-              >{option.label}</option>
-            )}
-          </select>
-        </div>
+          {nullable && <option value="" ></option>}
+          {options.map((option, i) =>
+            <option
+              key={i}
+              value={option.id}
+            >{option.label}</option>
+          )}
+        </select>
       </div>
-    )}
-  </div>
+    </div>
+  )
 );
 
 // TODO connectの名前
