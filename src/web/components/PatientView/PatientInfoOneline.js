@@ -32,12 +32,13 @@ export default ({
     patient.age &&
       <span>
         Age:
-        <TextUnitInputComponent
-          value={patient.age}
-          units={['years', 'months']}
-          readonly
-          inline
-        />
+        <div style={{ display: 'inline-block' }}>
+          <TextUnitInputComponent
+            value={patient.age}
+            units={['years', 'months']}
+            readonly
+          />
+        </div>
       </span>,
     patient.sex && `Sex: ${patient.sex}`,
     patient.address && `Address: ${patient.address}`,
