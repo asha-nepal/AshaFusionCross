@@ -68,7 +68,7 @@ export const SubformListComponent = ({
 
   return (
     <FieldComponentWrapper
-      className="control"
+      className="field"
       value={values}
       onChange={(newValues) => onChange(null, newValues)}
       getPreviousData={getPreviousData}

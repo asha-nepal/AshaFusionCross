@@ -44,7 +44,7 @@ export class Accordion extends Component {
     } = this.props;
 
     return (
-      <div className="card is-fullwidth control">
+      <div className="card is-fullwidth field">
         <a
           className="card-header"
           style={{ cursor: 'pointer' }}

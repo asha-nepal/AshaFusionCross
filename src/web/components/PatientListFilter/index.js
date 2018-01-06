@@ -49,13 +49,15 @@ export default ({
         onChange={onFilterChange}
       />
     </div>
-    <div className="column is-narrow control is-grouped">
+    <div className="column is-narrow">
       <SortControl
         field={sortBy}
         asc={sortInAsc}
         onFieldChange={setPatientListSortField}
         onOrderChange={setPatientListSortOrder}
       />
+    </div>
+    <div className="column is-narrow is-low">
       <DatePicker
         date={filterDate}
         onDatesChange={setFilterDate}

@@ -31,7 +31,7 @@ export const ReadonlyTextArea = ({
   label?: ?string,
   value: ?string,
 }) => (
-  <p className="control">
+  <p className="field">
     {label && <label className="label">{label}</label>}
     <span className="form-static is-multiline">
       {value && value.split('\n').reduce(
@@ -61,15 +61,17 @@ export const TextAreaComponent = ({
   <ReadonlyTextArea label={label} value={value} />
 ) : (
   <EditableFieldWrapper
-    className="control" style={style} fieldEditProps={fieldEditProps}
+    className="field" style={style} fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
-    <textarea
-      className="textarea"
-      placeholder={placeholder}
-      value={value || ''}
-      onChange={e => onChange(e.target.value)}
-    />
+    <div className="control">
+      <textarea
+        className="textarea"
+        placeholder={placeholder}
+        value={value || ''}
+        onChange={e => onChange(e.target.value)}
+      />
+    </div>
   </EditableFieldWrapper>
 ));
 

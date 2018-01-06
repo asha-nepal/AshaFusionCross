@@ -17,15 +17,16 @@
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 import AutosuggestInput from './AutosuggestInput';
 
 import EditableFieldWrapper from '../editor/EditableFieldWrapper';
 import type { FieldEditPropsType } from '../editor/type';
 
-const alertIcons = {
-  danger: <i className="fa fa-warning is-danger" />,
-  warning: <i className="fa fa-warning is-warning" />,
-  success: <i className="fa fa-check is-success" />,
+const alertFaIconClasses = {
+  danger: 'warning',
+  warning: 'warning',
+  success: 'check',
 };
 
 const ReadOnly = ({
@@ -39,7 +40,7 @@ const ReadOnly = ({
   prefix: ?string,
   suffix: ?string,
 }) => (
-  <div className="control">
+  <div className="field">
     {label && <label className="label">{label}</label>}
     {value &&
       <span className="form-static">{[prefix, value, suffix].join(' ')}</span>
@@ -61,10 +62,9 @@ export const TextInputComponent = ({
   precision,
   alerts,
   warning,
-  size,
+  size = '',
   required = false,
   readonly = false,
-  expanded = false,
   suggestions,
   valueSetters,
   fieldOptions = {},
@@ -83,10 +83,9 @@ export const TextInputComponent = ({
   precision?: number,
   alerts?: Array<Object>,
   warning?: string,
-  size?: string,
+  size: string,
   required?: boolean,
   readonly?: boolean,
-  expanded?: boolean,
   suggestions?: Array<string>,
   valueSetters?: Array<{ label: string, optionKey?: string, value?: string | number}>,
   fieldOptions?: Object,
@@ -95,8 +94,6 @@ export const TextInputComponent = ({
   if (readonly) {
     return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
   }
-
-  const hasAddons = prefix || suffix;
 
   let alert = null;
   const overrideStyle = {};
@@ -112,72 +109,116 @@ export const TextInputComponent = ({
     }
   }
 
-  const warningClassName = warning ? ' is-warning' : '';
-  const sizeClassName = size ? ` is-${size}` : '';
-
+  const hasAddons = prefix || suffix;
   const useSuggestions = suggestions && suggestions.length > 0;
   const InputComponent = useSuggestions ? AutosuggestInput : 'input';
   const additionalProps = useSuggestions ? { candidates: suggestions } : null;
+  const hasValueSetters = valueSetters && valueSetters.map;
+
+  const innerControl = (
+    <div className={classNames('field', { 'has-addons': hasAddons })}>
+      {prefix &&
+        <div className="control">
+          <span
+            className={classNames(
+              'button is-static',
+              { [`is-${size}`]: size }
+            )}
+          >
+            {prefix}
+          </span>
+        </div>
+      }
+      <div
+        className={classNames(
+          'control',
+          {
+            'is-expanded': !style || !style.width,
+            'has-icons-left': alert,
+          }
+        )}
+        data-balloon={alert && alert.label}
+        data-balloon-pos="up"
+      >
+        <InputComponent
+          type={type}
+          className={classNames(
+            'input',
+            {
+              'is-warning': warning,
+              [`is-${size}`]: size,
+            }
+          )}
+          style={{
+            ...style,
+            ...overrideStyle,
+          }}
+          placeholder={placeholder}
+          value={value || ''}
+          min={min}
+          max={max}
+          step={typeof precision === 'number' && Math.pow(10, -precision)}
+          onChange={e => onChange(e.target.value)}
+          required={required}
+          {...additionalProps}
+        />
+        {alert
+          ?
+          <span
+            className={classNames(
+              'icon is-small is-left',
+              { [`has-text-${alert.type}`]: true }
+            )}
+          >
+            <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+          </span>
+          :
+          <span />
+        }
+      </div>
+      {suffix &&
+        <p className="control">
+          <span
+            className={classNames(
+              'button is-static',
+              { [`is-${size}`]: size }
+            )}
+          >
+            {suffix}
+          </span>
+        </p>
+      }
+      {warning && <span className="help is-warning">{warning}</span>}
+    </div>
+  );
 
   return (
     <EditableFieldWrapper
-      className={expanded ? 'control is-expanded' : 'control'}
+      className="field"
       fieldEditProps={fieldEditProps}
     >
       {label && <label className="label">{label}</label>}
-      <div className="control is-grouped">
-        <div className={hasAddons ? 'control has-addons' : 'control'}>
-          {prefix &&
-            <span className={`button is-disabled${sizeClassName}`}>
-              {prefix}
-            </span>
-          }
-          <span
-            className={alert && 'control has-icon'}
-            data-balloon={alert && alert.label}
-            data-balloon-pos="up"
-          >
-            <InputComponent
-              type={type}
-              className={`input${warningClassName}${sizeClassName}`}
-              style={{
-                ...style,
-                ...overrideStyle,
-              }}
-              placeholder={placeholder}
-              value={value || ''}
-              min={min}
-              max={max}
-              step={typeof precision === 'number' && Math.pow(10, -precision)}
-              onChange={e => onChange(e.target.value)}
-              required={required}
-              {...additionalProps}
-            />
-            {alert ? alertIcons[alert.type] : <span />}
-          </span>
-          {suffix &&
-            <span className={`button is-disabled${sizeClassName}`}>
-              {suffix}
-            </span>
-          }
-        </div>
-        {valueSetters && valueSetters.map && valueSetters.map((valueSetter, i) => {
-          const setValue = valueSetter.value || fieldOptions[valueSetter.optionKey];
-          if (setValue == null) { return null; }
+      {hasValueSetters ? (
+        <div className={classNames('field', { 'is-grouped': hasValueSetters })}>
+          {innerControl}
+          {hasValueSetters && valueSetters.map((valueSetter, i) => {
+            const setValue = valueSetter.value || fieldOptions[valueSetter.optionKey];
+            if (setValue == null) { return null; }
 
-          return (
-            <a
-              key={i}
-              className="button"
-              onClick={e => {
-                e.preventDefault();
-                onChange(String(setValue));
-              }}
-            >{valueSetter.label}</a>
-          );
-        })}
-      </div>
-      <span className="help is-warning">{warning}</span>
+            return (
+              <div key={i} className="control">
+                <a
+                  className="button"
+                  onClick={e => {
+                    e.preventDefault();
+                    onChange(String(setValue));
+                  }}
+                >{valueSetter.label}</a>
+              </div>
+            );
+          })}
+        </div>
+      ) : innerControl}
     </EditableFieldWrapper>
   );
 };
@@ -190,10 +231,9 @@ TextInputComponent.fieldProps = [
   { name: 'min', type: 'number' },
   { name: 'max', type: 'number' },
   { name: 'precision', type: 'number' },
-  { name: 'size', type: 'number' },
+  { name: 'size', type: 'string' },
   { name: 'required', type: 'boolean' },
   { name: 'readonly', type: 'boolean' },
-  { name: 'expanded', type: 'boolean' },
 ];
 
 import connect from '../../../common/forms/fields/TextInput';

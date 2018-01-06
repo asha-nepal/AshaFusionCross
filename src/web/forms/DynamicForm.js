@@ -23,7 +23,6 @@ import { Form } from 'react-redux-form';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import {
-  TextInput,
   fieldComponentList as fieldComponents,
 } from './fields';
 
@@ -69,7 +68,7 @@ function makeCreateChildFields(
       }
 
       const childFieldPath = `${fieldPath}[${i}]`;
-      const component = fieldComponents[field.class] || TextInput;
+      const component = fieldComponents[field.class] || fieldComponents.textinput;
       let children = null;
 
       if (field.class === 'block' || field.class === 'accordion') {

@@ -9,7 +9,7 @@ $fa-font-path: "~font-awesome/fonts"
 @import "loading"
 @import "./form"
 @import "./design"
-@import "./checkgroup"
+@import "./buttons"
 @import "./attachment"
 @import "./print"
 @import "./form-editor"
@@ -26,35 +26,12 @@ a.inverse
 .icon.is-warning
   color: $yellow
 
-.withclear
-  padding-right: 32px
+.is-low
+  .DateInput
+    font-size: 12px
 
-.clearbuttonwrapper
-  position: absolute
-  display: block
-  top: 0px
-  right: 5px
-  height: 32px
-  width: 32px
-  cursor: pointer
-
-.clearbutton
-  margin-top: 30%
-  margin-left: 30%
-  color: #D5D5D5
-  &:hover
-    color: #000000
-
-.control
-  div.block
-    .DateInput
-      font-size: 12px
-
-    .DateInput__display-text
-      height: 16px
-      line-height: 1.5
-      padding-top: 0
-      text-align: center
-
-    .button
-      height: 34px
+  .DateInput__display-text
+    height: 16px
+    line-height: 1.5
+    padding-top: 0
+    text-align: center

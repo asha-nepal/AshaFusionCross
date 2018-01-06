@@ -37,21 +37,21 @@ const TextControl = ({
   type: string,
   form: Object,
 }) => (
-  <p className="control">
-    <label className="label">
-      {label}
+  <div className="field">
+    <label className="label">{label}</label>
+    <div className="control">
       <Control.input
         type={type}
         {...props}
         className={classNames('input', { 'is-danger': !form.valid })}
       />
-      {!form.valid &&
-        <span className="help is-danger">
-          {Object.keys(form.errors).filter(key => form.errors[key]).join(', ')}
-        </span>
-      }
-    </label>
-  </p>
+    </div>
+    {!form.valid &&
+      <p className="help is-danger">
+        {Object.keys(form.errors).filter(key => form.errors[key]).join(', ')}
+      </p>
+    }
+  </div>
 );
 
 let SignupForm = ({
@@ -104,13 +104,15 @@ let SignupForm = ({
             required
           />
 
-          <p className="control">
-            <button
-              className="button is-primary"
-              disabled={!form.$form.valid}
-              type="submit"
-            >Sign up</button>
-          </p>
+          <div className="field">
+            <p className="control">
+              <button
+                className="button is-primary"
+                disabled={!form.$form.valid}
+                type="submit"
+              >Sign up</button>
+            </p>
+          </div>
         </Form>
       </div>
     </div>

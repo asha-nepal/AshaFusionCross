@@ -32,7 +32,7 @@ export const AutoCalcComponent = ({
   style: ?Object,
   precision: ?number,
 }) => (
-  <div className="control">
+  <div className="field">
     {label && <label className="label">{label}</label>}
     <span className="form-static" style={style}>
       {(precision && typeof value === 'number') ? value.toFixed(precision) : value}

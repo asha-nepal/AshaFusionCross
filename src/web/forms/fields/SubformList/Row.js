@@ -16,6 +16,7 @@
 
 /* @flow */
 import React from 'react';
+import classNames from 'classnames';
 import type { FormFieldDefinition } from '.';
 import { checkVisibility } from '../../utils';
 
@@ -56,10 +57,13 @@ export default ({
   }
 
   return (
-    <div className="panel-block">
+    <div
+      className="panel-block"
+      style={{ display: 'block' }} // Workaround: https://github.com/jgthms/bulma/issues/812
+    >
       <div className="columns is-mobile">
         <div className="column">
-          <div className="control is-grouped" style={{ flexWrap: 'wrap' }} >
+          <div className="columns is-mobile is-multiline is-variable is-1">
           {fields.map((field, i) => {
             if (typeof field.show !== 'undefined'
               && !checkVisibility(_value, null, field.show)) {
@@ -72,8 +76,7 @@ export default ({
             const component = typeof field.class === 'string'
               ? fieldComponents[field.class] : field.class;
 
-            return React.createElement(component, {
-              key: i,
+            const element = React.createElement(component, {
               ...field,
               readonly,
               size: 'small',
@@ -90,22 +93,34 @@ export default ({
                 });
               }),
             });
+
+            return (
+              <div
+                key={i}
+                className={classNames(
+                  'column',
+                  { 'is-narrow': i !== fields.length - 1 }
+                )}
+                style={field.subformstyle}
+              >
+                {element}
+              </div>
+            );
           })}
           </div>
         </div>
 
         {onRemoveItemRequested &&
-          <div style={{ position: 'relative' }}>
+          <div
+            className="column is-narrow"
+          >
             <a
-              style={{ height: '100%' }}
-              className="button is-danger"
+              className="delete"
               onClick={e => {
                 e.preventDefault();
                 if (onRemoveItemRequested) onRemoveItemRequested();
               }}
-            >
-              <i className="fa fa-times" />
-            </a>
+            />
           </div>
         }
       </div>

@@ -32,7 +32,6 @@ import { AutoCalc } from './AutoCalc';
 import { GuideTools } from './GuideTools';
 import { Diagnoses } from './Diagnoses';
 import { MultiInput } from './MultiInput';
-import { MultiDoubleInput } from './MultiDoubleInput';
 import { SubformList, SubformListComponent, ReadonlySubformList } from './SubformList';
 import { Block } from './Block';
 
@@ -52,7 +51,6 @@ const fieldComponentList = {
   guide: GuideTools,
   diagnoses: Diagnoses,
   multiinput: MultiInput,
-  multidoubleinput: MultiDoubleInput,
   subformlist: SubformList,
   block: Block,
 };
@@ -73,7 +71,6 @@ export {
   GuideTools,
   Diagnoses,
   MultiInput,
-  MultiDoubleInput,
   SubformList, SubformListComponent, ReadonlySubformList,
   Block,
   fieldComponentList,

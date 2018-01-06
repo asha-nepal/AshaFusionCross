@@ -21,74 +21,46 @@ import {
   Link,
 } from 'react-router-dom';
 
-import {
-  TextUnitInputComponent,
-} from '../../forms/fields';
+import Header from '../common/Header';
 import PrintRecord from '../../containers/PrintRecord';
 
 export default ({
   patient,
-  verbose,
-  onPatientFormShowRequested,
   onBackClick,
 }: {
-  patient: ?PatientObject,
-  verbose: boolean,
-  onPatientFormShowRequested: () => void,
+  patient: PatientObject,
   onBackClick?: () => boolean,
 }) => (
-  <section className="hero is-primary is-bold header-fixed">
-    <div className="hero-head">
-      <div className="container">
-        <nav className="nav">
-          <div className="nav-left">
-            <Link
-              className="nav-item"
-              to="/"
-              onClick={e => {
-                if (onBackClick && !onBackClick()) {
-                  e.preventDefault();
-                  return false;
-                }
-                return true;
-              }}
-            >
-              <span className="icon"><i className="fa fa-arrow-left" /></span>
-            </Link>
-            {verbose && patient && [
-              patient.number && <span key="number" className="nav-item">[{patient.number}]</span>,
-              patient.name && <span key="name" className="nav-item">
-                <span className="title">{patient.name || ''}</span>
-              </span>,
-              patient.age &&
-                <span key="age" className="nav-item">
-                  Age:
-                  {<TextUnitInputComponent
-                    value={patient.age}
-                    units={['years', 'months']}
-                    readonly
-                  />}
-                </span>,
-              patient.sex &&
-                <span key="sex" className="nav-item">Sex: {patient.sex}</span>,
-              patient.address &&
-                <span key="address" className="nav-item">Address: {patient.address}</span>,
-            ]}
-            {verbose &&
-              <a
-                className="nav-item"
-                onClick={e => {
-                  e.preventDefault();
-                  onPatientFormShowRequested();
-                }}
-              >
-                <span className="icon"><i className="fa fa-pencil-square-o" /></span>
-              </a>
-            }
-            <PrintRecord className="nav-item" />
-          </div>
-        </nav>
+  <Header
+    brand={[
+      <Link
+        key="back"
+        className="navbar-item"
+        to="/"
+        onClick={e => {
+          if (onBackClick && !onBackClick()) {
+            e.preventDefault();
+            return false;
+          }
+          return true;
+        }}
+      >
+        <span className="icon"><i className="fa fa-arrow-left" /></span>
+      </Link>,
+      <span
+        key="name"
+        className="navbar-item is-hidden-touch"
+      >
+        {(patient.number ? `[${patient.number}] ` : '') + (patient.name || '(No name)')}
+      </span>,
+    ]}
+    menu={
+      <div className="navbar-end">
+        <PrintRecord className="navbar-item">
+          <span className="icon"><i className="fa fa-print" /></span>
+          Print
+        </PrintRecord>
       </div>
-    </div>
-  </section>
+    }
+  />
 );

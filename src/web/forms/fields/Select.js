@@ -17,6 +17,7 @@
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 
 import { ReadOnly } from './RadioGroup';
 
@@ -26,7 +27,7 @@ export const SelectComponent = ({
   options,
   nullable = true,
   onChange,
-  size,
+  size = '',
   readonly = false,
 }: {
   label?: ?string,
@@ -34,18 +35,21 @@ export const SelectComponent = ({
   options: Array<{id: string, label: string}>,
   nullable: boolean,
   onChange: (newValue: string) => void,
-  size?: string,
+  size: string,
   readonly?: boolean,
-}) => {
-  const sizeClassName = size ? ` is-${size}` : '';
-
-  return (
-    <div className="control">
-      {label && <label className="label">{label}</label>}
-      {readonly ? (
-        <ReadOnly value={value} options={options} />
-      ) : (
-        <span className={`select${sizeClassName}`}>
+}) => (
+  <div className="field">
+    {label && <label className="label">{label}</label>}
+    {readonly ? (
+      <ReadOnly value={value} options={options} />
+    ) : (
+      <div className="control">
+        <div
+          className={classNames(
+            'select',
+            { [`is-${size}`]: size }
+          )}
+        >
           <select
             value={value || ''}
             onChange={e => onChange(e.target.value || null)}
@@ -58,11 +62,11 @@ export const SelectComponent = ({
               >{option.label}</option>
             )}
           </select>
-        </span>
-      )}
-    </div>
-  );
-};
+        </div>
+      </div>
+    )}
+  </div>
+);
 
 // TODO connectの名前
 import connect from '../../../common/forms/fields/RadioGroup';

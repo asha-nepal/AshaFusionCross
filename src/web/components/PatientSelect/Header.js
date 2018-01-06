@@ -18,6 +18,8 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../common/Header';
+import logo from '../../../../assets/img/logo-white.svg';
 
 type Props = {
   isLoggedIn: boolean,
@@ -50,44 +52,28 @@ export default class extends Component {
     } = this.props;
 
     return (
-      <section className="hero is-primary is-bold">
-        <div className="hero-head">
-          <div className="container">
-            <nav className="nav">
-              <div className="nav-left">
-                <span className="nav-item is-brand title">ASHA fusion</span>
-              </div>
-
-              <span
-                className="nav-toggle"
+      <Header
+        brand={
+          <div className="navbar-item">
+            <img src={logo} alt="ASHA fusion" />
+          </div>
+        }
+        menu={isLoggedIn &&
+          <div className="navbar-end">
+            <div className="navbar-item">{loggedInUser || '(anonymous user)'}</div>
+            {isAdmin && <Link className="navbar-item" to="admin">Admin</Link>}
+            {logout &&
+              <a
+                className="navbar-item"
                 onClick={e => {
                   e.preventDefault();
-                  this.setState({ isMenuOpen: !this.state.isMenuOpen });
+                  logout();
                 }}
-              >
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-              {isLoggedIn &&
-                <div className={`nav-right nav-menu${this.state.isMenuOpen ? ' is-active' : ''}`}>
-                  <p className="nav-item">{loggedInUser || '(anonymous user)'}</p>
-                  {isAdmin && <Link className="nav-item" to="admin">Admin</Link>}
-                  {logout &&
-                    <a
-                      className="nav-item"
-                      onClick={e => {
-                        e.preventDefault();
-                        logout();
-                      }}
-                    >Log out</a>
-                  }
-                </div>
-              }
-            </nav>
+              >Log out</a>
+            }
           </div>
-        </div>
-      </section>
+        }
+      />
     );
   }
 }
