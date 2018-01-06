@@ -22,7 +22,7 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 import Row from './Row';
 import Readonly from './Readonly';
-import FieldComponentWrapper from '../common/FieldComponentWrapper';
+import DittoWrapper from '../common/DittoWrapper';
 
 export const ReadonlySubformList = Readonly;
 
@@ -63,7 +63,7 @@ export const SubformListComponent = ({
   const _values = values || [];
 
   return (
-    <FieldComponentWrapper
+    <DittoWrapper
       className="field"
       value={values}
       onChange={(newValues) => onChange(null, newValues)}
@@ -87,7 +87,7 @@ export const SubformListComponent = ({
         />
       )}
       </div>
-    </FieldComponentWrapper>
+    </DittoWrapper>
   );
 };
 

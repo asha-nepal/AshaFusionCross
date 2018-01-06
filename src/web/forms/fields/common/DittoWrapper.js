@@ -26,7 +26,7 @@ type Props = {
   getPreviousData: () => any,
 }
 
-class DittoWrapper extends React.Component {
+class DittoContainer extends React.Component {
   constructor(props: Props) {
     super(props);
 
@@ -114,12 +114,12 @@ export default ({
 }) => (
   getPreviousData
   ? (
-    <DittoWrapper
+    <DittoContainer
       value={value}
       onChange={onChange}
       getPreviousData={getPreviousData}
       {...rest}
-    >{children}</DittoWrapper>
+    >{children}</DittoContainer>
   )
   : <div {...rest}>{children}</div>
 );
