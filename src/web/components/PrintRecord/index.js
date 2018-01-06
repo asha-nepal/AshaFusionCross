@@ -26,10 +26,12 @@ export default ({
   patient,
   record,
   className,
+  children,
 }: {
   patient: PatientObject,
   record: RecordObject,
   className: ?string,
+  children: React$Element<any>,
 }) => (
   <a
     className={className}
@@ -51,8 +53,5 @@ export default ({
         };
       }
     }}
-  >
-    <span className="icon"><i className="fa fa-print" /></span>
-    Print
-  </a>
+  >{children}</a>
 );

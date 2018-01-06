@@ -56,7 +56,10 @@ export default ({
     ]}
     menu={
       <div className="navbar-end">
-        <PrintRecord className="navbar-item" />
+        <PrintRecord className="navbar-item">
+          <span className="icon"><i className="fa fa-print" /></span>
+          Print
+        </PrintRecord>
       </div>
     }
   />
