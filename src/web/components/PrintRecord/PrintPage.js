@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 
 import React from 'react';
@@ -49,7 +65,7 @@ export default ({
   return (
     <section className="section is-print">
       <div className="header is-clearfix">
-        <h1 className="title is-pulled-left">
+        <h1 className="subtitle is-3 is-pulled-left">
           {number && <small>No. {number} </small>}
           {getStr(patient, 'name')}
         </h1>
@@ -68,7 +84,7 @@ export default ({
         </div>
         <div>
           <p className="section-header">B) Physical Information</p>
-          <div className="control is-grouped">
+          <div className="field is-grouped">
             <div className="control">
               <label className="label">Height</label>
               <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
@@ -132,7 +148,7 @@ export default ({
               <tr>
                 <th>Vitals</th>
                 <td>
-                  <div className="control is-grouped">
+                  <div className="field is-grouped">
                     <div className="control">
                       <label className="label">Blood pressure</label>
                       <p className="form-static">
@@ -148,7 +164,7 @@ export default ({
                       <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
                     </div>
                   </div>
-                  <div className="control is-grouped">
+                  <div className="field is-grouped">
                     <div className="control">
                       <label className="label">SpO2</label>
                       <p className="form-static">{getStr(record, 'spo2', '---')} %</p>

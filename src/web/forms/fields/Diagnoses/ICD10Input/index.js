@@ -1,6 +1,23 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import Autosuggest from 'react-autosuggest';
 import ICD10Modal from './ICD10Modal';
 import ICD10Display from './ICD10Display';
@@ -24,7 +41,7 @@ type Props = {
   value: string,
   onChange: (newValue: ?string) => void,
   placeholder?: string,
-  size?: string,
+  size: string,
   readonly?: boolean,
   width?: string | number,
 }
@@ -84,7 +101,7 @@ export default class extends Component {
       value,
       onChange,
       placeholder,
-      size,
+      size = '',
       readonly,
       width,
     } = this.props;
@@ -105,46 +122,49 @@ export default class extends Component {
       );
     }
 
-    const sizeClassName = size ? ` is-${size}` : '';
-
     return (
-      <div className="control" style={{ width }}>
+      <div className="field" style={{ width }}>
         {label && <label className="label">{label}</label>}
-        <div className="control has-addons">
-          <Autosuggest
-            suggestions={this.state.suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={(suggestion) => suggestion.description}
-            renderSuggestion={(suggestion) => (
-              <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
-            )}
-            onSuggestionSelected={this.onSuggestionSelected}
-            inputProps={{
-              className: `input${sizeClassName}`,
-              placeholder,
-              value: this.state.value,
-              onBlur: this.onInputBlur,
-              onChange: this.onInputChange,
-            }}
-            theme={theme}
-          />
-          <a
-            className={`button${sizeClassName}`}
-            onClick={e => {
-              e.preventDefault();
-              this.setState({ isModalOpen: true });
-            }}
-          ><i className="fa fa-list-alt" /></a>
-          <ICD10Modal
-            isOpen={this.state.isModalOpen}
-            onClose={() => this.setState({ isModalOpen: false })}
-            onSelect={(code) => {
-              this.setState({ isModalOpen: false });
-              onChange(code);
-            }}
-          />
+        <div className="field has-addons">
+          <div className="control is-expanded">
+            <Autosuggest
+              suggestions={this.state.suggestions}
+              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              getSuggestionValue={(suggestion) => suggestion.description}
+              renderSuggestion={(suggestion) => (
+                <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
+              )}
+              onSuggestionSelected={this.onSuggestionSelected}
+              inputProps={{
+                className: classNames('input', { [`is-${size}`]: size }),
+                placeholder,
+                value: this.state.value,
+                onBlur: this.onInputBlur,
+                onChange: this.onInputChange,
+              }}
+              theme={theme}
+            />
+          </div>
+          <div className="control">
+            <a
+              className={classNames('button', { [`is-${size}`]: size })}
+              onClick={e => {
+                e.preventDefault();
+                this.setState({ isModalOpen: true });
+              }}
+            ><i className="fa fa-list-alt" /></a>
+          </div>
         </div>
+
+        <ICD10Modal
+          isOpen={this.state.isModalOpen}
+          onClose={() => this.setState({ isModalOpen: false })}
+          onSelect={(code) => {
+            this.setState({ isModalOpen: false });
+            onChange(code);
+          }}
+        />
       </div>
     );
   }

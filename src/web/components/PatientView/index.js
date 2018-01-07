@@ -1,15 +1,34 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2017 Yuguan Xing
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 
 import React, { Component } from 'react';
 import _get from 'lodash.get';
 
 import Header from './Header';
+import PatientInfoOneline from './PatientInfoOneline';
 import RecordsTab from './RecordsTab';
 import Footer from './Footer';
 
 import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
 import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import DynamicForm from '../../forms/DynamicForm';
+import Select from '../Select';
 
 type Props = {
   init: () => void,
@@ -19,6 +38,7 @@ type Props = {
   addNewActiveRecord: () => void,
   putActivePatient: () => void,
   putActiveRecord: (index: number) => void,
+  putDformStyles: () => void,
   removeActivePatient: () => void,
   isNew: boolean,
   isPuttingPatient: boolean,
@@ -57,6 +77,7 @@ export default class PatientView extends Component {
       addNewActiveRecord,
       putActivePatient,
       putActiveRecord,
+      putDformStyles,
       removeActivePatient,
       isNew,
       isPuttingPatient,
@@ -79,12 +100,12 @@ export default class PatientView extends Component {
       return <div>Fetching...</div>;
     }
 
+    const showRecord = !isNew && recordFormStyle;
+
     return (
-      <div className="header-fixed-container footer-fixed-container">
+      <div className="footer-fixed-container">
         <Header
           patient={patient}
-          verbose={!isNew && !patientFormVisibility}
-          onPatientFormShowRequested={() => setPatientFormVisibility(true)}
           onBackClick={() => {
             if (activeRecordsFormPristineness.some(x => !x)) {
               return confirm('Record(s) is (are) changed but not saved.\nIs it ok to go back?');
@@ -93,11 +114,14 @@ export default class PatientView extends Component {
           }}
         />
 
-        {(isNew || patientFormVisibility) &&
-          <section className="section">
-            <div className="card is-fullwidth">
-              <div className="card-content">
-                <div className="container">
+        {/* TODO: <Refactoring> Extract the block below to another component */}
+        <div className="card">
+          <div className="card-content">
+            <div className="container">
+            {(isNew || patientFormVisibility)
+              ?
+              <div className="columns">
+                <div className="column">
                   <DynamicForm
                     model="activePatient"
                     style={patientFormStyle}
@@ -117,25 +141,45 @@ export default class PatientView extends Component {
                     }}
                   />
                 </div>
+                {!isNew &&
+                  <div className="column is-narrow">
+                    <a
+                      className="delete is-pulled-right"
+                      aria-label="close"
+                      onClick={e => {
+                        e.preventDefault();
+                        setPatientFormVisibility(false);
+                      }}
+                    />
+                  </div>
+                }
               </div>
-              {!isNew &&
-                <footer className="card-footer">
+              :
+              <div className="columns">
+                <div className="column">
+                  <PatientInfoOneline
+                    patient={patient}
+                  />
+                </div>
+                <div className="column is-narrow">
                   <a
-                    className="card-footer-item"
+                    className="icon is-pulled-right"
+                    aria-label="edit"
                     onClick={e => {
                       e.preventDefault();
-                      setPatientFormVisibility(false);
+                      setPatientFormVisibility(true);
                     }}
                   >
-                    <i className="fa fa-caret-square-o-up" />
+                    <i className="fa fa-pencil-square-o" />
                   </a>
-                </footer>
-              }
+                </div>
+              </div>
+            }
             </div>
-          </section>
-        }
+          </div>
+        </div>
 
-        {!isNew &&
+        {showRecord &&
           <section className="section">
             <div className="container">
               <div className="columns">
@@ -146,21 +190,16 @@ export default class PatientView extends Component {
                   addNewActiveRecord={addNewActiveRecord}
                   pristinenessList={activeRecordsFormPristineness}
                 />
-                <div className="column is-narrow control">
-                  <span className="select">
-                    <select
+                <div className="column is-narrow">
+                  {recordFormStyles.size > 1 &&
+                    <Select
                       value={recordFormStyleId}
-                      onChange={e => {
-                        setRecordFormStyleId(e.target.value);
-                      }}
-                    >
-                    {recordFormStyles.map(style => {
-                      const id = style.get('id');
-                      const label = style.get('label');
-                      return <option key={id} value={id}>{label}</option>;
-                    })}
-                    </select>
-                  </span>
+                      onChange={setRecordFormStyleId}
+                      options={recordFormStyles.map(style =>
+                        ({ id: style.get('id'), label: style.get('label') })
+                      )}
+                    />
+                  }
                   <RecordChartToggle />
                 </div>
               </div>
@@ -171,6 +210,8 @@ export default class PatientView extends Component {
                 <div className="container">
                   <DynamicForm
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
+                    formGroup="record"
+                    formStyleId={recordFormStyleId}
                     style={recordFormStyle}
                     freeze={isPuttingRecord}
                     getPreviousData={(path: string) => {
@@ -184,6 +225,8 @@ export default class PatientView extends Component {
 
                       return null;
                     }}
+                    onFormsSave={putDformStyles}
+                    // customizable // TODO: Temporarily disabled
                   />
                 </div>
               )}
@@ -191,7 +234,7 @@ export default class PatientView extends Component {
           </section>
         }
 
-        {!isNew &&
+        {showRecord &&
           <Footer
             onSubmit={
               selectedActiveRecordIndex > -1

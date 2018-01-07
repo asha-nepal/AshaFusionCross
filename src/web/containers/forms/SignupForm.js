@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 
 import React from 'react';
@@ -9,6 +25,8 @@ import {
   actions,
 } from 'react-redux-form';
 
+import outerConnect from '../../../connects/forms/SignupForm';
+
 const TextControl = ({
   label,
   form,
@@ -19,24 +37,24 @@ const TextControl = ({
   type: string,
   form: Object,
 }) => (
-  <p className="control">
-    <label className="label">
-      {label}
+  <div className="field">
+    <label className="label">{label}</label>
+    <div className="control">
       <Control.input
         type={type}
         {...props}
         className={classNames('input', { 'is-danger': !form.valid })}
       />
-      {!form.valid &&
-        <span className="help is-danger">
-          {Object.keys(form.errors).filter(key => form.errors[key]).join(', ')}
-        </span>
-      }
-    </label>
-  </p>
+    </div>
+    {!form.valid &&
+      <p className="help is-danger">
+        {Object.keys(form.errors).filter(key => form.errors[key]).join(', ')}
+      </p>
+    }
+  </div>
 );
 
-const SignupForm = ({
+let SignupForm = ({
   form,
   signup,
   reset,
@@ -86,20 +104,22 @@ const SignupForm = ({
             required
           />
 
-          <p className="control">
-            <button
-              className="button is-primary"
-              disabled={!form.$form.valid}
-              type="submit"
-            >Sign up</button>
-          </p>
+          <div className="field">
+            <p className="control">
+              <button
+                className="button is-primary"
+                disabled={!form.$form.valid}
+                type="submit"
+              >Sign up</button>
+            </p>
+          </div>
         </Form>
       </div>
     </div>
   </div>
 );
 
-export default connect(
+SignupForm = connect(
   state => ({
     form: state.forms.forms.signup,
   }),
@@ -107,3 +127,5 @@ export default connect(
     reset: () => dispatch(actions.reset('forms.signup')),
   })
 )(SignupForm);
+
+export default outerConnect(SignupForm);
