@@ -431,41 +431,55 @@
           "show": "allergy"
         },
         {
-          "field": "past_medical_history_select",
-          "label": "Past medical history",
-          "class": "checkgroup",
-          "options": [
+          "class": "block",
+          "children": [
             {
-              "id": "htn",
-              "label": "HTN"
+              "field": "past_medical_history_select",
+              "label": "Past medical history",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "htn",
+                  "label": "HTN"
+                },
+                {
+                  "id": "dmii",
+                  "label": "DM II"
+                },
+                {
+                  "id": "copd",
+                  "label": "COPD"
+                },
+                {
+                  "id": "ptb",
+                  "label": "PTB"
+                },
+                {
+                  "id": "jaundice",
+                  "label": "Jaundice"
+                },
+                {
+                  "id": "typhoid",
+                  "label": "Typhoid"
+                },
+                {
+                  "id": "pneumonia",
+                  "label": "Pneumonia"
+                },
+                {
+                  "id": "not_significant",
+                  "label": "Not Significant"
+                }
+              ]
             },
             {
-              "id": "dmii",
-              "label": "DM II"
-            },
-            {
-              "id": "copd",
-              "label": "COPD"
-            },
-            {
-              "id": "ptb",
-              "label": "PTB"
-            },
-            {
-              "id": "jaundice",
-              "label": "Jaundice"
-            },
-            {
-              "id": "typhoid",
-              "label": "Typhoid"
-            },
-            {
-              "id": "pneumonia",
-              "label": "Pneumonia"
-            },
-            {
-              "id": "not_significant",
-              "label": "Not Significant"
+              "field": "past_medical_history_duration",
+              "label": "Duration",
+              "class": "textinput",
+              "show": "past_medical_history_select",
+              "suffix": "days",
+              "type": "number",
+              "min": 0
             }
           ]
         },
@@ -479,73 +493,87 @@
           "class": "textarea"
         },
         {
-          "field": "present_medical_history_select",
-          "label": "Present medical history",
-          "class": "checkgroup",
-          "options": [
+          "class": "block",
+          "children": [
             {
-              "id": "fever",
-              "label": "Fever"
+              "field": "present_medical_history_select",
+              "label": "Present medical history",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "fever",
+                  "label": "Fever"
+                },
+                {
+                  "id": "cough",
+                  "label": "Cough"
+                },
+                {
+                  "id": "runny_nose",
+                  "label": "Runny Nose"
+                },
+                {
+                  "id": "sore_throat",
+                  "label": "Sore throat"
+                },
+                {
+                  "id": "headache",
+                  "label": "Headache"
+                },
+                {
+                  "id": "earache",
+                  "label": "Earache"
+                },
+                {
+                  "id": "sob",
+                  "label": "SOB"
+                },
+                {
+                  "id": "chest_pain",
+                  "label": "Chest Pain"
+                },
+                {
+                  "id": "palpitation",
+                  "label": "Palpitation"
+                },
+                {
+                  "id": "orthopnea",
+                  "label": "Orthopnea"
+                },
+                {
+                  "id": "pnd",
+                  "label": "PND"
+                },
+                {
+                  "id": "easy_fatigability",
+                  "label": "Easy Fatigability"
+                },
+                {
+                  "id": "abdominal_pain",
+                  "label": "Abdominal pain"
+                },
+                {
+                  "id": "nausea",
+                  "label": "Nausea"
+                },
+                {
+                  "id": "vomiting",
+                  "label": "Vomiting"
+                },
+                {
+                  "id": "diarrhoea",
+                  "label": "Diarrhoea"
+                }
+              ]
             },
             {
-              "id": "cough",
-              "label": "Cough"
-            },
-            {
-              "id": "runny_nose",
-              "label": "Runny Nose"
-            },
-            {
-              "id": "sore_throat",
-              "label": "Sore throat"
-            },
-            {
-              "id": "headache",
-              "label": "Headache"
-            },
-            {
-              "id": "earache",
-              "label": "Earache"
-            },
-            {
-              "id": "sob",
-              "label": "SOB"
-            },
-            {
-              "id": "chest_pain",
-              "label": "Chest Pain"
-            },
-            {
-              "id": "palpitation",
-              "label": "Palpitation"
-            },
-            {
-              "id": "orthopnea",
-              "label": "Orthopnea"
-            },
-            {
-              "id": "pnd",
-              "label": "PND"
-            },
-            {
-              "id": "easy_fatigability",
-              "label": "Easy Fatigability"
-            },
-            {
-              "id": "abdominal_pain",
-              "label": "Abdominal pain"
-            },
-            {
-              "id": "nausea",
-              "label": "Nausea"
-            },
-            {
-              "id": "vomiting",
-              "label": "Vomiting"
-            },
-            {
-              "id": "diarrhoea",
-              "label": "Diarrhoea"
+              "field": "present_medical_history_duration",
+              "label": "Duration",
+              "class": "textinput",
+              "show": "present_medical_history_select",
+              "suffix": "days",
+              "type": "number",
+              "min": 0
             }
           ]
         },
@@ -983,41 +1011,55 @@
           "show": "allergy"
         },
         {
-          "field": "past_medical_history_select",
-          "label": "Past medical history",
-          "class": "checkgroup",
-          "options": [
+          "class": "block",
+          "children": [
             {
-              "id": "htn",
-              "label": "HTN"
+              "field": "past_medical_history_select",
+              "label": "Past medical history",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "htn",
+                  "label": "HTN"
+                },
+                {
+                  "id": "dmii",
+                  "label": "DM II"
+                },
+                {
+                  "id": "copd",
+                  "label": "COPD"
+                },
+                {
+                  "id": "ptb",
+                  "label": "PTB"
+                },
+                {
+                  "id": "jaundice",
+                  "label": "Jaundice"
+                },
+                {
+                  "id": "typhoid",
+                  "label": "Typhoid"
+                },
+                {
+                  "id": "pneumonia",
+                  "label": "Pneumonia"
+                },
+                {
+                  "id": "not_significant",
+                  "label": "Not Significant"
+                }
+              ]
             },
             {
-              "id": "dmii",
-              "label": "DM II"
-            },
-            {
-              "id": "copd",
-              "label": "COPD"
-            },
-            {
-              "id": "ptb",
-              "label": "PTB"
-            },
-            {
-              "id": "jaundice",
-              "label": "Jaundice"
-            },
-            {
-              "id": "typhoid",
-              "label": "Typhoid"
-            },
-            {
-              "id": "pneumonia",
-              "label": "Pneumonia"
-            },
-            {
-              "id": "not_significant",
-              "label": "Not Significant"
+              "field": "past_medical_history_duration",
+              "label": "Duration",
+              "class": "textinput",
+              "show": "past_medical_history_select",
+              "suffix": "days",
+              "type": "number",
+              "min": 0
             }
           ]
         },
@@ -1031,73 +1073,87 @@
           "class": "textarea"
         },
         {
-          "field": "present_medical_history_select",
-          "label": "Present medical history",
-          "class": "checkgroup",
-          "options": [
+          "class": "block",
+          "children": [
             {
-              "id": "fever",
-              "label": "Fever"
+              "field": "present_medical_history_select",
+              "label": "Present medical history",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "fever",
+                  "label": "Fever"
+                },
+                {
+                  "id": "cough",
+                  "label": "Cough"
+                },
+                {
+                  "id": "runny_nose",
+                  "label": "Runny Nose"
+                },
+                {
+                  "id": "sore_throat",
+                  "label": "Sore throat"
+                },
+                {
+                  "id": "headache",
+                  "label": "Headache"
+                },
+                {
+                  "id": "earache",
+                  "label": "Earache"
+                },
+                {
+                  "id": "sob",
+                  "label": "SOB"
+                },
+                {
+                  "id": "chest_pain",
+                  "label": "Chest Pain"
+                },
+                {
+                  "id": "palpitation",
+                  "label": "Palpitation"
+                },
+                {
+                  "id": "orthopnea",
+                  "label": "Orthopnea"
+                },
+                {
+                  "id": "pnd",
+                  "label": "PND"
+                },
+                {
+                  "id": "easy_fatigability",
+                  "label": "Easy Fatigability"
+                },
+                {
+                  "id": "abdominal_pain",
+                  "label": "Abdominal pain"
+                },
+                {
+                  "id": "nausea",
+                  "label": "Nausea"
+                },
+                {
+                  "id": "vomiting",
+                  "label": "Vomiting"
+                },
+                {
+                  "id": "diarrhoea",
+                  "label": "Diarrhoea"
+                }
+              ]
             },
             {
-              "id": "cough",
-              "label": "Cough"
-            },
-            {
-              "id": "runny_nose",
-              "label": "Runny Nose"
-            },
-            {
-              "id": "sore_throat",
-              "label": "Sore throat"
-            },
-            {
-              "id": "headache",
-              "label": "Headache"
-            },
-            {
-              "id": "earache",
-              "label": "Earache"
-            },
-            {
-              "id": "sob",
-              "label": "SOB"
-            },
-            {
-              "id": "chest_pain",
-              "label": "Chest Pain"
-            },
-            {
-              "id": "palpitation",
-              "label": "Palpitation"
-            },
-            {
-              "id": "orthopnea",
-              "label": "Orthopnea"
-            },
-            {
-              "id": "pnd",
-              "label": "PND"
-            },
-            {
-              "id": "easy_fatigability",
-              "label": "Easy Fatigability"
-            },
-            {
-              "id": "abdominal_pain",
-              "label": "Abdominal pain"
-            },
-            {
-              "id": "nausea",
-              "label": "Nausea"
-            },
-            {
-              "id": "vomiting",
-              "label": "Vomiting"
-            },
-            {
-              "id": "diarrhoea",
-              "label": "Diarrhoea"
+              "field": "present_medical_history_duration",
+              "label": "Duration",
+              "class": "textinput",
+              "show": "present_medical_history_select",
+              "suffix": "days",
+              "type": "number",
+              "min": 0
             }
           ]
         },
