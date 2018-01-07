@@ -1049,7 +1049,7 @@
             {
               "field": "mental.complient",
               "class": "textarea",
-              "placeholder": "Ex. “I cannot sleep well and cannot concentrate on daily tasks.”"
+              "placeholder": "Ex. \"I cannot sleep well and cannot concentrate on daily tasks.\""
             }
           ]
         },
