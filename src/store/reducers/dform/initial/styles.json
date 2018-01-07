@@ -1124,7 +1124,7 @@
               "field": "mental.education",
               "label": "Education",
               "class": "textinput",
-              "placeholder": "Ex. \"Attended high school but no graduation\""
+              "placeholder": "Ex. \"Attended high school but did not graduate.\""
             },
             {
               "field": "mental.work",
@@ -1136,7 +1136,7 @@
               "field": "mental.lifeevents",
               "label": "Significant life events",
               "class": "textinput",
-              "placeholder": "Ex. \"Attacked by a great earthquake when he was 23\""
+              "placeholder": "Ex. \"Experienced major earthquake when he was 23\""
             },
             {
               "field": "mental.personality",
