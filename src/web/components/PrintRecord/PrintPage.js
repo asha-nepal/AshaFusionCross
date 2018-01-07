@@ -84,7 +84,7 @@ export default ({
         </div>
         <div>
           <p className="section-header">B) Physical Information</p>
-          <div className="control is-grouped">
+          <div className="field is-grouped">
             <div className="control">
               <label className="label">Height</label>
               <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
@@ -148,7 +148,7 @@ export default ({
               <tr>
                 <th>Vitals</th>
                 <td>
-                  <div className="control is-grouped">
+                  <div className="field is-grouped">
                     <div className="control">
                       <label className="label">Blood pressure</label>
                       <p className="form-static">
@@ -164,7 +164,7 @@ export default ({
                       <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
                     </div>
                   </div>
-                  <div className="control is-grouped">
+                  <div className="field is-grouped">
                     <div className="control">
                       <label className="label">SpO2</label>
                       <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
