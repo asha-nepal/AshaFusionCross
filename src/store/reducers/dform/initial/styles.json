@@ -2272,109 +2272,227 @@
         },
         {
           "class": "block",
-          "label": "Stool Test",
+          "widthaligned": true,
           "children": [
             {
               "class": "block",
-              "label": "Physical Examination (R/E)",
+              "label": "STOOL EXAMINATION",
+              "layout": "horizontal",
               "children": [
                 {
-                  "field": "pathology.stool.re.colour", "label": "Colour"
+                  "class": "block",
+                  "label": "PHYSICAL",
+                  "children": [
+                    {
+                      "field": "pathology.stool.physical.colour",
+                      "label": "Colour"
+                    },
+                    {
+                      "field": "pathology.stool.physical.mucus",
+                      "label": "Mucus"
+                    },
+                    {
+                      "field": "pathology.stool.physical.worm",
+                      "label": "Worm"
+                    },
+                    {
+                      "field": "pathology.stool.physical.blood",
+                      "label": "blood"
+                    },
+                    {
+                      "field": "pathology.stool.physical.consistency",
+                      "label": "Consistency"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.re.consistency", "label": "Consistency"
+                  "class": "block",
+                  "label": "CHEMICAL",
+                  "children": [
+                    {
+                      "field": "pathology.stool.chemical.occult_blood",
+                      "label": "Occult blood"
+                    },
+                    {
+                      "field": "pathology.stool.chemical.ph",
+                      "label": "Ph"
+                    },
+                    {
+                      "field": "pathology.stool.chemical.reducing_substance",
+                      "label": "Reducing Substance"
+                    },
+                    {
+                      "field": "pathology.stool.chemical.others",
+                      "label": "Others"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.re.blood", "label": "Blood"
+                  "class": "block",
+                  "label": "MICROSCOPIC",
+                  "children": [
+                    {
+                      "field": "pathology.stool.microscopic.pus",
+                      "label": "Pus"
+                    },
+                    {
+                      "field": "pathology.stool.microscopic.rbc",
+                      "label": "RBCs"
+                    },
+                    {
+                      "field": "pathology.stool.microscopic.giardia_lambia",
+                      "label": "Giardia lambia"
+                    },
+                    {
+                      "field": "pathology.stool.microscopic.entamoeba_histolytica",
+                      "label": "Entamoeba histolytica"
+                    },
+                    {
+                      "field": "pathology.stool.microscopic.ascaris_lumbricoides",
+                      "label": "Ascaris lumbricoides"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.re.mucus", "label": "Mucus"
-                },
-                {
-                  "field": "pathology.stool.re.parasite", "label": "Parasite"
+                  "class": "block",
+                  "label": "HOOK WORM",
+                  "children": [
+                    {
+                      "field": "pathology.stool.hook_worm.trichuris_trichiura",
+                      "label": "Trichuris trichiura"
+                    },
+                    {
+                      "field": "pathology.stool.hook_worm.hymenolepis_nana",
+                      "label": "Hymenolepis nana"
+                    },
+                    {
+                      "field": "pathology.stool.hook_worm.taenia_spp",
+                      "label": "Taenia Spp."
+                    },
+                    {
+                      "field": "pathology.stool.hook_worm.indigested_food_particles",
+                      "label": "Indigested food particles"
+                    },
+                    {
+                      "field": "pathology.stool.hook_worm.strongyloides_stercoralis",
+                      "label": "Strongyloides Stercoralis"
+                    }
+                  ]
                 }
               ]
             },
             {
               "class": "block",
-              "label": "Microscopic Examination (M/E)",
+              "label": "URINE EXAMINATION",
+              "layout": "horizontal",
               "children": [
                 {
-                  "field": "pathology.stool.me.helminthes_parasite", "label": "Helminthes Parasite"
+                  "class": "block",
+                  "label": "PHYSICAL",
+                  "children": [
+                    {
+                      "field": "pathology.urine.physical.colour",
+                      "label": "Colour"
+                    },
+                    {
+                      "field": "pathology.urine.physical.specific_gravity",
+                      "label": "Specific Gravity"
+                    },
+                    {
+                      "field": "pathology.urine.physical.transparency",
+                      "label": "Transparency"
+                    },
+                    {
+                      "field": "pathology.urine.physical.quantity",
+                      "label": "Quantity"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.me.protozoal_parasite", "label": "Protozoal Parasite"
+                  "class": "block",
+                  "label": "CHEMICAL",
+                  "children": [
+                    {
+                      "field": "pathology.urine.chemical.reaction",
+                      "label": "Reaction"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.sugar",
+                      "label": "Sugar"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.albumin",
+                      "label": "Albumin"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.bilirubin",
+                      "label": "Bilirubin"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.urobilinogen",
+                      "label": "Urobilinogen"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.acetone",
+                      "label": "Acetone"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.me.undigested_food_particles", "label": "Undigested Food Particles"
+                  "class": "block",
+                  "label": "MICROSCOPIC",
+                  "children": [
+                    {
+                      "field": "pathology.urine.microscopic.pus_cells",
+                      "label": "Pus Cells",
+                      "type": "number", "suffix": "Hpf"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.rbc",
+                      "label": "RBCs",
+                      "type": "number", "suffix": "Hpf"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.casts_granular",
+                      "label": "Casts Granular"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.cellular",
+                      "label": "Cellular"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.other_cast",
+                      "label": "Other Cast"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.epithelial_cells",
+                      "label": "Epithelial Cells",
+                      "type": "number", "suffix": "Hpf"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.calcium_oxalate",
+                      "label": "Calcium Oxalate"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.amorphous_phosphate",
+                      "label": "Amorphous Phosphate"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.bacteria",
+                      "label": "Bacteria"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.others",
+                      "label": "Others"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.me.rbc", "label": "RBC"
-                },
-                {
-                  "field": "pathology.stool.me.pus_cell", "label": "Pus cell"
-                },
-                {
-                  "field": "pathology.stool.me.occult_blood_test", "label": "Occult Blood Test"
-                },
-                {
-                  "field": "pathology.stool.me.others", "label": "Others"
+                  "field": "pathology.pregnancy_test.text",
+                  "label": "Pregnancy Test",
+                  "class": "textarea"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "label": "Urine Test",
-          "children": [
-            {
-              "class": "block",
-              "label": "Physical Examination (R/E)",
-              "children": [
-                {
-                  "field": "pathology.urine.re.colour", "label": "Colour"
-                },
-                {
-                  "field": "pathology.urine.re.transparency", "label": "Transparency"
-                },
-                {
-                  "field": "pathology.urine.re.reaction_ph", "label": "Reaction/ Ph"
-                },
-                {
-                  "field": "pathology.urine.re.sugar", "label": "Sugar"
-                },
-                {
-                  "field": "pathology.urine.re.albumin", "label": "Albumin"
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Microscopic Examination (M/E)",
-              "children": [
-                {
-                  "field": "pathology.urine.me.pus_cells", "label": "Pus cells", "type": "number", "suffix": "Hpf"
-                },
-                {
-                  "field": "pathology.urine.me.rbc", "label": "RBC", "type": "number", "suffix": "Hpf"
-                },
-                {
-                  "field": "pathology.urine.me.epi_cells", "label": "Epi. Cells", "type": "number", "suffix": "Hpf"
-                },
-                {
-                  "field": "pathology.urine.me.cast", "label": "Cast", "type": "number", "suffix": "Hpf"
-                },
-                {
-                  "field": "pathology.urine.me.crystal", "label": "Crystal", "type": "number", "suffix": "Hpf"
-                }
-              ]
-            },
-            {
-              "field": "pathology.urine.specific_gravity", "label": "Specific Gravity"
-            },
-            {
-              "field": "pathology.urine.chyle", "label": "Chyle"
             }
           ]
         }
