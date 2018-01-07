@@ -37,6 +37,11 @@ export function checkVisibility(state: Object, rootPath: ?string, showProp: stri
         }
         return referent === valueToCheck;
       }
+
+      if (Array.isArray(referent)) {
+        return referent.length > 0;
+      }
+
       return !!referent;
     });
   }

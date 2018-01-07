@@ -53,6 +53,16 @@ describe('checkVisibility', () => {
     expect(checkVisibility(state, 'root', 'foo:bbb')).toBe(false);
   });
 
+  it('handles an empty array as falthy', () => {
+    const state = {
+      root: {
+        foo: [],
+      },
+    };
+
+    expect(checkVisibility(state, 'root', 'foo')).toBe(false);
+  });
+
   it('handles empty rootPath', () => {
     const state = {
       foo: true,
