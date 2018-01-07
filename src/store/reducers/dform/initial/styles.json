@@ -1547,7 +1547,7 @@
             {
               "field": "mental.complient",
               "class": "textarea",
-              "placeholder": "Ex. “I cannot sleep well and cannot concentrate on daily tasks.”"
+              "placeholder": "Ex. \"I cannot sleep well and cannot concentrate on daily tasks.\""
             }
           ]
         },
@@ -1558,7 +1558,7 @@
             {
               "field": "mental.illness",
               "class": "textarea",
-              "placeholder": "Ex. He is a 23-year-old male for whom psychiatric evaluation is requested due to depressive mood in the past few weeks. He denies any suicidal thoughts. He admits to morning sickness symptom of anorexia, and difficulty falling + staying asleep. He also admits that he lost his house dog on Monday.\nOtherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) headache, (-) substance abuse."
+              "placeholder": "Ex. \"He is a 23-year-old male for whom psychiatric evaluation is requested due to depressive mood in the past few weeks. He denies any suicidal thoughts. He admits to morning sickness symptom of anorexia, and difficulty falling + staying asleep. He also admits that he lost his house dog on Monday.\nOtherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) headache, (-) substance abuse\""
             }
           ]
         },
@@ -1569,7 +1569,7 @@
             {
               "field": "mental.family",
               "class": "textarea",
-              "placeholder": "Ex. His immediate family consists of his father (age 51), his mother (age 49), one older brother (age 26), and one younger sister (age 19). His father suffers from alcohol dependence."
+              "placeholder": "Ex. \"His immediate family consists of his father (age 51), his mother (age 49), one older brother (age 26), and one younger sister (age 19). His father suffers from alcohol dependence.\""
             }
           ]
         },
@@ -1623,12 +1623,13 @@
               "label": "Education",
               "class": "textinput",
               "placeholder": "Ex. Attended high school but did not graduate"
+
             },
             {
               "field": "mental.work",
               "label": "Work experience",
               "class": "textinput",
-              "placeholder": "Ex. Farm helper (2 years), Unstable work history"
+              "placeholder": "Ex. \"Farm helper (2 years), Unstable work history\""
             },
             {
               "field": "mental.lifeevents",
