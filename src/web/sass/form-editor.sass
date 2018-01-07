@@ -1,0 +1,23 @@
+.form-editor-drop-target
+  min-width: 12px
+  min-height: 12px
+  margin: 2px
+  background-color: $light
+  border-radius: 5px
+  border: 1px solid darken($light, 5%)
+  cursor: pointer
+
+  &.hover
+    background-color: transparent
+    border-color: $primary
+
+.form-editor-drag-source
+  &.dragging
+    background-color: lighten($primary, 30%)
+  &.hover
+    background-color: lighten($primary, 50%)
+    cursor: move
+
+.form-editor-drag-point
+  background-color: $grey
+  cursor: move

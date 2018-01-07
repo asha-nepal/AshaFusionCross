@@ -1,4 +1,6 @@
 [
+  { "key": "_patient.age", "name": "Age" },
+  { "key": "_patient.sex", "name": "Sex" },
   { "key": "height", "name": "Height (cm)" },
   { "key": "weight", "name": "Weight (kg)" },
   { "key": "bp.s", "name": "BP/s (mmHg)" },

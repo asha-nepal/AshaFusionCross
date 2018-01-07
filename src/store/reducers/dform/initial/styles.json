@@ -139,6 +139,7 @@
     {
       "id": "reception",
       "label": "Reception",
+      "roles": ["reception"],
       "style": [
         {
           "class": "block",
@@ -169,7 +170,7 @@
               "precision": 1,
               "units": [
                 "kg",
-                "lbm"
+                "lb"
               ]
             },
             {
@@ -689,6 +690,7 @@
     {
       "id": "physical",
       "label": "Physician",
+      "roles": ["physician"],
       "style": [
         {
           "class": "guide"
@@ -720,7 +722,7 @@
               },
               "units": [
                 "kg",
-                "lbm"
+                "lb"
               ]
             },
             {
@@ -1412,6 +1414,7 @@
     {
       "id": "mental",
       "label": "Mental",
+      "roles": ["psychiatrist"],
       "style": [
         {
           "class": "accordion",
@@ -1594,6 +1597,7 @@
     {
       "id": "ksix",
       "label": "K6",
+      "roles": ["reception", "psychiatrist"],
       "style": [
         {
           "field": "ksix.nervious",

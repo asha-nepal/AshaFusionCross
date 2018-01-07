@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { take, call, put, select, race, cancelled } from 'redux-saga/effects';
 import PouchDB from 'lib/pouchdb';
 import {
@@ -12,7 +28,6 @@ import {
   DB_CONNECT_REQUEST,
   DB_DISCONNECT_REQUEST,
   dbSetInstance,
-  requestLogout,
   requestAnonymousLogin,
 } from '../../actions';
 import handlePouchChanges from './handle-pouch-changes';
@@ -39,7 +54,6 @@ export function* watchOnPouchChanges(db: PouchInstance) {
       console.log('PouchDB listener cancelled');
     }
 
-    yield put(requestLogout());
     console.log('PouchDB listener terminated');
   }
 }
@@ -68,13 +82,12 @@ export function formatHostname(hostname: string) {
   return result;
 }
 
-export function * connect(config: PouchConfig) {
+export function createPouchInstance(config: PouchConfig) {
   const hostname = formatHostname(config.remote.hostname);
   const remoteUrl = `${hostname}/${config.remote.dbname}`;
-  let db;
 
   if (config.isLocal) {
-    db = new PouchDB(config.local.dbname);
+    const db = new PouchDB(config.local.dbname);
     if (config.local.isSynced) {
       db.sync(remoteUrl, {
         ...pouchOpts,
@@ -82,9 +95,14 @@ export function * connect(config: PouchConfig) {
         retry: true,
       });
     }
-  } else {
-    db = new PouchDB(remoteUrl, pouchOpts);
+    return db;
   }
+
+  return new PouchDB(remoteUrl, pouchOpts);
+}
+
+export function * connect(config: PouchConfig) {
+  const db = createPouchInstance(config);
 
   // 接続可能か確かめる
   const isDBConnectable = yield call(checkConnectable, db);
