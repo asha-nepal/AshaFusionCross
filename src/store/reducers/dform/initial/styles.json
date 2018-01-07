@@ -1769,10 +1769,193 @@
       "style": [
         {
           "class": "block",
-          "label": "Haematology Test",
+          "label": "Haematology",
+          "layout": "horizontal",
           "children": [
             {
-              "field": "pathology.haematology.tlc_wbc", "label": "TLC/WBC", "style": { "width": 100 },
+              "field": "pathology.haematology.hemoglobin",
+              "label": "Hemoglobin (Hb)",
+              "type": "number", "min": 0, "suffix": "g/dl",
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 12 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 12, 18 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 18, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.pcv",
+              "label": "PCV",
+              "type": "number", "suffix": "%", "min": 0, "max": 100,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 36 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 36, 54 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 54, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.mch",
+              "label": "MCH",
+              "type": "number", "suffix": "pg", "min": 0,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 27 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 27, 32 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 32, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.mchc",
+              "label": "MCHC",
+              "type": "number", "suffix": "ft", "min": 0,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 76 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 76, 96 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 96, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.bt",
+              "label": "BT",
+              "type": "number", "suffix": "min", "min": 0,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 1 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 1, 6 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 6, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.ct",
+              "label": "CT",
+              "type": "number", "suffix": "min", "min": 0,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 2 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 2, 10 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 10, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.pt",
+              "label": "PT",
+              "type": "number", "suffix": "sec", "min": 0,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 12 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 12, 16 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 16, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.mp_mf",
+              "label": "MP/MF"
+            },
+            {
+              "field": "pathology.haematology.esr",
+              "label": "ESR (wintrobe)",
+              "type": "number", "min": 0, "suffix": "mm/hrs",
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 1 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 1, 12 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 12, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.wbc",
+              "label": "WBC (Total Count)",
+              "suffix": "cmm",
               "type": "number", "min": 0,
               "alerts": [
                 {
@@ -1793,138 +1976,123 @@
               ]
             },
             {
-              "class": "block",
-              "label": "DLC",
-              "children": [
-                {
-                  "field": "pathology.haematology.dlc.neutrophil", "label": "Neutrophil", "style": { "width": 80 },
-                  "type": "number", "suffix": "%", "min": 0, "max": 100,
-                  "alerts": [
-                    {
-                      "type": "warning",
-                      "label": "Low",
-                      "range": [ null, 40 ]
-                    },
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [ 40, 70 ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [ 70, null]
-                    }
-                  ]
-                },
-                {
-                  "field": "pathology.haematology.dlc.lymphocyte", "label": "Lymphocyte", "style": { "width": 80 },
-                  "type": "number", "suffix": "%", "min": 0, "max": 100,
-                  "alerts": [
-                    {
-                      "type": "warning",
-                      "label": "Low",
-                      "range": [ null, 20 ]
-                    },
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [ 20, 45 ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [ 45, null]
-                    }
-                  ]
-                },
-                {
-                  "field": "pathology.haematology.dlc.monocyte", "label": "Monocyte", "style": { "width": 80 },
-                  "type": "number", "suffix": "%", "min": 0, "max": 100,
-                  "alerts": [
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [ null, 8 ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [ 8, null]
-                    }
-                  ]
-                },
-                {
-                  "field": "pathology.haematology.dlc.eosinophil", "label": "Eosinophil", "style": { "width": 80 },
-                  "type": "number", "suffix": "%", "min": 0, "max": 100,
-                  "alerts": [
-                    {
-                      "type": "warning",
-                      "label": "Low",
-                      "range": [ null, 2 ]
-                    },
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [ 2, 6 ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [ 6, null]
-                    }
-                  ]
-                },
-                {
-                  "field": "pathology.haematology.dlc.basophil", "label": "Basophil", "style": { "width": 80 },
-                  "type": "number", "suffix": "%", "min": 0, "max": 100,
-                  "alerts": [
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [ null, 1 ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [ 1, null]
-                    }
-                  ]
-                }
-              ]
+              "field": "pathology.haematology.differential_count",
+              "label": "Differential Count",
+              "type": "number"
             },
             {
-              "field": "pathology.haematology.hemoglobin", "label": "Hemoglobin (Hb)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "gm%"
+              "field": "pathology.haematology.band_cell",
+              "label": "Band Cells",
+              "type": "number"
             },
             {
-              "field": "pathology.haematology.esr", "label": "ESR (wintrobe)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mm/hrs"
-            },
-            {
-              "field": "pathology.haematology.rbc", "label": "RBC", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "millioin/cumm",
+              "field": "pathology.haematology.neutrophil", "label": "Neutrophils",
+              "type": "number", "suffix": "%", "min": 0, "max": 100,
               "alerts": [
                 {
                   "type": "warning",
                   "label": "Low",
-                  "range": [ null, 4.5 ]
+                  "range": [ null, 40 ]
                 },
                 {
                   "type": "success",
                   "label": "Normal",
-                  "range": [ 4.5, 6.5 ]
+                  "range": [ 40, 74 ]
                 },
                 {
                   "type": "warning",
                   "label": "High",
-                  "range": [ 6.5, null]
+                  "range": [ 74, null]
                 }
               ]
             },
             {
-              "field": "pathology.haematology.platelets", "label": "Platelets", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "lakh/cumm",
+              "field": "pathology.haematology.lymphocyte",
+              "label": "Lymphocyte",
+              "type": "number", "suffix": "%", "min": 0, "max": 100,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 20 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 20, 45 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 45, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.monocyte",
+              "label": "Monocyte",
+              "type": "number", "suffix": "%", "min": 0, "max": 100,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 2 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 2, 10 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 10, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.eosinophil",
+              "label": "Eosinophil",
+              "type": "number", "suffix": "%", "min": 0, "max": 100,
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 1 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 1, 6 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 6, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.basophil",
+              "label": "Basophil",
+              "type": "number", "suffix": "%", "min": 0, "max": 100,
+              "alerts": [
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 0, 2 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 2, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.platelets",
+              "label": "Platelet Count",
+              "type": "number", "min": 0, "suffix": "Lac/cmm",
               "alerts": [
                 {
                   "type": "warning",
@@ -1944,33 +2112,64 @@
               ]
             },
             {
-              "field": "pathology.haematology.pcv", "label": "PCV", "style": { "width": 100 },
-              "type": "number", "suffix": "%", "min": 0, "max": 100
-            },
-            {
-              "field": "pathology.haematology.pt", "label": "PT", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "sec"
-            },
-            {
-              "field": "pathology.haematology.aptt", "label": "APTT", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "sec",
+              "field": "pathology.haematology.rbc",
+              "label": "RBC Count",
+              "type": "number", "min": 0, "suffix": "million/cumm",
               "alerts": [
                 {
                   "type": "warning",
                   "label": "Low",
-                  "range": [ null, 24 ]
+                  "range": [ null, 4 ]
                 },
                 {
                   "type": "success",
                   "label": "Normal",
-                  "range": [ 24, 32 ]
+                  "range": [ 4, 6 ]
                 },
                 {
                   "type": "warning",
                   "label": "High",
-                  "range": [ 32, null]
+                  "range": [ 6, null]
                 }
               ]
+            },
+            {
+              "field": "pathology.haematology.retics",
+              "label": "Retics",
+              "type": "number", "min": 0, "max": 100, "suffix": "%",
+              "alerts": [
+                {
+                  "type": "warning",
+                  "label": "Low",
+                  "range": [ null, 0.5 ]
+                },
+                {
+                  "type": "success",
+                  "label": "Normal",
+                  "range": [ 0.5, 2.5 ]
+                },
+                {
+                  "type": "warning",
+                  "label": "High",
+                  "range": [ 2.5, null]
+                }
+              ]
+            },
+            {
+              "field": "pathology.haematology.rbc_morphology",
+              "label": "RBC Morphology"
+            },
+            {
+              "field": "pathology.haematology.others",
+              "label": "Others"
+            },
+            {
+              "field": "pathology.haematology.h_pyloric_ab",
+              "label": "H. Pyloric AB"
+            },
+            {
+              "field": "pathology.haematology.hba1c",
+              "label": "HBA1C"
             }
           ]
         },
