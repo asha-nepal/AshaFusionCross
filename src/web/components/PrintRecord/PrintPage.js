@@ -65,7 +65,7 @@ export default ({
   return (
     <section className="section is-print">
       <div className="header is-clearfix">
-        <h1 className="title is-pulled-left">
+        <h1 className="subtitle is-3 is-pulled-left">
           {number && <small>No. {number} </small>}
           {getStr(patient, 'name')}
         </h1>
