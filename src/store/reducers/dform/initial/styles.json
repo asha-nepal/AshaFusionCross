@@ -1008,7 +1008,7 @@
                 },
                 {
                   "id": "others",
-                  "label": "Others"
+                  "label": "Other"
                 }
               ]
             }
@@ -1036,7 +1036,7 @@
                 },
                 {
                   "id": "others",
-                  "label": "Others"
+                  "label": "Other"
                 }
               ]
             }
@@ -1044,7 +1044,7 @@
         },
         {
           "class": "accordion",
-          "label": "Chief complient",
+          "label": "Chief complaint",
           "children": [
             {
               "field": "mental.complient",
@@ -1081,7 +1081,7 @@
           "children": [
             {
               "field": "mental.is_married",
-              "label": "Married status",
+              "label": "Marital status",
               "class": "radio",
               "options": [
                 {
@@ -1090,7 +1090,7 @@
                 },
                 {
                   "id": false,
-                  "label": "Unmarried"
+                  "label": "Not married"
                 }
               ]
             },
@@ -1108,7 +1108,7 @@
         },
         {
           "class": "accordion",
-          "label": "Personal history history",
+          "label": "Personal history",
           "children": [
             {
               "field": "mental.birthplace",
@@ -1145,7 +1145,7 @@
             },
             {
               "field": "mental.religion",
-              "label": "Religion/Belief",
+              "label": "Religion/Beliefs",
               "class": "textinput"
             }
           ]
@@ -1159,7 +1159,7 @@
       "style": [
         {
           "field": "ksix.nervious",
-          "label": "क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervious?)",
+          "label": "क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervous?)",
           "class": "radio",
           "options": [
             {
@@ -1267,7 +1267,7 @@
         },
         {
           "field": "ksix.effort",
-          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything was an effort?)",
+          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything is an effort?)",
           "class": "radio",
           "options": [
             {
