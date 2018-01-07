@@ -1506,7 +1506,7 @@
                 },
                 {
                   "id": "others",
-                  "label": "Others"
+                  "label": "Other"
                 }
               ]
             }
@@ -1534,7 +1534,7 @@
                 },
                 {
                   "id": "others",
-                  "label": "Others"
+                  "label": "Other"
                 }
               ]
             }
@@ -1622,7 +1622,7 @@
               "field": "mental.education",
               "label": "Education",
               "class": "textinput",
-              "placeholder": "Ex. Attended high school but did not graduate"
+              "placeholder": "Ex. \"Attended high school but did not graduate.\""
 
             },
             {
@@ -1635,7 +1635,7 @@
               "field": "mental.lifeevents",
               "label": "Significant life events",
               "class": "textinput",
-              "placeholder": "Ex. Experienced a massive earthquake when he was 23"
+              "placeholder": "Ex. \"Experienced major earthquake when he was 23\""
             },
             {
               "field": "mental.personality",
@@ -1766,7 +1766,7 @@
         },
         {
           "field": "ksix.effort",
-          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything was an effort?)",
+          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything is an effort?)",
           "class": "radio",
           "options": [
             {
