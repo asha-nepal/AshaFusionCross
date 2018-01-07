@@ -23,45 +23,40 @@ import classNames from 'classnames';
 import _get from 'lodash.get';
 
 export const CheckboxComponent = ({
-  label,
   value,
   readonly = false,
   size = '',
   onChange,
 }: {
-  label: string,
   value: ?boolean,
   readonly?: boolean,
   size: string,
   onChange: (newValue: boolean) => void,
 }) => (
-  <div className="field">
-    {label && <label className="label">{label}</label>}
-    {readonly ? (
-      <p className="form-static">
-        {value ? <span className="icon"><i className="fa fa-check" /></span> : '---'}
-      </p>
-    ) : (
-      <p className="control">
-        <a
-          className={classNames(
-            'button',
-            {
-              'is-primary': value,
-              [`is-${size}`]: size,
-            }
-          )}
-          style={{ width: 32 }}
-          onClick={e => {
-            e.preventDefault();
-            onChange(!value);
-          }}
-        >
-          {value && <i className="fa fa-check" />}
-        </a>
-      </p>
-    )}
-  </div>
+  readonly ? (
+    <p className="form-static">
+      {value ? <span className="icon"><i className="fa fa-check" /></span> : '---'}
+    </p>
+  ) : (
+    <p className="control">
+      <a
+        className={classNames(
+          'button',
+          {
+            'is-primary': value,
+            [`is-${size}`]: size,
+          }
+        )}
+        style={{ width: 32 }}
+        onClick={e => {
+          e.preventDefault();
+          onChange(!value);
+        }}
+      >
+        {value && <i className="fa fa-check" />}
+      </a>
+    </p>
+  )
 );
 
 const mapStateToProps = (state, ownProps) => ({

@@ -22,21 +22,19 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 import Row from './Row';
 import Readonly from './Readonly';
-import FieldComponentWrapper from '../common/FieldComponentWrapper';
+import DittoWrapper from '../common/DittoWrapper';
 
 export const ReadonlySubformList = Readonly;
 
 export type FormFieldDefinition = {
   field: string,
   class: string | ReactClass<any>,
-  label?: string,
   primary?: boolean,
   show?: boolean | string,
   hide?: string,
 }
 
 export const SubformListComponent = ({
-  label,
   values,
   fields,
   onChange,
@@ -45,7 +43,6 @@ export const SubformListComponent = ({
   readonly,
   getPreviousData,
 }: {
-  label?: ?string,
   values: ?Array<Object | string>,
   fields: Array<FormFieldDefinition>,
   onChange: (index: ?number, newValue: Object) => void,
@@ -57,7 +54,6 @@ export const SubformListComponent = ({
   if (readonly) {
     return (
       <ReadonlySubformList
-        label={label}
         values={values}
         fields={fields}
       />
@@ -67,13 +63,12 @@ export const SubformListComponent = ({
   const _values = values || [];
 
   return (
-    <FieldComponentWrapper
+    <DittoWrapper
       className="field"
       value={values}
       onChange={(newValues) => onChange(null, newValues)}
       getPreviousData={getPreviousData}
     >
-      {label && <label className="label">{label}</label>}
       <div className="panel">
       {_values.map((value, i) =>
         <Row
@@ -92,7 +87,7 @@ export const SubformListComponent = ({
         />
       )}
       </div>
-    </FieldComponentWrapper>
+    </DittoWrapper>
   );
 };
 

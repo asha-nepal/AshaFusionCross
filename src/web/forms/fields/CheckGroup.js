@@ -46,51 +46,46 @@ const ReadOnly = ({
 );
 
 export const CheckGroupComponent = ({
-  label,
   value,
   options,
   readonly = false,
   onChange,
 }: {
-  label?: ?string,
   value: ?Array<string>,
   options: Array<{id: string, label: string}>,
   readonly?: boolean,
   onChange?: (newValue: Array<string>) => void,
 }) => (
-  <div className="field">
-    {label && <label className="label">{label}</label>}
-    {readonly ? (
-      <ReadOnly value={value} options={options} />
-    ) : (
-      <div className="buttons">
-        {options.map(option => {
-          const isChecked = value && value.indexOf(option.id) > -1;
-          return (
-            <a
-              key={option.id}
-              className={isChecked ? 'button is-primary' : 'button'}
-              onClick={e => {
-                e.preventDefault();
-                if (onChange) {
-                  onChange(
-                    isChecked
-                      ? (value || []).filter(v => v !== option.id)
-                      : (value || []).concat(option.id)
-                  );
-                }
-              }}
-            >
-              <span className="icon is-small">
-                <i className={isChecked ? 'fa fa-check-square' : 'fa fa-square-o'} />
-              </span>
-              <span>{option.label}</span>
-            </a>
-          );
-        })}
-      </div>
-    )}
-  </div>
+  readonly ? (
+    <ReadOnly value={value} options={options} />
+  ) : (
+    <div className="buttons">
+      {options.map(option => {
+        const isChecked = value && value.indexOf(option.id) > -1;
+        return (
+          <a
+            key={option.id}
+            className={isChecked ? 'button is-primary' : 'button'}
+            onClick={e => {
+              e.preventDefault();
+              if (onChange) {
+                onChange(
+                  isChecked
+                    ? (value || []).filter(v => v !== option.id)
+                    : (value || []).concat(option.id)
+                );
+              }
+            }}
+          >
+            <span className="icon is-small">
+              <i className={isChecked ? 'fa fa-check-square' : 'fa fa-square-o'} />
+            </span>
+            <span>{option.label}</span>
+          </a>
+        );
+      })}
+    </div>
+  )
 );
 
 const mapStateToProps = (state, ownProps) => ({

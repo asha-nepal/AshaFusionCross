@@ -21,58 +21,39 @@ import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 
-import EditableFieldWrapper from '../editor/EditableFieldWrapper';
-import type { FieldEditPropsType } from '../editor/type';
-
 export const ReadonlyTextArea = ({
-  label,
   value,
 }: {
-  label?: ?string,
   value: ?string,
 }) => (
-  <p className="field">
-    {label && <label className="label">{label}</label>}
-    <span className="form-static is-multiline">
-      {value && value.split('\n').reduce(
-        (a, b, i) => a.concat([b, <br key={i} />]), []
-      )}
-    </span>
-  </p>
+  <span className="form-static is-multiline">
+    {value && value.split('\n').reduce(
+      (a, b, i) => a.concat([b, <br key={i} />]), []
+    )}
+  </span>
 );
 
 export const TextAreaComponent = ({
   value,
-  label,
-  style,
   placeholder,
   readonly = false,
   onChange,
-  fieldEditProps,
 }: {
   value: ?string,
-  label?: ?string,
-  style?: Object,
   placeholder?: string,
   readonly?: boolean,
   onChange: (newValue: string) => void,
-  fieldEditProps?: FieldEditPropsType,
 }) => (readonly ? (
-  <ReadonlyTextArea label={label} value={value} />
+  <ReadonlyTextArea value={value} />
 ) : (
-  <EditableFieldWrapper
-    className="field" style={style} fieldEditProps={fieldEditProps}
-  >
-    {label && <label className="label">{label}</label>}
-    <div className="control">
-      <textarea
-        className="textarea"
-        placeholder={placeholder}
-        value={value || ''}
-        onChange={e => onChange(e.target.value)}
-      />
-    </div>
-  </EditableFieldWrapper>
+  <div className="control">
+    <textarea
+      className="textarea"
+      placeholder={placeholder}
+      value={value || ''}
+      onChange={e => onChange(e.target.value)}
+    />
+  </div>
 ));
 
 TextAreaComponent.fieldProps = [];

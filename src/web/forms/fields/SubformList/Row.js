@@ -24,12 +24,14 @@ import { TextInputComponent } from '../TextInput';
 import { CheckboxComponent } from '../Checkbox';
 import { RadioGroupComponent } from '../RadioGroup';
 import { SelectComponent } from '../Select';
+import fieldify from '../common/fieldify';
 
+// TODO: 共通化
 const fieldComponents = {
-  textinput: TextInputComponent,
-  check: CheckboxComponent,
-  radio: RadioGroupComponent,
-  select: SelectComponent,
+  textinput: fieldify(TextInputComponent),
+  check: fieldify(CheckboxComponent),
+  radio: fieldify(RadioGroupComponent),
+  select: fieldify(SelectComponent),
 };
 
 export default ({

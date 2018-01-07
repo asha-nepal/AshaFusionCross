@@ -123,7 +123,6 @@ class AttachmentViewerComponent extends Component {
   }
 
   props: {
-    label: string,
     docId: string,
     _attachments: Object,
     metadata: Array<Object>,
@@ -133,7 +132,6 @@ class AttachmentViewerComponent extends Component {
 
   render() {
     const {
-      label,
       docId,
       _attachments,
       metadata,
@@ -145,8 +143,7 @@ class AttachmentViewerComponent extends Component {
     }
 
     return (
-      <div className="field">
-        {label && <label className="label">{label}</label>}
+      <div className="field"> {/* TODO: Remove outer div.field after upgrading React to v16*/}
         <div className="columns is-mobile is-multiline">
         {metadata.map(m => {
           const blob = (this.state.cache[docId] && this.state.cache[docId][m.id])

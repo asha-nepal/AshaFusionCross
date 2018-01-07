@@ -34,24 +34,25 @@ import { Diagnoses } from './Diagnoses';
 import { MultiInput } from './MultiInput';
 import { SubformList, SubformListComponent, ReadonlySubformList } from './SubformList';
 import { Block } from './Block';
+import fieldify from './common/fieldify';
 
 const fieldComponentList = {
-  textinput: TextInput,
-  textunitinput: TextUnitInput,
-  textarea: TextArea,
-  radio: RadioGroup,
-  select: Select,
-  attachment: Attachment,
-  attachmentinput: AttachmentInput,
-  attachmentviewer: AttachmentViewer,
+  textinput: fieldify(TextInput),
+  textunitinput: fieldify(TextUnitInput),
+  textarea: fieldify(TextArea),
+  radio: fieldify(RadioGroup),
+  select: fieldify(Select),
+  attachment: fieldify(Attachment),
+  attachmentinput: fieldify(AttachmentInput),
+  attachmentviewer: fieldify(AttachmentViewer),
   accordion: Accordion,
-  check: Checkbox,
-  checkgroup: CheckGroup,
-  autocalc: AutoCalc,
+  check: fieldify(Checkbox),
+  checkgroup: fieldify(CheckGroup),
+  autocalc: fieldify(AutoCalc),
   guide: GuideTools,
   diagnoses: Diagnoses,
-  multiinput: MultiInput,
-  subformlist: SubformList,
+  multiinput: fieldify(MultiInput),
+  subformlist: fieldify(SubformList),
   block: Block,
 };
 

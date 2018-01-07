@@ -20,9 +20,6 @@ import React from 'react';
 import classNames from 'classnames';
 import AutosuggestInput from './AutosuggestInput';
 
-import EditableFieldWrapper from '../editor/EditableFieldWrapper';
-import type { FieldEditPropsType } from '../editor/type';
-
 const alertFaIconClasses = {
   danger: 'warning',
   warning: 'warning',
@@ -49,7 +46,6 @@ const ReadOnly = ({
 );
 
 export const TextInputComponent = ({
-  label,
   value,
   onChange,
   style,
@@ -68,9 +64,7 @@ export const TextInputComponent = ({
   suggestions,
   valueSetters,
   fieldOptions = {},
-  fieldEditProps,
 }: {
-  label: ?string,
   value: ?string,
   onChange: (newValue: string) => void,
   style?: Object,
@@ -89,10 +83,9 @@ export const TextInputComponent = ({
   suggestions?: Array<string>,
   valueSetters?: Array<{ label: string, optionKey?: string, value?: string | number}>,
   fieldOptions?: Object,
-  fieldEditProps?: FieldEditPropsType,
 }) => {
   if (readonly) {
-    return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
+    return <ReadOnly value={value} prefix={prefix} suffix={suffix} />;
   }
 
   let alert = null;
@@ -193,33 +186,27 @@ export const TextInputComponent = ({
   );
 
   return (
-    <EditableFieldWrapper
-      className="field"
-      fieldEditProps={fieldEditProps}
-    >
-      {label && <label className="label">{label}</label>}
-      {hasValueSetters ? (
-        <div className={classNames('field', { 'is-grouped': hasValueSetters })}>
-          {innerControl}
-          {hasValueSetters && valueSetters.map((valueSetter, i) => {
-            const setValue = valueSetter.value || fieldOptions[valueSetter.optionKey];
-            if (setValue == null) { return null; }
+    hasValueSetters ? (
+      <div className={classNames('field', { 'is-grouped': hasValueSetters })}>
+        {innerControl}
+        {hasValueSetters && valueSetters.map((valueSetter, i) => {
+          const setValue = valueSetter.value || fieldOptions[valueSetter.optionKey];
+          if (setValue == null) { return null; }
 
-            return (
-              <div key={i} className="control">
-                <a
-                  className="button"
-                  onClick={e => {
-                    e.preventDefault();
-                    onChange(String(setValue));
-                  }}
-                >{valueSetter.label}</a>
-              </div>
-            );
-          })}
-        </div>
-      ) : innerControl}
-    </EditableFieldWrapper>
+          return (
+            <div key={i} className="control">
+              <a
+                className="button"
+                onClick={e => {
+                  e.preventDefault();
+                  onChange(String(setValue));
+                }}
+              >{valueSetter.label}</a>
+            </div>
+          );
+        })}
+      </div>
+    ) : innerControl
   );
 };
 

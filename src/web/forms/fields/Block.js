@@ -26,11 +26,13 @@ export const Block = ({
   label,
   children,
   widthaligned = false,
+  layout,
   fieldEditProps,
 }: {
   label?: string,
   children: React$Element<any>,
   widthaligned: boolean,
+  layout?: string,
   wrap?: boolean,
   fieldEditProps?: FieldEditPropsType,
 }): React$Element<any> => (
@@ -39,7 +41,13 @@ export const Block = ({
     fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
-    <div className={classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })}>
+    <div
+      className={
+        layout === 'horizontal'
+        ? null
+        : classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })
+      }
+    >
       {children.map((child, i) =>
         <div
           key={i}

@@ -22,60 +22,55 @@ import { actions } from 'react-redux-form';
 import randomstring from 'randomstring';
 
 const AttachmentInputComponent = ({
-  label,
   accept,
   multiple,
   addAttachments,
 }: {
-  label: string,
   idprefix: string,
   accept: ?string,
   multiple: ?boolean,
   addAttachments: (attachments: Object, meta: Array<Object>) => void,
 }) => (
-  <div className="field">
-    {label && <label className="label">{label}</label>}
-    <p className="control">
-      <input
-        type="file"
-        accept={accept}
-        multiple={multiple}
-        onChange={e => {
-          const files = e.target.files;
+  <p className="control">
+    <input
+      type="file"
+      accept={accept}
+      multiple={multiple}
+      onChange={e => {
+        const files = e.target.files;
 
-          const meta = Array(files.length);
-          const attachments = {};
-          const idPromises = Array(files.length);
+        const meta = Array(files.length);
+        const attachments = {};
+        const idPromises = Array(files.length);
 
-          for (let i = 0; i < files.length; ++i) {
-            idPromises[i] = randomstring(16);
-          }
+        for (let i = 0; i < files.length; ++i) {
+          idPromises[i] = randomstring(16);
+        }
 
-          Promise.all(idPromises)
-          .then(ids => {
-            ids.forEach((id, i) => {
-              const file = files[i];
+        Promise.all(idPromises)
+        .then(ids => {
+          ids.forEach((id, i) => {
+            const file = files[i];
 
-              meta[i] = {
-                id,
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                lastModified: file.lastModified,
-              };
+            meta[i] = {
+              id,
+              name: file.name,
+              size: file.size,
+              type: file.type,
+              lastModified: file.lastModified,
+            };
 
-              attachments[id] = {
-                content_type: file.type,
-                data: file,
-              };
-            });
-
-            addAttachments(attachments, meta);
+            attachments[id] = {
+              content_type: file.type,
+              data: file,
+            };
           });
-        }}
-      />
-    </p>
-  </div>
+
+          addAttachments(attachments, meta);
+        });
+      }}
+    />
+  </p>
 );
 
 const mapStateToProps = null;

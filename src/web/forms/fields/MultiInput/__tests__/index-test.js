@@ -26,16 +26,13 @@ import React from 'react';
 import {
   MultiInputComponent,
   asArray,
-} from '../index';
+} from '..';
 
 describe('<MultiInputComponent />', () => {
   it('shows <input />s according to given values', () => {
     const wrapper = mount(<MultiInputComponent
-      label="THISISMULTIINPUT"
       values={['AAAA', 'BBBB', 'CCCC']}
     />);
-
-    expect(wrapper.find('label').text()).toEqual('THISISMULTIINPUT');
 
     const inputs = wrapper.find('input');
     expect(inputs.length).toEqual(4);  // 3 (given values) + 1 (new value input field)
@@ -46,11 +43,8 @@ describe('<MultiInputComponent />', () => {
 
   it('does not show any <input />s if no value given', () => {
     const wrapper = mount(<MultiInputComponent
-      label="THISISMULTIINPUT"
       values={null}
     />);
-
-    expect(wrapper.find('label').text()).toEqual('THISISMULTIINPUT');
 
     const inputs = wrapper.find('input');
     expect(inputs.length).toEqual(1);  // 0 (given values) + 1 (new value input field)

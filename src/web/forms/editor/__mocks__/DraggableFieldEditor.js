@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,20 +15,12 @@
  */
 
 /* @flow */
+
 import React from 'react';
 
-export default ({
-  values,
-}: {
-  values: ?Array<string>,
-}) => (
-  values
-  ? (
-    <div className="form-static is-multiline">
-      <ul>
-        {values.map((v, i) => <li key={i}>{v}</li>)}
-      </ul>
-    </div>
-  )
-  : null
+export default ({ children }: {children: React$Element<any>}) => (
+  <div>
+    <p>DraggableFieldEditor</p>
+    {children}
+  </div>
 );

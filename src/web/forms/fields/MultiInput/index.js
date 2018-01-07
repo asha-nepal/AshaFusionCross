@@ -26,7 +26,6 @@ import Readonly from './Readonly';
 export const ReadonlyMultiInput = Readonly;
 
 type Props = {
-  label: string,
   type?: string,
   values: ?Array<string>,
   readonly?: boolean,
@@ -58,7 +57,6 @@ export class MultiInputComponent extends Component {
 
   render() {
     const {
-      label,
       type = 'text',
       values,
       readonly = false,
@@ -68,15 +66,14 @@ export class MultiInputComponent extends Component {
     } = this.props;
 
     if (readonly) {
-      return <Readonly label={label} values={values} />;
+      return <Readonly values={values} />;
     }
 
     const _values = asArray(values);
     const inputNodes = [];
 
     return (
-      <div className="field">
-        {label && <label className="label">{label}</label>}
+      <div className="field"> {/* TODO: Remove outer div.field after upgrading React to v16*/}
         {_values.map((value, i) =>
           <RowComponent
             key={i}
