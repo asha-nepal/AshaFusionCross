@@ -83,11 +83,11 @@
             },
             {
               "id": "service",
-              "label": "Service"
+              "label": "Service Personnel"
             },
             {
               "id": "retired service",
-              "label": "Retired service"
+              "label": "Retired Service Personnel"
             },
             {
               "id": "business",
@@ -525,8 +525,8 @@
                   "label": "Earache"
                 },
                 {
-                  "id": "sob",
-                  "label": "SOB"
+                  "id": "shortness_of_breath",
+                  "label": "Shortness of Breath"
                 },
                 {
                   "id": "chest_pain",
@@ -545,8 +545,8 @@
                   "label": "PND"
                 },
                 {
-                  "id": "easy_fatigability",
-                  "label": "Easy Fatigability"
+                  "id": "fatigue",
+                  "label": "Fatigue"
                 },
                 {
                   "id": "abdominal_pain",
@@ -561,8 +561,8 @@
                   "label": "Vomiting"
                 },
                 {
-                  "id": "diarrhoea",
-                  "label": "Diarrhoea"
+                  "id": "diarrhea",
+                  "label": "Diarrhea"
                 }
               ]
             },
@@ -1105,8 +1105,8 @@
                   "label": "Earache"
                 },
                 {
-                  "id": "sob",
-                  "label": "SOB"
+                  "id": "shortness_of_breath",
+                  "label": "Shortness of Breath"
                 },
                 {
                   "id": "chest_pain",
@@ -1125,8 +1125,8 @@
                   "label": "PND"
                 },
                 {
-                  "id": "easy_fatigability",
-                  "label": "Easy Fatigability"
+                  "id": "fatigue",
+                  "label": "Fatigue"
                 },
                 {
                   "id": "abdominal_pain",
@@ -1141,8 +1141,8 @@
                   "label": "Vomiting"
                 },
                 {
-                  "id": "diarrhoea",
-                  "label": "Diarrhoea"
+                  "id": "diarrhea",
+                  "label": "Diarrhea"
                 }
               ]
             },
@@ -1506,7 +1506,7 @@
                 },
                 {
                   "id": "others",
-                  "label": "Others"
+                  "label": "Other"
                 }
               ]
             }
@@ -1534,7 +1534,7 @@
                 },
                 {
                   "id": "others",
-                  "label": "Others"
+                  "label": "Other"
                 }
               ]
             }
@@ -1542,12 +1542,12 @@
         },
         {
           "class": "accordion",
-          "label": "Chief complient",
+          "label": "Main complaint",
           "children": [
             {
               "field": "mental.complient",
               "class": "textarea",
-              "placeholder": "Ex. “I cannot sleep well and cannot concentrate on daily tasks.”"
+              "placeholder": "Ex. \"I cannot sleep well and cannot concentrate on daily tasks.\""
             }
           ]
         },
@@ -1558,7 +1558,7 @@
             {
               "field": "mental.illness",
               "class": "textarea",
-              "placeholder": "Ex. He is a 23-year-old male for whom psychiatric evaluation is requested due to depressive mood in the past few weeks. He denies any suicidal thoughts. He admits to morning sickness symptom of anorexia, and difficulty falling + staying asleep. He also admits that he lost his house dog on Monday.\nOtherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) headache, (-) substance abuse"
+              "placeholder": "Ex. \"He is a 23-year-old male for whom psychiatric evaluation is requested due to depressive mood in the past few weeks. He denies any suicidal thoughts. He admits to morning sickness symptom of anorexia, and difficulty falling + staying asleep. He also admits that he lost his house dog on Monday.\nOtherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) headache, (-) substance abuse\""
             }
           ]
         },
@@ -1569,7 +1569,7 @@
             {
               "field": "mental.family",
               "class": "textarea",
-              "placeholder": "Ex. His immediate family consists of his father (age 51), his mother (age 49), one older brother (age 26), and one younger sister (age 19). His father suffers from alcohol dependence."
+              "placeholder": "Ex. \"His immediate family consists of his father (age 51), his mother (age 49), one older brother (age 26), and one younger sister (age 19). His father suffers from alcohol dependence.\""
             }
           ]
         },
@@ -1579,7 +1579,7 @@
           "children": [
             {
               "field": "mental.is_married",
-              "label": "Married status",
+              "label": "Marital status",
               "class": "radio",
               "options": [
                 {
@@ -1588,7 +1588,7 @@
                 },
                 {
                   "id": false,
-                  "label": "Unmarried"
+                  "label": "Not married"
                 }
               ]
             },
@@ -1606,7 +1606,7 @@
         },
         {
           "class": "accordion",
-          "label": "Personal history history",
+          "label": "Personal history",
           "children": [
             {
               "field": "mental.birthplace",
@@ -1622,19 +1622,20 @@
               "field": "mental.education",
               "label": "Education",
               "class": "textinput",
-              "placeholder": "Ex. Attended high school but no graduation"
+              "placeholder": "Ex. \"Attended high school but did not graduate.\""
+
             },
             {
               "field": "mental.work",
               "label": "Work experience",
               "class": "textinput",
-              "placeholder": "Ex. Farm helper (2 years), Unstable work history"
+              "placeholder": "Ex. \"Farm helper (2 years), Unstable work history\""
             },
             {
               "field": "mental.lifeevents",
               "label": "Significant life events",
               "class": "textinput",
-              "placeholder": "Ex. Attacked by a great earthquake when he was 23"
+              "placeholder": "Ex. \"Experienced major earthquake when he was 23\""
             },
             {
               "field": "mental.personality",
@@ -1643,7 +1644,7 @@
             },
             {
               "field": "mental.religion",
-              "label": "Religion/Belief",
+              "label": "Religion/Beliefs",
               "class": "textinput"
             }
           ]
@@ -1657,7 +1658,7 @@
       "style": [
         {
           "field": "ksix.nervious",
-          "label": "क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervious?)",
+          "label": "क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervous?)",
           "class": "radio",
           "options": [
             {
@@ -1765,7 +1766,7 @@
         },
         {
           "field": "ksix.effort",
-          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything was an effort?)",
+          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything is an effort?)",
           "class": "radio",
           "options": [
             {
@@ -2372,7 +2373,7 @@
                 },
                 {
                   "field": "pathology.biochemistry.uric_acid_male",
-                  "label": "Uric acid Male",
+                  "label": "Uric acid - Male",
                   "type": "number", "min": 0, "suffix": "mg%",
                   "alerts": [
                     {
@@ -2394,7 +2395,7 @@
                 },
                 {
                   "field": "pathology.biochemistry.uric_acid_female",
-                  "label": "Uric acid Female",
+                  "label": "Uric acid - Female",
                   "type": "number", "min": 0, "suffix": "mg%",
                   "alerts": [
                     {
@@ -2531,7 +2532,7 @@
                 },
                 {
                   "field": "pathology.biochemistry.cpk_nac",
-                  "label": "CPK - NAc",
+                  "label": "CPK - NAC",
                   "type": "number", "min": 0, "suffix": "U/A",
                   "alerts": [
                     {
@@ -2729,7 +2730,7 @@
                 },
                 {
                   "field": "pathology.biochemistry.triglyceride",
-                  "label": "Triglyceride",
+                  "label": "Triglycerides",
                   "type": "number", "min": 0, "suffix": "mg%",
                   "alerts": [
                     {
@@ -2842,11 +2843,11 @@
                     },
                     {
                       "field": "pathology.stool.physical.worm",
-                      "label": "Worm"
+                      "label": "Worms"
                     },
                     {
                       "field": "pathology.stool.physical.blood",
-                      "label": "blood"
+                      "label": "Blood"
                     },
                     {
                       "field": "pathology.stool.physical.consistency",
@@ -2864,7 +2865,7 @@
                     },
                     {
                       "field": "pathology.stool.chemical.ph",
-                      "label": "Ph"
+                      "label": "pH"
                     },
                     {
                       "field": "pathology.stool.chemical.reducing_substance",
@@ -2904,7 +2905,7 @@
                 },
                 {
                   "class": "block",
-                  "label": "HOOK WORM",
+                  "label": "HOOKWORM",
                   "children": [
                     {
                       "field": "pathology.stool.hook_worm.trichuris_trichiura",
@@ -2919,8 +2920,8 @@
                       "label": "Taenia Spp."
                     },
                     {
-                      "field": "pathology.stool.hook_worm.indigested_food_particles",
-                      "label": "Indigested food particles"
+                      "field": "pathology.stool.hook_worm.undigested_food_particles",
+                      "label": "Undigested food particles"
                     },
                     {
                       "field": "pathology.stool.hook_worm.strongyloides_stercoralis",
