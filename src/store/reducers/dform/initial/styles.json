@@ -1287,6 +1287,77 @@
           "class": "textarea"
         },
         {
+          "class": "block",
+          "label": "System examination",
+          "children": [
+            {
+              "class": "block",
+              "label": "Chest",
+              "children": [
+                {
+                  "field": "system_exams.chest",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.chest_memo",
+                  "class": "textarea",
+                  "show": "system_exams.chest"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "CVS",
+              "children": [
+                {
+                  "field": "system_exams.cvs",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.cvs_memo",
+                  "class": "textarea",
+                  "show": "system_exams.cvs"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "P/A",
+              "children": [
+                {
+                  "field": "system_exams.pa",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.pa_memo",
+                  "class": "textarea",
+                  "show": "system_exams.pa"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "CNS",
+              "children": [
+                {
+                  "field": "system_exams.cns",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.cns_memo",
+                  "class": "textarea",
+                  "show": "system_exams.cns"
+                }
+              ]
+            },
+            {
+              "label": "Others",
+              "field": "system_exams.others_memo",
+              "class": "textarea"
+            }
+          ]
+        },
+        {
           "field": "diagnoses",
           "label": "Diagnoses",
           "class": "diagnoses"
@@ -1311,6 +1382,10 @@
             {
               "id": "advice",
               "label": "Advice"
+            },
+            {
+              "id": "procedures",
+              "label": "Procedures"
             }
           ]
         },
@@ -1408,6 +1483,14 @@
                 {
                   "id": "top",
                   "label": "TOP"
+                },
+                {
+                  "id": "iv",
+                  "label": "IV"
+                },
+                {
+                  "id": "im",
+                  "label": "IM"
                 }
               ]
             },
@@ -1457,6 +1540,12 @@
           "label": "Advice",
           "class": "textarea",
           "show": "plan:advice"
+        },
+        {
+          "field": "procedures",
+          "label": "Procedures",
+          "class": "textarea",
+          "show": "plan:procedures"
         },
         {
           "field": "attachments.images",
