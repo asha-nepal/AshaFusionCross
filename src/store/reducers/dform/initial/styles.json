@@ -139,6 +139,7 @@
     {
       "id": "reception",
       "label": "Reception",
+      "roles": ["reception"],
       "style": [
         {
           "class": "block",
@@ -169,7 +170,7 @@
               "precision": 1,
               "units": [
                 "kg",
-                "lbm"
+                "lb"
               ]
             },
             {
@@ -430,41 +431,55 @@
           "show": "allergy"
         },
         {
-          "field": "past_medical_history_select",
-          "label": "Past medical history",
-          "class": "checkgroup",
-          "options": [
+          "class": "block",
+          "children": [
             {
-              "id": "htn",
-              "label": "HTN"
+              "field": "past_medical_history_select",
+              "label": "Past medical history",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "htn",
+                  "label": "HTN"
+                },
+                {
+                  "id": "dmii",
+                  "label": "DM II"
+                },
+                {
+                  "id": "copd",
+                  "label": "COPD"
+                },
+                {
+                  "id": "ptb",
+                  "label": "PTB"
+                },
+                {
+                  "id": "jaundice",
+                  "label": "Jaundice"
+                },
+                {
+                  "id": "typhoid",
+                  "label": "Typhoid"
+                },
+                {
+                  "id": "pneumonia",
+                  "label": "Pneumonia"
+                },
+                {
+                  "id": "not_significant",
+                  "label": "Not Significant"
+                }
+              ]
             },
             {
-              "id": "dmii",
-              "label": "DM II"
-            },
-            {
-              "id": "copd",
-              "label": "COPD"
-            },
-            {
-              "id": "ptb",
-              "label": "PTB"
-            },
-            {
-              "id": "jaundice",
-              "label": "Jaundice"
-            },
-            {
-              "id": "typhoid",
-              "label": "Typhoid"
-            },
-            {
-              "id": "pneumonia",
-              "label": "Pneumonia"
-            },
-            {
-              "id": "not_significant",
-              "label": "Not Significant"
+              "field": "past_medical_history_duration",
+              "label": "Duration",
+              "class": "textinput",
+              "show": "past_medical_history_select",
+              "suffix": "days",
+              "type": "number",
+              "min": 0
             }
           ]
         },
@@ -478,73 +493,87 @@
           "class": "textarea"
         },
         {
-          "field": "present_medical_history_select",
-          "label": "Present medical history",
-          "class": "checkgroup",
-          "options": [
+          "class": "block",
+          "children": [
             {
-              "id": "fever",
-              "label": "Fever"
+              "field": "present_medical_history_select",
+              "label": "Present medical history",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "fever",
+                  "label": "Fever"
+                },
+                {
+                  "id": "cough",
+                  "label": "Cough"
+                },
+                {
+                  "id": "runny_nose",
+                  "label": "Runny Nose"
+                },
+                {
+                  "id": "sore_throat",
+                  "label": "Sore throat"
+                },
+                {
+                  "id": "headache",
+                  "label": "Headache"
+                },
+                {
+                  "id": "earache",
+                  "label": "Earache"
+                },
+                {
+                  "id": "sob",
+                  "label": "SOB"
+                },
+                {
+                  "id": "chest_pain",
+                  "label": "Chest Pain"
+                },
+                {
+                  "id": "palpitation",
+                  "label": "Palpitation"
+                },
+                {
+                  "id": "orthopnea",
+                  "label": "Orthopnea"
+                },
+                {
+                  "id": "pnd",
+                  "label": "PND"
+                },
+                {
+                  "id": "easy_fatigability",
+                  "label": "Easy Fatigability"
+                },
+                {
+                  "id": "abdominal_pain",
+                  "label": "Abdominal pain"
+                },
+                {
+                  "id": "nausea",
+                  "label": "Nausea"
+                },
+                {
+                  "id": "vomiting",
+                  "label": "Vomiting"
+                },
+                {
+                  "id": "diarrhoea",
+                  "label": "Diarrhoea"
+                }
+              ]
             },
             {
-              "id": "cough",
-              "label": "Cough"
-            },
-            {
-              "id": "runny_nose",
-              "label": "Runny Nose"
-            },
-            {
-              "id": "sore_throat",
-              "label": "Sore throat"
-            },
-            {
-              "id": "headache",
-              "label": "Headache"
-            },
-            {
-              "id": "earache",
-              "label": "Earache"
-            },
-            {
-              "id": "sob",
-              "label": "SOB"
-            },
-            {
-              "id": "chest_pain",
-              "label": "Chest Pain"
-            },
-            {
-              "id": "palpitation",
-              "label": "Palpitation"
-            },
-            {
-              "id": "orthopnea",
-              "label": "Orthopnea"
-            },
-            {
-              "id": "pnd",
-              "label": "PND"
-            },
-            {
-              "id": "easy_fatigability",
-              "label": "Easy Fatigability"
-            },
-            {
-              "id": "abdominal_pain",
-              "label": "Abdominal pain"
-            },
-            {
-              "id": "nausea",
-              "label": "Nausea"
-            },
-            {
-              "id": "vomiting",
-              "label": "Vomiting"
-            },
-            {
-              "id": "diarrhoea",
-              "label": "Diarrhoea"
+              "field": "present_medical_history_duration",
+              "label": "Duration",
+              "class": "textinput",
+              "show": "present_medical_history_select",
+              "suffix": "days",
+              "type": "number",
+              "min": 0
             }
           ]
         },
@@ -689,6 +718,7 @@
     {
       "id": "physical",
       "label": "Physician",
+      "roles": ["physician"],
       "style": [
         {
           "class": "guide"
@@ -720,7 +750,7 @@
               },
               "units": [
                 "kg",
-                "lbm"
+                "lb"
               ]
             },
             {
@@ -981,41 +1011,55 @@
           "show": "allergy"
         },
         {
-          "field": "past_medical_history_select",
-          "label": "Past medical history",
-          "class": "checkgroup",
-          "options": [
+          "class": "block",
+          "children": [
             {
-              "id": "htn",
-              "label": "HTN"
+              "field": "past_medical_history_select",
+              "label": "Past medical history",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "htn",
+                  "label": "HTN"
+                },
+                {
+                  "id": "dmii",
+                  "label": "DM II"
+                },
+                {
+                  "id": "copd",
+                  "label": "COPD"
+                },
+                {
+                  "id": "ptb",
+                  "label": "PTB"
+                },
+                {
+                  "id": "jaundice",
+                  "label": "Jaundice"
+                },
+                {
+                  "id": "typhoid",
+                  "label": "Typhoid"
+                },
+                {
+                  "id": "pneumonia",
+                  "label": "Pneumonia"
+                },
+                {
+                  "id": "not_significant",
+                  "label": "Not Significant"
+                }
+              ]
             },
             {
-              "id": "dmii",
-              "label": "DM II"
-            },
-            {
-              "id": "copd",
-              "label": "COPD"
-            },
-            {
-              "id": "ptb",
-              "label": "PTB"
-            },
-            {
-              "id": "jaundice",
-              "label": "Jaundice"
-            },
-            {
-              "id": "typhoid",
-              "label": "Typhoid"
-            },
-            {
-              "id": "pneumonia",
-              "label": "Pneumonia"
-            },
-            {
-              "id": "not_significant",
-              "label": "Not Significant"
+              "field": "past_medical_history_duration",
+              "label": "Duration",
+              "class": "textinput",
+              "show": "past_medical_history_select",
+              "suffix": "days",
+              "type": "number",
+              "min": 0
             }
           ]
         },
@@ -1029,73 +1073,87 @@
           "class": "textarea"
         },
         {
-          "field": "present_medical_history_select",
-          "label": "Present medical history",
-          "class": "checkgroup",
-          "options": [
+          "class": "block",
+          "children": [
             {
-              "id": "fever",
-              "label": "Fever"
+              "field": "present_medical_history_select",
+              "label": "Present medical history",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "fever",
+                  "label": "Fever"
+                },
+                {
+                  "id": "cough",
+                  "label": "Cough"
+                },
+                {
+                  "id": "runny_nose",
+                  "label": "Runny Nose"
+                },
+                {
+                  "id": "sore_throat",
+                  "label": "Sore throat"
+                },
+                {
+                  "id": "headache",
+                  "label": "Headache"
+                },
+                {
+                  "id": "earache",
+                  "label": "Earache"
+                },
+                {
+                  "id": "sob",
+                  "label": "SOB"
+                },
+                {
+                  "id": "chest_pain",
+                  "label": "Chest Pain"
+                },
+                {
+                  "id": "palpitation",
+                  "label": "Palpitation"
+                },
+                {
+                  "id": "orthopnea",
+                  "label": "Orthopnea"
+                },
+                {
+                  "id": "pnd",
+                  "label": "PND"
+                },
+                {
+                  "id": "easy_fatigability",
+                  "label": "Easy Fatigability"
+                },
+                {
+                  "id": "abdominal_pain",
+                  "label": "Abdominal pain"
+                },
+                {
+                  "id": "nausea",
+                  "label": "Nausea"
+                },
+                {
+                  "id": "vomiting",
+                  "label": "Vomiting"
+                },
+                {
+                  "id": "diarrhoea",
+                  "label": "Diarrhoea"
+                }
+              ]
             },
             {
-              "id": "cough",
-              "label": "Cough"
-            },
-            {
-              "id": "runny_nose",
-              "label": "Runny Nose"
-            },
-            {
-              "id": "sore_throat",
-              "label": "Sore throat"
-            },
-            {
-              "id": "headache",
-              "label": "Headache"
-            },
-            {
-              "id": "earache",
-              "label": "Earache"
-            },
-            {
-              "id": "sob",
-              "label": "SOB"
-            },
-            {
-              "id": "chest_pain",
-              "label": "Chest Pain"
-            },
-            {
-              "id": "palpitation",
-              "label": "Palpitation"
-            },
-            {
-              "id": "orthopnea",
-              "label": "Orthopnea"
-            },
-            {
-              "id": "pnd",
-              "label": "PND"
-            },
-            {
-              "id": "easy_fatigability",
-              "label": "Easy Fatigability"
-            },
-            {
-              "id": "abdominal_pain",
-              "label": "Abdominal pain"
-            },
-            {
-              "id": "nausea",
-              "label": "Nausea"
-            },
-            {
-              "id": "vomiting",
-              "label": "Vomiting"
-            },
-            {
-              "id": "diarrhoea",
-              "label": "Diarrhoea"
+              "field": "present_medical_history_duration",
+              "label": "Duration",
+              "class": "textinput",
+              "show": "present_medical_history_select",
+              "suffix": "days",
+              "type": "number",
+              "min": 0
             }
           ]
         },
@@ -1501,6 +1559,7 @@
     {
       "id": "mental",
       "label": "Mental",
+      "roles": ["psychiatrist"],
       "style": [
         {
           "class": "accordion",
@@ -1683,6 +1742,7 @@
     {
       "id": "ksix",
       "label": "K6",
+      "roles": ["reception", "psychiatrist"],
       "style": [
         {
           "field": "ksix.nervious",
@@ -1854,35 +1914,228 @@
       "style": [
         {
           "class": "block",
-          "label": "Haematology Test",
+          "widthaligned": true,
           "children": [
             {
-              "field": "pathology.haematology.tlc_wbc", "label": "TLC/WBC", "style": { "width": 100 },
-              "type": "number", "min": 0,
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 4000 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 4000, 11000 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 11000, null]
-                }
-              ]
-            },
-            {
               "class": "block",
-              "label": "DLC",
+              "label": "Haematology",
+              "layout": "horizontal",
               "children": [
                 {
-                  "field": "pathology.haematology.dlc.neutrophil", "label": "Neutrophil", "style": { "width": 80 },
+                  "field": "pathology.haematology.hemoglobin",
+                  "label": "Hemoglobin (Hb)",
+                  "type": "number", "min": 0, "suffix": "g/dl",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 12 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 12, 18 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 18, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.pcv",
+                  "label": "PCV",
+                  "type": "number", "suffix": "%", "min": 0, "max": 100,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 36 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 36, 54 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 54, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.mch",
+                  "label": "MCH",
+                  "type": "number", "suffix": "pg", "min": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 27 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 27, 32 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 32, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.mchc",
+                  "label": "MCHC",
+                  "type": "number", "suffix": "ft", "min": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 76 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 76, 96 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 96, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.bt",
+                  "label": "BT",
+                  "type": "number", "suffix": "min", "min": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 1 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 1, 6 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 6, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.ct",
+                  "label": "CT",
+                  "type": "number", "suffix": "min", "min": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 2 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 2, 10 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 10, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.pt",
+                  "label": "PT",
+                  "type": "number", "suffix": "sec", "min": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 12 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 12, 16 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 16, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.mp_mf",
+                  "label": "MP/MF"
+                },
+                {
+                  "field": "pathology.haematology.esr",
+                  "label": "ESR (wintrobe)",
+                  "type": "number", "min": 0, "suffix": "mm/hrs",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 1 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 1, 12 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 12, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.wbc",
+                  "label": "WBC (Total Count)",
+                  "suffix": "cmm",
+                  "type": "number", "min": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 4000 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 4000, 11000 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 11000, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.differential_count",
+                  "label": "Differential Count",
+                  "type": "number"
+                },
+                {
+                  "field": "pathology.haematology.band_cell",
+                  "label": "Band Cells",
+                  "type": "number"
+                },
+                {
+                  "field": "pathology.haematology.neutrophil", "label": "Neutrophils",
                   "type": "number", "suffix": "%", "min": 0, "max": 100,
                   "alerts": [
                     {
@@ -1893,17 +2146,18 @@
                     {
                       "type": "success",
                       "label": "Normal",
-                      "range": [ 40, 70 ]
+                      "range": [ 40, 74 ]
                     },
                     {
                       "type": "warning",
                       "label": "High",
-                      "range": [ 70, null]
+                      "range": [ 74, null]
                     }
                   ]
                 },
                 {
-                  "field": "pathology.haematology.dlc.lymphocyte", "label": "Lymphocyte", "style": { "width": 80 },
+                  "field": "pathology.haematology.lymphocyte",
+                  "label": "Lymphocyte",
                   "type": "number", "suffix": "%", "min": 0, "max": 100,
                   "alerts": [
                     {
@@ -1924,24 +2178,313 @@
                   ]
                 },
                 {
-                  "field": "pathology.haematology.dlc.monocyte", "label": "Monocyte", "style": { "width": 80 },
+                  "field": "pathology.haematology.monocyte",
+                  "label": "Monocyte",
+                  "type": "number", "suffix": "%", "min": 0, "max": 100,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 2 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 2, 10 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 10, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.eosinophil",
+                  "label": "Eosinophil",
+                  "type": "number", "suffix": "%", "min": 0, "max": 100,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 1 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 1, 6 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 6, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.basophil",
+                  "label": "Basophil",
                   "type": "number", "suffix": "%", "min": 0, "max": 100,
                   "alerts": [
                     {
                       "type": "success",
                       "label": "Normal",
-                      "range": [ null, 8 ]
+                      "range": [ 0, 2 ]
                     },
                     {
                       "type": "warning",
                       "label": "High",
-                      "range": [ 8, null]
+                      "range": [ 2, null]
                     }
                   ]
                 },
                 {
-                  "field": "pathology.haematology.dlc.eosinophil", "label": "Eosinophil", "style": { "width": 80 },
-                  "type": "number", "suffix": "%", "min": 0, "max": 100,
+                  "field": "pathology.haematology.platelets",
+                  "label": "Platelet Count",
+                  "type": "number", "min": 0, "suffix": "Lac/cmm",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 1.5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 1.5, 4 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 4, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.rbc",
+                  "label": "RBC Count",
+                  "type": "number", "min": 0, "suffix": "million/cumm",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 4 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 4, 6 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 6, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.retics",
+                  "label": "Retics",
+                  "type": "number", "min": 0, "max": 100, "suffix": "%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 0.5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 0.5, 2.5 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 2.5, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.haematology.rbc_morphology",
+                  "label": "RBC Morphology"
+                },
+                {
+                  "field": "pathology.haematology.others",
+                  "label": "Others"
+                },
+                {
+                  "field": "pathology.haematology.h_pyloric_ab",
+                  "label": "H. Pyloric AB"
+                },
+                {
+                  "field": "pathology.haematology.hba1c",
+                  "label": "HBA1C"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "BIOCHEMISTRY",
+              "layout": "horizontal",
+              "children": [
+                {
+                  "field": "pathology.biochemistry.glucose_fasting",
+                  "label": "Glucose Fasting",
+                  "type": "number", "min": 0, "suffix": "mg%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 60 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 60, 100 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 100, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.glucose_pp_r",
+                  "label": "Glucose PP/R",
+                  "type": "number", "min": 0, "suffix": "mg%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 80 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 80, 120 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 120, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.urea",
+                  "label": "Urea",
+                  "type": "number", "min": 0, "suffix": "mg%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 14 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 14, 40 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 40, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.creatinine",
+                  "label": "Creatinine",
+                  "type": "number", "min": 0, "suffix": "mg%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 0.7 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 0.7, 1.4 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 1.4, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.sodium",
+                  "label": "Sodium",
+                  "type": "number", "min": 0, "suffix": "mEq/L",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 135 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 135, 145 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 145, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.potassium",
+                  "label": "Potassium",
+                  "type": "number", "min": 0, "suffix": "mEq/L",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 3.5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 3.5, 5.5 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 5.5, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.uric_acid_male",
+                  "label": "Uric acid Male",
+                  "type": "number", "min": 0, "suffix": "mg%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 2 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 2, 7 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 7, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.uric_acid_female",
+                  "label": "Uric acid Female",
+                  "type": "number", "min": 0, "suffix": "mg%",
                   "alerts": [
                     {
                       "type": "warning",
@@ -1961,505 +2504,633 @@
                   ]
                 },
                 {
-                  "field": "pathology.haematology.dlc.basophil", "label": "Basophil", "style": { "width": 80 },
-                  "type": "number", "suffix": "%", "min": 0, "max": 100,
+                  "field": "pathology.biochemistry.bilirubin_total",
+                  "label": "Bilirubin Total",
+                  "type": "number", "min": 0, "suffix": "mg%",
                   "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 0.4 ]
+                    },
                     {
                       "type": "success",
                       "label": "Normal",
-                      "range": [ null, 1 ]
+                      "range": [ 0.4, 1.0 ]
                     },
                     {
                       "type": "warning",
                       "label": "High",
-                      "range": [ 1, null]
+                      "range": [ 1.0, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.bilirubin_direct",
+                  "label": "Bilirubin Direct",
+                  "type": "number", "min": 0, "suffix": "mg%"
+                },
+                {
+                  "field": "pathology.biochemistry.alanine_transaminase_gpt",
+                  "label": "Alanine transaminase (GPT)",
+                  "type": "number", "min": 0, "suffix": "U/L",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 5, 351 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 351, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.alkaline_phosphatase",
+                  "label": "Alkaline Phosphatase",
+                  "type": "number", "min": 0, "suffix": "K.A. Units",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 4 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 4, 111 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 111, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.aspartate_transaminase_got",
+                  "label": "Aspartate Transaminase (GOT)",
+                  "type": "number", "min": 0, "suffix": "U/L",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 8 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 8, 401 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 401, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.lactate_dehydrogenase_ldh",
+                  "label": "Lactate dehydrogenase (LDH)",
+                  "type": "number", "min": 0, "suffix": "U/L",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 70 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 70, 320 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 320, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.cpk_nac",
+                  "label": "CPK - NAc",
+                  "type": "number", "min": 0, "suffix": "U/A",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 10 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 10, 130 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 130, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.acid_phosphatase",
+                  "label": "Acid phosphatase",
+                  "type": "number", "min": 0, "suffix": "U (K.A.)",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 1.5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 1.5, 3.5 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 3.5, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.serum_amylase",
+                  "label": "Serum amylase",
+                  "type": "number", "min": 0, "suffix": "U/L",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 0 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 0, 100 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 100, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.total_protein",
+                  "label": "Total Protein",
+                  "type": "number", "min": 0, "suffix": "gm%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 5, 7 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 7, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.albumin",
+                  "label": "Albumin",
+                  "type": "number", "min": 0, "suffix": "gm%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 3.5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 3.5, 5.5 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 5.5, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.calcium",
+                  "label": "Calcium",
+                  "type": "number", "min": 0, "suffix": "mg/dl",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 8 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 8, 10 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 10, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.phosphorus",
+                  "label": "Phosphorus",
+                  "type": "number", "min": 0, "suffix": "mg%"
+                },
+                {
+                  "field": "pathology.biochemistry.cholesterol",
+                  "label": "Cholesterol",
+                  "type": "number", "min": 0, "suffix": "mg%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 150 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 150, 250 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 250, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.hdl",
+                  "label": "HDL",
+                  "type": "number", "min": 0, "suffix": "mg%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 35 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 35, 75 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 75, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.ldl",
+                  "label": "LDL",
+                  "type": "number", "min": 0, "suffix": "U/L",
+                  "alerts": [
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ null, 150 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 150, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.triglyceride",
+                  "label": "Triglyceride",
+                  "type": "number", "min": 0, "suffix": "mg%",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 35 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 35, 150 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 150, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.free_thyroxine_t4",
+                  "label": "Free Thyroxine (T4)",
+                  "type": "number", "min": 0, "suffix": "ng/ml",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 4.2 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 4.2, 12.0 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 12.0, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.tri_iodothyronine_t3",
+                  "label": "Tri iodothyronine (T3)",
+                  "type": "number", "min": 0, "suffix": "ng/ml",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 0.8 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 0.8, 2.1 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 2.1, null]
+                    }
+                  ]
+                },
+                {
+                  "field": "pathology.biochemistry.thyroid_stimulating_hormone",
+                  "label": "Thyroid Stimulating Hormone",
+                  "type": "number", "min": 0, "suffix": "ng/ml",
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 0.4 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 0.4, 5.2 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 5.2, null]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "class": "block",
+              "label": "STOOL EXAMINATION",
+              "layout": "horizontal",
+              "children": [
+                {
+                  "class": "block",
+                  "label": "PHYSICAL",
+                  "children": [
+                    {
+                      "field": "pathology.stool.physical.colour",
+                      "label": "Colour"
+                    },
+                    {
+                      "field": "pathology.stool.physical.mucus",
+                      "label": "Mucus"
+                    },
+                    {
+                      "field": "pathology.stool.physical.worm",
+                      "label": "Worm"
+                    },
+                    {
+                      "field": "pathology.stool.physical.blood",
+                      "label": "blood"
+                    },
+                    {
+                      "field": "pathology.stool.physical.consistency",
+                      "label": "Consistency"
+                    }
+                  ]
+                },
+                {
+                  "class": "block",
+                  "label": "CHEMICAL",
+                  "children": [
+                    {
+                      "field": "pathology.stool.chemical.occult_blood",
+                      "label": "Occult blood"
+                    },
+                    {
+                      "field": "pathology.stool.chemical.ph",
+                      "label": "Ph"
+                    },
+                    {
+                      "field": "pathology.stool.chemical.reducing_substance",
+                      "label": "Reducing Substance"
+                    },
+                    {
+                      "field": "pathology.stool.chemical.others",
+                      "label": "Others"
+                    }
+                  ]
+                },
+                {
+                  "class": "block",
+                  "label": "MICROSCOPIC",
+                  "children": [
+                    {
+                      "field": "pathology.stool.microscopic.pus",
+                      "label": "Pus"
+                    },
+                    {
+                      "field": "pathology.stool.microscopic.rbc",
+                      "label": "RBCs"
+                    },
+                    {
+                      "field": "pathology.stool.microscopic.giardia_lambia",
+                      "label": "Giardia lambia"
+                    },
+                    {
+                      "field": "pathology.stool.microscopic.entamoeba_histolytica",
+                      "label": "Entamoeba histolytica"
+                    },
+                    {
+                      "field": "pathology.stool.microscopic.ascaris_lumbricoides",
+                      "label": "Ascaris lumbricoides"
+                    }
+                  ]
+                },
+                {
+                  "class": "block",
+                  "label": "HOOK WORM",
+                  "children": [
+                    {
+                      "field": "pathology.stool.hook_worm.trichuris_trichiura",
+                      "label": "Trichuris trichiura"
+                    },
+                    {
+                      "field": "pathology.stool.hook_worm.hymenolepis_nana",
+                      "label": "Hymenolepis nana"
+                    },
+                    {
+                      "field": "pathology.stool.hook_worm.taenia_spp",
+                      "label": "Taenia Spp."
+                    },
+                    {
+                      "field": "pathology.stool.hook_worm.indigested_food_particles",
+                      "label": "Indigested food particles"
+                    },
+                    {
+                      "field": "pathology.stool.hook_worm.strongyloides_stercoralis",
+                      "label": "Strongyloides Stercoralis"
                     }
                   ]
                 }
               ]
             },
             {
-              "field": "pathology.haematology.hemoglobin", "label": "Hemoglobin (Hb)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "gm%"
-            },
-            {
-              "field": "pathology.haematology.esr", "label": "ESR (wintrobe)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mm/hrs"
-            },
-            {
-              "field": "pathology.haematology.rbc", "label": "RBC", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "millioin/cumm",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 4.5 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 4.5, 6.5 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 6.5, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.haematology.platelets", "label": "Platelets", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "lakh/cumm",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 1.5 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 1.5, 4 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 4, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.haematology.pcv", "label": "PCV", "style": { "width": 100 },
-              "type": "number", "suffix": "%", "min": 0, "max": 100
-            },
-            {
-              "field": "pathology.haematology.pt", "label": "PT", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "sec"
-            },
-            {
-              "field": "pathology.haematology.aptt", "label": "APTT", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "sec",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 24 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 24, 32 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 32, null]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "label": "Biochemistry Test",
-          "children": [
-            {
-              "field": "pathology.biochemistry.bs_f", "label": "Blood Suger (F)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mg%",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 60 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 60, 110 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 110, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.bs_r", "label": "Blood Suger (R)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mg%",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 80 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 80, 130 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 130, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.bs_pp", "label": "Blood Suger (PP)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mg%",
-              "alerts": [
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ null, 140 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 140, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.uric_acid", "label": "Uric Acid", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mg%"
-            },
-            {
-              "field": "pathology.biochemistry.bilirubin_t", "label": "Bilirubin (T)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mg%",
-              "alerts": [
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ null, 1 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 1, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.bilirubin_d", "label": "Bilirubin (D)", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mg%",
-              "alerts": [
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ null, 0.25 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 0.25, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.urea", "label": "Urea", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mg%",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 10 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 10, 45 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 45, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.creatinine", "label": "Creatinine", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mg/dl"
-            },
-            {
-              "field": "pathology.biochemistry.total_protein", "label": "Total Protein", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "g/dl",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 6.5 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 6.5, 8.2 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 8.2, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.albumin", "label": "Albumin", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "g/dl",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 3.5 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 3.5, 5.0 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 5.0, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.total_chloesterol", "label": "Total Chloesterol",  "style": { "width": 100 },
-              "type": "number", "min": 0
-            },
-            {
-              "field": "pathology.biochemistry.triaglycerol", "label": "Triaglycerol", "style": { "width": 100 },
-              "type": "number", "min": 0
-            },
-            {
-              "field": "pathology.biochemistry.gama_gt", "label": "Gama GT", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "IU/L",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 15 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 15, 80 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 80, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.hdl_cholesterol", "label": "HDL-Cholesterol",  "style": { "width": 100 },
-              "type": "number", "min": 0
-            },
-            {
-              "field": "pathology.biochemistry.ldl_cholesterol", "label": "LDL-Cholesterol", "style": { "width": 100 },
-              "type": "number", "min": 0
-            },
-            {
-              "field": "pathology.biochemistry.non_hdl_cholesterol", "label": "Non-HDL Cholesterol", "style": { "width": 100 },
-              "type": "number", "min": 0
-            },
-            {
-              "field": "pathology.biochemistry.sgot", "label": "SGOT", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "IU/L",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 5 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 5, 40 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 40, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.sgpt", "label": "SGPT", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "IU/L",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 5 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 5, 40 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 40, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.alp", "label": "ALP", "style": { "width": 100 },
-              "type": "number", "min": 0
-            },
-            {
-              "field": "pathology.biochemistry.sodium", "label": "Sodium", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mEq/L",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 134 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 134, 146 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 146, null]
-                }
-              ]
-            },
-            {
-              "field": "pathology.biochemistry.potassium", "label": "Potassium", "style": { "width": 100 },
-              "type": "number", "min": 0, "suffix": "mEq/L",
-              "alerts": [
-                {
-                  "type": "warning",
-                  "label": "Low",
-                  "range": [ null, 3.6 ]
-                },
-                {
-                  "type": "success",
-                  "label": "Normal",
-                  "range": [ 3.6, 5.0 ]
-                },
-                {
-                  "type": "warning",
-                  "label": "High",
-                  "range": [ 5.0, null]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "label": "Stool Test",
-          "children": [
-            {
               "class": "block",
-              "label": "Physical Examination (R/E)",
+              "label": "URINE EXAMINATION",
+              "layout": "horizontal",
               "children": [
                 {
-                  "field": "pathology.stool.re.colour", "label": "Colour"
+                  "class": "block",
+                  "label": "PHYSICAL",
+                  "children": [
+                    {
+                      "field": "pathology.urine.physical.colour",
+                      "label": "Colour"
+                    },
+                    {
+                      "field": "pathology.urine.physical.specific_gravity",
+                      "label": "Specific Gravity"
+                    },
+                    {
+                      "field": "pathology.urine.physical.transparency",
+                      "label": "Transparency"
+                    },
+                    {
+                      "field": "pathology.urine.physical.quantity",
+                      "label": "Quantity"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.re.consistency", "label": "Consistency"
+                  "class": "block",
+                  "label": "CHEMICAL",
+                  "children": [
+                    {
+                      "field": "pathology.urine.chemical.reaction",
+                      "label": "Reaction"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.sugar",
+                      "label": "Sugar"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.albumin",
+                      "label": "Albumin"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.bilirubin",
+                      "label": "Bilirubin"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.urobilinogen",
+                      "label": "Urobilinogen"
+                    },
+                    {
+                      "field": "pathology.urine.chemical.acetone",
+                      "label": "Acetone"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.re.blood", "label": "Blood"
+                  "class": "block",
+                  "label": "MICROSCOPIC",
+                  "children": [
+                    {
+                      "field": "pathology.urine.microscopic.pus_cells",
+                      "label": "Pus Cells",
+                      "type": "number", "suffix": "Hpf"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.rbc",
+                      "label": "RBCs",
+                      "type": "number", "suffix": "Hpf"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.casts_granular",
+                      "label": "Casts Granular"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.cellular",
+                      "label": "Cellular"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.other_cast",
+                      "label": "Other Cast"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.epithelial_cells",
+                      "label": "Epithelial Cells",
+                      "type": "number", "suffix": "Hpf"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.calcium_oxalate",
+                      "label": "Calcium Oxalate"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.amorphous_phosphate",
+                      "label": "Amorphous Phosphate"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.bacteria",
+                      "label": "Bacteria"
+                    },
+                    {
+                      "field": "pathology.urine.microscopic.others",
+                      "label": "Others"
+                    }
+                  ]
                 },
                 {
-                  "field": "pathology.stool.re.mucus", "label": "Mucus"
-                },
-                {
-                  "field": "pathology.stool.re.parasite", "label": "Parasite"
+                  "field": "pathology.pregnancy_test.text",
+                  "label": "Pregnancy Test",
+                  "class": "textarea"
                 }
               ]
-            },
-            {
-              "class": "block",
-              "label": "Microscopic Examination (M/E)",
-              "children": [
-                {
-                  "field": "pathology.stool.me.helminthes_parasite", "label": "Helminthes Parasite"
-                },
-                {
-                  "field": "pathology.stool.me.protozoal_parasite", "label": "Protozoal Parasite"
-                },
-                {
-                  "field": "pathology.stool.me.undigested_food_particles", "label": "Undigested Food Particles"
-                },
-                {
-                  "field": "pathology.stool.me.rbc", "label": "RBC"
-                },
-                {
-                  "field": "pathology.stool.me.pus_cell", "label": "Pus cell"
-                },
-                {
-                  "field": "pathology.stool.me.occult_blood_test", "label": "Occult Blood Test"
-                },
-                {
-                  "field": "pathology.stool.me.others", "label": "Others"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "label": "Urine Test",
-          "children": [
-            {
-              "class": "block",
-              "label": "Physical Examination (R/E)",
-              "children": [
-                {
-                  "field": "pathology.urine.re.colour", "label": "Colour"
-                },
-                {
-                  "field": "pathology.urine.re.transparency", "label": "Transparency"
-                },
-                {
-                  "field": "pathology.urine.re.reaction_ph", "label": "Reaction/ Ph"
-                },
-                {
-                  "field": "pathology.urine.re.sugar", "label": "Sugar"
-                },
-                {
-                  "field": "pathology.urine.re.albumin", "label": "Albumin"
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Microscopic Examination (M/E)",
-              "children": [
-                {
-                  "field": "pathology.urine.me.pus_cells", "label": "Pus cells", "type": "number", "suffix": "Hpf"
-                },
-                {
-                  "field": "pathology.urine.me.rbc", "label": "RBC", "type": "number", "suffix": "Hpf"
-                },
-                {
-                  "field": "pathology.urine.me.epi_cells", "label": "Epi. Cells", "type": "number", "suffix": "Hpf"
-                },
-                {
-                  "field": "pathology.urine.me.cast", "label": "Cast", "type": "number", "suffix": "Hpf"
-                },
-                {
-                  "field": "pathology.urine.me.crystal", "label": "Crystal", "type": "number", "suffix": "Hpf"
-                }
-              ]
-            },
-            {
-              "field": "pathology.urine.specific_gravity", "label": "Specific Gravity"
-            },
-            {
-              "field": "pathology.urine.chyle", "label": "Chyle"
             }
           ]
         }
