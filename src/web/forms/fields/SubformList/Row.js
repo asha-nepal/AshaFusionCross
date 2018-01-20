@@ -21,6 +21,8 @@ import type { FormFieldDefinition } from '.';
 import { checkVisibility } from '../../utils';
 
 import { TextInputComponent } from '../TextInput';
+import { TextUnitInputComponent } from '../TextUnitInput';
+import { TextAreaComponent } from '../TextArea';
 import { CheckboxComponent } from '../Checkbox';
 import { RadioGroupComponent } from '../RadioGroup';
 import { SelectComponent } from '../Select';
@@ -29,6 +31,8 @@ import fieldify from '../common/fieldify';
 // TODO: 共通化
 const fieldComponents = {
   textinput: fieldify(TextInputComponent),
+  textunitinput: fieldify(TextUnitInputComponent),
+  textarea: fieldify(TextAreaComponent),
   check: fieldify(CheckboxComponent),
   radio: fieldify(RadioGroupComponent),
   select: fieldify(SelectComponent),

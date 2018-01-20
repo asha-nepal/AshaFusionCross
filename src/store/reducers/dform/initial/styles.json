@@ -95,7 +95,92 @@
     {
       "id": "anc",
       "label": "ANC",
-      "style": []
+      "style": [
+        {
+          "field": "prev_pregnancy",
+          "label": "Previous history of Pregnancy",
+          "class": "subformlist",
+          "ditto": true,
+          "fields": [
+            {
+              "field": "living",
+              "label": "Living",
+              "class": "check"
+            },
+            {
+              "field": "born_dead",
+              "label": "Born Dead",
+              "class": "check",
+              "show": "!living"
+            },
+            {
+              "field": "born_within_36_weeks",
+              "label": "Born less than 36 weeks",
+              "class": "check"
+            },
+            {
+              "field": "twins",
+              "label": "Twins",
+              "class": "check"
+            },
+            {
+              "field": "abortion",
+              "label": "Abortion",
+              "class": "check"
+            },
+            {
+              "field": "gender",
+              "label": "Gender",
+              "class": "radio",
+              "options": [
+                {
+                  "id": 1,
+                  "label": "Male"
+                },
+                {
+                  "id": 2,
+                  "label": "Female"
+                }
+              ]
+            },
+            {
+              "field": "age",
+              "label": "Current Age",
+              "class": "textunitinput",
+              "units": [
+                "years",
+                "months"
+              ],
+              "precision": 0
+            },
+            {
+              "field": "pregnancy_complication",
+              "label": "Pregnancy Complication",
+              "class": "check"
+            },
+            {
+              "field": "pregnancy_complication_detail",
+              "class": "textarea",
+              "show": "pregnancy_complication"
+            },
+            {
+              "field": "",
+              "label": "Mode of Delivery",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "normal",
+                  "label": "Normal"
+                },
+                {
+                  "id": "cs",
+                  "label": "CS"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
