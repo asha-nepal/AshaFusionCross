@@ -494,86 +494,343 @@
         },
         {
           "class": "block",
+          "label": "Present medical history",
           "children": [
             {
-              "field": "present_medical_history_select",
-              "label": "Present medical history",
-              "class": "checkgroup",
-              "options": [
+              "class": "block",
+              "label": "Fever",
+              "children": [
                 {
-                  "id": "fever",
-                  "label": "Fever"
+                  "class": "check",
+                  "field": "present_medical_history_select.fever.yes"
                 },
                 {
-                  "id": "cough",
-                  "label": "Cough"
-                },
-                {
-                  "id": "runny_nose",
-                  "label": "Runny Nose"
-                },
-                {
-                  "id": "sore_throat",
-                  "label": "Sore throat"
-                },
-                {
-                  "id": "headache",
-                  "label": "Headache"
-                },
-                {
-                  "id": "earache",
-                  "label": "Earache"
-                },
-                {
-                  "id": "shortness_of_breath",
-                  "label": "Shortness of Breath"
-                },
-                {
-                  "id": "chest_pain",
-                  "label": "Chest Pain"
-                },
-                {
-                  "id": "palpitation",
-                  "label": "Palpitation"
-                },
-                {
-                  "id": "orthopnea",
-                  "label": "Orthopnea"
-                },
-                {
-                  "id": "pnd",
-                  "label": "PND"
-                },
-                {
-                  "id": "fatigue",
-                  "label": "Fatigue"
-                },
-                {
-                  "id": "abdominal_pain",
-                  "label": "Abdominal pain"
-                },
-                {
-                  "id": "nausea",
-                  "label": "Nausea"
-                },
-                {
-                  "id": "vomiting",
-                  "label": "Vomiting"
-                },
-                {
-                  "id": "diarrhea",
-                  "label": "Diarrhea"
+                  "field": "present_medical_history_select.fever.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.fever.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
                 }
               ]
             },
             {
-              "field": "present_medical_history_duration",
-              "label": "Duration",
-              "class": "textinput",
-              "show": "present_medical_history_select",
-              "suffix": "days",
-              "type": "number",
-              "min": 0
+              "class": "block",
+              "label": "Cough",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.cough.yes"
+                },
+                {
+                  "field": "present_medical_history_select.cough.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.cough.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Runny Nose",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.runny_nose.yes"
+                },
+                {
+                  "field": "present_medical_history_select.runny_nose.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.runny_nose.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Sore throat",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.sore_throat.yes"
+                },
+                {
+                  "field": "present_medical_history_select.sore_throat.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.sore_throat.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Headache",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.headache.yes"
+                },
+                {
+                  "field": "present_medical_history_select.headache.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.headache.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Earache",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.earache.yes"
+                },
+                {
+                  "field": "present_medical_history_select.earache.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.earache.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Shortness of Breath",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.shortness_of_breath.yes"
+                },
+                {
+                  "field": "present_medical_history_select.shortness_of_breath.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.shortness_of_breath.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Chest Pain",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.chest_pain.yes"
+                },
+                {
+                  "field": "present_medical_history_select.chest_pain.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.chest_pain.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Palpitation",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.palpitation.yes"
+                },
+                {
+                  "field": "present_medical_history_select.palpitation.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.palpitation.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Orthopnea",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.orthopnea.yes"
+                },
+                {
+                  "field": "present_medical_history_select.orthopnea.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.orthopnea.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "PND",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.pnd.yes"
+                },
+                {
+                  "field": "present_medical_history_select.pnd.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.pnd.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Fatigue",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.fatigue.yes"
+                },
+                {
+                  "field": "present_medical_history_select.fatigue.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.fatigue.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Abdominal pain",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.abdominal_pain.yes"
+                },
+                {
+                  "field": "present_medical_history_select.abdominal_pain.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.abdominal_pain.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Nausea",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.nausea.yes"
+                },
+                {
+                  "field": "present_medical_history_select.nausea.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.nausea.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Vomiting",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.vomiting.yes"
+                },
+                {
+                  "field": "present_medical_history_select.vomiting.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.vomiting.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Diarrhea",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.diarrhea.yes"
+                },
+                {
+                  "field": "present_medical_history_select.diarrhea.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.diarrhea.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
             }
           ]
         },
@@ -1074,86 +1331,343 @@
         },
         {
           "class": "block",
+          "label": "Present medical history",
           "children": [
             {
-              "field": "present_medical_history_select",
-              "label": "Present medical history",
-              "class": "checkgroup",
-              "options": [
+              "class": "block",
+              "label": "Fever",
+              "children": [
                 {
-                  "id": "fever",
-                  "label": "Fever"
+                  "class": "check",
+                  "field": "present_medical_history_select.fever.yes"
                 },
                 {
-                  "id": "cough",
-                  "label": "Cough"
-                },
-                {
-                  "id": "runny_nose",
-                  "label": "Runny Nose"
-                },
-                {
-                  "id": "sore_throat",
-                  "label": "Sore throat"
-                },
-                {
-                  "id": "headache",
-                  "label": "Headache"
-                },
-                {
-                  "id": "earache",
-                  "label": "Earache"
-                },
-                {
-                  "id": "shortness_of_breath",
-                  "label": "Shortness of Breath"
-                },
-                {
-                  "id": "chest_pain",
-                  "label": "Chest Pain"
-                },
-                {
-                  "id": "palpitation",
-                  "label": "Palpitation"
-                },
-                {
-                  "id": "orthopnea",
-                  "label": "Orthopnea"
-                },
-                {
-                  "id": "pnd",
-                  "label": "PND"
-                },
-                {
-                  "id": "fatigue",
-                  "label": "Fatigue"
-                },
-                {
-                  "id": "abdominal_pain",
-                  "label": "Abdominal pain"
-                },
-                {
-                  "id": "nausea",
-                  "label": "Nausea"
-                },
-                {
-                  "id": "vomiting",
-                  "label": "Vomiting"
-                },
-                {
-                  "id": "diarrhea",
-                  "label": "Diarrhea"
+                  "field": "present_medical_history_select.fever.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.fever.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
                 }
               ]
             },
             {
-              "field": "present_medical_history_duration",
-              "label": "Duration",
-              "class": "textinput",
-              "show": "present_medical_history_select",
-              "suffix": "days",
-              "type": "number",
-              "min": 0
+              "class": "block",
+              "label": "Cough",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.cough.yes"
+                },
+                {
+                  "field": "present_medical_history_select.cough.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.cough.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Runny Nose",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.runny_nose.yes"
+                },
+                {
+                  "field": "present_medical_history_select.runny_nose.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.runny_nose.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Sore throat",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.sore_throat.yes"
+                },
+                {
+                  "field": "present_medical_history_select.sore_throat.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.sore_throat.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Headache",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.headache.yes"
+                },
+                {
+                  "field": "present_medical_history_select.headache.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.headache.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Earache",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.earache.yes"
+                },
+                {
+                  "field": "present_medical_history_select.earache.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.earache.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Shortness of Breath",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.shortness_of_breath.yes"
+                },
+                {
+                  "field": "present_medical_history_select.shortness_of_breath.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.shortness_of_breath.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Chest Pain",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.chest_pain.yes"
+                },
+                {
+                  "field": "present_medical_history_select.chest_pain.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.chest_pain.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Palpitation",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.palpitation.yes"
+                },
+                {
+                  "field": "present_medical_history_select.palpitation.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.palpitation.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Orthopnea",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.orthopnea.yes"
+                },
+                {
+                  "field": "present_medical_history_select.orthopnea.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.orthopnea.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "PND",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.pnd.yes"
+                },
+                {
+                  "field": "present_medical_history_select.pnd.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.pnd.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Fatigue",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.fatigue.yes"
+                },
+                {
+                  "field": "present_medical_history_select.fatigue.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.fatigue.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Abdominal pain",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.abdominal_pain.yes"
+                },
+                {
+                  "field": "present_medical_history_select.abdominal_pain.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.abdominal_pain.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Nausea",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.nausea.yes"
+                },
+                {
+                  "field": "present_medical_history_select.nausea.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.nausea.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Vomiting",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.vomiting.yes"
+                },
+                {
+                  "field": "present_medical_history_select.vomiting.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.vomiting.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "Diarrhea",
+              "children": [
+                {
+                  "class": "check",
+                  "field": "present_medical_history_select.diarrhea.yes"
+                },
+                {
+                  "field": "present_medical_history_select.diarrhea.duration",
+                  "class": "textinput",
+                  "show": "present_medical_history_select.diarrhea.yes",
+                  "suffix": "days",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 60
+                  }
+                }
+              ]
             }
           ]
         },
