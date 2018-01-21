@@ -241,6 +241,52 @@
           ]
         },
         {
+          "label": "Health Worker, who prepared the card",
+          "class": "block",
+          "children": [
+            {
+              "class": "block",
+              "children": [
+                {
+                  "label": "Name",
+                  "field": "health_worker.name",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Surname",
+                  "field": "health_worker.surname",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Designation",
+                  "field": "health_worker.designation",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Date",
+                  "field": "health_worker.date",
+                  "class": "textinput"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "children": [
+                {
+                  "label": "Hospital Contact Number",
+                  "field": "hospital_contact_number",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Ambulance Contact Number",
+                  "field": "ambulance_contact_number",
+                  "class": "textinput"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "class": "block",
           "children": [
             {
@@ -259,6 +305,7 @@
           "label": "Laboratory Examination",
           "class": "subformlist",
           "field": "lab_exam",
+          "ditto": true,
           "fields": [
             {
               "label": "Date",
@@ -359,6 +406,7 @@
           "label": "Pregnancy Examination",
           "class": "subformlist",
           "field": "pregnancy_exam",
+          "ditto": true,
           "fields": [
             {
               "label": "Months",
