@@ -239,6 +239,134 @@
               ]
             }
           ]
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "label": "Last Menstrual Date",
+              "field": "last_menstrual_date",
+              "class": "textinput"
+            },
+            {
+              "label": "Estimated Date of Delivery",
+              "field": "estimated_date_of_delivery",
+              "class": "textinput"
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy Examination",
+          "class": "subformlist",
+          "field": "pregnancy_exam",
+          "fields": [
+            {
+              "label": "Months",
+              "field": "months",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "label": "Date",
+              "field": "date",
+              "class": "textinput"
+            },
+            {
+              "label": "Weight",
+              "field": "weight",
+              "class": "textunitinput",
+              "type": "number",
+              "precision": 1,
+              "units": [
+                "kg",
+                "lb"
+              ]
+            },
+            {
+              "label": "Anemia",
+              "field": "anemia",
+              "class": "check"
+            },
+            {
+              "label": "Edema",
+              "field": "edema",
+              "class": "check"
+            },
+            {
+              "label": "Blood pressure",
+              "field": "blood_pressure",
+              "class": "textinput",
+              "type": "number",
+              "suffix": "mmHg",
+              "min": 1,
+              "precision": 0
+            },
+            {
+              "label": "Pregnancy in weeks",
+              "field": "pregnancy_in_weeks",
+              "class": "textinput"
+            },
+            {
+              "label": "Size of uterus",
+              "field": "size_of_uterus",
+              "class": "textunitinput",
+              "type": "number",
+              "units": [
+                "cm",
+                "in"
+              ]
+            },
+            {
+              "label": "Foetus",
+              "field": "foetus.found",
+              "class": "check"
+            },
+            {
+              "label": "Child Heart Rate",
+              "field": "foetus.child_heart_rate",
+              "class": "textinput",
+              "type": "number",
+              "show": "foetus.found"
+            },
+            {
+              "label": "Any problem",
+              "field": "any_problem",
+              "class": "textarea"
+            },
+            {
+              "label": "Next Consultation Date",
+              "field": "next_consultation_date",
+              "class": "textinput"
+            },
+            {
+              "label": "Number of Iron Tablets",
+              "field": "number_of_iron_tablets",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "precision": 0
+            },
+            {
+              "label": "Alben",
+              "field": "alben",
+              "class": "textinput"
+            },
+            {
+              "label": "T.D",
+              "field": "td_vaccine",
+              "class": "check"
+            },
+            {
+              "label": "Health Worker Name",
+              "field": "health_worker_name",
+              "class": "textinput"
+            },
+            {
+              "label": "Name of Hospital",
+              "field": "hospital_name",
+              "class": "textinput"
+            }
+          ]
         }
       ]
     }
