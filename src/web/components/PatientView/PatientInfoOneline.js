@@ -40,8 +40,14 @@ export default ({
           />
         </div>
       </span>,
-    patient.sex && `Sex: ${patient.sex}`,
-    patient.address && `Address: ${patient.address}`,
+    patient.district && `District: ${patient.district}`,
+    patient.municipality_vdc.name && `Municipality/VDC: ${patient.municipality_vdc.name}`,
+    patient.municipality_vdc.no && `Municipality/VDC No: ${patient.municipality_vdc.no}`,
+    patient.area && `Area: ${patient.area}`,
+    patient.contact_number && `Contact Number: ${patient.contact_number}`,
+    patient.blood_type && `Blood Type: ${patient.blood_type}`,
+    patient.husband.name && `Husband's Name: ${patient.husband.name}`,
+    patient.husband.contact_number && `Husband's Contact Number: ${patient.husband.contact_number}`,
   ]
   .filter(element => element != null);
 
