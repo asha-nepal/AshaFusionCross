@@ -22,49 +22,71 @@
           "required": true
         },
         {
+          "field": "age",
+          "label": "Age",
+          "class": "textunitinput",
+          "units": [
+            "years",
+            "months"
+          ],
+          "precision": 0
+        },
+        {
+          "field": "district",
+          "label": "District",
+          "class": "textinput"
+        },
+        {
           "class": "block",
           "children": [
             {
-              "field": "sex",
-              "label": "Sex",
-              "class": "radio",
-              "options": [
-                {
-                  "id": "male",
-                  "label": "Male"
-                },
-                {
-                  "id": "female",
-                  "label": "Female"
-                }
-              ]
+              "field": "municipality_vdc.name",
+              "label": "Municipality/VDC",
+              "class": "textinput"
             },
             {
-              "field": "age",
-              "label": "Age",
-              "class": "textunitinput",
-              "units": [
-                "years",
-                "months"
-              ],
-              "precision": 0
+              "field": "municipality_vdc.no",
+              "label": "Municipality/VDC No.",
+              "class": "textinput",
+              "type": "number"
             }
           ]
         },
         {
-          "field": "address",
-          "label": "Address",
+          "field": "area",
+          "label": "Area",
           "class": "textinput"
         },
         {
-          "field": "tel",
-          "label": "Tel",
+          "field": "contact_number",
+          "label": "Contact Number",
           "class": "textinput"
         },
         {
-          "field": "ethnicity",
-          "label": "Ethnicity",
-          "class": "textinput"
+          "field": "blood_type",
+          "label": "Blood Type",
+          "class": "select",
+          "options": [
+            { "id": "A", "label": "A" },
+            { "id": "B", "label": "B" },
+            { "id": "O", "label": "O" },
+            { "id": "AB", "label": "AB" }
+          ]
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "husband.name",
+              "label": "Husband's Name",
+              "class": "textinput"
+            },
+            {
+              "field": "husband.contact_number",
+              "label": "Husband's Contact Number",
+              "class": "textinput"
+            }
+          ]
         }
       ]
     }
@@ -73,7 +95,428 @@
     {
       "id": "anc",
       "label": "ANC",
-      "style": []
+      "style": [
+        {
+          "field": "prev_pregnancy",
+          "label": "Previous history of Pregnancy",
+          "class": "subformlist",
+          "ditto": true,
+          "fields": [
+            {
+              "field": "living",
+              "label": "Living",
+              "class": "check"
+            },
+            {
+              "field": "born_dead",
+              "label": "Born Dead",
+              "class": "check",
+              "show": "!living"
+            },
+            {
+              "field": "born_within_36_weeks",
+              "label": "Born less than 36 weeks",
+              "class": "check"
+            },
+            {
+              "field": "twins",
+              "label": "Twins",
+              "class": "check"
+            },
+            {
+              "field": "abortion",
+              "label": "Abortion",
+              "class": "check"
+            },
+            {
+              "field": "gender",
+              "label": "Gender",
+              "class": "radio",
+              "options": [
+                {
+                  "id": 1,
+                  "label": "Male"
+                },
+                {
+                  "id": 2,
+                  "label": "Female"
+                }
+              ]
+            },
+            {
+              "field": "age",
+              "label": "Current Age",
+              "class": "textunitinput",
+              "units": [
+                "years",
+                "months"
+              ],
+              "precision": 0
+            },
+            {
+              "field": "pregnancy_complication",
+              "label": "Pregnancy Complication",
+              "class": "check"
+            },
+            {
+              "field": "pregnancy_complication_detail",
+              "class": "textarea",
+              "show": "pregnancy_complication"
+            },
+            {
+              "field": "",
+              "label": "Mode of Delivery",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "normal",
+                  "label": "Normal"
+                },
+                {
+                  "id": "cs",
+                  "label": "CS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy Vaccination",
+          "class": "block",
+          "children": [
+            {
+              "label": "T.D Vaccine Registerd Number",
+              "field": "td_vaccine.regd_no",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "label": "1st Vaccination",
+              "class": "block",
+              "children": [
+                {
+                  "field": "td_vaccine.1st.taken",
+                  "class": "check"
+                },
+                {
+                  "field": "td_vaccine.1st.date",
+                  "class": "textinput",
+                  "placeholder": "Date?",
+                  "show": "td_vaccine.1st.taken"
+                }
+              ]
+            },
+            {
+              "label": "2nd Vaccination",
+              "class": "block",
+              "children": [
+                {
+                  "field": "td_vaccine.2nd.taken",
+                  "class": "check"
+                },
+                {
+                  "field": "td_vaccine.2nd.date",
+                  "class": "textinput",
+                  "placeholder": "Date?",
+                  "show": "td_vaccine.2nd.taken"
+                }
+              ]
+            },
+            {
+              "label": "2+ Vaccination",
+              "class": "block",
+              "children": [
+                {
+                  "field": "td_vaccine.2+.taken",
+                  "class": "check"
+                },
+                {
+                  "field": "td_vaccine.2+.date",
+                  "class": "textinput",
+                  "placeholder": "Date?",
+                  "show": "td_vaccine.2+.taken"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Health Worker, who prepared the card",
+          "class": "block",
+          "children": [
+            {
+              "class": "block",
+              "children": [
+                {
+                  "label": "Name",
+                  "field": "health_worker.name",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Surname",
+                  "field": "health_worker.surname",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Designation",
+                  "field": "health_worker.designation",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Date",
+                  "field": "health_worker.date",
+                  "class": "textinput"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "children": [
+                {
+                  "label": "Hospital Contact Number",
+                  "field": "hospital_contact_number",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Ambulance Contact Number",
+                  "field": "ambulance_contact_number",
+                  "class": "textinput"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "label": "Last Menstrual Date",
+              "field": "last_menstrual_date",
+              "class": "textinput"
+            },
+            {
+              "label": "Estimated Date of Delivery",
+              "field": "estimated_date_of_delivery",
+              "class": "textinput"
+            }
+          ]
+        },
+        {
+          "label": "Laboratory Examination",
+          "class": "subformlist",
+          "field": "lab_exam",
+          "ditto": true,
+          "fields": [
+            {
+              "label": "Date",
+              "field": "date",
+              "class": "textinput",
+              "style": {
+                "width": 100
+              }
+            },
+            {
+              "label": "Hb",
+              "field": "hb",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "style": {
+                "width": 80
+              }
+            },
+            {
+              "label": "Albumin",
+              "field": "albumin",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "style": {
+                "width": 80
+              }
+            },
+            {
+              "label": "Urine (Protein)",
+              "field": "urine.protein",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "style": {
+                "width": 80
+              }
+            },
+            {
+              "label": "Urine (Sugar)",
+              "field": "urine.sugar",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "style": {
+                "width": 80
+              }
+            },
+            {
+              "label": "Blood Sugar",
+              "field": "blood_sugar",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "style": {
+                "width": 80
+              }
+            },
+            {
+              "label": "HBsAg",
+              "field": "hbsag",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "style": {
+                "width": 80
+              }
+            },
+            {
+              "label": "VDRL",
+              "field": "vdrl",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "style": {
+                "width": 80
+              }
+            },
+            {
+              "label": "Retro Virus",
+              "field": "retro_virus",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "style": {
+                "width": 80
+              }
+            },
+            {
+              "label": "Other",
+              "field": "other",
+              "class": "textarea"
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy Examination",
+          "class": "subformlist",
+          "field": "pregnancy_exam",
+          "ditto": true,
+          "fields": [
+            {
+              "label": "Months",
+              "field": "months",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "label": "Date",
+              "field": "date",
+              "class": "textinput"
+            },
+            {
+              "label": "Weight",
+              "field": "weight",
+              "class": "textunitinput",
+              "type": "number",
+              "precision": 1,
+              "units": [
+                "kg",
+                "lb"
+              ]
+            },
+            {
+              "label": "Anemia",
+              "field": "anemia",
+              "class": "check"
+            },
+            {
+              "label": "Edema",
+              "field": "edema",
+              "class": "check"
+            },
+            {
+              "label": "Blood pressure",
+              "field": "blood_pressure",
+              "class": "textinput",
+              "type": "number",
+              "suffix": "mmHg",
+              "min": 1,
+              "precision": 0
+            },
+            {
+              "label": "Pregnancy in weeks",
+              "field": "pregnancy_in_weeks",
+              "class": "textinput"
+            },
+            {
+              "label": "Size of uterus",
+              "field": "size_of_uterus",
+              "class": "textunitinput",
+              "type": "number",
+              "units": [
+                "cm",
+                "in"
+              ]
+            },
+            {
+              "label": "Foetus",
+              "field": "foetus.found",
+              "class": "check"
+            },
+            {
+              "label": "Child Heart Rate",
+              "field": "foetus.child_heart_rate",
+              "class": "textinput",
+              "type": "number",
+              "show": "foetus.found"
+            },
+            {
+              "label": "Any problem",
+              "field": "any_problem",
+              "class": "textarea"
+            },
+            {
+              "label": "Next Consultation Date",
+              "field": "next_consultation_date",
+              "class": "textinput"
+            },
+            {
+              "label": "Number of Iron Tablets",
+              "field": "number_of_iron_tablets",
+              "class": "textinput",
+              "type": "number",
+              "min": 0,
+              "precision": 0
+            },
+            {
+              "label": "Alben",
+              "field": "alben",
+              "class": "textinput"
+            },
+            {
+              "label": "T.D",
+              "field": "td_vaccine",
+              "class": "check"
+            },
+            {
+              "label": "Health Worker Name",
+              "field": "health_worker_name",
+              "class": "textinput"
+            },
+            {
+              "label": "Name of Hospital",
+              "field": "hospital_name",
+              "class": "textinput"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
