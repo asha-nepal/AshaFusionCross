@@ -179,6 +179,66 @@
               ]
             }
           ]
+        },
+        {
+          "label": "Pregnancy Vaccination",
+          "class": "block",
+          "children": [
+            {
+              "label": "T.D Vaccine Registerd Number",
+              "field": "td_vaccine.regd_no",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "label": "1st Vaccination",
+              "class": "block",
+              "children": [
+                {
+                  "field": "td_vaccine.1st.taken",
+                  "class": "check"
+                },
+                {
+                  "field": "td_vaccine.1st.date",
+                  "class": "textinput",
+                  "placeholder": "Date?",
+                  "show": "td_vaccine.1st.taken"
+                }
+              ]
+            },
+            {
+              "label": "2nd Vaccination",
+              "class": "block",
+              "children": [
+                {
+                  "field": "td_vaccine.2nd.taken",
+                  "class": "check"
+                },
+                {
+                  "field": "td_vaccine.2nd.date",
+                  "class": "textinput",
+                  "placeholder": "Date?",
+                  "show": "td_vaccine.2nd.taken"
+                }
+              ]
+            },
+            {
+              "label": "2+ Vaccination",
+              "class": "block",
+              "children": [
+                {
+                  "field": "td_vaccine.2+.taken",
+                  "class": "check"
+                },
+                {
+                  "field": "td_vaccine.2+.date",
+                  "class": "textinput",
+                  "placeholder": "Date?",
+                  "show": "td_vaccine.2+.taken"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
