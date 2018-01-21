@@ -26,18 +26,20 @@ export const Block = ({
   label,
   children,
   widthaligned = false,
+  border = false,
   layout,
   fieldEditProps,
 }: {
   label?: string,
   children: React$Element<any>,
   widthaligned: boolean,
+  border: boolean,
   layout?: string,
   wrap?: boolean,
   fieldEditProps?: FieldEditPropsType,
 }): React$Element<any> => (
   <EditableFieldWrapper
-    className="field"
+    className={classNames('field', { box: border })}
     fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
@@ -52,7 +54,7 @@ export const Block = ({
         <div
           key={i}
           className={classNames('column', { 'is-narrow': !widthaligned })}
-          style={widthaligned ? {} : { paddingBottom: 0 }}
+          style={(widthaligned || border) ? {} : { paddingBottom: 0 }}
         >
           {child}
         </div>
