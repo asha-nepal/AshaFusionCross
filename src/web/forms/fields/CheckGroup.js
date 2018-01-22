@@ -59,7 +59,7 @@ export const CheckGroupComponent = ({
   readonly ? (
     <ReadOnly value={value} options={options} />
   ) : (
-    <div className="buttons">
+    <div className="buttons is-width-restricted">
       {options.map(option => {
         const isChecked = value && value.indexOf(option.id) > -1;
         return (
