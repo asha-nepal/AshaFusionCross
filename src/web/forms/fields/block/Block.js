@@ -53,17 +53,19 @@ export const Block = ({
   label,
   children,
   widthaligned = false,
+  border = false,
   layout = null,
   fieldEditProps,
 }: {
   label?: string,
   children: React$Element<any>,
   widthaligned: boolean,
+  border: boolean,
   layout: ?string,
   fieldEditProps?: FieldEditPropsType,
 }): React$Element<any> => (
   <EditableFieldWrapper
-    className="field"
+    className={classNames('field', { box: border })}
     fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
