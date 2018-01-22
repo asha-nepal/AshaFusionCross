@@ -17,9 +17,12 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 type Props = {
   label: ?string,
+  widthaligned: boolean,
+  layout: ?string,
   children?: React$Element<any>,
 };
 
@@ -41,6 +44,9 @@ export class Accordion extends Component {
   render() {
     const {
       label,
+      children,
+      widthaligned = false,
+      layout = null,
     } = this.props;
 
     return (
@@ -61,7 +67,23 @@ export class Accordion extends Component {
           </span>
         </a>
         <div className="card-content" style={{ display: this.state.isOpen ? null : 'none' }}>
-          {this.props.children}
+          <div
+            className={
+              layout === 'horizontal'
+              ? null
+              : classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })
+            }
+          >
+            {children.map((child, i) =>
+              <div
+                key={i}
+                className={classNames('column', { 'is-narrow': !widthaligned })}
+                style={widthaligned ? {} : { paddingBottom: 0 }}
+              >
+                {child}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );

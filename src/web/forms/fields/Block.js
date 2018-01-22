@@ -26,13 +26,13 @@ export const Block = ({
   label,
   children,
   widthaligned = false,
-  layout,
+  layout = null,
   fieldEditProps,
 }: {
   label?: string,
   children: React$Element<any>,
   widthaligned: boolean,
-  layout?: string,
+  layout: ?string,
   wrap?: boolean,
   fieldEditProps?: FieldEditPropsType,
 }): React$Element<any> => (
