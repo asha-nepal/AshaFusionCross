@@ -19,8 +19,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import EditableFieldWrapper from '../editor/EditableFieldWrapper';
-import type { FieldEditPropsType } from '../editor/type';
+import EditableFieldWrapper from '../../editor/EditableFieldWrapper';
+import type { FieldEditPropsType } from '../../editor/type';
 
 export const Block = ({
   label,
