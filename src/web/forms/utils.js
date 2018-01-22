@@ -19,6 +19,24 @@
 
 import _get from 'lodash.get';
 
+function checkCondition(state: Object, rootPath: ?string, condition: string): boolean {
+  const [referPath, valueToCheck] = condition.split(':');
+  const absReferPath = rootPath ? `${rootPath}.${referPath}` : referPath;
+  const referent = _get(state, absReferPath, false);
+  if (valueToCheck) {
+    if (Array.isArray(referent)) {
+      return referent.indexOf(valueToCheck) > -1;
+    }
+    return referent === valueToCheck;
+  }
+
+  if (Array.isArray(referent)) {
+    return referent.length > 0;
+  }
+
+  return !!referent;
+}
+
 export function checkVisibility(state: Object, rootPath: ?string, showProp: string|boolean = true) {
   if (showProp === false) {
     return false;
@@ -28,21 +46,16 @@ export function checkVisibility(state: Object, rootPath: ?string, showProp: stri
     const conditions = showProp.split('|');
 
     return conditions.some(condition => {
-      const [referPath, valueToCheck] = condition.split(':');
-      const absReferPath = rootPath ? `${rootPath}.${referPath}` : referPath;
-      const referent = _get(state, absReferPath, false);
-      if (valueToCheck) {
-        if (Array.isArray(referent)) {
-          return referent.indexOf(valueToCheck) > -1;
-        }
-        return referent === valueToCheck;
+      let _condition = condition;
+
+      const isNegative = condition.charAt(0) === '!';
+      if (isNegative) {
+        _condition = condition.slice(1);
       }
 
-      if (Array.isArray(referent)) {
-        return referent.length > 0;
-      }
+      const result = checkCondition(state, rootPath, _condition);
 
-      return !!referent;
+      return isNegative ? !result : result;
     });
   }
 

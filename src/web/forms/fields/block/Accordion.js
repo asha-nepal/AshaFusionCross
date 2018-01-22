@@ -17,9 +17,12 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { BlockBody } from './Block';
 
 type Props = {
   label: ?string,
+  widthaligned: boolean,
+  layout: ?string,
   children?: React$Element<any>,
 };
 
@@ -41,6 +44,9 @@ export class Accordion extends Component {
   render() {
     const {
       label,
+      children,
+      widthaligned = false,
+      layout = null,
     } = this.props;
 
     return (
@@ -61,7 +67,10 @@ export class Accordion extends Component {
           </span>
         </a>
         <div className="card-content" style={{ display: this.state.isOpen ? null : 'none' }}>
-          {this.props.children}
+          <BlockBody
+            layout={layout}
+            widthaligned={widthaligned}
+          >{children}</BlockBody>
         </div>
       </div>
     );

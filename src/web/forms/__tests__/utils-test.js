@@ -85,4 +85,31 @@ describe('checkVisibility', () => {
 
     expect(checkVisibility(state, 'root', 'foo|bar')).toBe(true);
   });
+
+  it('handles negative', () => {
+    const state = {
+      root: {
+        foo: {
+          bar: true,
+        },
+        hoge: {
+          fuga: false,
+        },
+      },
+    };
+
+    expect(checkVisibility(state, 'root', '!foo.bar')).toBe(false);
+    expect(checkVisibility(state, 'root', '!hoge.fuga')).toBe(true);
+  });
+
+  it('handles negative on Array referent', () => {
+    const state = {
+      root: {
+        foo: ['aaa', 'zzz'],
+      },
+    };
+
+    expect(checkVisibility(state, 'root', '!foo:aaa')).toBe(false);
+    expect(checkVisibility(state, 'root', '!foo:bbb')).toBe(true);
+  });
 });
