@@ -18,6 +18,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { BlockBody} from './Block';
 
 type Props = {
   label: ?string,
@@ -67,23 +68,10 @@ export class Accordion extends Component {
           </span>
         </a>
         <div className="card-content" style={{ display: this.state.isOpen ? null : 'none' }}>
-          <div
-            className={
-              layout === 'horizontal'
-              ? null
-              : classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })
-            }
-          >
-            {children.map((child, i) =>
-              <div
-                key={i}
-                className={classNames('column', { 'is-narrow': !widthaligned })}
-                style={widthaligned ? {} : { paddingBottom: 0 }}
-              >
-                {child}
-              </div>
-            )}
-          </div>
+          <BlockBody
+            layout={layout}
+            widthaligned={widthaligned}
+          >{children}</BlockBody>
         </div>
       </div>
     );
