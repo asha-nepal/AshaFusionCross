@@ -263,52 +263,6 @@
           ]
         },
         {
-          "label": "Health Worker, who prepared the card",
-          "class": "block",
-          "children": [
-            {
-              "class": "block",
-              "children": [
-                {
-                  "label": "Name",
-                  "field": "health_worker.name",
-                  "class": "textinput"
-                },
-                {
-                  "label": "Surname",
-                  "field": "health_worker.surname",
-                  "class": "textinput"
-                },
-                {
-                  "label": "Designation",
-                  "field": "health_worker.designation",
-                  "class": "textinput"
-                },
-                {
-                  "label": "Date",
-                  "field": "health_worker.date",
-                  "class": "textinput"
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "children": [
-                {
-                  "label": "Hospital Contact Number",
-                  "field": "hospital_contact_number",
-                  "class": "textinput"
-                },
-                {
-                  "label": "Ambulance Contact Number",
-                  "field": "ambulance_contact_number",
-                  "class": "textinput"
-                }
-              ]
-            }
-          ]
-        },
-        {
           "label": "Details of Pregnancy Checkup",
           "class": "accordion",
           "widthaligned": true,
@@ -423,6 +377,52 @@
                 {
                   "label": "Name of Hospital",
                   "field": "hospital_name",
+                  "class": "textinput"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Health Worker, who prepared the card",
+          "class": "block",
+          "children": [
+            {
+              "class": "block",
+              "children": [
+                {
+                  "label": "Name",
+                  "field": "health_worker.name",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Surname",
+                  "field": "health_worker.surname",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Designation",
+                  "field": "health_worker.designation",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Date",
+                  "field": "health_worker.date",
+                  "class": "textinput"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "children": [
+                {
+                  "label": "Hospital Contact Number",
+                  "field": "hospital_contact_number",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Ambulance Contact Number",
+                  "field": "ambulance_contact_number",
                   "class": "textinput"
                 }
               ]
