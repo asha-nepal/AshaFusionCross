@@ -19,44 +19,60 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import EditableFieldWrapper from '../editor/EditableFieldWrapper';
-import type { FieldEditPropsType } from '../editor/type';
+import EditableFieldWrapper from '../../editor/EditableFieldWrapper';
+import type { FieldEditPropsType } from '../../editor/type';
+
+export const BlockBody = ({
+  children,
+  layout,
+  widthaligned,
+}: {
+  children: React$Element<any>,
+  layout: ?string,
+  widthaligned: boolean,
+}) => (
+  <div
+    className={
+      layout === 'horizontal'
+      ? null
+      : classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })
+    }
+  >
+    {children.map((child, i) =>
+      <div
+        key={i}
+        className={classNames('column', { 'is-narrow': !widthaligned })}
+      >
+        {child}
+      </div>
+    )}
+  </div>
+);
 
 export const Block = ({
   label,
   children,
   widthaligned = false,
-  layout,
+  border = false,
+  layout = null,
   fieldEditProps,
 }: {
   label?: string,
   children: React$Element<any>,
   widthaligned: boolean,
-  layout?: string,
-  wrap?: boolean,
+  border: boolean,
+  layout: ?string,
   fieldEditProps?: FieldEditPropsType,
 }): React$Element<any> => (
   <EditableFieldWrapper
-    className="field"
+    className={classNames('field', { box: border })}
     fieldEditProps={fieldEditProps}
   >
     {label && <label className="label">{label}</label>}
-    <div
-      className={
-        layout === 'horizontal'
-        ? null
-        : classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })
-      }
-    >
-      {children.map((child, i) =>
-        <div
-          key={i}
-          className={classNames('column', { 'is-narrow': !widthaligned })}
-        >
-          {child}
-        </div>
-      )}
-    </div>
+    <BlockBody
+      layout={layout}
+      widthaligned={widthaligned}
+    >{children}</BlockBody>
   </EditableFieldWrapper>
 );
 
