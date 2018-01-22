@@ -97,84 +97,106 @@
       "label": "ANC",
       "style": [
         {
-          "field": "prev_pregnancy",
-          "label": "Previous history of Pregnancy",
-          "class": "subformlist",
-          "ditto": true,
-          "fields": [
+          "class": "block",
+          "children": [
             {
-              "field": "living",
-              "label": "Living",
-              "class": "check"
+              "label": "Last Menstrual Date",
+              "field": "last_menstrual_date",
+              "class": "textinput"
             },
             {
-              "field": "born_dead",
-              "label": "Born Dead",
-              "class": "check",
-              "show": "!living"
-            },
+              "label": "Estimated Date of Delivery",
+              "field": "estimated_date_of_delivery",
+              "class": "textinput"
+            }
+          ]
+        },
+        {
+          "label": "Previous Pregnancy Details",
+          "class": "accordion",
+          "widthaligned": true,
+          "children": [
             {
-              "field": "born_within_36_weeks",
-              "label": "Born less than 36 weeks",
-              "class": "check"
-            },
-            {
-              "field": "twins",
-              "label": "Twins",
-              "class": "check"
-            },
-            {
-              "field": "abortion",
-              "label": "Abortion",
-              "class": "check"
-            },
-            {
-              "field": "gender",
-              "label": "Gender",
-              "class": "radio",
-              "options": [
+              "field": "prev_pregnancy",
+              "label": "Previous history of Pregnancy",
+              "class": "subformlist",
+              "ditto": true,
+              "fields": [
                 {
-                  "id": 1,
-                  "label": "Male"
+                  "field": "living",
+                  "label": "Living",
+                  "class": "check"
                 },
                 {
-                  "id": 2,
-                  "label": "Female"
-                }
-              ]
-            },
-            {
-              "field": "age",
-              "label": "Current Age",
-              "class": "textunitinput",
-              "units": [
-                "years",
-                "months"
-              ],
-              "precision": 0
-            },
-            {
-              "field": "pregnancy_complication",
-              "label": "Pregnancy Complication",
-              "class": "check"
-            },
-            {
-              "field": "pregnancy_complication_detail",
-              "class": "textarea",
-              "show": "pregnancy_complication"
-            },
-            {
-              "field": "",
-              "label": "Mode of Delivery",
-              "class": "radio",
-              "options": [
-                {
-                  "id": "normal",
-                  "label": "Normal"
+                  "field": "born_dead",
+                  "label": "Born Dead",
+                  "class": "check",
+                  "show": "!living"
                 },
                 {
-                  "id": "cs",
-                  "label": "CS"
+                  "field": "born_within_36_weeks",
+                  "label": "Born less than 36 weeks",
+                  "class": "check"
+                },
+                {
+                  "field": "twins",
+                  "label": "Twins",
+                  "class": "check"
+                },
+                {
+                  "field": "abortion",
+                  "label": "Abortion",
+                  "class": "check"
+                },
+                {
+                  "field": "gender",
+                  "label": "Gender",
+                  "class": "radio",
+                  "options": [
+                    {
+                      "id": 1,
+                      "label": "Male"
+                    },
+                    {
+                      "id": 2,
+                      "label": "Female"
+                    }
+                  ]
+                },
+                {
+                  "field": "age",
+                  "label": "Current Age",
+                  "class": "textunitinput",
+                  "units": [
+                    "years",
+                    "months"
+                  ],
+                  "precision": 0
+                },
+                {
+                  "field": "pregnancy_complication",
+                  "label": "Pregnancy Complication",
+                  "class": "check"
+                },
+                {
+                  "field": "pregnancy_complication_detail",
+                  "class": "textarea",
+                  "show": "pregnancy_complication"
+                },
+                {
+                  "field": "",
+                  "label": "Mode of Delivery",
+                  "class": "radio",
+                  "options": [
+                    {
+                      "id": "normal",
+                      "label": "Normal"
+                    },
+                    {
+                      "id": "cs",
+                      "label": "CS"
+                    }
+                  ]
                 }
               ]
             }
@@ -182,7 +204,7 @@
         },
         {
           "label": "Pregnancy Vaccination",
-          "class": "block",
+          "class": "accordion",
           "children": [
             {
               "label": "T.D Vaccine Registerd Number",
@@ -287,17 +309,123 @@
           ]
         },
         {
-          "class": "block",
+          "label": "Details of Pregnancy Checkup",
+          "class": "accordion",
+          "widthaligned": true,
           "children": [
             {
-              "label": "Last Menstrual Date",
-              "field": "last_menstrual_date",
-              "class": "textinput"
-            },
-            {
-              "label": "Estimated Date of Delivery",
-              "field": "estimated_date_of_delivery",
-              "class": "textinput"
+              "label": "Pregnancy Examination",
+              "class": "subformlist",
+              "field": "pregnancy_exam",
+              "ditto": true,
+              "fields": [
+                {
+                  "label": "Months",
+                  "field": "months",
+                  "class": "textinput",
+                  "type": "number"
+                },
+                {
+                  "label": "Date",
+                  "field": "date",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Weight",
+                  "field": "weight",
+                  "class": "textunitinput",
+                  "type": "number",
+                  "precision": 1,
+                  "units": [
+                    "kg",
+                    "lb"
+                  ]
+                },
+                {
+                  "label": "Anemia",
+                  "field": "anemia",
+                  "class": "check"
+                },
+                {
+                  "label": "Edema",
+                  "field": "edema",
+                  "class": "check"
+                },
+                {
+                  "label": "Blood pressure",
+                  "field": "blood_pressure",
+                  "class": "textinput",
+                  "type": "number",
+                  "suffix": "mmHg",
+                  "min": 1,
+                  "precision": 0
+                },
+                {
+                  "label": "Pregnancy in weeks",
+                  "field": "pregnancy_in_weeks",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Size of uterus",
+                  "field": "size_of_uterus",
+                  "class": "textunitinput",
+                  "type": "number",
+                  "units": [
+                    "cm",
+                    "in"
+                  ]
+                },
+                {
+                  "label": "Foetus",
+                  "field": "foetus.found",
+                  "class": "check"
+                },
+                {
+                  "label": "Child Heart Rate",
+                  "field": "foetus.child_heart_rate",
+                  "class": "textinput",
+                  "type": "number",
+                  "show": "foetus.found"
+                },
+                {
+                  "label": "Any problem",
+                  "field": "any_problem",
+                  "class": "textarea"
+                },
+                {
+                  "label": "Next Consultation Date",
+                  "field": "next_consultation_date",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Number of Iron Tablets",
+                  "field": "number_of_iron_tablets",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "precision": 0
+                },
+                {
+                  "label": "Alben",
+                  "field": "alben",
+                  "class": "textinput"
+                },
+                {
+                  "label": "T.D",
+                  "field": "td_vaccine",
+                  "class": "check"
+                },
+                {
+                  "label": "Health Worker Name",
+                  "field": "health_worker_name",
+                  "class": "textinput"
+                },
+                {
+                  "label": "Name of Hospital",
+                  "field": "hospital_name",
+                  "class": "textinput"
+                }
+              ]
             }
           ]
         },
@@ -399,120 +527,6 @@
               "label": "Other",
               "field": "other",
               "class": "textarea"
-            }
-          ]
-        },
-        {
-          "label": "Pregnancy Examination",
-          "class": "subformlist",
-          "field": "pregnancy_exam",
-          "ditto": true,
-          "fields": [
-            {
-              "label": "Months",
-              "field": "months",
-              "class": "textinput",
-              "type": "number"
-            },
-            {
-              "label": "Date",
-              "field": "date",
-              "class": "textinput"
-            },
-            {
-              "label": "Weight",
-              "field": "weight",
-              "class": "textunitinput",
-              "type": "number",
-              "precision": 1,
-              "units": [
-                "kg",
-                "lb"
-              ]
-            },
-            {
-              "label": "Anemia",
-              "field": "anemia",
-              "class": "check"
-            },
-            {
-              "label": "Edema",
-              "field": "edema",
-              "class": "check"
-            },
-            {
-              "label": "Blood pressure",
-              "field": "blood_pressure",
-              "class": "textinput",
-              "type": "number",
-              "suffix": "mmHg",
-              "min": 1,
-              "precision": 0
-            },
-            {
-              "label": "Pregnancy in weeks",
-              "field": "pregnancy_in_weeks",
-              "class": "textinput"
-            },
-            {
-              "label": "Size of uterus",
-              "field": "size_of_uterus",
-              "class": "textunitinput",
-              "type": "number",
-              "units": [
-                "cm",
-                "in"
-              ]
-            },
-            {
-              "label": "Foetus",
-              "field": "foetus.found",
-              "class": "check"
-            },
-            {
-              "label": "Child Heart Rate",
-              "field": "foetus.child_heart_rate",
-              "class": "textinput",
-              "type": "number",
-              "show": "foetus.found"
-            },
-            {
-              "label": "Any problem",
-              "field": "any_problem",
-              "class": "textarea"
-            },
-            {
-              "label": "Next Consultation Date",
-              "field": "next_consultation_date",
-              "class": "textinput"
-            },
-            {
-              "label": "Number of Iron Tablets",
-              "field": "number_of_iron_tablets",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "precision": 0
-            },
-            {
-              "label": "Alben",
-              "field": "alben",
-              "class": "textinput"
-            },
-            {
-              "label": "T.D",
-              "field": "td_vaccine",
-              "class": "check"
-            },
-            {
-              "label": "Health Worker Name",
-              "field": "health_worker_name",
-              "class": "textinput"
-            },
-            {
-              "label": "Name of Hospital",
-              "field": "hospital_name",
-              "class": "textinput"
             }
           ]
         }
