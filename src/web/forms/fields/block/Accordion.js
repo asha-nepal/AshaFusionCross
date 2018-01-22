@@ -17,8 +17,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import classNames from 'classnames';
-import { BlockBody} from './Block';
+import { BlockBody } from './Block';
 
 type Props = {
   label: ?string,
