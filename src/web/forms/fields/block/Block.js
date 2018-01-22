@@ -42,7 +42,6 @@ export const BlockBody = ({
       <div
         key={i}
         className={classNames('column', { 'is-narrow': !widthaligned })}
-        style={widthaligned ? {} : { paddingBottom: 0 }}
       >
         {child}
       </div>
