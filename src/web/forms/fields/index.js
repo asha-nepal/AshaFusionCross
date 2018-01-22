@@ -25,7 +25,6 @@ import { TextUnitInput, TextUnitInputComponent } from './TextUnitInput';
 import { Attachment } from './Attachment';
 import { AttachmentInput } from './AttachmentInput';
 import { AttachmentViewer } from './AttachmentViewer';
-import { Accordion } from './Accordion';
 import { Checkbox, CheckboxComponent } from './Checkbox';
 import { CheckGroup } from './CheckGroup';
 import { AutoCalc } from './AutoCalc';
@@ -33,7 +32,8 @@ import { GuideTools } from './GuideTools';
 import { Diagnoses } from './Diagnoses';
 import { MultiInput } from './MultiInput';
 import { SubformList, SubformListComponent, ReadonlySubformList } from './SubformList';
-import { Block } from './Block';
+import { Accordion } from './block/Accordion';
+import { Block } from './block/Block';
 import fieldify from './common/fieldify';
 
 const fieldComponentList = {
@@ -45,7 +45,6 @@ const fieldComponentList = {
   attachment: fieldify(Attachment),
   attachmentinput: fieldify(AttachmentInput),
   attachmentviewer: fieldify(AttachmentViewer),
-  accordion: Accordion,
   check: fieldify(Checkbox),
   checkgroup: fieldify(CheckGroup),
   autocalc: fieldify(AutoCalc),
@@ -53,6 +52,7 @@ const fieldComponentList = {
   diagnoses: Diagnoses,
   multiinput: fieldify(MultiInput),
   subformlist: fieldify(SubformList),
+  accordion: Accordion,
   block: Block,
 };
 

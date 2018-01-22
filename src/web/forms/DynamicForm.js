@@ -120,7 +120,8 @@ function makeCreateChildFields(
         },
         children
       );
-    });
+    })
+    .filter(element => element);  // Remove null
 
     // Insert <FieldInsertPanel /> between fields for field editing
     if (editing) {
