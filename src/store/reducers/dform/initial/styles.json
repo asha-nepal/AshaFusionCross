@@ -385,7 +385,7 @@
         },
         {
           "label": "Health Worker, who prepared the card",
-          "class": "block",
+          "class": "accordion",
           "children": [
             {
               "class": "block",
@@ -431,102 +431,108 @@
         },
         {
           "label": "Laboratory Examination",
-          "class": "subformlist",
-          "field": "lab_exam",
-          "ditto": true,
-          "fields": [
+          "class": "accordion",
+          "widthaligned": true,
+          "children": [
             {
-              "label": "Date",
-              "field": "date",
-              "class": "textinput",
-              "style": {
-                "width": 100
-              }
-            },
-            {
-              "label": "Hb",
-              "field": "hb",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "style": {
-                "width": 80
-              }
-            },
-            {
-              "label": "Albumin",
-              "field": "albumin",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "style": {
-                "width": 80
-              }
-            },
-            {
-              "label": "Urine (Protein)",
-              "field": "urine.protein",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "style": {
-                "width": 80
-              }
-            },
-            {
-              "label": "Urine (Sugar)",
-              "field": "urine.sugar",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "style": {
-                "width": 80
-              }
-            },
-            {
-              "label": "Blood Sugar",
-              "field": "blood_sugar",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "style": {
-                "width": 80
-              }
-            },
-            {
-              "label": "HBsAg",
-              "field": "hbsag",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "style": {
-                "width": 80
-              }
-            },
-            {
-              "label": "VDRL",
-              "field": "vdrl",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "style": {
-                "width": 80
-              }
-            },
-            {
-              "label": "Retro Virus",
-              "field": "retro_virus",
-              "class": "textinput",
-              "type": "number",
-              "min": 0,
-              "style": {
-                "width": 80
-              }
-            },
-            {
-              "label": "Other",
-              "field": "other",
-              "class": "textarea"
+              "class": "subformlist",
+              "field": "lab_exam",
+              "ditto": true,
+              "fields": [
+                {
+                  "label": "Date",
+                  "field": "date",
+                  "class": "textinput",
+                  "style": {
+                    "width": 100
+                  }
+                },
+                {
+                  "label": "Hb",
+                  "field": "hb",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 80
+                  }
+                },
+                {
+                  "label": "Albumin",
+                  "field": "albumin",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 80
+                  }
+                },
+                {
+                  "label": "Urine (Protein)",
+                  "field": "urine.protein",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 80
+                  }
+                },
+                {
+                  "label": "Urine (Sugar)",
+                  "field": "urine.sugar",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 80
+                  }
+                },
+                {
+                  "label": "Blood Sugar",
+                  "field": "blood_sugar",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 80
+                  }
+                },
+                {
+                  "label": "HBsAg",
+                  "field": "hbsag",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 80
+                  }
+                },
+                {
+                  "label": "VDRL",
+                  "field": "vdrl",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 80
+                  }
+                },
+                {
+                  "label": "Retro Virus",
+                  "field": "retro_virus",
+                  "class": "textinput",
+                  "type": "number",
+                  "min": 0,
+                  "style": {
+                    "width": 80
+                  }
+                },
+                {
+                  "label": "Other",
+                  "field": "other",
+                  "class": "textarea"
+                }
+              ]
             }
           ]
         }
