@@ -52,10 +52,8 @@ export default ({
       && `Contact Number: ${patient.contact_number}`,
     patient.blood_type
       && `Blood Type: ${patient.blood_type}`,
-    patient.husband && patient.husband.name
-      && `Husband's Name: ${patient.husband.name}`,
-    patient.husband && patient.husband.contact_number
-      && `Husband's Contact Number: ${patient.husband.contact_number}`,
+    patient.husband_name
+      && `Husband's Name: ${patient.husband_name}`,
   ]
   .filter(element => element != null);
 

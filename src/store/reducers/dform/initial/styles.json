@@ -32,6 +32,11 @@
           "precision": 0
         },
         {
+          "field": "ht",
+          "label": "Ht.",
+          "class": "textinput"
+        },
+        {
           "field": "district",
           "label": "District",
           "class": "textinput"
@@ -74,19 +79,15 @@
           ]
         },
         {
-          "class": "block",
-          "children": [
-            {
-              "field": "husband.name",
-              "label": "Husband's Name",
-              "class": "textinput"
-            },
-            {
-              "field": "husband.contact_number",
-              "label": "Husband's Contact Number",
-              "class": "textinput"
-            }
-          ]
+          "field": "number_of_delivery",
+          "label": "Number of delivery",
+          "class": "textinput",
+          "type": "number"
+        },
+        {
+          "field": "husband_name",
+          "label": "Husband's Name",
+          "class": "textinput"
         }
       ]
     }
@@ -134,8 +135,8 @@
                   "show": "!living"
                 },
                 {
-                  "field": "born_within_36_weeks",
-                  "label": "Born less than 36 weeks",
+                  "field": "born_before_37_weeks",
+                  "label": "Born before 37 weeks",
                   "class": "check"
                 },
                 {
@@ -152,6 +153,7 @@
                   "field": "gender",
                   "label": "Gender",
                   "class": "radio",
+                  "show": "living",
                   "options": [
                     {
                       "id": 1,
@@ -167,6 +169,7 @@
                   "field": "age",
                   "label": "Current Age",
                   "class": "textunitinput",
+                  "show": "living",
                   "units": [
                     "years",
                     "months"
@@ -184,8 +187,8 @@
                   "show": "pregnancy_complication"
                 },
                 {
-                  "field": "",
-                  "label": "Mode of Delivery",
+                  "field": "type_of_delivery",
+                  "label": "Type of Delivery",
                   "class": "radio",
                   "options": [
                     {
@@ -217,14 +220,14 @@
               "class": "block",
               "children": [
                 {
-                  "field": "td_vaccine.1st.taken",
+                  "field": "td_vaccine.first.taken",
                   "class": "check"
                 },
                 {
-                  "field": "td_vaccine.1st.date",
+                  "field": "td_vaccine.first.date",
                   "class": "textinput",
                   "placeholder": "Date?",
-                  "show": "td_vaccine.1st.taken"
+                  "show": "td_vaccine.first.taken"
                 }
               ]
             },
@@ -233,14 +236,14 @@
               "class": "block",
               "children": [
                 {
-                  "field": "td_vaccine.2nd.taken",
+                  "field": "td_vaccine.second.taken",
                   "class": "check"
                 },
                 {
-                  "field": "td_vaccine.2nd.date",
+                  "field": "td_vaccine.second.date",
                   "class": "textinput",
                   "placeholder": "Date?",
-                  "show": "td_vaccine.2nd.taken"
+                  "show": "td_vaccine.second.taken"
                 }
               ]
             },
@@ -249,14 +252,14 @@
               "class": "block",
               "children": [
                 {
-                  "field": "td_vaccine.2+.taken",
+                  "field": "td_vaccine.after_second.taken",
                   "class": "check"
                 },
                 {
-                  "field": "td_vaccine.2+.date",
+                  "field": "td_vaccine.after_second.date",
                   "class": "textinput",
                   "placeholder": "Date?",
-                  "show": "td_vaccine.2+.taken"
+                  "show": "td_vaccine.after_second.taken"
                 }
               ]
             }
