@@ -19,12 +19,23 @@
 import React from 'react';
 import _get from 'lodash.get';
 
-import { convert } from '../../forms/fields/TextUnitInput';
-import { ReadonlyTextArea } from '../../forms/fields/TextArea';
-import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
-import { ReadonlySubformList } from '../../forms/fields/SubformList';
-import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
-import { ReadonlyDiagnoses } from '../../forms/fields/Diagnoses';
+
+import {
+  ImageTemplate,
+  createText,
+  Table,
+  Row,
+  Col,
+} from './absolute_positioning';
+import ANCimg1 from '../../../../assets/img/anc_1.jpg';
+
+const Text = createText(3.5);
+
+const CheckIcon = () => (
+  <span className="icon" style={{ height: '5mm' }}>
+    <i className="fa fa-check" />
+  </span>
+);
 
 function getStr(obj: Object, path: string, defaultValue: string = ''): string {
   const value = _get(obj, path, defaultValue);
@@ -46,211 +57,117 @@ export default ({
 }: {
   patient: PatientObject,
   record: RecordObject,
-}) => {
-  const precision = 2;
-  const e = Math.pow(10, precision);
+}) => (
+  <section className="section is-print">
+    <ImageTemplate
+      src={ANCimg1}
+    >
+      <Text x={142} y={70.5}>{getStr(patient, 'name')}</Text>
+      <Text x={200} y={70.5}>{getStr(patient, 'age')}</Text>
+      <Text x={229} y={70.5}>{getStr(patient, 'ht')}</Text>
 
-  const timestamp = record.$created_at || record.$initialized_at;
-  const date = timestamp && new Date(timestamp);
+      <Text x={142} y={77}>{getStr(patient, 'district')}</Text>
+      <Text x={200} y={77}>{getStr(patient, 'municipality_vdc.name')}</Text>
+      <Text x={229} y={77}>{getStr(patient, 'municipality_vdc.no')}</Text>
 
-  const number = _get(patient, 'number');
+      <Text x={142} y={83}>{getStr(patient, 'area')}</Text>
+      <Text x={200} y={83} xScale={0.5}>{getStr(patient, 'contact_number')}</Text>
+      <Text x={233} y={83}>{getStr(patient, 'blood_type')}</Text>
 
-  const heightMeter = convert(_get(record, 'height'), 'm', 1);
-  const heightFoot = convert(_get(record, 'height'), 'ft', 1);
-  const weight = convert(_get(record, 'weight'), 'kg', 1);
-  const bmi = heightMeter && weight && (weight / Math.pow(heightMeter, 2));
-  const bmiRounded = bmi && Math.round(bmi * e) / e;
-  const temperature = convert(_get(record, 'temperature'), 'degF', 1);
+      <Text x={170} y={89.5}>{getStr(patient, 'number_of_delivery')}</Text>
+      <Text x={200} y={89.5}>{getStr(patient, 'husband_name')}</Text>
 
-  return (
-    <section className="section is-print">
-      <div className="header is-clearfix">
-        <h1 className="subtitle is-3 is-pulled-left">
-          {number && <small>No. {number} </small>}
-          {getStr(patient, 'name')}
-        </h1>
+      <Table x={132} y={118} fontSize={3.5}>
+        {record &&
+        record.prev_pregnancy &&
+        record.prev_pregnancy.map &&
+        record.prev_pregnancy.slice(0, 3).map((item, i) =>
+          <Row key={i} height={3.5}>
+            <Col width={10}>{i + 1}</Col>
+            <Col width={8}>
+              {item.living && <CheckIcon />}
+            </Col>
+            <Col width={8}>
+              {item.born_dead && <CheckIcon />}
+            </Col>
+            <Col width={17}>
+              {item.born_before_37_weeks && <CheckIcon />}
+            </Col>
+            <Col width={10}>
+              {item.twins && <CheckIcon />}
+            </Col>
+            <Col width={11}>
+              {item.abortion && <CheckIcon />}
+            </Col>
+            <Col width={9}>
+              {item.living && {
+                1: 'M',
+                2: 'F',
+              }[item.gender]}
+            </Col>
+            <Col width={10}>
+              {item.living &&
+                <span
+                  style={{
+                    display: 'block',
+                    transform: 'scale(0.5, 1.0)',
+                    transformOrigin: 'top left',
+                    width: '9mm',
+                  }}
+                >
+                  {getStr(item, 'age')}
+                </span>
+              }
+            </Col>
+            <Col width={10}>
+              {item.pregnancy_complication && <CheckIcon />}
+            </Col>
+            <Col width={10}>
+              {item.type_of_delivery &&
+                <span
+                  style={{
+                    display: 'block',
+                    transform: 'scale(0.7, 1.0)',
+                    transformOrigin: 'top left',
+                  }}
+                >
+                  {{
+                    normal: 'Normal',
+                    cs: 'CS',
+                  }[item.type_of_delivery] || item.type_of_delivery}
+                </span>
+              }
+            </Col>
+          </Row>
+        )}
+      </Table>
 
-        {date &&
-          <p className="is-pulled-right">
-            {date.toDateString()}
-          </p>
-        }
-      </div>
+      <Text x={143} y={137.5}>{_get(record, 'td_vaccine.regd_no')}</Text>
+      {_get(record, 'td_vaccine.first.taken') &&
+        <Text x={166} y={137.5} xScale={0.7}>{_get(record, 'td_vaccine.first.date')}</Text>
+      }
+      {_get(record, 'td_vaccine.second.taken') &&
+        <Text x={195} y={137.5} xScale={0.7}>{_get(record, 'td_vaccine.second.date')}</Text>
+      }
+      {_get(record, 'td_vaccine.after_second.taken') &&
+        <Text x={220} y={137.5} xScale={0.7}>{_get(record, 'td_vaccine.after_second.date')}</Text>
+      }
 
-      <div className="container">
-        <h2 className="subtitle">
-          <p>Age: {getStr(patient, 'age')}</p>
-          <p>Sex: {{ male: 'Male', female: 'Female' }[_get(patient, 'sex')]}</p>
-          <p>Address: {getStr(patient, 'address')}</p>
-        </h2>
-
-        <div className="field is-grouped">
-          <div className="field">
-            <label className="label">Height</label>
-            <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
-          </div>
-          <div className="field">
-            <label className="label">Weight</label>
-            <p className="form-static">{weight ? `${weight} kg` : '---'}</p>
-          </div>
-          <div className="field">
-            <label className="label">BMI</label>
-            <p className="form-static">{bmiRounded || '---'}</p>
-          </div>
-        </div>
-        <div className="field is-grouped">
-          <div className="field">
-            <label className="label">Blood pressure</label>
-            <p className="form-static">
-              {getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg
-            </p>
-          </div>
-          <div className="field">
-            <label className="label">Pulse</label>
-            <p className="form-static">{getStr(record, 'pulse', '---')} /min</p>
-          </div>
-          <div className="field">
-            <label className="label">Temperature</label>
-            <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
-          </div>
-          <div className="field">
-            <label className="label">SpO2</label>
-            <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
-          </div>
-          <div className="field">
-            <label className="label">Respiration rate</label>
-            <p className="form-static">{getStr(record, 'rr', '---')} /min</p>
-          </div>
-          <div className="field">
-            <label className="label">Blood sugar</label>
-            <p className="form-static">{getStr(record, 'bs', '---')} mg/dL</p>
-          </div>
-        </div>
-
-        <table className="table">
-          <tbody>
-            <tr>
-              <th>Allergy</th>
-              <td>{_get(record, 'allergy') ? (
-                <div>
-                  <strong>&lt;Yes&gt;</strong>
-                  <ReadonlyTextArea
-                    value={_get(record, 'allergy_memo')}
-                  />
-                </div>
-              ) : '---'}</td>
-            </tr>
-            <tr>
-              <th>Past medical history</th>
-              <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'past_medical_history')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Current medicines</th>
-              <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'current_medicine')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Present medical history</th>
-              <td>
-                <ReadonlyTextArea
-                  value={_get(record, 'present_medical_history')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Symptoms</th>
-              <td>
-                <ReadonlyMultiInput
-                  values={_get(record, 'symptoms')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Signs</th>
-              <td>
-                <CheckGroupComponent
-                  value={_get(record, 'signs_select')}
-                  options={[
-                    { id: 'jaundice', label: 'Jaundice' },
-                    { id: 'anemia', label: 'Anemia' },
-                    { id: 'lymphadenopathy', label: 'Lymphadenopathy' },
-                    { id: 'cyanosis', label: 'Cyanosis' },
-                    { id: 'clubbing', label: 'Clubbing' },
-                    { id: 'oedema', label: 'Oedema' },
-                    { id: 'dehydration', label: 'Dehydration' },
-                  ]}
-                  readonly
-                />
-                <ReadonlyTextArea
-                  value={_get(record, 'signs')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Diagnoses</th>
-              <td>
-                <ReadonlyDiagnoses
-                  value={_get(record, 'diagnoses')}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Prescriptions</th>
-              <td>
-                <ReadonlySubformList
-                  values={_get(record, 'prescription')}
-                  fields={[
-                    { field: 'medicine', label: 'Medicine', class: 'textinput', primary: true },
-                    { field: 'stat', label: 'Stat', class: 'check' },
-                    { field: 'sos', label: 'SOS', class: 'check' },
-                    {
-                      field: 'dose', class: 'textinput', type: 'number', style: { width: 50 },
-                      label: 'Dose', suffix: 'pcs',
-                    },
-                    {
-                      field: 'freq', class: 'textinput', type: 'number', style: { width: 50 },
-                      label: 'Frequency', suffix: 'times', hide: 'sos|stat',
-                    },
-                    {
-                      field: 'duration', class: 'textinput', type: 'number', style: { width: 60 },
-                      label: 'Duration', suffix: 'days', hide: 'sos|stat',
-                    },
-                    {
-                      field: 'route', class: 'select', label: 'Route',
-                      options: [
-                        { id: 'po', label: 'PO' },
-                        { id: 'ih', label: 'IH' },
-                        { id: 'pr', label: 'PR' },
-                        { id: 'sc', label: 'SC' },
-                        { id: 'sl', label: 'SL' },
-                        { id: 'top', label: 'TOP' },
-                      ],
-                    },
-                    {
-                      field: 'meal', class: 'select', label: 'Meal',
-                      options: [
-                        { id: 'before', label: 'Before the meal' },
-                        { id: 'after', label: 'After the meal' },
-                      ],
-                    },
-                    {
-                      field: 'remark', class: 'textinput', label: 'Remark', expanded: true,
-                      show: 'use_remark',
-                    },
-                  ]}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  );
-};
+      <Text x={132} y={155.5}>
+        {`${_get(record, 'health_worker.name', '')} ${_get(record, 'health_worker.surname', '')}`}
+      </Text>
+      <Text x={167} y={155.5}>
+        {_get(record, 'health_worker.designation')}
+      </Text>
+      <Text x={213} y={155.5}>
+        {_get(record, 'health_worker.date')}
+      </Text>
+      <Text x={132} y={168.5}>
+        {_get(record, 'hospital_contact_number')}
+      </Text>
+      <Text x={203} y={168.5}>
+        {_get(record, 'ambulance_contact_number')}
+      </Text>
+    </ImageTemplate>
+  </section>
+);
