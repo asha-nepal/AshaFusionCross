@@ -25,8 +25,6 @@ import PatientInfoOneline from './PatientInfoOneline';
 import RecordsTab from './RecordsTab';
 import Footer from './Footer';
 
-import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
-import RecordChartSelector from '../../containers/PatientView/RecordChartSelector';
 import DynamicForm from '../../forms/DynamicForm';
 import Select from '../Select';
 
@@ -200,11 +198,8 @@ export default class PatientView extends Component {
                       )}
                     />
                   }
-                  <RecordChartToggle />
                 </div>
               </div>
-
-              <RecordChartSelector records={records} />
 
               {selectedActiveRecordIndex > -1 && (
                 <div className="container">
