@@ -17,6 +17,7 @@
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
@@ -38,23 +39,39 @@ export const TextAreaComponent = ({
   placeholder,
   readonly = false,
   onChange,
+  size = '',
+  shrink = false,
+  maxRows = 5,
 }: {
   value: ?string,
   placeholder?: string,
   readonly?: boolean,
   onChange: (newValue: string) => void,
-}) => (readonly ? (
-  <ReadonlyTextArea value={value} />
-) : (
-  <div className="control">
-    <textarea
-      className="textarea"
-      placeholder={placeholder}
-      value={value || ''}
-      onChange={e => onChange(e.target.value)}
-    />
-  </div>
-));
+  size: string,
+  shrink: boolean,
+  maxRows: number,
+}) => {
+  if (readonly) return <ReadonlyTextArea value={value} />;
+
+  const _value = value || '';
+
+  return (
+    <div className="control">
+      <textarea
+        className={classNames(
+          'textarea',
+          {
+            [`is-${size}`]: size,
+          }
+        )}
+        placeholder={placeholder}
+        value={_value}
+        onChange={e => onChange(e.target.value)}
+        rows={shrink ? Math.min(maxRows, _value.match(/^/mg).length) : null}
+      />
+    </div>
+  );
+};
 
 TextAreaComponent.fieldProps = [];
 
