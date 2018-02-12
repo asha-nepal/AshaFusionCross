@@ -122,6 +122,7 @@
               "label": "Previous history of Pregnancy",
               "class": "subformlist",
               "ditto": true,
+              "autoAdd": false,
               "fields": [
                 {
                   "field": "living",
@@ -184,7 +185,8 @@
                 {
                   "field": "pregnancy_complication_detail",
                   "class": "textarea",
-                  "show": "pregnancy_complication"
+                  "show": "pregnancy_complication",
+                  "shrink": true
                 },
                 {
                   "field": "type_of_delivery",
@@ -275,6 +277,7 @@
               "class": "subformlist",
               "field": "pregnancy_exam",
               "ditto": true,
+              "autoAdd": false,
               "fields": [
                 {
                   "label": "Months",
@@ -352,7 +355,8 @@
                 {
                   "label": "Any problem",
                   "field": "any_problem",
-                  "class": "textarea"
+                  "class": "textarea",
+                  "shrink": true
                 },
                 {
                   "label": "Next Consultation Date",
@@ -446,6 +450,7 @@
               "class": "subformlist",
               "field": "lab_exam",
               "ditto": true,
+              "autoAdd": false,
               "fields": [
                 {
                   "label": "Date",
@@ -538,7 +543,8 @@
                 {
                   "label": "Other",
                   "field": "other",
-                  "class": "textarea"
+                  "class": "textarea",
+                  "shrink": true
                 }
               ]
             }
