@@ -37,6 +37,7 @@ export type FormFieldDefinition = {
 export const SubformListComponent = ({
   values,
   fields,
+  autoAdd = true,
   onChange,
   onAddItemRequested,
   onRemoveItemRequested,
@@ -45,6 +46,7 @@ export const SubformListComponent = ({
 }: {
   values: ?Array<Object | string>,
   fields: Array<FormFieldDefinition>,
+  autoAdd: boolean,
   onChange: (index: ?number, newValue: Object) => void,
   onAddItemRequested: (value: Object) => void,
   onRemoveItemRequested: (index: number) => void,
@@ -62,6 +64,38 @@ export const SubformListComponent = ({
 
   const _values = values || [];
 
+  const rows = _values.map((value, i) =>
+    <Row
+      key={i}
+      value={value}
+      fields={fields}
+      onChange={v => onChange(i, v)}
+      onRemoveItemRequested={() => onRemoveItemRequested(i)}
+    />
+  );
+
+  const additionalRow = autoAdd ? (
+    <Row
+      key={_values.length}
+      value={{}}
+      fields={fields}
+      onChange={v => onAddItemRequested(v)}
+    />
+  ) : (
+    <div
+      className="panel-block"
+      key={_values.length}
+    >
+      <button
+        className="button is-small is-primary is-outlined is-fullwidth"
+        onClick={e => {
+          e.target.blur();
+          onAddItemRequested({});
+        }}
+      >Add new item</button>
+    </div>
+  );
+
   return (
     <DittoWrapper
       className="field"
@@ -70,22 +104,7 @@ export const SubformListComponent = ({
       getPreviousData={getPreviousData}
     >
       <div className="panel">
-      {_values.map((value, i) =>
-        <Row
-          key={i}
-          value={value}
-          fields={fields}
-          onChange={v => onChange(i, v)}
-          onRemoveItemRequested={() => onRemoveItemRequested(i)}
-        />
-      ).concat(
-        <Row
-          key={_values.length}
-          value={{}}
-          fields={fields}
-          onChange={v => onAddItemRequested(v)}
-        />
-      )}
+      {rows.concat(additionalRow)}
       </div>
     </DittoWrapper>
   );
