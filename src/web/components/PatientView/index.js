@@ -98,7 +98,7 @@ export default class PatientView extends Component {
 
     if (isFetching) {
       return <div className="loading-container"><div className="loading-content" /></div>;
-      //return <div>Fetching...</div>;
+      // return <div>Fetching...</div>;
     }
 
     const showRecord = !isNew && recordFormStyle;
