@@ -44,7 +44,7 @@ export default ({
         return (
           <li
             key={record._id}
-            className={(selectedActiveRecordIndex === i) && 'is-active'}
+            className={(selectedActiveRecordIndex === i) ? 'is-active' : undefined}
           >
             <a
               href="#"
