@@ -22,6 +22,7 @@ import { START_DATE, END_DATE } from 'react-dates/constants';
 import type { Moment } from 'moment';
 
 type Props = {
+  id: string,
   date: Moment,
   onDatesChange: Moment,
 }
@@ -43,6 +44,7 @@ export default class DatePicker extends Component {
 
   render() {
     const {
+      id,
       date,
       onDatesChange,
     } = this.props;
@@ -58,7 +60,9 @@ export default class DatePicker extends Component {
         <div className="column is-narrow">
           <DateRangePicker
             startDate={date.startDate}
+            startDateId={`${id}-start-date`}
             endDate={date.endDate}
+            endDateId={`${id}-end-date`}
             focusedInput={this.state.focused}
             onDatesChange={onDatesChange}
             onFocusChange={(focused) => { this.setState({ focused }); }}
