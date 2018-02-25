@@ -17,6 +17,8 @@
 /* @flow */
 import React from 'react';
 import classNames from 'classnames';
+import _get from 'lodash.get';
+import _set from 'lodash.set';
 import type { FormFieldDefinition } from '.';
 import { checkVisibility } from '../../utils';
 
@@ -29,7 +31,7 @@ import { SelectComponent } from '../Select';
 import fieldify from '../common/fieldify';
 
 // TODO: 共通化
-const fieldComponents = {
+export const fieldComponents = {
   textinput: fieldify(TextInputComponent),
   textunitinput: fieldify(TextUnitInputComponent),
   textarea: fieldify(TextAreaComponent),
@@ -86,17 +88,14 @@ export default ({
               ...field,
               readonly,
               size: 'small',
-              value: _value[field.field],
+              value: _get(_value, field.field),
               onChange: (v => {
                 if (!onChange) { return; }
 
-                const updated = {};
-                updated[field.field] = v;
+                const updated = Object.assign({}, _value);
+                _set(updated, field.field, v);
 
-                onChange({
-                  ..._value,
-                  ...updated,
-                });
+                onChange(updated);
               }),
             });
 
