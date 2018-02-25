@@ -39,6 +39,12 @@ const CheckIcon = () => (
   </span>
 );
 
+const CircleIcon = () => (
+  <span className="icon" style={{ height: '5mm' }}>
+    <i className="fa fa-circle-o" />
+  </span>
+);
+
 function getStr(obj: Object, path: string, defaultValue: string = ''): string {
   const value = _get(obj, path, defaultValue);
 
@@ -232,16 +238,16 @@ export default ({
               {item.weight && convert(item.weight, 'kg')}
             </Col>
             <Col width={10}>
-              {item.anemia && '◯'}
+              {item.anemia && <CircleIcon />}
             </Col>
             <Col width={11}>
-              {!item.anemia && '◯'}
+              {!item.anemia && <CircleIcon />}
             </Col>
             <Col width={5.5}>
-              {_get(item, 'edema.hand') && '◯'}
+              {_get(item, 'edema.hand') && <CircleIcon />}
             </Col>
             <Col width={5.5}>
-              {_get(item, 'edema.face') && '◯'}
+              {_get(item, 'edema.face') && <CircleIcon />}
             </Col>
             <Col width={10}>{item.blood_pressure}</Col>
             <Col width={10}>{item.pregnancy_in_weeks}</Col>
