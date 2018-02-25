@@ -168,6 +168,54 @@ export default ({
       <Text x={203} y={168.5}>
         {_get(record, 'ambulance_contact_number')}
       </Text>
+
+      <Table x={13} y={114}>
+        {record &&
+        record.lab_exam &&
+        record.lab_exam.map &&
+        record.lab_exam.slice(0, 4).map((item, i) =>
+          <Row key={i} height={7.5}>
+            <Col width={18}>
+              {item.date}
+            </Col>
+            <Col width={6}>
+              {item.hb}
+            </Col>
+            <Col width={12}>
+              {item.albumin}
+            </Col>
+            <Col width={9}>
+              {_get(item, 'urine.protein')}
+            </Col>
+            <Col width={9}>
+              {_get(item, 'urine.sugar')}
+            </Col>
+            <Col width={10}>
+              {item.blood_sugar}
+            </Col>
+            <Col width={10}>
+              {item.hbsag}
+            </Col>
+            <Col width={10}>
+              {item.vdrl}
+            </Col>
+            <Col width={12}>
+              {item.retro_virus}
+            </Col>
+            <Col width={12}>
+              <span
+                style={{
+                  display: 'block',
+                  transform: 'scale(0.7, 1.0)',
+                  transformOrigin: 'top left',
+                }}
+              >
+                {item.other}
+              </span>
+            </Col>
+          </Row>
+        )}
+      </Table>
     </ImageTemplate>
   </section>
 );
