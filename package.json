@@ -67,7 +67,8 @@
     "ejs-loader": "^0.3.0",
     "electron": "^1.6.6",
     "electron-packager": "^8.6.0",
-    "enzyme": "^2.3.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^3.0.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-import-resolver-babel-module": "^3.0.0",
@@ -99,7 +100,6 @@
     "node-sass": "^4.5.3",
     "pouchdb": "^6.0.6",
     "pouchdb-authentication": "^1.1.1",
-    "react-addons-test-utils": "^15.1.0",
     "react-dom": "^16.2.0",
     "react-native-drawer": "^2.3.0",
     "react-redux": "^5.0.6",
@@ -119,11 +119,13 @@
   },
   "jest": {
     "automock": true,
+    "setupTestFrameworkScriptFile": "<rootDir>/test/setupTests.js",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react/",
       "<rootDir>/node_modules/react-dom/",
       "<rootDir>/node_modules/react-addons-test-utils/",
       "<rootDir>/node_modules/enzyme/",
+      "<rootDir>/node_modules/enzyme-adapter-*",
       "<rootDir>/node_modules/react-redux-form/",
       "<rootDir>/node_modules/redux-saga-test-plan/",
       "<rootDir>/node_modules/redux-saga-routines/"
