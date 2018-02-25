@@ -218,6 +218,8 @@ export default ({
       </Table>
     </ImageTemplate>
     <ImageTemplate src={ANCimg2} pageBreak>
+      <Text x={75} y={14}>{record.last_menstrual_date}</Text>
+      <Text x={191} y={14}>{record.estimated_date_of_delivery}</Text>
       <Table x={22} y={39}>
         {record &&
         record.pregnancy_exam &&
