@@ -20,6 +20,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
+import _set from 'lodash.set';
 import Row from './Row';
 import Readonly from './Readonly';
 import DittoWrapper from '../common/DittoWrapper';
@@ -47,7 +48,7 @@ export const SubformListComponent = ({
   values: ?Array<Object | string>,
   fields: Array<FormFieldDefinition>,
   autoAdd: boolean,
-  onChange: (index: ?number, newValue: Object) => void,
+  onChange: (path: ?string, newValue: Object) => void,
   onAddItemRequested: (value: Object) => void,
   onRemoveItemRequested: (index: number) => void,
   readonly?: boolean,
@@ -69,7 +70,7 @@ export const SubformListComponent = ({
       key={i}
       value={value}
       fields={fields}
-      onChange={v => onChange(i, v)}
+      onChange={(path, v) => onChange(path ? `[${i}]${path}` : `[${i}]`, v)}
       onRemoveItemRequested={() => onRemoveItemRequested(i)}
     />
   );
@@ -79,7 +80,7 @@ export const SubformListComponent = ({
       key={_values.length}
       value={{}}
       fields={fields}
-      onChange={v => onAddItemRequested(v)}
+      onChange={(path, v) => onAddItemRequested(path ? _set({}, path, v) : v)}
     />
   ) : (
     <div
@@ -116,9 +117,9 @@ const mapStateToProps = (state, ownProps) => ({
   values: _get(state, ownProps.model),
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (index, value) =>
+  onChange: (path, value) =>
     dispatch(actions.change(
-      index == null ? ownProps.model : `${ownProps.model}[${index}]`, value)),
+      path == null ? ownProps.model : `${ownProps.model}${path}`, value)),
   onAddItemRequested: (value) => dispatch(actions.push(ownProps.model, value)),
   onRemoveItemRequested: (index) => dispatch(actions.remove(ownProps.model, index)),
 });

@@ -60,19 +60,9 @@ describe('<SubformList.Row />', () => {
     expect(textInputs.at(1).prop('value')).toEqual('BARBAZ');
 
     textInputs.at(0).prop('onChange')('newFOO');
-    expect(onChange.mock.calls[0][0]).toEqual({
-      foo: 'newFOO',
-      bar: {
-        baz: 'BARBAZ',
-      },
-    });
+    expect(onChange.mock.calls[0]).toEqual(['foo', 'newFOO']);
 
     textInputs.at(1).prop('onChange')('newBARBAZ');
-    expect(onChange.mock.calls[1][0]).toEqual({
-      foo: 'FOO',
-      bar: {
-        baz: 'newBARBAZ',
-      },
-    });
+    expect(onChange.mock.calls[1]).toEqual(['bar.baz', 'newBARBAZ']);
   });
 });
