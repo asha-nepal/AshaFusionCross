@@ -304,8 +304,13 @@
                   "class": "check"
                 },
                 {
-                  "label": "Edema",
-                  "field": "edema",
+                  "label": "Edema (Hand)",
+                  "field": "edema.hand",
+                  "class": "check"
+                },
+                {
+                  "label": "Edema (Face)",
+                  "field": "edema.face",
                   "class": "check"
                 },
                 {
