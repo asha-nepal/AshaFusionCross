@@ -226,7 +226,7 @@ export default ({
     <ImageTemplate src={ANCimg2} pageBreak>
       <Text x={75} y={14}>{record.last_menstrual_date}</Text>
       <Text x={191} y={14}>{record.estimated_date_of_delivery}</Text>
-      <Table x={22} y={39}>
+      <Table x={22} y={41}>
         {record &&
         record.pregnancy_exam &&
         record.pregnancy_exam.map &&
@@ -240,7 +240,7 @@ export default ({
             <Col width={10}>
               {item.anemia && <CircleIcon />}
             </Col>
-            <Col width={11}>
+            <Col width={10}>
               {!item.anemia && <CircleIcon />}
             </Col>
             <Col width={5.5}>
