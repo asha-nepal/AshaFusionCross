@@ -20,8 +20,8 @@ import React from 'react';
 
 export const createText = (fontSize) => ({
   children,
-  x,
-  y,
+  x = 0,
+  y = 0,
   xScale = 1.0,
 }: {
   children: React$Element<any>,
@@ -59,6 +59,7 @@ export const Table = ({
       top: `${y}mm`,
       fontSize: `${fontSize}mm`,
       whiteSpace: 'pre',
+      tableLayout: 'fixed',
     }}
   >
     <tbody>
@@ -92,6 +93,7 @@ export const Col = ({
     style={{
       width: `${width}mm`,
       textAlign: 'center',
+      position: 'relative',
     }}
   >{children}</td>
 );
@@ -99,9 +101,11 @@ export const Col = ({
 export const ImageTemplate = ({
   children,
   src,
+  pageBreak = false,
 }: {
   children: React$Element<any>,
   src: string,
+  pageBreak: boolean,
 }) => (
   <div
     style={{
@@ -109,6 +113,7 @@ export const ImageTemplate = ({
       margin: 0,
       width: '251mm',
       height: '172mm',
+      pageBreakAfter: pageBreak ? 'always' : undefined,
     }}
   >
     <img
