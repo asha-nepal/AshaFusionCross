@@ -551,9 +551,27 @@
                   "class": "textinput",
                   "type": "number",
                   "min": 0,
+                  "suffix": "g/dl",
                   "style": {
                     "width": 80
-                  }
+                  },
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 12 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 12, 18 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 18, null]
+                    }
+                  ]
                 },
                 {
                   "label": "Albumin",
@@ -561,9 +579,27 @@
                   "class": "textinput",
                   "type": "number",
                   "min": 0,
+                  "suffix": "gm%",
                   "style": {
                     "width": 80
-                  }
+                  },
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 3.5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 3.5, 5.5 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 5.5, null]
+                    }
+                  ]
                 },
                 {
                   "label": "Urine (Protein)",
@@ -591,6 +627,7 @@
                   "class": "textinput",
                   "type": "number",
                   "min": 0,
+                  "suffix": "mg/dL",
                   "style": {
                     "width": 80
                   }
