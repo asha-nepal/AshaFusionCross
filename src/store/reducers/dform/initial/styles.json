@@ -122,6 +122,7 @@
               "label": "Previous history of Pregnancy",
               "class": "subformlist",
               "ditto": true,
+              "autoAdd": false,
               "fields": [
                 {
                   "field": "living",
@@ -184,7 +185,8 @@
                 {
                   "field": "pregnancy_complication_detail",
                   "class": "textarea",
-                  "show": "pregnancy_complication"
+                  "show": "pregnancy_complication",
+                  "shrink": true
                 },
                 {
                   "field": "type_of_delivery",
@@ -275,6 +277,7 @@
               "class": "subformlist",
               "field": "pregnancy_exam",
               "ditto": true,
+              "autoAdd": false,
               "fields": [
                 {
                   "label": "Months",
@@ -314,13 +317,98 @@
                   "class": "check"
                 },
                 {
-                  "label": "Blood pressure",
-                  "field": "blood_pressure",
+                  "label": "Blood Pressure (s)",
+                  "field": "bp.s",
                   "class": "textinput",
+                  "placeholder": "sBP",
                   "type": "number",
+                  "style": {
+                    "width": 60
+                  },
                   "suffix": "mmHg",
                   "min": 1,
-                  "precision": 0
+                  "precision": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [
+                        null,
+                        100
+                      ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [
+                        100,
+                        140
+                      ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [
+                        140,
+                        180
+                      ]
+                    },
+                    {
+                      "type": "danger",
+                      "label": "Alert",
+                      "range": [
+                        180,
+                        null
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "Blood Pressure (d)",
+                  "field": "bp.d",
+                  "class": "textinput",
+                  "placeholder": "dBP",
+                  "type": "number",
+                  "style": {
+                    "width": 60
+                  },
+                  "suffix": "mmHg",
+                  "min": 1,
+                  "precision": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [
+                        null,
+                        60
+                      ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [
+                        60,
+                        90
+                      ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [
+                        90,
+                        110
+                      ]
+                    },
+                    {
+                      "type": "danger",
+                      "label": "Alert",
+                      "range": [
+                        110,
+                        null
+                      ]
+                    }
+                  ]
                 },
                 {
                   "label": "Pregnancy in weeks",
@@ -352,7 +440,8 @@
                 {
                   "label": "Any problem",
                   "field": "any_problem",
-                  "class": "textarea"
+                  "class": "textarea",
+                  "shrink": true
                 },
                 {
                   "label": "Next Consultation Date",
@@ -446,6 +535,7 @@
               "class": "subformlist",
               "field": "lab_exam",
               "ditto": true,
+              "autoAdd": false,
               "fields": [
                 {
                   "label": "Date",
@@ -461,9 +551,27 @@
                   "class": "textinput",
                   "type": "number",
                   "min": 0,
+                  "suffix": "g/dl",
                   "style": {
                     "width": 80
-                  }
+                  },
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 12 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 12, 18 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 18, null]
+                    }
+                  ]
                 },
                 {
                   "label": "Albumin",
@@ -471,9 +579,27 @@
                   "class": "textinput",
                   "type": "number",
                   "min": 0,
+                  "suffix": "gm%",
                   "style": {
                     "width": 80
-                  }
+                  },
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [ null, 3.5 ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [ 3.5, 5.5 ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [ 5.5, null]
+                    }
+                  ]
                 },
                 {
                   "label": "Urine (Protein)",
@@ -501,6 +627,7 @@
                   "class": "textinput",
                   "type": "number",
                   "min": 0,
+                  "suffix": "mg/dL",
                   "style": {
                     "width": 80
                   }
@@ -538,7 +665,8 @@
                 {
                   "label": "Other",
                   "field": "other",
-                  "class": "textarea"
+                  "class": "textarea",
+                  "shrink": true
                 }
               ]
             }
