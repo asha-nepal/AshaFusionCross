@@ -52,12 +52,14 @@ export const BlockBody = ({
 export const Block = ({
   label,
   children,
+  alerts,
   widthaligned = false,
   border = false,
   layout = null,
   fieldEditProps,
 }: {
   label?: string,
+  alerts?: Array<Object>,
   children: React$Element<any>,
   widthaligned: boolean,
   border: boolean,

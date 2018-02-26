@@ -27,7 +27,7 @@ import { AttachmentInput } from './AttachmentInput';
 import { AttachmentViewer } from './AttachmentViewer';
 import { Checkbox, CheckboxComponent } from './Checkbox';
 import { CheckGroup } from './CheckGroup';
-import { AutoCalc } from './AutoCalc';
+import { AutoCalc, AutoCalcComponent } from './AutoCalc';
 import { GuideTools } from './GuideTools';
 import { Diagnoses } from './Diagnoses';
 import { MultiInput } from './MultiInput';
@@ -68,7 +68,7 @@ export {
   Accordion,
   Checkbox, CheckboxComponent,
   CheckGroup,
-  AutoCalc,
+  AutoCalc, AutoCalcComponent,
   GuideTools,
   Diagnoses,
   MultiInput,

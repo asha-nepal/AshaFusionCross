@@ -20,20 +20,137 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _get from 'lodash.get';
 import functions from './functions';
+import classNames from 'classnames';
+
+const alertFaIconClasses = {
+  danger: 'warning',
+  warning: 'warning',
+  success: 'check',
+};
 
 export const AutoCalcComponent = ({
   value,
   style,
   precision,
+  alerts,
+  // type = 'text',
+  type, 
 }: {
-  value: string,
+  value?: string,
   style: ?Object,
   precision: ?number,
-}) => (
+  type?: string,
+  alerts?: Array<Object>,
+}) => {
+
+  let alert = null;
+  const overrideStyle= {};
+
+    // if (alerts) {
+  if (type === 'number' && alerts) {
+    const numValue = parseFloat(value);
+
+    alert = alerts.find(al =>
+        ((al.range[0] == null || numValue >= al.range[0])
+          && (al.range[1] == null || al.range[1] > numValue ))
+      );
+
+    if (style && style.width) {
+      overrideStyle.width=style.width + 32;
+    }
+
+  }
+
+  const bunchofCode = (
   <span className="form-static" style={style}>
     {(precision && typeof value === 'number') ? value.toFixed(precision) : value}
+
+    <div className={classNames('control',
+    {
+      'is-expanded': !style || !style.width,
+      'has-icons-left': alert,
+    }
+    )}
+
+    data-balloon={alert && alert.label}
+    data-balloon-pos="up" >
+
+    {alert 
+      // (
+      //   <span className={classNames('icon is-small is-left',
+      //   {
+      //     [`has-text-${alert.type}`]: true}
+      //   )}>
+      //   <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+      //   </span>
+      //   )
+      ?
+      <span className={classNames(
+        'icon is-small is-left',
+        {
+          [`has-text-${alert.type}`]: true}
+
+        )}>
+      <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+      </span>
+      :
+      <span />
+    }
+
+    </div>
   </span>
-);
+  );
+
+
+
+  return (
+    bunchofCode
+    );
+
+  };
+
+
+  // let alert = null;
+  // if (type === 'number' && alerts) {
+  //   const numValue = parseFloat(value);
+
+  //   alert = alerts.find(al =>
+  //     ((al.range[0] == null || numValue >= al.range[0])
+  //       && (al.range[1] == null || al.range[1] > numValue))
+  //     );
+
+
+  // const innerControl = (
+
+
+  //   <div classname={classNames('control',
+  //     {
+  //       'has-icons-left': alert,
+  //       'is-expanded': !style || !style.width,
+  //     }
+  //     )}
+  //     data-balloon={alert && alert.label}
+  //     data-balloon-pos="up"
+  //   >
+  //   {alert
+  //         ?
+  //         <span
+  //           className={classNames(
+  //             'icon is-small is-left',
+  //             { [`has-text-${alert.type}`]: true }
+  //           )}
+  //         >
+  //           <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+  //         </span>
+  //         :
+  //         <span />
+  //       }
+
+  //   </div>
+ 
+  // );
+// };
+
 
 export function getValue(targetModel: Object, argKeys: Array<string>, calc: Function) {
   if (!targetModel) return null;
@@ -44,19 +161,20 @@ export function getValue(targetModel: Object, argKeys: Array<string>, calc: Func
   if (args.some(arg => typeof arg === 'undefined')) return null;
 
   return calc.apply(null, args);
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
   const targetModel = _get(state, ownProps.rootModel);
   const calc = ownProps.calc || functions[ownProps.func];
   const value = getValue(targetModel, ownProps.inputs, calc);
 
-  return {
-    value,
+  return { value, };
   };
-};
+
 const mapDispatchToProps = null;
 
 export const AutoCalc = connect(
   mapStateToProps, mapDispatchToProps
 )(AutoCalcComponent);
+
+
