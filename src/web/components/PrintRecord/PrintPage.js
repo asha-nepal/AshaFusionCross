@@ -249,7 +249,11 @@ export default ({
             <Col width={5.5}>
               {_get(item, 'edema.face') && <CircleIcon />}
             </Col>
-            <Col width={10}>{item.blood_pressure}</Col>
+            <Col width={10}>
+              <Text xScale={0.7}>
+                {item.bp && `${item.bp.s} / ${item.bp.d}`}
+              </Text>
+            </Col>
             <Col width={10}>{item.pregnancy_in_weeks}</Col>
             <Col width={15}>
               {item.size_of_uterus && convert(item.size_of_uterus, 'cm')}
