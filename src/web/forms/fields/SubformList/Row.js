@@ -18,7 +18,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import _get from 'lodash.get';
-import _set from 'lodash.set';
 import type { FormFieldDefinition } from '.';
 import { checkVisibility } from '../../utils';
 
@@ -49,7 +48,7 @@ export default ({
 }: {
   value: Object | string,
   fields: Array<FormFieldDefinition>,
-  onChange?: (newValue: Object) => void,
+  onChange?: (path: ?string, newValue: Object) => void,
   onRemoveItemRequested?: () => void,
   readonly?: boolean,
 }) => {
@@ -92,10 +91,7 @@ export default ({
               onChange: (v => {
                 if (!onChange) { return; }
 
-                const updated = Object.assign({}, _value);
-                _set(updated, field.field, v);
-
-                onChange(updated);
+                onChange(field.field, v);
               }),
             });
 

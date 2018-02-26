@@ -19,6 +19,7 @@
 import React from 'react';
 import _get from 'lodash.get';
 
+import { convert } from '../../forms/fields/TextUnitInput';
 
 import {
   ImageTemplate,
@@ -28,12 +29,19 @@ import {
   Col,
 } from './absolute_positioning';
 import ANCimg1 from '../../../../assets/img/anc_1.jpg';
+import ANCimg2 from '../../../../assets/img/anc_2.jpg';
 
 const Text = createText(3.5);
 
 const CheckIcon = () => (
   <span className="icon" style={{ height: '5mm' }}>
     <i className="fa fa-check" />
+  </span>
+);
+
+const CircleIcon = () => (
+  <span className="icon" style={{ height: '5mm' }}>
+    <i className="fa fa-circle-o" />
   </span>
 );
 
@@ -59,9 +67,7 @@ export default ({
   record: RecordObject,
 }) => (
   <section className="section is-print">
-    <ImageTemplate
-      src={ANCimg1}
-    >
+    <ImageTemplate src={ANCimg1} pageBreak>
       <Text x={142} y={70.5}>{getStr(patient, 'name')}</Text>
       <Text x={200} y={70.5}>{getStr(patient, 'age')}</Text>
       <Text x={229} y={70.5}>{getStr(patient, 'ht')}</Text>
@@ -168,6 +174,108 @@ export default ({
       <Text x={203} y={168.5}>
         {_get(record, 'ambulance_contact_number')}
       </Text>
+
+      <Table x={13} y={114}>
+        {record &&
+        record.lab_exam &&
+        record.lab_exam.map &&
+        record.lab_exam.slice(0, 4).map((item, i) =>
+          <Row key={i} height={7.5}>
+            <Col width={18}>
+              {item.date}
+            </Col>
+            <Col width={6}>
+              {item.hb}
+            </Col>
+            <Col width={12}>
+              {item.albumin}
+            </Col>
+            <Col width={9}>
+              {_get(item, 'urine.protein')}
+            </Col>
+            <Col width={9}>
+              {_get(item, 'urine.sugar')}
+            </Col>
+            <Col width={10}>
+              {item.blood_sugar}
+            </Col>
+            <Col width={10}>
+              {item.hbsag}
+            </Col>
+            <Col width={10}>
+              {item.vdrl}
+            </Col>
+            <Col width={12}>
+              {item.retro_virus}
+            </Col>
+            <Col width={12}>
+              <span
+                style={{
+                  display: 'block',
+                  transform: 'scale(0.7, 1.0)',
+                  transformOrigin: 'top left',
+                }}
+              >
+                {item.other}
+              </span>
+            </Col>
+          </Row>
+        )}
+      </Table>
+    </ImageTemplate>
+    <ImageTemplate src={ANCimg2} pageBreak>
+      <Text x={75} y={14}>{record.last_menstrual_date}</Text>
+      <Text x={191} y={14}>{record.estimated_date_of_delivery}</Text>
+      <Table x={22} y={41}>
+        {record &&
+        record.pregnancy_exam &&
+        record.pregnancy_exam.map &&
+        record.pregnancy_exam.slice(0, 7).map((item, i) =>
+          <Row key={i} height={10}>
+            <Col width={10}>{item.months}</Col>
+            <Col width={19}>{item.date}</Col>
+            <Col width={11}>
+              {item.weight && convert(item.weight, 'kg')}
+            </Col>
+            <Col width={10}>
+              {item.anemia && <CircleIcon />}
+            </Col>
+            <Col width={10}>
+              {!item.anemia && <CircleIcon />}
+            </Col>
+            <Col width={5.5}>
+              {_get(item, 'edema.hand') && <CircleIcon />}
+            </Col>
+            <Col width={5.5}>
+              {_get(item, 'edema.face') && <CircleIcon />}
+            </Col>
+            <Col width={10}>{item.blood_pressure}</Col>
+            <Col width={10}>{item.pregnancy_in_weeks}</Col>
+            <Col width={15}>
+              {item.size_of_uterus && convert(item.size_of_uterus, 'cm')}
+            </Col>
+            <Col width={12}>
+              {item.foetus && item.foetus.found && <CheckIcon />}
+            </Col>
+            <Col width={12}>
+              {item.foetus && item.foetus.child_heart_rate}
+            </Col>
+            <Col width={10}>
+              <Text xScale={0.5}>{item.any_problem}</Text>
+            </Col>
+            <Col width={15}>{item.next_consultation_date}</Col>
+            <Col width={10}>{item.number_of_iron_tablets}</Col>
+            <Col width={10}>{item.alben}</Col>
+            <Col width={10}>{item.td_vaccine && <CheckIcon />}</Col>
+            <Col width={18}>
+              <Text xScale={0.5}>{item.health_worker_name}</Text>
+            </Col>
+            <Col width={10}>
+              <Text xScale={0.5}>{item.hospital_name}</Text>
+            </Col>
+          </Row>
+        )}
+      </Table>
     </ImageTemplate>
   </section>
 );
