@@ -317,13 +317,98 @@
                   "class": "check"
                 },
                 {
-                  "label": "Blood pressure",
-                  "field": "blood_pressure",
+                  "label": "Blood Pressure (s)",
+                  "field": "bp.s",
                   "class": "textinput",
+                  "placeholder": "sBP",
                   "type": "number",
+                  "style": {
+                    "width": 60
+                  },
                   "suffix": "mmHg",
                   "min": 1,
-                  "precision": 0
+                  "precision": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [
+                        null,
+                        100
+                      ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [
+                        100,
+                        140
+                      ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [
+                        140,
+                        180
+                      ]
+                    },
+                    {
+                      "type": "danger",
+                      "label": "Alert",
+                      "range": [
+                        180,
+                        null
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "Blood Pressure (d)",
+                  "field": "bp.d",
+                  "class": "textinput",
+                  "placeholder": "dBP",
+                  "type": "number",
+                  "style": {
+                    "width": 60
+                  },
+                  "suffix": "mmHg",
+                  "min": 1,
+                  "precision": 0,
+                  "alerts": [
+                    {
+                      "type": "warning",
+                      "label": "Low",
+                      "range": [
+                        null,
+                        60
+                      ]
+                    },
+                    {
+                      "type": "success",
+                      "label": "Normal",
+                      "range": [
+                        60,
+                        90
+                      ]
+                    },
+                    {
+                      "type": "warning",
+                      "label": "High",
+                      "range": [
+                        90,
+                        110
+                      ]
+                    },
+                    {
+                      "type": "danger",
+                      "label": "Alert",
+                      "range": [
+                        110,
+                        null
+                      ]
+                    }
+                  ]
                 },
                 {
                   "label": "Pregnancy in weeks",
