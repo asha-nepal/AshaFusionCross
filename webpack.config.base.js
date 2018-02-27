@@ -121,7 +121,7 @@ module.exports = {
 };
 
 if (isProd) {
-  module.exports.devtool = '#source-map';
+  module.exports.devtool = false;
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -135,7 +135,7 @@ if (isProd) {
     new LodashModuleReplacementPlugin(),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|ja|ne/),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
+      sourceMap: false,
       compress: {
         warnings: false,
       },
