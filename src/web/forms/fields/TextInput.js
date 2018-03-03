@@ -150,7 +150,7 @@ export const TextInputComponent = ({
           value={value || ''}
           min={min}
           max={max}
-          step={typeof precision === 'number' && Math.pow(10, -precision)}
+          step={typeof precision === 'number' ? Math.pow(10, -precision) : undefined}
           onChange={e => onChange(e.target.value)}
           required={required}
           {...additionalProps}

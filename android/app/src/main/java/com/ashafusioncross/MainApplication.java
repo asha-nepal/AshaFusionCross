@@ -31,6 +31,11 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactMaterialKitPackage()
       );
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
   };
 
   @Override

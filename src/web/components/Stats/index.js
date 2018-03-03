@@ -106,6 +106,7 @@ export default({
           </div>
           <div className="level-right">
             <DatePicker
+              id="stats-filter-date"
               date={date}
               onDatesChange={setDate}
             />

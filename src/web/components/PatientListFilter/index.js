@@ -59,6 +59,7 @@ export default ({
     </div>
     <div className="column is-narrow is-low">
       <DatePicker
+        id="patient-list-filter-date"
         date={filterDate}
         onDatesChange={setFilterDate}
       />
