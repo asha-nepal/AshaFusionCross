@@ -163,8 +163,6 @@ export default ({
                       <label className="label">Temperature</label>
                       <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
                     </div>
-                  </div>
-                  <div className="field is-grouped">
                     <div className="control">
                       <label className="label">SpO2</label>
                       <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
