@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { fork, call, put, take, select, cancel, race } from 'redux-saga/effects';
 
 import {
@@ -11,27 +27,11 @@ import {
   alertError,
   alertInfo,
   setIsDBPublic,
-} from '../actions';
-import { btoa as _btoa } from '../utils';
+} from '../../actions';
+import { btoa as _btoa } from '../../utils';
 
-import { watchFetchPatient } from './fetch-patient';
-import { watchFetchPouchDocs } from './fetch-pouch-docs';
-import { watchPutActivePatient } from './put-active-patient';
-import { watchPutActiveRecord } from './put-active-record';
-import { watchRemoveActivePatient } from './remove-active-patient';
-import { watchInitActivePatient } from './init-active-patient';
-import { watchAddNewActiveRecord } from './add-new-active-record';
-import { watchOnPouchChanges } from './db';
-
-const authedSagas = [
-  watchFetchPatient,
-  watchFetchPouchDocs,
-  watchPutActivePatient,
-  watchPutActiveRecord,
-  watchRemoveActivePatient,
-  watchInitActivePatient,
-  watchAddNewActiveRecord,
-];
+import authedSagas from './authed-sagas';
+import adminSaga from '../admin';
 
 let authedTask = null;
 
@@ -46,12 +46,24 @@ export function checkAccessibility(db: PouchInstance) {
 
 export function* afterLoggedIn(db: PouchInstance) {
   for (let i = 0; i < authedSagas.length; ++i) {
-    yield fork(authedSagas[i]);
+    yield fork(authedSagas[i], db);
   }
-  yield fork(watchOnPouchChanges, db);
 
   const session = yield call([db, db.getSession]);
-  yield put(loginSuccess(session.userCtx.name, session.userCtx.roles));
+  const { name, roles } = session.userCtx;
+
+  let meta = null;
+  if (name) {
+    const user = yield call([db, db.getUser], name);
+    meta = user.asha || null;
+  }
+
+  const isAdmin = roles.includes('_admin');
+  if (isAdmin) {
+    yield fork(adminSaga);
+  }
+
+  yield put(loginSuccess(name, roles, meta));
 }
 
 export function* logout(db: PouchInstance) {

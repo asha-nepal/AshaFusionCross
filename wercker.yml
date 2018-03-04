@@ -5,6 +5,8 @@ command-timeout: 60
 build:
   steps:
     - npm-install
+    - install-packages:
+      packages: libelf-dev
     - script:
       name: Install dev packages (work around)
       code: npm install babel-preset-es2015-minimal babel-preset-stage-0
@@ -81,7 +83,7 @@ web-build-and-upload:
       key-id: $AWS_ACCESS_KEY_ID
       key-secret: $AWS_SECRET_ACCESS_KEY
       file: ${ZIP_ARCHIVE_NAME}
-      url: s3://asha-fusion-archive/webapp/${ZIP_ARCHIVE_NAME}
+      url: s3://${S3_BUCKET_DEPLOY_TO}/${S3_PREFIX}/${ZIP_ARCHIVE_NAME}
 
 electron-build-and-upload:
   box: node:6.10
@@ -117,7 +119,7 @@ electron-build-and-upload:
       key-id: $AWS_ACCESS_KEY_ID
       key-secret: $AWS_SECRET_ACCESS_KEY
       file: ./${DESTINATION_DIR_NAME}
-      url: s3://asha-fusion-archive/desktop/
+      url: s3://${S3_BUCKET_DEPLOY_TO}/${S3_PREFIX}/
 
 deploy-debug:
   steps:

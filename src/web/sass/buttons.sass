@@ -1,0 +1,14 @@
+.buttons
+  &.is-equiv
+    *
+      flex-grow: 1
+
+  &.is-width-restricted
+    +from($tablet)
+      max-width: $tablet - (2 * $gap)
+    +from($desktop)
+      max-width: $desktop - (2 * $gap)
+    +from($widescreen)
+      max-width: $widescreen - (2 * $gap)
+    +from($fullhd)
+      max-width: $fullhd - (2 * $gap)

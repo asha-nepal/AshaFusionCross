@@ -73,6 +73,7 @@
     {
       "id": "reception",
       "label": "Reception",
+      "roles": ["reception"],
       "style": [
         {
           "class": "block",
@@ -103,7 +104,7 @@
               "precision": 1,
               "units": [
                 "kg",
-                "lbm"
+                "lb"
               ]
             },
             {
@@ -365,23 +366,17 @@
         },
         {
           "class": "block",
-          "wrap": false,
+          "widthaligned": true,
           "children": [
             {
               "field": "past_medical_history",
               "label": "Past medical history",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "class": "textarea"
             },
             {
               "field": "current_medicine",
               "label": "Current medicines",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "class": "textarea"
             }
           ]
         },
@@ -446,6 +441,7 @@
     {
       "id": "physical",
       "label": "Physician",
+      "roles": ["physician"],
       "style": [
         {
           "class": "guide"
@@ -477,7 +473,7 @@
               },
               "units": [
                 "kg",
-                "lbm"
+                "lb"
               ]
             },
             {
@@ -739,23 +735,17 @@
         },
         {
           "class": "block",
-          "wrap": false,
+          "widthaligned": true,
           "children": [
             {
               "field": "past_medical_history",
               "label": "Past medical history",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "class": "textarea"
             },
             {
               "field": "current_medicine",
               "label": "Current medicines",
-              "class": "textarea",
-              "style": {
-                "width": "50%"
-              }
+              "class": "textarea"
             }
           ]
         },
@@ -982,6 +972,7 @@
     {
       "id": "mental",
       "label": "Mental",
+      "roles": ["psychiatrist"],
       "style": [
         {
           "class": "accordion",
@@ -1017,7 +1008,7 @@
                 },
                 {
                   "id": "others",
-                  "label": "Others"
+                  "label": "Other"
                 }
               ]
             }
@@ -1045,7 +1036,7 @@
                 },
                 {
                   "id": "others",
-                  "label": "Others"
+                  "label": "Other"
                 }
               ]
             }
@@ -1053,12 +1044,12 @@
         },
         {
           "class": "accordion",
-          "label": "Chief complient",
+          "label": "Chief complaint",
           "children": [
             {
               "field": "mental.complient",
               "class": "textarea",
-              "placeholder": "Ex. “I cannot sleep well and cannot concentrate on daily tasks.”"
+              "placeholder": "Ex. \"I cannot sleep well and cannot concentrate on daily tasks.\""
             }
           ]
         },
@@ -1069,7 +1060,7 @@
             {
               "field": "mental.illness",
               "class": "textarea",
-              "placeholder": "Ex. He is a 23-year-old male for whom psychiatric evaluation is requested due to depressive mood in the past few weeks. He denies any suicidal thoughts. He admits to morning sickness symptom of anorexia, and difficulty falling + staying asleep. He also admits that he lost his house dog on Monday.\nOtherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) headache, (-) substance abuse"
+              "placeholder": "Ex. \"He is a 23-year-old male for whom psychiatric evaluation is requested due to depressive mood in the past few weeks. He denies any suicidal thoughts. He admits to morning sickness symptom of anorexia, and difficulty falling + staying asleep. He also admits that he lost his house dog on Monday.\nOtherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) headache, (-) substance abuse\""
             }
           ]
         },
@@ -1080,7 +1071,7 @@
             {
               "field": "mental.family",
               "class": "textarea",
-              "placeholder": "Ex. His immediate family consists of his father (age 51), his mother (age 49), one older brother (age 26), and one younger sister (age 19). His father suffers from alcohol dependence."
+              "placeholder": "Ex. \"His immediate family consists of his father (age 51), his mother (age 49), one older brother (age 26), and one younger sister (age 19). His father suffers from alcohol dependence.\""
             }
           ]
         },
@@ -1090,7 +1081,7 @@
           "children": [
             {
               "field": "mental.is_married",
-              "label": "Married status",
+              "label": "Marital status",
               "class": "radio",
               "options": [
                 {
@@ -1099,7 +1090,7 @@
                 },
                 {
                   "id": false,
-                  "label": "Unmarried"
+                  "label": "Not married"
                 }
               ]
             },
@@ -1117,7 +1108,7 @@
         },
         {
           "class": "accordion",
-          "label": "Personal history history",
+          "label": "Personal history",
           "children": [
             {
               "field": "mental.birthplace",
@@ -1133,19 +1124,19 @@
               "field": "mental.education",
               "label": "Education",
               "class": "textinput",
-              "placeholder": "Ex. Attended high school but no graduation"
+              "placeholder": "Ex. \"Attended high school but did not graduate.\""
             },
             {
               "field": "mental.work",
               "label": "Work experience",
               "class": "textinput",
-              "placeholder": "Ex. Farm helper (2 years), Unstable work history"
+              "placeholder": "Ex. \"Farm helper (2 years), Unstable work history\""
             },
             {
               "field": "mental.lifeevents",
               "label": "Significant life events",
               "class": "textinput",
-              "placeholder": "Ex. Attacked by a great earthquake when he was 23"
+              "placeholder": "Ex. \"Experienced major earthquake when he was 23\""
             },
             {
               "field": "mental.personality",
@@ -1154,7 +1145,7 @@
             },
             {
               "field": "mental.religion",
-              "label": "Religion/Belief",
+              "label": "Religion/Beliefs",
               "class": "textinput"
             }
           ]
@@ -1164,10 +1155,11 @@
     {
       "id": "ksix",
       "label": "K6",
+      "roles": ["reception", "psychiatrist"],
       "style": [
         {
           "field": "ksix.nervious",
-          "label": "क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervious?)",
+          "label": "क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervous?)",
           "class": "radio",
           "options": [
             {
@@ -1275,7 +1267,7 @@
         },
         {
           "field": "ksix.effort",
-          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything was an effort?)",
+          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything is an effort?)",
           "class": "radio",
           "options": [
             {

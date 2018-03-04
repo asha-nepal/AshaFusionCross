@@ -1,5 +1,13 @@
 [
   {
+    "key": "_patient.age",
+    "type": "value_unit",
+    "unit": "year"
+  },
+  {
+    "key": "_patient.sex"
+  },
+  {
     "key": "height",
     "type": "value_unit",
     "unit": "cm"

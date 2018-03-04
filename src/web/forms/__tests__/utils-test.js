@@ -1,3 +1,19 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* eslint-env jest */
 
 jest.unmock('lodash.get');
@@ -37,6 +53,16 @@ describe('checkVisibility', () => {
     expect(checkVisibility(state, 'root', 'foo:bbb')).toBe(false);
   });
 
+  it('handles an empty array as falthy', () => {
+    const state = {
+      root: {
+        foo: [],
+      },
+    };
+
+    expect(checkVisibility(state, 'root', 'foo')).toBe(false);
+  });
+
   it('handles empty rootPath', () => {
     const state = {
       foo: true,
@@ -58,5 +84,32 @@ describe('checkVisibility', () => {
     };
 
     expect(checkVisibility(state, 'root', 'foo|bar')).toBe(true);
+  });
+
+  it('handles negative', () => {
+    const state = {
+      root: {
+        foo: {
+          bar: true,
+        },
+        hoge: {
+          fuga: false,
+        },
+      },
+    };
+
+    expect(checkVisibility(state, 'root', '!foo.bar')).toBe(false);
+    expect(checkVisibility(state, 'root', '!hoge.fuga')).toBe(true);
+  });
+
+  it('handles negative on Array referent', () => {
+    const state = {
+      root: {
+        foo: ['aaa', 'zzz'],
+      },
+    };
+
+    expect(checkVisibility(state, 'root', '!foo:aaa')).toBe(false);
+    expect(checkVisibility(state, 'root', '!foo:bbb')).toBe(true);
   });
 });
