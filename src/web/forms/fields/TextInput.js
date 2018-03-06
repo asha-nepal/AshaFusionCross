@@ -1,12 +1,29 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 import AutosuggestInput from './AutosuggestInput';
 
-const alertIcons = {
-  danger: <i className="fa fa-warning is-danger" />,
-  warning: <i className="fa fa-warning is-warning" />,
-  success: <i className="fa fa-check is-success" />,
+const alertFaIconClasses = {
+  danger: 'warning',
+  warning: 'warning',
+  success: 'check',
 };
 
 const ReadOnly = ({
@@ -20,7 +37,7 @@ const ReadOnly = ({
   prefix: ?string,
   suffix: ?string,
 }) => (
-  <div className="control">
+  <div className="field">
     {label && <label className="label">{label}</label>}
     {value &&
       <span className="form-static">{[prefix, value, suffix].join(' ')}</span>
@@ -29,7 +46,6 @@ const ReadOnly = ({
 );
 
 export const TextInputComponent = ({
-  label,
   value,
   onChange,
   style,
@@ -42,40 +58,35 @@ export const TextInputComponent = ({
   precision,
   alerts,
   warning,
-  size,
+  size = '',
   required = false,
   readonly = false,
-  expanded = false,
-  valueSetters,
   suggestions,
+  valueSetters,
   fieldOptions = {},
 }: {
-  label: ?string,
   value: ?string,
   onChange: (newValue: string) => void,
-  style: ?Object,
-  type: string,
+  style?: Object,
+  type?: string,
   prefix?: string,
   suffix?: string,
-  placeholder: ?string,
-  min: ?number,
-  max: ?number,
-  precision: ?number,
-  alerts: ?Array<Object>,
+  placeholder?: string,
+  min?: number,
+  max?: number,
+  precision?: number,
+  alerts?: Array<Object>,
   warning?: string,
-  size?: string,
-  required: boolean,
-  readonly: boolean,
-  expanded: boolean,
-  valueSetters?: Array<{ label: string, optionKey?: string, value?: string | number}>,
+  size: string,
+  required?: boolean,
+  readonly?: boolean,
   suggestions?: Array<string>,
+  valueSetters?: Array<{ label: string, optionKey?: string, value?: string | number}>,
   fieldOptions?: Object,
 }) => {
   if (readonly) {
-    return <ReadOnly label={label} value={value} prefix={prefix} suffix={suffix} />;
+    return <ReadOnly value={value} prefix={prefix} suffix={suffix} />;
   }
-
-  const hasAddons = prefix || suffix;
 
   let alert = null;
   const overrideStyle = {};
@@ -91,73 +102,126 @@ export const TextInputComponent = ({
     }
   }
 
-  const warningClassName = warning ? ' is-warning' : '';
-  const sizeClassName = size ? ` is-${size}` : '';
-
+  const hasAddons = prefix || suffix;
   const useSuggestions = suggestions && suggestions.length > 0;
   const InputComponent = useSuggestions ? AutosuggestInput : 'input';
   const additionalProps = useSuggestions ? { candidates: suggestions } : null;
+  const hasValueSetters = valueSetters && valueSetters.map;
+
+  const innerControl = (
+    <div className={classNames('field', { 'has-addons': hasAddons })}>
+      {prefix &&
+        <div className="control">
+          <span
+            className={classNames(
+              'button is-static',
+              { [`is-${size}`]: size }
+            )}
+          >
+            {prefix}
+          </span>
+        </div>
+      }
+      <div
+        className={classNames(
+          'control',
+          {
+            'is-expanded': !style || !style.width,
+            'has-icons-left': alert,
+          }
+        )}
+        data-balloon={alert && alert.label}
+        data-balloon-pos="up"
+      >
+        <InputComponent
+          type={type}
+          className={classNames(
+            'input',
+            {
+              'is-warning': warning,
+              [`is-${size}`]: size,
+            }
+          )}
+          style={{
+            ...style,
+            ...overrideStyle,
+          }}
+          placeholder={placeholder}
+          value={value || ''}
+          min={min}
+          max={max}
+          step={typeof precision === 'number' && Math.pow(10, -precision)}
+          onChange={e => onChange(e.target.value)}
+          required={required}
+          {...additionalProps}
+        />
+        {alert
+          ?
+          <span
+            className={classNames(
+              'icon is-small is-left',
+              { [`has-text-${alert.type}`]: true }
+            )}
+          >
+            <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+          </span>
+          :
+          <span />
+        }
+      </div>
+      {suffix &&
+        <p className="control">
+          <span
+            className={classNames(
+              'button is-static',
+              { [`is-${size}`]: size }
+            )}
+          >
+            {suffix}
+          </span>
+        </p>
+      }
+      {warning && <span className="help is-warning">{warning}</span>}
+    </div>
+  );
 
   return (
-    <div className={expanded ? 'control is-expanded' : 'control'}>
-      {label && <label className="label">{label}</label>}
-      <div className="control is-grouped">
-        <div className={hasAddons ? 'control has-addons' : 'control'}>
-          {prefix &&
-            <span className={`button is-disabled${sizeClassName}`}>
-              {prefix}
-            </span>
-          }
-          <span
-            className={alert && 'control has-icon'}
-            data-balloon={alert && alert.label}
-            data-balloon-pos="up"
-          >
-            <InputComponent
-              type={type}
-              className={`input${warningClassName}${sizeClassName}`}
-              style={{
-                ...style,
-                ...overrideStyle,
-              }}
-              placeholder={placeholder}
-              value={value || ''}
-              min={min}
-              max={max}
-              step={typeof precision === 'number' && Math.pow(10, -precision)}
-              onChange={e => onChange(e.target.value)}
-              required={required}
-              {...additionalProps}
-            />
-            {alert ? alertIcons[alert.type] : <span />}
-          </span>
-          {suffix &&
-            <span className={`button is-disabled${sizeClassName}`}>
-              {suffix}
-            </span>
-          }
-        </div>
-        {valueSetters && valueSetters.map && valueSetters.map((valueSetter, i) => {
+    hasValueSetters ? (
+      <div className={classNames('field', { 'is-grouped': hasValueSetters })}>
+        {innerControl}
+        {hasValueSetters && valueSetters.map((valueSetter, i) => {
           const setValue = valueSetter.value || fieldOptions[valueSetter.optionKey];
           if (setValue == null) { return null; }
 
           return (
-            <a
-              key={i}
-              className="button"
-              onClick={e => {
-                e.preventDefault();
-                onChange(String(setValue));
-              }}
-            >{valueSetter.label}</a>
+            <div key={i} className="control">
+              <a
+                className="button"
+                onClick={e => {
+                  e.preventDefault();
+                  onChange(String(setValue));
+                }}
+              >{valueSetter.label}</a>
+            </div>
           );
         })}
       </div>
-      <span className="help is-warning">{warning}</span>
-    </div>
+    ) : innerControl
   );
 };
 
+TextInputComponent.fieldProps = [
+  { name: 'type', type: 'string' },
+  { name: 'prefix', type: 'string' },
+  { name: 'suffix', type: 'string' },
+  { name: 'placeholder', type: 'string' },
+  { name: 'min', type: 'number' },
+  { name: 'max', type: 'number' },
+  { name: 'precision', type: 'number' },
+  { name: 'size', type: 'string' },
+  { name: 'required', type: 'boolean' },
+  { name: 'readonly', type: 'boolean' },
+];
 
 import connect from '../../../common/forms/fields/TextInput';
 

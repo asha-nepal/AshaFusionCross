@@ -1,3 +1,20 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2017 Yuguan Xing
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 import { actions as formActions } from 'react-redux-form';
 
@@ -21,6 +38,7 @@ export {
   SET_PATIENT_LIST_FILTER, setPatientListFilter,
   SET_PATIENT_LIST_SORT_FIELD, setPatientListSortField,
   SET_PATIENT_LIST_SORT_ORDER, setPatientListSortOrder,
+  SET_PATIENT_LIST_TIME_FILTER, setPatientListTimeFilter,
 } from './patient-select';
 
 export {
@@ -34,9 +52,14 @@ export {
 } from './pouch-docs';
 
 export {
-  DFORM_STYLE_INSERT, dformStyleInsert,
-  DFORM_STYLE_UPDATE, dformStyleUpdate,
-  DFORM_STYLE_DELETE, dformStyleDelete,
+  DFORM_STYLE_FIELD_INSERT, insertDformStyleField,
+  DFORM_STYLE_FIELD_UPDATE, updateDformStyleField,
+  DFORM_STYLE_FIELD_REMOVE, removeDformStyleField,
+  DFORM_STYLE_FIELD_MOVE, moveDformStyleField,
+  DFORM_STYLE_FORM_ADD, dformStyleFormAdd,
+  DFORM_STYLE_FORM_SET, setDformStyleForm,
+  DFORM_STYLES_FETCH, fetchDformStyles,
+  DFORM_STYLES_PUT, putDformStyles,
 } from './dform';
 
 export {

@@ -1,6 +1,23 @@
+/**
+ * Copyright 2017 Yuichiro Tsuchiya
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* @flow */
 
 import React from 'react';
+import classNames from 'classnames';
 
 export const ReadOnly = ({
   options,
@@ -20,44 +37,41 @@ export const ReadOnly = ({
 
 export const RadioGroupComponent = ({
   options,
-  label,
   value,
   readonly = false,
-  size,
+  size = '',
   onChange,
 }: {
   options: Array<{id: string, label: string}>,
-  label?: ?string,
   value: string,
   readonly?: boolean,
-  size?: string,
+  size: string,
   onChange?: (newValue: string) => void,
 }) => (
-  <div className="control">
-    {label && <label className="label">{label}</label>}
-    {readonly ? (
-      <ReadOnly options={options} value={value} />
-    ) : (
-      <div className="checkgroup is-equiv">
-        {options.map(option => {
-          const checkedClassName = option.id === value ? ' is-primary' : '';
-          const sizeClassName = size ? ` is-${size}` : '';
-          return (
-            <a
-              key={option.id}
-              className={`control button${checkedClassName}${sizeClassName}`}
-              onClick={e => {
-                e.preventDefault();
-                if (onChange) {
-                  onChange(option.id);
-                }
-              }}
-            >{option.label}</a>
-          );
-        })}
-      </div>
-    )}
-  </div>
+  readonly ? (
+    <ReadOnly options={options} value={value} />
+  ) : (
+    <div className="buttons is-equiv">
+      {options.map(option => (
+        <a
+          key={option.id}
+          className={classNames(
+            'button',
+            {
+              'is-primary': option.id === value,
+              [`is-${size}`]: size,
+            }
+          )}
+          onClick={e => {
+            e.preventDefault();
+            if (onChange) {
+              onChange(option.id);
+            }
+          }}
+        >{option.label}</a>
+      ))}
+    </div>
+  )
 );
 
 import connect from '../../../common/forms/fields/RadioGroup';
