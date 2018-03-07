@@ -154,11 +154,12 @@ const envKeys = [
 ];
 
 const envs = _.pick(process.env, envKeys);
+const envStrings = _.mapValues(envs, env => JSON.stringify(env));
 
 if (Object.keys(envs).length > 0) {
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
-      'process.env': envs,
+      'process.env': envStrings,
     }),
   ]);
 }
