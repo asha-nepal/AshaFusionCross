@@ -70,7 +70,7 @@ export default ({
       <section className="section">
         <div className="hero has-text-centered">
           <h1 className="title">Cervical Cancer Screening</h1>
-          <h2 className="subtitle">Community Health Service Center, Nagbahal</h2>
+          <h2 className="subtitle">Manmohan Community Hospital</h2>
           <h3 className="title is-6">{date && date.toDateString()}</h3>
         </div>
       </section>
