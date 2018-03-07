@@ -17,6 +17,7 @@
 /* @flow */
 import React from 'react';
 import classNames from 'classnames';
+import _get from 'lodash.get';
 import type { FormFieldDefinition } from '.';
 import { checkVisibility } from '../../utils';
 
@@ -27,7 +28,7 @@ import { SelectComponent } from '../Select';
 import fieldify from '../common/fieldify';
 
 // TODO: 共通化
-const fieldComponents = {
+export const fieldComponents = {
   textinput: fieldify(TextInputComponent),
   check: fieldify(CheckboxComponent),
   radio: fieldify(RadioGroupComponent),
@@ -43,7 +44,7 @@ export default ({
 }: {
   value: Object | string,
   fields: Array<FormFieldDefinition>,
-  onChange?: (newValue: Object) => void,
+  onChange?: (path: ?string, newValue: Object) => void,
   onRemoveItemRequested?: () => void,
   readonly?: boolean,
 }) => {
@@ -82,17 +83,11 @@ export default ({
               ...field,
               readonly,
               size: 'small',
-              value: _value[field.field],
+              value: _get(_value, field.field),
               onChange: (v => {
                 if (!onChange) { return; }
 
-                const updated = {};
-                updated[field.field] = v;
-
-                onChange({
-                  ..._value,
-                  ...updated,
-                });
+                onChange(field.field, v);
               }),
             });
 
