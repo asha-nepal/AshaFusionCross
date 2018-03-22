@@ -134,9 +134,75 @@ export default {
       label: 'Exam Staff',
       style: [
         {
+          field: 'height',
+          label: 'Height',
+          class: 'textunitinput',
+          type: 'number',
+          units: [
+            'ft',
+            'cm',
+            'in',
+          ],
+          style: {
+            width: 100,
+          },
+        },
+        {
           field: 'weight', label: 'Weight', class: 'textunitinput', type: 'number',
           style: { width: 100 },
           units: ['kg', 'lbm'],
+        },
+        {
+          field: 'pulse',
+          label: 'Pulse',
+          class: 'textinput',
+          type: 'number',
+          style: {
+            width: 60,
+          },
+          suffix: '/min',
+          alerts: [
+            {
+              type: 'danger',
+              label: 'Alert',
+              range: [
+                null,
+                35,
+              ],
+            },
+            {
+              type: 'warning',
+              label: 'Low',
+              range: [
+                35,
+                50,
+              ],
+            },
+            {
+              type: 'success',
+              label: 'Normal',
+              range: [
+                50,
+                100,
+              ],
+            },
+            {
+              type: 'warning',
+              label: 'High',
+              range: [
+                100,
+                150,
+              ],
+            },
+            {
+              type: 'danger',
+              label: 'Alert',
+              range: [
+                150,
+                null,
+              ],
+            },
+          ],
         },
         {
           class: 'block', label: 'Blood Pressure',

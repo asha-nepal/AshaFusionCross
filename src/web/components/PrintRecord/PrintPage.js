@@ -45,6 +45,9 @@ export default ({
   const timestamp = record.$created_at || record.$initialized_at;
   const date = timestamp && new Date(timestamp);
   const number = _get(patient, 'number');
+  const pulse = _get(record, 'pulse');
+  const height = convert(_get(record, 'height'), 'ft', 1);
+
   const weight = convert(_get(record, 'weight'), 'kg', 1);
   const abdomenIsAbnormal = _get(record, 'abdomen_is_abnormal');
   const abdomenDescription = abdomenIsAbnormal ? _get(record, 'abdomen_result_details') : '';
@@ -87,7 +90,13 @@ export default ({
         </p>
         <p className="is-left print-info-group">
           <span>
+            Height: <strong>{height ? `${height} ft` : '---'}</strong>
+          </span>
+          <span>
             Weight: <strong>{weight ? `${weight} kg` : '---'}</strong>
+          </span>
+          <span>
+            Pulse: <strong>{pulse ? `${pulse} /min` : '---'}</strong>
           </span>
           <span>Blood Pressure:
             <strong>{getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg</strong>
