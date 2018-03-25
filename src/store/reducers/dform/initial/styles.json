@@ -1319,51 +1319,52 @@
             }
           ]
         },
-        { "field": "dep",
+        { 
+          "field": "dep",
           "class": "block",
           "children": [
-          { 
-            "label": "Total:",
-            "class": "autocalc",
-            "style": {
+            { 
+              "label": "Total:",
+              "class": "autocalc",
+              "style": 
+            {
               "width": 50
-              },
-            "precision": 0,
-            "value": "string", 
-            "type": "number",
-            "func": "asha:sum",
-            "inputs": [
-                "ksix.nervious",
-                "ksix.hopeless",
-                "ksix.restless",
-                "ksix.depressed",
-                "ksix.effort",
-                "ksix.worthless"
-              ],
-              "alerts": [
-
-              { 
+            },
+          "precision": 0,
+          "value": "string", 
+          "type": "number",
+          "func": "asha:sum",
+          "inputs": [
+              "ksix.nervious",
+              "ksix.hopeless",
+              "ksix.restless",
+              "ksix.depressed",
+              "ksix.effort",
+              "ksix.worthless"
+                    ],
+          "alerts": [
+            { 
               "type": "success",
               "label": "Normal",
-              "range": [ 0, 5 ] },
-              {
-                "type": "warning",
-                "label": "possibility",
-                "range": [ 5, 12 ] },
-              {
-                "type": "danger",
-                "label": "serious risk",
-                "range": [ 12, 25] }
-
-              ]
-
-              ,
-
-              "children": [
-              { 
+              "range": [ 0, 5 ]
+            },
+            {
+              "type": "warning",
+              "label": "possibility",
+              "range": [ 5, 12 ] 
+            },
+            {
+              "type": "danger",
+              "label": "serious risk",
+              "range": [ 12, 25 ] 
+            }
+                    ],
+          "children": [
+            { 
               "class": "autocalc", 
-              "style": {
-              "width": 50
+              "style": 
+              {
+                "width": 50
               },
               "precision": 0, 
               "type": "number",
@@ -1376,33 +1377,29 @@
                 "ksix.depressed",
                 "ksix.effort",
                 "ksix.worthless"
-              ],
-              "alerts": 
-              [
-              { 
+                        ],
+              "alerts": [
+            { 
               "type": "success",
               "label": "Normal",
-              "range": [ 0, 4] },
-              {
-                "type": "warning",
-                "label": "possibility",
-                "range": [ 5, 12 ] },
-              {
-                "type": "danger",
-                "label": "serious risk",
-                "range": [ 12, 25] }
-              ]
-
-
-                }]
-            
-            
-          }
+              "range": [ 0, 4] 
+            },
+            {
+              "type": "warning",
+              "label": "possibility",
+              "range": [ 5, 12 ] 
+            },
+            {
+              "type": "danger",
+              "label": "serious risk",
+              "range": [ 12, 25 ] 
+            }
+                  ]
+                }
+              ]  
+            }
           ]
-       
-
-
-           }
+        }
       ]
     }
   ]
