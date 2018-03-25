@@ -26,10 +26,11 @@ export default {
       return null;
     }
   },
-  'asha:sum': (a, b, c, d, e, f) => {
+
+  'asha:sum': (...args) => {
     try {
-      const total = a + b + c + d + e + f;
-      return Math.trunc(total);
+      const total = math.sum(args);
+      return total;
     } catch (exc) {
       return null;
     }
