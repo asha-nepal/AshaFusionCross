@@ -33,14 +33,12 @@ export const AutoCalcComponent = ({
   style,
   precision,
   alerts,
-  width,
   // type = 'text',
   type, 
 }: {
   value?: string,
   style: ?Object,
   precision: ?number,
-  width?: number,
   type?: string,
   alerts?: Array<Object>,
 }) => {
