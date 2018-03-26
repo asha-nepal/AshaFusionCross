@@ -33,12 +33,14 @@ export const AutoCalcComponent = ({
   style,
   precision,
   alerts,
+  width,
   // type = 'text',
   type, 
 }: {
   value?: string,
   style: ?Object,
   precision: ?number,
+  width?: number,
   type?: string,
   alerts?: Array<Object>,
 }) => {
@@ -63,42 +65,42 @@ export const AutoCalcComponent = ({
 
   const bunchofCode = (
   <span className="form-static" style={style}>
+   <table>
+    <tr>
+    <td width="389">
+    <span>
     {(precision && typeof value === 'number') ? value.toFixed(precision) : value}
-
-    <div className={classNames('control',
-    {
-      'is-expanded': !style || !style.width,
-      'has-icons-left': alert,
-    }
+    </span>
+    </td>
+   
+    <td>
+    <div className={classNames('control'
     )}
 
-    data-balloon={alert && alert.label}
-    data-balloon-pos="up" >
-
+    data-balloon={alert && alert.label} 
+    data-balloon-pos="up" > 
+    
     {alert 
-      // (
-      //   <span className={classNames('icon is-small is-left',
-      //   {
-      //     [`has-text-${alert.type}`]: true}
-      //   )}>
-      //   <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
-      //   </span>
-      //   )
       ?
       <span className={classNames(
-        'icon is-small is-left',
+        'icon',
         {
           [`has-text-${alert.type}`]: true}
 
-        )}>
+        )}> 
+     
       <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
       </span>
       :
       <span />
-    }
-
+    } 
     </div>
-  </span>
+  </td>
+  </tr>
+  </table>
+
+    
+   </span>
   );
 
 

@@ -68,7 +68,7 @@ export {
   Accordion,
   Checkbox, CheckboxComponent,
   CheckGroup,
-  AutoCalc, AutoCalcComponent,
+  AutoCalc, //AutoCalcComponent,
   GuideTools,
   Diagnoses,
   MultiInput,
