@@ -781,6 +781,11 @@
           "class": "textarea"
         },
         {
+          "field": "past_surgical_history",
+          "label": "Past surgical history",
+          "class": "textarea"
+        },
+        {
           "field": "current_medicine",
           "label": "Current medicines",
           "class": "textarea"
@@ -1129,11 +1134,6 @@
         },
         {
           "field": "present_medical_history",
-          "class": "textarea"
-        },
-        {
-          "field": "past_surgical_history",
-          "label": "Past surgical history",
           "class": "textarea"
         },
         {
