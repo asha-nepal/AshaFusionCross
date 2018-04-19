@@ -709,19 +709,41 @@
               "suffix": "mg/dL",
               "min": 1,
               "precision": 0
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "children": [
+            {
+              "field": "drug_allergy",
+              "label": "Drug allergy",
+              "class": "check"
             },
             {
               "field": "allergy",
-              "label": "Allergy",
+              "label": "Other allergy",
               "class": "check"
             }
           ]
         },
         {
-          "field": "allergy_memo",
-          "label": "Allergy memo",
-          "class": "textarea",
-          "show": "allergy"
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "field": "drug_allergy_memo",
+              "label": "Drug allergy memo",
+              "class": "multiinput",
+              "show": "drug_allergy"
+            },
+            {
+              "field": "allergy_memo",
+              "label": "Other allergy memo",
+              "class": "textarea",
+              "show": "allergy"
+            }
+          ]
         },
         {
           "class": "block",
