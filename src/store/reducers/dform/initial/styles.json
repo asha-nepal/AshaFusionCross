@@ -1236,6 +1236,19 @@
               "suffix": "cigarettes / day",
               "type": "number",
               "min": 0
+            },
+            {
+              "label": "Frequency (year)",
+              "class": "autocalc",
+              "show": "social_history.smoking.history",
+              "style": {
+                "width": 50
+              },
+              "func": "asha:math:mul",
+              "inputs": [
+                "social_history.smoking.freq",
+                { "const": 365 }
+              ]
             }
           ]
         },
