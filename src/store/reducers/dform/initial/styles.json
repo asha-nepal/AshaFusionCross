@@ -1972,6 +1972,11 @@
                 {
                   "field": "pathology.haematology.hba1c",
                   "label": "HBA1C"
+                },
+                {
+                  "field": "pathology.haematology.other",
+                  "label": "Other (Haematology)",
+                  "class": "textarea"
                 }
               ]
             },
@@ -2556,6 +2561,11 @@
                       "range": [ 5.2, null]
                     }
                   ]
+                },
+                {
+                  "field": "pathology.biochemistry.other",
+                  "label": "Other (Biochemistry)",
+                  "class": "textarea"
                 }
               ]
             }
@@ -2669,6 +2679,11 @@
                       "label": "Strongyloides Stercoralis"
                     }
                   ]
+                },
+                {
+                  "field": "pathology.stool.other",
+                  "label": "Other (Stool)",
+                  "class": "textarea"
                 }
               ]
             },
@@ -2781,6 +2796,11 @@
                 {
                   "field": "pathology.pregnancy_test.text",
                   "label": "Pregnancy Test",
+                  "class": "textarea"
+                },
+                {
+                  "field": "pathology.urine.other",
+                  "label": "Other (Urine)",
                   "class": "textarea"
                 }
               ]
