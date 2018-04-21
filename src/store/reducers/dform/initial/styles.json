@@ -404,18 +404,6 @@
               "suffix": "/min",
               "min": 1,
               "precision": 0
-            },
-            {
-              "field": "bs",
-              "label": "Blood sugar",
-              "class": "textinput",
-              "type": "number",
-              "style": {
-                "width": 60
-              },
-              "suffix": "mg/dL",
-              "min": 1,
-              "precision": 0
             }
           ]
         },
@@ -695,18 +683,6 @@
                 "width": 60
               },
               "suffix": "/min",
-              "min": 1,
-              "precision": 0
-            },
-            {
-              "field": "bs",
-              "label": "Blood sugar",
-              "class": "textinput",
-              "type": "number",
-              "style": {
-                "width": 60
-              },
-              "suffix": "mg/dL",
               "min": 1,
               "precision": 0
             }
@@ -1575,6 +1551,15 @@
               "label": "Haematology",
               "layout": "horizontal",
               "children": [
+                {
+                  "field": "bs",
+                  "label": "Blood sugar",
+                  "class": "textinput",
+                  "type": "number",
+                  "suffix": "mg/dL",
+                  "min": 1,
+                  "precision": 0
+                },
                 {
                   "field": "pathology.haematology.hemoglobin",
                   "label": "Hemoglobin (Hb)",
