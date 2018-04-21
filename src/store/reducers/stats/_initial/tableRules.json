@@ -5,74 +5,13 @@
     "unit": "year"
   },
   {
-    "key": "_patient.sex"
+    "key": "_patient.ht"
   },
   {
-    "key": "height",
-    "type": "value_unit",
-    "unit": "cm"
+    "key": "_patient.district"
   },
   {
-    "key": "weight",
-    "type": "value_unit",
-    "unit": "kg"
-  },
-  {
-    "key": "bp.s"
-  },
-  {
-    "key": "bp.d"
-  },
-  {
-    "key": "pulse"
-  },
-  {
-    "key": "temperature",
-    "type": "value_unit",
-    "unit": "degC"
-  },
-  {
-    "key": "spo2"
-  },
-  {
-    "key": "rr"
-  },
-  {
-    "key": "bs"
-  },
-  {
-    "key": "allergy"
-  },
-  {
-    "key": "allergy_memo"
-  },
-  {
-    "key": "past_medical_history"
-  },
-  {
-    "key": "current_medicine"
-  },
-  {
-    "key": "present_medical_history"
-  },
-  {
-    "key": "signs_select"
-  },
-  {
-    "key": "signs"
-  },
-  {
-    "key": "symptoms"
-  },
-  {
-    "key": "diagnoses_icd10",
-    "entry": "diagnoses",
-    "pluck": "icd10"
-  },
-  {
-    "key": "diagnoses_text",
-    "entry": "diagnoses",
-    "pluck": "text"
+    "key": "_patient.blood_type"
   },
   {
     "key": "$updated_at",
