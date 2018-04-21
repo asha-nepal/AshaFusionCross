@@ -3141,6 +3141,27 @@
           ]
         }
       ]
+    },
+    {
+      "id": "diagnostic_procedure",
+      "label": "Diagnostic procedure",
+      "style": [
+        {
+          "field": "diagnostic_procedure.ultrasound",
+          "label": "Ultrasound",
+          "class": "textarea"
+        },
+        {
+          "field": "diagnostic_procedure.ecg",
+          "label": "ECG",
+          "class": "textarea"
+        },
+        {
+          "field": "diagnostic_procedure.xray",
+          "label": "X-ray",
+          "class": "textarea"
+        }
+      ]
     }
   ]
 }
