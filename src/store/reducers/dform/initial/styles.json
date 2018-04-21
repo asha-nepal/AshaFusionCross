@@ -1464,10 +1464,15 @@
               "field": "route",
               "class": "select",
               "label": "Route",
+              "nullable": false,
               "options": [
                 {
                   "id": "po",
                   "label": "PO"
+                },
+                {
+                  "id": "top",
+                  "label": "TOP"
                 },
                 {
                   "id": "ih",
@@ -1484,10 +1489,6 @@
                 {
                   "id": "sl",
                   "label": "SL"
-                },
-                {
-                  "id": "top",
-                  "label": "TOP"
                 },
                 {
                   "id": "iv",
