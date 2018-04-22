@@ -131,6 +131,207 @@
           "field": "ethnicity",
           "class": "textinput",
           "expanded": true
+        },
+        {
+          "class": "accordion",
+          "label": "Gynecology",
+          "layout": "horizontal",
+          "children": [
+            {
+              "field": "education",
+              "label": "Education",
+              "class": "textinput"
+            },
+            {
+              "field": "has_been_married",
+              "label": "Has the patient ever been married?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "age_first_marriage",
+              "show": "has_been_married",
+              "label": "At what age did the patient have the first marriage?",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "field": "history_of_smoking",
+              "label": "History of smoking",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "children",
+              "label": "Living children / abortion",
+              "class": "textinput"
+            },
+            {
+              "field": "menstrual_period",
+              "label": "Last menstrual period",
+              "class": "textinput"
+            },
+            {
+              "field": "had_previous_Pap_smear",
+              "label": "Has the patient had Pap smear before?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "previous_Pap_smear_detail",
+              "show": "had_previous_Pap_smear",
+              "label": "Please specify",
+              "class": "textarea",
+              "placeholder": "When? Was the result normal or abnormal? If the latter, how?"
+            },
+            {
+              "field": "previous_cervical_intervention",
+              "label": "Has the patient had cervical intervention before?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "previous_cervical_intervention_detail",
+              "show": "previous_cervical_intervention",
+              "label": "Please specify",
+              "class": "textarea",
+              "placeholder": "When? What kind?"
+            },
+            {
+              "field": "cervical_cancer_history",
+              "label": "Is there family history of cervical cancer?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "contraceptive_history",
+              "label": "Contraceptive History",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "none",
+                  "label": "None"
+                },
+                {
+                  "id": "barrier",
+                  "label": "Barrier"
+                },
+                {
+                  "id": "CuT",
+                  "label": "CuT"
+                },
+                {
+                  "id": "intradermal_implant",
+                  "label": "Intradermal Implant"
+                },
+                {
+                  "id": "oral_contraceptive_pills",
+                  "label": "Oral Contraceptive Pills"
+                },
+                {
+                  "id": "injection_depo-provera",
+                  "label": "Depo-Provera Injection"
+                }
+              ]
+            },
+            {
+              "field": "knows_HPV",
+              "label": "Does the patient know about human papilloma virus vaccine(HPV)?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "family_vaccinated",
+              "label": "Has anyone in the patient's family been vaccinated?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "gynecology_history",
+              "label": "Gynecology history",
+              "class": "textarea"
+            },
+            {
+              "field": "number_of_sexial_partners",
+              "label": "How many sexial partners",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "field": "menarche_age",
+              "label": "Menarche age",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "field": "spv_vaccination",
+              "label": "SPV Vaccination",
+              "class": "check"
+            }
+          ]
         }
       ]
     }
@@ -404,564 +605,8 @@
               "suffix": "/min",
               "min": 1,
               "precision": 0
-            },
-            {
-              "field": "bs",
-              "label": "Blood sugar",
-              "class": "textinput",
-              "type": "number",
-              "style": {
-                "width": 60
-              },
-              "suffix": "mg/dL",
-              "min": 1,
-              "precision": 0
-            },
-            {
-              "field": "allergy",
-              "label": "Allergy",
-              "class": "check"
             }
           ]
-        },
-        {
-          "field": "allergy_memo",
-          "label": "Allergy memo",
-          "class": "textarea",
-          "show": "allergy"
-        },
-        {
-          "class": "block",
-          "children": [
-            {
-              "field": "past_medical_history_select",
-              "label": "Past medical history",
-              "class": "checkgroup",
-              "options": [
-                {
-                  "id": "htn",
-                  "label": "HTN"
-                },
-                {
-                  "id": "dmii",
-                  "label": "DM II"
-                },
-                {
-                  "id": "copd",
-                  "label": "COPD"
-                },
-                {
-                  "id": "ptb",
-                  "label": "PTB"
-                },
-                {
-                  "id": "jaundice",
-                  "label": "Jaundice"
-                },
-                {
-                  "id": "typhoid",
-                  "label": "Typhoid"
-                },
-                {
-                  "id": "pneumonia",
-                  "label": "Pneumonia"
-                },
-                {
-                  "id": "not_significant",
-                  "label": "Not Significant"
-                }
-              ]
-            },
-            {
-              "field": "past_medical_history_duration",
-              "label": "Duration",
-              "class": "textinput",
-              "show": "past_medical_history_select",
-              "suffix": "days",
-              "type": "number",
-              "min": 0
-            }
-          ]
-        },
-        {
-          "field": "past_medical_history",
-          "class": "textarea"
-        },
-        {
-          "field": "current_medicine",
-          "label": "Current medicines",
-          "class": "textarea"
-        },
-        {
-          "class": "block",
-          "label": "Present medical history",
-          "children": [
-            {
-              "class": "block",
-              "label": "Fever",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.fever.yes"
-                },
-                {
-                  "field": "present_medical_history_select.fever.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.fever.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Cough",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.cough.yes"
-                },
-                {
-                  "field": "present_medical_history_select.cough.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.cough.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Runny Nose",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.runny_nose.yes"
-                },
-                {
-                  "field": "present_medical_history_select.runny_nose.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.runny_nose.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Sore throat",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.sore_throat.yes"
-                },
-                {
-                  "field": "present_medical_history_select.sore_throat.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.sore_throat.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Headache",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.headache.yes"
-                },
-                {
-                  "field": "present_medical_history_select.headache.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.headache.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Earache",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.earache.yes"
-                },
-                {
-                  "field": "present_medical_history_select.earache.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.earache.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Shortness of Breath",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.shortness_of_breath.yes"
-                },
-                {
-                  "field": "present_medical_history_select.shortness_of_breath.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.shortness_of_breath.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Chest Pain",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.chest_pain.yes"
-                },
-                {
-                  "field": "present_medical_history_select.chest_pain.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.chest_pain.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Palpitation",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.palpitation.yes"
-                },
-                {
-                  "field": "present_medical_history_select.palpitation.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.palpitation.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Orthopnea",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.orthopnea.yes"
-                },
-                {
-                  "field": "present_medical_history_select.orthopnea.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.orthopnea.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "PND",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.pnd.yes"
-                },
-                {
-                  "field": "present_medical_history_select.pnd.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.pnd.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Fatigue",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.fatigue.yes"
-                },
-                {
-                  "field": "present_medical_history_select.fatigue.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.fatigue.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Abdominal pain",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.abdominal_pain.yes"
-                },
-                {
-                  "field": "present_medical_history_select.abdominal_pain.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.abdominal_pain.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Nausea",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.nausea.yes"
-                },
-                {
-                  "field": "present_medical_history_select.nausea.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.nausea.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Vomiting",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.vomiting.yes"
-                },
-                {
-                  "field": "present_medical_history_select.vomiting.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.vomiting.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Diarrhea",
-              "children": [
-                {
-                  "class": "check",
-                  "field": "present_medical_history_select.diarrhea.yes"
-                },
-                {
-                  "field": "present_medical_history_select.diarrhea.duration",
-                  "class": "textinput",
-                  "show": "present_medical_history_select.diarrhea.yes",
-                  "suffix": "days",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 60
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "field": "present_medical_history",
-          "class": "textarea"
-        },
-        {
-          "field": "past_surgical_history",
-          "label": "Past surgical history",
-          "class": "textarea"
-        },
-        {
-          "field": "social_history.text",
-          "label": "Social history",
-          "class": "textarea"
-        },
-        {
-          "class": "block",
-          "children": [
-            {
-              "field": "social_history.alcohol.history",
-              "label": "Alcohol",
-              "class": "radio",
-              "options": [
-                {
-                  "id": true,
-                  "label": "Yes"
-                },
-                {
-                  "id": false,
-                  "label": "No"
-                }
-              ]
-            },
-            {
-              "field": "social_history.alcohol.years",
-              "label": "How many years?",
-              "class": "textinput",
-              "show": "social_history.alcohol.history",
-              "suffix": "years",
-              "type": "number",
-              "min": 0
-            },
-            {
-              "field": "social_history.alcohol.freq",
-              "label": "Frequency",
-              "class": "textinput",
-              "show": "social_history.alcohol.history",
-              "suffix": "times / week",
-              "type": "number",
-              "min": 0
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "children": [
-            {
-              "field": "social_history.smoking.history",
-              "label": "Smoking",
-              "class": "radio",
-              "options": [
-                {
-                  "id": true,
-                  "label": "Yes"
-                },
-                {
-                  "id": false,
-                  "label": "No"
-                }
-              ]
-            },
-            {
-              "field": "social_history.smoking.years",
-              "label": "How many years?",
-              "class": "textinput",
-              "show": "social_history.smoking.history",
-              "suffix": "years",
-              "type": "number",
-              "min": 0
-            },
-            {
-              "field": "social_history.smoking.freq",
-              "label": "Frequency",
-              "class": "textinput",
-              "show": "social_history.smoking.history",
-              "suffix": "cigarettes / day",
-              "type": "number",
-              "min": 0
-            }
-          ]
-        },
-        {
-          "field": "signs_select",
-          "label": "Physical Exams",
-          "class": "checkgroup",
-          "options": [
-            {
-              "id": "jaundice",
-              "label": "Jaundice"
-            },
-            {
-              "id": "anemia",
-              "label": "Anemia"
-            },
-            {
-              "id": "lymphadenopathy",
-              "label": "Lymphadenopathy"
-            },
-            {
-              "id": "cyanosis",
-              "label": "Cyanosis"
-            },
-            {
-              "id": "clubbing",
-              "label": "Clubbing"
-            },
-            {
-              "id": "oedema",
-              "label": "Oedema"
-            },
-            {
-              "id": "dehydration",
-              "label": "Dehydration"
-            }
-          ]
-        },
-        {
-          "field": "signs",
-          "class": "textarea"
         },
         {
           "field": "attachments.images",
@@ -1241,31 +886,41 @@
               "suffix": "/min",
               "min": 1,
               "precision": 0
-            },
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "children": [
             {
-              "field": "bs",
-              "label": "Blood sugar",
-              "class": "textinput",
-              "type": "number",
-              "style": {
-                "width": 60
-              },
-              "suffix": "mg/dL",
-              "min": 1,
-              "precision": 0
+              "field": "drug_allergy",
+              "label": "Drug allergy",
+              "class": "check"
             },
             {
               "field": "allergy",
-              "label": "Allergy",
+              "label": "Other allergy",
               "class": "check"
             }
           ]
         },
         {
-          "field": "allergy_memo",
-          "label": "Allergy memo",
-          "class": "textarea",
-          "show": "allergy"
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "field": "drug_allergy_memo",
+              "label": "Drug allergy memo",
+              "class": "multiinput",
+              "show": "drug_allergy"
+            },
+            {
+              "field": "allergy_memo",
+              "label": "Other allergy memo",
+              "class": "textarea",
+              "show": "allergy"
+            }
+          ]
         },
         {
           "class": "block",
@@ -1322,6 +977,11 @@
         },
         {
           "field": "past_medical_history",
+          "class": "textarea"
+        },
+        {
+          "field": "past_surgical_history",
+          "label": "Past surgical history",
           "class": "textarea"
         },
         {
@@ -1676,11 +1336,6 @@
           "class": "textarea"
         },
         {
-          "field": "past_surgical_history",
-          "label": "Past surgical history",
-          "class": "textarea"
-        },
-        {
           "field": "social_history.text",
           "label": "Social history",
           "class": "textarea"
@@ -1758,6 +1413,19 @@
               "suffix": "cigarettes / day",
               "type": "number",
               "min": 0
+            },
+            {
+              "label": "Frequency (year)",
+              "class": "autocalc",
+              "show": "social_history.smoking.history",
+              "style": {
+                "width": 50
+              },
+              "func": "asha:math:mul",
+              "inputs": [
+                "social_history.smoking.freq",
+                { "const": 365 }
+              ]
             }
           ]
         },
@@ -1973,10 +1641,15 @@
               "field": "route",
               "class": "select",
               "label": "Route",
+              "nullable": false,
               "options": [
                 {
                   "id": "po",
                   "label": "PO"
+                },
+                {
+                  "id": "top",
+                  "label": "TOP"
                 },
                 {
                   "id": "ih",
@@ -1993,10 +1666,6 @@
                 {
                   "id": "sl",
                   "label": "SL"
-                },
-                {
-                  "id": "top",
-                  "label": "TOP"
                 },
                 {
                   "id": "iv",
@@ -2071,359 +1740,6 @@
       ]
     },
     {
-      "id": "mental",
-      "label": "Mental",
-      "roles": ["psychiatrist"],
-      "style": [
-        {
-          "class": "accordion",
-          "label": "Accompanying person",
-          "children": [
-            {
-              "field": "mental.accompany",
-              "class": "radio",
-              "options": [
-                {
-                  "id": "mother",
-                  "label": "Mother"
-                },
-                {
-                  "id": "father",
-                  "label": "Father"
-                },
-                {
-                  "id": "daughter",
-                  "label": "Daughter"
-                },
-                {
-                  "id": "son",
-                  "label": "Son"
-                },
-                {
-                  "id": "family",
-                  "label": "Other family member"
-                },
-                {
-                  "id": "healthcare",
-                  "label": "Health-care personnel"
-                },
-                {
-                  "id": "others",
-                  "label": "Other"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "class": "accordion",
-          "label": "Incentive for counseling",
-          "children": [
-            {
-              "field": "mental.incentive",
-              "class": "radio",
-              "options": [
-                {
-                  "id": "own",
-                  "label": "Client's own motivation"
-                },
-                {
-                  "id": "referral",
-                  "label": "Medical referral"
-                },
-                {
-                  "id": "suggestion",
-                  "label": "At other's suggestion"
-                },
-                {
-                  "id": "others",
-                  "label": "Other"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "class": "accordion",
-          "label": "Main complaint",
-          "children": [
-            {
-              "field": "mental.complient",
-              "class": "textarea",
-              "placeholder": "Ex. \"I cannot sleep well and cannot concentrate on daily tasks.\""
-            }
-          ]
-        },
-        {
-          "class": "accordion",
-          "label": "Present illness",
-          "children": [
-            {
-              "field": "mental.illness",
-              "class": "textarea",
-              "placeholder": "Ex. \"He is a 23-year-old male for whom psychiatric evaluation is requested due to depressive mood in the past few weeks. He denies any suicidal thoughts. He admits to morning sickness symptom of anorexia, and difficulty falling + staying asleep. He also admits that he lost his house dog on Monday.\nOtherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) headache, (-) substance abuse\""
-            }
-          ]
-        },
-        {
-          "class": "accordion",
-          "label": "Family history",
-          "children": [
-            {
-              "field": "mental.family",
-              "class": "textarea",
-              "placeholder": "Ex. \"His immediate family consists of his father (age 51), his mother (age 49), one older brother (age 26), and one younger sister (age 19). His father suffers from alcohol dependence.\""
-            }
-          ]
-        },
-        {
-          "class": "accordion",
-          "label": "Marital history",
-          "children": [
-            {
-              "field": "mental.is_married",
-              "label": "Marital status",
-              "class": "radio",
-              "options": [
-                {
-                  "id": true,
-                  "label": "Married"
-                },
-                {
-                  "id": false,
-                  "label": "Not married"
-                }
-              ]
-            },
-            {
-              "field": "mental.family_num",
-              "class": "textinput",
-              "type": "number",
-              "label": "Number of live-in family members",
-              "style": {
-                "width": 100
-              },
-              "suffix": "person(s)"
-            }
-          ]
-        },
-        {
-          "class": "accordion",
-          "label": "Personal history",
-          "children": [
-            {
-              "field": "mental.birthplace",
-              "label": "Birthplace",
-              "class": "textinput"
-            },
-            {
-              "field": "mental.ethnicity",
-              "label": "Ethnicity",
-              "class": "textinput"
-            },
-            {
-              "field": "mental.education",
-              "label": "Education",
-              "class": "textinput",
-              "placeholder": "Ex. \"Attended high school but did not graduate.\""
-
-            },
-            {
-              "field": "mental.work",
-              "label": "Work experience",
-              "class": "textinput",
-              "placeholder": "Ex. \"Farm helper (2 years), Unstable work history\""
-            },
-            {
-              "field": "mental.lifeevents",
-              "label": "Significant life events",
-              "class": "textinput",
-              "placeholder": "Ex. \"Experienced major earthquake when he was 23\""
-            },
-            {
-              "field": "mental.personality",
-              "label": "Personality",
-              "class": "textinput"
-            },
-            {
-              "field": "mental.religion",
-              "label": "Religion/Beliefs",
-              "class": "textinput"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "ksix",
-      "label": "K6",
-      "roles": ["reception", "psychiatrist"],
-      "style": [
-        {
-          "field": "ksix.nervious",
-          "label": "क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervous?)",
-          "class": "radio",
-          "options": [
-            {
-              "id": 4,
-              "label": "संध (4)"
-            },
-            {
-              "id": 3,
-              "label": "धेरैजसो (3)"
-            },
-            {
-              "id": 2,
-              "label": "कहिलेकाहीं बिरैले (2)"
-            },
-            {
-              "id": 1,
-              "label": "एकदम कम मात्र (1)"
-            },
-            {
-              "id": 0,
-              "label": "कहिल्यै पनि भएन (0)"
-            }
-          ]
-        },
-        {
-          "field": "ksix.hopeless",
-          "label": "ख) भविष्यमा केही पनि गर्न सक्दिन भनेर हरेस खानुभएको थियो ? (Hopeless?)",
-          "class": "radio",
-          "options": [
-            {
-              "id": 4,
-              "label": "संध (4)"
-            },
-            {
-              "id": 3,
-              "label": "धेरैजसो (3)"
-            },
-            {
-              "id": 2,
-              "label": "कहिलेकाहीं बिरैले (2)"
-            },
-            {
-              "id": 1,
-              "label": "एकदम कम मात्र (1)"
-            },
-            {
-              "id": 0,
-              "label": "कहिल्यै पनि भएन (0)"
-            }
-          ]
-        },
-        {
-          "field": "ksix.restless",
-          "label": "ग )छटपटी हुने ,एक ठाउँमा स्थिर भएर बास्न नसक्ने वा कहाँ जाउँ के गरूँ जस्तो हुनुभएको थियो ? (Restless or fidgety?)",
-          "class": "radio",
-          "options": [
-            {
-              "id": 4,
-              "label": "संध (4)"
-            },
-            {
-              "id": 3,
-              "label": "धेरैजसो (3)"
-            },
-            {
-              "id": 2,
-              "label": "कहिलेकाहीं बिरैले (2)"
-            },
-            {
-              "id": 1,
-              "label": "एकदम कम मात्र (1)"
-            },
-            {
-              "id": 0,
-              "label": "कहिल्यै पनि भएन (0)"
-            }
-          ]
-        },
-        {
-          "field": "ksix.depressed",
-          "label": "घ) तपाईंको मनमा भएको दिक्दारिपन ,उदासिपन वा खिन्नताले गर्दा कुनैपनि कुराले केही गरेपनि खुसी हुननसक्ने हनुभएको थियो ? (So depressed that nothing could cheer you up?)",
-          "class": "radio",
-          "options": [
-            {
-              "id": 4,
-              "label": "संध (4)"
-            },
-            {
-              "id": 3,
-              "label": "धेरैजसो (3)"
-            },
-            {
-              "id": 2,
-              "label": "कहिलेकाहीं बिरैले (2)"
-            },
-            {
-              "id": 1,
-              "label": "एकदम कम मात्र (1)"
-            },
-            {
-              "id": 0,
-              "label": "कहिल्यै पनि भएन (0)"
-            }
-          ]
-        },
-        {
-          "field": "ksix.effort",
-          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything is an effort?)",
-          "class": "radio",
-          "options": [
-            {
-              "id": 4,
-              "label": "संध (4)"
-            },
-            {
-              "id": 3,
-              "label": "धेरैजसो (3)"
-            },
-            {
-              "id": 2,
-              "label": "कहिलेकाहीं बिरैले (2)"
-            },
-            {
-              "id": 1,
-              "label": "एकदम कम मात्र (1)"
-            },
-            {
-              "id": 0,
-              "label": "कहिल्यै पनि भएन (0)"
-            }
-          ]
-        },
-        {
-          "field": "ksix.worthless",
-          "label": "च) आफुलाई काम नलाग्ऩे बेकारको मान्छे जस्तो ठान्नुभएको थियो ? (Worthless?)",
-          "class": "radio",
-          "options": [
-            {
-              "id": 4,
-              "label": "संध (4)"
-            },
-            {
-              "id": 3,
-              "label": "धेरैजसो (3)"
-            },
-            {
-              "id": 2,
-              "label": "कहिलेकाहीं बिरैले (2)"
-            },
-            {
-              "id": 1,
-              "label": "एकदम कम मात्र (1)"
-            },
-            {
-              "id": 0,
-              "label": "कहिल्यै पनि भएन (0)"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "pathology",
       "label": "Pathology",
       "style": [
@@ -2436,6 +1752,15 @@
               "label": "Haematology",
               "layout": "horizontal",
               "children": [
+                {
+                  "field": "bs",
+                  "label": "Blood sugar",
+                  "class": "textinput",
+                  "type": "number",
+                  "suffix": "mg/dL",
+                  "min": 1,
+                  "precision": 0
+                },
                 {
                   "field": "pathology.haematology.hemoglobin",
                   "label": "Hemoglobin (Hb)",
@@ -2834,6 +2159,11 @@
                 {
                   "field": "pathology.haematology.hba1c",
                   "label": "HBA1C"
+                },
+                {
+                  "field": "pathology.haematology.other",
+                  "label": "Other (Haematology)",
+                  "class": "textarea"
                 }
               ]
             },
@@ -3418,6 +2748,11 @@
                       "range": [ 5.2, null]
                     }
                   ]
+                },
+                {
+                  "field": "pathology.biochemistry.other",
+                  "label": "Other (Biochemistry)",
+                  "class": "textarea"
                 }
               ]
             }
@@ -3531,6 +2866,11 @@
                       "label": "Strongyloides Stercoralis"
                     }
                   ]
+                },
+                {
+                  "field": "pathology.stool.other",
+                  "label": "Other (Stool)",
+                  "class": "textarea"
                 }
               ]
             },
@@ -3644,8 +2984,871 @@
                   "field": "pathology.pregnancy_test.text",
                   "label": "Pregnancy Test",
                   "class": "textarea"
+                },
+                {
+                  "field": "pathology.urine.other",
+                  "label": "Other (Urine)",
+                  "class": "textarea"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "label": "Gynecology",
+          "children": [
+            {
+              "field": "Pap_smear_report",
+              "label": "Pap smear report",
+              "class": "checkgroup",
+              "options": [
+                {
+                  "id": "negative_IL_or_malignancy",
+                  "label": "Negative for intraepithelial lesion or malignancy"
+                },
+                {
+                  "id": "RCC_with_inflammation",
+                  "label": "Reactive cellular changes associated with inflammation"
+                },
+                {
+                  "id": "ASCUS",
+                  "label": "ASCUS"
+                },
+                {
+                  "id": "AGUS",
+                  "label": "AGUS"
+                },
+                {
+                  "id": "LSIL",
+                  "label": "Low grade squamous intraepithelial lesion (LSIL)"
+                },
+                {
+                  "id": "HSIL",
+                  "label": "High grade squamous intraepithelial lesion (HSIL)"
+                },
+                {
+                  "id": "invasive_carcinoma",
+                  "label": "Invasive carcinoma"
+                },
+                {
+                  "id": "others",
+                  "label": "Others"
+                }
+              ]
+            },
+            {
+              "field": "Pap_result_other_details",
+              "label": "Please specify",
+              "class": "textarea",
+              "show": "Pap_smear_report:others"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diagnostic_procedure",
+      "label": "Diagnostic procedure",
+      "style": [
+        {
+          "field": "diagnostic_procedure.ultrasound",
+          "label": "Ultrasound",
+          "class": "textarea"
+        },
+        {
+          "field": "diagnostic_procedure.ecg",
+          "label": "ECG",
+          "class": "textarea"
+        },
+        {
+          "field": "diagnostic_procedure.xray",
+          "label": "X-ray",
+          "class": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "gynaecologist",
+      "label": "Gynaecologist",
+      "style": [
+        {
+          "class": "accordion",
+          "label": "Reported symptoms",
+          "children": [
+            {
+              "field": "symptoms",
+              "label": "Complaint of",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "none",
+                  "label": "None"
+                },
+                {
+                  "id": "pain_abdomen",
+                  "label": "Pain in abdomen"
+                },
+                {
+                  "id": "abnormal_vaginal_discharge",
+                  "label": "Abnormal vaginal discharge"
+                },
+                {
+                  "id": "coital_bleeding",
+                  "label": "Post coital bleeding"
+                },
+                {
+                  "id": "other_symptoms",
+                  "label": "Others"
+                }
+              ]
+            },
+            {
+              "field": "vaginal_discharge_detail",
+              "label": "Please specify",
+              "class": "textarea",
+              "show": "symptoms:abnormal_vaginal_discharge"
+            },
+            {
+              "field": "other_symptoms_detail",
+              "label": "Please specify",
+              "class": "textarea",
+              "show": "symptoms:other_symptoms",
+              "placeholder": "Describe the symptom(s)"
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "System examination",
+          "children": [
+            {
+              "class": "block",
+              "label": "Chest",
+              "children": [
+                {
+                  "field": "system_exams.chest",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.chest_memo",
+                  "class": "textarea",
+                  "show": "system_exams.chest"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "CVS",
+              "children": [
+                {
+                  "field": "system_exams.cvs",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.cvs_memo",
+                  "class": "textarea",
+                  "show": "system_exams.cvs"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "P/A",
+              "children": [
+                {
+                  "field": "system_exams.pa",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.pa_memo",
+                  "class": "textarea",
+                  "show": "system_exams.pa"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "CNS",
+              "children": [
+                {
+                  "field": "system_exams.cns",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.cns_memo",
+                  "class": "textarea",
+                  "show": "system_exams.cns"
+                }
+              ]
+            },
+            {
+              "label": "Others",
+              "field": "system_exams.others_memo",
+              "class": "textarea"
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "Examinations",
+          "children": [
+            {
+              "class": "accordion",
+              "label": "Per abdomen Examination",
+              "children": [
+                {
+                  "field": "abdomen_is_abnormal",
+                  "label": "Result of abdomen examination was",
+                  "class": "radio",
+                  "options": [
+                    {
+                      "id": false,
+                      "label": "Normal"
+                    },
+                    {
+                      "id": true,
+                      "label": "Abnormal"
+                    }
+                  ]
+                },
+                {
+                  "field": "abdomen_result_details",
+                  "label": "Please specify",
+                  "class": "textarea",
+                  "show": "abdomen_is_abnormal"
+                }
+              ]
+            },
+            {
+              "class": "accordion",
+              "label": "Per speculum examination",
+              "children": [
+                {
+                  "field": "cervix_is_unhealthy",
+                  "label": "Cervix",
+                  "class": "radio",
+                  "options": [
+                    {
+                      "id": false,
+                      "label": "Healthy"
+                    },
+                    {
+                      "id": true,
+                      "label": "Unhealthy"
+                    }
+                  ]
+                },
+                {
+                  "field": "cervix_problem",
+                  "label": "Problem",
+                  "class": "checkgroup",
+                  "show": "cervix_is_unhealthy",
+                  "options": [
+                    {
+                      "id": "ectropion",
+                      "label": "Ectropion"
+                    },
+                    {
+                      "id": "growth",
+                      "label": "Growth"
+                    },
+                    {
+                      "id": "polyp",
+                      "label": "Polyp"
+                    }
+                  ]
+                },
+                {
+                  "field": "cervix_consistency",
+                  "label": "Consistency",
+                  "class": "radio",
+                  "options": [
+                    {
+                      "id": "firm",
+                      "label": "Firm"
+                    },
+                    {
+                      "id": "soft",
+                      "label": "Soft"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "class": "accordion",
+              "label": "Per vaginal examination",
+              "children": [
+                {
+                  "field": "uterus_tip",
+                  "label": "Uterus",
+                  "class": "radio",
+                  "options": [
+                    {
+                      "id": "anterverted",
+                      "label": "Anterverted"
+                    },
+                    {
+                      "id": "retroverted",
+                      "label": "Retroverted"
+                    }
+                  ]
+                },
+                {
+                  "field": "uterus_size",
+                  "label": "Size",
+                  "class": "radio",
+                  "options": [
+                    {
+                      "id": "normal",
+                      "label": "Normal"
+                    },
+                    {
+                      "id": "bulky",
+                      "label": "Bulky"
+                    }
+                  ]
+                },
+                {
+                  "field": "uterus_adnexa",
+                  "label": "Adnexa",
+                  "class": "radio",
+                  "options": [
+                    {
+                      "id": "normal",
+                      "label": "Normal"
+                    },
+                    {
+                      "id": "mass",
+                      "label": "Mass"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "Management",
+          "children": [
+            {
+              "field": "management",
+              "label": "Management of patient",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "counselling_only",
+                  "label": "Counselling only"
+                },
+                {
+                  "id": "counselling_with_medication",
+                  "label": "Counselling with medication"
+                },
+                {
+                  "id": "referral",
+                  "label": "Referral to higher center"
+                },
+                {
+                  "id": "others",
+                  "label": "Others"
+                }
+              ]
+            },
+            {
+              "field": "other_management_details",
+              "label": "Please specify",
+              "class": "textarea",
+              "show": "management:others"
+            },
+            {
+              "field": "prescription",
+              "label": "Prescriptions",
+              "class": "subformlist",
+              "show": "management:counselling_with_medication",
+              "ditto": true,
+              "fields": [
+                {
+                  "field": "medicine",
+                  "label": "Medicine",
+                  "class": "textinput",
+                  "primary": true,
+                  "suggestions": []
+                },
+                {
+                  "field": "stat",
+                  "label": "Stat",
+                  "class": "check"
+                },
+                {
+                  "field": "sos",
+                  "label": "SOS",
+                  "class": "check"
+                },
+                {
+                  "field": "dose",
+                  "class": "textinput",
+                  "type": "number",
+                  "style": {
+                    "width": 50
+                  },
+                  "label": "Dose",
+                  "suffix": "pcs"
+                },
+                {
+                  "field": "dose_syrup",
+                  "class": "textinput",
+                  "type": "number",
+                  "style": {
+                    "width": 50
+                  },
+                  "label": "Dose (syrup)",
+                  "suffix": "ml"
+                },
+                {
+                  "field": "freq",
+                  "class": "textinput",
+                  "type": "number",
+                  "style": {
+                    "width": 50
+                  },
+                  "label": "Frequency",
+                  "suffix": "times",
+                  "hide": "sos|stat"
+                },
+                {
+                  "field": "duration",
+                  "class": "textinput",
+                  "type": "number",
+                  "style": {
+                    "width": 60
+                  },
+                  "label": "Duration",
+                  "suffix": "days",
+                  "hide": "sos|stat"
+                },
+                {
+                  "field": "route",
+                  "class": "select",
+                  "label": "Route",
+                  "nullable": false,
+                  "options": [
+                    {
+                      "id": "po",
+                      "label": "PO"
+                    },
+                    {
+                      "id": "top",
+                      "label": "TOP"
+                    },
+                    {
+                      "id": "ih",
+                      "label": "IH"
+                    },
+                    {
+                      "id": "pr",
+                      "label": "PR"
+                    },
+                    {
+                      "id": "sc",
+                      "label": "SC"
+                    },
+                    {
+                      "id": "sl",
+                      "label": "SL"
+                    },
+                    {
+                      "id": "iv",
+                      "label": "IV"
+                    },
+                    {
+                      "id": "im",
+                      "label": "IM"
+                    }
+                  ]
+                },
+                {
+                  "field": "meal",
+                  "class": "select",
+                  "label": "Meal",
+                  "options": [
+                    {
+                      "id": "before",
+                      "label": "Before the meal"
+                    },
+                    {
+                      "id": "after",
+                      "label": "After the meal"
+                    }
+                  ]
+                },
+                {
+                  "field": "use_remark",
+                  "class": "check",
+                  "label": "Remark"
+                },
+                {
+                  "field": "remark",
+                  "class": "textinput",
+                  "label": "Remark",
+                  "expanded": true,
+                  "show": "use_remark"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mental",
+      "label": "Mental",
+      "roles": ["psychiatrist"],
+      "style": [
+        {
+          "class": "accordion",
+          "label": "Accompanying person",
+          "children": [
+            {
+              "field": "mental.accompany",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "mother",
+                  "label": "Mother"
+                },
+                {
+                  "id": "father",
+                  "label": "Father"
+                },
+                {
+                  "id": "daughter",
+                  "label": "Daughter"
+                },
+                {
+                  "id": "son",
+                  "label": "Son"
+                },
+                {
+                  "id": "family",
+                  "label": "Other family member"
+                },
+                {
+                  "id": "healthcare",
+                  "label": "Health-care personnel"
+                },
+                {
+                  "id": "others",
+                  "label": "Other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "Incentive for counseling",
+          "children": [
+            {
+              "field": "mental.incentive",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "own",
+                  "label": "Client's own motivation"
+                },
+                {
+                  "id": "referral",
+                  "label": "Medical referral"
+                },
+                {
+                  "id": "suggestion",
+                  "label": "At other's suggestion"
+                },
+                {
+                  "id": "others",
+                  "label": "Other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "Main complaint",
+          "children": [
+            {
+              "field": "mental.complient",
+              "class": "textarea",
+              "placeholder": "Ex. \"I cannot sleep well and cannot concentrate on daily tasks.\""
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "Present illness",
+          "children": [
+            {
+              "field": "mental.illness",
+              "class": "textarea",
+              "placeholder": "Ex. \"He is a 23-year-old male for whom psychiatric evaluation is requested due to depressive mood in the past few weeks. He denies any suicidal thoughts. He admits to morning sickness symptom of anorexia, and difficulty falling + staying asleep. He also admits that he lost his house dog on Monday.\nOtherwise: (-) apparent hallucinations or delusions, (-) trauma, (-) fever, (-) headache, (-) substance abuse\""
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "Family history",
+          "children": [
+            {
+              "field": "mental.family",
+              "class": "textarea",
+              "placeholder": "Ex. \"His immediate family consists of his father (age 51), his mother (age 49), one older brother (age 26), and one younger sister (age 19). His father suffers from alcohol dependence.\""
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "Marital history",
+          "children": [
+            {
+              "field": "mental.is_married",
+              "label": "Marital status",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Married"
+                },
+                {
+                  "id": false,
+                  "label": "Not married"
+                }
+              ]
+            },
+            {
+              "field": "mental.family_num",
+              "class": "textinput",
+              "type": "number",
+              "label": "Number of live-in family members",
+              "style": {
+                "width": 100
+              },
+              "suffix": "person(s)"
+            }
+          ]
+        },
+        {
+          "class": "accordion",
+          "label": "Personal history",
+          "children": [
+            {
+              "field": "mental.birthplace",
+              "label": "Birthplace",
+              "class": "textinput"
+            },
+            {
+              "field": "mental.ethnicity",
+              "label": "Ethnicity",
+              "class": "textinput"
+            },
+            {
+              "field": "mental.education",
+              "label": "Education",
+              "class": "textinput",
+              "placeholder": "Ex. \"Attended high school but did not graduate.\""
+
+            },
+            {
+              "field": "mental.work",
+              "label": "Work experience",
+              "class": "textinput",
+              "placeholder": "Ex. \"Farm helper (2 years), Unstable work history\""
+            },
+            {
+              "field": "mental.lifeevents",
+              "label": "Significant life events",
+              "class": "textinput",
+              "placeholder": "Ex. \"Experienced major earthquake when he was 23\""
+            },
+            {
+              "field": "mental.personality",
+              "label": "Personality",
+              "class": "textinput"
+            },
+            {
+              "field": "mental.religion",
+              "label": "Religion/Beliefs",
+              "class": "textinput"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ksix",
+      "label": "K6",
+      "roles": ["reception", "psychiatrist"],
+      "style": [
+        {
+          "field": "ksix.nervious",
+          "label": "क) आत्तिने ,कहालिने ,डराउने वा मुटु दुकदुक हुने हुनुभएको थियो ? (Nervous?)",
+          "class": "radio",
+          "options": [
+            {
+              "id": 4,
+              "label": "संध (4)"
+            },
+            {
+              "id": 3,
+              "label": "धेरैजसो (3)"
+            },
+            {
+              "id": 2,
+              "label": "कहिलेकाहीं बिरैले (2)"
+            },
+            {
+              "id": 1,
+              "label": "एकदम कम मात्र (1)"
+            },
+            {
+              "id": 0,
+              "label": "कहिल्यै पनि भएन (0)"
+            }
+          ]
+        },
+        {
+          "field": "ksix.hopeless",
+          "label": "ख) भविष्यमा केही पनि गर्न सक्दिन भनेर हरेस खानुभएको थियो ? (Hopeless?)",
+          "class": "radio",
+          "options": [
+            {
+              "id": 4,
+              "label": "संध (4)"
+            },
+            {
+              "id": 3,
+              "label": "धेरैजसो (3)"
+            },
+            {
+              "id": 2,
+              "label": "कहिलेकाहीं बिरैले (2)"
+            },
+            {
+              "id": 1,
+              "label": "एकदम कम मात्र (1)"
+            },
+            {
+              "id": 0,
+              "label": "कहिल्यै पनि भएन (0)"
+            }
+          ]
+        },
+        {
+          "field": "ksix.restless",
+          "label": "ग )छटपटी हुने ,एक ठाउँमा स्थिर भएर बास्न नसक्ने वा कहाँ जाउँ के गरूँ जस्तो हुनुभएको थियो ? (Restless or fidgety?)",
+          "class": "radio",
+          "options": [
+            {
+              "id": 4,
+              "label": "संध (4)"
+            },
+            {
+              "id": 3,
+              "label": "धेरैजसो (3)"
+            },
+            {
+              "id": 2,
+              "label": "कहिलेकाहीं बिरैले (2)"
+            },
+            {
+              "id": 1,
+              "label": "एकदम कम मात्र (1)"
+            },
+            {
+              "id": 0,
+              "label": "कहिल्यै पनि भएन (0)"
+            }
+          ]
+        },
+        {
+          "field": "ksix.depressed",
+          "label": "घ) तपाईंको मनमा भएको दिक्दारिपन ,उदासिपन वा खिन्नताले गर्दा कुनैपनि कुराले केही गरेपनि खुसी हुननसक्ने हनुभएको थियो ? (So depressed that nothing could cheer you up?)",
+          "class": "radio",
+          "options": [
+            {
+              "id": 4,
+              "label": "संध (4)"
+            },
+            {
+              "id": 3,
+              "label": "धेरैजसो (3)"
+            },
+            {
+              "id": 2,
+              "label": "कहिलेकाहीं बिरैले (2)"
+            },
+            {
+              "id": 1,
+              "label": "एकदम कम मात्र (1)"
+            },
+            {
+              "id": 0,
+              "label": "कहिल्यै पनि भएन (0)"
+            }
+          ]
+        },
+        {
+          "field": "ksix.effort",
+          "label": "ङ्) जे काम गर्दापनि एकदमै जाँगर नलागिकन जबर्जस्ती गर्न परेको जस्तो लागेको थियो ? (That everything is an effort?)",
+          "class": "radio",
+          "options": [
+            {
+              "id": 4,
+              "label": "संध (4)"
+            },
+            {
+              "id": 3,
+              "label": "धेरैजसो (3)"
+            },
+            {
+              "id": 2,
+              "label": "कहिलेकाहीं बिरैले (2)"
+            },
+            {
+              "id": 1,
+              "label": "एकदम कम मात्र (1)"
+            },
+            {
+              "id": 0,
+              "label": "कहिल्यै पनि भएन (0)"
+            }
+          ]
+        },
+        {
+          "field": "ksix.worthless",
+          "label": "च) आफुलाई काम नलाग्ऩे बेकारको मान्छे जस्तो ठान्नुभएको थियो ? (Worthless?)",
+          "class": "radio",
+          "options": [
+            {
+              "id": 4,
+              "label": "संध (4)"
+            },
+            {
+              "id": 3,
+              "label": "धेरैजसो (3)"
+            },
+            {
+              "id": 2,
+              "label": "कहिलेकाहीं बिरैले (2)"
+            },
+            {
+              "id": 1,
+              "label": "एकदम कम मात्र (1)"
+            },
+            {
+              "id": 0,
+              "label": "कहिल्यै पनि भएन (0)"
             }
           ]
         }

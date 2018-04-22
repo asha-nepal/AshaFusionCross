@@ -35,11 +35,26 @@ export const AutoCalcComponent = ({
   </span>
 );
 
-export function getValue(targetModel: Object, argKeys: Array<string>, calc: Function) {
+type FuncInput = string | {
+  const: string | number,
+};
+
+export function getArgs(inputs: Array<FuncInput>, referenceModel: Object) {
+  return inputs.map((input) => {
+    if (typeof input === 'string') return _get(referenceModel, input);
+    if (typeof input === 'object') {
+      if (input.hasOwnProperty('const')) return input.const;
+    }
+
+    return undefined;
+  });
+}
+
+export function getValue(targetModel: Object, inputs: Array<FuncInput>, calc: Function) {
   if (!targetModel) return null;
   if (typeof calc !== 'function') return null;
 
-  const args = argKeys.map(argKey => _get(targetModel, argKey));
+  const args = getArgs(inputs, targetModel);
 
   if (args.some(arg => typeof arg === 'undefined')) return null;
 

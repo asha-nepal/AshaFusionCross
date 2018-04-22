@@ -22,7 +22,7 @@ jest.unmock('../index');
 
 import { shallow } from 'enzyme';
 import React from 'react';
-import { AutoCalcComponent, getValue } from '../index';
+import { AutoCalcComponent, getArgs, getValue } from '../index';
 
 describe('<AutoCalcComponent />', () => {
   it('shows value with given precision', () => {
@@ -50,8 +50,46 @@ describe('<AutoCalcComponent />', () => {
   });
 });
 
+describe('getArgs', () => {
+  describe('with string inputs', () => {
+    it('gets values from referenceObject by specified keys', () => {
+      const referenceObject = {
+        foo: 100,
+        bar: 20,
+        baz: {
+          yo: 30,
+          ho: 40,
+        },
+      };
+
+      expect(getArgs(['foo', 'bar'], referenceObject))
+        .toEqual([100, 20]);
+
+      expect(getArgs(['baz.yo', 'baz.ho'], referenceObject))
+        .toEqual([30, 40]);
+
+      expect(getArgs(['baz.yo', 'hoge'], referenceObject))
+        .toEqual([30, undefined]);
+    });
+  });
+
+  describe('with object inputs', () => {
+    describe('with `const` key', () => {
+      it('returns const values directly', () => {
+        const inputs = [
+          { const: 10 },
+          { const: 20 },
+        ];
+
+        expect(getArgs(inputs, {}))
+          .toEqual([10, 20]);
+      });
+    });
+  });
+});
+
 describe('getValue', () => {
-  it('applies given arguments to specified function', () => {
+  it('gets argeumsnts by getArgs and applies them to specified function', () => {
     const targetModel = {
       foo: 100,
       bar: 20,
