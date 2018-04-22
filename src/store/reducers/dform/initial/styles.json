@@ -3099,6 +3099,77 @@
         },
         {
           "class": "accordion",
+          "label": "System examination",
+          "children": [
+            {
+              "class": "block",
+              "label": "Chest",
+              "children": [
+                {
+                  "field": "system_exams.chest",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.chest_memo",
+                  "class": "textarea",
+                  "show": "system_exams.chest"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "CVS",
+              "children": [
+                {
+                  "field": "system_exams.cvs",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.cvs_memo",
+                  "class": "textarea",
+                  "show": "system_exams.cvs"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "P/A",
+              "children": [
+                {
+                  "field": "system_exams.pa",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.pa_memo",
+                  "class": "textarea",
+                  "show": "system_exams.pa"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "label": "CNS",
+              "children": [
+                {
+                  "field": "system_exams.cns",
+                  "class": "check"
+                },
+                {
+                  "field": "system_exams.cns_memo",
+                  "class": "textarea",
+                  "show": "system_exams.cns"
+                }
+              ]
+            },
+            {
+              "label": "Others",
+              "field": "system_exams.others_memo",
+              "class": "textarea"
+            }
+          ]
+        },
+        {
+          "class": "accordion",
           "label": "Examinations",
           "children": [
             {
