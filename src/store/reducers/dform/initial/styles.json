@@ -308,8 +308,29 @@
                   "label": "No"
                 }
               ]
+            },
+            {
+              "field": "gynecology_history",
+              "label": "Gynecology history",
+              "class": "textarea"
+            },
+            {
+              "field": "number_of_sexial_partners",
+              "label": "How many sexial partners",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "field": "menarche_age",
+              "label": "Menarche age",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "field": "spv_vaccination",
+              "label": "SPV Vaccination",
+              "class": "check"
             }
-
           ]
         }
       ]
