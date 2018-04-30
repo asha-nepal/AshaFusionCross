@@ -180,6 +180,6 @@ export class TextUnitInputComponent extends Component {
   }
 }
 
-import connect from '../../../common/forms/fields/TextUnitInput';
+import connect from '../../../../common/forms/fields/TextUnitInput';
 
 export const TextUnitInput = connect(TextUnitInputComponent);

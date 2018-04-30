@@ -17,13 +17,13 @@
 /* eslint-env jest */
 
 jest.unmock('react-redux');
-jest.unmock('../TextUnitInput');
+jest.unmock('../index');
 
 import React from 'react';
 import { shallow } from 'enzyme';
 import math from 'lib/mathjs';
 
-import { convert, TextUnitInputComponent } from '../TextUnitInput';
+import { convert, TextUnitInputComponent } from '../index';
 
 describe('TextUnitInput.convert', () => {
   let MockMathUnit;
