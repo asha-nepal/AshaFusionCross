@@ -18,26 +18,10 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import math from 'lib/mathjs';
+import convert from './convert';
 
-export const convert = (
-  value: ?ValueUnitType,
-  targetUnit: ?string,
-  precision: ?number
-): ?number => {
-  if (!value || !value.value || !value.unit) { return null; }
-  if (!targetUnit) { return null; }
-  if (value.unit === targetUnit) { return parseFloat(value.value); }
+export { convert };
 
-  const converted = math.unit(value.value, value.unit).toNumber(targetUnit);
-
-  if (precision != null) {
-    const e = Math.pow(10, precision);
-    return Math.round(converted * e) / e;
-  }
-
-  return converted;
-};
 
 type Props = {
   units: Array<string>,
