@@ -17,14 +17,53 @@
 /* @flow */
 
 import math from 'lib/mathjs';
+import coefficients from './coefficients';
 
 export default (
   value: ?ValueUnitType,
-  targetUnit: ?string
+  dstUnitStr: ?string,
+  coeffKey: ?string,
 ): ?number => {
   if (!value || !value.value || !value.unit) { return null; }
-  if (!targetUnit) { return null; }
-  if (value.unit === targetUnit) { return parseFloat(value.value); }
+  if (!dstUnitStr) { return null; }
+  if (value.unit === dstUnitStr) { return parseFloat(value.value); }
 
-  return math.unit(value.value, value.unit).toNumber(targetUnit);
+  const src = math.unit(value.value, value.unit);
+  const dstUnit = math.unit(dstUnitStr);
+
+  // When coefficient is not required
+  if (src.equalBase(dstUnit)) {
+    return src.toNumber(dstUnitStr);
+  }
+
+  // When coefficient is required (below)
+  if (coeffKey == null) return null;
+
+  const requiredCoeffUnit = dstUnit.divide(src);
+
+  const coeffUnitStrs = Object.keys(coefficients);
+
+  // Find coefficient e which satisfies dst = e * src
+  const matchedCoeffUnitStr = coeffUnitStrs.find(coeffStr =>
+    requiredCoeffUnit.equalBase(math.unit(coeffStr)));
+  if (matchedCoeffUnitStr) {
+    const matchedCoeffValue = coefficients[matchedCoeffUnitStr][coeffKey];
+    if (matchedCoeffValue == null) return null;
+
+    const coeff = math.unit(matchedCoeffValue, matchedCoeffUnitStr);
+    return src.multiply(coeff).toNumber(dstUnitStr);
+  }
+
+  // Find coefficient e which satisfies dst = 1/e * src
+  const matchedCoeffInvUnitStr = coeffUnitStrs.find(coeffStr =>
+    requiredCoeffUnit.equalBase(math.unit(coeffStr).pow(-1)));
+  if (matchedCoeffInvUnitStr) {
+    const matchedCoeffValue = coefficients[matchedCoeffInvUnitStr][coeffKey];
+    if (matchedCoeffValue == null) return null;
+
+    const coeff = math.unit(matchedCoeffValue, matchedCoeffInvUnitStr);
+    return src.divide(coeff).toNumber(dstUnitStr);
+  }
+
+  return null;
 };

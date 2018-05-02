@@ -16,23 +16,11 @@
 
 /* eslint-env jest */
 
-jest.unmock('../convert');
+jest.disableAutomock();
 
-import math from 'lib/mathjs';
 import convert from '../convert';
 
 describe('convert()', () => {
-  let MockMathUnit;
-  let mockMathUnitToNumber;
-
-  beforeEach(() => {
-    mockMathUnitToNumber = jest.fn().mockReturnValue(1234);
-    MockMathUnit = class {
-      toNumber = mockMathUnitToNumber;
-    };
-    math.unit = jest.fn().mockReturnValue(new MockMathUnit());
-  });
-
   it('converts unit', () => {
     const value = {
       value: '180',
@@ -40,20 +28,14 @@ describe('convert()', () => {
     };
     const targetUnit = 'in';
 
-    convert(value, targetUnit);
-
-    expect(math.unit).toBeCalledWith('180', 'cm');
-    expect(mockMathUnitToNumber).toBeCalledWith('in');
+    expect(convert(value, targetUnit)).toEqual(70.86614173228347);
   });
 
-  it('returns as invalid input given', () => {
+  it('returns null with invalid input given', () => {
     const value = null;
     const targetUnit = 'in';
 
-    convert(value, targetUnit);
-
-    expect(math.unit).not.toBeCalled();
-    expect(mockMathUnitToNumber).not.toBeCalled();
+    expect(convert(value, targetUnit)).toBe(null);
   });
 
   it('returns input value directly if given units are the same', () => {
@@ -64,7 +46,18 @@ describe('convert()', () => {
     const targetUnit = 'in';
 
     expect(convert(value, targetUnit)).toEqual(70);
-    expect(math.unit).not.toBeCalled();
-    expect(mockMathUnitToNumber).not.toBeCalled();
+  });
+
+  describe('with conversion between units which have different bases', () => {
+    [
+      [{ value: 1, unit: 'mmol/L' }, 'mg/dL', 'glucose', 18.015588],
+      [{ value: 1, unit: 'mmol/L' }, 'mg/dL', 'cholesterol', 38.665354],
+      [{ value: 1, unit: 'mg/dL' }, 'mmol/L', 'glucose', 1 / 18.015588],
+      [{ value: 1, unit: 'mg/dL' }, 'mmol/L', 'cholesterol', 1 / 38.665354],
+    ].forEach(([value, targetUnit, coefficient, expected]) => {
+      it(`converts mg/dl to mmol/L in case of ${coefficient}`, () => {
+        expect(convert(value, targetUnit, coefficient)).toBeCloseTo(expected, 10e-10);
+      });
+    });
   });
 });
