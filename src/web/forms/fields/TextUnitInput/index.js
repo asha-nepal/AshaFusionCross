@@ -19,6 +19,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import convert from './convert';
+import { approximateFloat } from '../../../../utils';
 
 export { convert };
 
@@ -70,7 +71,7 @@ export class TextUnitInputComponent extends Component {
       return '';
     }
 
-    const converted = convert(value, this.state.unit, this.props.precision);
+    const converted = approximateFloat(convert(value, this.state.unit), this.props.precision);
 
     if (!converted || parseFloat(this.state.inputValue) === converted) {
       return this.state.inputValue;  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う

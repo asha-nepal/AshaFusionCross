@@ -20,19 +20,11 @@ import math from 'lib/mathjs';
 
 export default (
   value: ?ValueUnitType,
-  targetUnit: ?string,
-  precision: ?number
+  targetUnit: ?string
 ): ?number => {
   if (!value || !value.value || !value.unit) { return null; }
   if (!targetUnit) { return null; }
   if (value.unit === targetUnit) { return parseFloat(value.value); }
 
-  const converted = math.unit(value.value, value.unit).toNumber(targetUnit);
-
-  if (precision != null) {
-    const e = Math.pow(10, precision);
-    return Math.round(converted * e) / e;
-  }
-
-  return converted;
+  return math.unit(value.value, value.unit).toNumber(targetUnit);
 };
