@@ -16,9 +16,7 @@
 
 /* eslint-env jest */
 
-jest.unmock('react-redux');
-jest.unmock('../index');
-jest.unmock('../convert');
+jest.disableAutomock();
 
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -58,7 +56,7 @@ describe('<TextUnitInput />', () => {
     expect(getInput().prop('value')).toEqual('160.5');
   });
 
-  it('limits precision', () => {
+  it('limits precision with forceFixed enabled', () => {
     const onChange = jest.fn();
     const wrapper = shallow(
       <TextUnitInputComponent
@@ -66,6 +64,7 @@ describe('<TextUnitInput />', () => {
         units={['cm']}
         onChange={onChange}
         precision={1}
+        forceFixed
       />
     );
 
@@ -75,12 +74,37 @@ describe('<TextUnitInput />', () => {
 
     getInput().simulate('change', { target: { value: '160.5' } });
     expect(onChange).toBeCalledWith({ value: 160.5, unit: 'cm' });
+    onChange.mockClear();
 
     wrapper.setProps({ value: { value: 160.5, unit: 'cm' } });
     expect(getInput().prop('value')).toEqual('160.5');
 
     getInput().simulate('change', { target: { value: '160.55' } });
     expect(onChange).toBeCalledWith({ value: 160.5, unit: 'cm' });
+    onChange.mockClear();
+  });
+
+  it('converts unit with specified precision', () => {
+    const onChange = jest.fn();
+    const wrapper = shallow(
+      <TextUnitInputComponent
+        value={{ value: 168, unit: 'cm' }}
+        units={['cm', 'in']}
+        onChange={onChange}
+        precision={1}
+      />
+    );
+
+    const getInput = () => wrapper.find('input').at(0);
+    const getSelect = () => wrapper.find('select').at(0);
+
+    expect(getInput().prop('value')).toEqual('168');
+    expect(getSelect().prop('value')).toEqual('cm');
+
+    // 168 cm = 66.14173228346456 inch
+    getSelect().simulate('change', { target: { value: 'in' } });
+    expect(onChange).not.toHaveBeenCalled();
+    expect(getInput().prop('value')).toEqual('66.1');  // With precision=1
   });
 
   it('can take number', () => {
