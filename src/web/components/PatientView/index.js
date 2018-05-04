@@ -23,6 +23,7 @@ import _get from 'lodash.get';
 import Header from './Header';
 import PatientInfoOneline from './PatientInfoOneline';
 import RecordsTab from './RecordsTab';
+import PrintRecord from './PrintRecord';
 import Footer from './Footer';
 
 import RecordChartToggle from '../../containers/PatientView/RecordChartToggle';
@@ -205,6 +206,16 @@ export default class PatientView extends Component {
               </div>
 
               <RecordChartSelector records={records} />
+
+              {selectedActiveRecordIndex > -1 && (
+                <PrintRecord
+                  patient={patient}
+                  record={records[selectedActiveRecordIndex]}
+                >
+                  <span className="icon"><i className="fa fa-print" /></span>
+                  Print
+                </PrintRecord>
+              )}
 
               {selectedActiveRecordIndex > -1 && (
                 <div className="container">

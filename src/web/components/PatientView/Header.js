@@ -22,7 +22,6 @@ import {
 } from 'react-router-dom';
 
 import Header from '../common/Header';
-import PrintRecord from '../../containers/PrintRecord';
 
 export default ({
   patient,
@@ -54,13 +53,5 @@ export default ({
         {(patient.number ? `[${patient.number}] ` : '') + (patient.name || '(No name)')}
       </span>,
     ]}
-    menu={
-      <div className="navbar-end">
-        <PrintRecord className="navbar-item">
-          <span className="icon"><i className="fa fa-print" /></span>
-          Print
-        </PrintRecord>
-      </div>
-    }
   />
 );
