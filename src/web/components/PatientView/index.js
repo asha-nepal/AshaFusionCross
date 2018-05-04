@@ -103,7 +103,7 @@ export default class PatientView extends Component {
     const showRecord = !isNew && recordFormStyle;
 
     return (
-      <div className="footer-fixed-container">
+      <div>
         <Header
           patient={patient}
           onBackClick={() => {
