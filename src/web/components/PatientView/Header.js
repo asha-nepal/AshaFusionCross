@@ -22,12 +22,15 @@ import {
 } from 'react-router-dom';
 
 import Header from '../common/Header';
+import PrintRecord from './PrintRecord';
 
 export default ({
   patient,
+  record,
   onBackClick,
 }: {
   patient: PatientObject,
+  record: ?RecordObject,
   onBackClick?: () => boolean,
 }) => (
   <Header
@@ -53,5 +56,17 @@ export default ({
         {(patient.number ? `[${patient.number}] ` : '') + (patient.name || '(No name)')}
       </span>,
     ]}
+    menu={
+      <div className="navbar-end">
+        <div className="navbar-item">
+          {patient && record &&
+            <PrintRecord
+              patient={patient}
+              record={record}
+            />
+          }
+        </div>
+      </div>
+    }
   />
 );

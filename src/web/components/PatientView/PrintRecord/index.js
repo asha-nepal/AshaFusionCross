@@ -18,40 +18,48 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import FaIcon from '../../common/FaIcon';
+import Dropdown from '../../common/Dropdown';
 import PrintPage from './PrintPage';
 
 
 export default ({
   patient,
   record,
-  className,
-  children,
 }: {
   patient: PatientObject,
   record: RecordObject,
-  className: ?string,
-  children: React$Element<any>,
 }) => (
-  <a
-    className={className}
-    onClick={e => {
-      e.preventDefault();
+  <Dropdown
+    hoverable
+    right
+    title={<span><FaIcon type="print" size="small" /><span>Print</span></span>}
+    items={[
+      { label: 'Report', Component: PrintPage },
+    ].map(({ label, Component }) => (
+      <a
+        className="dropdown-item"
+        onClick={e => {
+          e.preventDefault();
 
-      const printWindow = window.open('/print.html');
-      if (printWindow) {
-        printWindow.onload = () => {
-          ReactDOM.render(
-            <PrintPage patient={patient} record={record} />,
-            printWindow.document.getElementById('root'),
-            () => {
-              printWindow.focus();
-              setTimeout(() => printWindow.print(), 1);
-//                printWindow.close();
-            }
-          );
-        };
-      }
-    }}
-  >{children}</a>
+          const printWindow = window.open('/print.html');
+          if (printWindow) {
+            printWindow.onload = () => {
+              ReactDOM.render(
+                <Component patient={patient} record={record} />,
+                printWindow.document.getElementById('root'),
+                () => {
+                  printWindow.focus();
+                  setTimeout(() => printWindow.print(), 1);
+    //                printWindow.close();
+                }
+              );
+            };
+          }
+        }}
+      >
+        <span>{label}</span>
+      </a>
+    ))}
+  />
 );
