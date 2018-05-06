@@ -27,9 +27,6 @@ const formatList = [
 export const createPrintSelector = ({
   Container,
   Item,
-}: {
-  Container: React$Element<*>,
-  Item: React$Element<*>,
 }) => ({
   patient,
   record,

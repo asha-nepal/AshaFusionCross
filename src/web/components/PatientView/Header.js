@@ -63,17 +63,18 @@ export default ({
       </span>,
     ]}
     menu={
-      <div className="navbar-end">
-        <div className="navbar-item has-dropdown is-hoverable">
-          <a className="navbar-link">
-            <FaIcon type="print" size="small" /> Print
-          </a>
-          <PrintSelector
-            patient={patient}
-            record={record}
-          />
+      patient && record &&
+        <div className="navbar-end">
+          <div className="navbar-item has-dropdown is-hoverable">
+            <a className="navbar-link">
+              <FaIcon type="print" size="small" /> Print
+            </a>
+            <PrintSelector
+              patient={patient}
+              record={record}
+            />
+          </div>
         </div>
-      </div>
     }
   />
 );
