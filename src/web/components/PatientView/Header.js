@@ -22,7 +22,13 @@ import {
 } from 'react-router-dom';
 
 import Header from '../common/Header';
-import PrintRecord from './PrintRecord';
+import FaIcon from '../common/FaIcon';
+import { createPrintSelector } from './PrintRecord';
+
+const PrintSelector = createPrintSelector({
+  Container: ({ ...props }) => <div {...props} className="navbar-dropdown" />,
+  Item: ({ ...props }) => <a {...props} className="navbar-item" />,
+});
 
 export default ({
   patient,
@@ -58,13 +64,14 @@ export default ({
     ]}
     menu={
       <div className="navbar-end">
-        <div className="navbar-item">
-          {patient && record &&
-            <PrintRecord
-              patient={patient}
-              record={record}
-            />
-          }
+        <div className="navbar-item has-dropdown is-hoverable">
+          <a className="navbar-link">
+            <FaIcon type="print" size="small" /> Print
+          </a>
+          <PrintSelector
+            patient={patient}
+            record={record}
+          />
         </div>
       </div>
     }

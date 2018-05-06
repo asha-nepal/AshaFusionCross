@@ -18,27 +18,29 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FaIcon from '../../common/FaIcon';
-import Dropdown from '../../common/Dropdown';
 import PrintPage from './PrintPage';
 
+const formatList = [
+  { label: 'Report', Component: PrintPage },
+];
 
-export default ({
+export const createPrintSelector = ({
+  Container,
+  Item,
+}: {
+  Container: React$Element<*>,
+  Item: React$Element<*>,
+}) => ({
   patient,
   record,
 }: {
   patient: PatientObject,
   record: RecordObject,
 }) => (
-  <Dropdown
-    hoverable
-    right
-    title={<span><FaIcon type="print" size="small" /><span>Print</span></span>}
-    items={[
-      { label: 'Report', Component: PrintPage },
-    ].map(({ label, Component }) => (
-      <a
-        className="dropdown-item"
+  <Container>
+    {formatList.map(({ label, Component }, i) =>
+      <Item
+        key={i}
         onClick={e => {
           e.preventDefault();
 
@@ -58,8 +60,8 @@ export default ({
           }
         }}
       >
-        <span>{label}</span>
-      </a>
-    ))}
-  />
+        {label}
+      </Item>
+    )}
+  </Container>
 );
