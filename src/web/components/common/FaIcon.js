@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,17 @@
 
 /* @flow */
 
-import { connect } from 'react-redux';
-import {
-  getActivePatient,
-  getSelectedActiveRecord,
-} from '../../selectors';
-import PrintRecord from '../components/PrintRecord';
+import React from 'react';
+import classNames from 'classnames';
 
-const mapStateToProps = (state) => ({
-  patient: getActivePatient(state),
-  record: getSelectedActiveRecord(state),
-});
-const mapDispatchToProps = null;
-
-export default connect(mapStateToProps, mapDispatchToProps)(PrintRecord);
+export default ({
+  type,
+  size,
+}: {
+  type: string,
+  size: ?string,
+}) => (
+  <span className={classNames('icon', { [size ? `is-${size}` : '']: size != null })}>
+    <i className={`fa fa-${type}`} />
+  </span>
+);

@@ -103,9 +103,10 @@ export default class PatientView extends Component {
     const showRecord = !isNew && recordFormStyle;
 
     return (
-      <div className="footer-fixed-container">
+      <div>
         <Header
           patient={patient}
+          record={selectedActiveRecordIndex > -1 ? records[selectedActiveRecordIndex] : null}
           onBackClick={() => {
             if (activeRecordsFormPristineness.some(x => !x)) {
               return confirm('Record(s) is (are) changed but not saved.\nIs it ok to go back?');
