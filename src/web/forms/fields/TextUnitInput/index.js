@@ -37,6 +37,21 @@ type Props = {
   onChange?: (value: ?ValueUnitType) => void,
 }
 
+export function findAlert(
+  alerts: Array<Object>,
+  value: ValueUnitType,
+  coefficient: ?string
+): Object {
+  return alerts.find((al) => {
+    const numValue = convert(value, al.unit, coefficient);
+
+    if (numValue == null) return false;
+
+    return ((al.range[0] == null || numValue >= al.range[0])
+      && (al.range[1] == null || al.range[1] > numValue));
+  });
+}
+
 export class TextUnitInputComponent extends Component {
   constructor(props: Props) {
     super(props);
@@ -106,17 +121,9 @@ export class TextUnitInputComponent extends Component {
 
     const inputValue = this.getInputValue(_value);
 
-    let alert = null;
-    if (_value != null && alerts) {
-      alert = alerts.find((al) => {
-        const numValue = convert(_value, al.unit, this.props.coefficient);
-
-        if (numValue == null) return false;
-
-        return ((al.range[0] == null || numValue >= al.range[0])
-          && (al.range[1] == null || al.range[1] > numValue));
-      });
-    }
+    const alert = (_value != null && alerts)
+      ? findAlert(alerts, _value, this.props.coefficient)
+      : null;
 
     return (
       <div
