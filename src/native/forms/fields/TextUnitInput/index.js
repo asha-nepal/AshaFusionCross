@@ -38,6 +38,7 @@ const TextField = MKTextField.textfield()
 type Props = {
   label: ?string,
   units: Array<string>,
+  coefficient: ?string,
   value: ?(ValueUnitType | number | string),
   precision: ?number,
   forceFixed: ?boolean,
@@ -98,7 +99,7 @@ export class TextUnitInputComponent extends Component {
       ? { value, unit: units[0] }
       : value;
 
-    const converted = convert(_value, this.state.unit, precision);
+    const converted = convert(_value, this.state.unit, this.props.coefficient);
 
     const inputValue = !converted || parseFloat(this.state.inputValue) === converted
       ? this.state.inputValue  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
