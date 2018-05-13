@@ -2175,7 +2175,11 @@
                 {
                   "field": "pathology.biochemistry.glucose_fasting",
                   "label": "Glucose Fasting",
-                  "type": "number", "min": 0, "suffix": "mg%",
+                  "class": "textunitinput",
+                  "units": ["mg/dl", "mmol/l"],
+                  "min": 0,
+                  "coefficient": "glucose",
+                  "precision": 4,
                   "alerts": [
                     {
                       "type": "warning",
@@ -2197,7 +2201,11 @@
                 {
                   "field": "pathology.biochemistry.glucose_pp_r",
                   "label": "Glucose PP/R",
-                  "type": "number", "min": 0, "suffix": "mg%",
+                  "class": "textunitinput",
+                  "min": 0,
+                  "units": ["mg/dl", "mmol/l"],
+                  "coefficient": "glucose",
+                  "precision": 4,
                   "alerts": [
                     {
                       "type": "warning",
@@ -2603,7 +2611,11 @@
                 {
                   "field": "pathology.biochemistry.cholesterol",
                   "label": "Cholesterol",
-                  "type": "number", "min": 0, "suffix": "mg%",
+                  "class": "textunitinput",
+                  "min": 0,
+                  "units": ["mg/dl", "mmol/l"],
+                  "coefficient": "cholesterol",
+                  "precision": 4,
                   "alerts": [
                     {
                       "type": "warning",
