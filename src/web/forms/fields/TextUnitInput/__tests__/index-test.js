@@ -21,7 +21,8 @@ jest.disableAutomock();
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { TextUnitInputComponent } from '../index';
+import { TextUnitInputComponent, findAlert } from '../index';
+import AlertIcon from '../alert-icon';
 
 describe('<TextUnitInput />', () => {
   it('can handle decimal point', () => {
@@ -155,5 +156,39 @@ describe('<TextUnitInput />', () => {
 
     wrapper.setProps({ value: null });
     expect(getInput().prop('value')).toEqual('');
+  });
+
+  it('shows alert', () => {
+    const wrapper = shallow(
+      <TextUnitInputComponent
+        value={{ value: 2.5, unit: 'm' }}
+        units={['cm', 'm']}
+        alerts={[
+          { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' },
+        ]}
+      />
+    );
+
+    expect(wrapper.find(AlertIcon).at(0).prop('type')).toEqual('danger');
+  });
+});
+
+describe('findAlert()', () => {
+  it('returns null with invalid input', () => {
+    const alerts = [
+      { type: 'danger', label: 'Danger', range: [-100, 100] },
+    ];
+
+    expect(findAlert(alerts, { value: null, unit: null })).toBeUndefined();
+  });
+
+  it('finds alert matching given value with unit conversion', () => {
+    const alerts = [
+      { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' },
+    ];
+
+    expect(findAlert(alerts, { value: 2.5, unit: 'm' })).toEqual(
+      { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' }
+    );
   });
 });
