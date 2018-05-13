@@ -29,6 +29,8 @@ type Props = {
   coefficient: ?string,
   value: ?(ValueUnitType | number | string),
   style?: Object,
+  min?: number,
+  max?: number,
   precision?: number,
   alerts: Array<Object>,
   forceFixed?: boolean,
@@ -107,6 +109,8 @@ export class TextUnitInputComponent extends Component {
       units,
       value,
       style,
+      min,
+      max,
       precision,
       alerts,
       forceFixed = false,
@@ -137,12 +141,22 @@ export class TextUnitInputComponent extends Component {
             {inputValue}
           </span>
         ) : (
-          <div className={classNames('control', { 'has-icons-left': alert })}>
+          <div
+            className={classNames(
+              'control',
+              {
+                'is-expanded': !style,
+                'has-icons-left': alert,
+              }
+            )}
+          >
             <input
               type="number"
               className="input"
               style={style}
               value={inputValue}
+              min={min}
+              max={max}
               step={precision ? Math.pow(10, -precision) : null}
               placeholder={placeholder}
               onChange={(e) => {
