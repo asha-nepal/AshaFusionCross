@@ -20,9 +20,9 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import convert from './convert';
 import { approximateFloat } from '../../../../utils';
+import AlertIcon from './alert-icon';
 
 export { convert };
-
 
 type Props = {
   units: Array<string>,
@@ -30,10 +30,26 @@ type Props = {
   value: ?(ValueUnitType | number | string),
   style?: Object,
   precision?: number,
+  alerts: Array<Object>,
   forceFixed?: boolean,
   placeholder?: string,
   readonly?: boolean,
   onChange?: (value: ?ValueUnitType) => void,
+}
+
+export function findAlert(
+  alerts: Array<Object>,
+  value: ValueUnitType,
+  coefficient: ?string
+): Object {
+  return alerts.find((al) => {
+    const numValue = convert(value, al.unit, coefficient);
+
+    if (numValue == null) return false;
+
+    return ((al.range[0] == null || numValue >= al.range[0])
+      && (al.range[1] == null || al.range[1] > numValue));
+  });
 }
 
 export class TextUnitInputComponent extends Component {
@@ -92,6 +108,7 @@ export class TextUnitInputComponent extends Component {
       value,
       style,
       precision,
+      alerts,
       forceFixed = false,
       placeholder,
       readonly = false,
@@ -103,6 +120,10 @@ export class TextUnitInputComponent extends Component {
       : value;
 
     const inputValue = this.getInputValue(_value);
+
+    const alert = (_value != null && alerts)
+      ? findAlert(alerts, _value, this.props.coefficient)
+      : null;
 
     return (
       <div
@@ -116,7 +137,7 @@ export class TextUnitInputComponent extends Component {
             {inputValue}
           </span>
         ) : (
-          <div className="control">
+          <div className={classNames('control', { 'has-icons-left': alert })}>
             <input
               type="number"
               className="input"
@@ -149,6 +170,7 @@ export class TextUnitInputComponent extends Component {
                 return true;
               }}
             />
+            {alert && <AlertIcon type={alert.type} />}
           </div>
         )}
         <div className="control">
