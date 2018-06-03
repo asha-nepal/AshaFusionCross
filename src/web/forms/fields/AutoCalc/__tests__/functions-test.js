@@ -42,3 +42,18 @@ describe('asha:bmi', () => {
       .toBeCloseTo(21.46);
   });
 });
+
+describe('asha:sum', () => {
+  it('calculates sum of arbitrary list of args', () => {
+    const func = functions['asha:sum'];
+
+    const arg1 = 1;
+
+    const arg2 = 2;
+
+    const arg3 = 3;
+
+    expect(func(arg1, arg2, arg3))
+      .toEqual(6);
+  });
+});
