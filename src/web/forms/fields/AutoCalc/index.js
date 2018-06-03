@@ -33,8 +33,7 @@ export const AutoCalcComponent = ({
   style,
   precision,
   alerts,
-  // type = 'text',
-  type, 
+  type,
 }: {
   value?: string,
   style: ?Object,
@@ -42,115 +41,63 @@ export const AutoCalcComponent = ({
   type?: string,
   alerts?: Array<Object>,
 }) => {
-
   let alert = null;
-  const overrideStyle= {};
-
-    // if (alerts) {
+  const overrideStyle = {};
   if (type === 'number' && alerts) {
     const numValue = parseFloat(value);
 
     alert = alerts.find(al =>
         ((al.range[0] == null || numValue >= al.range[0])
-          && (al.range[1] == null || al.range[1] > numValue ))
+          && (al.range[1] == null || al.range[1] > numValue))
       );
 
     if (style && style.width) {
-      overrideStyle.width=style.width + 32;
+      overrideStyle.width = style.width + 32;
     }
-
   }
 
   const bunchofCode = (
-  <span className="form-static" style={style}>
-   <table>
-    <tr>
-    <td width="389">
-    <span>
+    <span className="form-static" style={style}>
+      <table>
+        <tr>
+          <td width="389">
+            <span>
     {(precision && typeof value === 'number') ? value.toFixed(precision) : value}
-    </span>
-    </td>
-   
-    <td>
-    <div className={classNames('control'
-    )}
+            </span>
+          </td>
+          <td>
+            <div
+              className={classNames('control')}
+              data-balloon={alert && alert.label}
+              data-balloon-pos="up"
+            >
 
-    data-balloon={alert && alert.label} 
-    data-balloon-pos="up" > 
-    
-    {alert 
+    {alert
       ?
-      <span className={classNames(
+      <span
+        className={classNames(
         'icon',
-        {
-          [`has-text-${alert.type}`]: true}
+          {
+            [`has-text-${alert.type}`]: true }
+          )}
+      >
 
-        )}> 
-     
-      <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+        <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
       </span>
       :
       <span />
-    } 
-    </div>
-  </td>
-  </tr>
-  </table>
-
-    
-   </span>
+    }
+            </div>
+          </td>
+        </tr>
+      </table>
+    </span>
   );
-
-
 
   return (
     bunchofCode
-    );
-
-  };
-
-
-  // let alert = null;
-  // if (type === 'number' && alerts) {
-  //   const numValue = parseFloat(value);
-
-  //   alert = alerts.find(al =>
-  //     ((al.range[0] == null || numValue >= al.range[0])
-  //       && (al.range[1] == null || al.range[1] > numValue))
-  //     );
-
-
-  // const innerControl = (
-
-
-  //   <div classname={classNames('control',
-  //     {
-  //       'has-icons-left': alert,
-  //       'is-expanded': !style || !style.width,
-  //     }
-  //     )}
-  //     data-balloon={alert && alert.label}
-  //     data-balloon-pos="up"
-  //   >
-  //   {alert
-  //         ?
-  //         <span
-  //           className={classNames(
-  //             'icon is-small is-left',
-  //             { [`has-text-${alert.type}`]: true }
-  //           )}
-  //         >
-  //           <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
-  //         </span>
-  //         :
-  //         <span />
-  //       }
-
-  //   </div>
- 
-  // );
-// };
-
+  );
+};
 
 export function getValue(targetModel: Object, argKeys: Array<string>, calc: Function) {
   if (!targetModel) return null;
@@ -161,20 +108,18 @@ export function getValue(targetModel: Object, argKeys: Array<string>, calc: Func
   if (args.some(arg => typeof arg === 'undefined')) return null;
 
   return calc.apply(null, args);
-};
+}
 
 const mapStateToProps = (state, ownProps) => {
   const targetModel = _get(state, ownProps.rootModel);
   const calc = ownProps.calc || functions[ownProps.func];
   const value = getValue(targetModel, ownProps.inputs, calc);
 
-  return { value, };
-  };
+  return { value };
+};
 
 const mapDispatchToProps = null;
 
 export const AutoCalc = connect(
   mapStateToProps, mapDispatchToProps
 )(AutoCalcComponent);
-
-

@@ -52,7 +52,6 @@ export const BlockBody = ({
 export const Block = ({
   label,
   children,
-  alerts,
   widthaligned = false,
   border = false,
   layout = null,

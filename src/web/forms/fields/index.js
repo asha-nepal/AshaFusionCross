@@ -27,7 +27,7 @@ import { AttachmentInput } from './AttachmentInput';
 import { AttachmentViewer } from './AttachmentViewer';
 import { Checkbox, CheckboxComponent } from './Checkbox';
 import { CheckGroup } from './CheckGroup';
-import { AutoCalc, AutoCalcComponent } from './AutoCalc';
+import { AutoCalc } from './AutoCalc';
 import { GuideTools } from './GuideTools';
 import { Diagnoses } from './Diagnoses';
 import { MultiInput } from './MultiInput';
