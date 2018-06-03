@@ -56,7 +56,6 @@ const mapStateToProps = (state) => {
     records: getActiveRecords(state),
     selectedActiveRecordIndex: getSelectedActiveRecordIndex(state),
     isNew: !patient.hasOwnProperty('_rev'),
-    // isFetching: true,   // debug mode
     isFetching: state.status.isFetchingPatient,
     isPuttingPatient: state.status.isPuttingPatient,
     isPuttingRecord: state.status.isPuttingRecord,
