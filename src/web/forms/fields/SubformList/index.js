@@ -20,6 +20,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
+import _set from 'lodash.set';
 import Row from './Row';
 import Readonly from './Readonly';
 import DittoWrapper from '../common/DittoWrapper';
@@ -37,6 +38,7 @@ export type FormFieldDefinition = {
 export const SubformListComponent = ({
   values,
   fields,
+  autoAdd = true,
   onChange,
   onAddItemRequested,
   onRemoveItemRequested,
@@ -45,7 +47,8 @@ export const SubformListComponent = ({
 }: {
   values: ?Array<Object | string>,
   fields: Array<FormFieldDefinition>,
-  onChange: (index: ?number, newValue: Object) => void,
+  autoAdd: boolean,
+  onChange: (path: ?string, newValue: Object) => void,
   onAddItemRequested: (value: Object) => void,
   onRemoveItemRequested: (index: number) => void,
   readonly?: boolean,
@@ -62,6 +65,38 @@ export const SubformListComponent = ({
 
   const _values = values || [];
 
+  const rows = _values.map((value, i) =>
+    <Row
+      key={i}
+      value={value}
+      fields={fields}
+      onChange={(path, v) => onChange(path ? `[${i}]${path}` : `[${i}]`, v)}
+      onRemoveItemRequested={() => onRemoveItemRequested(i)}
+    />
+  );
+
+  const additionalRow = autoAdd ? (
+    <Row
+      key={_values.length}
+      value={{}}
+      fields={fields}
+      onChange={(path, v) => onAddItemRequested(path ? _set({}, path, v) : v)}
+    />
+  ) : (
+    <div
+      className="panel-block"
+      key={_values.length}
+    >
+      <button
+        className="button is-small is-primary is-outlined is-fullwidth"
+        onClick={e => {
+          e.target.blur();
+          onAddItemRequested({});
+        }}
+      >Add new item</button>
+    </div>
+  );
+
   return (
     <DittoWrapper
       className="field"
@@ -70,22 +105,7 @@ export const SubformListComponent = ({
       getPreviousData={getPreviousData}
     >
       <div className="panel">
-      {_values.map((value, i) =>
-        <Row
-          key={i}
-          value={value}
-          fields={fields}
-          onChange={v => onChange(i, v)}
-          onRemoveItemRequested={() => onRemoveItemRequested(i)}
-        />
-      ).concat(
-        <Row
-          key={_values.length}
-          value={{}}
-          fields={fields}
-          onChange={v => onAddItemRequested(v)}
-        />
-      )}
+      {rows.concat(additionalRow)}
       </div>
     </DittoWrapper>
   );
@@ -97,9 +117,9 @@ const mapStateToProps = (state, ownProps) => ({
   values: _get(state, ownProps.model),
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (index, value) =>
+  onChange: (path, value) =>
     dispatch(actions.change(
-      index == null ? ownProps.model : `${ownProps.model}[${index}]`, value)),
+      path == null ? ownProps.model : `${ownProps.model}${path}`, value)),
   onAddItemRequested: (value) => dispatch(actions.push(ownProps.model, value)),
   onRemoveItemRequested: (index) => dispatch(actions.remove(ownProps.model, index)),
 });

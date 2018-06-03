@@ -18,36 +18,40 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import math from 'lib/mathjs';
+import convert from './convert';
+import { approximateFloat } from '../../../../utils';
+import AlertIcon from './alert-icon';
 
-export const convert = (
-  value: ?ValueUnitType,
-  targetUnit: ?string,
-  precision: ?number
-): ?number => {
-  if (!value || !value.value || !value.unit) { return null; }
-  if (!targetUnit) { return null; }
-  if (value.unit === targetUnit) { return parseFloat(value.value); }
-
-  const converted = math.unit(value.value, value.unit).toNumber(targetUnit);
-
-  if (precision != null) {
-    const e = Math.pow(10, precision);
-    return Math.round(converted * e) / e;
-  }
-
-  return converted;
-};
+export { convert };
 
 type Props = {
   units: Array<string>,
+  coefficient: ?string,
   value: ?(ValueUnitType | number | string),
   style?: Object,
+  min?: number,
+  max?: number,
   precision?: number,
+  alerts: Array<Object>,
   forceFixed?: boolean,
   placeholder?: string,
   readonly?: boolean,
   onChange?: (value: ?ValueUnitType) => void,
+}
+
+export function findAlert(
+  alerts: Array<Object>,
+  value: ValueUnitType,
+  coefficient: ?string
+): Object {
+  return alerts.find((al) => {
+    const numValue = convert(value, al.unit, coefficient);
+
+    if (numValue == null) return false;
+
+    return ((al.range[0] == null || numValue >= al.range[0])
+      && (al.range[1] == null || al.range[1] > numValue));
+  });
 }
 
 export class TextUnitInputComponent extends Component {
@@ -86,7 +90,10 @@ export class TextUnitInputComponent extends Component {
       return '';
     }
 
-    const converted = convert(value, this.state.unit, this.props.precision);
+    const converted = approximateFloat(
+      convert(value, this.state.unit, this.props.coefficient),
+      this.props.precision
+    );
 
     if (!converted || parseFloat(this.state.inputValue) === converted) {
       return this.state.inputValue;  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
@@ -102,7 +109,10 @@ export class TextUnitInputComponent extends Component {
       units,
       value,
       style,
+      min,
+      max,
       precision,
+      alerts,
       forceFixed = false,
       placeholder,
       readonly = false,
@@ -114,6 +124,10 @@ export class TextUnitInputComponent extends Component {
       : value;
 
     const inputValue = this.getInputValue(_value);
+
+    const alert = (_value != null && alerts)
+      ? findAlert(alerts, _value, this.props.coefficient)
+      : null;
 
     return (
       <div
@@ -127,12 +141,22 @@ export class TextUnitInputComponent extends Component {
             {inputValue}
           </span>
         ) : (
-          <div className="control">
+          <div
+            className={classNames(
+              'control',
+              {
+                'is-expanded': !style,
+                'has-icons-left': alert,
+              }
+            )}
+          >
             <input
               type="number"
               className="input"
               style={style}
               value={inputValue}
+              min={min}
+              max={max}
               step={precision ? Math.pow(10, -precision) : null}
               placeholder={placeholder}
               onChange={(e) => {
@@ -160,6 +184,7 @@ export class TextUnitInputComponent extends Component {
                 return true;
               }}
             />
+            {alert && <AlertIcon type={alert.type} />}
           </div>
         )}
         <div className="control">
@@ -180,6 +205,6 @@ export class TextUnitInputComponent extends Component {
   }
 }
 
-import connect from '../../../common/forms/fields/TextUnitInput';
+import connect from '../../../../common/forms/fields/TextUnitInput';
 
 export const TextUnitInput = connect(TextUnitInputComponent);
