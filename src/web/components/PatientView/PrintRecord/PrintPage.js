@@ -19,12 +19,12 @@
 import React from 'react';
 import _get from 'lodash.get';
 
-import { convert } from '../../forms/fields/TextUnitInput';
-import { ReadonlyTextArea } from '../../forms/fields/TextArea';
-import { ReadonlyMultiInput } from '../../forms/fields/MultiInput';
-import { ReadonlySubformList } from '../../forms/fields/SubformList';
-import { CheckGroupComponent } from '../../forms/fields/CheckGroup';
-import { ReadonlyDiagnoses } from '../../forms/fields/Diagnoses';
+import { convert } from '../../../forms/fields/TextUnitInput';
+import { ReadonlyTextArea } from '../../../forms/fields/TextArea';
+import { ReadonlyMultiInput } from '../../../forms/fields/MultiInput';
+import { ReadonlySubformList } from '../../../forms/fields/SubformList';
+import { CheckGroupComponent } from '../../../forms/fields/CheckGroup';
+import { ReadonlyDiagnoses } from '../../../forms/fields/Diagnoses';
 
 function getStr(obj: Object, path: string, defaultValue: string = ''): string {
   const value = _get(obj, path, defaultValue);

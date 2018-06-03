@@ -18,27 +18,47 @@
 
 import React from 'react';
 
-export default ({
-  onSubmit,
-  freeze,
-}: {
-  onSubmit?: () => void,
-  freeze: boolean,
-}) => (
-  <nav className="navbar footer-fixed">
-    <div className="container">
-      <div className="navbar-brand">
-        <div className="navbar-item">
-          <button
-            className="button is-primary"
-            disabled={freeze || !onSubmit}
-            onClick={e => {
-              e.preventDefault();
-              if (onSubmit) onSubmit();
-            }}
-          >Submit</button>
+export default class extends React.Component {
+  componentDidMount() {
+    if (document.documentElement) {
+      document.documentElement.classList.add('has-navbar-fixed-bottom');
+    }
+  }
+
+  componentWillUnmount() {
+    if (document.documentElement) {
+      document.documentElement.classList.remove('has-navbar-fixed-bottom');
+    }
+  }
+
+  props: {
+    onSubmit?: () => void,
+    freeze: boolean,
+  }
+
+  render() {
+    const {
+      onSubmit,
+      freeze,
+    } = this.props;
+
+    return (
+      <nav className="navbar is-fixed-bottom is-light">
+        <div className="container">
+          <div className="navbar-brand">
+            <div className="navbar-item">
+              <button
+                className="button is-primary"
+                disabled={freeze || !onSubmit}
+                onClick={e => {
+                  e.preventDefault();
+                  if (onSubmit) onSubmit();
+                }}
+              >Submit</button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </nav>
-);
+      </nav>
+    );
+  }
+}

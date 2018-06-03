@@ -223,6 +223,6 @@ TextInputComponent.fieldProps = [
   { name: 'readonly', type: 'boolean' },
 ];
 
-import connect from '../../../common/forms/fields/TextInput';
+import connect from '../../../../common/forms/fields/TextInput';
 
 export const TextInput = connect(TextInputComponent);

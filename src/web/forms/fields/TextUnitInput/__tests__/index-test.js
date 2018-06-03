@@ -16,74 +16,13 @@
 
 /* eslint-env jest */
 
-jest.unmock('react-redux');
-jest.unmock('../TextUnitInput');
+jest.disableAutomock();
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import math from 'lib/mathjs';
 
-import { convert, TextUnitInputComponent } from '../TextUnitInput';
-
-describe('TextUnitInput.convert', () => {
-  let MockMathUnit;
-  let mockMathUnitToNumber;
-
-  beforeEach(() => {
-    mockMathUnitToNumber = jest.fn().mockReturnValue(1234);
-    MockMathUnit = class {
-      toNumber = mockMathUnitToNumber;
-    };
-    math.unit = jest.fn().mockReturnValue(new MockMathUnit());
-  });
-
-  it('converts unit', () => {
-    const value = {
-      value: '180',
-      unit: 'cm',
-    };
-    const targetUnit = 'in';
-
-    convert(value, targetUnit);
-
-    expect(math.unit).toBeCalledWith('180', 'cm');
-    expect(mockMathUnitToNumber).toBeCalledWith('in');
-  });
-
-  it('returns as invalid input given', () => {
-    const value = null;
-    const targetUnit = 'in';
-
-    convert(value, targetUnit);
-
-    expect(math.unit).not.toBeCalled();
-    expect(mockMathUnitToNumber).not.toBeCalled();
-  });
-
-  it('returns input value directly if given units are the same', () => {
-    const value = {
-      value: '70',
-      unit: 'in',
-    };
-    const targetUnit = 'in';
-
-    expect(convert(value, targetUnit)).toEqual(70);
-    expect(math.unit).not.toBeCalled();
-    expect(mockMathUnitToNumber).not.toBeCalled();
-  });
-
-  it('cuts off result as precision argument given', () => {
-    mockMathUnitToNumber.mockReturnValue(12.9876);
-    const value = {
-      value: '180',
-      unit: 'cm',
-    };
-    const targetUnit = 'in';
-    const precision = 2;
-
-    expect(convert(value, targetUnit, precision)).toEqual(12.99);
-  });
-});
+import { TextUnitInputComponent, findAlert } from '../index';
+import AlertIcon from '../alert-icon';
 
 describe('<TextUnitInput />', () => {
   it('can handle decimal point', () => {
@@ -118,7 +57,7 @@ describe('<TextUnitInput />', () => {
     expect(getInput().prop('value')).toEqual('160.5');
   });
 
-  it('limits precision', () => {
+  it('limits precision with forceFixed enabled', () => {
     const onChange = jest.fn();
     const wrapper = shallow(
       <TextUnitInputComponent
@@ -126,6 +65,7 @@ describe('<TextUnitInput />', () => {
         units={['cm']}
         onChange={onChange}
         precision={1}
+        forceFixed
       />
     );
 
@@ -135,12 +75,37 @@ describe('<TextUnitInput />', () => {
 
     getInput().simulate('change', { target: { value: '160.5' } });
     expect(onChange).toBeCalledWith({ value: 160.5, unit: 'cm' });
+    onChange.mockClear();
 
     wrapper.setProps({ value: { value: 160.5, unit: 'cm' } });
     expect(getInput().prop('value')).toEqual('160.5');
 
     getInput().simulate('change', { target: { value: '160.55' } });
     expect(onChange).toBeCalledWith({ value: 160.5, unit: 'cm' });
+    onChange.mockClear();
+  });
+
+  it('converts unit with specified precision', () => {
+    const onChange = jest.fn();
+    const wrapper = shallow(
+      <TextUnitInputComponent
+        value={{ value: 168, unit: 'cm' }}
+        units={['cm', 'in']}
+        onChange={onChange}
+        precision={1}
+      />
+    );
+
+    const getInput = () => wrapper.find('input').at(0);
+    const getSelect = () => wrapper.find('select').at(0);
+
+    expect(getInput().prop('value')).toEqual('168');
+    expect(getSelect().prop('value')).toEqual('cm');
+
+    // 168 cm = 66.14173228346456 inch
+    getSelect().simulate('change', { target: { value: 'in' } });
+    expect(onChange).not.toHaveBeenCalled();
+    expect(getInput().prop('value')).toEqual('66.1');  // With precision=1
   });
 
   it('can take number', () => {
@@ -191,5 +156,39 @@ describe('<TextUnitInput />', () => {
 
     wrapper.setProps({ value: null });
     expect(getInput().prop('value')).toEqual('');
+  });
+
+  it('shows alert', () => {
+    const wrapper = shallow(
+      <TextUnitInputComponent
+        value={{ value: 2.5, unit: 'm' }}
+        units={['cm', 'm']}
+        alerts={[
+          { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' },
+        ]}
+      />
+    );
+
+    expect(wrapper.find(AlertIcon).at(0).prop('type')).toEqual('danger');
+  });
+});
+
+describe('findAlert()', () => {
+  it('returns null with invalid input', () => {
+    const alerts = [
+      { type: 'danger', label: 'Danger', range: [-100, 100] },
+    ];
+
+    expect(findAlert(alerts, { value: null, unit: null })).toBeUndefined();
+  });
+
+  it('finds alert matching given value with unit conversion', () => {
+    const alerts = [
+      { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' },
+    ];
+
+    expect(findAlert(alerts, { value: 2.5, unit: 'm' })).toEqual(
+      { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' }
+    );
   });
 });
