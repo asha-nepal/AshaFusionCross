@@ -44,16 +44,27 @@ describe('asha:bmi', () => {
 });
 
 describe('asha:sum', () => {
+  const func = functions['asha:sum'];
+
   it('calculates sum of arbitrary list of args', () => {
-    const func = functions['asha:sum'];
+    // Integers
+    expect(func(1, 2, 3)).toEqual(6);
+    expect(func(3.5, 1.5)).toEqual(5.0);
+    // const arg1 = 1;
+  });
 
-    const arg1 = 1;
+  it('adds together nothing if no arg/nullarg & turns into number (0)', () => {
+    // Nullarg
+    expect(func(null)).toBe(0);
+    // Undefined
+    expect(func()).toEqual(0);
+  });
 
-    const arg2 = 2;
-
-    const arg3 = 3;
-
-    expect(func(arg1, arg2, arg3))
-      .toEqual(6);
+  it('adds numbers even if strings', () => {
+    // String
+    expect(func('1')).toEqual(1);
+    expect(func('1', 2)).toEqual(3);
+    expect(func(1, '2')).toEqual(3);
+    expect(func('1', '2')).toEqual(3);
   });
 });

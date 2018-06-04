@@ -29,7 +29,7 @@ export default {
 
   'asha:sum': (...args) => {
     try {
-      const total = math.sum(args);
+      const total = Number(math.sum(args));
       return total;
     } catch (exc) {
       return null;
