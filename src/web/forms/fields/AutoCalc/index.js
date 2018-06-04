@@ -56,13 +56,13 @@ export const AutoCalcComponent = ({
     }
   }
 
-  const bunchofCode = (
+  return (
     <span className="form-static" style={style}>
       <table>
         <tr>
           <td width="389">
             <span>
-    {(precision && typeof value === 'number') ? value.toFixed(precision) : value}
+              {(precision && typeof value === 'number') ? value.toFixed(precision) : value}
             </span>
           </td>
           <td>
@@ -72,30 +72,25 @@ export const AutoCalcComponent = ({
               data-balloon-pos="up"
             >
 
-    {alert
-      ?
-      <span
-        className={classNames(
-        'icon',
-          {
-            [`has-text-${alert.type}`]: true }
-          )}
-      >
-
-        <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
-      </span>
-      :
-      <span />
-    }
+            {alert ?
+              <span
+                className={classNames(
+                  'icon',
+                  {
+                    [`has-text-${alert.type}`]: true }
+                  )}
+              >
+                {console.log(alert.type)}
+                <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+              </span>
+              :
+              <span />
+            }
             </div>
           </td>
         </tr>
       </table>
     </span>
-  );
-
-  return (
-    bunchofCode
   );
 };
 
