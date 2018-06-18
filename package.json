@@ -39,7 +39,7 @@
     "react-dates": "^7.0.1",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",
-    "react-native": "^0.42.3",
+    "react-native": "^0.46.0",
     "react-native-material-kit": "^0.4.1",
     "react-native-randombytes": "^2.2.0",
     "react-native-router-flux": "^3.38.0",
