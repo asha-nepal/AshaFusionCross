@@ -35,7 +35,7 @@ import {
 } from '../../actions';
 
 import {
-  checkVisibility,
+  referAndGetBool,
 } from './utils';
 import FieldInsertPanel from './editor/FieldInsertPanel';
 import FieldEditor from './editor/FieldEditor';
@@ -63,14 +63,14 @@ function makeCreateChildFields(
 
     const elements = !styles ? [] : styles.map((field, i) => {
       // Handle "show" prop
-      if (!checkVisibility(state, rootModel, field.show)) {
+      if (!referAndGetBool(state, rootModel, field.show)) {
         return null;
       }
 
       // Translate "disabled" and "enabled" prop to boolean value
       field.disabled = (
-        checkVisibility(state, rootModel, field.disabled, false) ||
-        !checkVisibility(state, rootModel, field.enabled, true)
+        referAndGetBool(state, rootModel, field.disabled, false) ||
+        !referAndGetBool(state, rootModel, field.enabled, true)
       );
 
       const childFieldPath = `${fieldPath}[${i}]`;
