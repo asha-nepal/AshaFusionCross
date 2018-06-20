@@ -20,6 +20,7 @@ jest.unmock('react-redux');
 jest.unmock('lodash.get');
 jest.unmock('lodash.set');
 jest.unmock('../Row');
+jest.unmock('../../../utils');
 jest.unmock('../../common/fieldify');
 
 import React from 'react';
