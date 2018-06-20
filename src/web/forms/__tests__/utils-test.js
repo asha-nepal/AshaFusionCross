@@ -26,6 +26,16 @@ describe('checkVisibility', () => {
     expect(checkVisibility({}, 'hoge', false)).toBe(false);
   });
 
+  it('returns true if `show` prop is true', () => {
+    expect(checkVisibility({}, 'hoge', true)).toBe(true);
+  })
+
+  it('returns defaultValue if `show` prop is undefined', () => {
+    expect(checkVisibility({}, 'hoge', undefined)).toBe(true);
+    expect(checkVisibility({}, 'hoge', undefined, true)).toBe(true);
+    expect(checkVisibility({}, 'hoge', undefined, false)).toBe(false);
+  });
+
   it('returns referred value if show prop is given as string', () => {
     const state = {
       root: {

@@ -48,6 +48,7 @@ const ReadOnly = ({
 export const TextInputComponent = ({
   value,
   onChange,
+  disabled = false,
   style,
   type = 'text',
   prefix,
@@ -67,6 +68,7 @@ export const TextInputComponent = ({
 }: {
   value: ?string,
   onChange: (newValue: string) => void,
+  disabled: boolean,
   style?: Object,
   type?: string,
   prefix?: string,
@@ -142,6 +144,7 @@ export const TextInputComponent = ({
               [`is-${size}`]: size,
             }
           )}
+          disabled={disabled}
           style={{
             ...style,
             ...overrideStyle,

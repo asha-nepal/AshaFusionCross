@@ -67,6 +67,12 @@ function makeCreateChildFields(
         return null;
       }
 
+      // Translate "disabled" and "enabled" prop to boolean value
+      field.disabled = (
+        checkVisibility(state, rootModel, field.disabled, false) ||
+        !checkVisibility(state, rootModel, field.enabled, true)
+      );
+
       const childFieldPath = `${fieldPath}[${i}]`;
       const component = fieldComponents[field.class] || fieldComponents.textinput;
       let children = null;

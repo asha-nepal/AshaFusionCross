@@ -37,10 +37,9 @@ function checkCondition(state: Object, rootPath: ?string, condition: string): bo
   return !!referent;
 }
 
-export function checkVisibility(state: Object, rootPath: ?string, showProp: string|boolean = true) {
-  if (showProp === false) {
-    return false;
-  }
+export function checkVisibility(state: Object, rootPath: ?string, showProp: string|boolean, defaultValue: boolean=true) {
+  if (typeof showProp === 'undefined') return defaultValue;
+  if (typeof showProp === 'boolean') return showProp;
 
   if (typeof showProp === 'string') {
     const conditions = showProp.split('|');
