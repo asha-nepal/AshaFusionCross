@@ -3056,6 +3056,22 @@
               "show": "Pap_smear_report:others"
             }
           ]
+        },
+        {
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "field": "gynecology_description",
+              "label": "Gynecology_Description",
+              "class": "textarea"
+            },
+            {
+              "field": "gynecology_comment",
+              "label": "Gynecology_Comment",
+              "class": "textarea"
+            }
+          ]
         }
       ]
     },
