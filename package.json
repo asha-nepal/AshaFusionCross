@@ -61,7 +61,7 @@
     "redux-saga": "^0.15.6",
     "redux-saga-routines": "^2.0.2",
     "redux-thunk": "^2.3.0",
-    "reselect": "^3.0.1"
+    "reselect": "^2.5.4"
   },
   "devDependencies": {
     "argv": "0.0.2",
