@@ -68,7 +68,7 @@ function makeCreateChildFields(
       }
 
       // Translate "disabled" and "enabled" prop to boolean value
-      field.disabled = (
+      const disabled = (
         referAndGetBool(state, rootModel, field.disabled, false) ||
         !referAndGetBool(state, rootModel, field.enabled, true)
       );
@@ -114,15 +114,15 @@ function makeCreateChildFields(
         component,
         {
           key: i,
+          ...field,
           model: field.field ? `${rootModel}.${field.field}` : null,
-          label: field.label,
           fieldOptions: fieldOptions[field.field],
+          disabled,
           warning: warnings[field.field],
           rootModel,
           fieldEditProps,
           getPreviousData: field.ditto && getPreviousData &&
             (() => getPreviousData && getPreviousData(field.field)),
-          ...field,
         },
         children
       );
