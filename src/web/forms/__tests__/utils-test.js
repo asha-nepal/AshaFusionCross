@@ -28,7 +28,7 @@ describe('referAndGetBool', () => {
 
   it('returns true if orgProp is true', () => {
     expect(referAndGetBool({}, 'hoge', true)).toBe(true);
-  })
+  });
 
   it('returns defaultValue if orgProp is undefined', () => {
     expect(referAndGetBool({}, 'hoge', undefined)).toBe(true);
