@@ -109,7 +109,6 @@
     "mathjs": "^3.3.0",
     "mockdate": "^1.0.4",
     "node-sass": "^4.5.3",
-    "pouchdb": "^6.0.6",
     "pouchdb-authentication": "^1.1.1",
     "react-addons-test-utils": "^15.1.0",
     "redux-saga-test-plan": "^3.2.0",
