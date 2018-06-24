@@ -76,7 +76,6 @@
     "babel-runtime": "^6.9.0",
     "balloon-css": "^0.3.0",
     "blob-polyfill": "^1.0.20150320",
-    "chance": "^1.0.9",
     "compression": "^1.7.2",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.2",
