@@ -2,7 +2,6 @@
     "parser": "babel-eslint",
     "plugins": [
         "flowtype",
-        "flow-vars"
     ],
     "extends": "airbnb",
     "rules": {
@@ -19,8 +18,8 @@
                 "capIsNewExceptionPattern" : "^Immutable\\.."
             }
         ],
-        "flow-vars/define-flow-type": 1,
-        "flow-vars/use-flow-type": 1
+        "flowtype/define-flow-type": 1,
+        "flowtype/use-flow-type": 1
     },
     "settings": {
         "import/resolver": {
