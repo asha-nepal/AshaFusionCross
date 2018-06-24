@@ -15,12 +15,12 @@
  */
 
 /* eslint-env jest */
-jest.unmock('../RecordsTab');
-
 import React from 'react';
 import { shallow } from 'enzyme';
 
 import RecordsTab from '../RecordsTab';
+
+jest.unmock('../RecordsTab');
 
 describe('<RecordsTab />', () => {
   it('shows $created_at or $initialized_at field', () => {
@@ -43,7 +43,7 @@ describe('<RecordsTab />', () => {
     const wrapper = shallow(
       <RecordsTab
         records={records}
-      />
+      />,
     );
 
     expect(wrapper.find('a small').at(0).text())

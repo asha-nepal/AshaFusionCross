@@ -35,7 +35,11 @@ export default (Component: ReactClass<any>) => ({
     return (
       <EditableFieldWrapper className="field is-horizontal" fieldEditProps={fieldEditProps}>
         <div className="field-label">
-          {label && <label className="label">{label}</label>}
+          {label && (
+          <label className="label">
+            {label}
+          </label>
+          )}
         </div>
         <div className="field-body">
           <div className="field">
@@ -48,7 +52,11 @@ export default (Component: ReactClass<any>) => ({
 
   return (
     <EditableFieldWrapper className="field" fieldEditProps={fieldEditProps}>
-      {label && <label className="label">{label}</label>}
+      {label && (
+      <label className="label">
+        {label}
+      </label>
+      )}
       <Component {...props} />
     </EditableFieldWrapper>
   );

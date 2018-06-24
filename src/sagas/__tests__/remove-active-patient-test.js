@@ -16,10 +16,6 @@
 
 /* eslint-env jest, jasmine */
 
-jest.unmock('redux-saga/effects');
-jest.unmock('../remove-active-patient');
-jest.unmock('../../actions');
-
 import { put, call } from 'redux-saga/effects';
 import PouchDB from 'lib/pouchdb';
 import {
@@ -31,6 +27,10 @@ import {
 import {
   removeActivePatient,
 } from '../remove-active-patient';
+
+jest.unmock('redux-saga/effects');
+jest.unmock('../remove-active-patient');
+jest.unmock('../../actions');
 
 describe('removeActivePatient', () => {
   it('calls db.bulkDocs to remove patient and all related records at once', () => {
@@ -184,7 +184,9 @@ describe('removeActivePatient', () => {
   it('alerts if db.bulkDocs returns error response about removing a patient', () => {
     const db = new PouchDB();
     const mockResponse = [
-      { id: 'patient_1234', ok: true, error: true, name: 'forbidden' },
+      {
+        id: 'patient_1234', ok: true, error: true, name: 'forbidden',
+      },
       { id: 'record_1234_8888', ok: true, rev: 'revrevrev' },
       { id: 'record_1234_9999', ok: true, rev: 'revrevrev' },
     ];

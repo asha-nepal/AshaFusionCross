@@ -16,13 +16,13 @@
 
 /* eslint-env jest */
 
-jest.unmock('react-redux');
-jest.unmock('lodash.get');
-jest.unmock('../index');
-
 import { shallow } from 'enzyme';
 import React from 'react';
 import { AutoCalcComponent, getValue } from '../index';
+
+jest.unmock('react-redux');
+jest.unmock('lodash.get');
+jest.unmock('../index');
 
 describe('<AutoCalcComponent />', () => {
   it('shows value with given precision', () => {
@@ -30,7 +30,7 @@ describe('<AutoCalcComponent />', () => {
       <AutoCalcComponent
         value={1.234567}
         precision={2}
-      />
+      />,
     );
 
     expect(wrapper.find('span').first().text())
@@ -42,7 +42,7 @@ describe('<AutoCalcComponent />', () => {
       <AutoCalcComponent
         value={null}
         precision={2}
-      />
+      />,
     );
 
     expect(wrapper.find('span').first().text())

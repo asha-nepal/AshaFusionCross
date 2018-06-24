@@ -17,13 +17,13 @@
 /* @flow */
 /* eslint-env jest */
 
-jest.unmock('react-router-dom');
-jest.unmock('../index');
-
 import { shallow } from 'enzyme';
 import React from 'react';
 
 import PatientSelect from '../index';
+
+jest.unmock('react-router-dom');
+jest.unmock('../index');
 
 describe('<PatientSelect />', () => {
   it('calls fetchPatientList() at componentWillMount()', () => {

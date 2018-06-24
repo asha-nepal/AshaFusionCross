@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { take, call, put, select, race, cancelled } from 'redux-saga/effects';
+import {
+  take, call, put, select, race, cancelled,
+} from 'redux-saga/effects';
 import PouchDB from 'lib/pouchdb';
 import {
   checkAccessibility,
@@ -61,7 +63,7 @@ export function* watchOnPouchChanges(db: PouchInstance) {
 export function checkConnectable(db: PouchInstance) {
   return db.info()
     .then(() => true)
-    .catch((error) => error.status === 401);
+    .catch(error => error.status === 401);
 }
 
 const pouchOpts = {
@@ -101,7 +103,7 @@ export function createPouchInstance(config: PouchConfig) {
   return new PouchDB(remoteUrl, pouchOpts);
 }
 
-export function * connect(config: PouchConfig) {
+export function* connect(config: PouchConfig) {
   const db = createPouchInstance(config);
 
   // 接続可能か確かめる
@@ -111,19 +113,19 @@ export function * connect(config: PouchConfig) {
   }
 
   yield put(dbSetInstance(db));
-//    yield fork(watchOnPouchChanges, db);
+  //    yield fork(watchOnPouchChanges, db);
 
   return { db };
 }
 
-export function * disconnect() {
+export function* disconnect() {
   const db = yield select(state => state.db.instance);
   yield call(logout, db);
 
   yield put(dbSetInstance(null));
 }
 
-export function * connectFlow() {
+export function* connectFlow() {
   while (true) {
     const { payload } = yield take(DB_CONNECT_REQUEST);
 
@@ -158,7 +160,7 @@ export function * connectFlow() {
   }
 }
 
-export function * disconnectFlow() {
+export function* disconnectFlow() {
   while (true) {
     yield take(DB_DISCONNECT_REQUEST);
     yield call(disconnect);

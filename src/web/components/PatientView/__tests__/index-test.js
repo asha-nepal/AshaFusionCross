@@ -16,11 +16,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('react-redux-form');
-jest.unmock('immutable');
-jest.unmock('../index');
-jest.unmock('../../Select');
-
 import { shallow } from 'enzyme';
 import React from 'react';
 import Immutable from 'immutable';
@@ -28,6 +23,11 @@ import Immutable from 'immutable';
 import PatientView from '../index';
 import Footer from '../Footer';
 import Select from '../../Select';
+
+jest.unmock('react-redux-form');
+jest.unmock('immutable');
+jest.unmock('../index');
+jest.unmock('../../Select');
 
 describe('<PatientView />', () => {
   it('calls init() at componentWillMount()', () => {
@@ -84,7 +84,7 @@ describe('<PatientView />', () => {
         { id: 'fuga', label: 'Fuga' },
       ])}
       recordFormStyle={Immutable.fromJS(
-        { id: 'hoge', label: 'Hoge' }
+        { id: 'hoge', label: 'Hoge' },
       )}
     />);
 
@@ -112,7 +112,7 @@ describe('<PatientView />', () => {
         { id: 'hoge', label: 'Hoge' },
       ])}
       recordFormStyle={Immutable.fromJS(
-        { id: 'hoge', label: 'Hoge' }
+        { id: 'hoge', label: 'Hoge' },
       )}
     />);
 
@@ -129,7 +129,7 @@ describe('<PatientView />', () => {
           name: 'foo bar',
         }}
         isNew
-      />
+      />,
     );
 
     expect(wrapper.find(Footer).length).toBe(0);

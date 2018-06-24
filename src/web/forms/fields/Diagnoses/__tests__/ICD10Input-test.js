@@ -16,11 +16,11 @@
 
 /* eslint-env jest */
 
+import deepFreeze from 'deep-freeze';
+import { getSuggestions } from '../ICD10Input';
+
 jest.unmock('react-redux');
 jest.unmock('../ICD10Input');
-
-import { getSuggestions } from '../ICD10Input';
-import deepFreeze from 'deep-freeze';
 
 describe('getSuggestions()', () => {
   it('does forward matching and accepts multiple queries', () => {

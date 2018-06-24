@@ -33,7 +33,7 @@ export default ({
   <span
     className={classNames(
       'icon is-small is-left',
-      { [`has-text-${type}`]: true }
+      { [`has-text-${type}`]: true },
     )}
   >
     <i className={`fa fa-${alertFaIconClasses[type]}`} />

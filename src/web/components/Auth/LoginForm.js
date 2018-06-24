@@ -36,7 +36,9 @@ export default class extends React.Component {
       <div className="columns">
         <div className="column is-half-tablet is-offset-one-quarter-tablet">
           <div className="box">
-            <h1 className="title">Log in</h1>
+            <h1 className="title">
+Log in
+            </h1>
             <form>
               <div className="field">
                 <label className="label">
@@ -67,32 +69,40 @@ export default class extends React.Component {
                       <p className="control">
                         <button
                           className="button is-primary"
-                          onClick={e => {
+                          onClick={(e) => {
                             e.preventDefault();
                             login(this.refs.username.value, this.refs.password.value);
                           }}
-                        >Login</button>
+                        >
+Login
+                        </button>
                       </p>
                     </div>
                   </div>
                 </div>
-                {isDBPublic &&
+                {isDBPublic
+                  && (
                   <div className="level-left">
-                    <div className="level-item">or</div>
+                    <div className="level-item">
+or
+                    </div>
                     <div className="level-item">
                       <div className="field">
                         <p className="control">
                           <a
                             className="button"
-                            onClick={e => {
+                            onClick={(e) => {
                               e.preventDefault();
                               anonymousLogin();
                             }}
-                          >Log in as anonymous user</a>
+                          >
+Log in as anonymous user
+                          </a>
                         </p>
                       </div>
                     </div>
                   </div>
+                  )
                 }
               </nav>
             </form>

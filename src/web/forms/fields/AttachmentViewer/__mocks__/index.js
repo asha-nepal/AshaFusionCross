@@ -17,5 +17,7 @@
 import React from 'react';
 
 export const AttachmentViewer = () => (
-  <div>AttachmentViewer</div>
+  <div>
+AttachmentViewer
+  </div>
 );

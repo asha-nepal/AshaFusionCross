@@ -16,15 +16,15 @@
 
 /* eslint-env jest */
 
-jest.unmock('reselect');
-jest.unmock('moment');
-jest.unmock('../stats');
-jest.unmock('../patient-list');
-
 import moment from 'moment';
 import {
   getRecordListForStats,
 } from '../stats';
+
+jest.unmock('reselect');
+jest.unmock('moment');
+jest.unmock('../stats');
+jest.unmock('../patient-list');
 
 describe('getRecordListForStats', () => {
   describe('record filtering by date', () => {

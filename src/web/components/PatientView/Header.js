@@ -45,7 +45,7 @@ export default ({
         key="back"
         className="navbar-item"
         to="/"
-        onClick={e => {
+        onClick={(e) => {
           if (onBackClick && !onBackClick()) {
             e.preventDefault();
             return false;
@@ -53,7 +53,9 @@ export default ({
           return true;
         }}
       >
-        <span className="icon"><i className="fa fa-arrow-left" /></span>
+        <span className="icon">
+          <i className="fa fa-arrow-left" />
+        </span>
       </Link>,
       <span
         key="name"
@@ -63,11 +65,14 @@ export default ({
       </span>,
     ]}
     menu={
-      patient && record &&
+      patient && record
+        && (
         <div className="navbar-end">
           <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link">
-              <FaIcon type="print" size="small" /> Print
+              <FaIcon type="print" size="small" />
+              {' '}
+Print
             </a>
             <PrintSelector
               patient={patient}
@@ -75,6 +80,7 @@ export default ({
             />
           </div>
         </div>
+        )
     }
   />
 );

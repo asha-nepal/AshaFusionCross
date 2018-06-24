@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   load: () => dispatch(fetchRecordList()),
   setDate: (date: Moment) => dispatch(setStatsDate(date)),
 });

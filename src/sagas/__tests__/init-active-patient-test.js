@@ -16,13 +16,6 @@
 
 /* eslint-env jest */
 
-jest.mock('randomstring', () => jest.fn());
-jest.unmock('redux-saga/effects');
-jest.unmock('redux-saga');
-jest.unmock('react-redux-form');
-jest.unmock('../../actions');
-jest.unmock('../init-active-patient');
-
 import randomstringPromise from 'randomstring';
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
@@ -33,6 +26,13 @@ import {
   resetActiveRecords,
 } from '../../actions';
 import { initActivePatient } from '../init-active-patient';
+
+jest.mock('randomstring', () => jest.fn());
+jest.unmock('redux-saga/effects');
+jest.unmock('redux-saga');
+jest.unmock('react-redux-form');
+jest.unmock('../../actions');
+jest.unmock('../init-active-patient');
 
 describe('INIT_ACTIVE_PATIENT', () => {
   it('calls changeActivePatient with new ID and resetActiveRecords as silent', () => {

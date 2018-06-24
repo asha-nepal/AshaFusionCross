@@ -75,9 +75,7 @@ function makeCreateChildFields(
         // Delegate `layout` prop to children
         let childFields = field.children;
         if (field.layout) {
-          childFields = childFields.map(child =>
-            Object.assign({}, { layout: field.layout }, child)
-          );
+          childFields = childFields.map(child => Object.assign({}, { layout: field.layout }, child));
         }
         children = createChildFields(childFields, `${childFieldPath}.children`);
       }
@@ -114,14 +112,14 @@ function makeCreateChildFields(
           warning: warnings[field.field],
           rootModel,
           fieldEditProps,
-          getPreviousData: field.ditto && getPreviousData &&
-            (() => getPreviousData && getPreviousData(field.field)),
+          getPreviousData: field.ditto && getPreviousData
+            && (() => getPreviousData && getPreviousData(field.field)),
           ...field,
         },
-        children
+        children,
       );
     })
-    .filter(element => element);  // Remove null
+      .filter(element => element); // Remove null
 
     // Insert <FieldInsertPanel /> between fields for field editing
     if (editing) {
@@ -129,17 +127,15 @@ function makeCreateChildFields(
         <FieldInsertPanel
           key={`dnd-target-${i}`}
           onFieldInsert={field => onFieldInsert(fieldPath, i, field)}
-          onFieldMove={(fromParentPath, fromIndex) =>
-            onFieldMove(fromParentPath, fromIndex, fieldPath, i)}
+          onFieldMove={(fromParentPath, fromIndex) => onFieldMove(fromParentPath, fromIndex, fieldPath, i)}
         />,
         b,
       ]), []).concat(
         <FieldInsertPanel
           key={`dnd-target-${elements.length}`}
           onFieldInsert={field => onFieldInsert(fieldPath, elements.length, field)}
-          onFieldMove={(fromParentPath, fromIndex) =>
-            onFieldMove(fromParentPath, fromIndex, fieldPath, elements.length)}
-        />
+          onFieldMove={(fromParentPath, fromIndex) => onFieldMove(fromParentPath, fromIndex, fieldPath, elements.length)}
+        />,
       );
     }
 
@@ -210,31 +206,37 @@ export class DynamicFormComponent extends React.Component {
   }
 
   onEditFocus: Function
+
   onEditFocus(fieldPath: ?string): void {
     this.setState({ editFocusOn: fieldPath });
   }
 
   onFieldInsert: Function
+
   onFieldInsert(parentPath: string, index: number, field: FormField) {
     this.props.onFieldInsert(parentPath, index, field);
   }
 
   onFieldMove: Function
+
   onFieldMove(fromParentPath: string, fromIndex: number, toParentPath: string, toIndex: number) {
     this.props.onFieldMove(fromParentPath, fromIndex, toParentPath, toIndex);
   }
 
   onFieldChange: Function
+
   onFieldChange(parentPath: string, index: number, field: FormField) {
     this.props.onFieldChange(parentPath, index, field);
   }
 
   onFieldRemove: Function
+
   onFieldRemove(parentPath: string, index: number) {
     this.props.onFieldRemove(parentPath, index);
   }
 
   onFormAdd: Function
+
   onFormAdd(id: string, label: string) {
     this.props.onFormAdd(id, label);
   }
@@ -260,7 +262,7 @@ export class DynamicFormComponent extends React.Component {
       state, model, getPreviousData, fieldOptions, warnings,
       this.state.editing, this.onEditFocus, this.state.editFocusOn,
       this.onFieldInsert, this.onFieldMove,
-      this.onFieldChange, this.onFieldRemove
+      this.onFieldChange, this.onFieldRemove,
     );
 
     return (
@@ -268,73 +270,96 @@ export class DynamicFormComponent extends React.Component {
         model={model}
         onSubmit={onSubmit}
       >
-        {this.state.editing &&
+        {this.state.editing
+          && (
           <div className="block is-clearfix">
             <FormAdder
               className="is-pulled-right"
               onFormAdd={this.onFormAdd}
             />
           </div>
+          )
         }
 
         {/* TODO: toJS() should be removed and handle Immutable object directly */}
         {createChildFields(style.toJS ? style.toJS() : style)}
 
-        {(onSubmit || onRemove) &&
+        {(onSubmit || onRemove)
+          && (
           <div className="level">
-            {onSubmit &&
+            {onSubmit
+              && (
               <p className="level-left">
                 <button type="submit" className="button is-primary" disabled={freeze}>
                   Submit
                 </button>
               </p>
+              )
             }
-            {onRemove &&
+            {onRemove
+              && (
               <p className="level-right">
                 <a
                   className="button is-danger"
                   disabled={freeze}
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     if (!freeze && onRemove) { onRemove(); }
                   }}
-                ><i className="fa fa-times" />Remove</a>
+                >
+                  <i className="fa fa-times" />
+Remove
+                </a>
               </p>
+              )
             }
           </div>
+          )
         }
 
-        {customizable &&
+        {customizable
+          && (
           <div className="block is-clearfix">
-            {!this.state.editing &&
+            {!this.state.editing
+              && (
               <a
                 className="button is-pulled-right is-small"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   this.setState({ editing: true });
                 }}
-              >Customize form</a>
+              >
+Customize form
+              </a>
+              )
             }
-            {this.state.editing &&
+            {this.state.editing
+              && (
               <div className="block is-pulled-right">
                 <a
                   className="button is-success"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     this.setState({ editing: false });
                     if (onFormsSave) onFormsSave();
                   }}
-                >Finish customizing</a>
+                >
+Finish customizing
+                </a>
                 <a
                   className="button is-default"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     this.setState({ editing: false });
                   }}
-                >Cancel</a>
+                >
+Cancel
+                </a>
               </div>
+              )
             }
           </div>
+          )
         }
       </Form>
     );
@@ -344,23 +369,23 @@ export class DynamicFormComponent extends React.Component {
 export default connect(
   state => ({ state }),
   (dispatch, ownProps) => ({
-    onFieldInsert: (parentPath, index, field) =>
-      dispatch(
-        insertDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
-    onFieldMove: (fromParentPath, fromIndex, toParentPath, toIndex) =>
-      dispatch(
-        moveDformStyleField(
-          ownProps.formGroup, ownProps.formStyleId,
-          fromParentPath, fromIndex, toParentPath, toIndex)),
-    onFieldChange: (parentPath, index, field) =>
-      dispatch(
-        updateDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field)),
-    onFieldRemove: (parentPath, index) =>
-      dispatch(
-        removeDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index)),
-    onFormAdd: (id, label) =>
-      dispatch(dformStyleFormAdd(ownProps.formGroup, id, label)),
-  })
+    onFieldInsert: (parentPath, index, field) => dispatch(
+      insertDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field),
+    ),
+    onFieldMove: (fromParentPath, fromIndex, toParentPath, toIndex) => dispatch(
+      moveDformStyleField(
+        ownProps.formGroup, ownProps.formStyleId,
+        fromParentPath, fromIndex, toParentPath, toIndex,
+      ),
+    ),
+    onFieldChange: (parentPath, index, field) => dispatch(
+      updateDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index, field),
+    ),
+    onFieldRemove: (parentPath, index) => dispatch(
+      removeDformStyleField(ownProps.formGroup, ownProps.formStyleId, parentPath, index),
+    ),
+    onFormAdd: (id, label) => dispatch(dformStyleFormAdd(ownProps.formGroup, id, label)),
+  }),
 )(
-  DragDropContext(HTML5Backend)(DynamicFormComponent)
+  DragDropContext(HTML5Backend)(DynamicFormComponent),
 );

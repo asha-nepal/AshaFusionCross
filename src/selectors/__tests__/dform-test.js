@@ -16,11 +16,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('immutable');
-jest.unmock('reselect');
-jest.unmock('deep-freeze');
-jest.unmock('../dform');
-
 import Immutable from 'immutable';
 import deepFreeze from 'deep-freeze';
 import {
@@ -32,6 +27,11 @@ import {
   getIsAdmin,
   getUserRoles,
 } from '../auth';
+
+jest.unmock('immutable');
+jest.unmock('reselect');
+jest.unmock('deep-freeze');
+jest.unmock('../dform');
 
 describe('getRecordFormStyleId', () => {
   it('selects recordFormStyleId', () => {

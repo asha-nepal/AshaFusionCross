@@ -49,7 +49,7 @@ export class GuideTools extends Component {
       <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
         <a
           className="button"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             this.setState({ modal: 'diabetes' });
             return false;
@@ -60,7 +60,7 @@ export class GuideTools extends Component {
 
         <a
           className="button"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             this.setState({ modal: 'bloodpressure' });
             return false;
@@ -74,22 +74,24 @@ export class GuideTools extends Component {
           onClose={() => this.setState({ modal: false })}
         >
           <div className="box">
-          {this.state.modal === 'diabetes' ? (
-            DiabetesTable
-          ) : (
-            <div>
-              <img
-                src={modalBloodPressureImg}
-                alt="Diagnosis algorithm"
-              />
-              <p>
+            {this.state.modal === 'diabetes' ? (
+              DiabetesTable
+            ) : (
+              <div>
+                <img
+                  src={modalBloodPressureImg}
+                  alt="Diagnosis algorithm"
+                />
+                <p>
                 Cited from:
                 "Health Care Guideline Hypertension Diagnosis and Treatment",
                 Institute for Clinical Systems Improvement
-              </p>
-              <a target="_blank" href="/assets/HTN.pdf">Original PDF</a>
-            </div>
-          )}
+                </p>
+                <a target="_blank" href="/assets/HTN.pdf">
+Original PDF
+                </a>
+              </div>
+            )}
           </div>
         </Modal>
       </div>

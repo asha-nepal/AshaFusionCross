@@ -16,11 +16,6 @@
 
 /* eslint-env jest, jasmine */
 
-jest.unmock('redux-saga/effects');
-jest.unmock('mockdate');
-jest.unmock('../put-active-patient');
-jest.unmock('../../actions');
-
 import MockDate from 'mockdate';
 import { put, call } from 'redux-saga/effects';
 import PouchDB from 'lib/pouchdb';
@@ -37,6 +32,11 @@ import {
 import {
   putActivePatient,
 } from '../put-active-patient';
+
+jest.unmock('redux-saga/effects');
+jest.unmock('mockdate');
+jest.unmock('../put-active-patient');
+jest.unmock('../../actions');
 
 describe('putActivePatient', () => {
   const mockCurrentTime = 9876543210987;

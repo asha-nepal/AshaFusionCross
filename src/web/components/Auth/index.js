@@ -53,30 +53,38 @@ export default ({
           <div className="column is-half-tablet is-offset-one-quarter-tablet">
             <div className="logo">
               <img className="logo-img" src={logo} alt="ASHA fusion" />
-              <h1 className="logo-title">ASHA fusion</h1>
+              <h1 className="logo-title">
+ASHA fusion
+              </h1>
             </div>
           </div>
         </div>
 
-        {!isDBConnected &&
+        {!isDBConnected
+          && (
           <DBConfigForm
             defaultValue={currentDBConfig}
-            onConnect={(config) => connectDB(config)}
+            onConnect={config => connectDB(config)}
           />
+          )
         }
 
-        {isDBConnected &&
+        {isDBConnected
+          && (
           <LoginForm
             login={login}
             isDBPublic={isDBPublic}
             anonymousLogin={anonymousLogin}
           />
+          )
         }
 
-        {isDBConnected && isDBPublic &&
+        {isDBConnected && isDBPublic
+          && (
           <SignupForm
             signup={signup}
           />
+          )
         }
       </div>
     </section>

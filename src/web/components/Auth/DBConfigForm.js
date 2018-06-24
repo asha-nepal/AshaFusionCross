@@ -34,7 +34,9 @@ export default class extends Component {
       <div className="columns">
         <div className="column is-half-tablet is-offset-one-quarter-tablet">
           <div className="box">
-            <h1 className="title">Connect</h1>
+            <h1 className="title">
+Connect
+            </h1>
             <form>
               <div className="field">
                 <label className="label">
@@ -69,7 +71,7 @@ export default class extends Component {
                 <p className="control">
                   <button
                     className="button is-primary"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
 
                       const config = Object.assign({}, defaultValue, {
@@ -81,7 +83,9 @@ export default class extends Component {
 
                       onConnect(config);
                     }}
-                  >Connect</button>
+                  >
+Connect
+                  </button>
                 </p>
               </div>
             </form>

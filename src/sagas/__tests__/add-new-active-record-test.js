@@ -16,18 +16,11 @@
 
 /* eslint-env jest, jasmine */
 
-jest.unmock('redux-thunk');
-jest.unmock('redux-saga');
-jest.unmock('redux-saga/effects');
-jest.unmock('react-redux-form');
-jest.unmock('mockdate');
-jest.unmock('../../actions');
-jest.unmock('../add-new-active-record');
-jest.unmock('../../selectors');
-
 import MockDate from 'mockdate';
 import { delay } from 'redux-saga';
-import { take, put, call, select } from 'redux-saga/effects';
+import {
+  take, put, call, select,
+} from 'redux-saga/effects';
 
 import {
   ADD_NEW_ACTIVE_RECORD,
@@ -41,6 +34,15 @@ import {
   addNewActiveRecord,
   watchAddNewActiveRecord,
 } from '../add-new-active-record';
+
+jest.unmock('redux-thunk');
+jest.unmock('redux-saga');
+jest.unmock('redux-saga/effects');
+jest.unmock('react-redux-form');
+jest.unmock('mockdate');
+jest.unmock('../../actions');
+jest.unmock('../add-new-active-record');
+jest.unmock('../../selectors');
 
 describe('ADD_NEW_ACTIVE_RECORD', () => {
   const mockCurrentTime = 1234567890123;

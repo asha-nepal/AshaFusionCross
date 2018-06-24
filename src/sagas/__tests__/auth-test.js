@@ -16,11 +16,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('redux-saga/effects');
-jest.unmock('../auth');
-jest.unmock('../../actions');
-jest.unmock('../../actions/auth');
-
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import PouchDB from 'lib/pouchdb';
@@ -30,6 +25,11 @@ import { afterLoggedIn } from '../auth';
 import {
   loginSuccess,
 } from '../../actions';
+
+jest.unmock('redux-saga/effects');
+jest.unmock('../auth');
+jest.unmock('../../actions');
+jest.unmock('../../actions/auth');
 
 describe('afterLoggedIn()', () => {
   beforeEach(() => {

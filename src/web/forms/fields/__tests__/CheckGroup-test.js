@@ -16,13 +16,13 @@
 
 /* eslint-env jest */
 
-jest.unmock('react-redux');
-jest.unmock('../CheckGroup');
-
 import { shallow } from 'enzyme';
 import React from 'react';
 
 import { CheckGroupComponent } from '../CheckGroup';
+
+jest.unmock('react-redux');
+jest.unmock('../CheckGroup');
 
 describe('<CheckGroupComponent />', () => {
   it('adds value as unchecked button is clicked', () => {

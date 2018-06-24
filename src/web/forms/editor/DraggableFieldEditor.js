@@ -62,7 +62,11 @@ class DraggableFieldEditor extends React.Component {
     try {
       child = React.Children.only(children);
     } catch (e) {
-      child = <div>{children}</div>;
+      child = (
+        <div>
+          {children}
+        </div>
+      );
     }
 
     return (
@@ -74,22 +78,22 @@ class DraggableFieldEditor extends React.Component {
           {
             dragging: isDragging,
             hover: this.state.hover && !isDragging,
-          }
+          },
         )}
         style={{
           ...style,
           position: 'relative',
         }}
-        onClick={e => {
+        onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
           if (fieldEditProps) fieldEditProps.onFocus();
         }}
-        onMouseOver={e => {
+        onMouseOver={(e) => {
           e.stopPropagation();
           this.setState({ hover: true });
         }}
-        onMouseOut={e => {
+        onMouseOut={(e) => {
           e.stopPropagation();
           this.setState({ hover: false });
         }}
@@ -102,5 +106,5 @@ class DraggableFieldEditor extends React.Component {
 }
 
 export default DragSource(
-  'editable-field', editableFieldSource, collect
+  'editable-field', editableFieldSource, collect,
 )(DraggableFieldEditor);

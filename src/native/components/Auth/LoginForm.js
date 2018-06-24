@@ -88,10 +88,12 @@ export default class extends Component {
           }}
         />
 
-        {isDBPublic &&
+        {isDBPublic
+          && (
           <AnonymousLoginButton
             onPress={() => anonymousLogin()}
           />
+          )
         }
       </View>
     );

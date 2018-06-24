@@ -21,12 +21,12 @@ import {
   insertOrChangeActiveRecord,
 } from 'actions';
 
-export default function * (change) {
+export default function* (change) {
   const doc = change.doc;
 
   // For PatientSelect
   if (doc.type === 'patient' || doc.type === 'record') {
-    yield put(fetchPatientList());  // TODO: 全件fetchし直すのは効率が悪い
+    yield put(fetchPatientList()); // TODO: 全件fetchし直すのは効率が悪い
   }
 
   // For PatientView
@@ -37,7 +37,7 @@ export default function * (change) {
     yield put(changeActivePatient(doc, { silent: true }));
   } else if (doc.type === 'record') {
     const activePatientIdBody = activePatientId.replace(/^patient_/, '');
-    const match = doc._id.match(/record_(.+)_.+/);  // Extract patientId
+    const match = doc._id.match(/record_(.+)_.+/); // Extract patientId
     if (match && (match[1] === activePatientIdBody)) {
       yield put(insertOrChangeActiveRecord(doc, { silent: true }));
     }

@@ -20,6 +20,8 @@ import React from 'react';
 import classNames from 'classnames';
 import AutosuggestInput from './AutosuggestInput';
 
+import connect from '../../../../common/forms/fields/TextInput';
+
 const alertFaIconClasses = {
   danger: 'warning',
   warning: 'warning',
@@ -38,9 +40,17 @@ const ReadOnly = ({
   suffix: ?string,
 }) => (
   <div className="field">
-    {label && <label className="label">{label}</label>}
-    {value &&
-      <span className="form-static">{[prefix, value, suffix].join(' ')}</span>
+    {label && (
+    <label className="label">
+      {label}
+    </label>
+    )}
+    {value
+      && (
+      <span className="form-static">
+        {[prefix, value, suffix].join(' ')}
+      </span>
+      )
     }
   </div>
 );
@@ -93,8 +103,7 @@ export const TextInputComponent = ({
   if (type === 'number' && alerts) {
     const numValue = parseFloat(value);
 
-    alert = alerts.find(al =>
-      ((al.range[0] == null || numValue >= al.range[0])
+    alert = alerts.find(al => ((al.range[0] == null || numValue >= al.range[0])
         && (al.range[1] == null || al.range[1] > numValue)));
 
     if (style && style.width) {
@@ -110,17 +119,19 @@ export const TextInputComponent = ({
 
   const innerControl = (
     <div className={classNames('field', { 'has-addons': hasAddons })}>
-      {prefix &&
+      {prefix
+        && (
         <div className="control">
           <span
             className={classNames(
               'button is-static',
-              { [`is-${size}`]: size }
+              { [`is-${size}`]: size },
             )}
           >
             {prefix}
           </span>
         </div>
+        )
       }
       <div
         className={classNames(
@@ -128,7 +139,7 @@ export const TextInputComponent = ({
           {
             'is-expanded': !style || !style.width,
             'has-icons-left': alert,
-          }
+          },
         )}
         data-balloon={alert && alert.label}
         data-balloon-pos="up"
@@ -140,7 +151,7 @@ export const TextInputComponent = ({
             {
               'is-warning': warning,
               [`is-${size}`]: size,
-            }
+            },
           )}
           style={{
             ...style,
@@ -156,32 +167,38 @@ export const TextInputComponent = ({
           {...additionalProps}
         />
         {alert
-          ?
-          <span
-            className={classNames(
-              'icon is-small is-left',
-              { [`has-text-${alert.type}`]: true }
-            )}
-          >
-            <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
-          </span>
-          :
-          <span />
+          ? (
+            <span
+              className={classNames(
+                'icon is-small is-left',
+                { [`has-text-${alert.type}`]: true },
+              )}
+            >
+              <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
+            </span>
+          )
+          : <span />
         }
       </div>
-      {suffix &&
+      {suffix
+        && (
         <p className="control">
           <span
             className={classNames(
               'button is-static',
-              { [`is-${size}`]: size }
+              { [`is-${size}`]: size },
             )}
           >
             {suffix}
           </span>
         </p>
+        )
       }
-      {warning && <span className="help is-warning">{warning}</span>}
+      {warning && (
+      <span className="help is-warning">
+        {warning}
+      </span>
+      )}
     </div>
   );
 
@@ -197,11 +214,13 @@ export const TextInputComponent = ({
             <div key={i} className="control">
               <a
                 className="button"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   onChange(String(setValue));
                 }}
-              >{valueSetter.label}</a>
+              >
+                {valueSetter.label}
+              </a>
             </div>
           );
         })}
@@ -222,7 +241,5 @@ TextInputComponent.fieldProps = [
   { name: 'required', type: 'boolean' },
   { name: 'readonly', type: 'boolean' },
 ];
-
-import connect from '../../../../common/forms/fields/TextInput';
 
 export const TextInput = connect(TextInputComponent);

@@ -16,12 +16,12 @@
 
 /* eslint-env jest */
 
-jest.unmock('../PrintPage');
-
-import PrintPage from '../PrintPage';
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import PrintPage from '../PrintPage';
+
+jest.unmock('../PrintPage');
 
 describe('<PrintPage/>', () => {
   it('takes patient and record data then render', () => {
@@ -42,7 +42,7 @@ describe('<PrintPage/>', () => {
       <PrintPage
         patient={patient}
         record={record}
-      />
+      />,
     );
   });
 });

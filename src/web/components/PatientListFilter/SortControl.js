@@ -29,21 +29,27 @@ export default ({
   onOrderChange: (asc: boolean) => void,
 }) => (
   <div className="field is-grouped">
-    <span className="form-static">Sort:</span>
+    <span className="form-static">
+Sort:
+    </span>
     <p className="control">
       <span className="select">
         <select
           value={field}
           onChange={e => onFieldChange(e.target.value)}
         >
-          <option value="name">Name</option>
-          <option value="number">No.</option>
+          <option value="name">
+Name
+          </option>
+          <option value="number">
+No.
+          </option>
         </select>
       </span>
     </p>
     <p className="form-static">
       <a
-        onClick={e => {
+        onClick={(e) => {
           e.preventDefault();
           onOrderChange(!asc);
         }}

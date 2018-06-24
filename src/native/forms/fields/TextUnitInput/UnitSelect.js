@@ -93,7 +93,9 @@ export default class extends Component {
         >
           <Text
             style={styles.unitButton}
-          >{unit}</Text>
+          >
+            {unit}
+          </Text>
         </TouchableOpacity>
         <Modal
           animationType="slide"
@@ -104,20 +106,22 @@ export default class extends Component {
           <View
             style={styles.selectContainer}
           >
-          {units.map(item =>
-            <TouchableOpacity
-              key={item}
-              style={styles.selectItemContainer}
-              onPress={() => {
-                onValueChange(item);
-                this.setState({ open: false });
-              }}
-            >
-              <Text
-                style={styles.selectItem}
-              >{item}</Text>
-            </TouchableOpacity>
-          )}
+            {units.map(item => (
+              <TouchableOpacity
+                key={item}
+                style={styles.selectItemContainer}
+                onPress={() => {
+                  onValueChange(item);
+                  this.setState({ open: false });
+                }}
+              >
+                <Text
+                  style={styles.selectItem}
+                >
+                  {item}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </View>
         </Modal>
       </View>

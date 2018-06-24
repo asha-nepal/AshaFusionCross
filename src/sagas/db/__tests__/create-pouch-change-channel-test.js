@@ -18,10 +18,10 @@
 
 import EventEmitter from 'events';
 
-jest.unmock('../create-pouch-change-channel');
-
 import { eventChannel } from 'redux-saga';
 import createPouchChangeChannel from '../create-pouch-change-channel';
+
+jest.unmock('../create-pouch-change-channel');
 
 const emit = jest.fn();
 eventChannel.mockImplementation((factory) => {

@@ -27,6 +27,8 @@ import {
 } from 'react-native-material-kit';
 import styles from './styles';
 
+import connect from '../../../common/forms/fields/TextInput';
+
 const keyboardTypes = {
   number: 'numeric',
   email: 'email-address',
@@ -54,20 +56,28 @@ export const TextInputComponent = ({
   suffix?: string
 }) => (
   <View style={styles.fieldContainer}>
-    <Text style={styles.fieldLabel}>{label}</Text>
+    <Text style={styles.fieldLabel}>
+      {label}
+    </Text>
     <View style={styles.columns}>
-      {prefix && <Text style={styles.textfieldPrefix}>{prefix}</Text>}
+      {prefix && (
+      <Text style={styles.textfieldPrefix}>
+        {prefix}
+      </Text>
+      )}
       <TextField
         value={value || ''}
         onChangeText={onChange}
         keyboardType={type && keyboardTypes[type] || 'default'}
         {...rest}
       />
-      {suffix && <Text style={styles.textfieldPrefix}>{suffix}</Text>}
+      {suffix && (
+      <Text style={styles.textfieldPrefix}>
+        {suffix}
+      </Text>
+      )}
     </View>
   </View>
 );
-
-import connect from '../../../common/forms/fields/TextInput';
 
 export const TextInput = connect(TextInputComponent);

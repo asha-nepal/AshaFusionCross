@@ -17,9 +17,13 @@
 import React from 'react';
 
 export const SelectGroup = () => (
-  <div>SelectGroup</div>
+  <div>
+SelectGroup
+  </div>
 );
 
 export const SelectGroupComponent = () => (
-  <div>SelectGroupComponent</div>
+  <div>
+SelectGroupComponent
+  </div>
 );

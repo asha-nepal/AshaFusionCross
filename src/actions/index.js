@@ -108,35 +108,32 @@ export const addNewActiveRecord = (patientId: string) => ({
 
 export const changeActivePatient = formActions.change.bind(null, 'activePatient');
 
-export const changeActiveRecord = (index: number, record: RecordObject, option: ?Object) =>
-  formActions.change(`activeRecords[${index}]`, record, option);
+export const changeActiveRecord = (index: number, record: RecordObject, option: ?Object) => formActions.change(`activeRecords[${index}]`, record, option);
 
 export const changeActiveRecords = formActions.change.bind(null, 'activeRecords');
 
-export const setActiveRecordPristine = (index: number) =>
-  formActions.setPristine(`activeRecords[${index}]`);
+export const setActiveRecordPristine = (index: number) => formActions.setPristine(`activeRecords[${index}]`);
 
 export const resetActiveRecords = formActions.reset.bind(null, 'activeRecords');
 
-export const insertOrChangeActiveRecord = (record: RecordObject, option: ?Object) =>
-  (dispatch: Function, getState: Function) => {
-    const key = '_id';
-    const model = 'activeRecords';
-    const collection = getState().activeRecords;
-    const index = collection.findIndex(c => c[key] === record[key]);
+export const insertOrChangeActiveRecord = (record: RecordObject, option: ?Object) => (dispatch: Function, getState: Function) => {
+  const key = '_id';
+  const model = 'activeRecords';
+  const collection = getState().activeRecords;
+  const index = collection.findIndex(c => c[key] === record[key]);
 
-    if (index > -1) {
-      dispatch(
-        formActions.change(`${model}[${index}]`, record, option)
-      );
-    } else {
-      // pushでの末尾追加ではない
-      // IDでソートし，複数端末間で時間差submitしても順序を一意に保つ
-      dispatch(
-        formActions.change(model, collection.concat(record).sort((a, b) => a._id > b._id), option)
-      );
-    }
-  };
+  if (index > -1) {
+    dispatch(
+      formActions.change(`${model}[${index}]`, record, option),
+    );
+  } else {
+    // pushでの末尾追加ではない
+    // IDでソートし，複数端末間で時間差submitしても順序を一意に保つ
+    dispatch(
+      formActions.change(model, collection.concat(record).sort((a, b) => a._id > b._id), option),
+    );
+  }
+};
 
 
 export const PUSH_ALERT = 'PUSH_ALERT';

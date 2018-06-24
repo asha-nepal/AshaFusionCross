@@ -35,7 +35,11 @@ export const CheckboxComponent = ({
 }) => (
   readonly ? (
     <p className="form-static">
-      {value ? <span className="icon"><i className="fa fa-check" /></span> : '---'}
+      {value ? (
+        <span className="icon">
+          <i className="fa fa-check" />
+        </span>
+      ) : '---'}
     </p>
   ) : (
     <p className="control">
@@ -45,10 +49,10 @@ export const CheckboxComponent = ({
           {
             'is-primary': value,
             [`is-${size}`]: size,
-          }
+          },
         )}
         style={{ width: 32 }}
-        onClick={e => {
+        onClick={(e) => {
           e.preventDefault();
           onChange(!value);
         }}
@@ -64,9 +68,9 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
+  onChange: newValue => dispatch(actions.change(ownProps.model, newValue)),
 });
 
 export const Checkbox = connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(CheckboxComponent);

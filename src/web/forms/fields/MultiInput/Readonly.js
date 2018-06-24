@@ -23,12 +23,16 @@ export default ({
   values: ?Array<string>,
 }) => (
   values
-  ? (
-    <div className="form-static is-multiline">
-      <ul>
-        {values.map((v, i) => <li key={i}>{v}</li>)}
-      </ul>
-    </div>
-  )
-  : null
+    ? (
+      <div className="form-static is-multiline">
+        <ul>
+          {values.map((v, i) => (
+            <li key={i}>
+              {v}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+    : null
 );

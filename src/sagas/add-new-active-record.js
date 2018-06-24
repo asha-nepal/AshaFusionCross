@@ -15,7 +15,9 @@
  */
 
 import { delay } from 'redux-saga';
-import { take, put, call, select } from 'redux-saga/effects';
+import {
+  take, put, call, select,
+} from 'redux-saga/effects';
 import {
   ADD_NEW_ACTIVE_RECORD,
   selectActiveRecord,

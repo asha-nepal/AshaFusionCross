@@ -29,7 +29,7 @@ const store = configureStore();
 store.runSaga(rootSaga);
 
 export default (props: {children: ReactClass<{}>}) => (
-  <Provider store={store} >
+  <Provider store={store}>
     {props.children}
   </Provider>
 );

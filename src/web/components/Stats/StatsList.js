@@ -25,12 +25,16 @@ const RankDisplay = ({
 }) => (
   <table className="table">
     <tbody>
-      {value.map((item, i) =>
+      {value.map((item, i) => (
         <tr key={i}>
-          <th>{item[1]}</th>
-          <td>{item[0].join ? item[0].join(', ') : item[0]}</td>
+          <th>
+            {item[1]}
+          </th>
+          <td>
+            {item[0].join ? item[0].join(', ') : item[0]}
+          </td>
         </tr>
-      )}
+      ))}
     </tbody>
   </table>
 );
@@ -40,9 +44,15 @@ const ValueDisplay = ({
 }: {
   value: string | number | Array<[Array<string>, number]>
 }) => {
-  if (typeof value === 'string' || typeof value === 'number') return <span>{value}</span>;
+  if (typeof value === 'string' || typeof value === 'number') {
+    return (
+      <span>
+        {value}
+      </span>
+    );
+  }
 
-  if (Array.isArray(value)) {  // `rank` type
+  if (Array.isArray(value)) { // `rank` type
     return <RankDisplay value={value} />;
   }
 
@@ -57,15 +67,21 @@ export default({
   statsRules: {[key: string]: {name: string}},
 }) => (
   <div>
-    <h3 className="subtitle">Stats</h3>
+    <h3 className="subtitle">
+Stats
+    </h3>
     <table className="table">
       <tbody>
-        {Object.keys(stats).map(key =>
+        {Object.keys(stats).map(key => (
           <tr key={key}>
-            <th>{statsRules[key].name || key}</th>
-            <td><ValueDisplay value={stats[key]} /></td>
+            <th>
+              {statsRules[key].name || key}
+            </th>
+            <td>
+              <ValueDisplay value={stats[key]} />
+            </td>
           </tr>
-        )}
+        ))}
       </tbody>
     </table>
   </div>

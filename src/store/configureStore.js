@@ -36,8 +36,8 @@ export default () => {
           middlewares,
           typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
             ? window.devToolsExtension()
-            : f => f
-        )
+            : f => f,
+        ),
     ),
     runSaga: sagaMiddleware.run,
   };

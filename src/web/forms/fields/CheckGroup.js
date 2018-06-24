@@ -29,7 +29,7 @@ const ReadOnly = ({
   options: Array<{id: string, label: string}>,
 }) => (
   <div className="form-static">
-    {options.map(option => {
+    {options.map((option) => {
       if (value && value.indexOf(option.id) > -1) {
         return (
           <p key={option.id}>
@@ -60,19 +60,19 @@ export const CheckGroupComponent = ({
     <ReadOnly value={value} options={options} />
   ) : (
     <div className="buttons is-width-restricted">
-      {options.map(option => {
+      {options.map((option) => {
         const isChecked = value && value.indexOf(option.id) > -1;
         return (
           <a
             key={option.id}
             className={isChecked ? 'button is-primary' : 'button'}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               if (onChange) {
                 onChange(
                   isChecked
                     ? (value || []).filter(v => v !== option.id)
-                    : (value || []).concat(option.id)
+                    : (value || []).concat(option.id),
                 );
               }
             }}
@@ -80,7 +80,9 @@ export const CheckGroupComponent = ({
             <span className="icon is-small">
               <i className={isChecked ? 'fa fa-check-square' : 'fa fa-square-o'} />
             </span>
-            <span>{option.label}</span>
+            <span>
+              {option.label}
+            </span>
           </a>
         );
       })}
@@ -93,10 +95,10 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
+  onChange: newValue => dispatch(actions.change(ownProps.model, newValue)),
 });
 
 export const CheckGroup = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CheckGroupComponent);

@@ -70,7 +70,7 @@ export default class DatePicker extends Component {
           <div style={{ display: 'flex', height: '100%', alignItems: 'center' }}>
             <a
               className="delete"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 onDatesChange({ startDate: null, endDate: null });
               }}

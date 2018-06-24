@@ -16,9 +16,9 @@
 
 /* eslint-env jest */
 
-jest.unmock('../index');
-
 import { approximateFloat } from '../index';
+
+jest.unmock('../index');
 
 describe('approximateFloat()', () => {
   [

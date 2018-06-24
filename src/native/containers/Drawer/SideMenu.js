@@ -24,7 +24,7 @@ import {
 import SideMenu from '../../components/Drawer/SideMenu';
 
 const mapStateToProps = null;
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(requestLogout()),
   disconnect: () => dispatch(dbDisconnectRequest()),
 });

@@ -28,26 +28,30 @@ import PatientSelect from '../containers/PatientSelect.react';
 import PatientView from '../containers/PatientView.react';
 import Drawer from './Drawer';
 
-const DrawerButton = (<Icon
-  name="menu"
-  size={24}
-  color="#fff"
-  onPress={() => Actions.refresh({ key: 'drawer', open: value => !value })}
-/>);
+const DrawerButton = (
+  <Icon
+    name="menu"
+    size={24}
+    color="#fff"
+    onPress={() => Actions.refresh({ key: 'drawer', open: value => !value })}
+  />
+);
 
-const BackButton = (<Icon
-  name="keyboard-arrow-left"
-  size={32}
-  color="#fff"
-  onPress={() => Actions.pop()}
-/>);
+const BackButton = (
+  <Icon
+    name="keyboard-arrow-left"
+    size={32}
+    color="#fff"
+    onPress={() => Actions.pop()}
+  />
+);
 
 export default () => (
   <Root>
     <View style={{ flex: 1 }}>
       <Router>
         <Scene key="auth" component={Auth}>
-          <Scene key="drawer" component={Drawer} open={false} >
+          <Scene key="drawer" component={Drawer} open={false}>
             <Scene key="main">
               <Scene
                 initial

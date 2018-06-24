@@ -17,6 +17,7 @@
 /* @flow */
 
 import Immutable from 'immutable';
+import _toPath from 'lodash.topath';
 import {
   DFORM_STYLE_FIELD_INSERT,
   DFORM_STYLE_FIELD_UPDATE,
@@ -26,7 +27,6 @@ import {
   DFORM_STYLE_FORM_SET,
 } from '../../../actions';
 import initialFormStyles from './initial/styles';
-import _toPath from 'lodash.topath';
 
 export default function (
   formStyles: Map<string, List<Map<string, any>>> = Immutable.fromJS(initialFormStyles),
@@ -51,7 +51,7 @@ export default function (
 
       return formStyles.updateIn(
         fullParentPathArray,
-        prev => (prev ? prev.splice(index, 0, fieldObj) : Immutable.List([fieldObj]))
+        prev => (prev ? prev.splice(index, 0, fieldObj) : Immutable.List([fieldObj])),
       );
     }
 
@@ -110,7 +110,7 @@ export default function (
       const toPathArray = [..._toPath(toParentPath), toIndex];
       const toPathArrayAfterRemoval = toPathArray.map((toSegment, i) => {
         const fromSegment = fromPathArray[i];
-        if (isNaN(toSegment) || isNaN(fromSegment)) {  // If either is not numeric
+        if (isNaN(toSegment) || isNaN(fromSegment)) { // If either is not numeric
           return toSegment;
         }
 
@@ -121,8 +121,7 @@ export default function (
       });
 
       const fullFromPathArray = [group, formIndex, 'style', ...fromPathArray];
-      const fullToParentPathArrayAfterRemoval =
-        [group, formIndex, 'style', ...toPathArrayAfterRemoval.slice(0, -1)];
+      const fullToParentPathArrayAfterRemoval = [group, formIndex, 'style', ...toPathArrayAfterRemoval.slice(0, -1)];
       const toIndexAfterRemoval = toPathArrayAfterRemoval[toPathArrayAfterRemoval.length - 1];
 
       // Move the field by removing and inserting
@@ -132,7 +131,7 @@ export default function (
 
       return removedFormStyles.updateIn(
         fullToParentPathArrayAfterRemoval,
-        prev => prev.insert(toIndexAfterRemoval, movingField)
+        prev => prev.insert(toIndexAfterRemoval, movingField),
       );
     }
 

@@ -53,25 +53,37 @@ export default class extends Component {
 
     return (
       <Header
-        brand={
+        brand={(
           <div className="navbar-item">
             <img src={logo} alt="ASHA fusion" />
           </div>
-        }
-        menu={isLoggedIn &&
+)}
+        menu={isLoggedIn
+          && (
           <div className="navbar-end">
-            <div className="navbar-item">{loggedInUser || '(anonymous user)'}</div>
-            {isAdmin && <Link className="navbar-item" to="admin">Admin</Link>}
-            {logout &&
+            <div className="navbar-item">
+              {loggedInUser || '(anonymous user)'}
+            </div>
+            {isAdmin && (
+            <Link className="navbar-item" to="admin">
+Admin
+            </Link>
+            )}
+            {logout
+              && (
               <a
                 className="navbar-item"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   logout();
                 }}
-              >Log out</a>
+              >
+Log out
+              </a>
+              )
             }
           </div>
+          )
         }
       />
     );

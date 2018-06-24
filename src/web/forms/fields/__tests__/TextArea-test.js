@@ -16,13 +16,13 @@
 
 /* eslint-env jest */
 
-jest.unmock('react-redux');
-jest.unmock('../TextArea');
-
 import { shallow } from 'enzyme';
 import React from 'react';
 
 import { TextAreaComponent } from '../TextArea';
+
+jest.unmock('react-redux');
+jest.unmock('../TextArea');
 
 describe('<TextArea />', () => {
   it('changes the number of rows according to the input text if `shrink` prop is true', () => {
@@ -32,7 +32,7 @@ describe('<TextArea />', () => {
       <TextAreaComponent
         value={text}
         shrink
-      />
+      />,
     );
 
     expect(wrapper.find('textarea').prop('rows')).toBe(3);
@@ -45,7 +45,7 @@ describe('<TextArea />', () => {
       <TextAreaComponent
         value={text}
         shrink
-      />
+      />,
     );
 
     expect(wrapper.find('textarea').prop('rows')).toBe(5);

@@ -65,7 +65,8 @@ class DittoContainer extends React.Component {
           transitionEnterTimeout={100}
           transitionLeaveTimeout={100}
         >
-        {this.state.hover && getPreviousData &&
+          {this.state.hover && getPreviousData
+          && (
           <div
             key="tooltip"
             className="field-tooltip"
@@ -76,7 +77,7 @@ class DittoContainer extends React.Component {
           >
             <a
               className="button is-primary"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
 
                 if (!getPreviousData) return;
@@ -90,8 +91,11 @@ class DittoContainer extends React.Component {
 
                 onChange(prev);
               }}
-            >Ditto</a>
+            >
+Ditto
+            </a>
           </div>
+          )
         }
         </ReactCSSTransitionGroup>
         {children}
@@ -113,13 +117,19 @@ export default ({
   getPreviousData?: () => any,
 }) => (
   getPreviousData
-  ? (
-    <DittoContainer
-      value={value}
-      onChange={onChange}
-      getPreviousData={getPreviousData}
-      {...rest}
-    >{children}</DittoContainer>
-  )
-  : <div {...rest}>{children}</div>
+    ? (
+      <DittoContainer
+        value={value}
+        onChange={onChange}
+        getPreviousData={getPreviousData}
+        {...rest}
+      >
+        {children}
+      </DittoContainer>
+    )
+    : (
+      <div {...rest}>
+        {children}
+      </div>
+    )
 );

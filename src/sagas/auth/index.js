@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { fork, call, put, take, select, cancel, race } from 'redux-saga/effects';
+import {
+  fork, call, put, take, select, cancel, race,
+} from 'redux-saga/effects';
 
 import {
   loginSuccess,
@@ -154,7 +156,7 @@ export function* anonymousLoginFlow() {
   }
 }
 
-export function * alreadyLoggedIn(db: PouchInstance) {
+export function* alreadyLoggedIn(db: PouchInstance) {
   authedTask = yield fork(afterLoggedIn, db);
 }
 
@@ -193,7 +195,7 @@ export function* signupFlow() {
   }
 }
 
-export function * logoutFlow() {
+export function* logoutFlow() {
   while (true) {
     yield take(REQUEST_LOGOUT);
     const db = yield select(state => state.db.instance);

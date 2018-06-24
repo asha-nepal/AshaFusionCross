@@ -17,13 +17,19 @@
 import React from 'react';
 
 export const SubformList = () => (
-  <div>SubformListComponent</div>
+  <div>
+SubformListComponent
+  </div>
 );
 
 export const ReadonlySubformList = () => (
-  <div>ReadonlySubformList</div>
+  <div>
+ReadonlySubformList
+  </div>
 );
 
 export const SubformListComponent = () => (
-  <div>SubformListComponent</div>
+  <div>
+SubformListComponent
+  </div>
 );

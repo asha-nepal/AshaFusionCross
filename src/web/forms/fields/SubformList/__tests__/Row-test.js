@@ -16,16 +16,16 @@
 
 /* eslint-env jest */
 
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import Row, { fieldComponents } from '../Row';
+
 jest.unmock('react-redux');
 jest.unmock('lodash.get');
 jest.unmock('lodash.set');
 jest.unmock('../Row');
 jest.unmock('../../common/fieldify');
-
-import React from 'react';
-import { shallow } from 'enzyme';
-
-import Row, { fieldComponents } from '../Row';
 
 describe('<SubformList.Row />', () => {
   it('renders child components, distributes their values, and handles their onChanges', () => {
@@ -50,7 +50,7 @@ describe('<SubformList.Row />', () => {
           },
         ]}
         onChange={onChange}
-      />
+      />,
     );
 
     const textInputs = wrapper.find(fieldComponents.textinput);

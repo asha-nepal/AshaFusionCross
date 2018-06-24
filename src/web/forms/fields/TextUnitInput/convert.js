@@ -44,8 +44,7 @@ export default (
   const coeffUnitStrs = Object.keys(coefficients);
 
   // Find coefficient e which satisfies dst = e * src
-  const matchedCoeffUnitStr = coeffUnitStrs.find(coeffStr =>
-    requiredCoeffUnit.equalBase(math.unit(coeffStr)));
+  const matchedCoeffUnitStr = coeffUnitStrs.find(coeffStr => requiredCoeffUnit.equalBase(math.unit(coeffStr)));
   if (matchedCoeffUnitStr) {
     const matchedCoeffValue = coefficients[matchedCoeffUnitStr][coeffKey];
     if (matchedCoeffValue == null) return null;
@@ -55,8 +54,7 @@ export default (
   }
 
   // Find coefficient e which satisfies dst = 1/e * src
-  const matchedCoeffInvUnitStr = coeffUnitStrs.find(coeffStr =>
-    requiredCoeffUnit.equalBase(math.unit(coeffStr).pow(-1)));
+  const matchedCoeffInvUnitStr = coeffUnitStrs.find(coeffStr => requiredCoeffUnit.equalBase(math.unit(coeffStr).pow(-1)));
   if (matchedCoeffInvUnitStr) {
     const matchedCoeffValue = coefficients[matchedCoeffInvUnitStr][coeffKey];
     if (matchedCoeffValue == null) return null;

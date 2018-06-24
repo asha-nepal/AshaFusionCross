@@ -16,11 +16,6 @@
 
 /* eslint-env jest, jasmine */
 
-jest.unmock('redux-saga/effects');
-jest.unmock('../put-active-record');
-jest.unmock('../../actions');
-jest.unmock('mockdate');
-
 import deepFreeze from 'deep-freeze';
 import MockDate from 'mockdate';
 import { put, call } from 'redux-saga/effects';
@@ -38,6 +33,11 @@ import {
 import {
   putActiveRecord,
 } from '../put-active-record';
+
+jest.unmock('redux-saga/effects');
+jest.unmock('../put-active-record');
+jest.unmock('../../actions');
+jest.unmock('mockdate');
 
 describe('PUT_ACTIVE_RECORD', () => {
   const mockCurrentTime = 1234567890123;

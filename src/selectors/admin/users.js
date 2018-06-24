@@ -16,5 +16,4 @@
 
 /* @flow */
 
-export const getUsers = (state: Object): List<UserObject> =>
-  state.admin.users;
+export const getUsers = (state: Object): List<UserObject> => state.admin.users;

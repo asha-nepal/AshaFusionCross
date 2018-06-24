@@ -71,15 +71,19 @@ export default class extends React.Component {
             className="button"
             onClick={() => !hoverable && this.setState({ open: !this.state.open })}
           >
-            <span>{title}</span>
+            <span>
+              {title}
+            </span>
             <FaIcon type={up ? 'angle-up' : 'angle-down'} size="small" />
           </button>
         </div>
         <div className="dropdown-menu" role="menu">
           <div className="dropdown-content">
-          {items.map((item, i) =>
-            <div key={i} className="dropdown-item">{item}</div>
-          )}
+            {items.map((item, i) => (
+              <div key={i} className="dropdown-item">
+                {item}
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -37,8 +37,7 @@ const getSuggestions = (canonicalCandidates: Array<[string, string]>, value: str
   return canonicalCandidates.filter(cs => cs[0].startsWith(canonicalValue)).map(cs => cs[1]);
 };
 
-const canonifyCandidates = (candidates: Array<string>): Array<[string, string]> =>
-  candidates.map((c, i) => [canonifyString(c), candidates[i]]);
+const canonifyCandidates = (candidates: Array<string>): Array<[string, string]> => candidates.map((c, i) => [canonifyString(c), candidates[i]]);
 
 export default class extends React.Component {
   constructor(props: Props) {
@@ -52,7 +51,7 @@ export default class extends React.Component {
 
   state: {
     suggestions: Array<string>,
-    candidates: Array<[string, string]>,  // [canonicalCandidates, originalCandidates]
+    candidates: Array<[string, string]>, // [canonicalCandidates, originalCandidates]
   }
 
   componentWillMount = () => {
@@ -99,7 +98,11 @@ export default class extends React.Component {
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={s => s}
-        renderSuggestion={suggestion => <span>{suggestion}</span>}
+        renderSuggestion={suggestion => (
+          <span>
+            {suggestion}
+          </span>
+        )}
         onSuggestionSelected={this.onSuggestionSelected}
         inputProps={{
           ..._.omit(this.props, 'candidates'),

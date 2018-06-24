@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { put, take, select, call, cancelled } from 'redux-saga/effects';
+import {
+  put, take, select, call, cancelled,
+} from 'redux-saga/effects';
 import { routines } from 'actions/admin';
 import { createPouchInstance } from '../db';
 

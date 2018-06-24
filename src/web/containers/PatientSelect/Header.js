@@ -28,12 +28,12 @@ import {
 } from '../../../selectors';
 import Header from '../../components/PatientSelect/Header';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isLoggedIn: getIsLoggedIn(state),
   loggedInUser: getLoggedInUser(state),
   isAdmin: getIsAdmin(state),
 });
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(requestLogout()),
 });
 

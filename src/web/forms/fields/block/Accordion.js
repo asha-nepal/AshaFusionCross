@@ -54,7 +54,7 @@ export class Accordion extends Component {
         <a
           className="card-header"
           style={{ cursor: 'pointer' }}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             this.setState({ isOpen: !this.state.isOpen });
           }}
@@ -63,14 +63,16 @@ export class Accordion extends Component {
             {label}
           </p>
           <span className="card-header-icon">
-            <i className={this.state.isOpen ? 'fa fa-angle-up' : 'fa fa-angle-down'}></i>
+            <i className={this.state.isOpen ? 'fa fa-angle-up' : 'fa fa-angle-down'} />
           </span>
         </a>
         <div className="card-content" style={{ display: this.state.isOpen ? null : 'none' }}>
           <BlockBody
             layout={layout}
             widthaligned={widthaligned}
-          >{children}</BlockBody>
+          >
+            {children}
+          </BlockBody>
         </div>
       </div>
     );

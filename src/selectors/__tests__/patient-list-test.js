@@ -17,12 +17,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('lodash.get');
-jest.unmock('reselect');
-jest.unmock('deep-freeze');
-jest.unmock('../patient-list');
-jest.unmock('moment');
-
 import deepFreeze from 'deep-freeze';
 import moment from 'moment';
 import {
@@ -35,6 +29,12 @@ import {
   makeGetDuplicatedPatients,
   getPatientMax,
 } from '../patient-list';
+
+jest.unmock('lodash.get');
+jest.unmock('reselect');
+jest.unmock('deep-freeze');
+jest.unmock('../patient-list');
+jest.unmock('moment');
 const currentTime = moment(Date.now());
 describe('getPatientList', () => {
   it('selects patientList from state', () => {
@@ -217,7 +217,7 @@ describe('getSortedFilteredPatientList', () => {
       .toEqual([
         { name: 'Hoge foo', $updated_at: currentTime },
         { name: 'hoge fuga', $updated_at: currentTime },
-        { name: '', $updated_at: currentTime },  // 空データは末尾に来る
+        { name: '', $updated_at: currentTime }, // 空データは末尾に来る
       ]);
   });
 

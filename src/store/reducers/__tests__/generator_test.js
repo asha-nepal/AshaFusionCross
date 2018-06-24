@@ -15,16 +15,16 @@
  */
 
 /* eslint-env jest */
-jest.unmock('actions');
-jest.unmock('actions/pouch-docs');
-jest.unmock('../generator');
-
 import {
   successFetchingPouchDocs,
 } from '../../../actions';
 import {
   generatePouchDocsReducer,
 } from '../generator';
+
+jest.unmock('actions');
+jest.unmock('actions/pouch-docs');
+jest.unmock('../generator');
 
 describe('generatePouchDocsReducer()', () => {
   describe('generates reducer and it', () => {

@@ -102,28 +102,36 @@ export default ({
         />
         <Text
           style={styles.title}
-        >ASHA fusion</Text>
+        >
+ASHA fusion
+        </Text>
       </View>
 
-      {isDBConnected &&
+      {isDBConnected
+        && (
         <LoginForm
           login={login}
           isDBPublic={isDBPublic}
           anonymousLogin={anonymousLogin}
         />
+        )
       }
 
-      {isDBConnected &&
+      {isDBConnected
+        && (
         <SignupForm
           signup={signup}
         />
+        )
       }
 
-      {!isDBConnected &&
+      {!isDBConnected
+        && (
         <DBConfigForm
           defaultValue={currentDBConfig}
-          onConnect={(config) => connectDB(config)}
+          onConnect={config => connectDB(config)}
         />
+        )
       }
     </View>
   );

@@ -15,12 +15,12 @@
  */
 
 /* @flow */
-import tableRules from './_initial/tableRules.json';
-import tableColumns from './_initial/tableColumns.json';
-import statsRules from './_initial/statsRules.json';
 import {
   STATS_DATE_SET,
 } from 'actions';
+import tableRules from './_initial/tableRules.json';
+import tableColumns from './_initial/tableColumns.json';
+import statsRules from './_initial/statsRules.json';
 
 const initialState = {
   tableRules,

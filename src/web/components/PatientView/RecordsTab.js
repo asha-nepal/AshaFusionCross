@@ -38,8 +38,7 @@ export default ({
       {records.map((record, i) => {
         const timestamp = record.$created_at || record.$initialized_at;
         const date = timestamp && new Date(timestamp);
-        const hasAttachments =
-          record._attachments && Object.keys(record._attachments).length > 0;
+        const hasAttachments = record._attachments && Object.keys(record._attachments).length > 0;
 
         return (
           <li
@@ -48,21 +47,25 @@ export default ({
           >
             <a
               href="#"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 selectActiveRecord(record._id);
               }}
             >
-              {hasAttachments &&
+              {hasAttachments
+                && (
                 <span className="icon is-small">
                   <i className="fa fa-paperclip" />
                 </span>
+                )
               }
               {i + 1}
-              {date &&
+              {date
+                && (
                 <small style={{ paddingLeft: 8 }}>
                   {date.toDateString()}
                 </small>
+                )
               }
               {!pristinenessList[i] && dirtyIcon}
             </a>
@@ -72,11 +75,13 @@ export default ({
       <li>
         <a
           href="#"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             addNewActiveRecord();
           }}
-        >+</a>
+        >
++
+        </a>
       </li>
     </ul>
   </div>

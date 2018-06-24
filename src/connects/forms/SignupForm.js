@@ -24,7 +24,7 @@ import {
 
 const mapStateToProps = null;
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   signup: (username, password) => dispatch(requestSignup(username, password, false)),
 });
 

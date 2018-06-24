@@ -45,7 +45,7 @@ export function checkVisibility(state: Object, rootPath: ?string, showProp: stri
   if (typeof showProp === 'string') {
     const conditions = showProp.split('|');
 
-    return conditions.some(condition => {
+    return conditions.some((condition) => {
       let _condition = condition;
 
       const isNegative = condition.charAt(0) === '!';

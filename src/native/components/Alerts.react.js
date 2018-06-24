@@ -53,11 +53,13 @@ export default function Alerts({ alerts }: { alerts: Array<Alert> }) {
 
   return (
     <View style={styles.container}>
-    {alerts.map(alert =>
-      <View key={alert.id} style={[styles.alert, styles[alert.type]]}>
-        <Text style={styles.alertMessage}>{alert.message}</Text>
-      </View>
-    )}
+      {alerts.map(alert => (
+        <View key={alert.id} style={[styles.alert, styles[alert.type]]}>
+          <Text style={styles.alertMessage}>
+            {alert.message}
+          </Text>
+        </View>
+      ))}
     </View>
   );
 }

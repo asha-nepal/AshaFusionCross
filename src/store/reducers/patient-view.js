@@ -34,7 +34,7 @@ const initialState = {
 
 export default function (
   state: Object = initialState,
-  action: PatientViewAction
+  action: PatientViewAction,
 ): Object {
   switch (action.type) {
     case SELECT_ACTIVE_RECORD:

@@ -56,26 +56,32 @@ export default class extends Component {
     });
 
     load
-    .then(c => {
-      this.setState({ component: c.default || c, failed: false });
-    })
-    .catch(() => {
-      this.setState({ component: null, failed: true });
-    });
+      .then((c) => {
+        this.setState({ component: c.default || c, failed: false });
+      })
+      .catch(() => {
+        this.setState({ component: null, failed: true });
+      });
   }
 
   render() {
     if (this.state.failed) {
       return (
         <div>
-          <h1 className="title">Error occurred</h1>
-          <p>Please check the network connection or some other incidents.</p>
+          <h1 className="title">
+Error occurred
+          </h1>
+          <p>
+Please check the network connection or some other incidents.
+          </p>
         </div>
       );
     }
     if (!this.state.component) {
       return (
-        <div className="loading-container"><div className="loading-content" /></div>
+        <div className="loading-container">
+          <div className="loading-content" />
+        </div>
       );
     }
 

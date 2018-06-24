@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { take, put, call, select } from 'redux-saga/effects';
+import {
+  take, put, call, select,
+} from 'redux-saga/effects';
 import {
   PUT_ACTIVE_RECORD,
   requestPutRecord,
@@ -32,7 +34,7 @@ export function* putActiveRecord(db: PouchInstance, index: number) {
   const record = yield select(state => state.activeRecords[index]);
   const { loggedInUser } = yield select(state => state.auth);
 
-  const now = Date.now();  // Unix Millisecond Timestamp
+  const now = Date.now(); // Unix Millisecond Timestamp
 
   try {
     const res = yield call([db, db.put], {

@@ -43,7 +43,7 @@ export default ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        onKeyPress={e => {
+        onKeyPress={(e) => {
           if (e.which === 13) {
             e.preventDefault();
             if (onFocusNextRequested) onFocusNextRequested();
@@ -54,11 +54,12 @@ export default ({
         ref={inputRef}
       />
     </p>
-    {onRemoveItemRequested &&
+    {onRemoveItemRequested
+      && (
       <p className="control">
         <a
           className="button is-danger"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             if (onRemoveItemRequested) onRemoveItemRequested();
           }}
@@ -66,6 +67,7 @@ export default ({
           <i className="fa fa-times" />
         </a>
       </p>
+      )
     }
   </div>
 );

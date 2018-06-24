@@ -16,8 +16,9 @@
 
 /* eslint-env jest */
 
-jest.unmock('../alerts');
 import { getId } from '../alerts';
+
+jest.unmock('../alerts');
 
 describe('getId()', () => {
   it('returns incremental ID', () => {

@@ -25,7 +25,7 @@ import {
 export const getRecordList = (state: Object): Array<RecordObject> => state.recordList;
 
 export const getStatsDate = (
-  state: Object
+  state: Object,
 ): {
   startDate: ?moment.Moment,
   endDate: ?moment.Moment
@@ -38,16 +38,15 @@ export const getRecordListFilteredByDate = createSelector(
 
     let filteredRecordList = recordList.filter(record => record.$updated_at);
     filteredRecordList = filteredRecordList
-      .filter(record =>
-        moment(record.$updated_at).isBetween(date.startDate, date.endDate, 'day', '[]'));
+      .filter(record => moment(record.$updated_at).isBetween(date.startDate, date.endDate, 'day', '[]'));
 
     return filteredRecordList;
-  }
+  },
 );
 
 export const getRecordListForStats = createSelector(
   [getRecordListFilteredByDate, getPatientList],
-  (recordList, patientList) => recordList.map(record => {
+  (recordList, patientList) => recordList.map((record) => {
     const match = record._id.match(/record_(\S+)_(\S+)/);
     const patientId = match && `patient_${match[1]}`;
     const patient = patientId && patientList.find(p => p._id === patientId);
@@ -58,5 +57,5 @@ export const getRecordListForStats = createSelector(
       ...record,
       _patient: patient,
     };
-  })
+  }),
 );

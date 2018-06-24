@@ -8,9 +8,8 @@ import {
   fieldComponentList,
 } from '../fields';
 
-const avaliableComponentKeys =
-  Object.keys(fieldComponentList)
-    .filter(key => 'fieldProps' in fieldComponentList[key]);
+const avaliableComponentKeys = Object.keys(fieldComponentList)
+  .filter(key => 'fieldProps' in fieldComponentList[key]);
 
 export default ({
   field,
@@ -39,12 +38,16 @@ export default ({
         <p className="is-clearfix">
           <a
             className="is-pulled-right"
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
               onUnfocus();
             }}
-          ><span className="icon is-small"><i className="fa fa-times-circle" /></span></a>
+          >
+            <span className="icon is-small">
+              <i className="fa fa-times-circle" />
+            </span>
+          </a>
         </p>
 
         <TextInputComponent
@@ -77,8 +80,7 @@ export default ({
         />
 
         {fieldProps && fieldProps.map((fieldProp, i) => {
-          const editorComponent =
-            fieldProp.type === 'boolean'
+          const editorComponent = fieldProp.type === 'boolean'
             ? CheckboxComponent : TextInputComponent;
 
           // $FlowFixMe
@@ -96,11 +98,13 @@ export default ({
 
         <a
           className="button is-danger"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             onFieldRemove();
           }}
-        >Remove</a>
+        >
+Remove
+        </a>
       </div>
     </div>
   );

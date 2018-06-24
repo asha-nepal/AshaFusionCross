@@ -16,13 +16,13 @@
 
 /* eslint-env jest */
 
-jest.disableAutomock();
-
 import React from 'react';
 import { shallow } from 'enzyme';
 
 import { TextUnitInputComponent, findAlert } from '../index';
 import AlertIcon from '../alert-icon';
+
+jest.disableAutomock();
 
 describe('<TextUnitInput />', () => {
   it('can handle decimal point', () => {
@@ -33,7 +33,7 @@ describe('<TextUnitInput />', () => {
         value={{ value: 160, unit: 'cm' }}
         onChange={onChange}
         units={['cm']}
-      />
+      />,
     );
 
     const getInput = () => wrapper.find('input').at(0);
@@ -66,7 +66,7 @@ describe('<TextUnitInput />', () => {
         onChange={onChange}
         precision={1}
         forceFixed
-      />
+      />,
     );
 
     const getInput = () => wrapper.find('input').at(0);
@@ -93,7 +93,7 @@ describe('<TextUnitInput />', () => {
         units={['cm', 'in']}
         onChange={onChange}
         precision={1}
-      />
+      />,
     );
 
     const getInput = () => wrapper.find('input').at(0);
@@ -105,7 +105,7 @@ describe('<TextUnitInput />', () => {
     // 168 cm = 66.14173228346456 inch
     getSelect().simulate('change', { target: { value: 'in' } });
     expect(onChange).not.toHaveBeenCalled();
-    expect(getInput().prop('value')).toEqual('66.1');  // With precision=1
+    expect(getInput().prop('value')).toEqual('66.1'); // With precision=1
   });
 
   it('can take number', () => {
@@ -115,7 +115,7 @@ describe('<TextUnitInput />', () => {
         value={160}
         units={['cm']}
         onChange={onChange}
-      />
+      />,
     );
 
     const getInput = () => wrapper.find('input').at(0);
@@ -132,7 +132,7 @@ describe('<TextUnitInput />', () => {
         value="160"
         units={['cm']}
         onChange={onChange}
-      />
+      />,
     );
 
     const getInput = () => wrapper.find('input').at(0);
@@ -147,7 +147,7 @@ describe('<TextUnitInput />', () => {
       <TextUnitInputComponent
         value={{ value: 160, unit: 'cm' }}
         units={['cm']}
-      />
+      />,
     );
 
     const getInput = () => wrapper.find('input').at(0);
@@ -164,9 +164,11 @@ describe('<TextUnitInput />', () => {
         value={{ value: 2.5, unit: 'm' }}
         units={['cm', 'm']}
         alerts={[
-          { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' },
+          {
+            type: 'danger', label: 'Danger', range: [200, null], unit: 'cm',
+          },
         ]}
-      />
+      />,
     );
 
     expect(wrapper.find(AlertIcon).at(0).prop('type')).toEqual('danger');
@@ -184,11 +186,15 @@ describe('findAlert()', () => {
 
   it('finds alert matching given value with unit conversion', () => {
     const alerts = [
-      { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' },
+      {
+        type: 'danger', label: 'Danger', range: [200, null], unit: 'cm',
+      },
     ];
 
     expect(findAlert(alerts, { value: 2.5, unit: 'm' })).toEqual(
-      { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' }
+      {
+        type: 'danger', label: 'Danger', range: [200, null], unit: 'cm',
+      },
     );
   });
 });

@@ -16,9 +16,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('../../../actions');
-jest.unmock('../alerts');
-
 import deepFreeze from 'deep-freeze';
 
 import {
@@ -26,6 +23,9 @@ import {
   removeAlert,
 } from '../../../actions';
 import reducer from '../alerts';
+
+jest.unmock('../../../actions');
+jest.unmock('../alerts');
 
 describe('ADD_ALERT', () => {
   it('adds new alert', () => {

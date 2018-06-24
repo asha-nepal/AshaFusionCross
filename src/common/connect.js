@@ -27,9 +27,9 @@ const store = configureStore();
 store.runSaga(rootSaga);
 
 export default (
-  WrappedComponent: ReactClass<{}>
+  WrappedComponent: ReactClass<{}>,
 ) => (() => (
-  <Provider store={store} >
+  <Provider store={store}>
     <WrappedComponent />
   </Provider>
 ));

@@ -17,9 +17,13 @@
 import React from 'react';
 
 export const Diagnoses = () => (
-  <div>Diagnoses</div>
+  <div>
+Diagnoses
+  </div>
 );
 
 export const ReadonlyDiagnoses = () => (
-  <div>ReadonlyDiagnoses</div>
+  <div>
+ReadonlyDiagnoses
+  </div>
 );

@@ -21,22 +21,23 @@ import {
   StyleSheet,
   View,
   TouchableHighlight,
-//  RecyclerViewBackedScrollView,
+  //  RecyclerViewBackedScrollView,
   ListView,
   Text,
   ScrollView,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
-const MK = require('react-native-material-kit');
-const {
-  MKButton,
-} = MK;
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import PatientListFilter from '../containers/PatientListFilter.react';
 
 import appStyles from './styles';
+
+const MK = require('react-native-material-kit');
+
+const {
+  MKButton,
+} = MK;
 
 const styles = {
   ...appStyles,
@@ -115,7 +116,9 @@ export default class PatientSelect extends Component {
   };
 
   _onAddPress: Function;
+
   _onPatientSelect: Function;
+
   _renderRow: Function;
 
   _onAddPress() {
@@ -130,7 +133,7 @@ export default class PatientSelect extends Component {
     rowData: Object,
     sectionID: number,
     rowID: number,
-    highlightRow: (sectionID: number, rowID: number) => void
+    highlightRow: (sectionID: number, rowID: number) => void,
   ) {
     return (
       <TouchableHighlight
@@ -154,7 +157,11 @@ export default class PatientSelect extends Component {
     } = this.props;
 
     if (isFetching) {
-      return <Text>Fetching patient list...</Text>;
+      return (
+        <Text>
+Fetching patient list...
+        </Text>
+      );
     }
 
     return (
@@ -167,15 +174,16 @@ export default class PatientSelect extends Component {
             // TODO: RecyclerViewBackedScrollViewは
             // androidでbetter performanceらしいがheight=0になって表示されない（バグ？）
             // renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-            renderSeparator={(sectionID, rowID) =>
-              <View key={`${sectionID}-${rowID}`} style={styles.separator} />
+            renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />
             }
             enableEmptySections
           />
         </ScrollView>
         <FixedAccentColoredFab
           onPress={this._onAddPress}
-        ><Icon name="add" size={24} color="#FFFFFF" /></FixedAccentColoredFab>
+        >
+          <Icon name="add" size={24} color="#FFFFFF" />
+        </FixedAccentColoredFab>
       </View>
     );
   }

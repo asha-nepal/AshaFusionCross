@@ -18,10 +18,10 @@
 /* @flow */
 
 import React from 'react';
+import type { Moment } from 'moment';
 import TextSearchInput from './TextSearchInput';
 import SortControl from './SortControl';
 import DatePicker from '../DatePicker';
-import type { Moment } from 'moment';
 
 export default ({
   filter,

@@ -17,9 +17,13 @@
 import React from 'react';
 
 export const MultiInput = () => (
-  <div>MultiInput</div>
+  <div>
+MultiInput
+  </div>
 );
 
 export const ReadonlyMultiInput = () => (
-  <div>ReadonlyMultiInput</div>
+  <div>
+ReadonlyMultiInput
+  </div>
 );

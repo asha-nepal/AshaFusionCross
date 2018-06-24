@@ -27,6 +27,11 @@ import {
   MKButton,
 } from 'react-native-material-kit';
 
+import PatientForm from '../forms/PatientForm.react';
+import RecordForm from '../forms/RecordForm.react';
+
+import appStyles from './styles';
+
 const ColoredRaisedSubmitButton = MKButton.coloredButton()
   .withText('Submit')
   .withStyle({
@@ -40,11 +45,6 @@ const ColoredRaisedAddButton = MKButton.coloredButton()
     marginBottom: 20,
   })
   .build();
-
-import PatientForm from '../forms/PatientForm.react';
-import RecordForm from '../forms/RecordForm.react';
-
-import appStyles from './styles';
 
 const styles = {
   ...appStyles,
@@ -80,7 +80,11 @@ export default class PatientView extends Component {
     } = this.props;
 
     if (isFetching) {
-      return <Text>Fetching...</Text>;
+      return (
+        <Text>
+Fetching...
+        </Text>
+      );
     }
 
     return (
@@ -93,7 +97,7 @@ export default class PatientView extends Component {
           onPress={putActivePatient}
         />
 
-        {records.map((record, i) =>
+        {records.map((record, i) => (
           <View key={i}>
             <RecordForm
               model={`activeRecords[${i}]`}
@@ -103,7 +107,7 @@ export default class PatientView extends Component {
               onPress={() => putActiveRecord(i)}
             />
           </View>
-        )}
+        ))}
 
         <ColoredRaisedAddButton
           onPress={addNewActiveRecord}

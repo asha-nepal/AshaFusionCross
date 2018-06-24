@@ -56,7 +56,7 @@ export default ({
     <Icon name="search" size={24} color="#666666" />
     <TextField
       value={filter}
-      onChangeText={(text) => onFilterChange(text)}
+      onChangeText={text => onFilterChange(text)}
     />
   </View>
 );

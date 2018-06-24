@@ -31,9 +31,7 @@ export const getSuggestions = (candidates: Array<{_query: string}>, value: strin
 
   const queries = inputValue.split(' ').filter(q => q.length > 0);
 
-  return candidates.filter(icd10 =>
-    queries.every(query => icd10._query.indexOf(` ${query}`) > -1)
-  );
+  return candidates.filter(icd10 => queries.every(query => icd10._query.indexOf(` ${query}`) > -1));
 };
 
 type Props = {
@@ -82,7 +80,7 @@ export default class extends Component {
 
   onInputBlur = (
     event: Object,
-    { highlightedSuggestion }: { highlightedSuggestion: ICD10Type }
+    { highlightedSuggestion }: { highlightedSuggestion: ICD10Type },
   ) => {
     if (highlightedSuggestion) {
       this.props.onChange(highlightedSuggestion.code);
@@ -124,16 +122,25 @@ export default class extends Component {
 
     return (
       <div className="field" style={{ width }}>
-        {label && <label className="label">{label}</label>}
+        {label && (
+        <label className="label">
+          {label}
+        </label>
+        )}
         <div className="field has-addons">
           <div className="control is-expanded">
             <Autosuggest
               suggestions={this.state.suggestions}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
               onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-              getSuggestionValue={(suggestion) => suggestion.description}
-              renderSuggestion={(suggestion) => (
-                <span><small>{suggestion.code}</small>{` ${suggestion.description}`}</span>
+              getSuggestionValue={suggestion => suggestion.description}
+              renderSuggestion={suggestion => (
+                <span>
+                  <small>
+                    {suggestion.code}
+                  </small>
+                  {` ${suggestion.description}`}
+                </span>
               )}
               onSuggestionSelected={this.onSuggestionSelected}
               inputProps={{
@@ -149,11 +156,13 @@ export default class extends Component {
           <div className="control">
             <a
               className={classNames('button', { [`is-${size}`]: size })}
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 this.setState({ isModalOpen: true });
               }}
-            ><i className="fa fa-list-alt" /></a>
+            >
+              <i className="fa fa-list-alt" />
+            </a>
           </div>
         </div>
 

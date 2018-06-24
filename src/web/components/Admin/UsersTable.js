@@ -29,7 +29,9 @@ const UserRow = ({
   user: Map<string, any>,
 }) => (
   <tr>
-    <td>{user.get('name')}</td>
+    <td>
+      {user.get('name')}
+    </td>
   </tr>
 );
 
@@ -47,11 +49,15 @@ export default class extends Component {
 
     return (
       <div className="box">
-        <div className="title">Users</div>
+        <div className="title">
+Users
+        </div>
         <table className="table">
           <thead>
             <tr>
-              <th>Username</th>
+              <th>
+Username
+              </th>
             </tr>
           </thead>
           <tbody>

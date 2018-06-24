@@ -30,15 +30,15 @@ import {
   getPatientSortOrder,
 } from '../selectors';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   filter: state.patientSelect.filter,
   sortBy: getPatientSortField(state),
   sortInAsc: getPatientSortOrder(state),
   filterDate: state.patientSelect.filterDate,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onFilterChange: (newFilter) => dispatch(setPatientListFilter(newFilter)),
+const mapDispatchToProps = dispatch => ({
+  onFilterChange: newFilter => dispatch(setPatientListFilter(newFilter)),
   setPatientListSortField: (sortBy: string) => dispatch(setPatientListSortField(sortBy)),
   setPatientListSortOrder: (sortInAsc: boolean) => dispatch(setPatientListSortOrder(sortInAsc)),
   setFilterDate: (date: {startDate: Moment,
@@ -47,5 +47,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );

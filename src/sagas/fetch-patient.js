@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { take, put, call, select } from 'redux-saga/effects';
+import {
+  take, put, call, select,
+} from 'redux-saga/effects';
 import {
   FETCH_PATIENT,
   requestFetchPatient,

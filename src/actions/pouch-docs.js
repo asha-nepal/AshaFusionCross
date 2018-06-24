@@ -52,14 +52,12 @@ export const failFetchingPouchDocs = (name: string, error: ErrorObject) => ({
   error,
 });
 
-export const fetchPatientList = () =>
-  fetchPouchDocs(
-    'patients',
-    { prefix: 'patient_', label: 'patient list' }
-  );
+export const fetchPatientList = () => fetchPouchDocs(
+  'patients',
+  { prefix: 'patient_', label: 'patient list' },
+);
 
-export const fetchRecordList = () =>
-  fetchPouchDocs(
-    'records',
-    { prefix: 'record_' }
-  );
+export const fetchRecordList = () => fetchPouchDocs(
+  'records',
+  { prefix: 'record_' },
+);

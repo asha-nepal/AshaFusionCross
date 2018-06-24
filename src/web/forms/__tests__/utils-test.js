@@ -16,10 +16,10 @@
 
 /* eslint-env jest */
 
+import { checkVisibility } from '../utils';
+
 jest.unmock('lodash.get');
 jest.unmock('../utils');
-
-import { checkVisibility } from '../utils';
 
 describe('checkVisibility', () => {
   it('returns false if `show` prop is false', () => {

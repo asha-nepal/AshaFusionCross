@@ -34,18 +34,18 @@ export const BlockBody = ({
   <div
     className={
       layout === 'horizontal'
-      ? null
-      : classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })
+        ? null
+        : classNames('columns is-variable is-1', { 'is-multiline': !widthaligned })
     }
   >
-    {children.map((child, i) =>
+    {children.map((child, i) => (
       <div
         key={i}
         className={classNames('column', { 'is-narrow': !widthaligned })}
       >
         {child}
       </div>
-    )}
+    ))}
   </div>
 );
 
@@ -68,11 +68,17 @@ export const Block = ({
     className={classNames('field', { box: border })}
     fieldEditProps={fieldEditProps}
   >
-    {label && <label className="label">{label}</label>}
+    {label && (
+    <label className="label">
+      {label}
+    </label>
+    )}
     <BlockBody
       layout={layout}
       widthaligned={widthaligned}
-    >{children}</BlockBody>
+    >
+      {children}
+    </BlockBody>
   </EditableFieldWrapper>
 );
 

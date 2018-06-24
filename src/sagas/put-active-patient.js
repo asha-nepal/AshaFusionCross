@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { take, put, call, select } from 'redux-saga/effects';
+import {
+  take, put, call, select,
+} from 'redux-saga/effects';
 import {
   PUT_ACTIVE_PATIENT,
   requestPutPatient,
@@ -33,7 +35,7 @@ export function* putActivePatient(db: PouchInstance, cb: ?(patient: PatientObjec
   const records = yield select(state => state.activeRecords);
   const { loggedInUser } = yield select(state => state.auth);
 
-  const now = Date.now();  // Unix Millisecond Timestamp
+  const now = Date.now(); // Unix Millisecond Timestamp
 
   try {
     const res = yield call([db, db.put], {

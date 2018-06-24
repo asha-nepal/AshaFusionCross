@@ -15,7 +15,9 @@
  */
 
 /* @flow */
-import { take, select, call, put } from 'redux-saga/effects';
+import {
+  take, select, call, put,
+} from 'redux-saga/effects';
 import {
   POUCH_DOCS_FETCH,
   requestFetchingPouchDocs,
@@ -34,13 +36,13 @@ function pouchFetchDocs(db: PouchInstance, prefix: string): Promise<Array<PouchD
     startkey: prefix,
     endkey: `${prefix}\uffff`,
   })
-  .then(res => res.rows.map(r => r.doc));
+    .then(res => res.rows.map(r => r.doc));
 }
 
 export function* fetchPouchDocs(
   db: PouchInstance,
   name: string,
-  opts: Object
+  opts: Object,
 ): Generator<*, void, *> {
   const { prefix, label } = opts;
 

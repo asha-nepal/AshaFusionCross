@@ -67,58 +67,60 @@ export default ({
       <div className="columns is-mobile">
         <div className="column">
           <div className="columns is-mobile is-multiline is-variable is-1">
-          {fields.map((field, i) => {
-            if (typeof field.show !== 'undefined'
+            {fields.map((field, i) => {
+              if (typeof field.show !== 'undefined'
               && !checkVisibility(_value, null, field.show)) {
-              return null;
-            } else if (typeof field.hide !== 'undefined'
+                return null;
+              } if (typeof field.hide !== 'undefined'
               && checkVisibility(_value, null, field.hide)) {
-              return null;
-            }
+                return null;
+              }
 
-            const component = typeof field.class === 'string'
-              ? fieldComponents[field.class] : field.class;
+              const component = typeof field.class === 'string'
+                ? fieldComponents[field.class] : field.class;
 
-            const element = React.createElement(component, {
-              ...field,
-              readonly,
-              size: 'small',
-              value: _get(_value, field.field),
-              onChange: (v => {
-                if (!onChange) { return; }
+              const element = React.createElement(component, {
+                ...field,
+                readonly,
+                size: 'small',
+                value: _get(_value, field.field),
+                onChange: ((v) => {
+                  if (!onChange) { return; }
 
-                onChange(field.field, v);
-              }),
-            });
+                  onChange(field.field, v);
+                }),
+              });
 
-            return (
-              <div
-                key={i}
-                className={classNames(
-                  'column',
-                  { 'is-narrow': i !== fields.length - 1 }
-                )}
-                style={field.subformstyle}
-              >
-                {element}
-              </div>
-            );
-          })}
+              return (
+                <div
+                  key={i}
+                  className={classNames(
+                    'column',
+                    { 'is-narrow': i !== fields.length - 1 },
+                  )}
+                  style={field.subformstyle}
+                >
+                  {element}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {onRemoveItemRequested &&
+        {onRemoveItemRequested
+          && (
           <div
             className="column is-narrow"
           >
             <a
               className="delete"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 if (onRemoveItemRequested) onRemoveItemRequested();
               }}
             />
           </div>
+          )
         }
       </div>
     </div>

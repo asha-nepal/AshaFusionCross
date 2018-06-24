@@ -33,12 +33,14 @@ export default function Alerts({ alerts }: { alerts: Array<Alert> }) {
         zIndex: 1000,
       }}
     >
-    {alerts.map(alert =>
-      <div
-        key={alert.id}
-        className={`notification ${modifiers[alert.type]}`}
-      >{alert.message}</div>
-    )}
+      {alerts.map(alert => (
+        <div
+          key={alert.id}
+          className={`notification ${modifiers[alert.type]}`}
+        >
+          {alert.message}
+        </div>
+      ))}
     </div>
   );
 }

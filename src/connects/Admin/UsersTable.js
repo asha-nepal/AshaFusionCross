@@ -24,7 +24,7 @@ import {
   getUsers,
 } from '../../selectors/admin/users';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   users: getUsers(state),
 });
 

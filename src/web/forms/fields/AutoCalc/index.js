@@ -43,7 +43,7 @@ export function getValue(targetModel: Object, argKeys: Array<string>, calc: Func
 
   if (args.some(arg => typeof arg === 'undefined')) return null;
 
-  return calc.apply(null, args);
+  return calc(...args);
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -58,5 +58,5 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = null;
 
 export const AutoCalc = connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(AutoCalcComponent);

@@ -50,11 +50,13 @@ export default class extends React.Component {
               <button
                 className="button is-primary"
                 disabled={freeze || !onSubmit}
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   if (onSubmit) onSubmit();
                 }}
-              >Submit</button>
+              >
+Submit
+              </button>
             </div>
           </div>
         </div>

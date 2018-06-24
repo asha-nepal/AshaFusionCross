@@ -25,7 +25,7 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   textfield: {
-    height: 28,  // have to do it on iOS
+    height: 28, // have to do it on iOS
   },
   textfieldPrefix: {
     paddingLeft: 16,
@@ -44,7 +44,8 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    marginLeft: 7, marginRight: 7,
+    marginLeft: 7,
+    marginRight: 7,
   },
   fieldLabel: {
     textAlign: 'center',

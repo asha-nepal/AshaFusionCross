@@ -50,37 +50,41 @@ export default class extends React.Component {
       <nav
         className={classNames(
           'navbar is-primary',
-          { 'is-fixed-top': fixed }
+          { 'is-fixed-top': fixed },
         )}
       >
         <div className="container">
           <div className="navbar-brand">
             {brand}
 
-            {menu &&
+            {menu
+              && (
               <div
                 className={classNames('navbar-burger', { 'is-active': this.state.isMenuOpen })}
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   this.setState({ isMenuOpen: !this.state.isMenuOpen });
                 }}
               >
-                <span></span>
-                <span></span>
-                <span></span>
+                <span />
+                <span />
+                <span />
               </div>
+              )
             }
           </div>
 
-          {menu &&
+          {menu
+            && (
             <div
               className={classNames(
                 'navbar-menu',
-                { 'is-active': this.state.isMenuOpen }
+                { 'is-active': this.state.isMenuOpen },
               )}
             >
               {menu}
             </div>
+            )
           }
         </div>
       </nav>

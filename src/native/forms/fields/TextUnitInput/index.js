@@ -25,9 +25,11 @@ import {
   MKTextField,
 } from 'react-native-material-kit';
 import styles from '../styles';
-import { convert } from '../../../../web/forms/fields/TextUnitInput';  // TODO: convertの場所
+import { convert } from '../../../../web/forms/fields/TextUnitInput'; // TODO: convertの場所
 
 import UnitSelect from './UnitSelect';
+
+import connect from '../../../../common/forms/fields/TextUnitInput';
 
 const TextField = MKTextField.textfield()
   .withStyle(styles.textfield)
@@ -102,12 +104,14 @@ export class TextUnitInputComponent extends Component {
     const converted = convert(_value, this.state.unit, this.props.coefficient);
 
     const inputValue = !converted || parseFloat(this.state.inputValue) === converted
-      ? this.state.inputValue  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
+      ? this.state.inputValue // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
       : converted.toString();
 
     return (
       <View style={styles.fieldContainer}>
-        <Text style={styles.fieldLabel}>{label}</Text>
+        <Text style={styles.fieldLabel}>
+          {label}
+        </Text>
         <View style={styles.columns}>
           <TextField
             style={styles.column}
@@ -141,14 +145,12 @@ export class TextUnitInputComponent extends Component {
           <UnitSelect
             unit={this.state.unit}
             units={units}
-            onValueChange={(itemValue) => this.setState({ unit: itemValue })}
+            onValueChange={itemValue => this.setState({ unit: itemValue })}
           />
         </View>
       </View>
     );
   }
 }
-
-import connect from '../../../../common/forms/fields/TextUnitInput';
 
 export const TextUnitInput = connect(TextUnitInputComponent);

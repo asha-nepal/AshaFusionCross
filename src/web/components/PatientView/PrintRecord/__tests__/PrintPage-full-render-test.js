@@ -16,12 +16,12 @@
 
 /* eslint-env jest */
 
-jest.disableAutomock();
-
-import PrintPage from '../PrintPage';
 
 import React from 'react';
 import { mount } from 'enzyme';
+import PrintPage from '../PrintPage';
+
+jest.disableAutomock();
 
 describe('<PrintPage/>', () => {
   it('takes patient and record data and can be rendered in Full Rendering mode', () => {
@@ -42,7 +42,7 @@ describe('<PrintPage/>', () => {
       <PrintPage
         patient={patient}
         record={record}
-      />
+      />,
     );
   });
 });

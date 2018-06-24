@@ -25,7 +25,6 @@ styles
   .find(s => s.field === 'prescription')
   .fields
   .find(s => s.field === 'medicine')
-  .suggestions
-    = medicines;
+  .suggestions = medicines;
 
 export default styles;

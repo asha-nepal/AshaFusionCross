@@ -50,7 +50,9 @@ const Item = ({
   >
     <Text
       style={styles.item}
-    >{text}</Text>
+    >
+      {text}
+    </Text>
   </TouchableOpacity>
 );
 

@@ -1,12 +1,12 @@
 /* eslint-env jest */
 
-jest.unmock('react-redux');
-jest.unmock('../Select');
-
 import { shallow } from 'enzyme';
 import React from 'react';
 
 import { SelectComponent } from '../Select';
+
+jest.unmock('react-redux');
+jest.unmock('../Select');
 
 describe('<SelectComponent />', () => {
   it('is `nullable` by default and can disable it', () => {
@@ -17,7 +17,7 @@ describe('<SelectComponent />', () => {
           { id: 'b', label: 'B' },
           { id: 'c', label: 'C' },
         ]}
-      />
+      />,
     );
 
     expect(wrapper.find('option').length).toBe(4);

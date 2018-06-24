@@ -36,20 +36,19 @@ const AdminComponent = ({
   component: ReactClass<any>,
 }) => (
   isAdmin
-  ? <Component {...props} />
-  : <Redirect to={{ pathname: '/', from: location }} />
+    ? <Component {...props} />
+    : <Redirect to={{ pathname: '/', from: location }} />
 );
 
 const AdminContainer = connect(
   state => ({
     isAdmin: getIsAdmin(state),
-  })
+  }),
 )(AdminComponent);
 
 export default ({ component, ...rest }: { component: React.Component<void, *, *>}) => (
   <Route
-    render={props =>
-      <AdminContainer component={component} {...props} />
+    render={props => <AdminContainer component={component} {...props} />
     }
     {...rest}
   />

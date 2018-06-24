@@ -1,12 +1,5 @@
 /* eslint-env jest, jasmine */
 
-jest.unmock('immutable');
-jest.unmock('redux-saga/effects');
-jest.unmock('../../actions');
-jest.unmock('../../actions/dform');
-jest.unmock('../../selectors');
-jest.unmock('../dform');
-
 import Immutable from 'immutable';
 import { call, put } from 'redux-saga/effects';
 import PouchDB from 'lib/pouchdb';
@@ -19,6 +12,13 @@ import {
   fetchDformStyles,
   putDformStyles,
 } from '../dform';
+
+jest.unmock('immutable');
+jest.unmock('redux-saga/effects');
+jest.unmock('../../actions');
+jest.unmock('../../actions/dform');
+jest.unmock('../../selectors');
+jest.unmock('../dform');
 
 describe('fetchDformStyles', () => {
   it('calls db.allDocs with startkey and endkey and load form styles', () => {

@@ -42,7 +42,11 @@ export default class PatientSelect extends Component {
     } = this.props;
 
     if (isFetching) {
-      return <div>Fetching patient list...</div>;
+      return (
+        <div>
+Fetching patient list...
+        </div>
+      );
     }
 
     return (
@@ -57,7 +61,9 @@ export default class PatientSelect extends Component {
                 <span className="icon">
                   <i className="fa fa-table" />
                 </span>
-                <span>Stats</span>
+                <span>
+Stats
+                </span>
               </Link>
             </div>
 
@@ -68,13 +74,17 @@ export default class PatientSelect extends Component {
               >
                 <PatientListFilter />
               </div>
-              {patientList.map((patient) =>
+              {patientList.map(patient => (
                 <Link
                   key={patient._id}
                   className="panel-block"
                   to={`/patient/${patient._id}`}
-                >{patient.number && `[${patient.number}] `} {patient.name || ''}</Link>
-              )}
+                >
+                  {patient.number && `[${patient.number}] `}
+                  {' '}
+                  {patient.name || ''}
+                </Link>
+              ))}
             </nav>
           </div>
         </section>

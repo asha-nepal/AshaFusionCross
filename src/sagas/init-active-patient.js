@@ -16,6 +16,7 @@
 
 import { take, put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+import randomstringPromise from 'randomstring';
 import {
   INIT_ACTIVE_PATIENT,
   requestFetchPatient,
@@ -23,7 +24,6 @@ import {
   changeActivePatient,
   resetActiveRecords,
 } from '../actions';
-import randomstringPromise from 'randomstring';
 
 export function* initActivePatient() {
   // FIXME:

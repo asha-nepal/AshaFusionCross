@@ -26,11 +26,11 @@ import {
 
 const styles = StyleSheet.create({
   textfield: {
-    height: 28,  // have to do it on iOS
+    height: 28, // have to do it on iOS
     marginTop: 32,
   },
   textfieldWithFloatingLabel: {
-    height: 48,  // have to do it on iOS
+    height: 48, // have to do it on iOS
     marginTop: 10,
   },
 });

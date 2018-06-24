@@ -20,24 +20,32 @@
 import React from 'react';
 import ReactDataGrid from 'react-data-grid';
 import { Link } from 'react-router-dom';
+import type { Moment } from 'moment';
 import Header from '../common/Header';
 import Content from '../common/Content';
 import DatePicker from '../DatePicker';
 import StatsList from './StatsList';
 import CsvExporter from './CsvExporter';
-import type { Moment } from 'moment';
 
 const ArrayFormatter = ({
   value,
 }: {
   value: ?Array<string>,
-}) => <span>{(value && value.join) ? value.join(', ') : ''}</span>;
+}) => (
+  <span>
+    {(value && value.join) ? value.join(', ') : ''}
+  </span>
+);
 
 const BooleanFormatter = ({
   value,
 }: {
   value: ?boolean,
-}) => <span>{(value != null) && value.toString()}</span>;
+}) => (
+  <span>
+    {(value != null) && value.toString()}
+  </span>
+);
 
 
 export default({
@@ -57,13 +65,13 @@ export default({
   date: Moment,
   setDate: (date: Moment) => void,
 }) => {
-  const _columns = columns.map(column => {
+  const _columns = columns.map((column) => {
     if (column.isArray) {
       return {
         ...column,
         formatter: ArrayFormatter,
       };
-    } else if (column.isBoolean) {
+    } if (column.isBoolean) {
       return {
         ...column,
         formatter: BooleanFormatter,
@@ -82,7 +90,9 @@ export default({
             className="navbar-item"
             to="/"
           >
-            <span className="icon"><i className="fa fa-arrow-left" /></span>
+            <span className="icon">
+              <i className="fa fa-arrow-left" />
+            </span>
           </Link>,
           <span
             key="title"
@@ -98,11 +108,13 @@ export default({
           <div className="level-left">
             <a
               className="button is-large"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 load();
               }}
-            >Load</a>
+            >
+Load
+            </a>
           </div>
           <div className="level-right">
             <DatePicker

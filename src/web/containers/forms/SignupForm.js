@@ -38,7 +38,9 @@ const TextControl = ({
   form: Object,
 }) => (
   <div className="field">
-    <label className="label">{label}</label>
+    <label className="label">
+      {label}
+    </label>
     <div className="control">
       <Control.input
         type={type}
@@ -46,10 +48,12 @@ const TextControl = ({
         className={classNames('input', { 'is-danger': !form.valid })}
       />
     </div>
-    {!form.valid &&
+    {!form.valid
+      && (
       <p className="help is-danger">
         {Object.keys(form.errors).filter(key => form.errors[key]).join(', ')}
       </p>
+      )
     }
   </div>
 );
@@ -66,17 +70,18 @@ let SignupForm = ({
   <div className="columns">
     <div className="column is-half-tablet is-offset-one-quarter-tablet">
       <div className="box">
-        <h1 className="title">Sign up</h1>
+        <h1 className="title">
+Sign up
+        </h1>
         <Form
           model="forms.signup"
           validators={{
             '': {
               // Form-level validator
-              passwordsMatch: (vals) => vals.password === vals.passwordConfirm,
+              passwordsMatch: vals => vals.password === vals.passwordConfirm,
             },
           }}
-          onSubmit={({ username, password }) =>
-            form.$form.valid && signup(username, password) && reset()}
+          onSubmit={({ username, password }) => form.$form.valid && signup(username, password) && reset()}
         >
           <TextControl
             label="Username"
@@ -110,7 +115,9 @@ let SignupForm = ({
                 className="button is-primary"
                 disabled={!form.$form.valid}
                 type="submit"
-              >Sign up</button>
+              >
+Sign up
+              </button>
             </p>
           </div>
         </Form>
@@ -125,7 +132,7 @@ SignupForm = connect(
   }),
   dispatch => ({
     reset: () => dispatch(actions.reset('forms.signup')),
-  })
+  }),
 )(SignupForm);
 
 export default outerConnect(SignupForm);

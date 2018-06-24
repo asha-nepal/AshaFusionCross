@@ -16,13 +16,13 @@
 
 /* eslint-env jest */
 
+import functions from '../functions';
+
 jest.unmock('mathjs/core');
 jest.unmock('mathjs/lib/type/unit');
 jest.unmock('mathjs/lib/function/statistics');
 jest.unmock('lib/mathjs');
 jest.unmock('../functions');
-
-import functions from '../functions';
 
 describe('asha:bmi', () => {
   it('calculates BMI', () => {

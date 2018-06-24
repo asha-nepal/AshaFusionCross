@@ -16,9 +16,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('../../../actions');
-jest.unmock('../patient-view');
-
 import deepFreeze from 'deep-freeze';
 
 import {
@@ -29,6 +26,9 @@ import {
   setRecordChartType,
 } from '../../../actions';
 import reducer from '../patient-view';
+
+jest.unmock('../../../actions');
+jest.unmock('../patient-view');
 
 describe('SELECT_ACTIVE_RECORD', () => {
   it('updates selectedActiveRecordId', () => {

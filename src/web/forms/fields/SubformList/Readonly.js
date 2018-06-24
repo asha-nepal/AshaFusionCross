@@ -28,13 +28,13 @@ export default ({
   fields: Array<FormFieldDefinition>,
 }) => (
   <div className="panel">
-    {(values || []).map((value, i) =>
+    {(values || []).map((value, i) => (
       <Row
         key={i}
         value={value}
         fields={fields}
         readonly
       />
-    )}
+    ))}
   </div>
 );

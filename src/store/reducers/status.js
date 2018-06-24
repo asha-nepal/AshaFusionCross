@@ -46,7 +46,7 @@ export default function (
     type: string,
     payload: Object,
     error: ErrorObject,
-  }
+  },
 ): Object {
   switch (action.type) {
     /* Fetch Pouch Docs */

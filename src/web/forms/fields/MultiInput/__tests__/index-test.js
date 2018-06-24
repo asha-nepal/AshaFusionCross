@@ -16,10 +16,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('react-redux');
-jest.unmock('../index');
-jest.unmock('../RowComponent');
-
 import { mount } from 'enzyme';
 import React from 'react';
 
@@ -28,6 +24,10 @@ import {
   asArray,
 } from '..';
 
+jest.unmock('react-redux');
+jest.unmock('../index');
+jest.unmock('../RowComponent');
+
 describe('<MultiInputComponent />', () => {
   it('shows <input />s according to given values', () => {
     const wrapper = mount(<MultiInputComponent
@@ -35,7 +35,7 @@ describe('<MultiInputComponent />', () => {
     />);
 
     const inputs = wrapper.find('input');
-    expect(inputs.length).toEqual(4);  // 3 (given values) + 1 (new value input field)
+    expect(inputs.length).toEqual(4); // 3 (given values) + 1 (new value input field)
     expect(inputs.at(0).prop('value')).toEqual('AAAA');
     expect(inputs.at(1).prop('value')).toEqual('BBBB');
     expect(inputs.at(2).prop('value')).toEqual('CCCC');
@@ -47,7 +47,7 @@ describe('<MultiInputComponent />', () => {
     />);
 
     const inputs = wrapper.find('input');
-    expect(inputs.length).toEqual(1);  // 0 (given values) + 1 (new value input field)
+    expect(inputs.length).toEqual(1); // 0 (given values) + 1 (new value input field)
   });
 
   it('contains <input />s whose type is specified by prop', () => {
@@ -81,8 +81,8 @@ describe('<MultiInputComponent />', () => {
   it('shows single <input /> if a scalar value given', () => {
     const wrapper = mount(
       <MultiInputComponent
-        values={'XXX'}
-      />
+        values="XXX"
+      />,
     );
 
     const inputs = wrapper.find('input');

@@ -16,9 +16,9 @@
 
 /* eslint-env jest */
 
-jest.disableAutomock();
-
 import convert from '../convert';
+
+jest.disableAutomock();
 
 describe('convert()', () => {
   it('converts unit', () => {

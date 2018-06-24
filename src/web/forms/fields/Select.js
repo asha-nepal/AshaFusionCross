@@ -21,6 +21,9 @@ import classNames from 'classnames';
 
 import { ReadOnly } from './RadioGroup';
 
+// TODO connectの名前
+import connect from '../../../common/forms/fields/RadioGroup';
+
 export const SelectComponent = ({
   value,
   options,
@@ -43,27 +46,26 @@ export const SelectComponent = ({
       <div
         className={classNames(
           'select',
-          { [`is-${size}`]: size }
+          { [`is-${size}`]: size },
         )}
       >
         <select
           value={value || ''}
           onChange={e => onChange(e.target.value || null)}
         >
-          {nullable && <option value="" ></option>}
-          {options.map((option, i) =>
+          {nullable && <option value="" />}
+          {options.map((option, i) => (
             <option
               key={i}
               value={option.id}
-            >{option.label}</option>
-          )}
+            >
+              {option.label}
+            </option>
+          ))}
         </select>
       </div>
     </div>
   )
 );
-
-// TODO connectの名前
-import connect from '../../../common/forms/fields/RadioGroup';
 
 export const Select = connect(SelectComponent);

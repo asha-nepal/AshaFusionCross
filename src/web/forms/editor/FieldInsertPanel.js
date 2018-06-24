@@ -15,7 +15,7 @@ const editableFieldTarget = {
 
     props.onFieldMove(
       fromParentPath,
-      fromIndex
+      fromIndex,
     );
   },
 };
@@ -38,23 +38,23 @@ const FieldInsertPanel = ({
       'form-editor-drop-target',
       {
         hover: isOver,
-      }
+      },
     )}
-    onClick={e => {
+    onClick={(e) => {
       e.preventDefault();
 
-      const field = {  // FIXME: tmp
+      const field = { // FIXME: tmp
         label: '(New field)',
         class: 'textinput',
       };
 
       onFieldInsert(field);
     }}
-  />
+  />,
 );
 
 export default DropTarget(
-  'editable-field', editableFieldTarget, collect
+  'editable-field', editableFieldTarget, collect,
 )(
-  FieldInsertPanel
+  FieldInsertPanel,
 );

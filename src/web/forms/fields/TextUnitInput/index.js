@@ -22,6 +22,8 @@ import convert from './convert';
 import { approximateFloat } from '../../../../utils';
 import AlertIcon from './alert-icon';
 
+import connect from '../../../../common/forms/fields/TextUnitInput';
+
 export { convert };
 
 type Props = {
@@ -42,7 +44,7 @@ type Props = {
 export function findAlert(
   alerts: Array<Object>,
   value: ValueUnitType,
-  coefficient: ?string
+  coefficient: ?string,
 ): Object {
   return alerts.find((al) => {
     const numValue = convert(value, al.unit, coefficient);
@@ -92,11 +94,11 @@ export class TextUnitInputComponent extends Component {
 
     const converted = approximateFloat(
       convert(value, this.state.unit, this.props.coefficient),
-      this.props.precision
+      this.props.precision,
     );
 
     if (!converted || parseFloat(this.state.inputValue) === converted) {
-      return this.state.inputValue;  // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
+      return this.state.inputValue; // 小数点を入力中('5.'など)のときへの対応．state.inputValueを使う
     }
 
     return converted.toString();
@@ -133,7 +135,7 @@ export class TextUnitInputComponent extends Component {
       <div
         className={classNames(
           'field',
-          { [readonly ? 'is-grouped' : 'has-addons']: true }
+          { [readonly ? 'is-grouped' : 'has-addons']: true },
         )}
       >
         {readonly ? (
@@ -147,7 +149,7 @@ export class TextUnitInputComponent extends Component {
               {
                 'is-expanded': !style,
                 'has-icons-left': alert,
-              }
+              },
             )}
           >
             <input
@@ -194,9 +196,11 @@ export class TextUnitInputComponent extends Component {
               value={this.state.unit}
               onChange={e => this.setState({ unit: e.target.value })}
             >
-            {units.map(unit =>
-              <option key={unit} value={unit}>{unit}</option>
-            )}
+              {units.map(unit => (
+                <option key={unit} value={unit}>
+                  {unit}
+                </option>
+              ))}
             </select>
           </span>
         </div>
@@ -204,7 +208,5 @@ export class TextUnitInputComponent extends Component {
     );
   }
 }
-
-import connect from '../../../../common/forms/fields/TextUnitInput';
 
 export const TextUnitInput = connect(TextUnitInputComponent);

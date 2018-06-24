@@ -82,22 +82,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       else dispatch(initActivePatient());
     },
     addNewActiveRecord: () => dispatch(addNewActiveRecord(patientId)),
-    selectActiveRecord: (id) => dispatch(selectActiveRecord(id)),
-    putActivePatient: () => dispatch(putActivePatient(patient =>
-      ownProps.history && ownProps.history.push(`/patient/${patient._id}`)
-    )),
-    putActiveRecord: (index) => dispatch(putActiveRecord(index)),
+    selectActiveRecord: id => dispatch(selectActiveRecord(id)),
+    putActivePatient: () => dispatch(putActivePatient(patient => ownProps.history && ownProps.history.push(`/patient/${patient._id}`))),
+    putActiveRecord: index => dispatch(putActiveRecord(index)),
     putDformStyles: () => dispatch(putDformStyles()),
-    removeActivePatient: () => dispatch(removeActivePatient(() =>
-      ownProps.history && ownProps.history.replace('/')
-    )),
-    setPatientFormVisibility: (visibility: boolean) =>
-      dispatch(setPatientFormVisibility(visibility)),
-    setRecordFormStyleId: (styleId) => dispatch(setRecordFormStyleId(styleId)),
+    removeActivePatient: () => dispatch(removeActivePatient(() => ownProps.history && ownProps.history.replace('/'))),
+    setPatientFormVisibility: (visibility: boolean) => dispatch(setPatientFormVisibility(visibility)),
+    setRecordFormStyleId: styleId => dispatch(setRecordFormStyleId(styleId)),
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );

@@ -19,6 +19,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import connect from '../../../common/forms/fields/RadioGroup';
+
 export const ReadOnly = ({
   options,
   value,
@@ -60,20 +62,20 @@ export const RadioGroupComponent = ({
             {
               'is-primary': option.id === value,
               [`is-${size}`]: size,
-            }
+            },
           )}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             if (onChange) {
               onChange(option.id);
             }
           }}
-        >{option.label}</a>
+        >
+          {option.label}
+        </a>
       ))}
     </div>
   )
 );
-
-import connect from '../../../common/forms/fields/RadioGroup';
 
 export const RadioGroup = connect(RadioGroupComponent);

@@ -34,7 +34,7 @@ export default ({
   <a
     {...rest}
     className={classnames(['button', className])}
-    onClick={e => {
+    onClick={(e) => {
       e.preventDefault();
 
       const csvColumns = {};
@@ -51,8 +51,10 @@ export default ({
           const datetimeString = moment().format('YYYY-MM-DD-HH-mm-ss');
 
           downloadBlob(blob, `asha-${datetimeString}.csv`);
-        }
+        },
       );
     }}
-  >Export as CSV</a>
+  >
+Export as CSV
+  </a>
 );

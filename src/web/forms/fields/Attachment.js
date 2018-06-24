@@ -26,7 +26,9 @@ export const Attachment = ({
   accept,
   multiple,
 }: AttachmentProps) => (
-  <div className="field"> {/* TODO: Remove outer div.field after upgrading React to v16*/}
+  <div className="field">
+    {' '}
+    {/* TODO: Remove outer div.field after upgrading React to v16 */}
     <AttachmentViewer
       rootModel={rootModel}
       model={model}

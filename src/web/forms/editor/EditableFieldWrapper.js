@@ -16,7 +16,11 @@ export default ({
   style?: Object,
 }) => {
   if (!fieldEditProps) {
-    return <div className={className} style={style} {...props}>{children}</div>;
+    return (
+      <div className={className} style={style} {...props}>
+        {children}
+      </div>
+    );
   }
 
   return (
@@ -25,6 +29,8 @@ export default ({
       className={className}
       style={style}
       {...props}
-    >{children}</DraggableFieldEditor>
+    >
+      {children}
+    </DraggableFieldEditor>
   );
 };

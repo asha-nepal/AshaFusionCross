@@ -49,7 +49,9 @@ export default ({
   <ScatterChart
     width={600}
     height={400}
-    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+    margin={{
+      top: 20, right: 20, bottom: 20, left: 20,
+    }}
     {...wrapperProps}
   >
     <XAxis
@@ -79,7 +81,7 @@ export default ({
     <Legend />
     {fields.map((field, i) => {
       const data = records
-        .map(record => {
+        .map((record) => {
           const value = _get(record, field.field);
           return [
             record.$created_at || record.$initialized_at || null,
@@ -91,13 +93,16 @@ export default ({
 
       if (data.length === 0) { return null; }
 
-      return (<Scatter
-        key={i}
-        name={field.label}
-        data={data}
-        fill={field.color || '#8884d8'}
-        line shape="cross"
-      />);
+      return (
+        <Scatter
+          key={i}
+          name={field.label}
+          data={data}
+          fill={field.color || '#8884d8'}
+          line
+          shape="cross"
+        />
+      );
     })}
   </ScatterChart>
 );

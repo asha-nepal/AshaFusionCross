@@ -29,7 +29,7 @@ export const ReadonlyTextArea = ({
 }) => (
   <span className="form-static is-multiline">
     {value && value.split('\n').reduce(
-      (a, b, i) => a.concat([b, <br key={i} />]), []
+      (a, b, i) => a.concat([b, <br key={i} />]), [],
     )}
   </span>
 );
@@ -62,7 +62,7 @@ export const TextAreaComponent = ({
           'textarea',
           {
             [`is-${size}`]: size,
-          }
+          },
         )}
         placeholder={placeholder}
         value={_value}
@@ -80,9 +80,9 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
+  onChange: newValue => dispatch(actions.change(ownProps.model, newValue)),
 });
 
 export const TextArea = connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(TextAreaComponent);

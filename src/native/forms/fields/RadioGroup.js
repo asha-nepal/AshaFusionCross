@@ -26,6 +26,8 @@ import {
 } from 'react-native-material-kit';
 import styles from './styles';
 
+import connect from '../../../common/forms/fields/RadioGroup';
+
 type Props = {
   options: Array<{id: string, label: string}>,
   label?: string,
@@ -54,28 +56,30 @@ export class RadioGroupComponent extends Component {
 
     return (
       <View style={styles.fieldContainer}>
-        <Text style={styles.fieldLabel}>{label || ''}</Text>
+        <Text style={styles.fieldLabel}>
+          {label || ''}
+        </Text>
         <View style={styles.radioGroupRow}>
-        {options.map(option =>
-          <View key={option.id} style={styles.radioGroupCol}>
-            <MKRadioButton
-              checked={option.id === value}
-              group={this.radioGroup}
-              onCheckedChange={({ checked }) => {
-                if (checked) {
-                  onChange(option.id);
-                }
-              }}
-            />
-            <Text style={styles.legendLabel}>{option.label}</Text>
-          </View>
-        )}
+          {options.map(option => (
+            <View key={option.id} style={styles.radioGroupCol}>
+              <MKRadioButton
+                checked={option.id === value}
+                group={this.radioGroup}
+                onCheckedChange={({ checked }) => {
+                  if (checked) {
+                    onChange(option.id);
+                  }
+                }}
+              />
+              <Text style={styles.legendLabel}>
+                {option.label}
+              </Text>
+            </View>
+          ))}
         </View>
       </View>
     );
   }
 }
-
-import connect from '../../../common/forms/fields/RadioGroup';
 
 export const RadioGroup = connect(RadioGroupComponent);

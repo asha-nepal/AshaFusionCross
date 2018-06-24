@@ -15,7 +15,9 @@
  */
 
 import { delay } from 'redux-saga';
-import { take, put, call, fork } from 'redux-saga/effects';
+import {
+  take, put, call, fork,
+} from 'redux-saga/effects';
 import {
   PUSH_ALERT,
   addAlert,

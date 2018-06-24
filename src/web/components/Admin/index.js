@@ -35,7 +35,9 @@ export default ({
           className="navbar-item"
           to="/"
         >
-          <span className="icon"><i className="fa fa-arrow-left" /></span>
+          <span className="icon">
+            <i className="fa fa-arrow-left" />
+          </span>
         </Link>,
         <span
           key="title"

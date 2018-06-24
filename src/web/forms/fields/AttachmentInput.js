@@ -36,7 +36,7 @@ const AttachmentInputComponent = ({
       type="file"
       accept={accept}
       multiple={multiple}
-      onChange={e => {
+      onChange={(e) => {
         const files = e.target.files;
 
         const meta = Array(files.length);
@@ -48,26 +48,26 @@ const AttachmentInputComponent = ({
         }
 
         Promise.all(idPromises)
-        .then(ids => {
-          ids.forEach((id, i) => {
-            const file = files[i];
+          .then((ids) => {
+            ids.forEach((id, i) => {
+              const file = files[i];
 
-            meta[i] = {
-              id,
-              name: file.name,
-              size: file.size,
-              type: file.type,
-              lastModified: file.lastModified,
-            };
+              meta[i] = {
+                id,
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                lastModified: file.lastModified,
+              };
 
-            attachments[id] = {
-              content_type: file.type,
-              data: file,
-            };
+              attachments[id] = {
+                content_type: file.type,
+                data: file,
+              };
+            });
+
+            addAttachments(attachments, meta);
           });
-
-          addAttachments(attachments, meta);
-        });
       }}
     />
   </p>
@@ -87,5 +87,5 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 export const AttachmentInput = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AttachmentInputComponent);

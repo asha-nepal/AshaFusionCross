@@ -16,10 +16,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('redux-saga/effects');
-jest.unmock('../../actions');
-jest.unmock('../fetch-patient');
-
 import { put, call } from 'redux-saga/effects';
 import PouchDB from 'lib/pouchdb';
 
@@ -37,6 +33,10 @@ import {
 import {
   fetchPatient,
 } from '../fetch-patient';
+
+jest.unmock('redux-saga/effects');
+jest.unmock('../../actions');
+jest.unmock('../fetch-patient');
 
 describe('fetchPatient saga', () => {
   it('calls db.get() with specified id then set current active-record', () => {
@@ -75,7 +75,7 @@ describe('fetchPatient saga', () => {
 
     expect(saga.next().value)
       .toEqual(
-        put(changeActiveRecords(mockFetchedRecordDocs.rows.map(r => r.doc), { silent: true }))
+        put(changeActiveRecords(mockFetchedRecordDocs.rows.map(r => r.doc), { silent: true })),
       );
 
     expect(saga.next().value)

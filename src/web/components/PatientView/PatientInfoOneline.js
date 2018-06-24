@@ -29,7 +29,8 @@ export default ({
 }) => {
   const elements = [
     (patient.number ? `[${patient.number}] ` : '') + (patient.name || ''),
-    patient.age &&
+    patient.age
+      && (
       <span>
         Age:
         <div style={{ display: 'inline-block' }}>
@@ -39,20 +40,25 @@ export default ({
             readonly
           />
         </div>
-      </span>,
+      </span>
+      ),
     patient.sex && `Sex: ${patient.sex}`,
     patient.address && `Address: ${patient.address}`,
   ]
-  .filter(element => element != null);
+    .filter(element => element != null);
 
   const delimiter = '/';
   const delimited = elements.reduce(
-    (a, b, i) => (i === 0 ? a.concat(b) : a.concat([delimiter, b])), []
+    (a, b, i) => (i === 0 ? a.concat(b) : a.concat([delimiter, b])), [],
   );
 
   return (
     <div {...rest} className="columns is-vcentered is-mobile is-multiline is-variable is-1">
-      {delimited.map((elem, i) => <span key={i} className="column is-narrow">{elem}</span>)}
+      {delimited.map((elem, i) => (
+        <span key={i} className="column is-narrow">
+          {elem}
+        </span>
+      ))}
     </div>
   );
 };

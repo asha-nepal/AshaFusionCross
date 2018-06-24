@@ -65,7 +65,7 @@ export const SubformListComponent = ({
 
   const _values = values || [];
 
-  const rows = _values.map((value, i) =>
+  const rows = _values.map((value, i) => (
     <Row
       key={i}
       value={value}
@@ -73,7 +73,7 @@ export const SubformListComponent = ({
       onChange={(path, v) => onChange(path ? `[${i}]${path}` : `[${i}]`, v)}
       onRemoveItemRequested={() => onRemoveItemRequested(i)}
     />
-  );
+  ));
 
   const additionalRow = autoAdd ? (
     <Row
@@ -89,11 +89,13 @@ export const SubformListComponent = ({
     >
       <button
         className="button is-small is-primary is-outlined is-fullwidth"
-        onClick={e => {
+        onClick={(e) => {
           e.target.blur();
           onAddItemRequested({});
         }}
-      >Add new item</button>
+      >
+Add new item
+      </button>
     </div>
   );
 
@@ -101,11 +103,11 @@ export const SubformListComponent = ({
     <DittoWrapper
       className="field"
       value={values}
-      onChange={(newValues) => onChange(null, newValues)}
+      onChange={newValues => onChange(null, newValues)}
       getPreviousData={getPreviousData}
     >
       <div className="panel">
-      {rows.concat(additionalRow)}
+        {rows.concat(additionalRow)}
       </div>
     </DittoWrapper>
   );
@@ -117,13 +119,13 @@ const mapStateToProps = (state, ownProps) => ({
   values: _get(state, ownProps.model),
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (path, value) =>
-    dispatch(actions.change(
-      path == null ? ownProps.model : `${ownProps.model}${path}`, value)),
-  onAddItemRequested: (value) => dispatch(actions.push(ownProps.model, value)),
-  onRemoveItemRequested: (index) => dispatch(actions.remove(ownProps.model, index)),
+  onChange: (path, value) => dispatch(actions.change(
+    path == null ? ownProps.model : `${ownProps.model}${path}`, value,
+  )),
+  onAddItemRequested: value => dispatch(actions.push(ownProps.model, value)),
+  onRemoveItemRequested: index => dispatch(actions.remove(ownProps.model, index)),
 });
 
 export const SubformList = connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(SubformListComponent);

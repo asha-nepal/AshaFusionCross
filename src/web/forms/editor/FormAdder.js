@@ -40,11 +40,13 @@ export default class extends React.Component {
       <span className={className}>
         <a
           className="button is-primary"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             this.setState({ isModalOpen: true });
           }}
-        >Add new form</a>
+        >
+Add new form
+        </a>
 
         <Modal
           isOpen={this.state.isModalOpen}
@@ -62,10 +64,12 @@ export default class extends React.Component {
               onChange={newFormLabel => this.setState({ newFormLabel })}
             />
             <p className="control">
-              <label className="label">&nbsp;</label>
+              <label className="label">
+&nbsp;
+              </label>
               <a
                 className="button"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   onFormAdd(this.state.newFormId, this.state.newFormLabel);
                   this.setState({
@@ -74,7 +78,9 @@ export default class extends React.Component {
                     newFormLabel: '',
                   });
                 }}
-              >Add new form</a>
+              >
+Add new form
+              </a>
             </p>
           </div>
         </Modal>

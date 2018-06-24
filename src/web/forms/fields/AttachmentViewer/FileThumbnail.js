@@ -27,7 +27,7 @@ export default ({
   <a
     title={label}
     className="image is-128x128 attachment-file"
-    onClick={e => {
+    onClick={(e) => {
       e.preventDefault();
       onClick();
     }}
@@ -35,6 +35,8 @@ export default ({
     <span className="icon">
       <i className="fa fa-file" />
     </span>
-    <span className="filename">{label}</span>
+    <span className="filename">
+      {label}
+    </span>
   </a>
 );

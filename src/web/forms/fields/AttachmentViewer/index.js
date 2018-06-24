@@ -20,11 +20,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
+import { makeCancelable } from 'utils';
+import downloadBlob from 'lib/download-blob';
 import ImageThumbnail from './ImageThumbnail';
 import FileThumbnail from './FileThumbnail';
 import ImageModal from './ImageModal';
-import { makeCancelable } from 'utils';
-import downloadBlob from 'lib/download-blob';
 
 class AttachmentViewerComponent extends Component {
   constructor(props) {
@@ -81,32 +81,31 @@ class AttachmentViewerComponent extends Component {
   }
 
   loadingCachesPromise: ?CancelablePromise;
+
   _loadAttachmentsToCache: Function;
 
   _loadAttachmentsToCache(
-    db: PouchInstance, docId: string, _attachments: Object, metadata: Array<Object>
+    db: PouchInstance, docId: string, _attachments: Object, metadata: Array<Object>,
   ) {
     if (!db) { return; }
     if (!_attachments) { return; }
 
     const attachmentIds = metadata.map(m => m.id);
-    const attachmentIdsToCache = attachmentIds.filter(id =>
-        id in _attachments
+    const attachmentIdsToCache = attachmentIds.filter(id => id in _attachments
         && !_attachments[id].data
-        && (!this.state.cache[docId] || !(id in this.state.cache[docId]))
-      );
+        && (!this.state.cache[docId] || !(id in this.state.cache[docId])));
 
     if (this.loadingCachesPromise) {
       this.loadingCachesPromise.cancel();
     }
 
     this.loadingCachesPromise = makeCancelable(
-      Promise.all(attachmentIdsToCache.map(id => db.getAttachment(docId, id)))
+      Promise.all(attachmentIdsToCache.map(id => db.getAttachment(docId, id))),
     );
 
     this.loadingCachesPromise
       .promise
-      .then(blobs => {
+      .then((blobs) => {
         const newCache = this.state.cache;
 
         if (!newCache[docId]) {
@@ -143,50 +142,54 @@ class AttachmentViewerComponent extends Component {
     }
 
     return (
-      <div className="field"> {/* TODO: Remove outer div.field after upgrading React to v16*/}
+      <div className="field">
+        {' '}
+        {/* TODO: Remove outer div.field after upgrading React to v16 */}
         <div className="columns is-mobile is-multiline">
-        {metadata.map(m => {
-          const blob = (this.state.cache[docId] && this.state.cache[docId][m.id])
+          {metadata.map((m) => {
+            const blob = (this.state.cache[docId] && this.state.cache[docId][m.id])
             || (_attachments && _attachments[m.id] && _attachments[m.id].data);
 
-          let content = null;
+            let content = null;
 
-          if (!blob) {
-            content = `Loading, ${m.id} ${m.name}`;
-          } else if (blob.type && blob.type.match(/image\/*/)) {
-            content = (
-              <ImageThumbnail
-                blob={blob}
-                alt={m.name}
-                onClick={() => this.setState({
-                  isModalOpen: true,
-                  modalImageBlob: blob,
-                  modalImageName: m.name,
-                })}
-              />
-            );
-          } else {
-            content = (
-              <FileThumbnail
-                label={m.name}
-                onClick={() => downloadBlob(blob, m.name)}
-              />
-            );
-          }
+            if (!blob) {
+              content = `Loading, ${m.id} ${m.name}`;
+            } else if (blob.type && blob.type.match(/image\/*/)) {
+              content = (
+                <ImageThumbnail
+                  blob={blob}
+                  alt={m.name}
+                  onClick={() => this.setState({
+                    isModalOpen: true,
+                    modalImageBlob: blob,
+                    modalImageName: m.name,
+                  })}
+                />
+              );
+            } else {
+              content = (
+                <FileThumbnail
+                  label={m.name}
+                  onClick={() => downloadBlob(blob, m.name)}
+                />
+              );
+            }
 
-          return (
-            <div key={m.id} className="column is-narrow">
-              {content}
-              <button
-                className="button is-danger"
-                onClick={e => {
-                  e.preventDefault();
-                  removeAttachment(m.id);
-                }}
-              >Remove</button>
-            </div>
-          );
-        })}
+            return (
+              <div key={m.id} className="column is-narrow">
+                {content}
+                <button
+                  className="button is-danger"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeAttachment(m.id);
+                  }}
+                >
+Remove
+                </button>
+              </div>
+            );
+          })}
         </div>
         <ImageModal
           isOpen={this.state.isModalOpen}
@@ -212,12 +215,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   removeAttachment: (attachmentId) => {
-    dispatch(actions.filter(ownProps.model, (m) => m.id !== attachmentId));
+    dispatch(actions.filter(ownProps.model, m => m.id !== attachmentId));
     dispatch(actions.omit(`${ownProps.rootModel}._attachments`, attachmentId));
   },
 });
 
 export const AttachmentViewer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AttachmentViewerComponent);

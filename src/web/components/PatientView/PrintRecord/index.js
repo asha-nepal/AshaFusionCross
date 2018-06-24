@@ -35,10 +35,10 @@ export const createPrintSelector = ({
   record: RecordObject,
 }) => (
   <Container>
-    {formatList.map(({ label, Component }, i) =>
+    {formatList.map(({ label, Component }, i) => (
       <Item
         key={i}
-        onClick={e => {
+        onClick={(e) => {
           e.preventDefault();
 
           const printWindow = window.open('/print.html');
@@ -50,8 +50,8 @@ export const createPrintSelector = ({
                 () => {
                   printWindow.focus();
                   setTimeout(() => printWindow.print(), 1);
-    //                printWindow.close();
-                }
+                  //                printWindow.close();
+                },
               );
             };
           }
@@ -59,6 +59,6 @@ export const createPrintSelector = ({
       >
         {label}
       </Item>
-    )}
+    ))}
   </Container>
 );

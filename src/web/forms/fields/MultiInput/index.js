@@ -73,14 +73,16 @@ export class MultiInputComponent extends Component {
     const inputNodes = [];
 
     return (
-      <div className="field"> {/* TODO: Remove outer div.field after upgrading React to v16*/}
-        {_values.map((value, i) =>
+      <div className="field">
+        {' '}
+        {/* TODO: Remove outer div.field after upgrading React to v16 */}
+        {_values.map((value, i) => (
           <RowComponent
             key={i}
             type={type}
             value={value || ''}
             onChange={e => onChange(i, e.target.value)}
-            onBlur={e => {
+            onBlur={(e) => {
               if (e.target.value === '') {
                 onRemoveItemRequested(i);
                 if (inputNodes[i]) inputNodes[i].focus();
@@ -90,20 +92,20 @@ export class MultiInputComponent extends Component {
             onFocusNextRequested={() => {
               if (inputNodes[i + 1]) inputNodes[i + 1].focus();
             }}
-            inputRef={inputNode => {
+            inputRef={(inputNode) => {
               inputNodes[i] = inputNode;
             }}
           />
-        ).concat(
+        )).concat(
           <RowComponent
             key={_values.length}
             type={type}
             value=""
             onChange={e => onAddItemRequested(e.target.value)}
-            inputRef={inputNode => {
+            inputRef={(inputNode) => {
               inputNodes[_values.length] = inputNode;
             }}
-          />
+          />,
         )}
       </div>
     );
@@ -115,10 +117,10 @@ const mapStateToProps = (state, ownProps) => ({
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onChange: (index, value) => dispatch(actions.change(`${ownProps.model}[${index}]`, value)),
-  onAddItemRequested: (value) => dispatch(actions.push(ownProps.model, value)),
-  onRemoveItemRequested: (index) => dispatch(actions.remove(ownProps.model, index)),
+  onAddItemRequested: value => dispatch(actions.push(ownProps.model, value)),
+  onRemoveItemRequested: index => dispatch(actions.remove(ownProps.model, index)),
 });
 
 export const MultiInput = connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(MultiInputComponent);

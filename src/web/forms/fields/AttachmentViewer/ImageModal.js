@@ -17,8 +17,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import Modal from '../../../components/Modal';
 import downloadBlob from 'lib/download-blob';
+import Modal from '../../../components/Modal';
 
 type Props = {
   isOpen: boolean,
@@ -61,30 +61,40 @@ export default class extends Component {
         isOpen={isOpen}
         onClose={onClose}
       >
-        {imageUrl &&
+        {imageUrl
+          && (
           <p className="image" style={{ marginBottom: 20 }}>
             <img
               src={imageUrl}
               alt={imageName || ''}
             />
           </p>
+          )
         }
         <div className="has-text-centered">
-          {imageBlob &&
+          {imageBlob
+            && (
             <a
               className="icon is-medium inverse"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 if (imageBlob) downloadBlob(imageBlob, imageName || 'file');
               }}
-            ><i className="fa fa-download" /></a>
+            >
+              <i className="fa fa-download" />
+            </a>
+            )
           }
-          {imageUrl &&
+          {imageUrl
+            && (
             <a
               className="icon is-medium inverse"
               href={imageUrl}
               target="_blank"
-            ><i className="fa fa-external-link" /></a>
+            >
+              <i className="fa fa-external-link" />
+            </a>
+            )
           }
         </div>
       </Modal>

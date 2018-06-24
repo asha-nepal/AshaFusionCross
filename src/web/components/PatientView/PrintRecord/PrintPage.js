@@ -66,82 +66,155 @@ export default ({
     <section className="section is-print">
       <div className="header is-clearfix">
         <h1 className="subtitle is-3 is-pulled-left">
-          {number && <small>No. {number} </small>}
+          {number && (
+          <small>
+No.
+            {number}
+            {' '}
+
+          </small>
+          )}
           {getStr(patient, 'name')}
         </h1>
 
-        {date &&
+        {date
+          && (
           <p className="is-pulled-right">
             {date.toDateString()}
           </p>
+          )
         }
       </div>
 
       <div className="container">
         <h2 className="subtitle">
-          <p>Age: {getStr(patient, 'age')}</p>
-          <p>Sex: {{ male: 'Male', female: 'Female' }[_get(patient, 'sex')]}</p>
-          <p>Address: {getStr(patient, 'address')}</p>
+          <p>
+Age:
+            {getStr(patient, 'age')}
+          </p>
+          <p>
+Sex:
+            {{ male: 'Male', female: 'Female' }[_get(patient, 'sex')]}
+          </p>
+          <p>
+Address:
+            {getStr(patient, 'address')}
+          </p>
         </h2>
 
         <div className="field is-grouped">
           <div className="field">
-            <label className="label">Height</label>
-            <p className="form-static">{heightFoot ? `${heightFoot} ft` : '---'}</p>
+            <label className="label">
+Height
+            </label>
+            <p className="form-static">
+              {heightFoot ? `${heightFoot} ft` : '---'}
+            </p>
           </div>
           <div className="field">
-            <label className="label">Weight</label>
-            <p className="form-static">{weight ? `${weight} kg` : '---'}</p>
+            <label className="label">
+Weight
+            </label>
+            <p className="form-static">
+              {weight ? `${weight} kg` : '---'}
+            </p>
           </div>
           <div className="field">
-            <label className="label">BMI</label>
-            <p className="form-static">{bmiRounded || '---'}</p>
+            <label className="label">
+BMI
+            </label>
+            <p className="form-static">
+              {bmiRounded || '---'}
+            </p>
           </div>
         </div>
         <div className="field is-grouped">
           <div className="field">
-            <label className="label">Blood pressure</label>
+            <label className="label">
+Blood pressure
+            </label>
             <p className="form-static">
-              {getStr(record, 'bp.s', '---')} / {getStr(record, 'bp.d', '---')} mmHg
+              {getStr(record, 'bp.s', '---')}
+              {' '}
+/
+              {getStr(record, 'bp.d', '---')}
+              {' '}
+mmHg
             </p>
           </div>
           <div className="field">
-            <label className="label">Pulse</label>
-            <p className="form-static">{getStr(record, 'pulse', '---')} /min</p>
+            <label className="label">
+Pulse
+            </label>
+            <p className="form-static">
+              {getStr(record, 'pulse', '---')}
+              {' '}
+/min
+            </p>
           </div>
           <div className="field">
-            <label className="label">Temperature</label>
-            <p className="form-static">{temperature ? `${temperature} degF` : '---'}</p>
+            <label className="label">
+Temperature
+            </label>
+            <p className="form-static">
+              {temperature ? `${temperature} degF` : '---'}
+            </p>
           </div>
           <div className="field">
-            <label className="label">SpO2</label>
-            <p className="form-static">{getStr(record, 'spo2', '---')} %</p>
+            <label className="label">
+SpO2
+            </label>
+            <p className="form-static">
+              {getStr(record, 'spo2', '---')}
+              {' '}
+%
+            </p>
           </div>
           <div className="field">
-            <label className="label">Respiration rate</label>
-            <p className="form-static">{getStr(record, 'rr', '---')} /min</p>
+            <label className="label">
+Respiration rate
+            </label>
+            <p className="form-static">
+              {getStr(record, 'rr', '---')}
+              {' '}
+/min
+            </p>
           </div>
           <div className="field">
-            <label className="label">Blood sugar</label>
-            <p className="form-static">{getStr(record, 'bs', '---')} mg/dL</p>
+            <label className="label">
+Blood sugar
+            </label>
+            <p className="form-static">
+              {getStr(record, 'bs', '---')}
+              {' '}
+mg/dL
+            </p>
           </div>
         </div>
 
         <table className="table">
           <tbody>
             <tr>
-              <th>Allergy</th>
-              <td>{_get(record, 'allergy') ? (
-                <div>
-                  <strong>&lt;Yes&gt;</strong>
-                  <ReadonlyTextArea
-                    value={_get(record, 'allergy_memo')}
-                  />
-                </div>
-              ) : '---'}</td>
+              <th>
+Allergy
+              </th>
+              <td>
+                {_get(record, 'allergy') ? (
+                  <div>
+                    <strong>
+&lt;Yes&gt;
+                    </strong>
+                    <ReadonlyTextArea
+                      value={_get(record, 'allergy_memo')}
+                    />
+                  </div>
+                ) : '---'}
+              </td>
             </tr>
             <tr>
-              <th>Past medical history</th>
+              <th>
+Past medical history
+              </th>
               <td>
                 <ReadonlyTextArea
                   value={_get(record, 'past_medical_history')}
@@ -149,7 +222,9 @@ export default ({
               </td>
             </tr>
             <tr>
-              <th>Current medicines</th>
+              <th>
+Current medicines
+              </th>
               <td>
                 <ReadonlyTextArea
                   value={_get(record, 'current_medicine')}
@@ -157,7 +232,9 @@ export default ({
               </td>
             </tr>
             <tr>
-              <th>Present medical history</th>
+              <th>
+Present medical history
+              </th>
               <td>
                 <ReadonlyTextArea
                   value={_get(record, 'present_medical_history')}
@@ -165,7 +242,9 @@ export default ({
               </td>
             </tr>
             <tr>
-              <th>Symptoms</th>
+              <th>
+Symptoms
+              </th>
               <td>
                 <ReadonlyMultiInput
                   values={_get(record, 'symptoms')}
@@ -173,7 +252,9 @@ export default ({
               </td>
             </tr>
             <tr>
-              <th>Signs</th>
+              <th>
+Signs
+              </th>
               <td>
                 <CheckGroupComponent
                   value={_get(record, 'signs_select')}
@@ -194,7 +275,9 @@ export default ({
               </td>
             </tr>
             <tr>
-              <th>Diagnoses</th>
+              <th>
+Diagnoses
+              </th>
               <td>
                 <ReadonlyDiagnoses
                   value={_get(record, 'diagnoses')}
@@ -202,28 +285,48 @@ export default ({
               </td>
             </tr>
             <tr>
-              <th>Prescriptions</th>
+              <th>
+Prescriptions
+              </th>
               <td>
                 <ReadonlySubformList
                   values={_get(record, 'prescription')}
                   fields={[
-                    { field: 'medicine', label: 'Medicine', class: 'textinput', primary: true },
+                    {
+                      field: 'medicine', label: 'Medicine', class: 'textinput', primary: true,
+                    },
                     { field: 'stat', label: 'Stat', class: 'check' },
                     { field: 'sos', label: 'SOS', class: 'check' },
                     {
-                      field: 'dose', class: 'textinput', type: 'number', style: { width: 50 },
-                      label: 'Dose', suffix: 'pcs',
+                      field: 'dose',
+                      class: 'textinput',
+                      type: 'number',
+                      style: { width: 50 },
+                      label: 'Dose',
+                      suffix: 'pcs',
                     },
                     {
-                      field: 'freq', class: 'textinput', type: 'number', style: { width: 50 },
-                      label: 'Frequency', suffix: 'times', hide: 'sos|stat',
+                      field: 'freq',
+                      class: 'textinput',
+                      type: 'number',
+                      style: { width: 50 },
+                      label: 'Frequency',
+                      suffix: 'times',
+                      hide: 'sos|stat',
                     },
                     {
-                      field: 'duration', class: 'textinput', type: 'number', style: { width: 60 },
-                      label: 'Duration', suffix: 'days', hide: 'sos|stat',
+                      field: 'duration',
+                      class: 'textinput',
+                      type: 'number',
+                      style: { width: 60 },
+                      label: 'Duration',
+                      suffix: 'days',
+                      hide: 'sos|stat',
                     },
                     {
-                      field: 'route', class: 'select', label: 'Route',
+                      field: 'route',
+                      class: 'select',
+                      label: 'Route',
                       options: [
                         { id: 'po', label: 'PO' },
                         { id: 'ih', label: 'IH' },
@@ -234,14 +337,19 @@ export default ({
                       ],
                     },
                     {
-                      field: 'meal', class: 'select', label: 'Meal',
+                      field: 'meal',
+                      class: 'select',
+                      label: 'Meal',
                       options: [
                         { id: 'before', label: 'Before the meal' },
                         { id: 'after', label: 'After the meal' },
                       ],
                     },
                     {
-                      field: 'remark', class: 'textinput', label: 'Remark', expanded: true,
+                      field: 'remark',
+                      class: 'textinput',
+                      label: 'Remark',
+                      expanded: true,
                       show: 'use_remark',
                     },
                   ]}

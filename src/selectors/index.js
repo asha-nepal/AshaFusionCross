@@ -49,17 +49,14 @@ export {
 export const getActivePatient = (state: Object) => state.activePatient;
 
 export const getActiveRecords = (state: Object) => state.activeRecords;
-export const getSelectedActiveRecordId =
-  (state: Object) => state.patientView.selectedActiveRecordId;
+export const getSelectedActiveRecordId = (state: Object) => state.patientView.selectedActiveRecordId;
 export const getSelectedActiveRecord = createSelector(
   [getActiveRecords, getSelectedActiveRecordId],
-  (activeRecords, selectedActiveRecordId) =>
-    activeRecords.find(r => r._id === selectedActiveRecordId)
+  (activeRecords, selectedActiveRecordId) => activeRecords.find(r => r._id === selectedActiveRecordId),
 );
 export const getSelectedActiveRecordIndex = createSelector(
   [getActiveRecords, getSelectedActiveRecordId],
-  (activeRecords, selectedActiveRecordId) =>
-    activeRecords.findIndex(r => r._id === selectedActiveRecordId)
+  (activeRecords, selectedActiveRecordId) => activeRecords.findIndex(r => r._id === selectedActiveRecordId),
 );
 
 function isFormPristine(formState, path) {
@@ -72,6 +69,5 @@ function isFormPristine(formState, path) {
 export const getActiveRecordsForm = (state: Object) => state.activeRecordsForm;
 export const getActiveRecordsFormPristineness = createSelector(
   [getActiveRecords, getActiveRecordsForm],
-  (activeRecords, activeRecordsForm) =>
-    activeRecords.map((r, i) => isFormPristine(activeRecordsForm, `[${i}]`)),
+  (activeRecords, activeRecordsForm) => activeRecords.map((r, i) => isFormPristine(activeRecordsForm, `[${i}]`)),
 );

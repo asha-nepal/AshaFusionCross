@@ -17,5 +17,7 @@
 import React from 'react';
 
 export default () => (
-  <div>PrintRecord</div>
+  <div>
+PrintRecord
+  </div>
 );

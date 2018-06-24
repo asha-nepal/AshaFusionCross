@@ -16,12 +16,6 @@
 
 /* eslint-env jest */
 
-jest.unmock('../../../../actions');
-jest.unmock('../../../../actions/dform');
-jest.unmock('lodash.topath');
-jest.unmock('immutable');
-jest.unmock('../styles');
-
 import Immutable from 'immutable';
 
 import {
@@ -34,6 +28,12 @@ import {
 } from '../../../../actions';
 
 import reducer from '../styles';
+
+jest.unmock('../../../../actions');
+jest.unmock('../../../../actions/dform');
+jest.unmock('lodash.topath');
+jest.unmock('immutable');
+jest.unmock('../styles');
 
 describe('DFORM_STYLE_FIELD_INSERT', () => {
   it('inserts field', () => {
@@ -60,7 +60,7 @@ describe('DFORM_STYLE_FIELD_INSERT', () => {
       'form01',
       '[0].children',
       1,
-      { class: 'textunitinput', label: 'XXX' }
+      { class: 'textunitinput', label: 'XXX' },
     );
 
     const stateAfter = Immutable.fromJS({
@@ -105,7 +105,7 @@ describe('DFORM_STYLE_FIELD_INSERT', () => {
       'form01',
       '[0].children',
       0,
-      { class: 'textunitinput', label: 'XXX' }
+      { class: 'textunitinput', label: 'XXX' },
     );
 
     const stateAfter = Immutable.fromJS({
@@ -154,7 +154,7 @@ describe('DFORM_STYLE_FIELD_UPDATE', () => {
       'form01',
       '[0].children',
       1,
-      { class: 'textunitinput', label: 'XXX' }
+      { class: 'textunitinput', label: 'XXX' },
     );
 
     const stateAfter = Immutable.fromJS({
@@ -204,7 +204,7 @@ describe('DFORM_STYLE_FIELD_UPDATE', () => {
       '[0].children',
       1,
       { class: 'textunitinput' },
-      true
+      true,
     );
 
     const stateAfter = Immutable.fromJS({

@@ -23,7 +23,7 @@ export default ({
   isOpen = false,
   onClose,
 }: {
-  children?: React$Element<any>,  // FIXME: flow@0.32.0がJSXのchildren propを正しく検出してくれないためWorkaround
+  children?: React$Element<any>, // FIXME: flow@0.32.0がJSXのchildren propを正しく検出してくれないためWorkaround
   isOpen?: boolean,
   onClose: () => void,
 }) => (
@@ -39,7 +39,7 @@ export default ({
     </div>
     <button
       className="modal-close"
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         onClose();
         return false;

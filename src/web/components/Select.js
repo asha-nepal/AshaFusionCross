@@ -30,15 +30,17 @@ const Select = <T>({
   <span className="select">
     <select
       value={value}
-      onChange={e => {
+      onChange={(e) => {
         onChange(e.target.value);
       }}
     >
-    {options.map((option, i) =>
-      <option key={i} value={option.id}>{option.label}</option>
-    )}
+      {options.map((option, i) => (
+        <option key={i} value={option.id}>
+          {option.label}
+        </option>
+      ))}
     </select>
   </span>
-);
+  );
 
 export default Select;

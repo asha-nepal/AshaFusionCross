@@ -22,11 +22,11 @@ import {
   setRecordChartVisibility,
 } from '../../../actions';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   visibility: state.patientView.recordChartVisibility,
 });
-const mapDispatchToProps = (dispatch) => ({
-  setVisibility: (visibility) => dispatch(setRecordChartVisibility(visibility)),
+const mapDispatchToProps = dispatch => ({
+  setVisibility: visibility => dispatch(setRecordChartVisibility(visibility)),
 });
 
 const RecordChartToggleComponent = ({
@@ -38,11 +38,13 @@ const RecordChartToggleComponent = ({
 }) => (
   <button
     className={visibility ? 'button is-primary' : 'button'}
-    onClick={e => {
+    onClick={(e) => {
       e.preventDefault();
       setVisibility(!visibility);
     }}
-  ><i className="fa fa-line-chart" /></button>
+  >
+    <i className="fa fa-line-chart" />
+  </button>
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordChartToggleComponent);

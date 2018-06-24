@@ -97,7 +97,11 @@ export default class PatientView extends Component {
     } = this.props;
 
     if (isFetching) {
-      return <div>Fetching...</div>;
+      return (
+        <div>
+Fetching...
+        </div>
+      );
     }
 
     const showRecord = !isNew && recordFormStyle;
@@ -119,68 +123,73 @@ export default class PatientView extends Component {
         <div className="card">
           <div className="card-content">
             <div className="container">
-            {(isNew || patientFormVisibility)
-              ?
-              <div className="columns">
-                <div className="column">
-                  <DynamicForm
-                    model="activePatient"
-                    style={patientFormStyle}
-                    freeze={isPuttingPatient}
-                    onSubmit={putActivePatient}
-                    onRemove={isNew ? null : (() => {
-                      if (confirm('Are you sure?')) {
-                        removeActivePatient();
-                      }
-                    })}
-                    warnings={duplicatedPatientsExist ? {
-                      name: duplicatedPatientsExist.name && 'Duplicated',
-                      number: duplicatedPatientsExist.number && 'Duplicated',
-                    } : undefined}
-                    fieldOptions={{
-                      number: { nextPatientNumber },
-                    }}
-                  />
-                </div>
-                {!isNew &&
+              {(isNew || patientFormVisibility)
+                ? (
+                  <div className="columns">
+                    <div className="column">
+                      <DynamicForm
+                        model="activePatient"
+                        style={patientFormStyle}
+                        freeze={isPuttingPatient}
+                        onSubmit={putActivePatient}
+                        onRemove={isNew ? null : (() => {
+                          if (confirm('Are you sure?')) {
+                            removeActivePatient();
+                          }
+                        })}
+                        warnings={duplicatedPatientsExist ? {
+                          name: duplicatedPatientsExist.name && 'Duplicated',
+                          number: duplicatedPatientsExist.number && 'Duplicated',
+                        } : undefined}
+                        fieldOptions={{
+                          number: { nextPatientNumber },
+                        }}
+                      />
+                    </div>
+                    {!isNew
+                  && (
                   <div className="column is-narrow">
                     <a
                       className="delete is-pulled-right"
                       aria-label="close"
-                      onClick={e => {
+                      onClick={(e) => {
                         e.preventDefault();
                         setPatientFormVisibility(false);
                       }}
                     />
                   </div>
+                  )
                 }
-              </div>
-              :
-              <div className="columns">
-                <div className="column">
-                  <PatientInfoOneline
-                    patient={patient}
-                  />
-                </div>
-                <div className="column is-narrow">
-                  <a
-                    className="icon is-pulled-right"
-                    aria-label="edit"
-                    onClick={e => {
-                      e.preventDefault();
-                      setPatientFormVisibility(true);
-                    }}
-                  >
-                    <i className="fa fa-pencil-square-o" />
-                  </a>
-                </div>
-              </div>
+                  </div>
+                )
+                : (
+                  <div className="columns">
+                    <div className="column">
+                      <PatientInfoOneline
+                        patient={patient}
+                      />
+                    </div>
+                    <div className="column is-narrow">
+                      <a
+                        className="icon is-pulled-right"
+                        aria-label="edit"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setPatientFormVisibility(true);
+                        }}
+                      >
+                        <i className="fa fa-pencil-square-o" />
+                      </a>
+                    </div>
+                  </div>
+                )
             }
             </div>
           </div>
         </div>
 
-        {showRecord &&
+        {showRecord
+          && (
           <section className="section">
             <div className="container">
               <div className="columns">
@@ -192,14 +201,14 @@ export default class PatientView extends Component {
                   pristinenessList={activeRecordsFormPristineness}
                 />
                 <div className="column is-narrow">
-                  {recordFormStyles.size > 1 &&
+                  {recordFormStyles.size > 1
+                    && (
                     <Select
                       value={recordFormStyleId}
                       onChange={setRecordFormStyleId}
-                      options={recordFormStyles.map(style =>
-                        ({ id: style.get('id'), label: style.get('label') })
-                      )}
+                      options={recordFormStyles.map(style => ({ id: style.get('id'), label: style.get('label') }))}
                     />
+                    )
                   }
                   <RecordChartToggle />
                 </div>
@@ -208,34 +217,35 @@ export default class PatientView extends Component {
               <RecordChartSelector records={records} />
 
               {selectedActiveRecordIndex > -1 && (
-                <div className="container">
-                  <DynamicForm
-                    model={`activeRecords[${selectedActiveRecordIndex}]`}
-                    formGroup="record"
-                    formStyleId={recordFormStyleId}
-                    style={recordFormStyle}
-                    freeze={isPuttingRecord}
-                    getPreviousData={(path: string) => {
-                      // FIXME: Logics in view component.
-                      // This function should be outside of this component.
-                      const prevIndex = selectedActiveRecordIndex - 1;
-                      const prevRecord = records[prevIndex];
-                      if (prevRecord) {
-                        return _get(prevRecord, path);
-                      }
+              <div className="container">
+                <DynamicForm
+                  model={`activeRecords[${selectedActiveRecordIndex}]`}
+                  formGroup="record"
+                  formStyleId={recordFormStyleId}
+                  style={recordFormStyle}
+                  freeze={isPuttingRecord}
+                  getPreviousData={(path: string) => {
+                    // FIXME: Logics in view component.
+                    // This function should be outside of this component.
+                    const prevIndex = selectedActiveRecordIndex - 1;
+                    const prevRecord = records[prevIndex];
+                    if (prevRecord) {
+                      return _get(prevRecord, path);
+                    }
 
-                      return null;
-                    }}
-                    onFormsSave={putDformStyles}
-                    // customizable // TODO: Temporarily disabled
-                  />
-                </div>
+                    return null;
+                  }}
+                  onFormsSave={putDformStyles}
+                />
+              </div>
               )}
             </div>
           </section>
+          )
         }
 
-        {showRecord &&
+        {showRecord
+          && (
           <Footer
             onSubmit={
               selectedActiveRecordIndex > -1
@@ -244,6 +254,7 @@ export default class PatientView extends Component {
             }
             freeze={isPuttingRecord}
           />
+          )
         }
       </div>
     );
