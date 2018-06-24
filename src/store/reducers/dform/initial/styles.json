@@ -1748,7 +1748,7 @@
           "widthaligned": true,
           "children": [
             {
-              "class": "block",
+              "class": "accordion",
               "label": "Haematology",
               "layout": "horizontal",
               "children": [
@@ -2168,7 +2168,7 @@
               ]
             },
             {
-              "class": "block",
+              "class": "accordion",
               "label": "BIOCHEMISTRY",
               "layout": "horizontal",
               "children": [
@@ -2775,12 +2775,12 @@
           "widthaligned": true,
           "children": [
             {
-              "class": "block",
+              "class": "accordion",
               "label": "STOOL EXAMINATION",
               "layout": "horizontal",
               "children": [
                 {
-                  "class": "block",
+                  "class": "accordion",
                   "label": "PHYSICAL",
                   "children": [
                     {
@@ -2806,7 +2806,7 @@
                   ]
                 },
                 {
-                  "class": "block",
+                  "class": "accordion",
                   "label": "CHEMICAL",
                   "children": [
                     {
@@ -2828,7 +2828,7 @@
                   ]
                 },
                 {
-                  "class": "block",
+                  "class": "accordion",
                   "label": "MICROSCOPIC",
                   "children": [
                     {
@@ -2854,7 +2854,7 @@
                   ]
                 },
                 {
-                  "class": "block",
+                  "class": "accordion",
                   "label": "HOOKWORM",
                   "children": [
                     {
@@ -2887,12 +2887,12 @@
               ]
             },
             {
-              "class": "block",
+              "class": "accordion",
               "label": "URINE EXAMINATION",
               "layout": "horizontal",
               "children": [
                 {
-                  "class": "block",
+                  "class": "accordion",
                   "label": "PHYSICAL",
                   "children": [
                     {
@@ -2914,7 +2914,7 @@
                   ]
                 },
                 {
-                  "class": "block",
+                  "class": "accordion",
                   "label": "CHEMICAL",
                   "children": [
                     {
@@ -2944,7 +2944,7 @@
                   ]
                 },
                 {
-                  "class": "block",
+                  "class": "accordion",
                   "label": "MICROSCOPIC",
                   "children": [
                     {
