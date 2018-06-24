@@ -19,7 +19,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
-import randomstring from 'randomstring';
+import randomstringPromise from 'randomstring-promise';
 
 const AttachmentInputComponent = ({
   accept,
@@ -44,7 +44,7 @@ const AttachmentInputComponent = ({
         const idPromises = Array(files.length);
 
         for (let i = 0; i < files.length; ++i) {
-          idPromises[i] = randomstring(16);
+          idPromises[i] = randomstringPromise(16);
         }
 
         Promise.all(idPromises)

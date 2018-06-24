@@ -33,7 +33,6 @@
     "lodash.uniqby": "^4.7.0",
     "moment": "^2.22.2",
     "pouchdb": "^6.3.4",
-    "randomstring": "^1.1.5",
     "randomstring-promise": "0.0.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
