@@ -119,6 +119,11 @@
                 "height",
                 "weight"
               ]
+            },
+            {
+              "label": "somevalue",
+              "field": "somevalue",
+              "class": "textinput"
             }
           ]
         },
