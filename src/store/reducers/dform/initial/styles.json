@@ -60,11 +60,6 @@
           "field": "tel",
           "label": "Tel",
           "class": "textinput"
-        },
-        {
-          "field": "ethnicity",
-          "label": "Ethnicity",
-          "class": "textinput"
         }
       ]
     }
