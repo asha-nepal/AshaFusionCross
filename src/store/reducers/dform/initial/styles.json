@@ -101,58 +101,58 @@
           "class": "block",
           "children": [
             {
-              "label": "Last Menstrual Date",
+              "label": "आखिरी रजश्वला भएको मिति",
               "field": "last_menstrual_date",
               "class": "textinput"
             },
             {
-              "label": "Estimated Date of Delivery",
+              "label": "प्रसुतीको अनुमानित मिति",
               "field": "estimated_date_of_delivery",
               "class": "textinput"
             }
           ]
         },
         {
-          "label": "Previous Pregnancy Details",
+          "label": "पहिलेका गर्भहरुको विवरण",
           "class": "accordion",
           "widthaligned": true,
           "children": [
             {
               "field": "prev_pregnancy",
-              "label": "Previous history of Pregnancy",
+              "label": "गर्भको विवरण",
               "class": "subformlist",
               "ditto": true,
               "autoAdd": false,
               "fields": [
                 {
                   "field": "living",
-                  "label": "Living",
+                  "label": "जीवित",
                   "class": "check"
                 },
                 {
                   "field": "born_dead",
-                  "label": "Born Dead",
+                  "label": "मृत जन्म",
                   "class": "check",
                   "show": "!living"
                 },
                 {
                   "field": "born_before_37_weeks",
-                  "label": "Born before 37 weeks",
+                  "label": "अवधि नपुगेको (३७ हप्ता)",
                   "class": "check"
                 },
                 {
                   "field": "twins",
-                  "label": "Twins",
+                  "label": "जुम्ल्याहा",
                   "class": "check"
                 },
                 {
                   "field": "abortion",
-                  "label": "Abortion",
+                  "label": "गर्भपतन",
                   "class": "check"
                 },
                 {
                   "field": "gender",
-                  "label": "Gender",
+                  "label": "लिंग",
                   "class": "radio",
                   "show": "living",
                   "options": [
@@ -168,7 +168,7 @@
                 },
                 {
                   "field": "age",
-                  "label": "Current Age",
+                  "label": "हालको उमेर",
                   "class": "textunitinput",
                   "show": "living",
                   "units": [
@@ -179,7 +179,7 @@
                 },
                 {
                   "field": "pregnancy_complication",
-                  "label": "Pregnancy Complication",
+                  "label": "गर्भको जटिलता",
                   "class": "check"
                 },
                 {
@@ -190,7 +190,7 @@
                 },
                 {
                   "field": "type_of_delivery",
-                  "label": "Type of Delivery",
+                  "label": "प्रसुतीको किसिम",
                   "class": "radio",
                   "options": [
                     {
@@ -208,17 +208,17 @@
           ]
         },
         {
-          "label": "Pregnancy Vaccination",
+          "label": "गर्भवती खोप",
           "class": "accordion",
           "children": [
             {
-              "label": "T.D Vaccine Registerd Number",
+              "label": "टीडी खोप दर्ता नम्बर",
               "field": "td_vaccine.regd_no",
               "class": "textinput",
               "type": "number"
             },
             {
-              "label": "1st Vaccination",
+              "label": "टीडी १ ग/म/सा",
               "class": "block",
               "children": [
                 {
@@ -228,13 +228,13 @@
                 {
                   "field": "td_vaccine.first.date",
                   "class": "textinput",
-                  "placeholder": "Date?",
+                  "placeholder": "मिति?",
                   "show": "td_vaccine.first.taken"
                 }
               ]
             },
             {
-              "label": "2nd Vaccination",
+              "label": "टीडी २ ग/म/सा",
               "class": "block",
               "children": [
                 {
@@ -244,13 +244,13 @@
                 {
                   "field": "td_vaccine.second.date",
                   "class": "textinput",
-                  "placeholder": "Date?",
+                  "placeholder": "मिति?",
                   "show": "td_vaccine.second.taken"
                 }
               ]
             },
             {
-              "label": "2+ Vaccination",
+              "label": "टीडी २+ ग/म/सा",
               "class": "block",
               "children": [
                 {
@@ -260,7 +260,7 @@
                 {
                   "field": "td_vaccine.after_second.date",
                   "class": "textinput",
-                  "placeholder": "Date?",
+                  "placeholder": "मिति?",
                   "show": "td_vaccine.after_second.taken"
                 }
               ]
@@ -268,30 +268,30 @@
           ]
         },
         {
-          "label": "Details of Pregnancy Checkup",
+          "label": "गर्भवती जांच विवरण",
           "class": "accordion",
           "widthaligned": true,
           "children": [
             {
-              "label": "Pregnancy Examination",
+              "label": "गर्भ जांच",
               "class": "subformlist",
               "field": "pregnancy_exam",
               "ditto": true,
               "autoAdd": false,
               "fields": [
                 {
-                  "label": "Months",
+                  "label": "महिना",
                   "field": "months",
                   "class": "textinput",
                   "type": "number"
                 },
                 {
-                  "label": "Date",
+                  "label": "मिति",
                   "field": "date",
                   "class": "textinput"
                 },
                 {
-                  "label": "Weight",
+                  "label": "तौल",
                   "field": "weight",
                   "class": "textunitinput",
                   "type": "number",
@@ -302,22 +302,22 @@
                   ]
                 },
                 {
-                  "label": "Anemia",
+                  "label": "रक्तअल्पता",
                   "field": "anemia",
                   "class": "check"
                 },
                 {
-                  "label": "Edema (Hand)",
+                  "label": "हात सुन्निएको",
                   "field": "edema.hand",
                   "class": "check"
                 },
                 {
-                  "label": "Edema (Face)",
+                  "label": "अनुहार सुन्निएको",
                   "field": "edema.face",
                   "class": "check"
                 },
                 {
-                  "label": "Blood Pressure (s)",
+                  "label": "रक्तचाप माथिल्लो",
                   "field": "bp.s",
                   "class": "textinput",
                   "placeholder": "sBP",
@@ -364,7 +364,7 @@
                   ]
                 },
                 {
-                  "label": "Blood Pressure (d)",
+                  "label": "रक्तचाप तल्लो",
                   "field": "bp.d",
                   "class": "textinput",
                   "placeholder": "dBP",
@@ -411,12 +411,12 @@
                   ]
                 },
                 {
-                  "label": "Pregnancy in weeks",
+                  "label": "गर्भावस्था समय हप्तामा",
                   "field": "pregnancy_in_weeks",
                   "class": "textinput"
                 },
                 {
-                  "label": "Size of uterus",
+                  "label": "पाठेघरको उचाई",
                   "field": "size_of_uterus",
                   "class": "textunitinput",
                   "type": "number",
@@ -426,30 +426,30 @@
                   ]
                 },
                 {
-                  "label": "Foetus",
+                  "label": "बच्चा",
                   "field": "foetus.found",
                   "class": "check"
                 },
                 {
-                  "label": "Child Heart Rate",
+                  "label": "हृदय गति",
                   "field": "foetus.child_heart_rate",
                   "class": "textinput",
                   "type": "number",
                   "show": "foetus.found"
                 },
                 {
-                  "label": "Any problem",
+                  "label": "अन्य समस्या",
                   "field": "any_problem",
                   "class": "textarea",
                   "shrink": true
                 },
                 {
-                  "label": "Next Consultation Date",
+                  "label": "अर्को पटक सेवा लिन आउने मिति",
                   "field": "next_consultation_date",
                   "class": "textinput"
                 },
                 {
-                  "label": "Number of Iron Tablets",
+                  "label": "आइरन चक्कीको संख्या",
                   "field": "number_of_iron_tablets",
                   "class": "textinput",
                   "type": "number",
@@ -457,22 +457,22 @@
                   "precision": 0
                 },
                 {
-                  "label": "Alben",
+                  "label": "जुकाको औषधि",
                   "field": "alben",
                   "class": "textinput"
                 },
                 {
-                  "label": "T.D",
+                  "label": "टीडी खोप",
                   "field": "td_vaccine",
                   "class": "check"
                 },
                 {
-                  "label": "Health Worker Name",
+                  "label": "परिक्षण गर्नेको नाम र सहि",
                   "field": "health_worker_name",
                   "class": "textinput"
                 },
                 {
-                  "label": "Name of Hospital",
+                  "label": "परिक्षण गरेको संस्था",
                   "field": "hospital_name",
                   "class": "textinput"
                 }
@@ -481,29 +481,29 @@
           ]
         },
         {
-          "label": "Health Worker, who prepared the card",
+          "label": "कार्ड तयार गर्ने स्वास्थ्यकर्मी",
           "class": "accordion",
           "children": [
             {
               "class": "block",
               "children": [
                 {
-                  "label": "Name",
+                  "label": "नाम",
                   "field": "health_worker.name",
                   "class": "textinput"
                 },
                 {
-                  "label": "Surname",
+                  "label": "थर",
                   "field": "health_worker.surname",
                   "class": "textinput"
                 },
                 {
-                  "label": "Designation",
+                  "label": "पद",
                   "field": "health_worker.designation",
                   "class": "textinput"
                 },
                 {
-                  "label": "Date",
+                  "label": "मिति",
                   "field": "health_worker.date",
                   "class": "textinput"
                 }
@@ -513,12 +513,12 @@
               "class": "block",
               "children": [
                 {
-                  "label": "Hospital Contact Number",
+                  "label": "अस्पतालको सम्पर्क नम्बर",
                   "field": "hospital_contact_number",
                   "class": "textinput"
                 },
                 {
-                  "label": "Ambulance Contact Number",
+                  "label": "एम्बुलेन्सको सम्पर्क नम्बर",
                   "field": "ambulance_contact_number",
                   "class": "textinput"
                 }
@@ -527,7 +527,7 @@
           ]
         },
         {
-          "label": "Laboratory Examination",
+          "label": "प्रयोगशाला परिक्षण",
           "class": "accordion",
           "widthaligned": true,
           "children": [
@@ -538,7 +538,7 @@
               "autoAdd": false,
               "fields": [
                 {
-                  "label": "Date",
+                  "label": "मिति",
                   "field": "date",
                   "class": "textinput",
                   "style": {
