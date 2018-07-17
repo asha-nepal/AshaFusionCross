@@ -1719,7 +1719,7 @@
           "children": [
             {
               "class": "block",
-              "label": "Haematology",
+              "label": "HAEMATOLOGY",
               "layout": "horizontal",
               "children": [
                 {
@@ -2978,7 +2978,171 @@
         },
         {
           "class": "block",
-          "label": "Gynecology",
+          "label": "SEROLOGICAL TESTS",
+          "children":[
+            {
+              "field": "serological.test.HIV",
+              "label": "HIV I AND II antibody",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Positive",
+                  "label": "Positive"
+                },
+                {
+                  "id": "Negative",
+                  "label": "Negative"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.HBsAg",
+              "label": "HBsAg",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Positive",
+                  "label": "Positive"
+                },
+                {
+                  "id": "Negative",
+                  "label": "Negative"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.AntiHCV",
+              "label": "Anti HCV",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Positive",
+                  "label": "Positive"
+                },
+                {
+                  "id": "Negative",
+                  "label": "Negative"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.VDRL",
+              "label": "VDRL",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Reactive",
+                  "label": "Reactive"
+                },
+                {
+                  "id": "Non-Reactive",
+                  "label": "Non Reactive"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.TPHA",
+              "label": "TPHA",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Positive",
+                  "label": "Positive"
+                },
+                {
+                  "id": "Negative",
+                  "label": "Negative"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.ABOgrouping",
+              "label": "ABO Grouping",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "A",
+                  "label": "A"
+                },
+                {
+                  "id": "B",
+                  "label": "B"
+                },
+                {
+                  "id": "AB",
+                  "label": "AB"
+                },
+                {
+                  "id": "O",
+                  "label": "O"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.RhTyping",
+              "label": "Rh Typing",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Positive",
+                  "label": "Positive"
+                },
+                {
+                  "id": "Negative",
+                  "label": "Negative"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.RAFactor",
+              "label": "RA Factor",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Positive",
+                  "label": "Positive"
+                },
+                {
+                  "id": "Negative",
+                  "label": "Negative"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.CRP",
+              "label": "CRP",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Positive",
+                  "label": "Positive"
+                },
+                {
+                  "id": "Negative",
+                  "label": "Negative"
+                }
+              ]
+            },
+            {
+              "field": "serological.test.ASO",
+              "label": "ASO",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "Positive",
+                  "label": "Positive"
+                },
+                {
+                  "id": "Negative",
+                  "label": "Negative"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "label": "GYNECOLOGY",
           "children": [
             {
               "field": "Pap_smear_report",
