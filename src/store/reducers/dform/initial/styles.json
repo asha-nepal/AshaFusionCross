@@ -2981,7 +2981,7 @@
           "label": "SEROLOGICAL TESTS",
           "children":[
             {
-              "field": "serological.test.HIV",
+              "field": "serological.HIV",
               "label": "HIV I AND II antibody",
               "class": "radio",
               "options":[
@@ -2996,7 +2996,7 @@
               ]
             },
             {
-              "field": "serological.test.HBsAg",
+              "field": "serological.HBsAg",
               "label": "HBsAg",
               "class": "radio",
               "options":[
@@ -3011,7 +3011,7 @@
               ]
             },
             {
-              "field": "serological.test.AntiHCV",
+              "field": "serological.AntiHCV",
               "label": "Anti HCV",
               "class": "radio",
               "options":[
@@ -3026,7 +3026,7 @@
               ]
             },
             {
-              "field": "serological.test.VDRL",
+              "field": "serological.VDRL",
               "label": "VDRL",
               "class": "radio",
               "options":[
@@ -3041,7 +3041,7 @@
               ]
             },
             {
-              "field": "serological.test.TPHA",
+              "field": "serological.TPHA",
               "label": "TPHA",
               "class": "radio",
               "options":[
@@ -3056,7 +3056,7 @@
               ]
             },
             {
-              "field": "serological.test.ABOgrouping",
+              "field": "serological.ABOgrouping",
               "label": "ABO Grouping",
               "class": "radio",
               "options":[
@@ -3079,7 +3079,7 @@
               ]
             },
             {
-              "field": "serological.test.RhTyping",
+              "field": "serological.RhTyping",
               "label": "Rh Typing",
               "class": "radio",
               "options":[
@@ -3094,7 +3094,7 @@
               ]
             },
             {
-              "field": "serological.test.RAFactor",
+              "field": "serological.RAFactor",
               "label": "RA Factor",
               "class": "radio",
               "options":[
@@ -3109,7 +3109,7 @@
               ]
             },
             {
-              "field": "serological.test.CRP",
+              "field": "serological.CRP",
               "label": "CRP",
               "class": "radio",
               "options":[
@@ -3124,7 +3124,7 @@
               ]
             },
             {
-              "field": "serological.test.ASO",
+              "field": "serological.ASO",
               "label": "ASO",
               "class": "radio",
               "options":[
@@ -3137,6 +3137,15 @@
                   "label": "Negative"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "class":"block",
+          "label":"SEMEN ANALYSIS",
+          "children":[
+            {
+              "field": "Semen_Analysis.Collection"
             }
           ]
         },
