@@ -3145,7 +3145,52 @@
           "label":"SEMEN ANALYSIS",
           "children":[
             {
-              "field": "Semen_Analysis.Collection"
+              "field": "SemenAnalysis.CollectionTime",
+              "label": "Collection Time",
+              "class":"textinput"
+            },
+            {
+              "field":"SemenAnalysis.ExaminationTime",
+              "label": "Examination Time",
+              "class":"textinput"
+            },
+            {
+              "field":"SemenAnalysis.Volume",
+              "label":"Volume",
+              "class":"textinput",
+              "suffix":"ml"
+            },
+            {
+              "field":"SemenAnalysis.PH",
+              "label":"PH",
+              "class": "textinput"
+            },
+            {
+              "field":"SemenAnalysis.SpermatozoaMotility",
+              "label": "Spermatozoa Motility",
+              "class":"textinput",
+              "suffix": "%"
+            },
+            {
+              "field":"SemenAnalysis.SpermatozoaCount",
+              "label":"Spermatozoa Count",
+              "class":"textinput",
+              "suffix": "million/cc"
+            },
+            {
+              "field":"SemenAnalysis.SpermMorpholohy",
+              "label":"Sperm Morpholohy",
+              "class":"textinput"
+            },
+            {
+              "field":"SemenAnalysis.Visocity",
+              "label":"Viscosity",
+              "class":"textinput"
+            },
+            {
+              "field":"SemenAnalysis.OtherCell",
+              "label":"Other Cell",
+              "class":"textinput"
             }
           ]
         },
