@@ -3141,6 +3141,70 @@
           ]
         },
         {
+           "class": "block",
+           "label": "SEMEN ANALYSIS",
+           "children":[
+             {
+               "field": "Pathology.semen.analysis.collectionTime",
+               "label":"Collection Time",
+               "class":"textinput"
+
+             },
+             {
+              "field": "Pathology.semen.analysis.examinationTime",
+              "label":"Eximination Time",
+              "class":"textinput"
+             },
+             {
+              "field": "Pathology.semen.analysis.colour",
+              "label":"Colour",
+              "class":"textinput"
+             },
+             {
+              "field": "Pathology.semen.analysis.PH",
+              "label":"PH",
+              "class":"textinput"
+             },
+             {
+              "field": "Pathology.semen.analysis.volume",
+              "label":"Volume",
+              "class": "textunitinput",
+              "units": "ml"
+             },
+             {
+              "field": "Pathology.semen.analysis.SpermatozoaMotility",
+              "label":"Spermatozoa Motility",
+              "class": "textunitinput",
+              "units": "%"
+             },
+             {
+              "field": "Pathology.semen.analysis.SpermatozoaCount",
+              "label":"Spermatozoa count",
+              "class": "textunitinput",
+              "units": "milion/cc"
+             },
+             {
+              "field": "Pathology.semen.analysis.spermMorpholohy",
+              "label":"Sperm MOrpholohy",
+              "class": "textinput"
+          
+             },
+             {
+             "field": "Pathology.semen.analysis.viscosity",
+              "label":"Viscosity",
+              "class": "textinput"
+              
+             },
+             {
+              "field": "Pathology.semen.analysis.OtherCell",
+              "label":"Other Cell",
+              "class": "textinput"
+              
+             }
+    
+           ]
+        },
+        {
           "class": "block",
           "label": "GYNECOLOGY",
           "children": [
