@@ -16,7 +16,7 @@
  */
 
 import styles from './styles.json';
-import medicines from '../../../../../data/pharping-medicine-list-brandnames.json';
+import medicines from '../../../../../data/pharping-medicine-list.json';
 
 styles
   .record
