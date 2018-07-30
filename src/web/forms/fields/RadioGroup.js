@@ -74,6 +74,6 @@ export const RadioGroupComponent = ({
   )
 );
 
-import connect from '../../../common/forms/fields/RadioGroup';
+import connect from '../../../connects/forms/single-value';
 
 export const RadioGroup = connect(RadioGroupComponent);
