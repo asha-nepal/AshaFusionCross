@@ -18,32 +18,44 @@
 
 import React from 'react';
 
+import translators from './translators';
+
 const RankDisplay = ({
   value,
+  translator,
 }: {
   value: Array<[Array<string>, number]>,
+  translator?: Function,
 }) => (
   <table className="table">
     <tbody>
-      {value.map((item, i) =>
-        <tr key={i}>
-          <th>{item[1]}</th>
-          <td>{item[0].join ? item[0].join(', ') : item[0]}</td>
-        </tr>
-      )}
+      {value.map((item, i) => {
+        const count = item[1];
+        const rawTitles = Array.isArray(item) ? item[0] : [item[0]];
+        const titles = translator ? rawTitles.map(translator) : rawTitles;
+
+        return (
+          <tr key={i}>
+            <th>{count}</th>
+            <td>{titles.join(', ')}</td>
+          </tr>
+        );
+      })}
     </tbody>
   </table>
 );
 
 const ValueDisplay = ({
   value,
+  translator,
 }: {
-  value: string | number | Array<[Array<string>, number]>
+  value: string | number | Array<[Array<string>, number]>,
+  translator?: Function
 }) => {
   if (typeof value === 'string' || typeof value === 'number') return <span>{value}</span>;
 
   if (Array.isArray(value)) {  // `rank` type
-    return <RankDisplay value={value} />;
+    return <RankDisplay value={value} translator={translator} />;
   }
 
   return null;
@@ -54,18 +66,30 @@ export default({
   statsRules,
 }: {
   stats: {[key: string]: any},
-  statsRules: {[key: string]: {name: string}},
+  statsRules: {[key: string]: {name: string, translator?: string}},
 }) => (
   <div>
     <h3 className="subtitle">Stats</h3>
     <table className="table">
       <tbody>
-        {Object.keys(stats).map(key =>
-          <tr key={key}>
-            <th>{statsRules[key].name || key}</th>
-            <td><ValueDisplay value={stats[key]} /></td>
-          </tr>
-        )}
+        {Object.keys(stats).map(key => {
+          const stat = stats[key];
+          const rule = statsRules[key];
+
+          if (stat == null || rule == null) return null;
+
+          return (
+            <tr key={key}>
+              <th>{rule.name || key}</th>
+              <td>
+                <ValueDisplay
+                  value={stat}
+                  translator={rule.translator && translators[rule.translator]}
+                />
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   </div>
