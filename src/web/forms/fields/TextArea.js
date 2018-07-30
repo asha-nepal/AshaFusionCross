@@ -18,9 +18,6 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
 
 export const ReadonlyTextArea = ({
   value,
@@ -75,14 +72,6 @@ export const TextAreaComponent = ({
 
 TextAreaComponent.fieldProps = [];
 
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
+import connect from '../../../connects/forms/single-value';
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
-});
-
-export const TextArea = connect(
-  mapStateToProps, mapDispatchToProps
-)(TextAreaComponent);
+export const TextArea = connect(TextAreaComponent);
