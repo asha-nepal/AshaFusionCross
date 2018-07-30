@@ -12,5 +12,11 @@
   "bp.d.max": { "name": "Max(BP (d))", "entry": "bp.d", "type": "max" },
   "bp.d.min": { "name": "Min(BP (d))", "entry": "bp.d", "type": "min" },
   "symptoms.rank": { "name": "Rank(Symptoms)", "entry": "symptoms", "type": "rank", "order": "desc" },
-  "diagnoses_icd10.rank": { "name": "Rank(Diagnoses.ICD10)", "entry": "diagnoses_icd10", "type": "rank", "order": "desc" }
+  "diagnoses_icd10.rank": {
+    "name": "Rank(Diagnoses.ICD10)",
+    "entry": "diagnoses_icd10",
+    "type": "rank",
+    "order": "desc",
+    "translator": "asha.icd10"
+  }
 }
