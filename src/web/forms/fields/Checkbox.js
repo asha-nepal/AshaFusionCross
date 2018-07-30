@@ -60,7 +60,7 @@ export const CheckboxComponent = ({
 );
 
 const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model, false),
+  value: _get(state, ownProps.model, ownProps.defaultValue || false),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
