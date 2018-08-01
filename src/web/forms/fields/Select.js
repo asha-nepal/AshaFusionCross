@@ -63,7 +63,6 @@ export const SelectComponent = ({
   )
 );
 
-// TODO connectの名前
-import connect from '../../../common/forms/fields/RadioGroup';
+import connect from '../../../connects/forms/single-value';
 
 export const Select = connect(SelectComponent);

@@ -18,9 +18,7 @@
 
 import { connect } from 'react-redux';
 
-import {
-  requestSignup,
-} from '../../actions';
+import { requestSignup,} from '../../actions';
 
 const mapStateToProps = null;
 

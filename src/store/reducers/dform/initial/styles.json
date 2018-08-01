@@ -2978,6 +2978,72 @@
         },
         {
           "class": "block",
+          "label": "WIDEL TEST",
+          "children":[
+            {
+              "field": "widelTest.positive",
+              "label": "Positive",
+              "class": "check"
+            },
+            {
+              "field": "widelTest.negative",
+              "label": "Negative",
+              "class": "check"
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "show": "widelTest.positive",
+          "children":[
+            {
+              "field":"widelTest.Positive_SalO",
+              "label": "Sal. Typhi O",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "< or = 1 : 80",
+                  "label": "< or = 1 : 80"
+                }
+              ]
+            },
+            {
+              "field":"widelTest.Positive_SalH",
+              "label": "Sal. Typhi H",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "< or = 1 : 160",
+                  "label": "< or = 1 : 160"
+                }
+              ]
+            },
+            {
+              "field":"widelTest.Positive_SalParaAH",
+              "label": "Sal. Para Typhi AH",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "< or = 1 : 240",
+                  "label": "< or = 1 : 240"
+                }
+              ]
+            },
+            {
+              "field":"widelTest.Positive_SalParaBH",
+              "label": "Sal. Para Typhi BH",
+              "class": "radio",
+              "options":[
+                {
+                  "id": "< or = 1 : 320",
+                  "label": "< or = 1 : 320"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "block",
           "label": "SEROLOGICAL TESTS",
           "children":[
             {
@@ -3145,7 +3211,71 @@
           "label":"SEMEN ANALYSIS",
           "children":[
             {
-              "field": "Semen_Analysis.Collection"
+              "field": "Semen_Analysis.CollectionTime",
+              "label": "Collection Time",
+              "class": "textinput"
+            },
+            {
+              "field": "Semen_Analysis.ExaminationTime",
+              "label": "Examination Time",
+              "class": "textinput"
+            },
+            {
+              "field": "Semen_Analysis.Colour",
+              "label": "Colour",
+              "class": "textinput"
+            },
+            {
+              "field": "Semen_Analysis.PH",
+              "label": "PH",
+              "class": "textinput"
+            },
+          
+            {
+              "field": "Semen_Analysis.Volume",
+              "label": "Volume",
+              "suffix": "ml"
+            },
+            {
+              "field": "Semen_Analysis.SpermatozoaMotility",
+              "label": "Spermatozoa Motility",
+              "suffix": "%"
+            },
+            {
+              "field": "Semen_Analysis.SpermatozoaCount",
+              "label": "Spermatozoa Count",
+              "suffix": "milion/cc"
+            },
+            {
+              "field": "Semen_Analysis.SpermMorpholohy",
+              "label": "Sperm Morpholohy",
+              "suffix": "viscosity"
+            },
+            {
+              "field": "Semen_Analysis.OthersCell",
+              "label": "Others Cell",
+              "class": "textinput"
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "label": "MANTOUX TEST (after 72 hours)",
+          "children":[
+            {
+               "field": "mantouxTest.Intro",
+               "label": "Introduction",
+               "class": "textinput"
+            },
+            {
+              "field": "mantouxTest.Erythroma",
+               "label": "Erythroma",
+               "class": "textinput"
+            },
+            {
+              "field": "mantouxTest.Result",
+               "label": "Result",
+               "class": "textinput"
             }
           ]
         },
