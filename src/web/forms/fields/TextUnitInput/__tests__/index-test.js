@@ -21,7 +21,7 @@ jest.disableAutomock();
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { TextUnitInputComponent, findAlert } from '../index';
+import { TextUnitInputComponent, findActiveAlert } from '../index';
 import AlertIcon from '../../TextInput/alert-icon';
 
 describe('<TextUnitInput />', () => {
@@ -173,13 +173,13 @@ describe('<TextUnitInput />', () => {
   });
 });
 
-describe('findAlert()', () => {
+describe('findActiveAlert()', () => {
   it('returns null with invalid input', () => {
     const alerts = [
       { type: 'danger', label: 'Danger', range: [-100, 100] },
     ];
 
-    expect(findAlert(alerts, { value: null, unit: null })).toBeUndefined();
+    expect(findActiveAlert({ value: null, unit: null }, alerts)).toBeUndefined();
   });
 
   it('finds alert matching given value with unit conversion', () => {
@@ -187,8 +187,28 @@ describe('findAlert()', () => {
       { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' },
     ];
 
-    expect(findAlert(alerts, { value: 2.5, unit: 'm' })).toEqual(
+    expect(findActiveAlert({ value: 2.5, unit: 'm' }, alerts)).toEqual(
       { type: 'danger', label: 'Danger', range: [200, null], unit: 'cm' }
+    );
+  });
+
+  it('returns alert matching given value and normalRange', () => {
+    const normalRange = [
+      { value: 1, unit: 'm' },
+      { value: 2, unit: 'm' },
+    ];
+
+    expect(findActiveAlert({ value: 99, unit: 'cm' }, null, normalRange)).toEqual(
+      { type: 'warning', label: 'Low' }
+    );
+    expect(findActiveAlert({ value: 100, unit: 'cm' }, null, normalRange)).toEqual(
+      { type: 'success', label: 'Normal' }
+    );
+    expect(findActiveAlert({ value: 200, unit: 'cm' }, null, normalRange)).toEqual(
+      { type: 'success', label: 'Normal' }
+    );
+    expect(findActiveAlert({ value: 201, unit: 'cm' }, null, normalRange)).toEqual(
+      { type: 'warning', label: 'High' }
     );
   });
 });
