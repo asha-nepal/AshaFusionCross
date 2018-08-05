@@ -20,7 +20,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import convert from './convert';
 import { approximateFloat } from '../../../../utils';
-import AlertIcon from './alert-icon';
+import AlertIcon from '../TextInput/alert-icon';
 
 export { convert };
 

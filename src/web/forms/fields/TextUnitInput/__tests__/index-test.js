@@ -22,7 +22,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { TextUnitInputComponent, findAlert } from '../index';
-import AlertIcon from '../alert-icon';
+import AlertIcon from '../../TextInput/alert-icon';
 
 describe('<TextUnitInput />', () => {
   it('can handle decimal point', () => {

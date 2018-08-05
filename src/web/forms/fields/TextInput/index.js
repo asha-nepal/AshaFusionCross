@@ -19,12 +19,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import AutosuggestInput from './AutosuggestInput';
-
-const alertFaIconClasses = {
-  danger: 'warning',
-  warning: 'warning',
-  success: 'check',
-};
+import AlertIcon from './alert-icon';
 
 export const findActiveAlert = (value, alerts, normalRange) => {
   const numValue = parseFloat(value);
@@ -170,19 +165,7 @@ export const TextInputComponent = ({
           required={required}
           {...additionalProps}
         />
-        {alert
-          ?
-          <span
-            className={classNames(
-              'icon is-small is-left',
-              { [`has-text-${alert.type}`]: true }
-            )}
-          >
-            <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
-          </span>
-          :
-          <span />
-        }
+        {alert && <AlertIcon type={alert.type} />}
       </div>
       {suffix &&
         <p className="control">
