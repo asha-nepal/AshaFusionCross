@@ -18,7 +18,7 @@
 
 import React from 'react';
 
-const dirtyIcon = <span className="icon is-small is-warning fa fa-circle" />;
+const dirtyIcon = <span className="icon is-small has-text-warning fa fa-circle" />;
 
 export default ({
   records,
