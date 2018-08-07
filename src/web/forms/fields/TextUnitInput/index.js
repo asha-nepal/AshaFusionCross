@@ -20,7 +20,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import convert from './convert';
 import { approximateFloat } from '../../../../utils';
-import AlertIcon from './alert-icon';
+import AlertIcon from '../TextInput/alert-icon';
 
 export { convert };
 
@@ -32,26 +32,41 @@ type Props = {
   min?: number,
   max?: number,
   precision?: number,
-  alerts: Array<Object>,
+  alerts?: Array<Object>,
+  normalRange?: Array<{value: number, unit: string}>,
   forceFixed?: boolean,
   placeholder?: string,
   readonly?: boolean,
   onChange?: (value: ?ValueUnitType) => void,
 }
 
-export function findAlert(
-  alerts: Array<Object>,
+export function findActiveAlert(
   value: ValueUnitType,
+  alerts: ?Array<Object>,
+  normalRange: ?Array<{value: number, unit: string}>,
   coefficient: ?string
-): Object {
-  return alerts.find((al) => {
-    const numValue = convert(value, al.unit, coefficient);
+): ?Object {
+  if (alerts) {
+    return alerts.find((al) => {
+      const numValue = convert(value, al.unit, coefficient);
 
-    if (numValue == null) return false;
+      if (numValue == null) return false;
 
-    return ((al.range[0] == null || numValue >= al.range[0])
-      && (al.range[1] == null || al.range[1] > numValue));
-  });
+      return ((al.range[0] == null || numValue >= al.range[0])
+        && (al.range[1] == null || al.range[1] > numValue));
+    });
+  }
+  if (normalRange) {
+    if (convert(value, normalRange[0].unit, coefficient) < normalRange[0].value) {
+      return { type: 'warning', label: 'Low' };
+    }
+    if (convert(value, normalRange[1].unit, coefficient) > normalRange[1].value) {
+      return { type: 'warning', label: 'High' };
+    }
+    return { type: 'success', label: 'Normal' };
+  }
+
+  return null;
 }
 
 export class TextUnitInputComponent extends Component {
@@ -113,6 +128,8 @@ export class TextUnitInputComponent extends Component {
       max,
       precision,
       alerts,
+      normalRange,
+      coefficient,
       forceFixed = false,
       placeholder,
       readonly = false,
@@ -125,8 +142,8 @@ export class TextUnitInputComponent extends Component {
 
     const inputValue = this.getInputValue(_value);
 
-    const alert = (_value != null && alerts)
-      ? findAlert(alerts, _value, this.props.coefficient)
+    const alert = (_value != null && (alerts || normalRange))
+      ? findActiveAlert(_value, alerts, normalRange, coefficient)
       : null;
 
     return (
