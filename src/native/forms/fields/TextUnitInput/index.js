@@ -149,6 +149,6 @@ export class TextUnitInputComponent extends Component {
   }
 }
 
-import connect from '../../../../common/forms/fields/TextUnitInput';
+import connect from '../../../../connects/forms/single-value';
 
 export const TextUnitInput = connect(TextUnitInputComponent);

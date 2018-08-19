@@ -78,7 +78,7 @@ export default ({
               ...field,
               readonly,
               size: 'small',
-              value: _get(_value, field.field),
+              value: _get(_value, field.field, field.defaultValue),
               onChange: (v => {
                 if (!onChange) { return; }
 
