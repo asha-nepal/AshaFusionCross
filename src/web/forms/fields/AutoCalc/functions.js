@@ -26,4 +26,13 @@ export default {
       return null;
     }
   },
+
+  'asha:sum': (...args) => {
+    try {
+      const total = Number(math.sum(args));
+      return total;
+    } catch (exc) {
+      return null;
+    }
+  },
 };
