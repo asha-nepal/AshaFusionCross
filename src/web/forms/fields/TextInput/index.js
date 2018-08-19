@@ -19,11 +19,23 @@
 import React from 'react';
 import classNames from 'classnames';
 import AutosuggestInput from './AutosuggestInput';
+import AlertIcon from './alert-icon';
 
-const alertFaIconClasses = {
-  danger: 'warning',
-  warning: 'warning',
-  success: 'check',
+export const findActiveAlert = (value, alerts, normalRange) => {
+  const numValue = parseFloat(value);
+  if (isNaN(numValue)) return null;
+
+  if (alerts) {
+    return alerts.find(al =>
+      ((al.range[0] == null || numValue >= al.range[0])
+        && (al.range[1] == null || al.range[1] > numValue)));
+  } else if (normalRange) {
+    if (numValue < normalRange[0]) return { type: 'warning', label: 'Low' };
+    if (numValue > normalRange[1]) return { type: 'warning', label: 'High' };
+    return { type: 'success', label: 'Normal' };
+  }
+
+  return null;
 };
 
 const ReadOnly = ({
@@ -57,6 +69,7 @@ export const TextInputComponent = ({
   max,
   precision,
   alerts,
+  normalRange,
   warning,
   size = '',
   required = false,
@@ -76,6 +89,7 @@ export const TextInputComponent = ({
   max?: number,
   precision?: number,
   alerts?: Array<Object>,
+  normalRange?: Array<number>,
   warning?: string,
   size: string,
   required?: boolean,
@@ -90,12 +104,8 @@ export const TextInputComponent = ({
 
   let alert = null;
   const overrideStyle = {};
-  if (type === 'number' && alerts) {
-    const numValue = parseFloat(value);
-
-    alert = alerts.find(al =>
-      ((al.range[0] == null || numValue >= al.range[0])
-        && (al.range[1] == null || al.range[1] > numValue)));
+  if (type === 'number' && (alerts || normalRange)) {
+    alert = findActiveAlert(value, alerts, normalRange);
 
     if (style && style.width) {
       overrideStyle.width = style.width + 32;
@@ -155,19 +165,7 @@ export const TextInputComponent = ({
           required={required}
           {...additionalProps}
         />
-        {alert
-          ?
-          <span
-            className={classNames(
-              'icon is-small is-left',
-              { [`has-text-${alert.type}`]: true }
-            )}
-          >
-            <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
-          </span>
-          :
-          <span />
-        }
+        {alert && <AlertIcon type={alert.type} />}
       </div>
       {suffix &&
         <p className="control">
@@ -223,6 +221,6 @@ TextInputComponent.fieldProps = [
   { name: 'readonly', type: 'boolean' },
 ];
 
-import connect from '../../../common/forms/fields/TextInput';
+import connect from '../../../../connects/forms/single-value';
 
 export const TextInput = connect(TextInputComponent);

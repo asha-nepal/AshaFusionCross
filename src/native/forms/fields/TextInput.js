@@ -68,6 +68,6 @@ export const TextInputComponent = ({
   </View>
 );
 
-import connect from '../../../common/forms/fields/TextInput';
+import connect from '../../../connects/forms/single-value';
 
 export const TextInput = connect(TextInputComponent);

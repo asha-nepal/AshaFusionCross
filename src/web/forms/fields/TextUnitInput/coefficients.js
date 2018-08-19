@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,9 @@
  * limitations under the License.
  */
 
-/* @flow */
-
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
-
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: v => dispatch(actions.change(ownProps.model, v)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps);
+export default {
+  'g/mol': {
+    glucose: 180.15588,
+    cholesterol: 386.65354,
+  },
+};

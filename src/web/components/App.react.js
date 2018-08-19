@@ -47,7 +47,7 @@ export default connect(() => (
       <Router>
         <div>
           <Route exact path="/" component={PatientSelect} />
-          <Route path="/patient/:patientId?" component={PatientView} />
+          <Route exact path="/patient/:patientId?" component={PatientView} />
           <AdminRoute path="/admin" component={Admin} />
           <Route path="/stats" component={Stats} />
         </div>
