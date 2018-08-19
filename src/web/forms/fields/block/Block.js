@@ -58,7 +58,6 @@ export const Block = ({
   fieldEditProps,
 }: {
   label?: string,
-  // alerts?: Array<Object>,
   children: React$Element<any>,
   widthaligned: boolean,
   border: boolean,

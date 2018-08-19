@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2017 Yuichiro Tsuchiya, Yu Tachibana
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,39 +57,34 @@ export const AutoCalcComponent = ({
   }
 
   return (
-    <span className="form-static" style={style}>
-      <table>
-        <tr>
-          <td width="389">
-            <span>
-              {(precision && typeof value === 'number') ? value.toFixed(precision) : value}
-            </span>
-          </td>
-          <td>
-            <div
-              className={classNames('control')}
-              data-balloon={alert && alert.label}
-              data-balloon-pos="up"
-            >
-
-            {alert ?
-              <span
-                className={classNames(
-                  'icon',
-                  {
-                    [`has-text-${alert.type}`]: true }
-                  )}
-              >
-                {console.log(alert.type)}
-                <i className={`fa fa-${alertFaIconClasses[alert.type]}`} />
-              </span>
-              :
-              <span />
+    <span
+      className="form-static is-left-inline"
+    >
+      <span>
+      {(precision && typeof value === 'number') ?
+    value.toFixed(precision) : value}
+      </span>
+      <span>
+        <div
+          className="control"
+          data-balloon={alert && alert.label}
+          data-balloon-pos="up"
+        >
+      {alert &&
+        <span
+          className={classNames(
+            'icon',
+            { [`has-text-${alert.type}`]: true,
             }
-            </div>
-          </td>
-        </tr>
-      </table>
+          )}
+        >
+          <i
+            className={`fa fa-${alertFaIconClasses[
+            alert.type]}`}
+          />
+        </span>}
+        </div>
+      </span>
     </span>
   );
 };

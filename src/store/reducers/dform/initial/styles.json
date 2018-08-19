@@ -1326,10 +1326,8 @@
               "label": "Total:",
               "class": "autocalc",
               "style": {
-                "width": 50
+                 "width": 50
               },
-              "precision": 0,
-              "value": "string",
               "type": "number",
               "func": "asha:sum",
               "inputs": [
