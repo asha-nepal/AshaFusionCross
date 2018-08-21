@@ -76,7 +76,7 @@ export default ({
             e.preventDefault();
             addNewActiveRecord();
           }}
-        >+</a>
+        >New Visit</a>
       </li>
     </ul>
   </div>
