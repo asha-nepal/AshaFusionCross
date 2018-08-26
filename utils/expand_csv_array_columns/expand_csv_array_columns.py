@@ -34,8 +34,12 @@ import pandas as pd
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('src', type=argparse.FileType('r'))
-    parser.add_argument('dst', type=argparse.FileType('w'))
+    parser.add_argument('src',
+                        type=argparse.FileType('r'),
+                        help='path to source file')
+    parser.add_argument('dst',
+                        type=argparse.FileType('w'),
+                        help='path to destination/output file')
     parser.add_argument('--array-columns',
                         nargs='*',
                         default=[],
