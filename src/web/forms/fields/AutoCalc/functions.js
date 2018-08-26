@@ -26,4 +26,9 @@ export default {
       return null;
     }
   },
+  'asha:math:mul': (...args) => {
+    if (args.length === 0) return null;
+
+    return args.reduce((a, b) => a * b, 1);
+  },
 };
