@@ -1887,7 +1887,22 @@
                 },
                 {
                   "field": "pathology.haematology.mp_mf",
-                  "label": "MP/MF"
+                  "label": "MP/MF",
+                  "class":"radio",
+                  "options":[
+                    {
+                      "id":"Positive",
+                      "label":"Positive"
+                    },
+                    {
+                      "id": "Positive",
+                      "label":"Positive"
+                    },
+                    {
+                      "id":"Negative",
+                      "label":"Negative"
+                    }
+                  ]
                 },
                 {
                   "field": "pathology.haematology.esr",
@@ -2124,7 +2139,18 @@
                 },
                 {
                   "field": "pathology.haematology.h_pyloric_ab",
-                  "label": "H. Pyloric AB"
+                  "label": "H. Pyloric AB",
+                  "class": "radio",
+                  "options":[
+                    {
+                      "id":"Positive",
+                      "label": "Positive"
+                    },
+                    {
+                      "id": "Negative",
+                      "label": "Negative"
+                    }
+                  ]
                 },
                 {
                   "field": "pathology.haematology.hba1c",
@@ -2965,7 +2991,17 @@
                 {
                   "field": "pathology.pregnancy_test.text",
                   "label": "Pregnancy Test",
-                  "class": "textarea"
+                  "class":"radio",
+                  "options":[
+                    {
+                      "id":"Positive",
+                      "label":"Positive"
+                    },
+                    {
+                      "id": "Negative",
+                      "label":"Negative"
+                    }
+                  ]
                 },
                 {
                   "field": "pathology.urine.other",
