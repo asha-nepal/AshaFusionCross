@@ -3506,7 +3506,7 @@
             },
             {
               "field":"SemenAnalysis.SpermMorpholohy",
-              "label":"Sperm Morpholohy",
+              "label":"Sperm Morphology",
               "class":"textinput"
             },
             {
