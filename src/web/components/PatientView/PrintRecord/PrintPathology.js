@@ -41,6 +41,9 @@ function getStr(obj: Object, path: string, defaultValue: string = ''): string {
 
 const style = styles.record[2].style;
 
+// <div>{(() => ( if (someCondition) {return 1; } ))()}</div>
+// React.createElement('div', (() => ( if (someCondition) {return 1; } ))())
+
 const Block = ({
   data,
   block,
@@ -66,10 +69,13 @@ const Block = ({
           ) : (
             <tr key={i}>
               <th>{field.label}</th>
-              <td>
+              <td style={{ 'padding-left': '0px' }}>
                 <span className="level">
                   <span className="level-left">
                     {field.prefix}{getStr(data, field.field)}
+                  </span>
+                  <span className="placeholder">
+                  {field.normalRange && ` (${field.normalRange[0]} ~ ${field.normalRange[1]})`}
                   </span>
                   <span className="level-right">
                     <small>{field.suffix}</small>
