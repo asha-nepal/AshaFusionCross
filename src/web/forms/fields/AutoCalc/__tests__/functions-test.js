@@ -39,3 +39,57 @@ describe('asha:bmi', () => {
     });
   });
 });
+
+describe('asha:math:mul', () => {
+  const func = functions['asha:math:mul'];
+
+  it('multiplies arbitrary number of inputs', () => {
+    // Integer
+    expect(func(1)).toEqual(1);
+    expect(func(1, 2)).toEqual(2);
+    expect(func(1, 2, 3)).toEqual(6);
+    expect(func(1, 2, 3, 4)).toEqual(24);
+
+    // With zero
+    expect(func(0)).toEqual(0);
+    expect(func(0, 1)).toEqual(0);
+    expect(func(0, 1, 2)).toEqual(0);
+
+    // Decimal
+    expect(func(1.5)).toEqual(1.5);
+    expect(func(1.5, 2.5)).toEqual(3.75);
+    expect(func(0, 1.5)).toEqual(0);
+
+    // Negative
+    expect(func(-1)).toEqual(-1);
+    expect(func(-1, -2)).toEqual(2);
+    expect(func(-1, -2, -3)).toEqual(-6);
+    expect(func(-1, -2, -3, -4)).toEqual(24);
+  });
+
+  it('can accept string', () => {
+    expect(func('1')).toEqual(1);
+    expect(func('1', 2)).toEqual(2);
+    expect(func(1, '2')).toEqual(2);
+    expect(func('1', '2')).toEqual(2);
+
+    expect(func('0')).toEqual(0);
+    expect(func('0', 1)).toEqual(0);
+    expect(func(0, '1')).toEqual(0);
+    expect(func('0', '1')).toEqual(0);
+
+    expect(func('1.5')).toEqual(1.5);
+    expect(func('1.5', 2.5)).toEqual(3.75);
+    expect(func(1.5, '2.5')).toEqual(3.75);
+    expect(func('1.5', '2.5')).toEqual(3.75);
+
+    expect(func('-1')).toEqual(-1);
+    expect(func('-1', -2)).toEqual(2);
+    expect(func(-1, '-2')).toEqual(2);
+    expect(func('-1', '-2')).toEqual(2);
+  });
+
+  it('returns null if input is empty', () => {
+    expect(func()).toEqual(null);
+  });
+});
