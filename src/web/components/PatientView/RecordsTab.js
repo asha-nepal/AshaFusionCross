@@ -76,7 +76,10 @@ export default ({
             e.preventDefault();
             addNewActiveRecord();
           }}
-        ><i className="fa fa-plus" />New Visit</a>
+        >
+          <i className="fa fa-plus" />
+          <span style={{ paddingLeft: 8 }}>New Visit</span>
+        </a>
       </li>
     </ul>
   </div>
