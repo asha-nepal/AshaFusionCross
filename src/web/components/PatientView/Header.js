@@ -26,8 +26,14 @@ import FaIcon from '../common/FaIcon';
 import { createPrintSelector } from './PrintRecord';
 
 const PrintSelector = createPrintSelector({
-  Container: ({ ...props }) => <div {...props} className="navbar-dropdown" />,
-  Item: ({ ...props }) => <a {...props} className="navbar-item" />,
+  Container: ({ ...props }) =>
+    <div
+      {...props} className="navbar-dropdown"
+    />,
+  Item: ({ ...props }) =>
+    <a
+      {...props} className="navbar-item"
+    />,
 });
 
 export default ({
@@ -67,7 +73,14 @@ export default ({
         <div className="navbar-end">
           <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link">
-              <FaIcon type="print" size="small" /> Print
+              <FaIcon type="print" size="small" />
+              <span
+                style={{ paddingLeft: '5px',
+                  paddingBottom: '2px',
+                }}
+              >
+              Print
+              </span>
             </a>
             <PrintSelector
               patient={patient}

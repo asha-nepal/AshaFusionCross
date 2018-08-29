@@ -20,10 +20,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PrintPage from './PrintPage';
 import PrintPathology from './PrintPathology';
+import PrintPathologyForm from './PrintPathologyForm';
 
 const formatList = [
   { label: 'Report', Component: PrintPage },
   { label: 'Pathology', Component: PrintPathology },
+  { label: 'PathologyForm', Component: PrintPathologyForm },
 ];
 
 export const createPrintSelector = ({
