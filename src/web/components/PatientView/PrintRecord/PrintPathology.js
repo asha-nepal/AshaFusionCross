@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya, Yu Tachibana
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,9 +40,6 @@ function getStr(obj: Object, path: string, defaultValue: string = ''): string {
 }
 
 const style = styles.record[2].style;
-
-// <div>{(() => ( if (someCondition) {return 1; } ))()}</div>
-// React.createElement('div', (() => ( if (someCondition) {return 1; } ))())
 
 const Block = ({
   data,
