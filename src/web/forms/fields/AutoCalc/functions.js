@@ -28,7 +28,7 @@ export default {
   },
   'asha:sum': (...args) => {
     if (args.length === 0) return null;
-    return args.reduce((a, b) => a + b, 1);
+    return args.reduce((a, b) => a + b, 0);
   },
   'asha:math:mul': (...args) => {
     if (args.length === 0) return null;
