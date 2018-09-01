@@ -28,15 +28,11 @@ export default {
   },
 
   'asha:sum': (a, b, c, d, e, f) => {
-  	try {
-  		// return a+b+c+d+e+f;
-  		const total=a+b+c+d+e+f;
-  		return Math.trunc(total);
-  	} catch (e) {
-  		return null;
-  	}
-
-  }
+    try {
+      const total = a + b + c + d + e + f;
+      return Math.trunc(total);
+    } catch (exc) {
+      return null;
+    }
+  },
 };
-
-
