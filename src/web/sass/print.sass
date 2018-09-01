@@ -2,6 +2,42 @@
   @page
     margin: 0
 
+  section.section.is-print-form
+    margin: 2em
+    padding-top: 3cm
+    padding-bottom: 20px
+    line-height: 120%
+
+    .title:not(:last-child), .subtitle:not(:last-child)
+      margin-bottom: 0.5rem
+
+    img.logo
+      margin: -50px auto 0px
+      display: block
+      height: 120px
+      width: 180px
+
+    table.table
+      width: 100%
+      border: 1px solid $border
+      margin-bottom: 10px
+
+      tr
+        border: 1px solid $border
+
+        th
+          width: 1px
+          white-space: normal
+
+    .form-static
+      height: initial
+      line-height: initial
+
+    .section-header
+      margin-top: 1em
+      font-weight: bold
+      font-size: 18px
+      
   section.section.is-print
     margin: 2em
     padding-bottom: 20px

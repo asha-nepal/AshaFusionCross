@@ -5,6 +5,7 @@
       $color-invert: nth($pair, 2)
       &.is-#{$name}
         color: $color
+
   .input
     &:focus + .fa
       @each $name, $pair in $colors
@@ -80,3 +81,10 @@
   color: grey
   align-items: baseline
   padding-right: 10px
+  
+.linedisplay
+  border-bottom: 1px solid
+  padding-left: 550px
+
+.signature
+  font-size: $size-medium
