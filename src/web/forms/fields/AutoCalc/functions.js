@@ -26,13 +26,12 @@ export default {
       return null;
     }
   },
-
-  'asha:sum': (a, b, c, d, e, f) => {
-    try {
-      const total = a + b + c + d + e + f;
-      return Math.trunc(total);
-    } catch (exc) {
-      return null;
-    }
+  'asha:math:sum': (...args) => {
+    if (args.length === 0) return null;
+    return args.reduce((a, b) => a + b, 1);
+  },
+  'asha:math:mul': (...args) => {
+    if (args.length === 0) return null;
+    return args.reduce((a, b) => a * b, 1);
   },
 };
