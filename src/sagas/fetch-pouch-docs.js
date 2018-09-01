@@ -15,7 +15,7 @@
  */
 
 /* @flow */
-import { take, select, call, put } from 'redux-saga/effects';
+import { take, select, call, put, fork } from 'redux-saga/effects';
 import {
   POUCH_DOCS_FETCH,
   requestFetchingPouchDocs,
@@ -59,6 +59,6 @@ export function* watchFetchPouchDocs(): Generator<*, void, *> {
   while (true) {
     const { payload } = yield take(POUCH_DOCS_FETCH);
     const db = yield select(state => state.db.instance);
-    yield call(fetchPouchDocs, db, payload.name, payload.opts);
+    yield fork(fetchPouchDocs, db, payload.name, payload.opts);
   }
 }
