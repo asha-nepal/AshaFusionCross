@@ -60,14 +60,11 @@ describe('asha:sum', () => {
   });
 
   it('adds together nothing if no arg/nullarg & turns into number (0)', () => {
-    // Nullarg
     expect(func(null)).toBe(null);
-    // Undefined
     expect(func()).toEqual(null);
   });
 
   it('adds numbers even if strings', () => {
-    // String
     expect(func('1')).toEqual(1);
     expect(func('1', 2)).toEqual(3);
     expect(func(1, '2')).toEqual(3);

@@ -68,3 +68,6 @@ coverage
 
 # Flow
 flow-typed
+
+# package-lock
+package-lock.json

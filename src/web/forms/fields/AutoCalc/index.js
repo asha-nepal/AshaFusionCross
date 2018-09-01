@@ -30,30 +30,21 @@ const alertFaIconClasses = {
 
 export const AutoCalcComponent = ({
   value,
-  style,
   precision,
   alerts,
-  type,
 }: {
   value?: string,
-  style: ?Object,
   precision: ?number,
-  type?: string,
   alerts?: Array<Object>,
 }) => {
   let alert = null;
-  const overrideStyle = {};
-  if (type === 'number' && alerts) {
+  if (alerts) {
     const numValue = parseFloat(value);
 
     alert = alerts.find(al =>
         ((al.range[0] == null || numValue >= al.range[0])
           && (al.range[1] == null || al.range[1] > numValue))
       );
-
-    if (style && style.width) {
-      overrideStyle.width = style.width + 32;
-    }
   }
 
   return (
