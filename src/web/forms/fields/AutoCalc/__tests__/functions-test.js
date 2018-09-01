@@ -47,17 +47,23 @@ describe('asha:sum', () => {
   const func = functions['asha:sum'];
 
   it('calculates sum of arbitrary list of args', () => {
-    // Integers
+    expect(func(1)).toEqual(1);
+    expect(func(-1, 1)).toEqual(0);
     expect(func(1, 2, 3)).toEqual(6);
+  });
+
+  it('calculates reasonable sum for numerical/coerceable args', () => {
+    expect(func(0)).toEqual(0);
+    expect(func(1, 1.0)).toEqual(2.0);
     expect(func(3.5, 1.5)).toEqual(5.0);
-    // const arg1 = 1;
+    expect(func('1', 1.0)).toEqual(2.0);
   });
 
   it('adds together nothing if no arg/nullarg & turns into number (0)', () => {
     // Nullarg
-    expect(func(null)).toBe(0);
+    expect(func(null)).toBe(null);
     // Undefined
-    expect(func()).toEqual(0);
+    expect(func()).toEqual(null);
   });
 
   it('adds numbers even if strings', () => {

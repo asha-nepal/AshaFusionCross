@@ -28,11 +28,7 @@ export default {
   },
 
   'asha:sum': (...args) => {
-    try {
-      const total = Number(math.sum(args));
-      return total;
-    } catch (exc) {
-      return null;
-    }
+    if (args.length > 0 && args[0] !== null) return args.reduce((a, b) => Number(a) + Number(b), 0);
+    return null;
   },
 };
