@@ -31,46 +31,57 @@ const AttachmentInputComponent = ({
   multiple: ?boolean,
   addAttachments: (attachments: Object, meta: Array<Object>) => void,
 }) => (
-  <p className="control">
-    <input
-      type="file"
-      accept={accept}
-      multiple={multiple}
-      onChange={e => {
-        const files = e.target.files;
+  <div className="field">
+    <label className="file-label">
+      <div className="file is-small is-boxed">
+        <input
+          className="file-input"
+          type="file"
+          accept={accept}
+          multiple={multiple}
+          onChange={e => {
+            const files = e.target.files;
+            const meta = Array(files.length);
+            const attachments = {};
+            const idPromises = Array(files.length);
 
-        const meta = Array(files.length);
-        const attachments = {};
-        const idPromises = Array(files.length);
+            for (let i = 0; i < files.length; i++) {
+              idPromises[i] = randomstring(16);
+            }
 
-        for (let i = 0; i < files.length; ++i) {
-          idPromises[i] = randomstring(16);
-        }
+            Promise.all(idPromises)
+            .then(ids => {
+              ids.forEach((id, i) => {
+                const file = files[i];
+                meta[i] = {
+                  id,
+                  name: file.name,
+                  size: file.size,
+                  type: file.type,
+                  lastModified: file.lastModified,
+                };
 
-        Promise.all(idPromises)
-        .then(ids => {
-          ids.forEach((id, i) => {
-            const file = files[i];
+                attachments[id] = {
+                  content_type: file.type,
+                  data: file,
+                };
+              });
 
-            meta[i] = {
-              id,
-              name: file.name,
-              size: file.size,
-              type: file.type,
-              lastModified: file.lastModified,
-            };
-
-            attachments[id] = {
-              content_type: file.type,
-              data: file,
-            };
-          });
-
-          addAttachments(attachments, meta);
-        });
-      }}
-    />
-  </p>
+              addAttachments(attachments, meta);
+            });
+          }}
+        />
+        <span className="file-cta">
+          <span className="file-icon">
+            <i className="fa fa-upload"></i>
+          </span>
+          <span className="file-label">
+          Upload Image
+          </span>
+        </span>
+      </div>
+    </label>
+  </div>
 );
 
 const mapStateToProps = null;

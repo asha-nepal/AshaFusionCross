@@ -177,6 +177,7 @@ class AttachmentViewerComponent extends Component {
           return (
             <div key={m.id} className="column is-narrow">
               {content}
+              <div>{m.name}</div>
               <button
                 className="button is-danger"
                 onClick={e => {
