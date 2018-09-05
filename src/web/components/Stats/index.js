@@ -39,7 +39,6 @@ const BooleanFormatter = ({
   value: ?boolean,
 }) => <span>{(value != null) && value.toString()}</span>;
 
-
 export default({
   columns,
   rows,
@@ -47,6 +46,8 @@ export default({
   statsRules,
   load,
   date,
+  patientLen,
+  recordLen,
   setDate,
 }: {
   columns: Array<{ key: string, name: string }>,
@@ -56,6 +57,8 @@ export default({
   load: () => void,
   date: Moment,
   setDate: (date: Moment) => void,
+  patientLen: number,
+  recordLen: number,
 }) => {
   const _columns = columns.map(column => {
     if (column.isArray) {
@@ -132,7 +135,10 @@ export default({
             stats={stats}
             statsRules={statsRules}
           />
+          <div> Patients total: {patientLen}</div>
+          <div> Records total: {recordLen}</div>
         </div>
+
       </Content>
     </div>
   );
