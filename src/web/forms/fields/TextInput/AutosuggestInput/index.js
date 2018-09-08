@@ -17,7 +17,7 @@
 /* @flow */
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import _ from 'lodash';
+import _omit from 'lodash.omit';
 import theme from './theme';
 
 type SuggestionsType = Array<string>
@@ -102,7 +102,7 @@ export default class extends React.Component {
         renderSuggestion={suggestion => <span>{suggestion}</span>}
         onSuggestionSelected={this.onSuggestionSelected}
         inputProps={{
-          ..._.omit(this.props, 'candidates'),
+          ..._omit(this.props, 'candidates'),
           onChange: this.onInputChange,
         }}
         theme={theme}
