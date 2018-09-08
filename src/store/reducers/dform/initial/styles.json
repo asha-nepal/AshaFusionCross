@@ -2055,8 +2055,7 @@
                 },
                 {
                   "field": "pathology.haematology.mp_mf",
-                  "label": "MP/MF",
-                  "show": "haemotology:pathology.haematology.mp_mf"
+                  "label": "MP/MF"
                 },
                 {
                   "field": "pathology.haematology.esr",
@@ -2308,8 +2307,7 @@
                 },
                 {
                   "field": "pathology.haematology.h_pyloric_ab",
-                  "label": "H. Pyloric AB",
-                  "show": "haemotology:pathology.haematology.h_pyloric_ab"
+                  "label": "H. Pyloric AB"
                 },
                 {
                   "field": "pathology.haematology.hba1c",
@@ -3223,9 +3221,7 @@
                 },
                 {
                   "field": "pathology.pregnancy_test.text",
-                  "label": "Pregnancy Test",
-                  "show": "urine:pathology.pregnancy_test.text",
-                  "class": "textarea"
+                  "label": "Pregnancy Test"
                 },
                 {
                   "field": "pathology.urine.other",
