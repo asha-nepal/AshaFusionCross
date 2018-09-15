@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya, Yu Tachibana
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,45 @@ import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import randomstring from 'randomstring';
 
+function dragHandler(event) {
+  // console.log('This just happened: ', event);
+  event.preventDefault();
+}
+
+type Props = {
+  accept: ?string,
+  multiple: ?boolean,
+  addAttachments: (attachments: Object, meta: Array<Object>) => void,
+}
+
+// export class AttachmentInputComponentr extends React.Component {
+//   constructor(props: Props) {
+//     super(props);
+//
+//     this.state = {
+//       isDragging: false,
+//     };
+//   }
+//
+//   state: {
+//     isDragging: boolean,
+//   }
+//
+//   props: Props;
+//
+//   render() {
+//     const {
+//       accept,
+//       multiple,
+//       addAttachments,
+//     } = this.props;
+//
+//     return (
+//
+//     );
+//   }
+// }
+
 const AttachmentInputComponent = ({
   accept,
   multiple,
@@ -37,6 +76,7 @@ const AttachmentInputComponent = ({
         <input
           className="file-input"
           type="file"
+          style={{ opacity: 0 }}
           accept={accept}
           multiple={multiple}
           onChange={e => {
@@ -71,12 +111,62 @@ const AttachmentInputComponent = ({
             });
           }}
         />
-        <span className="file-cta">
+        <span
+          className="file-cta"
+          onDragOver={e => {
+            dragHandler(e);
+            e.target.style = 'border:2px dashed blue;opacity:0.7;';
+          }
+          }
+          onDragLeave={e => {
+            e.preventDefault();
+            e.target.style = '';
+          }
+          }
+          onDrop={e => {
+            e.preventDefault();
+            e.target.style = '';
+            const nrfiles = e.dataTransfer.items.length;
+            const meta = Array(nrfiles);
+            const attachments = {};
+            const idPromises = Array(nrfiles);
+            const items = [];
+
+            if (e.dataTransfer.items) {
+              for (let i = 0; i < nrfiles; i++) {
+                idPromises[i] = randomstring(16);
+                items.push(e.dataTransfer.items[i].getAsFile());
+              }
+              Promise.all(idPromises).then(ids => {
+                ids.forEach((id, i) => {
+                  const fl = items[i];
+                  meta[i] = {
+                    id,
+                    name: fl.name,
+                    size: fl.size,
+                    type: fl.type,
+                    lastModified: fl.lastModified,
+                  };
+                  attachments[id] = {
+                    content_type: fl.type,
+                    data: fl,
+                  };
+                });
+                console.log(attachments, meta);
+                addAttachments(attachments, meta);
+              });
+            }
+            // addAttachments(atts, m);
+          }
+          }
+
+        >
           <span className="file-icon">
             <i className="fa fa-upload"></i>
           </span>
           <span className="file-label">
-          Upload Image
+            Upload Image <br />
+            or Drag and Drop <br />
           </span>
         </span>
       </div>
@@ -85,6 +175,7 @@ const AttachmentInputComponent = ({
 );
 
 const mapStateToProps = null;
+
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addAttachments: (attachments, meta) => {
