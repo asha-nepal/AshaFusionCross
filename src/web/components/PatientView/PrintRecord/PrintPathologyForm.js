@@ -103,7 +103,11 @@ export default ({
   const number = _get(patient, 'number');
 
   return (
-    <section className="section is-print-form">
+    <section
+      className="section is-print-form"
+      style={{ paddingTop: '3px' }}
+    >
+      <img src="/assets/manmohan_header.png" alt="Manmohan hospital" />
       <div className="header level">
         <span className="level-left">
           <h1 className="subtitle is-3">
