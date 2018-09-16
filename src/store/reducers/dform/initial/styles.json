@@ -1317,8 +1317,33 @@
               "id": 0,
               "label": "कहिल्यै पनि भएन (0)"
             }
+            
           ]
-        }
+        },
+        { "class": "block",
+          "children": [
+          {
+            "label": "Total:",
+              "class": "autocalc",
+              "style": {
+                "width": 50
+              },
+              "precision": 0,
+              "func": "asha:sum",
+              "inputs": [
+                "ksix.nervious",
+                "ksix.hopeless",
+                "ksix.restless",
+                "ksix.depressed",
+                "ksix.effort",
+                "ksix.worthless"
+              ]
+
+
+          }
+
+          ]
+           }
       ]
     }
   ]
