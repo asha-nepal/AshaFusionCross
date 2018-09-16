@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya, Yu Tachibana
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,10 +66,13 @@ const Block = ({
           ) : (
             <tr key={i}>
               <th>{field.label}</th>
-              <td>
+              <td style={{ 'padding-left': '0px' }}>
                 <span className="level">
                   <span className="level-left">
                     {field.prefix}{getStr(data, field.field)}
+                  </span>
+                  <span className="placeholder">
+                  {field.normalRange && ` (${field.normalRange[0]} ~ ${field.normalRange[1]})`}
                   </span>
                   <span className="level-right">
                     <small>{field.suffix}</small>
