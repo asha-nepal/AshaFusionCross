@@ -72,6 +72,9 @@ const Block = ({
                   <span className="level-left">
                     {field.prefix}{getStr(data, field.field)}
                   </span>
+                  <span className="placeholder">
+                  {field.normalRange && ` (${field.normalRange[0]} ~ ${field.normalRange[1]})`}
+                  </span>
                   <span className="level-right">
                     <small>{field.suffix}</small>
                   </span>
