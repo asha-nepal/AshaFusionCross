@@ -177,7 +177,9 @@ class AttachmentViewerComponent extends Component {
           return (
             <div key={m.id} className="column is-narrow">
               {content}
-              <div>{m.name}</div>
+              <div>{m.name.length > 15 ?
+                `${m.name.slice(0, 3)}...${m.name.slice(-6)}` : m.name}
+              </div>
               <button
                 className="button is-danger"
                 onClick={e => {
