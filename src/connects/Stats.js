@@ -23,15 +23,18 @@ import {
 } from 'lib/tableizer';
 import {
   fetchRecordList,
+  fetchPatientList,
   setStatsDate,
 } from 'actions';
 import {
   getRecordListForStats,
+  getPatientList,
 } from 'selectors';
 import type { Moment } from 'moment';
 
 const mapStateToProps = (state) => {
   const recordList = getRecordListForStats(state);
+  const patientList = getPatientList(state);
 
   return {
     columns: state.stats.tableColumns,
@@ -39,11 +42,16 @@ const mapStateToProps = (state) => {
     statsRules: state.stats.statsRules,
     stats: reduceTable(tableize(recordList, state.stats.tableRules), state.stats.statsRules),
     date: state.stats.date,
+    patientLen: patientList.length,
+    recordLen: recordList.length,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  load: () => dispatch(fetchRecordList()),
+  load: () => {
+    dispatch(fetchRecordList());
+    dispatch(fetchPatientList());
+  },
   setDate: (date: Moment) => dispatch(setStatsDate(date)),
 });
 
