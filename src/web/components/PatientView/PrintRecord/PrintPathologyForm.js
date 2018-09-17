@@ -22,6 +22,9 @@ There are lot of workarounds and WET code.
 import React from 'react';
 import _get from 'lodash.get';
 import Signature from './Signature';
+import {
+  checkVisibility,
+} from '../../../forms/utils';
 
 // XXX: Bad manner! styles MUST BE accessed only via reducer.
 import styles from '../../../../store/reducers/dform/initial/styles.json';
@@ -50,6 +53,7 @@ const Block = ({
   block: {
     class: string,
     label: string,
+    show: string,
     children?: Array<Object>,
   },
 }) => (
@@ -57,32 +61,54 @@ const Block = ({
     <h2 className="subtitle">{block.label}</h2>
     <table className="table">
       <tbody>
-        {block.children.map((field, i) => (
-          field.class === 'block' ? (
-            <tr key={i}>
-              <td colSpan="2">
-                <Block key={i} data={data} block={field} />
-              </td>
-            </tr>
-          ) : (
-            <tr key={i}>
-              <th>{field.label}</th>
-              <td>
-                <span className="level">
-                  <span className="level-left">
-                    {field.prefix}{getStr(data, field.field)}
-                  </span>
-                  <span className="placeholder">
-                  {field.normalRange && ` (${field.normalRange[0]} ~ ${field.normalRange[1]})`}
-                  </span>
-                  <span className="level-right">
-                    <small>{field.suffix}</small>
-                  </span>
-                </span>
-              </td>
-            </tr>
-          )
-        ))}
+        {block.children.map((field, i) => {
+          let elements;
+          if (field.show == null || checkVisibility(data, '', field.show)) {
+            if (field.class === 'block') {
+              elements = (
+                <tr key={i}>
+                  <td colSpan="2">
+                    <Block key={i} data={data} block={field} />
+                  </td>
+                </tr>
+              );
+            } else {
+              elements = (
+                <tr key={i}>
+                  <th>{field.label}</th>
+                  <td>
+                    <span className="level">
+                      <span className="level-left">
+                        {field.prefix}{getStr(data, field.field)}
+                      </span>
+                      <span className="placeholder">
+                      {field.normalRange && ` (${field.normalRange[0]} ~ ${field.normalRange[1]})`}
+                      </span>
+                      <span className="level-right">
+                        <small>{field.suffix}</small>
+                      </span>
+                    </span>
+                  </td>
+                </tr>
+              );
+            }
+          }
+          return elements;
+        }
+         //  (
+         //  (field.show)
+         //    ? ({ if (field.class === 'block') {
+         //        return (<div> "isblock" </div>)
+         //      }}
+         //    )
+         //      // (field.class === 'block' ?
+         //      //   (<div> "isblock" </div>) :
+         //      //   (<div> "isnotblock"</div>)
+         //      // )
+         //
+         //    : (<div> </div>)
+         )
+      }
       </tbody>
     </table>
   </div>
@@ -121,13 +147,31 @@ export default ({
       </div>
 
       <div className="columns">
-        <div className="column">
-          <Block data={record} block={style[0]} />
-        </div>
-        <div className="column">
-          <Block data={record} block={style[1]} />
-        </div>
+      {
+        (style.slice(0, 2)).map((element, index) => (
+          <div className="column" key={index}>
+            <Block data={record} block={element} />
+          </div>
+        ))}
       </div>
+      {(() => {
+        let testtype;
+        const testsColumn = [];
+        const step = 3;
+        for (let i = 2; i < style.length; i += step) {
+          testtype = (<div className="columns" key={i}>
+          {((style.slice(i, i + step)).map((element, index) => (
+            <div className="column" key={index}>
+              <Block data={record} block={element} />
+            </div>
+          ))
+          )}
+          </div>);
+          testsColumn.push(testtype);
+        }
+        return testsColumn;
+      })()
+      }
       <div
         style={{
           paddingTop: '60px',
