@@ -2677,76 +2677,85 @@
         },
         {
           "class": "block",
-          "label": "WIDEL TEST",
-          "show": "test-order:widel",
-          "children":[
+          "widthaligned": true,
+          "children": [
             {
-              "field": "widelTest.positive",
-              "label": "Positive",
-              "class": "check"
+              "class": "block",
+              "label": "WIDEL TEST",
+              "show": "test-order:widel",
+              "children":[
+                {
+                  "field": "widelTest.positive",
+                  "label": "Positive",
+                  "class": "check"
+                },
+                {
+                  "field": "widelTest.negative",
+                  "label": "Negative",
+                  "class": "check"
+                }
+              ]
             },
             {
-              "field": "widelTest.negative",
-              "label": "Negative",
-              "class": "check"
+              "class": "block",
+              "show": "widelTest.positive",
+              "children":[
+                {
+                  "field":"widelTest.Positive_SalO",
+                  "label": "Sal. Typhi O",
+                  "class": "radio",
+                  "options":[
+                    {
+                      "id": "< or = 1 : 80",
+                      "label": "< or = 1 : 80"
+                    }
+                  ]
+                },
+                {
+                  "field":"widelTest.Positive_SalH",
+                  "label": "Sal. Typhi H",
+                  "class": "radio",
+                  "options":[
+                    {
+                      "id": "< or = 1 : 160",
+                      "label": "< or = 1 : 160"
+                    }
+                  ]
+                },
+                {
+                  "field":"widelTest.Positive_SalParaAH",
+                  "label": "Sal. Para Typhi AH",
+                  "class": "radio",
+                  "options":[
+                    {
+                      "id": "< or = 1 : 240",
+                      "label": "< or = 1 : 240"
+                    }
+                  ]
+                },
+                {
+                  "field":"widelTest.Positive_SalParaBH",
+                  "label": "Sal. Para Typhi BH",
+                  "class": "radio",
+                  "options":[
+                    {
+                      "id": "< or = 1 : 320",
+                      "label": "< or = 1 : 320"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
         {
           "class": "block",
-          "show": "widelTest.positive",
-          "children":[
+          "widthaligned": true,          "children": [
             {
-              "field":"widelTest.Positive_SalO",
-              "label": "Sal. Typhi O",
-              "class": "radio",
-              "options":[
-                {
-                  "id": "< or = 1 : 80",
-                  "label": "< or = 1 : 80"
-                }
-              ]
-            },
-            {
-              "field":"widelTest.Positive_SalH",
-              "label": "Sal. Typhi H",
-              "class": "radio",
-              "options":[
-                {
-                  "id": "< or = 1 : 160",
-                  "label": "< or = 1 : 160"
-                }
-              ]
-            },
-            {
-              "field":"widelTest.Positive_SalParaAH",
-              "label": "Sal. Para Typhi AH",
-              "class": "radio",
-              "options":[
-                {
-                  "id": "< or = 1 : 240",
-                  "label": "< or = 1 : 240"
-                }
-              ]
-            },
-            {
-              "field":"widelTest.Positive_SalParaBH",
-              "label": "Sal. Para Typhi BH",
-              "class": "radio",
-              "options":[
-                {
-                  "id": "< or = 1 : 320",
-                  "label": "< or = 1 : 320"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "label": "SEROLOGICAL TESTS",
-          "show": "test-order:serological",
-          "children":[
+              "class": "block",
+              "label": "SEROLOGICAL TESTS",
+              "show": "test-order:serological",
+              "children": [
             {
               "field": "serological.HIV",
               "label": "HIV I AND II antibody",
@@ -2915,180 +2924,206 @@
                 }
               ]
             }
-          ]
-        },
-        {
-          "class":"block",
-          "label":"SEMEN ANALYSIS",
-          "show": "test-order:semenanalysis",
-          "children":[
-            {
-              "field": "SemenAnalysis.CollectionTime",
-              "label": "Collection Time",
-              "show": "semenanalysis:pathology.SemenAnalysis.CollectionTime",
-              "class":"textinput"
-            },
-            {
-              "field":"SemenAnalysis.ExaminationTime",
-              "label": "Examination Time",
-              "show": "semenanalysis:pathology.SemenAnalysis.ExaminationTime",
-              "class":"textinput"
-            },
-            {
-              "field":"SemenAnalysis.Volume",
-              "label":"Volume",
-              "show": "semenanalysis:pathology.SemenAnalysis.Volume",
-              "class":"textinput",
-              "suffix":"ml"
-            },
-            {
-              "field":"SemenAnalysis.PH",
-              "label":"PH",
-              "show": "semenanalysis:pathology.SemenAnalysis.PH",
-              "class": "textinput"
-            },
-            {
-              "field":"SemenAnalysis.SpermatozoaMotility",
-              "label": "Spermatozoa Motility",
-              "show": "semenanalysis:pathology.SemenAnalysis.SpermatozoaMotility",
-              "class":"textinput",
-              "suffix": "%"
-            },
-            {
-              "field":"SemenAnalysis.SpermatozoaCount",
-              "label":"Spermatozoa Count",
-              "show": "semenanalysis:pathology.SemenAnalysis.SpermatozoaCount",
-              "class":"textinput",
-              "suffix": "million/cc"
-            },
-            {
-              "field":"SemenAnalysis.SpermMorpholohy",
-              "label":"Sperm Morphology",
-              "show": "semenanalysis:pathology.SemenAnalysis.SpermMorpholohy",
-              "class":"textinput"
-            },
-            {
-              "field":"SemenAnalysis.Visocity",
-              "label":"Viscosity",
-              "show": "semenanalysis:pathology.SemenAnalysis.Visocity",
-              "class":"textinput"
-            },
-            {
-              "field":"SemenAnalysis.OtherCell",
-              "label":"Other Cell",
-              "show": "semenanalysis:pathology.SemenAnalysis.OtherCell",
-              "class":"textinput"
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "label": "MANTOUX TEST (after 72 hours)",
-          "show": "test-order:mantoux",
-          "children":[
-            {
-               "field": "mantouxTest.Intro",
-               "label": "Introduction",
-               "show": "mantoux:pathology.mantouxTest.Intro",
-               "class": "textinput"
-            },
-            {
-              "field": "mantouxTest.Erythroma",
-               "label": "Erythroma",
-               "show": "mantoux:pathology.mantouxTest.Erythroma",
-               "class": "textinput"
-            },
-            {
-              "field": "mantouxTest.Result",
-               "label": "Result",
-               "show": "mantoux:pathology.mantouxTest.Result",
-               "class": "textinput"
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "label": "GYNECOLOGY",
-          "show": "test-order:gynecology",
-          "children": [
-            {
-              "field": "Pap_smear_report",
-              "label": "Pap smear report",
-              "show": "gynecology:pathology.Pap_smear_report",
-              "class": "checkgroup",
-              "options": [
-                {
-                  "id": "negative_IL_or_malignancy",
-                  "label": "Negative for intraepithelial lesion or malignancy"
-                },
-                {
-                  "id": "RCC_with_inflammation",
-                  "label": "Reactive cellular changes associated with inflammation"
-                },
-                {
-                  "id": "ASCUS",
-                  "label": "ASCUS"
-                },
-                {
-                  "id": "AGUS",
-                  "label": "AGUS"
-                },
-                {
-                  "id": "LSIL",
-                  "label": "Low grade squamous intraepithelial lesion (LSIL)"
-                },
-                {
-                  "id": "HSIL",
-                  "label": "High grade squamous intraepithelial lesion (HSIL)"
-                },
-                {
-                  "id": "invasive_carcinoma",
-                  "label": "Invasive carcinoma"
-                },
-                {
-                  "id": "others",
-                  "label": "Others"
-                }
               ]
-            },
-            {
-              "field": "Pap_result_other_details",
-              "label": "Please specify",
-              "class": "textarea",
-              "show": "Pap_smear_report:others"
             }
           ]
         },
         {
           "class": "block",
           "widthaligned": true,
-          "show": "test-order:gynecology",
           "children": [
             {
-              "field": "gynecology_description",
-              "label": "Gynecology Description",
-              "show": "gynecology:pathology.gynecology_description",
-              "class": "textarea"
-            },
-            {
-              "field": "gynecology_comment",
-              "label": "Gynecology Comment",
-              "show": "gynecology:pathology.gynecology_comment",
-              "class": "textarea"
+              "class":"block",
+              "label":"SEMEN ANALYSIS",
+              "show": "test-order:semenanalysis",
+              "children":[
+                {
+                  "field": "SemenAnalysis.CollectionTime",
+                  "label": "Collection Time",
+                  "show": "semenanalysis:pathology.SemenAnalysis.CollectionTime",
+                  "class":"textinput"
+                },
+                {
+                  "field":"SemenAnalysis.ExaminationTime",
+                  "label": "Examination Time",
+                  "show": "semenanalysis:pathology.SemenAnalysis.ExaminationTime",
+                  "class":"textinput"
+                },
+                {
+                  "field":"SemenAnalysis.Volume",
+                  "label":"Volume",
+                  "show": "semenanalysis:pathology.SemenAnalysis.Volume",
+                  "class":"textinput",
+                  "suffix":"ml"
+                },
+                {
+                  "field":"SemenAnalysis.PH",
+                  "label":"PH",
+                  "show": "semenanalysis:pathology.SemenAnalysis.PH",
+                  "class": "textinput"
+                },
+                {
+                  "field":"SemenAnalysis.SpermatozoaMotility",
+                  "label": "Spermatozoa Motility",
+                  "show": "semenanalysis:pathology.SemenAnalysis.SpermatozoaMotility",
+                  "class":"textinput",
+                  "suffix": "%"
+                },
+                {
+                  "field":"SemenAnalysis.SpermatozoaCount",
+                  "label":"Spermatozoa Count",
+                  "show": "semenanalysis:pathology.SemenAnalysis.SpermatozoaCount",
+                  "class":"textinput",
+                  "suffix": "million/cc"
+                },
+                {
+                  "field":"SemenAnalysis.SpermMorpholohy",
+                  "label":"Sperm Morphology",
+                  "show": "semenanalysis:pathology.SemenAnalysis.SpermMorpholohy",
+                  "class":"textinput"
+                },
+                {
+                  "field":"SemenAnalysis.Visocity",
+                  "label":"Viscosity",
+                  "show": "semenanalysis:pathology.SemenAnalysis.Visocity",
+                  "class":"textinput"
+                },
+                {
+                  "field":"SemenAnalysis.OtherCell",
+                  "label":"Other Cell",
+                  "show": "semenanalysis:pathology.SemenAnalysis.OtherCell",
+                  "class":"textinput"
+                }
+              ]
             }
           ]
         },
         {
           "class": "block",
-          "field": "tests",
-          "widthaligned": "true",
-          "label": "Free description",
-          "show": "test-order:freedescript",
+          "widthaligned": true,
           "children": [
             {
-              "field": "free_descript",
+              "class": "block",
+              "label": "MANTOUX TEST (after 72 hours)",
+              "show": "test-order:mantoux",
+              "children":[
+                {
+                   "field": "mantouxTest.Intro",
+                   "label": "Introduction",
+                   "show": "mantoux:pathology.mantouxTest.Intro",
+                   "class": "textinput"
+                },
+                {
+                  "field": "mantouxTest.Erythroma",
+                   "label": "Erythroma",
+                   "show": "mantoux:pathology.mantouxTest.Erythroma",
+                   "class": "textinput"
+                },
+                {
+                  "field": "mantouxTest.Result",
+                   "label": "Result",
+                   "show": "mantoux:pathology.mantouxTest.Result",
+                   "class": "textinput"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "class": "block",
+              "label": "GYNECOLOGY",
+              "show": "test-order:gynecology",
+              "children": [
+                {
+                  "field": "Pap_smear_report",
+                  "label": "Pap smear report",
+                  "show": "gynecology:pathology.Pap_smear_report",
+                  "class": "checkgroup",
+                  "options": [
+                    {
+                      "id": "negative_IL_or_malignancy",
+                      "label": "Negative for intraepithelial lesion or malignancy"
+                    },
+                    {
+                      "id": "RCC_with_inflammation",
+                      "label": "Reactive cellular changes associated with inflammation"
+                    },
+                    {
+                      "id": "ASCUS",
+                      "label": "ASCUS"
+                    },
+                    {
+                      "id": "AGUS",
+                      "label": "AGUS"
+                    },
+                    {
+                      "id": "LSIL",
+                      "label": "Low grade squamous intraepithelial lesion (LSIL)"
+                    },
+                    {
+                      "id": "HSIL",
+                      "label": "High grade squamous intraepithelial lesion (HSIL)"
+                    },
+                    {
+                      "id": "invasive_carcinoma",
+                      "label": "Invasive carcinoma"
+                    },
+                    {
+                      "id": "others",
+                      "label": "Others"
+                    }
+                  ]
+                },
+                {
+                  "field": "Pap_result_other_details",
+                  "label": "Please specify",
+                  "class": "textarea",
+                  "show": "Pap_smear_report:others"
+                }
+              ]
+            },
+            {
+              "class": "block",
+              "widthaligned": true,
+              "show": "test-order:gynecology",
+              "children": [
+                {
+                  "field": "gynecology_description",
+                  "label": "Gynecology Description",
+                  "show": "gynecology:pathology.gynecology_description",
+                  "class": "textarea"
+                },
+                {
+                  "field": "gynecology_comment",
+                  "label": "Gynecology Comment",
+                  "show": "gynecology:pathology.gynecology_comment",
+                  "class": "textarea"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "class": "block",
+              "field": "tests",
+              "widthaligned": "true",
+              "label": "Free description",
               "show": "test-order:freedescript",
-              "class": "textarea"
+              "children": [
+                {
+                  "field": "free_descript",
+                  "show": "test-order:freedescript",
+                  "class": "textarea"
+                }
+              ]
             }
           ]
         }

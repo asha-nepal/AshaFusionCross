@@ -42,7 +42,6 @@ function getStr(obj: Object, path: string, defaultValue: string = ''): string {
 
   return '';
 }
-console.log(styles.record[2]);
 const style = styles.record[2].style; // this is pathology rec
 
 
@@ -101,8 +100,6 @@ const Block = ({
       </tbody>
     </table>
   </div>
-
-
 );
 
 export default ({
@@ -116,7 +113,6 @@ export default ({
   const date = timestamp && new Date(timestamp);
 
   const number = _get(patient, 'number');
-  console.log("STYLE.....", style);
 
   return (
     <section
@@ -135,22 +131,12 @@ export default ({
           {date && date.toDateString()}
         </span>
       </div>
-
-      <div className="columns">
-      {
-        (style.slice(0, 2)).map((element, index) => (
-          <div className="column" key={index}>
-            <Block data={record} block={element} />
-          </div>
-        ))}
-      </div>
       {(() => {
-        let testtype;
         const testsColumn = [];
         const step = 3;
-        for (let i = 2; i < style.length; i += step) {
-          testtype = (<div className="columns" key={i}>
-          {((style.slice(i, i + step)).map((element, index) => (
+        for (let i = 0; i < style.length; i += step) {
+          const testtype = (<div className="columns" key={i}>
+          {(style.slice(i, i + step).map((element, index) => (
             <div className="column" key={index}>
               <Block data={record} block={element} />
             </div>
