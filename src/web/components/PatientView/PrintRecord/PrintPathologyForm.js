@@ -42,8 +42,9 @@ function getStr(obj: Object, path: string, defaultValue: string = ''): string {
 
   return '';
 }
+console.log(styles.record[2]);
+const style = styles.record[2].style; // this is pathology rec
 
-const style = styles.record[2].style;
 
 const Block = ({
   data,
@@ -95,18 +96,6 @@ const Block = ({
           }
           return elements;
         }
-         //  (
-         //  (field.show)
-         //    ? ({ if (field.class === 'block') {
-         //        return (<div> "isblock" </div>)
-         //      }}
-         //    )
-         //      // (field.class === 'block' ?
-         //      //   (<div> "isblock" </div>) :
-         //      //   (<div> "isnotblock"</div>)
-         //      // )
-         //
-         //    : (<div> </div>)
          )
       }
       </tbody>
@@ -127,6 +116,7 @@ export default ({
   const date = timestamp && new Date(timestamp);
 
   const number = _get(patient, 'number');
+  console.log("STYLE.....", style);
 
   return (
     <section

@@ -1707,6 +1707,30 @@
                 {
                   "id": "urine",
                   "label": "Urine Examination"
+                },
+                {
+                  "id": "widel",
+                  "label": "Widel Test"
+                },
+                {
+                  "id": "serological",
+                  "label": "Serological Tests"
+                },
+                {
+                  "id": "semenanalysis",
+                  "label": "Semen Analysis"
+                },
+                {
+                  "id": "mantoux",
+                  "label": "Mantoux Test"
+                },
+                {
+                  "id": "gynecology",
+                  "label": "Gynecology"
+                },
+                {
+                  "id": "freedescript",
+                  "label": "Free description"
                 }
               ]
             }
@@ -1842,10 +1866,79 @@
           ]
         },
         {
+          "field": "widel",
+          "class": "checkgroup",
+          "label": "Widel Test",
+          "show": "test-order:widel",
+          "options": []
+        },
+        {
+          "field": "serological",
+          "class": "checkgroup",
+          "label": "Serological Tests",
+          "show": "test-order:serological",
+          "options": [
+            {"id": "pathology.serological.HIV",
+            "label": "HIV I AND II antibody"},
+            {"id": "pathology.serological.HBsAg",
+            "label": "HBsAg"},
+            {"id": "pathology.serological.AntiHCV", "label": "Anti HCV"},
+            {"id": "pathology.serological.VDRL", "label": "VDRL"},
+            {"id": "pathology.serological.TPHA", "label": "TPHA"},
+            {"id": "pathology.serological.ABOgrouping", "label": "ABO Grouping"},
+            {"id": "pathology.serological.RhTyping", "label": "Rh Typing"},
+            {"id": "pathology.serological.RAFactor", "label": "RA Factor"},
+            {"id": "pathology.serological.CRP", "label": "CRP"},
+            {"id": "pathology.serological.ASO", "label": "ASO"}
+          ]
+        },
+        {
+          "field": "semenanalysis",
+          "class": "checkgroup",
+          "label": "Semen Analysis",
+          "show": "test-order:semenanalysis",
+          "options": [
+            {"id": "pathology.SemenAnalysis.CollectionTime", "label": "Collection Time"},
+            {"id": "pathology.SemenAnalysis.ExaminationTime","label": "Examination Time"},
+            {"id": "pathology.SemenAnalysis.Volume", "label": "Volume"},
+            {"id": "pathology.SemenAnalysis.PH", "label": "PH"},
+            {"id": "pathology.SemenAnalysis.SpermatozoaMotility", "label": "Spermatozoa Motility"},
+            {"id": "pathology.SemenAnalysis.SpermatozoaCount", "label": "Spermatozoa Count"},
+            {"id": "pathology.SemenAnalysis.SpermMorpholohy", "label": "Sperm Morphology"},
+            {"id": "pathology.SemenAnalysis.Visocity", "label": "Viscosity"},
+            {"id": "pathology.SemenAnalysis.OtherCell", "label": "Other Cell"}
+          ]
+        },
+        {
+          "field": "mantoux",
+          "class": "checkgroup",
+          "label": "Mantoux Test",
+          "show": "test-order:mantoux",
+          "options": [
+            {"id": "pathology.mantouxTest.Intro", "label": "Introduction"},
+            {"id": "pathology.mantouxTest.Erythroma", "label": "Erythroma"},
+            {"id": "pathology.mantouxTest.Result", "label": "Result"}
+          ]
+        },
+        {
+          "field": "gynecology",
+          "class": "checkgroup",
+          "label": "Gynecology",
+          "show": "test-order:gynecology",
+          "options": [
+            {"id": "pathology.Pap_smear_report", "label": "Pap smear report"},
+            {"id": "pathology.gynecology_description", "label": "Gynecology Description"},
+            {"id": "pathology.gynecology_comment",
+            "label": "Gynecology Comment"
+            }
+          ]
+        },
+        {
           "field": "tests",
           "label": "Free description",
-          "class": "textarea",
-          "show": "plan:test"
+          "class": "checkgroup",
+          "show": "test-order:freedescript",
+          "options": []
         },
         {
           "field": "advice",
@@ -2585,6 +2678,7 @@
         {
           "class": "block",
           "label": "WIDEL TEST",
+          "show": "test-order:widel",
           "children":[
             {
               "field": "widelTest.positive",
@@ -2651,10 +2745,12 @@
         {
           "class": "block",
           "label": "SEROLOGICAL TESTS",
+          "show": "test-order:serological",
           "children":[
             {
               "field": "serological.HIV",
               "label": "HIV I AND II antibody",
+              "show": "serological:pathology.serological.HIV",
               "class": "radio",
               "options":[
                 {
@@ -2670,6 +2766,7 @@
             {
               "field": "serological.HBsAg",
               "label": "HBsAg",
+              "show": "serological:pathology.serological.HBsAg",
               "class": "radio",
               "options":[
                 {
@@ -2685,6 +2782,7 @@
             {
               "field": "serological.AntiHCV",
               "label": "Anti HCV",
+              "show": "serological:pathology.serological.AntiHCV",
               "class": "radio",
               "options":[
                 {
@@ -2700,6 +2798,7 @@
             {
               "field": "serological.VDRL",
               "label": "VDRL",
+              "show": "serological:pathology.serological.VDRL",
               "class": "radio",
               "options":[
                 {
@@ -2715,6 +2814,7 @@
             {
               "field": "serological.TPHA",
               "label": "TPHA",
+              "show": "serological:pathology.serological.TPHA",
               "class": "radio",
               "options":[
                 {
@@ -2730,6 +2830,7 @@
             {
               "field": "serological.ABOgrouping",
               "label": "ABO Grouping",
+              "show": "serological:pathology.serological.ABOgrouping",
               "class": "radio",
               "options":[
                 {
@@ -2753,6 +2854,7 @@
             {
               "field": "serological.RhTyping",
               "label": "Rh Typing",
+              "show": "serological:pathology.serological.RhTyping",
               "class": "radio",
               "options":[
                 {
@@ -2768,6 +2870,7 @@
             {
               "field": "serological.RAFactor",
               "label": "RA Factor",
+              "show": "serological:pathology.serological.RAFactor",
               "class": "radio",
               "options":[
                 {
@@ -2783,6 +2886,7 @@
             {
               "field": "serological.CRP",
               "label": "CRP",
+              "show": "serological:pathology.serological.CRP",
               "class": "radio",
               "options":[
                 {
@@ -2798,6 +2902,7 @@
             {
               "field": "serological.ASO",
               "label": "ASO",
+              "show": "serological:pathology.serological.ASO",
               "class": "radio",
               "options":[
                 {
@@ -2815,53 +2920,63 @@
         {
           "class":"block",
           "label":"SEMEN ANALYSIS",
+          "show": "test-order:semenanalysis",
           "children":[
             {
               "field": "SemenAnalysis.CollectionTime",
               "label": "Collection Time",
+              "show": "semenanalysis:pathology.SemenAnalysis.CollectionTime",
               "class":"textinput"
             },
             {
               "field":"SemenAnalysis.ExaminationTime",
               "label": "Examination Time",
+              "show": "semenanalysis:pathology.SemenAnalysis.ExaminationTime",
               "class":"textinput"
             },
             {
               "field":"SemenAnalysis.Volume",
               "label":"Volume",
+              "show": "semenanalysis:pathology.SemenAnalysis.Volume",
               "class":"textinput",
               "suffix":"ml"
             },
             {
               "field":"SemenAnalysis.PH",
               "label":"PH",
+              "show": "semenanalysis:pathology.SemenAnalysis.PH",
               "class": "textinput"
             },
             {
               "field":"SemenAnalysis.SpermatozoaMotility",
               "label": "Spermatozoa Motility",
+              "show": "semenanalysis:pathology.SemenAnalysis.SpermatozoaMotility",
               "class":"textinput",
               "suffix": "%"
             },
             {
               "field":"SemenAnalysis.SpermatozoaCount",
               "label":"Spermatozoa Count",
+              "show": "semenanalysis:pathology.SemenAnalysis.SpermatozoaCount",
               "class":"textinput",
               "suffix": "million/cc"
             },
             {
               "field":"SemenAnalysis.SpermMorpholohy",
               "label":"Sperm Morphology",
+              "show": "semenanalysis:pathology.SemenAnalysis.SpermMorpholohy",
               "class":"textinput"
             },
             {
               "field":"SemenAnalysis.Visocity",
               "label":"Viscosity",
+              "show": "semenanalysis:pathology.SemenAnalysis.Visocity",
               "class":"textinput"
             },
             {
               "field":"SemenAnalysis.OtherCell",
               "label":"Other Cell",
+              "show": "semenanalysis:pathology.SemenAnalysis.OtherCell",
               "class":"textinput"
             }
           ]
@@ -2869,20 +2984,24 @@
         {
           "class": "block",
           "label": "MANTOUX TEST (after 72 hours)",
+          "show": "test-order:mantoux",
           "children":[
             {
                "field": "mantouxTest.Intro",
                "label": "Introduction",
+               "show": "mantoux:pathology.mantouxTest.Intro",
                "class": "textinput"
             },
             {
               "field": "mantouxTest.Erythroma",
                "label": "Erythroma",
+               "show": "mantoux:pathology.mantouxTest.Erythroma",
                "class": "textinput"
             },
             {
               "field": "mantouxTest.Result",
                "label": "Result",
+               "show": "mantoux:pathology.mantouxTest.Result",
                "class": "textinput"
             }
           ]
@@ -2890,10 +3009,12 @@
         {
           "class": "block",
           "label": "GYNECOLOGY",
+          "show": "test-order:gynecology",
           "children": [
             {
               "field": "Pap_smear_report",
               "label": "Pap smear report",
+              "show": "gynecology:pathology.Pap_smear_report",
               "class": "checkgroup",
               "options": [
                 {
@@ -2941,15 +3062,32 @@
         {
           "class": "block",
           "widthaligned": true,
+          "show": "test-order:gynecology",
           "children": [
             {
               "field": "gynecology_description",
-              "label": "Gynecology_Description",
+              "label": "Gynecology Description",
+              "show": "gynecology:pathology.gynecology_description",
               "class": "textarea"
             },
             {
               "field": "gynecology_comment",
-              "label": "Gynecology_Comment",
+              "label": "Gynecology Comment",
+              "show": "gynecology:pathology.gynecology_comment",
+              "class": "textarea"
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "field": "tests",
+          "widthaligned": "true",
+          "label": "Free description",
+          "show": "test-order:freedescript",
+          "children": [
+            {
+              "field": "free_descript",
+              "show": "test-order:freedescript",
               "class": "textarea"
             }
           ]
