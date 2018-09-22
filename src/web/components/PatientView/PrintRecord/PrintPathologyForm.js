@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya, Yu Tachibana
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,18 +95,6 @@ const Block = ({
           }
           return elements;
         }
-         //  (
-         //  (field.show)
-         //    ? ({ if (field.class === 'block') {
-         //        return (<div> "isblock" </div>)
-         //      }}
-         //    )
-         //      // (field.class === 'block' ?
-         //      //   (<div> "isblock" </div>) :
-         //      //   (<div> "isnotblock"</div>)
-         //      // )
-         //
-         //    : (<div> </div>)
          )
       }
       </tbody>
@@ -155,12 +143,11 @@ export default ({
         ))}
       </div>
       {(() => {
-        let testtype;
         const testsColumn = [];
         const step = 3;
         for (let i = 2; i < style.length; i += step) {
-          testtype = (<div className="columns" key={i}>
-          {((style.slice(i, i + step)).map((element, index) => (
+          const testtype = (<div className="columns" key={i}>
+          {(style.slice(i, i + step).map((element, index) => (
             <div className="column" key={index}>
               <Block data={record} block={element} />
             </div>
