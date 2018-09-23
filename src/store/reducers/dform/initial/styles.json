@@ -1306,11 +1306,6 @@
           "class": "textarea"
         },
         {
-          "field": "social_history.text",
-          "label": "Social history",
-          "class": "textarea"
-        },
-        {
           "class": "block",
           "children": [
             {
@@ -1576,14 +1571,33 @@
               "suffix": "pcs"
             },
             {
-              "field": "dose_syrup",
-              "class": "textinput",
-              "type": "number",
-              "style": {
-                "width": 50
-              },
+              "field":"dose_syrup",
               "label": "Dose (syrup)",
-              "suffix": "ml"
+              "class":"textinput",
+              "type":"number",
+              "style": {
+                "width": 80
+              }
+              
+            },
+            {
+              "field":"dose_syrup_unit",
+              "label":"------",
+              "class":"select",
+              "nullable": false,
+              "options":[
+                {
+                  "id": "drops",
+                  "label": "drops"
+                },
+                {
+                  "id": "ml",
+                  "label": "ml"
+                }
+              ],
+              "style":{
+                "margin-top": 20
+              }
             },
             {
               "field": "freq",
