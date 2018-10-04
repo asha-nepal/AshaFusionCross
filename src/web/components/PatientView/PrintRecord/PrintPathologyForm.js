@@ -42,8 +42,8 @@ function getStr(obj: Object, path: string, defaultValue: string = ''): string {
 
   return '';
 }
+const style = styles.record[2].style; // this is pathology rec
 
-const style = styles.record[2].style;
 
 const Block = ({
   data,
@@ -95,25 +95,11 @@ const Block = ({
           }
           return elements;
         }
-         //  (
-         //  (field.show)
-         //    ? ({ if (field.class === 'block') {
-         //        return (<div> "isblock" </div>)
-         //      }}
-         //    )
-         //      // (field.class === 'block' ?
-         //      //   (<div> "isblock" </div>) :
-         //      //   (<div> "isnotblock"</div>)
-         //      // )
-         //
-         //    : (<div> </div>)
          )
       }
       </tbody>
     </table>
   </div>
-
-
 );
 
 export default ({
@@ -145,22 +131,12 @@ export default ({
           {date && date.toDateString()}
         </span>
       </div>
-
-      <div className="columns">
-      {
-        (style.slice(0, 2)).map((element, index) => (
-          <div className="column" key={index}>
-            <Block data={record} block={element} />
-          </div>
-        ))}
-      </div>
       {(() => {
-        let testtype;
         const testsColumn = [];
         const step = 3;
-        for (let i = 2; i < style.length; i += step) {
-          testtype = (<div className="columns" key={i}>
-          {((style.slice(i, i + step)).map((element, index) => (
+        for (let i = 0; i < style.length; i += step) {
+          const testtype = (<div className="columns" key={i}>
+          {(style.slice(i, i + step).map((element, index) => (
             <div className="column" key={index}>
               <Block data={record} block={element} />
             </div>
