@@ -2611,44 +2611,92 @@
             {
               "field":"widelTest.Positive_SalO",
               "label": "Sal. Typhi O",
-              "class": "radio",
+              "class": "select",
               "options":[
                 {
                   "id": "< or = 1 : 80",
                   "label": "< or = 1 : 80"
+                },
+                {
+                  "id":"< or = 1 : 160",
+                  "label":"< or = 1 : 160"
+                },
+                {
+                  "id":"< or = 1 : 240",
+                  "label":"< or = 1 : 240"
+                },
+                {
+                  "id":"< or = 1 : 320",
+                  "label":"< or = 1 : 320"
                 }
               ]
             },
             {
               "field":"widelTest.Positive_SalH",
               "label": "Sal. Typhi H",
-              "class": "radio",
+              "class": "select",
               "options":[
                 {
-                  "id": "< or = 1 : 160",
-                  "label": "< or = 1 : 160"
+                  "id": "< or = 1 : 80",
+                  "label": "< or = 1 : 80"
+                },
+                {
+                  "id":"< or = 1 : 160",
+                  "label":"< or = 1 : 160"
+                },
+                {
+                  "id":"< or = 1 : 240",
+                  "label":"< or = 1 : 240"
+                },
+                {
+                  "id":"< or = 1 : 320",
+                  "label":"< or = 1 : 320"
                 }
               ]
             },
             {
               "field":"widelTest.Positive_SalParaAH",
               "label": "Sal. Para Typhi AH",
-              "class": "radio",
+              "class": "select",
               "options":[
                 {
-                  "id": "< or = 1 : 240",
-                  "label": "< or = 1 : 240"
+                  "id": "< or = 1 : 80",
+                  "label": "< or = 1 : 80"
+                },
+                {
+                  "id":"< or = 1 : 160",
+                  "label":"< or = 1 : 160"
+                },
+                {
+                  "id":"< or = 1 : 240",
+                  "label":"< or = 1 : 240"
+                },
+                {
+                  "id":"< or = 1 : 320",
+                  "label":"< or = 1 : 320"
                 }
               ]
             },
             {
               "field":"widelTest.Positive_SalParaBH",
               "label": "Sal. Para Typhi BH",
-              "class": "radio",
+              "class": "select",
               "options":[
                 {
-                  "id": "< or = 1 : 320",
-                  "label": "< or = 1 : 320"
+                  "id": "< or = 1 : 80",
+                  "label": "< or = 1 : 80"
+                },
+                {
+                  "id":"< or = 1 : 160",
+                  "label":"< or = 1 : 160"
+                },
+                {
+                  "id":"< or = 1 : 240",
+                  "label":"< or = 1 : 240"
+                },
+                {
+                  "id":"< or = 1 : 320",
+                  "label":"< or = 1 : 320"
                 }
               ]
             }
