@@ -25,21 +25,18 @@ jest.unmock('../functions');
 import functions from '../functions';
 
 describe('asha:bmi', () => {
-  it('calculates BMI', () => {
-    const func = functions['asha:bmi'];
+  [
+    [{ value: 178, unit: 'cm' }, { value: 68, unit: 'kg' }, 21.46],
+    [{ value: 178.5, unit: 'cm' }, { value: 68, unit: 'kg' }, 21.34],
+    [{ value: 178, unit: 'cm' }, { value: 68.5, unit: 'kg' }, 21.62],
+    [{ value: 178.5, unit: 'cm' }, { value: 68.5, unit: 'kg' }, 21.50],
+  ].forEach(([height, weight, expected]) => {
+    it(`calculates BMI (height: ${height.value} ${height.unit}, weight: ${weight.value} ${weight.unit})`, () => { // eslint-disable-line max-len
+      const func = functions['asha:bmi'];
 
-    const height = {
-      value: 178,
-      unit: 'cm',
-    };
-
-    const weight = {
-      value: 68,
-      unit: 'kg',
-    };
-
-    expect(func(height, weight))
-      .toBeCloseTo(21.46);
+      expect(func(height, weight))
+        .toBeCloseTo(expected);
+    });
   });
 });
 
