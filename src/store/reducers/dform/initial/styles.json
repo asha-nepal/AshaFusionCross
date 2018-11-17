@@ -62,6 +62,17 @@
           "class": "textinput"
         },
         {
+          "field": "blood_type",
+          "label": "Blood Type",
+          "class": "select",
+          "options": [
+            { "id": "A", "label": "A" },
+            { "id": "B", "label": "B" },
+            { "id": "O", "label": "O" },
+            { "id": "AB", "label": "AB" }
+          ]
+        },
+        {
           "field": "occupation",
           "label": "Occupation",
           "class": "radio",
