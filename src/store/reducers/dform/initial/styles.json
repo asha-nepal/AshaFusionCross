@@ -22,49 +22,43 @@
           "required": true
         },
         {
-          "field": "age",
-          "label": "Age",
-          "class": "textunitinput",
-          "units": [
-            "years",
-            "months"
-          ],
-          "precision": 0
-        },
-        {
-          "field": "ht",
-          "label": "Ht.",
-          "class": "textinput"
-        },
-        {
-          "field": "district",
-          "label": "District",
-          "class": "textinput"
-        },
-        {
           "class": "block",
           "children": [
             {
-              "field": "municipality_vdc.name",
-              "label": "Municipality/VDC",
-              "class": "textinput"
+              "field": "sex",
+              "label": "Sex",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "male",
+                  "label": "Male"
+                },
+                {
+                  "id": "female",
+                  "label": "Female"
+                }
+              ]
             },
             {
-              "field": "municipality_vdc.no",
-              "label": "Municipality/VDC No.",
-              "class": "textinput",
-              "type": "number"
+              "field": "age",
+              "label": "Age",
+              "class": "textunitinput",
+              "units": [
+                "years",
+                "months"
+              ],
+              "precision": 0
             }
           ]
         },
         {
-          "field": "area",
-          "label": "Area",
+          "field": "address",
+          "label": "Address",
           "class": "textinput"
         },
         {
-          "field": "contact_number",
-          "label": "Contact Number",
+          "field": "tel",
+          "label": "Tel",
           "class": "textinput"
         },
         {
@@ -79,15 +73,46 @@
           ]
         },
         {
-          "field": "number_of_delivery",
-          "label": "Number of delivery",
-          "class": "textinput",
-          "type": "number"
+          "field": "occupation",
+          "label": "Occupation",
+          "class": "radio",
+          "options": [
+            {
+              "id": "housewife",
+              "label": "Housewife"
+            },
+            {
+              "id": "student",
+              "label": "Student"
+            },
+            {
+              "id": "service",
+              "label": "Service Personnel"
+            },
+            {
+              "id": "retired service",
+              "label": "Retired Service Personnel"
+            },
+            {
+              "id": "business",
+              "label": "Business"
+            },
+            {
+              "id": "agriculture",
+              "label": "Agriculture"
+            }
+          ]
         },
         {
-          "field": "husband_name",
-          "label": "Husband's Name",
-          "class": "textinput"
+          "field": "occupation",
+          "class": "textinput",
+          "expanded": true
+        },
+        {
+          "field": "ethnicity",
+          "label": "Ethnicity",
+          "class": "textinput",
+          "expanded": true
         }
       ]
     }
