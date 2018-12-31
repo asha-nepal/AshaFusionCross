@@ -1448,7 +1448,8 @@
                 {
                   "field": "system_exams.chest_memo",
                   "class": "textarea",
-                  "show": "system_exams.chest"
+                  "show": "system_exams.chest",
+                  "defaultValue": "B/L NVBS, no wheezes or crepitation"
                 }
               ]
             },
@@ -1463,7 +1464,8 @@
                 {
                   "field": "system_exams.cvs_memo",
                   "class": "textarea",
-                  "show": "system_exams.cvs"
+                  "show": "system_exams.cvs",
+                  "defaultValue": "S1+S2+M0"
                 }
               ]
             },
@@ -1478,7 +1480,8 @@
                 {
                   "field": "system_exams.pa_memo",
                   "class": "textarea",
-                  "show": "system_exams.pa"
+                  "show": "system_exams.pa",
+                  "defaultValue": "soft, non-distended, non-tender, no organomegaly, BS present"
                 }
               ]
             },
@@ -1493,7 +1496,8 @@
                 {
                   "field": "system_exams.cns_memo",
                   "class": "textarea",
-                  "show": "system_exams.cns"
+                  "show": "system_exams.cns",
+                  "defaultValue": "grossly intact"
                 }
               ]
             },
