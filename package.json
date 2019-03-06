@@ -34,7 +34,7 @@
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-shallow-compare": "^15.4.2",
-    "react-autosuggest": "^9.0.1",
+    "react-autosuggest": "^9.4.3",
     "react-data-grid": "^3.0.11",
     "react-dates": "^7.0.1",
     "react-dnd": "^2.4.0",
@@ -95,7 +95,7 @@
     "lodash-webpack-plugin": "^0.11.4",
     "mathjs": "^3.3.0",
     "mockdate": "^1.0.4",
-    "moment": "^2.13.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.5.3",
     "pouchdb": "^6.0.6",
     "pouchdb-authentication": "^1.1.1",
@@ -104,7 +104,7 @@
     "react-dom": "^15.5.4",
     "react-native-drawer": "^2.3.0",
     "react-redux": "^4.4.5",
-    "react-redux-form": "^1.0.13",
+    "react-redux-form": "^1.16.12",
     "react-router-dom": "^4.1.1",
     "recharts": "^0.13.4",
     "redux-saga-test-plan": "^3.2.0",
@@ -116,7 +116,7 @@
     "webpack": "^2.6.0",
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-server": "^2.4.5",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.2.1"
   },
   "jest": {
     "automock": true,
