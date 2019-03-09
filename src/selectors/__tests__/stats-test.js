@@ -26,7 +26,7 @@ import {
   getRecordListForStats,
 } from '../stats';
 
-describe('getRecordListForStats', () => {
+xdescribe('getRecordListForStats', () => {
   describe('record filtering by date', () => {
     const recordList = [
       { _id: '0', $updated_at: moment([2017, 1, 25, 0, 0, 0]).valueOf() },
