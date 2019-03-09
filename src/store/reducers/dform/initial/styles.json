@@ -150,6 +150,7 @@
                   "field": "district",
                   "class": "select",
                   "options": [
+                    {"id": "Dang", "label": "Dang"},
                     {"id": "Kapilvastu", "label": "Kapilvastu"},
                     {"id": "Parasi", "label": "Parasi"},
                     {"id": "Rupandehi", "label": "Rupandehi"},
