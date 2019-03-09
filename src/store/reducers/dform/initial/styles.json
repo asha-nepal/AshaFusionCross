@@ -4,7 +4,7 @@
       "style": [
         {
           "field": "number",
-          "label": "No.",
+          "label": "Registration Number",
           "style": {
             "width": 200
           },
@@ -16,10 +16,58 @@
           ]
         },
         {
-          "field": "name",
-          "label": "Name",
-          "class": "textinput",
-          "required": true
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "field": "first_name",
+              "label": "First Name",
+              "class": "textinput",
+              "required": true
+            },
+            {
+              "field": "last_name",
+              "label": "Last Name",
+              "class": "textinput",
+              "required": true
+            }
+          ]
+        },
+        {
+          "field": "house_number",
+          "label": "House Number",
+          "class": "textinput"
+        },
+        {
+          "field": "ethnicity_code",
+          "label": "Ethnicity Code (Select one of these)",
+          "class": "radio",
+          "options": [
+            {
+              "id": 1,
+              "label": "[1] Untouchables"
+            },
+            {
+              "id": 2,
+              "label": "[2] Indigenous"
+            },
+            {
+              "id": 3,
+              "label": "[3] Madheshis"
+            },
+            {
+              "id": 4,
+              "label": "[4] Muslim"
+            },
+            {
+              "id": 5,
+              "label": "[5] Brahaman/Chhetri"
+            },
+            {
+              "id": 6,
+              "label": "[6] Others"
+            }
+          ]
         },
         {
           "class": "block",
@@ -52,67 +100,50 @@
           ]
         },
         {
-          "field": "address",
-          "label": "Address",
-          "class": "textinput"
-        },
-        {
-          "field": "tel",
-          "label": "Tel",
-          "class": "textinput"
-        },
-        {
-          "field": "blood_type",
-          "label": "Blood Type",
-          "class": "select",
-          "options": [
-            { "id": "A", "label": "A" },
-            { "id": "B", "label": "B" },
-            { "id": "O", "label": "O" },
-            { "id": "AB", "label": "AB" }
-          ]
-        },
-        {
-          "field": "occupation",
-          "label": "Occupation",
-          "class": "radio",
-          "options": [
+          "class": "block",
+          "widthaligned": true,
+          "children": [
             {
-              "id": "housewife",
-              "label": "Housewife"
+              "field": "district",
+              "label": "District",
+              "class": "textinput"
             },
             {
-              "id": "student",
-              "label": "Student"
-            },
-            {
-              "id": "service",
-              "label": "Service Personnel"
-            },
-            {
-              "id": "retired service",
-              "label": "Retired Service Personnel"
-            },
-            {
-              "id": "business",
-              "label": "Business"
-            },
-            {
-              "id": "agriculture",
-              "label": "Agriculture"
+              "field": "municipality",
+              "label": "Municipality",
+              "class": "textinput"
             }
           ]
         },
         {
-          "field": "occupation",
-          "class": "textinput",
-          "expanded": true
+          "field": "contact_number",
+          "label": "Contact Number",
+          "class": "textinput"
         },
         {
-          "field": "ethnicity",
-          "label": "Ethnicity",
-          "class": "textinput",
-          "expanded": true
+          "field": "service_type",
+          "label": "Service type",
+          "class": "textinput"
+        },
+        {
+          "field": "free_or_cost",
+          "label": "Free / Cost",
+          "class": "radio",
+          "options": [
+            {
+              "id": "free",
+              "label": "Free"
+            },
+            {
+              "id": "cost",
+              "label": "Cost"
+            }
+          ]
+        },
+        {
+          "field": "referred_from",
+          "label": "Referred from",
+          "class": "textinput"
         }
       ]
     }

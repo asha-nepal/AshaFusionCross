@@ -38,6 +38,19 @@ export const checkPatientMatchesQueries = (queries: Array<string>, patient: Pati
       if (_name.indexOf(_query) !== -1) return true;
     }
 
+    // TODO: Be DRY
+    if (patient.first_name) {
+      const _query = ` ${query}`;
+      const _name = ` ${patient.first_name.toLowerCase()}`;
+      if (_name.indexOf(_query) !== -1) return true;
+    }
+
+    if (patient.last_name) {
+      const _query = ` ${query}`;
+      const _name = ` ${patient.last_name.toLowerCase()}`;
+      if (_name.indexOf(_query) !== -1) return true;
+    }
+
     if (patient.number) {
       if (patient.number === query) return true;
     }

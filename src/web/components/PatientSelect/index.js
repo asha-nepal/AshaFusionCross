@@ -73,7 +73,13 @@ export default class PatientSelect extends Component {
                   key={patient._id}
                   className="panel-block"
                   to={`/patient/${patient._id}`}
-                >{patient.number && `[${patient.number}] `} {patient.name || ''}</Link>
+                >
+                  {patient.number && `[${patient.number}] `}
+
+                  {/* TODO: Fix to use arbitrary field(s) as a entity title.
+                  For example, rowData.name or rowData.first_name + rowData.last_name */}
+                  {patient.first_name} {patient.last_name}
+                </Link>
               )}
             </nav>
           </div>

@@ -27,8 +27,16 @@ export default ({
 }: {
   patient: ?PatientObject,
 }) => {
+  // TODO: Fix to use arbitrary fields to show
   const elements = [
-    (patient.number ? `[${patient.number}] ` : '') + (patient.name || ''),
+    `${patient.number ? `[${patient.number}] ` : ''}`
+    + `${patient.first_name || ''} ${patient.last_name || ''}`,
+    patient.house_number
+      && `House Number: ${patient.house_number}`,
+    patient.ethnicity_code
+      && `Ethnicity Code: ${patient.ethnicity_code}`,
+    patient.sex
+      && `Sex: ${patient.sex}`,
     patient.age &&
       <span>
         Age:
@@ -42,18 +50,16 @@ export default ({
       </span>,
     patient.district
       && `District: ${patient.district}`,
-    patient.municipality_vdc && patient.municipality_vdc.name
-      && `Municipality/VDC: ${patient.municipality_vdc.name}`,
-    patient.municipality_vdc && patient.municipality_vdc.no
-      && `Municipality/VDC No: ${patient.municipality_vdc.no}`,
-    patient.area
-      && `Area: ${patient.area}`,
+    patient.municipality
+      && `District: ${patient.municipality}`,
     patient.contact_number
       && `Contact Number: ${patient.contact_number}`,
-    patient.blood_type
-      && `Blood Type: ${patient.blood_type}`,
-    patient.husband_name
-      && `Husband's Name: ${patient.husband_name}`,
+    patient.service_type
+      && `Service Type: ${patient.service_type}`,
+    patient.free_or_cost
+      && `Free or Cost: ${patient.free_or_cost}`,
+    patient.referred_from
+      && `Referred from: ${patient.referred_from}`,
   ]
   .filter(element => element != null);
 
