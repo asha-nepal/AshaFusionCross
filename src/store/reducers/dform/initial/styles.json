@@ -100,18 +100,133 @@
           ]
         },
         {
+          "field": "blood_type",
+          "class": "radio",
+          "label": "Blood type",
+          "options": [
+            {
+              "id": "a_pos",
+              "label": "A+"
+            },
+            {
+              "id": "b_pos",
+              "label": "B+"
+            },
+            {
+              "id": "ab_pos",
+              "label": "AB+"
+            },
+            {
+              "id": "o_pos",
+              "label": "O+"
+            },
+            {
+              "id": "a_neg",
+              "label": "A-"
+            },
+            {
+              "id": "b_neg",
+              "label": "B-"
+            },
+            {
+              "id": "ab_neg",
+              "label": "AB-"
+            },
+            {
+              "id": "o_neg",
+              "label": "O-"
+            }
+          ]
+        },
+        {
           "class": "block",
           "widthaligned": true,
           "children": [
             {
-              "field": "district",
+              "class": "block",
               "label": "District",
-              "class": "textinput"
+              "children": [
+                {
+                  "field": "district",
+                  "class": "select",
+                  "options": [
+                    {"id": "Kapilvastu", "label": "Kapilvastu"},
+                    {"id": "Parasi", "label": "Parasi"},
+                    {"id": "Rupandehi", "label": "Rupandehi"},
+                    {"id": "Arghakhanchi", "label": "Arghakhanchi"},
+                    {"id": "Gulmi", "label": "Gulmi"},
+                    {"id": "Palpa", "label": "Palpa"},
+                    {"id": "Dang", "label": "Dang"},
+                    {"id": "Pyuthan", "label": "Pyuthan"},
+                    {"id": "Rolpa", "label": "Rolpa"},
+                    {"id": "Eastern", "label": "Eastern"},
+                    {"id": "Banke", "label": "Banke"},
+                    {"id": "Bardiya", "label": "Bardiya"}
+                  ]
+                },
+                {
+                  "field": "district",
+                  "class": "textinput"
+                }
+              ]
             },
             {
-              "field": "municipality",
+              "class": "block",
               "label": "Municipality",
-              "class": "textinput"
+              "children": [
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "options": [
+                    {"id": "Rajpur", "label": "Rajpur"},
+                    {"id": "Baghmare", "label": "Baghmare"},
+                    {"id": "Bela", "label": "Bela"},
+                    {"id": "Bijauri", "label": "Bijauri"},
+                    {"id": "Chaulahi", "label": "Chaulahi"},
+                    {"id": "Dhanauri", "label": "Dhanauri"},
+                    {"id": "Dharna", "label": "Dharna"},
+                    {"id": "Dhikpur", "label": "Dhikpur"},
+                    {"id": "Duruwa", "label": "Duruwa"},
+                    {"id": "Gadhawa", "label": "Gadhawa"},
+                    {"id": "Gangapraspur", "label": "Gangapraspur"},
+                    {"id": "Gobardiya", "label": "Gobardiya"},
+                    {"id": "Goltakuri", "label": "Goltakuri"},
+                    {"id": "Halwar", "label": "Halwar"},
+                    {"id": "Hansipur", "label": "Hansipur"},
+                    {"id": "Hapur", "label": "Hapur"},
+                    {"id": "Hekuli", "label": "Hekuli"},
+                    {"id": "Kabhre", "label": "Kabhre"},
+                    {"id": "Koilabas", "label": "Koilabas"},
+                    {"id": "Lalmatiya", "label": "Lalmatiya"},
+                    {"id": "Laxmipur", "label": "Laxmipur"},
+                    {"id": "Loharpani", "label": "Loharpani"},
+                    {"id": "Manpur", "label": "Manpur"},
+                    {"id": "Narayanpur", "label": "Narayanpur"},
+                    {"id": "Panchakule", "label": "Panchakule"},
+                    {"id": "Pawan Nagar", "label": "Pawan Nagar"},
+                    {"id": "Phulbari", "label": "Phulbari"},
+                    {"id": "Purandhara", "label": "Purandhara"},
+                    {"id": "Rajpur", "label": "Rajpur"},
+                    {"id": "Rampur", "label": "Rampur"},
+                    {"id": "Saidha", "label": "Saidha"},
+                    {"id": "Satbariya", "label": "Satbariya"},
+                    {"id": "Saudiyar", "label": "Saudiyar"},
+                    {"id": "Shantinagar", "label": "Shantinagar"},
+                    {"id": "Shreegaun", "label": "Shreegaun"},
+                    {"id": "Sisahaniya", "label": "Sisahaniya"},
+                    {"id": "Sonpur", "label": "Sonpur"},
+                    {"id": "Syuja", "label": "Syuja"},
+                    {"id": "Tarigaun", "label": "Tarigaun"},
+                    {"id": "Ghorahi Municipality", "label": "Ghorahi Municipality"},
+                    {"id": "Tulsipur Municipality", "label": "Tulsipur Municipality"},
+                    {"id": "Urahari", "label": "Urahari"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "textinput"
+                }
+              ]
             }
           ]
         },
