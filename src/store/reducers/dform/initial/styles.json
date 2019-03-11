@@ -3806,13 +3806,14 @@
           "label": "पहिलेका गर्भहरुको विवरण",
           "class": "accordion",
           "widthaligned": true,
+          "initialOpen": true,
           "children": [
             {
               "field": "prev_pregnancy",
               "label": "गर्भको विवरण",
               "class": "subformlist",
               "ditto": true,
-              "autoAdd": false,
+              "autoAdd": true,
               "fields": [
                 {
                   "field": "living",
@@ -3900,6 +3901,7 @@
         {
           "label": "गर्भवती खोप",
           "class": "accordion",
+          "initialOpen": true,
           "children": [
             {
               "label": "टीडी खोप दर्ता नम्बर",
@@ -3961,13 +3963,14 @@
           "label": "गर्भवती जांच विवरण",
           "class": "accordion",
           "widthaligned": true,
+          "initialOpen": true,
           "children": [
             {
               "label": "गर्भ जांच",
               "class": "subformlist",
               "field": "pregnancy_exam",
               "ditto": true,
-              "autoAdd": false,
+              "autoAdd": true,
               "fields": [
                 {
                   "label": "महिना",
