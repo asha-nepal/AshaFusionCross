@@ -279,6 +279,22 @@
   ],
   "record": [
     {
+      "id": "general_opd",
+      "label": "General OPD",
+      "style": [
+        {
+          "field": "diagnoses",
+          "label": "Diagnoses",
+          "class": "diagnoses"
+        },
+        {
+          "field": "note",
+          "label": "note",
+          "class": "textarea"
+        }
+      ]
+    },
+    {
       "id": "reception",
       "label": "Reception",
       "roles": ["reception"],
