@@ -25,20 +25,71 @@ jest.unmock('../functions');
 import functions from '../functions';
 
 describe('asha:bmi', () => {
-  it('calculates BMI', () => {
-    const func = functions['asha:bmi'];
+  [
+    [{ value: 178, unit: 'cm' }, { value: 68, unit: 'kg' }, 21.46],
+    [{ value: 178.5, unit: 'cm' }, { value: 68, unit: 'kg' }, 21.34],
+    [{ value: 178, unit: 'cm' }, { value: 68.5, unit: 'kg' }, 21.62],
+    [{ value: 178.5, unit: 'cm' }, { value: 68.5, unit: 'kg' }, 21.50],
+  ].forEach(([height, weight, expected]) => {
+    it(`calculates BMI (height: ${height.value} ${height.unit}, weight: ${weight.value} ${weight.unit})`, () => { // eslint-disable-line max-len
+      const func = functions['asha:bmi'];
 
-    const height = {
-      value: 178,
-      unit: 'cm',
-    };
+      expect(func(height, weight))
+        .toBeCloseTo(expected);
+    });
+  });
+});
 
-    const weight = {
-      value: 68,
-      unit: 'kg',
-    };
+describe('asha:math:mul', () => {
+  const func = functions['asha:math:mul'];
 
-    expect(func(height, weight))
-      .toBeCloseTo(21.46);
+  it('multiplies arbitrary number of inputs', () => {
+    // Integer
+    expect(func(1)).toEqual(1);
+    expect(func(1, 2)).toEqual(2);
+    expect(func(1, 2, 3)).toEqual(6);
+    expect(func(1, 2, 3, 4)).toEqual(24);
+
+    // With zero
+    expect(func(0)).toEqual(0);
+    expect(func(0, 1)).toEqual(0);
+    expect(func(0, 1, 2)).toEqual(0);
+
+    // Decimal
+    expect(func(1.5)).toEqual(1.5);
+    expect(func(1.5, 2.5)).toEqual(3.75);
+    expect(func(0, 1.5)).toEqual(0);
+
+    // Negative
+    expect(func(-1)).toEqual(-1);
+    expect(func(-1, -2)).toEqual(2);
+    expect(func(-1, -2, -3)).toEqual(-6);
+    expect(func(-1, -2, -3, -4)).toEqual(24);
+  });
+
+  it('can accept string', () => {
+    expect(func('1')).toEqual(1);
+    expect(func('1', 2)).toEqual(2);
+    expect(func(1, '2')).toEqual(2);
+    expect(func('1', '2')).toEqual(2);
+
+    expect(func('0')).toEqual(0);
+    expect(func('0', 1)).toEqual(0);
+    expect(func(0, '1')).toEqual(0);
+    expect(func('0', '1')).toEqual(0);
+
+    expect(func('1.5')).toEqual(1.5);
+    expect(func('1.5', 2.5)).toEqual(3.75);
+    expect(func(1.5, '2.5')).toEqual(3.75);
+    expect(func('1.5', '2.5')).toEqual(3.75);
+
+    expect(func('-1')).toEqual(-1);
+    expect(func('-1', -2)).toEqual(2);
+    expect(func(-1, '-2')).toEqual(2);
+    expect(func('-1', '-2')).toEqual(2);
+  });
+
+  it('returns null if input is empty', () => {
+    expect(func()).toEqual(null);
   });
 });

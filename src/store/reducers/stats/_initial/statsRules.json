@@ -2,5 +2,25 @@
   "_patient.age.mean": { "name": "Mean(Age)", "entry": "_patient.age", "type": "mean" },
   "_patient.age.max": { "name": "Max(Age)", "entry": "_patient.age", "type": "max" },
   "_patient.age.min": { "name": "Min(Age)", "entry": "_patient.age", "type": "min" },
-  "_patient.blood_type.rank": { "name": "Rank(Blood Type)", "entry": "_patient.blood_type", "type": "rank", "order": "desc" }
+  "_patient.blood_type.rank": { "name": "Rank(Blood Type)", "entry": "_patient.blood_type", "type": "rank", "order": "desc" },
+  "height.mean": { "name": "Mean(Height)", "entry": "height", "type": "mean" },
+  "height.max": { "name": "Max(Height)", "entry": "height", "type": "max" },
+  "height.min": { "name": "Min(Height)", "entry": "height", "type": "min" },
+  "weight.mean": { "name": "Mean(Weight)", "entry": "weight", "type": "mean" },
+  "weight.max": { "name": "Max(Weight)", "entry": "weight", "type": "max" },
+  "weight.min": { "name": "Min(Weight)", "entry": "weight", "type": "min" },
+  "bp.s.mean": { "name": "Mean(BP (s))", "entry": "bp.s", "type": "mean" },
+  "bp.s.max": { "name": "Max(BP (s))", "entry": "bp.s", "type": "max" },
+  "bp.s.min": { "name": "Min(BP (s))", "entry": "bp.s", "type": "min" },
+  "bp.d.mean": { "name": "Mean(BP (d))", "entry": "bp.d", "type": "mean" },
+  "bp.d.max": { "name": "Max(BP (d))", "entry": "bp.d", "type": "max" },
+  "bp.d.min": { "name": "Min(BP (d))", "entry": "bp.d", "type": "min" },
+  "symptoms.rank": { "name": "Rank(Symptoms)", "entry": "symptoms", "type": "rank", "order": "desc" },
+  "diagnoses_icd10.rank": {
+    "name": "Rank(Diagnoses.ICD10)",
+    "entry": "diagnoses_icd10",
+    "type": "rank",
+    "order": "desc",
+    "translator": "asha.icd10"
+  }
 }

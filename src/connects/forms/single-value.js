@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,14 @@
 /* @flow */
 
 import { connect } from 'react-redux';
-import {
-  getActivePatient,
-  getSelectedActiveRecord,
-} from '../../selectors';
-import PrintRecord from '../components/PrintRecord';
+import { actions } from 'react-redux-form';
+import _get from 'lodash.get';
 
-const mapStateToProps = (state) => ({
-  patient: getActivePatient(state),
-  record: getSelectedActiveRecord(state),
+const mapStateToProps = (state, ownProps) => ({
+  value: _get(state, ownProps.model, ownProps.defaultValue),
 });
-const mapDispatchToProps = null;
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrintRecord);
+export default connect(mapStateToProps, mapDispatchToProps);

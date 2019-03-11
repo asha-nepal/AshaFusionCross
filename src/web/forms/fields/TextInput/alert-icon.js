@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Yuichiro Tsuchiya
+ * Copyright 2018 Yuichiro Tsuchiya
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,26 @@
 
 /* @flow */
 
-import { connect } from 'react-redux';
-import { actions } from 'react-redux-form';
-import _get from 'lodash.get';
+import React from 'react';
+import classNames from 'classnames';
 
-const mapStateToProps = (state, ownProps) => ({
-  value: _get(state, ownProps.model),
-});
+const alertFaIconClasses = {
+  danger: 'warning',
+  warning: 'warning',
+  success: 'check',
+};
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onChange: (newValue) => dispatch(actions.change(ownProps.model, newValue)),
-});
-
-export default connect(
-  mapStateToProps, mapDispatchToProps
+export default ({
+  type,
+}: {
+  type: "danger" | "warning" | "success"
+}) => (
+  <span
+    className={classNames(
+      'icon is-small is-left',
+      { [`has-text-${type}`]: true }
+    )}
+  >
+    <i className={`fa fa-${alertFaIconClasses[type]}`} />
+  </span>
 );

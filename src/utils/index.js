@@ -56,3 +56,10 @@ export const btoa = createBTOA();
 export const capitalize = (str: string) => (
   str.length === 0 ? str : str.charAt(0).toUpperCase() + str.substring(1)
 );
+
+export const approximateFloat = (value: number, precision: ?number): number => {
+  if (precision == null) return value;
+
+  const e = Math.pow(10, precision);
+  return Math.round(value * e) / e;
+};

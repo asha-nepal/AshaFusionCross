@@ -19,7 +19,7 @@
 import React from 'react';
 import _get from 'lodash.get';
 
-import { convert } from '../../forms/fields/TextUnitInput';
+import { convert } from '../../../forms/fields/TextUnitInput';
 
 import {
   ImageTemplate,
@@ -28,8 +28,8 @@ import {
   Row,
   Col,
 } from './absolute_positioning';
-import ANCimg1 from '../../../../assets/img/anc_1.jpg';
-import ANCimg2 from '../../../../assets/img/anc_2.jpg';
+import ANCimg1 from '../../../../../assets/img/anc_1.jpg';
+import ANCimg2 from '../../../../../assets/img/anc_2.jpg';
 
 const Text = createText(3.5);
 
