@@ -22,6 +22,7 @@ import { BlockBody } from './Block';
 type Props = {
   label: ?string,
   widthaligned: boolean,
+  initialOpen?: boolean,
   layout: ?string,
   children?: React$Element<any>,
 };
@@ -31,7 +32,7 @@ export class Accordion extends Component {
     super(props);
 
     this.state = {
-      isOpen: false,
+      isOpen: !!props.initialOpen,
     };
   }
 
