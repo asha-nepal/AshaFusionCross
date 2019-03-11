@@ -34,26 +34,21 @@
           ]
         },
         {
-          "field": "house_number",
-          "label": "House Number",
-          "class": "textinput"
-        },
-        {
           "field": "ethnicity_code",
           "label": "Ethnicity Code (Select one of these)",
           "class": "radio",
           "options": [
             {
               "id": 1,
-              "label": "[1] Untouchables"
+              "label": "[1] Dalit"
             },
             {
               "id": 2,
-              "label": "[2] Indigenous"
+              "label": "[2] Janajati"
             },
             {
               "id": 3,
-              "label": "[3] Madheshis"
+              "label": "[3] Madheshi"
             },
             {
               "id": 4,
@@ -65,7 +60,7 @@
             },
             {
               "id": 6,
-              "label": "[6] Others"
+              "label": "[6] Other"
             }
           ]
         },
@@ -96,45 +91,6 @@
                 "months"
               ],
               "precision": 0
-            }
-          ]
-        },
-        {
-          "field": "blood_type",
-          "class": "radio",
-          "label": "Blood type",
-          "options": [
-            {
-              "id": "a_pos",
-              "label": "A+"
-            },
-            {
-              "id": "b_pos",
-              "label": "B+"
-            },
-            {
-              "id": "ab_pos",
-              "label": "AB+"
-            },
-            {
-              "id": "o_pos",
-              "label": "O+"
-            },
-            {
-              "id": "a_neg",
-              "label": "A-"
-            },
-            {
-              "id": "b_neg",
-              "label": "B-"
-            },
-            {
-              "id": "ab_neg",
-              "label": "AB-"
-            },
-            {
-              "id": "o_neg",
-              "label": "O-"
             }
           ]
         },
@@ -232,6 +188,21 @@
           ]
         },
         {
+          "class": "block",
+          "children": [
+            {
+              "field": "ward_number",
+              "label": "Ward Number",
+              "class": "textinput"
+            },
+            {
+              "field": "house_number",
+              "label": "House Number",
+              "class": "textinput"
+            }
+          ]
+        },
+        {
           "field": "contact_number",
           "label": "Contact Number",
           "class": "textinput"
@@ -239,7 +210,49 @@
         {
           "field": "service_type",
           "label": "Service type",
-          "class": "textinput"
+          "class": "radio",
+          "options": [
+            {
+              "id": 1,
+              "label": "General"
+            },
+            {
+              "id": 2,
+              "label": "CBIMNCI"
+            },
+            {
+              "id": 3,
+              "label": "Nutrition"
+            },
+            {
+              "id": 4,
+              "label": "Safe Motherhood"
+            },
+            {
+              "id": 5,
+              "label": "Family Planning"
+            },
+            {
+              "id": 6,
+              "label": "TB"
+            },
+            {
+              "id": 7,
+              "label": "Leprosy"
+            },
+            {
+              "id": 8,
+              "label": "Vector Borne Disease"
+            },
+            {
+              "id": 9,
+              "label": "Sexually Transmitted Disease"
+            },
+            {
+              "id": 10,
+              "label": "Others"
+            }
+          ]
         },
         {
           "field": "free_or_cost",
