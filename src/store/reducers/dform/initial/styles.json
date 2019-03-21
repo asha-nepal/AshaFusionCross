@@ -219,6 +219,7 @@
             },
             {
               "field": "house_number",
+              "type": "number",
               "label": "House Number",
               "class": "textinput"
             }
