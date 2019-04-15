@@ -27,10 +27,9 @@ export default ({
 }: {
   patient: ?PatientObject,
 }) => {
-  // TODO: Fix to use arbitrary fields to show
+  // TODO: Fix to use arbitrary fields to show such as patient.first_name + patient.last_name
   const elements = [
-    `${patient.number ? `[${patient.number}] ` : ''}`
-    + `${patient.first_name || ''} ${patient.last_name || ''}`,
+    `${patient.number ? `[${patient.number}] ` : ''}${patient.name || ''}`,
     patient.house_number
       && `House Number: ${patient.house_number}`,
     patient.ethnicity_code

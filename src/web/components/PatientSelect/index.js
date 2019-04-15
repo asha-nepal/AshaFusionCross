@@ -78,7 +78,7 @@ export default class PatientSelect extends Component {
 
                   {/* TODO: Fix to use arbitrary field(s) as a entity title.
                   For example, rowData.name or rowData.first_name + rowData.last_name */}
-                  {patient.first_name} {patient.last_name}
+                  {patient.name || ''}
                 </Link>
               )}
             </nav>

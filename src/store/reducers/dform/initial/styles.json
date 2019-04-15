@@ -22,14 +22,8 @@
           "widthaligned": true,
           "children": [
             {
-              "field": "first_name",
-              "label": "First Name",
-              "class": "textinput",
-              "required": true
-            },
-            {
-              "field": "last_name",
-              "label": "Last Name",
+              "field": "name",
+              "label": "Name",
               "class": "textinput",
               "required": true
             }
