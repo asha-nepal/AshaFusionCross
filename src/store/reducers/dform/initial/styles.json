@@ -22,14 +22,8 @@
           "widthaligned": true,
           "children": [
             {
-              "field": "first_name",
-              "label": "First Name",
-              "class": "textinput",
-              "required": true
-            },
-            {
-              "field": "last_name",
-              "label": "Last Name",
+              "field": "name",
+              "label": "Name",
               "class": "textinput",
               "required": true
             }
@@ -108,24 +102,92 @@
                   "field": "district",
                   "class": "select",
                   "options": [
-                    {"id": "Dang", "label": "Dang"},
-                    {"id": "Kapilvastu", "label": "Kapilvastu"},
-                    {"id": "Parasi", "label": "Parasi"},
-                    {"id": "Rupandehi", "label": "Rupandehi"},
-                    {"id": "Arghakhanchi", "label": "Arghakhanchi"},
-                    {"id": "Gulmi", "label": "Gulmi"},
-                    {"id": "Palpa", "label": "Palpa"},
-                    {"id": "Dang", "label": "Dang"},
-                    {"id": "Pyuthan", "label": "Pyuthan"},
-                    {"id": "Rolpa", "label": "Rolpa"},
-                    {"id": "Eastern", "label": "Eastern"},
-                    {"id": "Banke", "label": "Banke"},
-                    {"id": "Bardiya", "label": "Bardiya"}
+                    {"id": 1, "label": "Taplejung"},
+                    {"id": 2, "label": "Panchthar"},
+                    {"id": 3, "label": "Ilam"},
+                    {"id": 4, "label": "Jhapa"},
+                    {"id": 5, "label": "Morang"},
+                    {"id": 6, "label": "Sunasari"},
+                    {"id": 7, "label": "Dhankuta"},
+                    {"id": 8, "label": "Terhathum"},
+                    {"id": 9, "label": "Sankhusabha"},
+                    {"id": 10, "label": "Bhojpur"},
+                    {"id": 11, "label": "Solukhumbu"},
+                    {"id": 12, "label": "Okhaldunga"},
+                    {"id": 13, "label": "Khotang"},
+                    {"id": 14, "label": "Udayapur"},
+                    {"id": 15, "label": "Saptari"},
+                    {"id": 16, "label": "Siraha"},
+                    {"id": 17, "label": "Dhanusha"},
+                    {"id": 18, "label": "Mahottari"},
+                    {"id": 19, "label": "Sarlahi"},
+                    {"id": 32, "label": "Rautahat"},
+                    {"id": 33, "label": "Bara"},
+                    {"id": 34, "label": "Parsa"},
+                    {"id": 20, "label": "Sindhuli"},
+                    {"id": 21, "label": "Ramechhap"},
+                    {"id": 22, "label": "Dolakha"},
+                    {"id": 23, "label": "Sindhupalchowk"},
+                    {"id": 24, "label": "Kavrepalanchok"},
+                    {"id": 25, "label": "Lalitpur"},
+                    {"id": 26, "label": "Bhaktapur"},
+                    {"id": 27, "label": "Kathmandu"},
+                    {"id": 28, "label": "Nuwakot"},
+                    {"id": 29, "label": "Rasuwa"},
+                    {"id": 30, "label": "Dhading"},
+                    {"id": 31, "label": "Makawanpur"},
+                    {"id": 35, "label": "Chitwan"},
+                    {"id": 36, "label": "Gorkha"},
+                    {"id": 37, "label": "Lamjung"},
+                    {"id": 38, "label": "Tanahun"},
+                    {"id": 39, "label": "Syangja"},
+                    {"id": 40, "label": "Kaski"},
+                    {"id": 41, "label": "Manang"},
+                    {"id": 42, "label": "Mustang"},
+                    {"id": 43, "label": "Myagdi"},
+                    {"id": 44, "label": "Parbat"},
+                    {"id": 45, "label": "Baglung"},
+                    {"id": 46, "label": "Gulmi"},
+                    {"id": 47, "label": "Palpa"},
+                    {"id": 49, "label": "Rupandehi"},
+                    {"id": 50, "label": "Kapilbastu"},
+                    {"id": 51, "label": "Arghakhanchi"},
+                    {"id": 52, "label": "Pyuthan"},
+                    {"id": 53, "label": "Rolpa"},
+                    {"id": 56, "label": "Dang"},
+                    {"id": 57, "label": "Banke"},
+                    {"id": 58, "label": "Bardiya"},
+                    {"id": 55, "label": "Salyan"},
+                    {"id": 59, "label": "Surkhet"},
+                    {"id": 60, "label": "Dailekh"},
+                    {"id": 61, "label": "Jajarkot"},
+                    {"id": 62, "label": "Dolpa"},
+                    {"id": 63, "label": "Jumla"},
+                    {"id": 64, "label": "Kalikot"},
+                    {"id": 65, "label": "Mugu"},
+                    {"id": 66, "label": "Humla"},
+                    {"id": 67, "label": "Bajura"},
+                    {"id": 68, "label": "Bajhang"},
+                    {"id": 69, "label": "Achham"},
+                    {"id": 70, "label": "Doti"},
+                    {"id": 71, "label": "Kailali"},
+                    {"id": 72, "label": "Kanchanpur"},
+                    {"id": 73, "label": "Dadeldhura"},
+                    {"id": 74, "label": "Baitadi"},
+                    {"id": 75, "label": "Darchula"}
                   ]
                 },
                 {
                   "field": "district",
-                  "class": "textinput"
+                  "class": "radio",
+                  "options": [
+                    {"id": "56", "label": "Dang"}
+                  ]
+                },
+                {
+                  "field": "district_text",
+                  "class": "textinput",
+                  "placeholder": "Free text if necessary"
                 }
               ]
             },
@@ -136,54 +198,222 @@
                 {
                   "field": "municipality",
                   "class": "select",
+                  "show": "district:46",
                   "options": [
-                    {"id": "Rajpur", "label": "Rajpur"},
-                    {"id": "Baghmare", "label": "Baghmare"},
-                    {"id": "Bela", "label": "Bela"},
-                    {"id": "Bijauri", "label": "Bijauri"},
-                    {"id": "Chaulahi", "label": "Chaulahi"},
-                    {"id": "Dhanauri", "label": "Dhanauri"},
-                    {"id": "Dharna", "label": "Dharna"},
-                    {"id": "Dhikpur", "label": "Dhikpur"},
-                    {"id": "Duruwa", "label": "Duruwa"},
-                    {"id": "Gadhawa", "label": "Gadhawa"},
-                    {"id": "Gangapraspur", "label": "Gangapraspur"},
-                    {"id": "Gobardiya", "label": "Gobardiya"},
-                    {"id": "Goltakuri", "label": "Goltakuri"},
-                    {"id": "Halwar", "label": "Halwar"},
-                    {"id": "Hansipur", "label": "Hansipur"},
-                    {"id": "Hapur", "label": "Hapur"},
-                    {"id": "Hekuli", "label": "Hekuli"},
-                    {"id": "Kabhre", "label": "Kabhre"},
-                    {"id": "Koilabas", "label": "Koilabas"},
-                    {"id": "Lalmatiya", "label": "Lalmatiya"},
-                    {"id": "Laxmipur", "label": "Laxmipur"},
-                    {"id": "Loharpani", "label": "Loharpani"},
-                    {"id": "Manpur", "label": "Manpur"},
-                    {"id": "Narayanpur", "label": "Narayanpur"},
-                    {"id": "Panchakule", "label": "Panchakule"},
-                    {"id": "Pawan Nagar", "label": "Pawan Nagar"},
-                    {"id": "Phulbari", "label": "Phulbari"},
-                    {"id": "Purandhara", "label": "Purandhara"},
-                    {"id": "Rajpur", "label": "Rajpur"},
-                    {"id": "Rampur", "label": "Rampur"},
-                    {"id": "Saidha", "label": "Saidha"},
-                    {"id": "Satbariya", "label": "Satbariya"},
-                    {"id": "Saudiyar", "label": "Saudiyar"},
-                    {"id": "Shantinagar", "label": "Shantinagar"},
-                    {"id": "Shreegaun", "label": "Shreegaun"},
-                    {"id": "Sisahaniya", "label": "Sisahaniya"},
-                    {"id": "Sonpur", "label": "Sonpur"},
-                    {"id": "Syuja", "label": "Syuja"},
-                    {"id": "Tarigaun", "label": "Tarigaun"},
-                    {"id": "Ghorahi Municipality", "label": "Ghorahi Municipality"},
-                    {"id": "Tulsipur Municipality", "label": "Tulsipur Municipality"},
-                    {"id": "Urahari", "label": "Urahari"}
+                    {"id": 461, "label": "Musikot Municipality"},
+                    {"id": 462, "label": "Resunga Municipality"},
+                    {"id": 463, "label": "Isma"},
+                    {"id": 464, "label": "Kali Gandaki"},
+                    {"id": 465, "label": "Gulmi Durbar"},
+                    {"id": 466, "label": "Satyawati"},
+                    {"id": 467, "label": "Chandrakot"},
+                    {"id": 468, "label": "Ruru"},
+                    {"id": 469, "label": "Chhatrakot"},
+                    {"id": 470, "label": "Dhurkot"},
+                    {"id": 471, "label": "Madane"},
+                    {"id": 472, "label": "Malika"}
                   ]
                 },
                 {
                   "field": "municipality",
-                  "class": "textinput"
+                  "class": "select",
+                  "show": "district:47",
+                  "options": [
+                    {"id": 473, "label": "Rampur Municipality"},
+                    {"id": 474, "label": "Tansen Municipality"},
+                    {"id": 475, "label": "Nisdi"},
+                    {"id": 476, "label": "Purba Khola"},
+                    {"id": 477, "label": "Rambha"},
+                    {"id": 478, "label": "Matha Gadhi"},
+                    {"id": 479, "label": "Tinau"},
+                    {"id": 480, "label": "Bagnaskali"},
+                    {"id": 481, "label": "Ribdikot"},
+                    {"id": 482, "label": "Raina Devi Chhahara"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:48",
+                  "options": [
+                    {"id": 483, "label": "Kawasoti Municipality"},
+                    {"id": 484, "label": "Gaindakot Municipality"},
+                    {"id": 485, "label": "Devchuli Municipality"},
+                    {"id": 486, "label": "Bardaghat Municipality"},
+                    {"id": 487, "label": "Madhya Bindu Municipality"},
+                    {"id": 488, "label": "Ramgram Municipality"},
+                    {"id": 489, "label": "Sunwal Municipality"},
+                    {"id": 490, "label": "Triveni Susta"},
+                    {"id": 491, "label": "Palhi Nandan"},
+                    {"id": 492, "label": "Pratappur"},
+                    {"id": 493, "label": "Bungdi Kali"},
+                    {"id": 494, "label": "Bulingtar"},
+                    {"id": 495, "label": "Binayi"},
+                    {"id": 496, "label": "Sarawal"},
+                    {"id": 497, "label": "Hupsekot"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:49",
+                  "options": [
+                    {"id": 498, "label": "Butwal Sub-Metropolitan"},
+                    {"id": 499, "label": "Devdaha Municipality"},
+                    {"id": 500, "label": "Lumbini Sanskritik Municipality"},
+                    {"id": 501, "label": "Siddharthanagar Municipality"},
+                    {"id": 502, "label": "Saina Maina Municipality"},
+                    {"id": 503, "label": "Tilottama Municipality"},
+                    {"id": 504, "label": "Gaidahawa"},
+                    {"id": 505, "label": "Kanchan"},
+                    {"id": 506, "label": "Kotahi Mai"},
+                    {"id": 507, "label": "Marchawari"},
+                    {"id": 508, "label": "Mayadevi"},
+                    {"id": 509, "label": "Om Satiya"},
+                    {"id": 510, "label": "Rohini"},
+                    {"id": 511, "label": "Sammari Mai"},
+                    {"id": 512, "label": "Siyari"},
+                    {"id": 513, "label": "Suddodhana"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:50",
+                  "options": [
+                    {"id": 514, "label": "Kapilbastu Municipality"},
+                    {"id": 515, "label": "Buddabhumi Municipality"},
+                    {"id": 516, "label": "Shivaraj Municipality"},
+                    {"id": 517, "label": "Maharajganj Municipality"},
+                    {"id": 518, "label": "Krishna Nagar Municipality"},
+                    {"id": 519, "label": "Banganga Municipality"},
+                    {"id": 520, "label": "Mayadevi"},
+                    {"id": 521, "label": "Yashodhara"},
+                    {"id": 522, "label": "Suddodhana"},
+                    {"id": 523, "label": "Bijay Nagar"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:51",
+                  "options": [
+                    {"id": 524, "label": "Sandhikharka Municipality"},
+                    {"id": 525, "label": "Shit Ganga Municipality"},
+                    {"id": 526, "label": "Bhumikasthan Municipality"},
+                    {"id": 527, "label": "Chhatra Dev"},
+                    {"id": 528, "label": "Panini"},
+                    {"id": 529, "label": "Malarani"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:52",
+                  "options": [
+                    {"id": 530, "label": "Pyuthan Municipality"},
+                    {"id": 531, "label": "Swargadwari Municipality"},
+                    {"id": 532, "label": "Gaumukhi"},
+                    {"id": 533, "label": "Mandavi"},
+                    {"id": 534, "label": "Sarumarani"},
+                    {"id": 535, "label": "Mallarani"},
+                    {"id": 536, "label": "Nau Bahini"},
+                    {"id": 537, "label": "Jhimaruk"},
+                    {"id": 538, "label": "Eairabati"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:53",
+                  "options": [
+                    {"id": 539, "label": "Rolpa Municipality"},
+                    {"id": 540, "label": "Triveni"},
+                    {"id": 541, "label": "Dui Kholi"},
+                    {"id": 542, "label": "Madi"},
+                    {"id": 543, "label": "Runti Gadhi"},
+                    {"id": 544, "label": "Lungri"},
+                    {"id": 545, "label": "Sukidaha"},
+                    {"id": 546, "label": "Sunchhahari"},
+                    {"id": 547, "label": "Subarnawati"},
+                    {"id": 548, "label": "Thawang"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:54",
+                  "options": [
+                    {"id": 549, "label": "Musikot Municipality"},
+                    {"id": 550, "label": "Chaurjahari Municipality"},
+                    {"id": 551, "label": "Aathabiskot Municipality"},
+                    {"id": 552, "label": "Putha Uttar Ganga"},
+                    {"id": 553, "label": "Bhume"},
+                    {"id": 554, "label": "Sisne"},
+                    {"id": 555, "label": "Barphikot"},
+                    {"id": 556, "label": "Triveni"},
+                    {"id": 557, "label": "Sani Bheri"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:56",
+                  "options": [
+                    {"id": 574, "label": "Rajpur"},
+                    {"id": 568, "label": "Tulsipur Sub-Metropolitan"},
+                    {"id": 569, "label": "Ghorahi Sub-Metropolitan"},
+                    {"id": 570, "label": "Lamahi Municipality"},
+                    {"id": 571, "label": "Banglachuli"},
+                    {"id": 572, "label": "Dangi Sharan"},
+                    {"id": 573, "label": "Gadhawa"},
+                    {"id": 574, "label": "Rajpur"},
+                    {"id": 575, "label": "Rapti"},
+                    {"id": 576, "label": "Shanti Nagar"},
+                    {"id": 577, "label": "Babai"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:57",
+                  "options": [
+                    {"id": 578, "label": "Nepalgunj Sub-Metropolitan"},
+                    {"id": 579, "label": "Kohalpur Municipality"},
+                    {"id": 580, "label": "Narainapur"},
+                    {"id": 581, "label": "Raptisonari"},
+                    {"id": 582, "label": "Baijanath"},
+                    {"id": 583, "label": "Khajura"},
+                    {"id": 584, "label": "Duduwa"},
+                    {"id": 585, "label": "Janaki"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "select",
+                  "show": "district:58",
+                  "options": [
+                    {"id": 586, "label": "Gulariya Municipality"},
+                    {"id": 587, "label": "Maduvan Municipality"},
+                    {"id": 588, "label": "Rajapur Taratal Municipality"},
+                    {"id": 589, "label": "Thakura Baba Municipality"},
+                    {"id": 590, "label": "Bansgadhi Municipality"},
+                    {"id": 591, "label": "Bar Bardiya Municipality"},
+                    {"id": 592, "label": "Badhaiya Tal"},
+                    {"id": 593, "label": "Geruwa"}
+                  ]
+                },
+                {
+                  "field": "municipality",
+                  "class": "radio",
+                  "options": [
+                    {"id": 574, "label": "Rajpur"}
+                  ]
+                },
+                {
+                  "field": "municipality_text",
+                  "class": "textinput",
+                  "placeholder": "Free text if necessary"
                 }
               ]
             }
@@ -228,7 +458,8 @@
         {
           "field": "contact_number",
           "label": "Contact Number",
-          "class": "textinput"
+          "class": "textinput",
+          "type": "number"
         },
         {
           "field": "service_type",
