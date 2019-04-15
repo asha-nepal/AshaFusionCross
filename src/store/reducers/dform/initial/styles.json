@@ -236,7 +236,8 @@
         {
           "field": "contact_number",
           "label": "Contact Number",
-          "class": "textinput"
+          "class": "textinput",
+          "type": "number"
         },
         {
           "field": "service_type",
