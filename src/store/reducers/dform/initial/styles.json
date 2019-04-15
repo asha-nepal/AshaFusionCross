@@ -120,6 +120,13 @@
                 {
                   "field": "district",
                   "class": "textinput"
+                },
+                {
+                  "field": "district",
+                  "class": "checkgroup",
+                  "options": [
+                    {"id": "Dang", "label": "Dang"}
+                  ]
                 }
               ]
             },
@@ -178,6 +185,13 @@
                 {
                   "field": "municipality",
                   "class": "textinput"
+                },
+                {
+                  "field": "municipality",
+                  "class": "checkgroup",
+                  "options": [
+                    {"id": "Rajpur", "label": "Rajpur"}
+                  ]
                 }
               ]
             }
