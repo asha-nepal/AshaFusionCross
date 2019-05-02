@@ -16,7 +16,9 @@
     "electron:pack:all": "electron-packager build asha-fusion --overwrite --asar --all --icon=assets/icons/asha --out=electron-build",
     "server": "if-env NODE_ENV=production && npm run server:prod || npm run server:dev",
     "server:dev": "webpack-dev-server --config webpack.config.web.js",
-    "server:prod": "node server.js"
+    "server:prod": "node server.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "bulma": "^0.6.1",
@@ -39,14 +41,15 @@
     "react-dates": "^7.0.1",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",
-    "react-native": "^0.42.3",
+    "react-native": "^0.59.0",
     "react-native-material-kit": "^0.4.1",
     "react-native-randombytes": "^2.2.0",
     "react-native-router-flux": "^3.38.0",
-    "react-native-vector-icons": "^4.0.1",
+    "react-native-vector-icons": "^6.4.1",
     "redux": "^3.5.2",
     "redux-saga": "^0.15.6",
-    "redux-saga-routines": "^2.0.2"
+    "redux-saga-routines": "^2.0.2",
+    "snyk": "^1.158.0"
   },
   "devDependencies": {
     "argv": "0.0.2",
@@ -137,5 +140,6 @@
       "^.+\\.(gif|png|jpg|jpeg|html)$": "<rootDir>/test/fileMock.js",
       "randomstring": "randomstring-promise"
     }
-  }
+  },
+  "snyk": true
 }
