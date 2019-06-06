@@ -4,9 +4,7 @@
       "style": [
         {
           "field": "number",
-          "class": "textinput",
-          "type": "number",
-          "label": "Registration Number",
+          "label": "Regd. No.",
           "style": {
             "width": 200
           },
@@ -18,47 +16,10 @@
           ]
         },
         {
-          "class": "block",
-          "widthaligned": true,
-          "children": [
-            {
-              "field": "name",
-              "label": "Name",
-              "class": "textinput",
-              "required": true
-            }
-          ]
-        },
-        {
-          "field": "ethnicity_code",
-          "label": "Ethnicity Code (Select one of these)",
-          "class": "radio",
-          "options": [
-            {
-              "id": 1,
-              "label": "[1] Dalit"
-            },
-            {
-              "id": 2,
-              "label": "[2] Janajati"
-            },
-            {
-              "id": 3,
-              "label": "[3] Madheshi"
-            },
-            {
-              "id": 4,
-              "label": "[4] Muslim"
-            },
-            {
-              "id": 5,
-              "label": "[5] Brahaman/Chhetri"
-            },
-            {
-              "id": 6,
-              "label": "[6] Other"
-            }
-          ]
+          "field": "name",
+          "label": "Name",
+          "class": "textinput",
+          "required": true
         },
         {
           "class": "block",
@@ -91,463 +52,261 @@
           ]
         },
         {
-          "class": "block",
-          "widthaligned": true,
-          "children": [
-            {
-              "class": "block",
-              "label": "District",
-              "children": [
-                {
-                  "field": "district",
-                  "class": "select",
-                  "options": [
-                    {"id": 1, "label": "Taplejung"},
-                    {"id": 2, "label": "Panchthar"},
-                    {"id": 3, "label": "Ilam"},
-                    {"id": 4, "label": "Jhapa"},
-                    {"id": 5, "label": "Morang"},
-                    {"id": 6, "label": "Sunasari"},
-                    {"id": 7, "label": "Dhankuta"},
-                    {"id": 8, "label": "Terhathum"},
-                    {"id": 9, "label": "Sankhusabha"},
-                    {"id": 10, "label": "Bhojpur"},
-                    {"id": 11, "label": "Solukhumbu"},
-                    {"id": 12, "label": "Okhaldunga"},
-                    {"id": 13, "label": "Khotang"},
-                    {"id": 14, "label": "Udayapur"},
-                    {"id": 15, "label": "Saptari"},
-                    {"id": 16, "label": "Siraha"},
-                    {"id": 17, "label": "Dhanusha"},
-                    {"id": 18, "label": "Mahottari"},
-                    {"id": 19, "label": "Sarlahi"},
-                    {"id": 32, "label": "Rautahat"},
-                    {"id": 33, "label": "Bara"},
-                    {"id": 34, "label": "Parsa"},
-                    {"id": 20, "label": "Sindhuli"},
-                    {"id": 21, "label": "Ramechhap"},
-                    {"id": 22, "label": "Dolakha"},
-                    {"id": 23, "label": "Sindhupalchowk"},
-                    {"id": 24, "label": "Kavrepalanchok"},
-                    {"id": 25, "label": "Lalitpur"},
-                    {"id": 26, "label": "Bhaktapur"},
-                    {"id": 27, "label": "Kathmandu"},
-                    {"id": 28, "label": "Nuwakot"},
-                    {"id": 29, "label": "Rasuwa"},
-                    {"id": 30, "label": "Dhading"},
-                    {"id": 31, "label": "Makawanpur"},
-                    {"id": 35, "label": "Chitwan"},
-                    {"id": 36, "label": "Gorkha"},
-                    {"id": 37, "label": "Lamjung"},
-                    {"id": 38, "label": "Tanahun"},
-                    {"id": 39, "label": "Syangja"},
-                    {"id": 40, "label": "Kaski"},
-                    {"id": 41, "label": "Manang"},
-                    {"id": 42, "label": "Mustang"},
-                    {"id": 43, "label": "Myagdi"},
-                    {"id": 44, "label": "Parbat"},
-                    {"id": 45, "label": "Baglung"},
-                    {"id": 46, "label": "Gulmi"},
-                    {"id": 47, "label": "Palpa"},
-                    {"id": 49, "label": "Rupandehi"},
-                    {"id": 50, "label": "Kapilbastu"},
-                    {"id": 51, "label": "Arghakhanchi"},
-                    {"id": 52, "label": "Pyuthan"},
-                    {"id": 53, "label": "Rolpa"},
-                    {"id": 56, "label": "Dang"},
-                    {"id": 57, "label": "Banke"},
-                    {"id": 58, "label": "Bardiya"},
-                    {"id": 55, "label": "Salyan"},
-                    {"id": 59, "label": "Surkhet"},
-                    {"id": 60, "label": "Dailekh"},
-                    {"id": 61, "label": "Jajarkot"},
-                    {"id": 62, "label": "Dolpa"},
-                    {"id": 63, "label": "Jumla"},
-                    {"id": 64, "label": "Kalikot"},
-                    {"id": 65, "label": "Mugu"},
-                    {"id": 66, "label": "Humla"},
-                    {"id": 67, "label": "Bajura"},
-                    {"id": 68, "label": "Bajhang"},
-                    {"id": 69, "label": "Achham"},
-                    {"id": 70, "label": "Doti"},
-                    {"id": 71, "label": "Kailali"},
-                    {"id": 72, "label": "Kanchanpur"},
-                    {"id": 73, "label": "Dadeldhura"},
-                    {"id": 74, "label": "Baitadi"},
-                    {"id": 75, "label": "Darchula"}
-                  ]
-                },
-                {
-                  "field": "district",
-                  "class": "radio",
-                  "options": [
-                    {"id": "56", "label": "Dang"}
-                  ]
-                },
-                {
-                  "field": "district_text",
-                  "class": "textinput",
-                  "placeholder": "Free text if necessary"
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "label": "Municipality",
-              "children": [
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:46",
-                  "options": [
-                    {"id": 461, "label": "Musikot Municipality"},
-                    {"id": 462, "label": "Resunga Municipality"},
-                    {"id": 463, "label": "Isma"},
-                    {"id": 464, "label": "Kali Gandaki"},
-                    {"id": 465, "label": "Gulmi Durbar"},
-                    {"id": 466, "label": "Satyawati"},
-                    {"id": 467, "label": "Chandrakot"},
-                    {"id": 468, "label": "Ruru"},
-                    {"id": 469, "label": "Chhatrakot"},
-                    {"id": 470, "label": "Dhurkot"},
-                    {"id": 471, "label": "Madane"},
-                    {"id": 472, "label": "Malika"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:47",
-                  "options": [
-                    {"id": 473, "label": "Rampur Municipality"},
-                    {"id": 474, "label": "Tansen Municipality"},
-                    {"id": 475, "label": "Nisdi"},
-                    {"id": 476, "label": "Purba Khola"},
-                    {"id": 477, "label": "Rambha"},
-                    {"id": 478, "label": "Matha Gadhi"},
-                    {"id": 479, "label": "Tinau"},
-                    {"id": 480, "label": "Bagnaskali"},
-                    {"id": 481, "label": "Ribdikot"},
-                    {"id": 482, "label": "Raina Devi Chhahara"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:48",
-                  "options": [
-                    {"id": 483, "label": "Kawasoti Municipality"},
-                    {"id": 484, "label": "Gaindakot Municipality"},
-                    {"id": 485, "label": "Devchuli Municipality"},
-                    {"id": 486, "label": "Bardaghat Municipality"},
-                    {"id": 487, "label": "Madhya Bindu Municipality"},
-                    {"id": 488, "label": "Ramgram Municipality"},
-                    {"id": 489, "label": "Sunwal Municipality"},
-                    {"id": 490, "label": "Triveni Susta"},
-                    {"id": 491, "label": "Palhi Nandan"},
-                    {"id": 492, "label": "Pratappur"},
-                    {"id": 493, "label": "Bungdi Kali"},
-                    {"id": 494, "label": "Bulingtar"},
-                    {"id": 495, "label": "Binayi"},
-                    {"id": 496, "label": "Sarawal"},
-                    {"id": 497, "label": "Hupsekot"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:49",
-                  "options": [
-                    {"id": 498, "label": "Butwal Sub-Metropolitan"},
-                    {"id": 499, "label": "Devdaha Municipality"},
-                    {"id": 500, "label": "Lumbini Sanskritik Municipality"},
-                    {"id": 501, "label": "Siddharthanagar Municipality"},
-                    {"id": 502, "label": "Saina Maina Municipality"},
-                    {"id": 503, "label": "Tilottama Municipality"},
-                    {"id": 504, "label": "Gaidahawa"},
-                    {"id": 505, "label": "Kanchan"},
-                    {"id": 506, "label": "Kotahi Mai"},
-                    {"id": 507, "label": "Marchawari"},
-                    {"id": 508, "label": "Mayadevi"},
-                    {"id": 509, "label": "Om Satiya"},
-                    {"id": 510, "label": "Rohini"},
-                    {"id": 511, "label": "Sammari Mai"},
-                    {"id": 512, "label": "Siyari"},
-                    {"id": 513, "label": "Suddodhana"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:50",
-                  "options": [
-                    {"id": 514, "label": "Kapilbastu Municipality"},
-                    {"id": 515, "label": "Buddabhumi Municipality"},
-                    {"id": 516, "label": "Shivaraj Municipality"},
-                    {"id": 517, "label": "Maharajganj Municipality"},
-                    {"id": 518, "label": "Krishna Nagar Municipality"},
-                    {"id": 519, "label": "Banganga Municipality"},
-                    {"id": 520, "label": "Mayadevi"},
-                    {"id": 521, "label": "Yashodhara"},
-                    {"id": 522, "label": "Suddodhana"},
-                    {"id": 523, "label": "Bijay Nagar"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:51",
-                  "options": [
-                    {"id": 524, "label": "Sandhikharka Municipality"},
-                    {"id": 525, "label": "Shit Ganga Municipality"},
-                    {"id": 526, "label": "Bhumikasthan Municipality"},
-                    {"id": 527, "label": "Chhatra Dev"},
-                    {"id": 528, "label": "Panini"},
-                    {"id": 529, "label": "Malarani"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:52",
-                  "options": [
-                    {"id": 530, "label": "Pyuthan Municipality"},
-                    {"id": 531, "label": "Swargadwari Municipality"},
-                    {"id": 532, "label": "Gaumukhi"},
-                    {"id": 533, "label": "Mandavi"},
-                    {"id": 534, "label": "Sarumarani"},
-                    {"id": 535, "label": "Mallarani"},
-                    {"id": 536, "label": "Nau Bahini"},
-                    {"id": 537, "label": "Jhimaruk"},
-                    {"id": 538, "label": "Eairabati"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:53",
-                  "options": [
-                    {"id": 539, "label": "Rolpa Municipality"},
-                    {"id": 540, "label": "Triveni"},
-                    {"id": 541, "label": "Dui Kholi"},
-                    {"id": 542, "label": "Madi"},
-                    {"id": 543, "label": "Runti Gadhi"},
-                    {"id": 544, "label": "Lungri"},
-                    {"id": 545, "label": "Sukidaha"},
-                    {"id": 546, "label": "Sunchhahari"},
-                    {"id": 547, "label": "Subarnawati"},
-                    {"id": 548, "label": "Thawang"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:54",
-                  "options": [
-                    {"id": 549, "label": "Musikot Municipality"},
-                    {"id": 550, "label": "Chaurjahari Municipality"},
-                    {"id": 551, "label": "Aathabiskot Municipality"},
-                    {"id": 552, "label": "Putha Uttar Ganga"},
-                    {"id": 553, "label": "Bhume"},
-                    {"id": 554, "label": "Sisne"},
-                    {"id": 555, "label": "Barphikot"},
-                    {"id": 556, "label": "Triveni"},
-                    {"id": 557, "label": "Sani Bheri"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:56",
-                  "options": [
-                    {"id": 574, "label": "Rajpur"},
-                    {"id": 568, "label": "Tulsipur Sub-Metropolitan"},
-                    {"id": 569, "label": "Ghorahi Sub-Metropolitan"},
-                    {"id": 570, "label": "Lamahi Municipality"},
-                    {"id": 571, "label": "Banglachuli"},
-                    {"id": 572, "label": "Dangi Sharan"},
-                    {"id": 573, "label": "Gadhawa"},
-                    {"id": 574, "label": "Rajpur"},
-                    {"id": 575, "label": "Rapti"},
-                    {"id": 576, "label": "Shanti Nagar"},
-                    {"id": 577, "label": "Babai"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:57",
-                  "options": [
-                    {"id": 578, "label": "Nepalgunj Sub-Metropolitan"},
-                    {"id": 579, "label": "Kohalpur Municipality"},
-                    {"id": 580, "label": "Narainapur"},
-                    {"id": 581, "label": "Raptisonari"},
-                    {"id": 582, "label": "Baijanath"},
-                    {"id": 583, "label": "Khajura"},
-                    {"id": 584, "label": "Duduwa"},
-                    {"id": 585, "label": "Janaki"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "select",
-                  "show": "district:58",
-                  "options": [
-                    {"id": 586, "label": "Gulariya Municipality"},
-                    {"id": 587, "label": "Maduvan Municipality"},
-                    {"id": 588, "label": "Rajapur Taratal Municipality"},
-                    {"id": 589, "label": "Thakura Baba Municipality"},
-                    {"id": 590, "label": "Bansgadhi Municipality"},
-                    {"id": 591, "label": "Bar Bardiya Municipality"},
-                    {"id": 592, "label": "Badhaiya Tal"},
-                    {"id": 593, "label": "Geruwa"}
-                  ]
-                },
-                {
-                  "field": "municipality",
-                  "class": "radio",
-                  "options": [
-                    {"id": 574, "label": "Rajpur"}
-                  ]
-                },
-                {
-                  "field": "municipality_text",
-                  "class": "textinput",
-                  "placeholder": "Free text if necessary"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "class": "block",
-          "children": [
-            {
-              "class": "block",
-              "label": "Ward Number",
-              "children": [
-                {
-                  "field": "ward_number",
-                  "class": "radio",
-                  "options": [
-                    { "id": 1, "label": "1" },
-                    { "id": 2, "label": "2" },
-                    { "id": 3, "label": "3" },
-                    { "id": 4, "label": "4" },
-                    { "id": 5, "label": "5" },
-                    { "id": 6, "label": "6" },
-                    { "id": 7, "label": "7" }
-                  ]
-                },
-                {
-                  "field": "ward_number",
-                  "class": "textinput",
-                  "type": "number",
-                  "placeholder": "7+"
-                }
-              ]
-            },
-            {
-              "field": "house_number",
-              "type": "number",
-              "label": "House Number",
-              "class": "textinput"
-            }
-          ]
-        },
-        {
-          "field": "contact_number",
-          "label": "Contact Number",
-          "class": "textinput",
-          "type": "number"
-        },
-        {
-          "field": "service_type",
-          "label": "Service type",
-          "class": "radio",
-          "options": [
-            {
-              "id": 1,
-              "label": "[1] General"
-            },
-            {
-              "id": 2,
-              "label": "[2] CBIMNCI"
-            },
-            {
-              "id": 3,
-              "label": "[3] Nutrition"
-            },
-            {
-              "id": 4,
-              "label": "[4] Safe Motherhood"
-            },
-            {
-              "id": 5,
-              "label": "[5] FP"
-            },
-            {
-              "id": 6,
-              "label": "[6] TB"
-            },
-            {
-              "id": 7,
-              "label": "[7] Leprosy"
-            },
-            {
-              "id": 8,
-              "label": "[8] Vector-borne"
-            },
-            {
-              "id": 9,
-              "label": "[9] STD"
-            },
-            {
-              "id": 10,
-              "label": "[10] Others"
-            }
-          ]
-        },
-        {
-          "field": "free_or_cost",
-          "label": "Free / Cost",
-          "class": "radio",
-          "options": [
-            {
-              "id": "free",
-              "label": "Free"
-            },
-            {
-              "id": "cost",
-              "label": "Cost"
-            }
-          ]
-        },
-        {
-          "field": "referred_from",
-          "label": "Referred from",
+          "field": "address",
+          "label": "Address",
           "class": "textinput"
+        },
+        {
+          "field": "tel",
+          "label": "Tel",
+          "class": "textinput"
+        },
+        {
+          "field": "occupation",
+          "label": "Occupation",
+          "class": "radio",
+          "options": [
+            {
+              "id": "housewife",
+              "label": "Housewife"
+            },
+            {
+              "id": "student",
+              "label": "Student"
+            },
+            {
+              "id": "service",
+              "label": "Service Personnel"
+            },
+            {
+              "id": "retired service",
+              "label": "Retired Service Personnel"
+            },
+            {
+              "id": "business",
+              "label": "Business"
+            },
+            {
+              "id": "agriculture",
+              "label": "Agriculture"
+            }
+          ]
+        },
+        {
+          "field": "occupation",
+          "class": "textinput",
+          "expanded": true
+        },
+        {
+          "field": "ethnicity",
+          "class": "textinput",
+          "expanded": true
+        },
+        {
+          "class": "accordion",
+          "label": "Gynecology",
+          "layout": "horizontal",
+          "children": [
+            {
+              "field": "education",
+              "label": "Education",
+              "class": "textinput"
+            },
+            {
+              "field": "has_been_married",
+              "label": "Has the patient ever been married?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "age_first_marriage",
+              "show": "has_been_married",
+              "label": "At what age did the patient have her first marriage?",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "field": "history_of_smoking",
+              "label": "History of smoking",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "children",
+              "label": "Living children / abortion",
+              "class": "textinput"
+            },
+            {
+              "field": "menstrual_period",
+              "label": "Last menstrual period",
+              "class": "textinput"
+            },
+            {
+              "field": "had_previous_Pap_smear",
+              "label": "Has the patient had a Pap smear before?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "previous_Pap_smear_detail",
+              "show": "had_previous_Pap_smear",
+              "label": "Please specify",
+              "class": "textarea",
+              "placeholder": "When? Was the result normal or abnormal? If the latter, how?"
+            },
+            {
+              "field": "previous_cervical_intervention",
+              "label": "Has the patient had cervical intervention before?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "previous_cervical_intervention_detail",
+              "show": "previous_cervical_intervention",
+              "label": "Please specify",
+              "class": "textarea",
+              "placeholder": "When? What kind?"
+            },
+            {
+              "field": "cervical_cancer_history",
+              "label": "Is there family history of cervical cancer?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "contraceptive_history",
+              "label": "Contraceptive History",
+              "class": "radio",
+              "options": [
+                {
+                  "id": "none",
+                  "label": "None"
+                },
+                {
+                  "id": "barrier",
+                  "label": "Barrier"
+                },
+                {
+                  "id": "CuT",
+                  "label": "CuT"
+                },
+                {
+                  "id": "intradermal_implant",
+                  "label": "Intradermal Implant"
+                },
+                {
+                  "id": "oral_contraceptive_pills",
+                  "label": "Oral Contraceptive Pills"
+                },
+                {
+                  "id": "injection_depo-provera",
+                  "label": "Depo-Provera Injection"
+                }
+              ]
+            },
+            {
+              "field": "knows_HPV",
+              "label": "Does the patient know about human papilloma virus vaccine (HPV)?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "family_vaccinated",
+              "label": "Has anyone in the patient's family been vaccinated?",
+              "class": "radio",
+              "options": [
+                {
+                  "id": true,
+                  "label": "Yes"
+                },
+                {
+                  "id": false,
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "field": "gynecology_history",
+              "label": "Gynecology history",
+              "class": "textarea"
+            },
+            {
+              "field": "number_of_sexial_partners",
+              "label": "How many sexual partners",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "field": "menarche_age",
+              "label": "Menarche age",
+              "class": "textinput",
+              "type": "number"
+            },
+            {
+              "field": "spv_vaccination",
+              "label": "SPV Vaccination",
+              "class": "check"
+            }
+          ]
         }
       ]
     }
   ],
   "record": [
-    {
-      "id": "general_opd",
-      "label": "General OPD",
-      "style": [
-        {
-          "field": "diagnoses",
-          "label": "Diagnoses",
-          "class": "diagnoses"
-        },
-        {
-          "field": "note",
-          "label": "note",
-          "class": "textarea"
-        }
-      ]
-    },
     {
       "id": "reception",
       "label": "Reception",
@@ -1819,7 +1578,7 @@
               "style": {
                 "width": 80
               }
-
+              
             },
             {
               "field":"dose_syrup_unit",
@@ -1973,19 +1732,12 @@
           "label": "Haemotology tests",
           "show": "test-order:haemotology",
           "options": [
-            {"id": "bs", "label": "Blood sugar" },
-            {"id": "pathology.haematology.hemoglobin", "label": "Hemoglobin (Hb)" },
-            {"id": "pathology.haematology.pcv", "label": "PCV" },
-            {"id": "pathology.haematology.mch", "label": "MCH" },
-            {"id": "pathology.haematology.mchc", "label": "MCHC" },
-            {"id": "pathology.haematology.bt", "label": "BT" },
-            {"id": "pathology.haematology.ct", "label": "CT" },
-            {"id": "pathology.haematology.pt", "label": "PT" },
+            
             {"id": "pathology.haematology.mp_mf", "label": "MP/MF" },
             {"id": "pathology.haematology.esr", "label": "ESR (wintrobe)" },
             {"id": "pathology.haematology.wbc", "label": "WBC (Total Count)" },
             {"id": "pathology.haematology.differential_count", "label": "Differential Count" },
-            {"id": "pathology.haematology.band_cell", "label": "Band Cells" },
+            
             {"id": "pathology.haematology.neutrophil", "label": "Neutrophils" },
             {"id": "pathology.haematology.lymphocyte", "label": "Lymphocyte" },
             {"id": "pathology.haematology.monocyte", "label": "Monocyte" },
@@ -1993,12 +1745,8 @@
             {"id": "pathology.haematology.basophil", "label": "Basophil" },
             {"id": "pathology.haematology.platelets", "label": "Platelet Count" },
             {"id": "pathology.haematology.rbc", "label": "RBC Count" },
-            {"id": "pathology.haematology.retics", "label": "Retics" },
-            {"id": "pathology.haematology.rbc_morphology", "label": "RBC Morphology" },
-            {"id": "pathology.haematology.others", "label": "Others" },
-            {"id": "pathology.haematology.h_pyloric_ab", "label": "H. Pyloric AB" },
-            {"id": "pathology.haematology.hba1c", "label": "HBA1C" },
-            {"id": "pathology.haematology.other", "label": "Other (Haematology)" }
+
+            {"id": "haemotology:pathology.haematology.hb", "label": "HB"}
           ]
         },
         {
@@ -2034,8 +1782,7 @@
             {"id": "pathology.biochemistry.triglyceride", "label": "Triglycerides" },
             {"id": "pathology.biochemistry.free_thyroxine_t4", "label": "Free Thyroxine (T4)" },
             {"id": "pathology.biochemistry.tri_iodothyronine_t3", "label": "Tri iodothyronine (T3)" },
-            {"id": "pathology.biochemistry.thyroid_stimulating_hormone", "label": "Thyroid Stimulating Hormone" },
-            {"id": "pathology.biochemistry.other", "label": "Other (Biochemistry)" }
+            {"id": "pathology.biochemistry.thyroid_stimulating_hormone", "label": "Thyroid Stimulating Hormone" }
           ]
         },
         {
@@ -2094,6 +1841,7 @@
             {"id": "pathology.urine.microscopic.others", "label": "Others" },
             {"id": "pathology.pregnancy_test.text", "label": "Pregnancy Test" },
             {"id": "pathology.urine.other", "label": "Other (Urine)" }
+            
           ]
         },
         {
@@ -2146,63 +1894,11 @@
               "layout": "horizontal",
               "children": [
                 {
-                  "field": "bs",
-                  "label": "Blood sugar",
-                  "show": "haemotology:bs",
-                  "class": "textinput",
-                  "type": "number",
-                  "suffix": "mg/dL",
-                  "min": 1,
-                  "precision": 0
-                },
-                {
-                  "field": "pathology.haematology.hemoglobin",
-                  "label": "Hemoglobin (Hb)",
-                  "show": "haemotology:pathology.haematology.hemoglobin",
-                  "type": "number", "min": 0, "suffix": "g/dl",
-                  "normalRange": [ 12, 18 ]
-                },
-                {
                   "field": "pathology.haematology.pcv",
                   "label": "PCV",
                   "show": "haemotology:pathology.haematology.pcv",
                   "type": "number", "suffix": "%", "min": 0, "max": 100,
                   "normalRange": [ 36, 54 ]
-                },
-                {
-                  "field": "pathology.haematology.mch",
-                  "label": "MCH",
-                  "show": "haemotology:pathology.haematology.mch",
-                  "type": "number", "suffix": "pg", "min": 0,
-                  "normalRange": [ 27, 32 ]
-                },
-                {
-                  "field": "pathology.haematology.mchc",
-                  "label": "MCHC",
-                  "show": "haemotology:pathology.haematology.mchc",
-                  "type": "number", "suffix": "ft", "min": 0,
-                  "normalRange": [ 76, 96 ]
-                },
-                {
-                  "field": "pathology.haematology.bt",
-                  "label": "BT",
-                  "show": "haemotology:pathology.haematology.bt",
-                  "type": "number", "suffix": "min", "min": 0,
-                  "normalRange": [ 1, 6]
-                },
-                {
-                  "field": "pathology.haematology.ct",
-                  "label": "CT",
-                  "show": "haemotology:pathology.haematology.ct",
-                  "type": "number", "suffix": "min", "min": 0,
-                  "normalRange": [ 2, 10 ]
-                },
-                {
-                  "field": "pathology.haematology.pt",
-                  "label": "PT",
-                  "show": "haemotology:pathology.haematology.pt",
-                  "type": "number", "suffix": "sec", "min": 0,
-                  "normalRange": [ 12, 16 ]
                 },
                 {
                   "field": "pathology.haematology.mp_mf",
@@ -2244,12 +1940,6 @@
                   "field": "pathology.haematology.differential_count",
                   "label": "Differential Count",
                   "show": "haemotology:pathology.haematology.differential_count",
-                  "type": "number"
-                },
-                {
-                  "field": "pathology.haematology.band_cell",
-                  "label": "Band Cells",
-                  "show": "haemotology:pathology.haematology.band_cell",
                   "type": "number"
                 },
                 {
@@ -2302,37 +1992,12 @@
                   "normalRange": [ 4, 6 ]
                 },
                 {
-                  "field": "pathology.haematology.retics",
-                  "label": "Retics",
-                  "show": "haemotology:pathology.haematology.retics",
-                  "type": "number", "min": 0, "max": 100, "suffix": "%",
-                  "normalRange": [ 0.5, 2.5 ]
-                },
-                {
-                  "field": "pathology.haematology.rbc_morphology",
-                  "label": "RBC Morphology",
-                  "show": "haemotology:pathology.haematology.rbc_morphology"
-                },
-                {
-                  "field": "pathology.haematology.others",
-                  "label": "Others",
-                  "show": "haemotology:pathology.haematology.others"
-                },
-                {
-                  "field": "pathology.haematology.h_pyloric_ab",
-                  "label": "H. Pyloric AB"
-                },
-                {
-                  "field": "pathology.haematology.hba1c",
-                  "label": "HBA1C",
-                  "show": "haemotology:pathology.haematology.hba1c"
-                },
-                {
-                  "field": "pathology.haematology.other",
-                  "label": "Other (Haematology)",
-                  "show": "haemotology:pathology.haematology.other",
-                  "class": "textarea"
+                  "field": "pathology.haematology.hb",
+                  "label": "HB",
+                  "show": "haemotology:pathology.haematology.hb",
+                  "type": "number"
                 }
+
               ]
             },
             {
@@ -4061,590 +3726,6 @@
             {
               "id": 0,
               "label": "कहिल्यै पनि भएन (0)"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "anc",
-      "label": "ANC",
-      "style": [
-        {
-          "class": "block",
-          "children": [
-            {
-              "label": "आखिरी रजश्वला भएको मिति",
-              "field": "last_menstrual_date",
-              "class": "textinput"
-            },
-            {
-              "label": "प्रसुतीको अनुमानित मिति",
-              "field": "estimated_date_of_delivery",
-              "class": "textinput"
-            }
-          ]
-        },
-        {
-          "label": "पहिलेका गर्भहरुको विवरण",
-          "class": "accordion",
-          "widthaligned": true,
-          "initialOpen": true,
-          "children": [
-            {
-              "field": "prev_pregnancy",
-              "label": "गर्भको विवरण",
-              "class": "subformlist",
-              "ditto": true,
-              "autoAdd": true,
-              "fields": [
-                {
-                  "field": "living",
-                  "label": "जीवित",
-                  "class": "check"
-                },
-                {
-                  "field": "born_dead",
-                  "label": "मृत जन्म",
-                  "class": "check",
-                  "show": "!living"
-                },
-                {
-                  "field": "born_before_37_weeks",
-                  "label": "अवधि नपुगेको (३७ हप्ता)",
-                  "class": "check"
-                },
-                {
-                  "field": "twins",
-                  "label": "जुम्ल्याहा",
-                  "class": "check"
-                },
-                {
-                  "field": "abortion",
-                  "label": "गर्भपतन",
-                  "class": "check"
-                },
-                {
-                  "field": "gender",
-                  "label": "लिंग",
-                  "class": "radio",
-                  "show": "living",
-                  "options": [
-                    {
-                      "id": 1,
-                      "label": "Male"
-                    },
-                    {
-                      "id": 2,
-                      "label": "Female"
-                    }
-                  ]
-                },
-                {
-                  "field": "age",
-                  "label": "हालको उमेर",
-                  "class": "textunitinput",
-                  "show": "living",
-                  "units": [
-                    "years",
-                    "months"
-                  ],
-                  "precision": 0
-                },
-                {
-                  "field": "pregnancy_complication",
-                  "label": "गर्भको जटिलता",
-                  "class": "check"
-                },
-                {
-                  "field": "pregnancy_complication_detail",
-                  "class": "textarea",
-                  "show": "pregnancy_complication",
-                  "shrink": true
-                },
-                {
-                  "field": "type_of_delivery",
-                  "label": "प्रसुतीको किसिम",
-                  "class": "radio",
-                  "options": [
-                    {
-                      "id": "normal",
-                      "label": "Normal"
-                    },
-                    {
-                      "id": "cs",
-                      "label": "CS"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "label": "गर्भवती खोप",
-          "class": "accordion",
-          "initialOpen": true,
-          "children": [
-            {
-              "label": "टीडी खोप दर्ता नम्बर",
-              "field": "td_vaccine.regd_no",
-              "class": "textinput",
-              "type": "number"
-            },
-            {
-              "label": "टीडी १ ग/म/सा",
-              "class": "block",
-              "children": [
-                {
-                  "field": "td_vaccine.first.taken",
-                  "class": "check"
-                },
-                {
-                  "field": "td_vaccine.first.date",
-                  "class": "textinput",
-                  "placeholder": "मिति?",
-                  "show": "td_vaccine.first.taken"
-                }
-              ]
-            },
-            {
-              "label": "टीडी २ ग/म/सा",
-              "class": "block",
-              "children": [
-                {
-                  "field": "td_vaccine.second.taken",
-                  "class": "check"
-                },
-                {
-                  "field": "td_vaccine.second.date",
-                  "class": "textinput",
-                  "placeholder": "मिति?",
-                  "show": "td_vaccine.second.taken"
-                }
-              ]
-            },
-            {
-              "label": "टीडी २+ ग/म/सा",
-              "class": "block",
-              "children": [
-                {
-                  "field": "td_vaccine.after_second.taken",
-                  "class": "check"
-                },
-                {
-                  "field": "td_vaccine.after_second.date",
-                  "class": "textinput",
-                  "placeholder": "मिति?",
-                  "show": "td_vaccine.after_second.taken"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "label": "गर्भवती जांच विवरण",
-          "class": "accordion",
-          "widthaligned": true,
-          "initialOpen": true,
-          "children": [
-            {
-              "label": "गर्भ जांच",
-              "class": "subformlist",
-              "field": "pregnancy_exam",
-              "ditto": true,
-              "autoAdd": true,
-              "fields": [
-                {
-                  "label": "महिना",
-                  "field": "months",
-                  "class": "textinput",
-                  "type": "number"
-                },
-                {
-                  "label": "मिति",
-                  "field": "date",
-                  "class": "textinput"
-                },
-                {
-                  "label": "तौल",
-                  "field": "weight",
-                  "class": "textunitinput",
-                  "type": "number",
-                  "precision": 1,
-                  "units": [
-                    "kg",
-                    "lb"
-                  ]
-                },
-                {
-                  "label": "रक्तअल्पता",
-                  "field": "anemia",
-                  "class": "check"
-                },
-                {
-                  "label": "हात सुन्निएको",
-                  "field": "edema.hand",
-                  "class": "check"
-                },
-                {
-                  "label": "अनुहार सुन्निएको",
-                  "field": "edema.face",
-                  "class": "check"
-                },
-                {
-                  "label": "रक्तचाप माथिल्लो",
-                  "field": "bp.s",
-                  "class": "textinput",
-                  "placeholder": "sBP",
-                  "type": "number",
-                  "style": {
-                    "width": 60
-                  },
-                  "suffix": "mmHg",
-                  "min": 1,
-                  "precision": 0,
-                  "alerts": [
-                    {
-                      "type": "warning",
-                      "label": "Low",
-                      "range": [
-                        null,
-                        100
-                      ]
-                    },
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [
-                        100,
-                        140
-                      ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [
-                        140,
-                        180
-                      ]
-                    },
-                    {
-                      "type": "danger",
-                      "label": "Alert",
-                      "range": [
-                        180,
-                        null
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "label": "रक्तचाप तल्लो",
-                  "field": "bp.d",
-                  "class": "textinput",
-                  "placeholder": "dBP",
-                  "type": "number",
-                  "style": {
-                    "width": 60
-                  },
-                  "suffix": "mmHg",
-                  "min": 1,
-                  "precision": 0,
-                  "alerts": [
-                    {
-                      "type": "warning",
-                      "label": "Low",
-                      "range": [
-                        null,
-                        60
-                      ]
-                    },
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [
-                        60,
-                        90
-                      ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [
-                        90,
-                        110
-                      ]
-                    },
-                    {
-                      "type": "danger",
-                      "label": "Alert",
-                      "range": [
-                        110,
-                        null
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "label": "गर्भावस्था समय हप्तामा",
-                  "field": "pregnancy_in_weeks",
-                  "class": "textinput"
-                },
-                {
-                  "label": "पाठेघरको उचाई",
-                  "field": "size_of_uterus",
-                  "class": "textunitinput",
-                  "type": "number",
-                  "units": [
-                    "cm",
-                    "in"
-                  ]
-                },
-                {
-                  "label": "बच्चा",
-                  "field": "foetus.found",
-                  "class": "check"
-                },
-                {
-                  "label": "हृदय गति",
-                  "field": "foetus.child_heart_rate",
-                  "class": "textinput",
-                  "type": "number",
-                  "show": "foetus.found"
-                },
-                {
-                  "label": "अन्य समस्या",
-                  "field": "any_problem",
-                  "class": "textarea",
-                  "shrink": true
-                },
-                {
-                  "label": "अर्को पटक सेवा लिन आउने मिति",
-                  "field": "next_consultation_date",
-                  "class": "textinput"
-                },
-                {
-                  "label": "आइरन चक्कीको संख्या",
-                  "field": "number_of_iron_tablets",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "precision": 0
-                },
-                {
-                  "label": "जुकाको औषधि",
-                  "field": "alben",
-                  "class": "textinput"
-                },
-                {
-                  "label": "टीडी खोप",
-                  "field": "td_vaccine",
-                  "class": "check"
-                },
-                {
-                  "label": "परिक्षण गर्नेको नाम र सहि",
-                  "field": "health_worker_name",
-                  "class": "textinput"
-                },
-                {
-                  "label": "परिक्षण गरेको संस्था",
-                  "field": "hospital_name",
-                  "class": "textinput"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "label": "कार्ड तयार गर्ने स्वास्थ्यकर्मी",
-          "class": "accordion",
-          "children": [
-            {
-              "class": "block",
-              "children": [
-                {
-                  "label": "नाम",
-                  "field": "health_worker.name",
-                  "class": "textinput"
-                },
-                {
-                  "label": "थर",
-                  "field": "health_worker.surname",
-                  "class": "textinput"
-                },
-                {
-                  "label": "पद",
-                  "field": "health_worker.designation",
-                  "class": "textinput"
-                },
-                {
-                  "label": "मिति",
-                  "field": "health_worker.date",
-                  "class": "textinput"
-                }
-              ]
-            },
-            {
-              "class": "block",
-              "children": [
-                {
-                  "label": "अस्पतालको सम्पर्क नम्बर",
-                  "field": "hospital_contact_number",
-                  "class": "textinput"
-                },
-                {
-                  "label": "एम्बुलेन्सको सम्पर्क नम्बर",
-                  "field": "ambulance_contact_number",
-                  "class": "textinput"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "label": "प्रयोगशाला परिक्षण",
-          "class": "accordion",
-          "widthaligned": true,
-          "children": [
-            {
-              "class": "subformlist",
-              "field": "lab_exam",
-              "ditto": true,
-              "autoAdd": false,
-              "fields": [
-                {
-                  "label": "मिति",
-                  "field": "date",
-                  "class": "textinput",
-                  "style": {
-                    "width": 100
-                  }
-                },
-                {
-                  "label": "Hb",
-                  "field": "hb",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "suffix": "g/dl",
-                  "style": {
-                    "width": 80
-                  },
-                  "alerts": [
-                    {
-                      "type": "warning",
-                      "label": "Low",
-                      "range": [ null, 12 ]
-                    },
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [ 12, 18 ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [ 18, null]
-                    }
-                  ]
-                },
-                {
-                  "label": "Albumin",
-                  "field": "albumin",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "suffix": "gm%",
-                  "style": {
-                    "width": 80
-                  },
-                  "alerts": [
-                    {
-                      "type": "warning",
-                      "label": "Low",
-                      "range": [ null, 3.5 ]
-                    },
-                    {
-                      "type": "success",
-                      "label": "Normal",
-                      "range": [ 3.5, 5.5 ]
-                    },
-                    {
-                      "type": "warning",
-                      "label": "High",
-                      "range": [ 5.5, null]
-                    }
-                  ]
-                },
-                {
-                  "label": "Urine (Protein)",
-                  "field": "urine.protein",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 80
-                  }
-                },
-                {
-                  "label": "Urine (Sugar)",
-                  "field": "urine.sugar",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 80
-                  }
-                },
-                {
-                  "label": "Blood Sugar",
-                  "field": "blood_sugar",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "suffix": "mg/dL",
-                  "style": {
-                    "width": 80
-                  }
-                },
-                {
-                  "label": "HBsAg",
-                  "field": "hbsag",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 80
-                  }
-                },
-                {
-                  "label": "VDRL",
-                  "field": "vdrl",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 80
-                  }
-                },
-                {
-                  "label": "Retro Virus",
-                  "field": "retro_virus",
-                  "class": "textinput",
-                  "type": "number",
-                  "min": 0,
-                  "style": {
-                    "width": 80
-                  }
-                },
-                {
-                  "label": "Other",
-                  "field": "other",
-                  "class": "textarea",
-                  "shrink": true
-                }
-              ]
             }
           ]
         }
