@@ -34,6 +34,7 @@ export function* addNewActiveRecord(patientId) {
     _id: newId,
     type: 'record',
     $meta: {
+      prev_record_ids: existingActiveRecords.map(record => record._id),
       record_count: existingActiveRecords.length + 1,
     },
     $initialized_at: now,
