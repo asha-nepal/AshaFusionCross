@@ -29,14 +29,18 @@ export function* addNewActiveRecord(patientId) {
   const patientIdBody = patientId.replace(/^patient_/, '');
   const now = (new Date()).getTime(); // Unix Millisecond Timestamp
   const newId = `record_${patientIdBody}_${now}`;
+  const existingActiveRecords = yield select(getActiveRecords);
   const newRecord = {
     _id: newId,
     type: 'record',
+    $meta: {
+      prev_record_ids: existingActiveRecords.map(record => record._id),
+      record_count: existingActiveRecords.length + 1,
+    },
     $initialized_at: now,
   };
 
-  const activeRecords = yield select(getActiveRecords);
-  yield put(changeActiveRecord(activeRecords.length, newRecord, { silent: true }));
+  yield put(changeActiveRecord(existingActiveRecords.length, newRecord, { silent: true }));
   yield put(selectActiveRecord(newId));
 }
 
