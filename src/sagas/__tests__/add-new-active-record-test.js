@@ -53,16 +53,28 @@ describe('ADD_NEW_ACTIVE_RECORD', () => {
     MockDate.reset();
   });
 
-  it('calls actions.push() with new ID', () => {
+  it('calls actions.push() with new ID and $meta.record_count', () => {
     const saga = addNewActiveRecord('patient_foo');
+
+    const mockExistingActiveRecords = [
+      { _id: 'record_aaa_111' },
+      { _id: 'record_aaa_222' },
+    ];
 
     expect(saga.next().value)
       .toEqual(select(getActiveRecords));
 
-    expect(saga.next([{}, {}]).value)
+    expect(saga.next(mockExistingActiveRecords).value)
       .toEqual(put(changeActiveRecord(2, {
         _id: 'record_foo_1234567890123',
         type: 'record',
+        $meta: {
+          prev_record_ids: [
+            'record_aaa_111',
+            'record_aaa_222',
+          ],
+          record_count: 3,
+        },
         $initialized_at: 1234567890123,
       }, { silent: true })));
 

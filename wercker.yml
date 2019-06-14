@@ -4,6 +4,11 @@ command-timeout: 60
 
 build:
   steps:
+    - script:
+      name: echo nodejs information
+      code: |
+        echo "node version $(node -v) running"
+        echo "npm version $(npm -v) running"
     - npm-install
     - install-packages:
       packages: libelf-dev
@@ -27,11 +32,6 @@ build:
     - script:
       name: save-artifacts
       code: cp -r coverage $WERCKER_REPORT_ARTIFACTS_DIR/coverage
-    - script:
-      name: echo nodejs information
-      code: |
-        echo "node version $(node -v) running"
-        echo "npm version $(npm -v) running"
   after-steps:
     - script:
       name: install necessary packages for coverage notification
