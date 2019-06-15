@@ -5,6 +5,10 @@
     "unit": "year"
   },
   {
+    "key": "sex",
+    "entry": "_patient.sex"
+  },
+  {
     "key": "_patient.ht"
   },
   {
@@ -14,7 +18,17 @@
     "key": "_patient.blood_type"
   },
   {
+    "key": "record_count",
+    "entry": "$meta.record_count"
+  },
+  {
+    "key": "$created_at",
+    "type": "moment",
+    "format": "YYYY/MM/DD HH:mm:ss"
+  },
+  {
     "key": "$updated_at",
-    "type": "moment"
+    "type": "moment",
+    "format": "YYYY/MM/DD HH:mm:ss"
   }
 ]

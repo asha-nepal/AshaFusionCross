@@ -1,7 +1,10 @@
 [
   { "key": "_patient.age", "name": "Age" },
+  { "key": "sex", "name": "Sex" },
   { "key": "_patient.ht", "name": "Ht." },
   { "key": "_patient.district", "name": "District" },
   { "key": "_patient.blood_type", "name": "Blood Type" },
+  { "key": "record_count", "name": "Record Count" },
+  { "key": "$created_at", "name": "Created at" },
   { "key": "$updated_at", "name": "Updated at" }
 ]
