@@ -29,7 +29,7 @@
     "lodash.sortby": "^4.7.0",
     "lodash.topath": "^4.5.2",
     "lodash.uniqby": "^4.7.0",
-    "nepali-calendar-js": "^1.0.4",
+    "nepali-date": "^0.1.3",
     "pouchdb": "^6.3.4",
     "randomstring-promise": "0.0.1",
     "react": "^15.4.2",

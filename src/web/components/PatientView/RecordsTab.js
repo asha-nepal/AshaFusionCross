@@ -17,6 +17,7 @@
 /* @flow */
 
 import React from 'react';
+import { default as NepaliDate } from 'nepali-date';
 
 const dirtyIcon = <span className="icon is-small has-text-warning fa fa-circle" />;
 
@@ -26,12 +27,14 @@ export default ({
   selectActiveRecord,
   addNewActiveRecord,
   pristinenessList = [],
+  nepaliDate = false,
 }: {
   records: Array<RecordObject>,
   selectedActiveRecordIndex: number,
   selectActiveRecord: (id: string) => void,
   addNewActiveRecord: () => void,
   pristinenessList: Array<boolean>,
+  nepaliDate: bool,
 }) => (
   <div className="tabs is-boxed column">
     <ul>
@@ -61,7 +64,7 @@ export default ({
               {i + 1}
               {date &&
                 <small style={{ paddingLeft: 8 }}>
-                  {date.toDateString()}
+                  {nepaliDate ? new NepaliDate(date).format('yyyy-mm-dd') : date.toDateString()}
                 </small>
               }
               {!pristinenessList[i] && dirtyIcon}
