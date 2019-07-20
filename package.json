@@ -37,6 +37,7 @@
     "react-addons-shallow-compare": "^15.4.2",
     "react-autosuggest": "^9.0.1",
     "react-data-grid": "^3.0.11",
+    "react-datepicker-nepali": "^1.0.1",
     "react-dates": "^7.0.1",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",
