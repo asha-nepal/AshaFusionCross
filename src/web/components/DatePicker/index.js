@@ -20,10 +20,18 @@ import React, { Component } from 'react';
 import { DateRangePicker } from 'react-dates';
 import { START_DATE, END_DATE } from 'react-dates/constants';
 import type { Moment } from 'moment';
+import NepaliDatePicker from './Nepali';
 
 type Props = {
-  date: Moment,
-  onDatesChange: Moment,
+  date: {
+    startDate: Moment,
+    endDate: Moment,
+  },
+  onDatesChange: ({
+    startDate: Moment,
+    endDate: Moment,
+  }) => void,
+  nepaliDate?: boolean,
 }
 
 export default class DatePicker extends Component {
@@ -45,6 +53,7 @@ export default class DatePicker extends Component {
     const {
       date,
       onDatesChange,
+      nepaliDate = false,
     } = this.props;
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -55,6 +64,11 @@ export default class DatePicker extends Component {
 
     return (
       <div className="columns is-mobile">
+        {nepaliDate &&
+          <div className="column is-narrow">
+            <NepaliDatePicker date={date} onDatesChange={onDatesChange} />
+          </div>
+        }
         <div className="column is-narrow">
           <DateRangePicker
             startDate={date.startDate}
