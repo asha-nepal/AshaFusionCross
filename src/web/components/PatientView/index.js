@@ -188,6 +188,7 @@ export default class PatientView extends Component {
                   selectActiveRecord={selectActiveRecord}
                   addNewActiveRecord={addNewActiveRecord}
                   pristinenessList={activeRecordsFormPristineness}
+                  nepaliDate
                 />
                 <div className="column is-narrow">
                   {recordFormStyles.size > 1 &&

@@ -108,6 +108,7 @@ export default({
             <DatePicker
               date={date}
               onDatesChange={setDate}
+              nepaliDate
             />
           </div>
         </div>
