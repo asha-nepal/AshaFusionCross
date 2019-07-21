@@ -61,6 +61,7 @@ export default ({
       <DatePicker
         date={filterDate}
         onDatesChange={setFilterDate}
+        nepaliDate
       />
     </div>
   </div>
