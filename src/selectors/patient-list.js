@@ -32,30 +32,17 @@ export const getPatientSelectQueryList = (state: Object) =>
 
 export const checkPatientMatchesQueries = (queries: Array<string>, patient: PatientObject) =>
   queries.every(query => {
-    if (patient.name) {
-      const _query = ` ${query}`;
-      const _name = ` ${patient.name.toLowerCase()}`;
-      if (_name.indexOf(_query) !== -1) return true;
-    }
+    // TODO: Be configurable
+    const searchKeys = ['number', 'name', 'father_name', 'grandfather_name'];
+    const _query = ` ${query}`;
+    return searchKeys.find((searchKey) => {
+      if (!(searchKey in patient)) {
+        return false;
+      }
+      const searchVal = ` ${patient[searchKey].toLowerCase()}`;
 
-    // TODO: Be DRY
-    if (patient.first_name) {
-      const _query = ` ${query}`;
-      const _name = ` ${patient.first_name.toLowerCase()}`;
-      if (_name.indexOf(_query) !== -1) return true;
-    }
-
-    if (patient.last_name) {
-      const _query = ` ${query}`;
-      const _name = ` ${patient.last_name.toLowerCase()}`;
-      if (_name.indexOf(_query) !== -1) return true;
-    }
-
-    if (patient.number) {
-      if (patient.number === query) return true;
-    }
-
-    return false;
+      return searchVal.indexOf(_query) !== -1;
+    });
   });
 
 function patientInTimeRange(timeRange, patient) {

@@ -30,6 +30,30 @@
           ]
         },
         {
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "field": "father_name",
+              "label": "Father's name",
+              "class": "textinput",
+              "required": true
+            }
+          ]
+        },
+        {
+          "class": "block",
+          "widthaligned": true,
+          "children": [
+            {
+              "field": "grandfather_name",
+              "label": "Grandfather's name",
+              "class": "textinput",
+              "required": true
+            }
+          ]
+        },
+        {
           "field": "ethnicity_code",
           "label": "Ethnicity Code (Select one of these)",
           "class": "radio",

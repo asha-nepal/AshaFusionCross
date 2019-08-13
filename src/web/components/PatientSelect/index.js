@@ -79,6 +79,10 @@ export default class PatientSelect extends Component {
                   {/* TODO: Fix to use arbitrary field(s) as a entity title.
                   For example, rowData.name or rowData.first_name + rowData.last_name */}
                   {patient.name || ''}
+                  {' ('}
+                  {patient.father_name || ''}
+                  {patient.grandfather_name ? ` / ${patient.grandfather_name}` : ''}
+                  {')'}
                 </Link>
               )}
             </nav>
