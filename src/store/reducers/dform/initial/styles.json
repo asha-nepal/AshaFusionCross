@@ -6,13 +6,13 @@
           "field": "number",
           "class": "textinput",
           "type": "number",
-          "label": "Registration Number",
+          "label": "दर्ता नम्बर",
           "style": {
             "width": 200
           },
           "valueSetters": [
             {
-              "label": "Set next No.",
+              "label": "पालोमा आर्को नम्बर दिनुहोस्",
               "optionKey": "nextPatientNumber"
             }
           ]
@@ -23,7 +23,7 @@
           "children": [
             {
               "field": "name",
-              "label": "Name",
+              "label": "सेवाग्रहिको नाम थर",
               "class": "textinput",
               "required": true
             }
@@ -35,7 +35,7 @@
           "children": [
             {
               "field": "father_name",
-              "label": "Father's name",
+              "label": "बुवाको नाम",
               "class": "textinput",
               "required": true
             }
@@ -47,7 +47,7 @@
           "children": [
             {
               "field": "grandfather_name",
-              "label": "Grandfather's name",
+              "label": "हजुरबुवाको नाम",
               "class": "textinput",
               "required": true
             }
@@ -55,32 +55,32 @@
         },
         {
           "field": "ethnicity_code",
-          "label": "Ethnicity Code (Select one of these)",
+          "label": "जाती कोड",
           "class": "radio",
           "options": [
             {
               "id": 1,
-              "label": "[1] Dalit"
+              "label": "१ दलित"
             },
             {
               "id": 2,
-              "label": "[2] Janajati"
+              "label": "२ जनजाती"
             },
             {
               "id": 3,
-              "label": "[3] Madheshi"
+              "label": "३ मधेशी"
             },
             {
               "id": 4,
-              "label": "[4] Muslim"
+              "label": "४ मुसलमान"
             },
             {
               "id": 5,
-              "label": "[5] Brahaman/Chhetri"
+              "label": "५ ब्रह्मण क्षेत्री"
             },
             {
               "id": 6,
-              "label": "[6] Other"
+              "label": "६  अन्य"
             }
           ]
         },
@@ -89,22 +89,22 @@
           "children": [
             {
               "field": "sex",
-              "label": "Sex",
+              "label": "लिंग",
               "class": "radio",
               "options": [
                 {
                   "id": "male",
-                  "label": "Male"
+                  "label": "पुरुष"
                 },
                 {
                   "id": "female",
-                  "label": "Female"
+                  "label": "महिला"
                 }
               ]
             },
             {
               "field": "age",
-              "label": "Age",
+              "label": "उमेर",
               "class": "textunitinput",
               "units": [
                 "years",
@@ -120,7 +120,7 @@
           "children": [
             {
               "class": "block",
-              "label": "District",
+              "label": "जिल्ला",
               "children": [
                 {
                   "field": "district",
@@ -178,7 +178,7 @@
                     {"id": 51, "label": "Arghakhanchi"},
                     {"id": 52, "label": "Pyuthan"},
                     {"id": 53, "label": "Rolpa"},
-                    {"id": 56, "label": "Dang"},
+                    {"id": 56, "label": "दाङ"},
                     {"id": 57, "label": "Banke"},
                     {"id": 58, "label": "Bardiya"},
                     {"id": 55, "label": "Salyan"},
@@ -205,7 +205,7 @@
                   "field": "district",
                   "class": "radio",
                   "options": [
-                    {"id": "56", "label": "Dang"}
+                    {"id": "56", "label": "दाङ"}
                   ]
                 },
                 {
@@ -217,7 +217,7 @@
             },
             {
               "class": "block",
-              "label": "Municipality",
+              "label": "गाउँपालिका नगरपालिका",
               "children": [
                 {
                   "field": "municipality",
@@ -384,14 +384,14 @@
                   "class": "select",
                   "show": "district:56",
                   "options": [
-                    {"id": 574, "label": "Rajpur"},
+                    {"id": 574, "label": "राजपुर"},
                     {"id": 568, "label": "Tulsipur Sub-Metropolitan"},
                     {"id": 569, "label": "Ghorahi Sub-Metropolitan"},
                     {"id": 570, "label": "Lamahi Municipality"},
                     {"id": 571, "label": "Banglachuli"},
                     {"id": 572, "label": "Dangi Sharan"},
                     {"id": 573, "label": "Gadhawa"},
-                    {"id": 574, "label": "Rajpur"},
+                    {"id": 574, "label": "राजपुर"},
                     {"id": 575, "label": "Rapti"},
                     {"id": 576, "label": "Shanti Nagar"},
                     {"id": 577, "label": "Babai"}
@@ -431,7 +431,7 @@
                   "field": "municipality",
                   "class": "radio",
                   "options": [
-                    {"id": 574, "label": "Rajpur"}
+                    {"id": 574, "label": "राजपुर"}
                   ]
                 },
                 {
@@ -448,7 +448,7 @@
           "children": [
             {
               "class": "block",
-              "label": "Ward Number",
+              "label": "वडा नम्बर",
               "children": [
                 {
                   "field": "ward_number",
@@ -474,82 +474,82 @@
             {
               "field": "house_number",
               "type": "number",
-              "label": "House Number",
+              "label": "घर नम्बर",
               "class": "textinput"
             }
           ]
         },
         {
           "field": "contact_number",
-          "label": "Contact Number",
+          "label": "सम्पर्क नम्बर",
           "class": "textinput",
           "type": "number"
         },
         {
           "field": "service_type",
-          "label": "Service type",
+          "label": "सेवाको किसिम",
           "class": "radio",
           "options": [
             {
               "id": 1,
-              "label": "[1] General"
+              "label": "१ सामान्य उपचार"
             },
             {
               "id": 2,
-              "label": "[2] CBIMNCI"
+              "label": "२ आईएमसीआई"
             },
             {
               "id": 3,
-              "label": "[3] Nutrition"
+              "label": "३ पोशण"
             },
             {
               "id": 4,
-              "label": "[4] Safe Motherhood"
+              "label": "४ सुरक्षित मात्रीत्व"
             },
             {
               "id": 5,
-              "label": "[5] FP"
+              "label": "५ परिवार नियोजन"
             },
             {
               "id": 6,
-              "label": "[6] TB"
+              "label": "६ क्षय रोग"
             },
             {
               "id": 7,
-              "label": "[7] Leprosy"
+              "label": "७ कुस्थ रोग"
             },
             {
               "id": 8,
-              "label": "[8] Vector-borne"
+              "label": "८ किट जन्य रोग"
             },
             {
               "id": 9,
-              "label": "[9] STD"
+              "label": "९ योन रोग"
             },
             {
               "id": 10,
-              "label": "[10] Others"
+              "label": "१० अन्य (खुलाउने) "
             }
           ]
         },
         {
           "field": "free_or_cost",
-          "label": "Free / Cost",
+          "label": "निशुल्क शुल्क रु.",
           "class": "radio",
           "options": [
             {
               "id": "free",
-              "label": "Free"
+              "label": "निशुल्क"
             },
             {
               "id": "cost",
-              "label": "Cost"
+              "label": "शुल्क रु."
             }
           ]
         },
         {
           "field": "referred_from",
-          "label": "Referred from",
+          "label": "प्रेशण भई आएको संस्थाको नाम",
           "class": "textinput"
         }
       ]
@@ -4156,11 +4156,11 @@
                   "options": [
                     {
                       "id": 1,
-                      "label": "Male"
+                      "label": "पुरुष"
                     },
                     {
                       "id": 2,
-                      "label": "Female"
+                      "label": "महिला"
                     }
                   ]
                 },
