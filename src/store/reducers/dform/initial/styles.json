@@ -36,8 +36,7 @@
             {
               "field": "father_name",
               "label": "बुवाको नाम",
-              "class": "textinput",
-              "required": true
+              "class": "textinput"
             }
           ]
         },
@@ -48,8 +47,7 @@
             {
               "field": "grandfather_name",
               "label": "हजुरबुवाको नाम",
-              "class": "textinput",
-              "required": true
+              "class": "textinput"
             }
           ]
         },
