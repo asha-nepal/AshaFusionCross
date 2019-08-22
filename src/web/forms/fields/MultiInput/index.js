@@ -22,6 +22,7 @@ import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
 import RowComponent from './RowComponent';
 import Readonly from './Readonly';
+import { asArray } from '../common/as-array';
 
 export const ReadonlyMultiInput = Readonly;
 
@@ -33,12 +34,6 @@ type Props = {
   onAddItemRequested: (value: string) => void,
   onRemoveItemRequested: (index: number) => void,
 };
-
-export function asArray(value: any): Array<any> {
-  if (value == null) return [];
-  if (Array.isArray(value)) return value;
-  return [value];
-}
 
 export class MultiInputComponent extends Component {
   constructor(props: Props) {
