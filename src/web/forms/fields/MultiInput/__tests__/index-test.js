@@ -18,6 +18,7 @@
 
 jest.unmock('react-redux');
 jest.unmock('../index');
+jest.unmock('../../common/as-array');
 jest.unmock('../RowComponent');
 
 import { mount } from 'enzyme';

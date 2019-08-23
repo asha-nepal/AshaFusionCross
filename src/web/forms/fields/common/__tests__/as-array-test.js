@@ -1,5 +1,7 @@
 /* eslint-env jest */
 
+jest.unmock('../as-array');
+
 import {
   asArray,
 } from '../as-array';
