@@ -17,6 +17,7 @@
 /* eslint-env jest */
 
 jest.unmock('react-redux');
+jest.unmock('../common/as-array');
 jest.unmock('../CheckGroup');
 
 import { shallow } from 'enzyme';
@@ -25,7 +26,7 @@ import React from 'react';
 import { CheckGroupComponent } from '../CheckGroup';
 
 describe('<CheckGroupComponent />', () => {
-  it('adds value as unchecked button is clicked', () => {
+  it('adds value when a unchecked button is clicked', () => {
     const mockOnChange = jest.fn();
     const mockEventObject = {
       preventDefault: jest.fn(),

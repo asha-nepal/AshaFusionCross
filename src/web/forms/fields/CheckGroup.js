@@ -20,6 +20,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 import _get from 'lodash.get';
+import { asArray } from './common/as-array';
 
 const ReadOnly = ({
   value,
@@ -55,13 +56,20 @@ export const CheckGroupComponent = ({
   options: Array<{id: string, label: string}>,
   readonly?: boolean,
   onChange?: (newValue: Array<string>) => void,
-}) => (
-  readonly ? (
-    <ReadOnly value={value} options={options} />
-  ) : (
+}) => {
+  // This enables to migrate from Radio to Checkgroup
+  const _value = asArray(value);
+
+  if (readonly) {
+    return (
+      <ReadOnly value={_value} options={options} />
+    );
+  }
+
+  return (
     <div className="buttons is-width-restricted">
       {options.map(option => {
-        const isChecked = value && value.indexOf(option.id) > -1;
+        const isChecked = _value && _value.indexOf(option.id) > -1;
         return (
           <a
             key={option.id}
@@ -71,8 +79,8 @@ export const CheckGroupComponent = ({
               if (onChange) {
                 onChange(
                   isChecked
-                    ? (value || []).filter(v => v !== option.id)
-                    : (value || []).concat(option.id)
+                    ? (_value || []).filter(v => v !== option.id)
+                    : (_value || []).concat(option.id)
                 );
               }
             }}
@@ -85,8 +93,8 @@ export const CheckGroupComponent = ({
         );
       })}
     </div>
-  )
-);
+  );
+};
 
 const mapStateToProps = (state, ownProps) => ({
   value: _get(state, ownProps.model),
