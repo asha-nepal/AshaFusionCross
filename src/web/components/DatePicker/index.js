@@ -64,11 +64,6 @@ export default class DatePicker extends Component {
 
     return (
       <div className="columns is-mobile">
-        {nepaliDate &&
-          <div className="column is-narrow">
-            <NepaliDatePicker date={date} onDatesChange={onDatesChange} />
-          </div>
-        }
         <div className="column is-narrow">
           <DateRangePicker
             startDate={date.startDate}
@@ -79,6 +74,9 @@ export default class DatePicker extends Component {
             isOutsideRange={() => false}
             {...opts}
           />
+          {nepaliDate &&
+            <NepaliDatePicker date={date} onDatesChange={onDatesChange} />
+          }
         </div>
         <div className="column is-narrow">
           <div style={{ display: 'flex', height: '100%', alignItems: 'center' }}>
