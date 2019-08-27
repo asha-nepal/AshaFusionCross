@@ -486,7 +486,7 @@
         {
           "field": "service_type",
           "label": "सेवाको किसिम",
-          "class": "radio",
+          "class": "checkgroup",
           "options": [
             {
               "id": 1,
