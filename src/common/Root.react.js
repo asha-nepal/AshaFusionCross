@@ -25,7 +25,7 @@ import {
 import rootSaga from '../sagas';
 import configureStore from '../store/configureStore';
 
-const store = configureStore();
+export const store = configureStore();
 store.runSaga(rootSaga);
 
 export default (props: {children: ReactClass<{}>}) => (
