@@ -19,11 +19,21 @@
 jest.unmock('lodash.get');
 jest.unmock('../utils');
 
-import { checkVisibility } from '../utils';
+import { referAndGetBool } from '../utils';
 
-describe('checkVisibility', () => {
-  it('returns false if `show` prop is false', () => {
-    expect(checkVisibility({}, 'hoge', false)).toBe(false);
+describe('referAndGetBool', () => {
+  it('returns false if orgProp is false', () => {
+    expect(referAndGetBool({}, 'hoge', false)).toBe(false);
+  });
+
+  it('returns true if orgProp is true', () => {
+    expect(referAndGetBool({}, 'hoge', true)).toBe(true);
+  });
+
+  it('returns defaultValue if orgProp is undefined', () => {
+    expect(referAndGetBool({}, 'hoge', undefined)).toBe(true);
+    expect(referAndGetBool({}, 'hoge', undefined, true)).toBe(true);
+    expect(referAndGetBool({}, 'hoge', undefined, false)).toBe(false);
   });
 
   it('returns referred value if show prop is given as string', () => {
@@ -38,8 +48,8 @@ describe('checkVisibility', () => {
       },
     };
 
-    expect(checkVisibility(state, 'root', 'foo.bar')).toBe(true);
-    expect(checkVisibility(state, 'root', 'hoge.fuga')).toBe(false);
+    expect(referAndGetBool(state, 'root', 'foo.bar')).toBe(true);
+    expect(referAndGetBool(state, 'root', 'hoge.fuga')).toBe(false);
   });
 
   it('handles Array as referent', () => {
@@ -49,8 +59,8 @@ describe('checkVisibility', () => {
       },
     };
 
-    expect(checkVisibility(state, 'root', 'foo:aaa')).toBe(true);
-    expect(checkVisibility(state, 'root', 'foo:bbb')).toBe(false);
+    expect(referAndGetBool(state, 'root', 'foo:aaa')).toBe(true);
+    expect(referAndGetBool(state, 'root', 'foo:bbb')).toBe(false);
   });
 
   it('handles an empty array as falthy', () => {
@@ -60,7 +70,7 @@ describe('checkVisibility', () => {
       },
     };
 
-    expect(checkVisibility(state, 'root', 'foo')).toBe(false);
+    expect(referAndGetBool(state, 'root', 'foo')).toBe(false);
   });
 
   it('handles empty rootPath', () => {
@@ -71,8 +81,8 @@ describe('checkVisibility', () => {
       },
     };
 
-    expect(checkVisibility(state, null, 'foo')).toBe(true);
-    expect(checkVisibility(state, 'hoge', 'foo')).toBe(false);
+    expect(referAndGetBool(state, null, 'foo')).toBe(true);
+    expect(referAndGetBool(state, 'hoge', 'foo')).toBe(false);
   });
 
   it('handles OR condition', () => {
@@ -83,7 +93,7 @@ describe('checkVisibility', () => {
       },
     };
 
-    expect(checkVisibility(state, 'root', 'foo|bar')).toBe(true);
+    expect(referAndGetBool(state, 'root', 'foo|bar')).toBe(true);
   });
 
   it('handles negative', () => {
@@ -98,8 +108,8 @@ describe('checkVisibility', () => {
       },
     };
 
-    expect(checkVisibility(state, 'root', '!foo.bar')).toBe(false);
-    expect(checkVisibility(state, 'root', '!hoge.fuga')).toBe(true);
+    expect(referAndGetBool(state, 'root', '!foo.bar')).toBe(false);
+    expect(referAndGetBool(state, 'root', '!hoge.fuga')).toBe(true);
   });
 
   it('handles negative on Array referent', () => {
@@ -109,7 +119,7 @@ describe('checkVisibility', () => {
       },
     };
 
-    expect(checkVisibility(state, 'root', '!foo:aaa')).toBe(false);
-    expect(checkVisibility(state, 'root', '!foo:bbb')).toBe(true);
+    expect(referAndGetBool(state, 'root', '!foo:aaa')).toBe(false);
+    expect(referAndGetBool(state, 'root', '!foo:bbb')).toBe(true);
   });
 });

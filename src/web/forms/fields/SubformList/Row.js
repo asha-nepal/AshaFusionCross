@@ -19,7 +19,7 @@ import React from 'react';
 import classNames from 'classnames';
 import _get from 'lodash.get';
 import type { FormFieldDefinition } from '.';
-import { checkVisibility } from '../../utils';
+import { referAndGetBool } from '../../utils';
 
 import { TextInputComponent } from '../TextInput';
 import { CheckboxComponent } from '../Checkbox';
@@ -68,13 +68,8 @@ export default ({
         <div className="column">
           <div className="columns is-mobile is-multiline is-variable is-1">
           {fields.map((field, i) => {
-            if (typeof field.show !== 'undefined'
-              && !checkVisibility(_value, null, field.show)) {
-              return null;
-            } else if (typeof field.hide !== 'undefined'
-              && checkVisibility(_value, null, field.hide)) {
-              return null;
-            }
+            if (!referAndGetBool(_value, null, field.show, true)) return null;
+            if (referAndGetBool(_value, null, field.hide, false)) return null;
 
             const component = typeof field.class === 'string'
               ? fieldComponents[field.class] : field.class;

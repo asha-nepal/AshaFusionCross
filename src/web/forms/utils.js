@@ -37,13 +37,17 @@ function checkCondition(state: Object, rootPath: ?string, condition: string): bo
   return !!referent;
 }
 
-export function checkVisibility(state: Object, rootPath: ?string, showProp: string|boolean = true) {
-  if (showProp === false) {
-    return false;
-  }
+export function referAndGetBool(
+  state: Object,
+  rootPath: ?string,
+  orgProp: string|boolean,
+  defaultValue: boolean=true
+) {
+  if (typeof orgProp === 'undefined') return defaultValue;
+  if (typeof orgProp === 'boolean') return orgProp;
 
-  if (typeof showProp === 'string') {
-    const conditions = showProp.split('|');
+  if (typeof orgProp === 'string') {
+    const conditions = orgProp.split('|');
 
     return conditions.some(condition => {
       let _condition = condition;
