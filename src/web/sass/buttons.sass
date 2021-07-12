@@ -12,3 +12,9 @@
       max-width: $widescreen - (2 * $gap)
     +from($fullhd)
       max-width: $fullhd - (2 * $gap)
+
+.is-fullwidth-mobile
+  width: 100%
+
+  +from($tablet)
+    width: initial

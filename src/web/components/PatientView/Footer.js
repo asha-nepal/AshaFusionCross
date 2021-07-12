@@ -45,10 +45,10 @@ export default class extends React.Component {
     return (
       <nav className="navbar is-fixed-bottom is-light">
         <div className="container">
-          <div className="navbar-brand">
-            <div className="navbar-item">
+          <div className="navbar-brand is-fullwidth-mobile">
+            <div className="navbar-item is-fullwidth-mobile">
               <button
-                className="button is-primary"
+                className="button is-primary is-fullwidth"
                 disabled={freeze || !onSubmit}
                 onClick={e => {
                   e.preventDefault();
