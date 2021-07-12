@@ -16,7 +16,9 @@
 
 import { PayloadAction } from './action';
 
-export type DformStyle = List<Map<string, any> | string>
+export type DformField = Map<string, any>
+export type DformStyle = List<DformField | string>
+export type DformFieldModel = Map<string, DformField>
 
 interface insertDformStyleFieldPayload {
   group: string,

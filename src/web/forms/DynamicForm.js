@@ -46,6 +46,7 @@ function makeCreateChildFields(
   state,
   rootModel,
   getPreviousData,
+  fieldTemplates: Object,
   fieldOptions,
   warnings: Object,
   editing: boolean,
@@ -58,10 +59,12 @@ function makeCreateChildFields(
   onFieldChange: (parentPath: string, index: number, field: FormField) => void,
   onFieldRemove: (parentPath: string, index: number) => void,
 ) {
-  return function createChildFields(styles, fieldPath = '') {
+  return function createChildFields(fieldList, fieldPath = '') {
     // fieldPath is string rather than array because it's easy to check equality
+    const elements = !fieldList ? [] : fieldList.map((_field, i) => {
+      const fieldTemplate = fieldTemplates[_field.field] || {};
+      const field = { ...fieldTemplate, ..._field };
 
-    const elements = !styles ? [] : styles.map((field, i) => {
       // Handle "show" prop
       if (!checkVisibility(state, rootModel, field.show)) {
         return null;
@@ -155,6 +158,7 @@ type Props = {
   onRemove: ?() => void,
   freeze: boolean,
   getPreviousData?: (field: string) => any,
+  fieldTemplates: DformfieldTemplate,
   fieldOptions?: Object,
   warnings?: Object,
   formGroup: string,
@@ -250,6 +254,7 @@ export class DynamicFormComponent extends React.Component {
       onRemove,
       freeze,
       getPreviousData,
+      fieldTemplates = {},
       fieldOptions = {},
       warnings = {},
       customizable = false,
@@ -257,7 +262,9 @@ export class DynamicFormComponent extends React.Component {
     } = this.props;
 
     const createChildFields = makeCreateChildFields(
-      state, model, getPreviousData, fieldOptions, warnings,
+      /* TODO: toJS() should be removed and handle Immutable object directly */
+      state, model, getPreviousData, fieldTemplates.toJS ? fieldTemplates.toJS() : fieldTemplates,
+      fieldOptions, warnings,
       this.state.editing, this.onEditFocus, this.state.editFocusOn,
       this.onFieldInsert, this.onFieldMove,
       this.onFieldChange, this.onFieldRemove
@@ -341,8 +348,28 @@ export class DynamicFormComponent extends React.Component {
   }
 }
 
+// TODO: To be more configurable
+import {
+  getRecordFormStyle,
+  getPatientFormStyle,
+} from '../../selectors';
+
+const styleSelectors = {
+  patient: getPatientFormStyle,
+  record: getRecordFormStyle,
+};
+
+const fieldTemplateSelectors = {
+  patient: (state) => state.dform.fieldTemplates.get('patient'),
+  record: (state) => state.dform.fieldTemplates.get('record'),
+};
+
 export default connect(
-  state => ({ state }),
+  (state, ownProps) => ({
+    state,
+    style: styleSelectors[ownProps.type](state),
+    fieldTemplates: fieldTemplateSelectors[ownProps.type](state),
+  }),
   (dispatch, ownProps) => ({
     onFieldInsert: (parentPath, index, field) =>
       dispatch(

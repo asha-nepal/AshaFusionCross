@@ -1,0 +1,35 @@
+{
+  "patient": {
+    "name": {
+      "field": "name",
+      "label": "Name",
+      "class": "textinput",
+      "required": true
+    },
+    "sex": {
+      "field": "sex",
+      "label": "Sex",
+      "class": "radio",
+      "options": [
+        {
+          "id": "male",
+          "label": "Male"
+        },
+        {
+          "id": "female",
+          "label": "Female"
+        }
+      ]
+    },
+    "age": {
+      "field": "age",
+      "label": "Age",
+      "class": "textunitinput",
+      "units": [
+        "years",
+        "months"
+      ],
+      "precision": 0
+    }
+  }
+}

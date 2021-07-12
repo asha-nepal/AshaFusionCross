@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-import {
-  combineReducers,
-} from 'redux';
+/* @flow */
 
-import styles from './styles';
-import fieldTemplates from './field-templates';
+import Immutable from 'immutable';
 
-export default combineReducers({
-  styles,
-  fieldTemplates,
-});
+import initialFields from './initial/field-templates';
+
+export default function (
+  fields: Map<string, Map<string, Map<string, any>>> = Immutable.fromJS(initialFields),
+  action: Object, // TODO: Strict type annotation
+) {
+  return fields;
+}

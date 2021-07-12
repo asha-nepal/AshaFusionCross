@@ -48,10 +48,8 @@ type Props = {
   selectedActiveRecordIndex: number,
   selectActiveRecord: (id: string) => void,
   setRecordFormStyleId: (styleId: string) => void,
-  patientFormStyle: DformStyle,
   recordFormStyles: List<Map<string, DformStyle | string>>,
   recordFormStyleId: string,
-  recordFormStyle: ?DformStyle,
   params: ?Object,
   patientId: ?string,
   duplicatedPatientsExist: {
@@ -87,10 +85,8 @@ export default class PatientView extends Component {
       selectedActiveRecordIndex,
       selectActiveRecord,
       setRecordFormStyleId,
-      patientFormStyle,
       recordFormStyles,
       recordFormStyleId,
-      recordFormStyle,
       duplicatedPatientsExist,
       activeRecordsFormPristineness,
       nextPatientNumber = 1,
@@ -124,8 +120,8 @@ export default class PatientView extends Component {
               <div className="columns">
                 <div className="column">
                   <DynamicForm
+                    type="patient"
                     model="activePatient"
-                    style={patientFormStyle}
                     freeze={isPuttingPatient}
                     onSubmit={putActivePatient}
                     onRemove={isNew ? null : (() => {
@@ -210,10 +206,10 @@ export default class PatientView extends Component {
               {selectedActiveRecordIndex > -1 && (
                 <div className="container">
                   <DynamicForm
+                    type="record"
                     model={`activeRecords[${selectedActiveRecordIndex}]`}
                     formGroup="record"
                     formStyleId={recordFormStyleId}
-                    style={recordFormStyle}
                     freeze={isPuttingRecord}
                     getPreviousData={(path: string) => {
                       // FIXME: Logics in view component.
