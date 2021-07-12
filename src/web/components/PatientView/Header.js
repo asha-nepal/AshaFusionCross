@@ -67,7 +67,8 @@ export default ({
         <div className="navbar-end">
           <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link">
-              <FaIcon type="print" size="small" /> Print
+              <FaIcon type="print" size="small" />
+              <span>Print</span>
             </a>
             <PrintSelector
               patient={patient}
