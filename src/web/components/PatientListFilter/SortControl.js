@@ -36,6 +36,7 @@ export default ({
           value={field}
           onChange={e => onFieldChange(e.target.value)}
         >
+          <option value=""></option>
           <option value="name">Name</option>
           <option value="number">No.</option>
         </select>
